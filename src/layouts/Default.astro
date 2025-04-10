@@ -1,11 +1,10 @@
 ---
-import Base from './Base.astro';
+//import Base from './Base.astro';
 import { siteConfig } from '../config';
 const { sitetitle, description, baseurl, bloburl, learnurl } = siteConfig;
 const { children, frontmatter } = Astro.props;
 ---
 
-    <Base>
       <main class="position-relative p-3 z-0">
         <h1>{ frontmatter.title }</h1>
         <div class="accordion m-3" id="mokuji" style="max-width:400px;">
@@ -33,5 +32,4 @@ const { children, frontmatter } = Astro.props;
         </div>
         <div id="main-content"><slot /></div>
       </main>
-    </Base>
       
