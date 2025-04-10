@@ -1,0 +1,83 @@
+---
+import { siteConfig } from '../config';
+const { sitetitle, description, baseurl, bloburl, learnurl } = siteConfig;
+const { children, frontmatter } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>{ frontmatter.title } | { sitetitle }</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content={Astro.generator} />
+  <style>
+    img {
+      max-width: 100%;
+    }
+    pre {
+      background-color: #f8f9fa;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid d-flex flex-row flex-nowrap">
+
+    <div class="offcanvas-lg offcanvas-start flex-shrink-0 bg-primary-subtle" 
+      style="width: 280px;" 
+      tabindex="-1" id="offcanvasResponsive" 
+      aria-labelledby="offcanvasResponsiveLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasResponsiveLabel">メニュー</h5>
+        <button type="button" class="btn-close" 
+          data-bs-dismiss="offcanvas" data-bs-target="#offcanvasResponsive" 
+          aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body d-flex flex-column flex-shrink-0 p-2 position-sticky top-0">
+        <h1 class="m-4">
+          <img alt={ sitetitle }
+            src={ learnurl }>
+        </h1>
+        <p style="text-align:center;background-color:#fff;border:thin solid #777;">
+          検索は<a href={ learnurl }>翻訳元</a>へ
+        </p>
+        <div id="sidebar-menu" class="mb-auto overflow-y-auto"></div>
+      </div>
+    </div>
+
+    <div class="flex-shrink-1 position-relative" 
+      style="min-width:300px;width:100%;min-height:100vh;">
+      <header class="d-flex align-items-center flex-row 
+        bg-body-tertiary border-bottom position-sticky top-0 p-2 mb-3 z-1">
+        <div class="d-flex align-items-center flex-row me-auto flex-shrink-10">
+          <button class="btn btn-primary d-lg-none flex-shrink-0" type="button" 
+            data-bs-toggle="offcanvas" data-bs-target="#offcanvasResponsive" 
+            aria-controls="offcanvasResponsive">メニュー</button>
+          <div class="d-none d-sm-block ps-3 flex-shrink-10">
+            <ol class="breadcrumb" id="breadcrumb">
+              <li class="breadcrumb-item">{ frontmatter.title }</li>
+              <template>
+                <li class="breadcrumb-item"><a href="#"></a></li>
+              </template>
+            </ol>
+          </div>
+        </div>
+        <div class="flex-shrink-0">
+          <a href={ bloburl+"/" } class="btn">編集</a>
+        </div>
+        <div class="flex-shrink-0"><a href="#" id="prev" class="btn">&lt; 前</a></div>
+        <div class="flex-shrink-0"><a href="#" id="next" class="btn">次 &gt;</a></div>
+      </header>
+      
+      { children }
+      
+      <footer class="border-top position-relative bottom-0">
+        <p class="text-center p-3">
+          翻訳元ページ：
+          <a href={ learnurl } >{ learnurl }</a>
+        </p>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>
