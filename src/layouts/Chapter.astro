@@ -5,7 +5,7 @@ const { sitetitle, description, baseurl, bloburl, learnurl } = siteConfig;
 const { children, frontmatter } = Astro.props;
 ---
 
-    <Base>
+    <Base frontmatter={frontmatter}>
       <main class="position-relative p-3 z-0">
         <div id="main-content"><slot /></div>
       </main>
