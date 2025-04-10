@@ -1,5 +1,5 @@
 ---
-layout: '../layouts/Layout.astro'
+layout: '../layouts/Default.astro'
 title: 'Markdownページ'
 ---
 
