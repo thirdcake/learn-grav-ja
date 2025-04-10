@@ -2,7 +2,7 @@
 import Base from './Base.astro';
 import { siteConfig } from '../config';
 const { sitetitle, description, baseurl, bloburl, learnurl } = siteConfig;
-const { children, frontmatter } = Astro.props;
+const { frontmatter } = Astro.props;
 ---
 
     <Base frontmatter={frontmatter}>

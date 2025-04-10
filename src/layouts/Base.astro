@@ -1,7 +1,7 @@
 ---
 import { siteConfig } from '../config';
 const { sitetitle, description, baseurl, bloburl, learnurl } = siteConfig;
-const { children, frontmatter } = Astro.props;
+const { frontmatter } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -71,7 +71,7 @@ const { children, frontmatter } = Astro.props;
         <div class="flex-shrink-0"><a href="#" id="next" class="btn">次 &gt;</a></div>
       </header>
       
-      { children }
+      <slot />
       
       <footer class="border-top position-relative bottom-0">
         <p class="text-center p-3">
