@@ -5,14 +5,14 @@ layout: ../../../layouts/Default.astro
 
 ページの上部にある、ページのヘッダー（フロントマターとして知られているもの）は、完全に付随的なものです。Gravでページを表示するときに、無かったとしても全く問題のないものです。Gravには、3つの主要なページタイプがあります（**標準**、**一覧**、そして**モジュラー** ）が、それぞれはヘッダーと関係しています。
 
-> [!NOTE]
+> [!NOTE]  
 > ヘッダは、**ページのフロントマター(Frontmatter)** とも呼ばれ、HTTPヘッダと混同されないように、そちらで呼ばれることがよくあります。
 
 <h2 id="basic-page-headers">基本的なページヘッダー</h2>
 
 たくさんの基本的なヘッダーオプションが使えます。
 
-<h3 id="cache-enable">キャッシュの有効化</h3>
+### Cache Enable
 
 ```yaml
 cache_enable: false
@@ -22,16 +22,16 @@ cache_enable: false
 
 この例では、コンテンツの中で、動的なTwig変数を使っています。`cache_enable` 変数は、このふるまいを上書きします。Twigのコンテンツ変数については、後ほどの章で解説予定です。この設定では、`true` もしくは `false` を指定します。
 
-<h3 id="date">日付</h3>
+### Date
 
 ```yaml
 date: 01/01/2020 3:14pm
 ```
 
-`data` 変数は、このページに関連する特定の日付を設定します。
-The `date` variable allows you to specifically set a date associated with this page.  This is often used to indicate when a post was created and can be used for display or sort-order purposes.  If not set, this defaults to the last **modified time** of the page.
+`date` 変数は、このページに関連する特定の日付を設定します。これは、しばしばそのポストが作られた日であり、表示予定日や表示順序を決める目的に使われます。設定しなければ、そのページを最後に **修正した時間** がデフォルトで使われます。
 
-! Dates in the `m/d/y` or `d-m-y` formats are disambiguated by looking at the separator between the various components: if the separator is a slash (`/`), then the **American** `m/d/y` is assumed; whereas if the separator is a dash (`-`) or a dot (`.`), then the **European** `d.m.y` format is assumed.
+> [!]  
+> `月/日/年` もしくは `日-月-年` による日付表記は、要素間のセパレータを見ることではっきりさせることができます：もしセパレータがスラッシュ（`/`）だった場合、**アメリカ式** で `月/日/年` が推定され、セパレータがダッシュ（`-`）やドット（`.`）だった場合、**ヨーロッパ式** で `日.月.年` が推定されます。
 
 ### Menu
 
@@ -39,7 +39,7 @@ The `date` variable allows you to specifically set a date associated with this p
 menu: My Page
 ```
 
-The `menu` variable lets you set the text to be used in the navigation. There are several layers of fall-backs for the menu, so if no `menu` variable is set, Grav will try to use the `title` variable.
+`menu` 変数は、ナビゲーションで使われるテキストを設定します。メニューにはいくつかの代替措置があるので、`menu` 変数を設定しそこねたとしても、Gravは代わりに、 `title` 変数を利用します。
 
 ### Published
 
@@ -47,7 +47,7 @@ The `menu` variable lets you set the text to be used in the navigation. There ar
 published: true
 ```
 
-By default, a page is **published** unless you explicitly set `published: false` or via a `publish_date` being in the future, or `unpublish_date` in the past. Valid values are `true` or `false`.
+デフォルトでは、ページは **表示されます（publishされます）** 。意図的に `published: false` を設定したり、`publish_date` を未来に設定したり、`unpublish_date` を過去に設定しない限りは。この変数の有効な値は、`true` もしくは `false` です。
 
 ### Slug
 
@@ -55,11 +55,11 @@ By default, a page is **published** unless you explicitly set `published: false`
 slug: my-page-slug
 ```
 
-The `slug` variable allows you to specifically set the page's portion of the URL. For example: `http://yoursite.com/my-page-slug` would be the URL if you set the `slug` above.  If the `slug` is not set in the page, Grav falls back to using the folder name (without any numerical prefixes).
+`slug` 変数は、ページURLの一部として設定します。たとえば：上記のような`slug` を設定した場合、`http://yoursite.com/my-page-slug` がURLになるでしょう。もし `slug` がページに設定されなかったら、Gravは（先頭の数字を除いた）フォルダ名を代わりにURLとして使います。
 
-[Slugs](http://en.wikipedia.org/wiki/Semantic_URL#Slug) are generally entirely lowercase, with accented characters replaced by letters from the English alphabet and whitespace characters replaced by a dash or an underscore. While future versions of Grav will support spaces in slugs, having blank spaces or capital lettering is not recommended.
+[スラッグ](http://en.wikipedia.org/wiki/Semantic_URL#Slug) は、一般的にすべて小文字で、アクセント文字は英語のアルファベットに置き換えられ、ホワイトスペース（半角の空白）文字はダッシュ（`-`）やアンダースコア（`_`）に置き換えられます。将来的には、Gravは、スラッグ中の `spaces` に対応予定ですが、空白や大文字は推奨しません。
 
-For example: If a blog post's title is `Blog Post Example`, the recommended slug would be `blog-post-example`.
+たとえば：ブログ投稿のタイトルが `Blog Post Example` だったとき、おすすめのスラッグは、`blog-post-example` です。
 
 ### Taxonomy
 
@@ -69,23 +69,23 @@ taxonomy:
     tag: [sample, demo, grav]
 ```
 
-A very useful header variable, `taxonomy` lets you assign values to **taxonomy** you defined as valid types in the [Site Configuration](../../basics/grav-configuration#site-configuration) file.
+とても便利なヘッダー変数である `taxonomy` は、[サイト設定](../../01.basics/05.grav-configuration/#site-configuration) ファイルで決めた **タクソノミー（タグやカテゴリーのこと）** に、値を設定できます。
 
-If the taxonomy is not defined in that file, it will be ignored.  In this example, the page is defined as being in the `blog` category, and has the tags: `sample`, `demo`, and `grav`.  These taxonomies can be used to find these pages from other pages, plugins and even themes. The [Taxonomy](../taxonomy) chapter will cover this concept in more detail.
+もしタクソノミーを設定ファイルで決めていなかった場合、この設定は無視されます。この例では、このページは`blog` カテゴリーの記事であり、`sample`、`demo`、`grav` というタグを持っています。これらタクソノミーは、他のページや、プラグイン、テーマから、そのページを探してもらうために使われます。[タクソノミー](../08.taxonomy) の章では、より詳しい概念を説明予定です。
 
 ### Title
 
-If you have no headers at all, you will not have any control over the title of the page as it shows in the browser and search engines.  For this reason, it is recommended to _at least_ put the `title` variable in the header of the page:
+ヘッダーがまったく無い場合、ブラウザや検索エンジンで表示されるページタイトルを設定することはできません。そのため、_最低でも_ `title` 変数だけは、ページのヘッダに設定しておくことをおすすめします。
 
 ```yaml
 title: Title of my Page
 ```
 
-If the `title` variable is not set, Grav has a fallback solution, and will try to use the capitalized `slug` variable.
+`title` 変数が設定されていない場合、Gravは、`slug` 変数を代わりに使おうとします。
 
-## Advanced Headers
+<h2 id="advanced-headers">応用的なヘッダ</h2>
 
-These are still important but less commonly used. They can be used to provide advanced functionality within your page.
+次のものは、重要ながらあまり一般的ではない使い方です。より応用的な機能をそのページに提供してくれます。
 
 ### Append URL extension
 
@@ -93,7 +93,7 @@ These are still important but less commonly used. They can be used to provide ad
 append_url_extension: '.json'
 ```
 
-Allows the page to override the default extension and set one programmatically.  It will also set the appropriate header attributes for the response.
+ページがデフォルトの拡張子を上書きし、プログラム的に設定します。同時に、適切なヘッダ属性をレスポンスに付与します。
 
 ### Cache-Control
 
@@ -101,9 +101,10 @@ Allows the page to override the default extension and set one programmatically. 
 cache_control: max-age=604800
 ```
 
-Can be blank for no setting, or a [valid](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control) `cache-control` text value.
+この変数を入力するときは、[適切な](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control) `cache-control` テキストを設定してください。
 
-! Make sure you're using `no-cache` if the page contains information that can change based on the user. Otherwise the content can leak to other users. [Expires](/content/headers#expires) setting if set to `expires: 0` has the same effect.
+> [!]  
+> ページのコンテンツ情報が、ユーザーごとに変わる場合は、`no-cache` を使うことを確認してください。そうでなければ、他のユーザーにコンテンツ情報が漏洩するかもしれません。[Expires](#expires) の設定は、`expires: 0` と同じ影響があります。
 
 ### Date Format
 
@@ -111,11 +112,11 @@ Can be blank for no setting, or a [valid](https://developer.mozilla.org/en-US/do
 dateformat: 'Y-m-d H:i:s'
 ```
 
-Overrides the default Grav configuration for date formats and lets it be set at the page level. You can use any of the [PHP date formats](https://www.php.net/manual/en/function.date.php) available.
+Gravの日付のデフォルト設定を上書きし、ページ単位で設定できます。[PHPのdate書式](https://www.php.net/manual/en/function.date.php) が使えます。
 
 ### Debugger
 
-When you enable the debugger via the `system.yaml` configuration file, the debugger will display on every page.  There are cases where this may not be desirable or may cause conflicts with the output.  Such an example is when you are requesting a page that is intended to return rendered HTML to an Ajax call.  This should not have the debugger injected into the resulting data.  To disable the debugger on this page you can use the `debugger` page header:
+`system.yaml` 設定ファイルでデバッガを有効にしていた場合、デバッガはすべてのページで表示されます。これが好ましくない場合や、出力と不整合を起こすこともあります。そのような例には、Ajax呼び出しに、レンダリングされたHTMLを返すようなページがあります。このようなときは、結果のデータに、デバッガが差し込まれていてほしくないでしょう。このページだけデバッガを無効にしたいようなときに、`debugger` ページヘッダを使ってください。
 
 ```yaml
 debugger: false
@@ -127,7 +128,7 @@ debugger: false
 etag: true
 ```
 
-Enable or disable on a page level whether or not to display an ETag header variable with a unique value. `false` by default unless overridden in your `system.yaml`.
+ページ単位で、ETag（キャッシュを制御するHTTPヘッダ）をユニークな値で表示するかどうかを、有効化したり無効化したりできます。`system.yaml` で、上書きしない限り、デフォルトでは `false` です。
 
 ### Expires
 
@@ -135,9 +136,10 @@ Enable or disable on a page level whether or not to display an ETag header varia
 expires: 604800
 ```
 
-Page expires time in seconds (604800 seconds = 7 days).
+ページの有効期限は、604800秒（=7日間）です。
 
-! Make sure you're using `expires: 0` if the page contains information that can change based on the user. Otherwise the content can leak to other users. See also [Cache-Control](/content/headers#Cache-Control) setting.
+> [!]  
+> ユーザごとにページのコンテンツ情報が変わるときは、`expires: 0` になっていることを確認してください。そうでなければ、他のユーザに漏洩する可能性があります。[Cache-Control](#cache-control)設定も、あわせて確認してください。
 
 ### External Url
 
@@ -145,8 +147,7 @@ Page expires time in seconds (604800 seconds = 7 days).
 external_url: https://www.mysite.com/foo/bar
 ```
 
-Allows you to override the dynamically generated URL with one you explicitly provide.
-
+動的に生成されたURLに上書きできます。
 
 ### HTTP Response Code
 
@@ -154,7 +155,7 @@ Allows you to override the dynamically generated URL with one you explicitly pro
 http_response_code: 404
 ```
 
-Allows the dynamic setting of an HTTP Response Code.
+HTTP レスポンスコードを動的に設定できます。
 
 ### Language
 
@@ -162,7 +163,7 @@ Allows the dynamic setting of an HTTP Response Code.
 language: fr
 ```
 
-This allows you to override the language for a particular page.
+特定のページに対して、言語を上書きできます。
 
 ### LastModified
 
@@ -170,7 +171,7 @@ This allows you to override the language for a particular page.
 last_modified: true
 ```
 
-Enable or disable on a page level whether or not to display a Last Modified header variable with modified date. `false` by default unless overridden in your `system.yaml`.
+ページ単位で、HTTPのLast-Modifiedヘッダを編集日により表示するかどうかを、有効化したり無効化したりできます。`system.yaml` で上書きしていなければ、デフォルトで `false` です。
 
 ### Lightbox
 
@@ -178,7 +179,7 @@ Enable or disable on a page level whether or not to display a Last Modified head
 lightbox: true
 ```
 
-Although strictly speaking this is not a standard page header, it is a common way to enable the loading of a standard lightbox JavaScript and CSS for a page.  By default the core `antimatter` theme does not load the prerequisites to enable lightbox capabilities of images, be sure to install a lightbox plugin such as **Featherlight**, which is available via GPM.
+厳密に言えば、これはページヘッダとしては標準的ではないのですが、ページに標準のライトボックスのJavaScriptとCSSを読み込みを有効化する一般的な方法です。デフォルトでは、コアの`antimatter` テーマはライトボックスのライブラリを読み込みません。GPMから利用できる **Featherlight** のような、ライトボックスプラグインをインストールしてください。
 
 ### Login Redirect Here
 
@@ -186,17 +187,17 @@ Although strictly speaking this is not a standard page header, it is a common wa
 login_redirect_here: false
 ```
 
-The `login_redirect_here` header enables you to determine whether or not someone is kept on that page after logging in through the [Grav Login Plugin](https://github.com/getgrav/grav-plugin-login). Setting this header to `false` will forward someone to the prior page after a successful login.
+`login_redirect_here` 設定は、ユーザが[Gravのログイン・プラグイン](https://github.com/getgrav/grav-plugin-login) でログインしたあとに、そのページがまた表示されるかどうかを設定します。この設定が`false` だった場合、その人は、ログインに成功したあと、より優先的なページへ遷移します。
 
-A `true` setting here will enable the person to stay on the current page after a successful login. This is also the default setting, which applies if there is no `login_redirect_here` header in the frontmatter.
+`true` 設定にすると、その人はログイン後もそのページにいられます。もしこの設定をページのフロントマターに書いていなければ、これがデフォルトの設定です。
 
-You can override this default behavior by forcing a standard location by specifying an explicit option in your Login configuration YAML:
+このデフォルト設定は、上書きできます。ログインプラグインの設定YAMLに、標準的な場所を指定することができます。
 
 ```yaml
 redirect_after_login: '/profile'
 ```
 
-This will always take you to the `/profile` route after a successful login.
+上記の設定では、ログインに成功すると、`/profile` ページが表示されます。
 
 ### Markdown
 
@@ -211,17 +212,15 @@ This will always take you to the `/profile` route after a successful login.
       '<': 'lt'
 ```
 
-[div class="table-keycol"]
 | Property | Description |
 | -------- | ----------- |
-| **extra:** | Enable support for Markdown Extra (GFM by default) |
-| **auto_line_breaks:** | Enable automatic line breaks |
-| **auto_url_links:** | Enable automatic HTML links |
-| **escape_markup:** | Escape markup tags into entities |
-| **special_chars:** | List of special characters to automatically convert to |
-[/div]
+| **extra:** | Markdown Extraサポートを有効化 (GFM by default) |
+| **auto_line_breaks:** | 自動改行を有効化 |
+| **auto_url_links:** | HTMLを自動的にリンク（`<a>`タグ）にすることを有効化 |
+| **escape_markup:** | マークアップタグをエスケープする |
+| **special_chars:** | special characters を自動的に変換するリスト |
 
-You can enable these globally via your `user/config/system.yaml` configuration file, or you can override this global setting _per-page_ with this `markdown` header option.
+`user/config/system.yaml` 設定ファイルにより、サイト全体で有効化することもできます。また、 _ページごとに_ この `markdown` ヘッダオプションにより、全体設定を上書きできます。
 
 ### Never Cache Twig
 
@@ -229,11 +228,12 @@ You can enable these globally via your `user/config/system.yaml` configuration f
 never_cache_twig: true
 ```
 
-Enabling this will allow you to add a processing logic that can change dynamically on each page load, rather than caching the results and storing it for each page load. This can be enabled/disabled site-wide in the **system.yaml**, or on a specific page. Can be set `true` or `false`.
+この設定を有効化すると、（Twig処理後の）最終結果をキャッシュして保存するのではなく、ページが読み込まれるごとに動的に変化するプロセスロジックを追加できます。サイト全体では **system.yaml** で有効化・無効化できます。`true`もしくは`false` で設定してください。
 
-This is a subtle change, but one that is especially useful in modular pages as it keeps you from having to constantly disable caching when you're working with it. The page is still cached, but not the Twig. The Twig is processed after the cached content is retrieved. For modular forms, it now works with just this setting rather than having to disable the modular page cache.
+これは些細な変更ではありますが、特にモジュラページでは便利な変更です。これにより作業中に何度もキャッシュを無効にする必要がなくなります。ページはキャッシュされますが、Twigはキャッシュされません。Twigは、キャッシュされたコンテンツを取得したあとに処理されます。モジュラのフォームでは、モジュラページのキャッシュを無効にしなくても、この設定だけで機能するようになりました。
 
-!! This is not compatible with `twig_first: true` currently because all processing is happening in the one Twig call.
+> [!Info]  
+> この設定は、`twig_first: true` とは互換性がありません。なぜなら、すべての処理は、一度のTwig呼び出しで起こるからです。
 
 ### Process
 
@@ -243,11 +243,11 @@ process:
 	twig: true
 ```
 
-Processing of the page is another advanced capability. By default Grav will process `markdown` but will **not** process `twig` in a page.  This choice to not process Twig by default is purely for performance reasons as this is not a commonly needed feature.  The `process` variable allows you to override this behavior.
+ページのプロセスは、また別の高度な機能です。デフォルトでは、Gravは、`markdown` を処理（パース）しますが、ページ内の `twig` は **処理しません** 。このようにTwigをデフォルトで処理しない理由は、純粋にパフォーマンス上の理由です。一般的には必要とされない機能です。 `process` 変数で、このふるまいを上書きできます。
 
-You may want to disable `markdown` on a particular page if you want to use 100% HTML in your page and not have the markdown process run at all.  Also it allows a plugin to process content in another manner completely. Valid values are `true` or `false`.
+ある特定のページでは、`markdown` を無効にしたいことがあるかもしれません。100%HTMLで書き、マークダウンの処理を全く必要としないようなときです。または、プラグインが、まったく別の方法でコンテンツを処理することもあります。この値は、`true` もしくは `false` としてください。
 
-There are situations when you want to use Twig templating functionality in your content, and this is accomplished by setting the `twig` variable to true.
+Twigテンプレートの機能をコンテンツの中で使いたいようなシチュエーションでは、`twig` 変数をtrueにしてください。
 
 ### Process Twig First
 
@@ -255,7 +255,7 @@ There are situations when you want to use Twig templating functionality in your 
 twig_first: false
 ```
 
-If set to `true` Twig processing will occur before any Markdown processing. This can be particularly useful if your Twig generates markdown that needs to be available in order to be processed by the Markdown compiler.  One thing to note, if have `cache_enable: false` **and** `twig_first: true` page caching is effectively disabled.
+`true` に設定すると、Twigプロセスが、マークダウンプロセスより先に行われます。これは、Twigでマークダウン処理が必要なテキストを生成するようなときに便利です。注意点として、`cache_enable: false` と **した上で** `twig_first: true` とすると、ページキャッシュは機能しません。
 
 ### Publish Date
 
@@ -263,7 +263,7 @@ If set to `true` Twig processing will occur before any Markdown processing. This
 publish_date: 01/23/2020 13:00
 ```
 
-Optional field, but can provide a date to automatically trigger publication. Valid values are any string date values that [strtotime()](https://php.net/manual/en/function.strtotime.php) supports.
+オプション設定ですが、自動的に公開する日を設定できます。使える文字列は、 [PHPのstrtotime関数](https://php.net/manual/en/function.strtotime.php) がサポートする日付の値です。
 
 ### Redirect
 
@@ -277,9 +277,9 @@ or
 redirect: 'http://someexternalsite.com'
 ```
 
-You can redirect to another internal or external page right from a page header.  Of course this means this page will not be displayed, but the page can still be in a collection, menu, etc because it will exist as a page within Grav.
+ページヘッダから、サイト内の別ページもしくはサイト外ページへリダイレクトできます。もちろん、そのページは表示されません。しかし、そのページはGrav内にページとしてあるため、collectionや、メニュー、その他にあり続けます。
 
-You can also append a redirect code to a URL by using square brackets:
+リダイレクトコードを、角括弧を利用して、URLの最後に付け足すこともできます。
 
 ```yaml
 redirect: '/some/custom/route[303]'
@@ -296,15 +296,15 @@ routes:
     - '/can-be-any-valid-slug'
 ```
 
-You can now provide a **default route** that overrides the standard route structure as defined by the folder structure.
+フォルダ構造で決められた標準的なURL構造を上書きする **デフォルトURL** を使うことができます。
 
-You can also specify a specific **canonical route** that can be used in themes to output a canonical link:
+**canonicalのURL** を使うこともできます。これは、テーマで canonicalのリンクタグを出力するのに使われます。
 
 ```html
 <link rel="canonical" href="https://yoursite/dresses/green-dresses-are-awesome" />
 ```
 
-Lastly, you can specify an array of **route aliases** that can be used as alternative routes for a particular page.
+最後に、あるページの代替ルートとして使える **別名のURL** の配列を指定できます。
 
 ### Routable
 
@@ -312,9 +312,9 @@ Lastly, you can specify an array of **route aliases** that can be used as altern
 routable: false
 ```
 
-By default, all pages are **routable**.  This means that they can be reached by pointing your browser to the URL of the page.  However, you may need to create a page that is created to hold specific content, but it is meant to be called directly by a plugin, other content, or even a theme directly.  A good example of this is a `404 Error` page.
+デフォルトでは、すべてのページは **アクセス可能** です。つまり、ブラウザからそのページのURLを指し示せば、そのページにたどり着くということです。しかしながら、特定のコンテンツを持つページは作りたいが、プラグインや他のコンテンツ、もしくはそれら同士だけで呼び出せれば良いということもあります。このわかりやすい例として、 `404 エラー` ページがあります。
 
-Grav automatically looks for a page with the route `/error` if another page cannot be found.  With this being an actual page within Grav, you would have complete control over what this page looks like.  You probably do not want people accessing this page directly in their browser, however, so this page commonly has its `routable` variable set to false. Valid values are `true` or `false`.
+Gravは、なにかのページが見つからないときに、`/error` ページを自動的に探します。Grav内に存在するページなので、どのように見えるかを完全に制御できます。しかし、ブラウザからこのページへ直接アクセスされることは望まないでしょうから、このページは一般的に `routable` 変数がfalseに設定されます。`true` もしくは `false` で設定します。
 
 ### SSL
 
@@ -322,7 +322,7 @@ Grav automatically looks for a page with the route `/error` if another page cann
 ssl: true
 ```
 
-You can now enable a specific page to be forced with SSL **on** or **off**.  This **only works** with the `absolute_urls: true` option set in the `system.yaml` configuration.  This is because to be able to switch back and forth between SSL and non-SSL pages, you must be using full URLs with the protocol and host included.
+特定のページで、SSLの強制を **on** にするか **off**にするかを決められます。`system.yaml` 設定で、`absolute_urls: true` を **選択したときのみ機能します** 。なぜなら、ページのSSLか非SSLかを変更するためには、プロトコルやホストも含めたURL全体が必要だからです。
 
 ### Summary
 
@@ -333,30 +333,24 @@ summary:
   size: int
 ```
 
-The **summary** option configures what the `page.summary()` method returns.  This is most often used in a blog-listing type scenario, but can be used anytime you need a synopsis or summary of the page content.  The scenarios are as follows:
+**要約** オプションは、`page.summary()` メソッドの返り値を設定します。これは、しばしばブログ一覧のタイプを作るシナリオで使われますが、ページのコンテンツを要約したいときはいつでも使ってください。利用場面は、次の通りです。
 
-[div class="table-keycol"]
 | Property | Description |
 | -------- | ----------- |
 | **enabled:** | Switch off page summary (the summary returns the same as the page content) |
 | **format:** | <ul><li>`long` = Any summary delimiter of the content will be ignored<li>`short` = Detect and truncate content up to summary delimiter position</ul> |
-[/div]
 
-The `size` attribute has different meanings when the format is set to `short` and `long`:
+`size` 属性は、`short` と `long` の設定によって意味が異なります。
 
-[div class="table-keycol"]
 | Short Size | Description |
 | -------- | ----------- |
 | **size: 0** | If no summary delimiter is found, the summary equals the page content, otherwise the content will be truncated up to summary delimiter position |
 | **size:** `int` | Always truncate the content after **int** chars. If a summary delimiter was found, then truncate content up to summary delimiter position |
-[/div]
 
-[div class="table-keycol"]
 | Long Size | Description |
 | -------- | ----------- |
 | **size: 0** | Summary equals the entire page content |
 | **size:** `int` | The content will be truncated after **int** chars, independent of summary delimiter position |
-[/div]
 
 ### Template
 
@@ -364,11 +358,11 @@ The `size` attribute has different meanings when the format is set to `short` an
 template: custom
 ```
 
-As explained in [the previous chapter](../content-pages), the template from the theme that is used to render a page is based on the filename of the `.md` file.
+[前の章](../01.content-pages) で解説したとおり、ページをレンダリングするテーマのテンプレートは、`.md` ファイルのファイル名を基準にします。
 
-So a file called `default.md`, will use the `default` template in the active theme.  You can, of course, override this behavior by simply setting the `template` variable in the header and choosing a different template.
+このため、`default.md` ファイルは、有効化されているテーマの `default` テンプレートを使います。もちろん、この設定も上書きできます。単に、ヘッダに `template` 変数を異なるテンプレートに設定するだけです。
 
-In the example above, the page will use the `custom` template from the theme.  This variable exists because you may need to change the template of a page programmatically from a plugin.
+上の例では、そのページは `custom` テンプレートが使われます。この変数は、プラグインのプログラムからページのテンプレートを変える必要があるときのために用意されています。
 
 ### Template Format
 
@@ -376,11 +370,11 @@ In the example above, the page will use the `custom` template from the theme.  T
 template_format: xml
 ```
 
-Traditionally, if you want a page to output a specific format (ie: xml, json, etc.) you needed to append the format to the url. For example, entering `http://example.com/sitemap.xml` would tell the browser to render the content using the `xml` twig template ending in `.xml.twig`. This is all well and good, because we love doing things simply in Grav.
+伝統的に、あるページを特定のフォーマット（たとえば、xml、json、その他）で出力したいとき、URLにそのフォーマットを付け足す必要がありました。たとえば、`http://example.com/sitemap.xml` にアクセスすると、ブラウザは、`.xml.twig` で終わる `xml` のtwigテンプレートを使ったコンテンツをレンダリングします。これはとても良いことです。なぜならGravでかんたんにできるからです。
 
-Using the `template_format` page header, we can tell the browser how to render the page without any need for extensions in the URL. By entering `template_format: xml` in our `sitemap` page, we can make `http://example.com/sitemap` work for us without having to append `.xml` to the end of it.
+`template_format` ページヘッダを使えば、URLに拡張子を使うことなく、ブラウザにどのようにレンダリングするかを伝えることができます。`sitemap` ページに、`template_format: xml` を入力することで、`http://example.com/sitemap` が `.xml` を最後につけなくても機能するようになります。
 
-We [used this method](https://github.com/getgrav/grav-plugin-sitemap/commit/00c23738bdbfe9683627bf0f99bda12eab9505d5#diff-190081f40350c0272970d9171f3437a2) with the [Grav Sitemap Plugin](https://github.com/getgrav/grav-plugin-sitemap).
+[Grav サイトマップ・プラグイン](https://github.com/getgrav/grav-plugin-sitemap) では、[このメソッドを使っています。](https://github.com/getgrav/grav-plugin-sitemap/commit/00c23738bdbfe9683627bf0f99bda12eab9505d5#diff-190081f40350c0272970d9171f3437a2) 。 
 
 ### Unpublish Date
 
@@ -388,7 +382,7 @@ We [used this method](https://github.com/getgrav/grav-plugin-sitemap/commit/00c2
 unpublish_date: 05/17/2020 00:32
 ```
 
-Optional field, but can provide a date to automatically trigger un-publication. Valid values are any string date values that [strtotime()](https://php.net/manual/en/function.strtotime.php) supports.
+オプション設定ですが、自動的に非公開にする日を設定できます。使える文字列は、 [PHPのstrtotime関数](https://php.net/manual/en/function.strtotime.php) がサポートする日付の値です。
 
 ### Visible
 
@@ -396,55 +390,58 @@ Optional field, but can provide a date to automatically trigger un-publication. 
 visible: false
 ```
 
-By default, a page is **visible** in the **navigation** if the surrounding folder has a numerical prefix, i.e. `/01.home` is visible, while `/error` is **not visible**. This behavior can be overwritten by setting the `visible` variable in the header. Valid values are `true` or `false`.
+デフォルトでは、**ナビゲーション** 内でページは **表示されます** 。フォルダが番号で始まるとき（例 `/01.home`）は表示される一方で、`/error` のようなときは **表示されません** 。このふるまいはヘッダに `visible` 変数を設定することで上書きできます。`true` もしくは `false` で設定してください。
 
-## Custom Page Headers
+<h2 id="custom-page-headers">カスタム・ページ・ヘッダ</h2>
 
-Of course, you can create your own custom page headers using any valid YAML syntax.  These would be page-specific and be available for any plugin, or theme to make use of. A good example of this would be to set some variable specific to a sitemap plugin, such as:
+もちろん、適切なYAML構文を使うことで、独自にカスタムしたページヘッダを作り出せます。これらはそのページに特有のものであり、プラグインやテーマから利用可能です。わかりやすい例として、次のようなサイトマッププラグインで使える変数が設定できます。
 
-[prism classes="language-yaml line-numbers"]
+```yaml
 sitemap:
     changefreq: monthly
     priority: 1.03
-[/prism]
+```
 
-The significance of these headers is that Grav does not use them by default. They are only read by the **sitemap plugin** to determine how often this particular page is modified and what its priority should be.
+これらのヘッダの重要な点は、Gravはデフォルトでは利用しないことです。**サイトマップ・プラグイン** でのみ読まれます。そして、このページがどれくらいの頻度で修正され、優先度がどの程度なのかを、そのプラグインは決定します。
 
-Any page header such as this should be documented, and generally, there will be some default value that will be used if the page does not provide it.
+このようにあらゆるページのヘッダはドキュメント化されます。そして通常は、ページがヘッダを定義していない場合に備えて、デフォルトの値が用意されています。
 
-Another example would be to store page-specific data that could then be used by Twig in the content of the page.
+次の例では、ページ特有のデータが保存されています。そしてTwigがそのページコンテンツに使えるようになっています。
 
-For example, you might have want to associate some author reference for the page. If you added these YAML settings to the page header:
+たとえば、著者参照を紐付けたいと思うかもしれません。次のようなYAML設定をページヘッダに付け加えると：
 
-[prism classes="language-yaml line-numbers"]
+```yaml
 author:
     name: Sandy Johnson
     twitter: @sandyjohnson
     bio: Sandy is a freelance journalist and author of several publications on open source CMS platforms.
-[/prism]
+```
 
-You could then access them from Twig:
+Twigで、これらのアクセスできます：
 
-[prism classes="language-twig line-numbers"]
+```twig
 <section id="author-details">
     <h2>{{ page.header.author.name|e }}</h2>
     <p>{{ page.header.author.bio|e }}</p>
     <span>Contact: <a href="https://twitter.com/{{ page.header.author.twitter|e }}"><i class="fa fa-twitter"></i></a></span>
 </section>
-[/prism]
+```
 
-If the variable name [contains a special character like a dash](https://github.com/getgrav/grav/issues/1957#issuecomment-723236844) you should use [twigs attribute function](https://twig.symfony.com/doc/1.x/functions/attribute.html):
 
-[prism classes="language-twig"] attribute(page.header, 'plugin-name').active [/prism]
+もし変数名に、[dashのような特殊文字を使いたいときは](https://github.com/getgrav/grav/issues/1957#issuecomment-723236844) 、[Twigのattribute関数](https://twig.symfony.com/doc/1.x/functions/attribute.html) を使ってください:
+
+```twig
+attribute(page.header, 'plugin-name').active
+```
 
 
 ## Meta Page Headers
 
-Meta headers allow you to set the [standard set of HTML **<meta> tags**](http://www.w3schools.com/tags/tag_meta.asp) for each page as well as [OpenGraph](http://ogp.me/), [Facebook](https://developers.facebook.com/docs/sharing/best-practices), and [Twitter](https://dev.twitter.com/cards/overview).
+メタ・ヘッダにより、それぞれのページに [標準的なHTMLの**<meta>タグ**](http://www.w3schools.com/tags/tag_meta.asp) を設定できます。同様に、[OpenGraph](http://ogp.me/), [Facebook](https://developers.facebook.com/docs/sharing/best-practices) や、 [Twitter](https://dev.twitter.com/cards/overview) も設定できます。
 
-#### Standard Metatag examples
+<h4 id="standard-metatag-examples">標準的なmetaタグの例</h4>
 
-[prism classes="language-yaml line-numbers"]
+```yaml
 metadata:
     refresh: 30
     generator: 'Grav'
@@ -453,11 +450,11 @@ metadata:
     author: 'John Smith'
     robots: 'noindex, nofollow'
     my_key: 'my_value'
-[/prism]
+```
 
-This will produce the HTML:
+上記の例は、以下のようなHTMLになります：
 
-[prism classes="language-twig line-numbers"]
+```twig
 <meta name="generator" content="Grav" />
 <meta name="description" content="Your page description goes here" />
 <meta http-equiv="refresh" content="30" />
@@ -465,66 +462,66 @@ This will produce the HTML:
 <meta name="author" content="John Smith" />
 <meta name="robots" content="noindex, nofollow" />
 <meta name="my_key" content="my_value" />
-[/prism]
+```
 
-All HTML5 metatags are supported.
+すべてのHTML5のmetaタグがサポートされています。
 
 #### OpenGraph Metatag examples
 
-[prism classes="language-yaml line-numbers"]
+```yaml
 metadata:
     'og:title': The Rock
     'og:type': video.movie
     'og:url': http://www.imdb.com/title/tt0117500/
     'og:image': http://ia.media-imdb.com/images/rock.jpg
-[/prism]
+```
 
-This will produce the HTML:
+上記は、次のようなHTMLに変換されます：
 
-[prism classes="language-html line-numbers"]
+```html
 <meta name="og:title" property="og:title" content="The Rock" />
 <meta name="og:type" property="og:type" content="video.movie" />
 <meta name="og:url" property="og:url" content="http://www.imdb.com/title/tt0117500/" />
 <meta name="og:image" property="og:image" content="http://ia.media-imdb.com/images/rock.jpg" />
-[/prism]
+```
 
-For a full outline of all OpenGraph metatags that can be used, please consult the [official documentation](http://ogp.me/).
+OpenGraphのメタタグの全体的な概要については、[公式ドキュメント](http://ogp.me/) を調べてください。
 
 #### Facebook Metatag examples
 
-[prism classes="language-yaml line-numbers"]
+```yaml
 metadata:
     'fb:app_id': your_facebook_app_id
-[/prism]
+```
 
 This will produce the HTML:
 
-[prism classes="language-html line-numbers"]
+```html
 <meta name="fb:app_id" property="fb:app_id" content="your_facebook_app_id" />
-[/prism]
+```
 
 Facebook mostly uses OpenGraph metatags, but there are some Facebook-specific tags and these are supported automatically by Grav.
 
 #### Twitter Metatag examples
 
-[prism classes="language-yaml line-numbers"]
+```yaml
 metadata:
     'twitter:card' : summary
     'twitter:site' : @flickr
     'twitter:title' : Your Page Title
     'twitter:description' : Your page description can contain summary information
     'twitter:image' : https://farm6.staticflickr.com/5510/14338202952_93595258ff_z.jpg
-[/prism]
+```
 
 This will produce the HTML:
 
-[prism classes="language-twig line-numbers"]
+```twig
 <meta name="twitter:card" property="twitter:card" content="summary" />
 <meta name="twitter:site" property="twitter:site" content="@flickr" />
 <meta name="twitter:title" property="twitter:title" content="Your Page Title" />
 <meta name="twitter:description" property="twitter:description" content="Your page description can contain summary information" />
 <meta name="twitter:image" property="twitter:image" content="https://farm6.staticflickr.com/5510/14338202952_93595258ff_z.jpg" />
-[/prism]
+```
 
 For a full outline of all Twitter metatags that can be used, please consult the [official documentation](https://dev.twitter.com/cards/overview).
 
@@ -532,16 +529,21 @@ This really provides a lot of flexibility and power.
 
 ## Frontmatter.yaml
 
-An advanced feature that can come in handy for some power users is the ability to use common frontmatter values via a `frontmatter.yaml` file located in the page folder.  This is particular useful when working with multi-language sites where you may wish to share a portion of the frontmatter between all the language versions of a given page.
+一部のヘビーユーザにとって、便利で高度な機能として、ページフォルダにある`frontmatter.yaml` ファイルを通して、共通のfrontmatter値を使用する機能があります。これは、特に多言語サイトで作業するときに便利です。あるページのすべての言語バージョン間で、フロントマターを共有したい場合があります。
 
-To take advantage of this, simply create a `frontmatter.yaml` file alongside your page's `.md` file and add any valid frontmatter values.  For example:
+これを利用するためには、ページの`.md` ファイル と一緒に`frontmatter.yaml` ファイルを作り、有効なfrontmatterの値を追加するだけです。たとえば：
 
-[prism classes="language-yaml line-numbers"]
+```yaml
 metadata:
     generator: 'Super Grav'
     description: Give your page a powerup with Grav!
-[/prism]
+```
 
-! If a header is defined in both frontmatter.yaml and in page frontmatter, the page values is used, frontmatter.yaml values are overridden.
+> [!Note]  
+> frontmatter.yamlと、ページのフロントマターの両方でヘッダが決められている場合、frontmatter.yamlの値が上書きされます。
 
-!!!! Utilizing frontmatter.yaml is a file-side feature and is **not supported** by the admin plugin.
+> [!Warning]  
+> frontmatter.yaml の利用は、ファイル側の機能であり、管理プラグインでは **サポートされません** 。
+
+
+
