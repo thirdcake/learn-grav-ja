@@ -1,13 +1,11 @@
 ---
 import Base from './Base.astro';
-import { siteConfig } from '../config';
-const { sitetitle, description, baseurl, bloburl, learnurl } = siteConfig;
 const { frontmatter } = Astro.props;
 ---
 
     <Base frontmatter={frontmatter}>
-      <main class="position-relative p-3 z-0">
-        <div id="main-content"><slot /></div>
+      <main class="position-relative p-5 z-0 learn-grav-chapter">
+        <slot />
       </main>
     </Base>
       

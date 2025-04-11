@@ -1,0 +1,26 @@
+---
+
+type TreeNode = {
+  title: string;
+  url?: string;
+  children: TreeNode[];
+};
+const { pages } = Astro.props;
+import Sidebarchild from '../components/Sidebar.astro';
+---
+
+    <ul>
+    { pages.children.map(( page ) => {
+        if(page.children === 0) {
+            return <li>
+                <a href={ page.url }>{ page.title }</a>
+            </li>
+        } else {
+            return <li>
+                <a href={ page.url }>{ page.title }</a>
+                <Sidebarchild pages={ page }  />
+            </li>
+        }
+    }) }
+    </ul>
+

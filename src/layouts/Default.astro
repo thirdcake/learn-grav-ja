@@ -1,14 +1,12 @@
 ---
 import Base from './Base.astro';
-import { siteConfig } from '../config';
-const { sitetitle, description, baseurl, bloburl, learnurl } = siteConfig;
 const { frontmatter } = Astro.props;
 ---
 
     <Base frontmatter={frontmatter}>
       <main class="position-relative p-3 z-0">
-        <h1>{ frontmatter.title }</h1>
-        <div class="accordion m-3" id="mokuji" style="max-width:400px;">
+        <h1 class="pt-5">{ frontmatter.title }</h1>
+        <div class="accordion" id="mokuji" style="max-width:400px;">
           <div class="accordion-item">
             <h2 class="accordion-header">
               <button class="accordion-button" type="button" 
@@ -31,7 +29,7 @@ const { frontmatter } = Astro.props;
             </div>
           </div>
         </div>
-        <div id="main-content"><slot /></div>
+        <div class="mt-5 mb-5 learn-grav-default"><slot /></div>
       </main>
     </Base>
 

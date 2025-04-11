@@ -1,0 +1,16 @@
+---
+const { breadobj } = Astro.props;
+---
+
+
+<ol class="breadcrumb">
+    {
+        breadobj.map((page, index) => {
+          if (index === breadobj.length - 1) {
+            return <li class="breadcrumb-item">{ page.frontmatter.title }</li>;
+          } else {
+            return <li class="breadcrumb-item"><a href={page.url}>{ page.frontmatter.title }</a></li>;
+          }
+        })
+      }
+</ol>
