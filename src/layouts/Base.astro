@@ -8,9 +8,10 @@ const { sitetitle, description, baseurl, bloburl, learnurl } = siteConfig;
 
 const { frontmatter } = Astro.props;
 
+// urlを `/` 無しにそろえる
+const normalizePath = (path: string) => path.endsWith('/') ? path.slice(0,-1) : path;
 // 現在アクセスしているページのURL
-const currenturl = new URL(Astro.url);
-const currentpath = currenturl.pathname;
+const currentpath = normalizePath(new URL(Astro.url).pathname);
 
 // ドキュメントページ全体を取得する
 const pages = await Astro.glob('../pages/**/index.md');
@@ -72,7 +73,7 @@ const sidebarPages = pages
   }, {title:'', url:'', children:[]});
 
 // ページ右上の前・次リンク
-const currentIndex = pages.findIndex(item => item.url === currentpath);
+const currentIndex = pages.findIndex(item => (item.url === currentpath));
 const prevurl = (currentIndex + 1 < pages.length) ? pages[currentIndex+1].url : '#';
 const nexturl = (0 < currentIndex) ? pages[currentIndex-1].url : '#';
 
