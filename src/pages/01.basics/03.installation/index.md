@@ -165,7 +165,7 @@ https://127.0.0.1:8000
 
 最初にロードされるとき、Gravはいくつかのファイルをコンパイルします。ブラウザを再表示させれば、表示速度が上がり、キャッシュされたものが得られます。
 
-![Grav Installed](install.png)
+![Grav Installed](install.jpg)
 
 > [!TIP]
 > 先程の例では、コマンドプロンプトが **$マーク** で表示されていました。これはプラットフォームにより別の見え方をしているかもしれません。
@@ -176,7 +176,7 @@ https://127.0.0.1:8000
 
 最初のページがロードされるときに（もしくは、キャッシュクリアされたあとに）、なにか問題が見つかった場合、エラーページが表示されるかもしれません：
 
-![Grav with Problems](problems.png)
+![Grav with Problems](problems.jpg)
 
 具体的な問題については、[Troubleshooting](/11.troubleshooting)をご参照ください。
 
