@@ -3,11 +3,11 @@ title: "Gravとプラグインのアップデート"
 layout: ../../../layouts/Default.astro
 ---
 
-Gravと、プラグイン、テーマを最新に保つより良い方法は、**Gravパッケージ・マネージャー(GPM)** を使うことです。すべての情報は、[Grav GPM ドキュメント](/advanced/grav-gpm)にあります。
+Gravと、プラグイン、テーマを最新に保つより良い方法は、**Gravパッケージ・マネージャー(GPM)** を使うことです。すべての情報は、[Grav GPM ドキュメント](../../07.cli-console/04.grav-cli-gpm)にあります。
 
-また、**GPM** は、[管理パネル](/admin-panel)プラグインに統合されており、あらゆるアップデートをチェックし、プロンプトを表示し、自動的にインストールします。
+また、**GPM** は、[管理パネル](../../05.admin-panel)プラグインに統合されており、あらゆるアップデートをチェックし、プロンプトを表示し、自動的にインストールします。
 
-### Which version do I have?
+<h3 id="which-version-do-i-have">どのバージョンを使っているか</h3>
 
 サイトが使うGravとプラグインのバージョンを知る方法は、いくつもあります：
 
@@ -15,7 +15,7 @@ Gravと、プラグイン、テーマを最新に保つより良い方法は、*
 * **CLI** ：`bin/gpm version grav` コマンドを実行してください。テーマとプラグインのバージョンリストがそれらの名前とともに表示されます。
 * **ファイルシステム** ：バージョンを確認する最もかんたんな方法は、Gravをインストールしたルートディレクトリの`CHANGELOG.md` ファイルを見ることです。プラグインとテーマについても同じで、通常`user/plugins` と、`user/themes` フォルダ内に、それぞれ見つかります。
 
-### Upgrading from Grav 1.5 or older version
+<h3 id="upgrading-from-grav-1-5-or-older-version">Grav1.5以前のバージョンからのアップグレード</h3>
 
 Updating an older version of Grav may need some extra preparations and work because of the increased minimum requirements and potential incompatibilities.
 
@@ -25,19 +25,19 @@ The basic workflow is following:
 - Upgrade manually **to Grav 1.6.31**
 - Upgrade to the latest version
 
-A detailed guide **[Upgrading from Grav <1.6](/advanced/grav-development/grav-15-upgrade-guide)** should help you in the process.
+A detailed guide **[Upgrading from Grav <1.6](../../08.advanced/09.grav-development/01.grav-15-upgrade-guide)** should help you in the process.
 
 ### Upgrading to the Next Version
 
 次のバージョンにアップデートについては、アップグレード後もすべてが機能することを確認するための特別なガイドがあります。
 
-- **[Grav1.7にアップグレード](/advanced/grav-development/grav-17-upgrade-guide)**
-- **[Grav1.6にアップグレード](/advanced/grav-development/grav-16-upgrade-guide)**
+- **[Grav1.7にアップグレード](../../08.advanced/09.grav-development/03.grav-17-upgrade-guide)**
+- **[Grav1.6にアップグレード](../../08.advanced/09.grav-development/02.grav-16-upgrade-guide)**
 
-> [!NOTE]
+> [!Note]  
 > Gravの次のバージョンをインストールする前に、このアップグレードガイドを読むことをおすすめします。
 
-### Grav CMS Updates
+<h3 id="grav-cms-updates">Grav CMSのアップデート</h3>
 
 Gravをアップデートするより良い方法は、**Gravパッケージ・マネージャ(GPM)** を使うことです。やるべきことは、Gravサイトのルートフォルダに移動し、次のように入力することだけです：
 
@@ -45,8 +45,8 @@ Gravをアップデートするより良い方法は、**Gravパッケージ・�
 bin/gpm selfupgrade -f
 ```
 
-> [!TIPS]
-> コマンドの詳しい情報は、[GPM コマンド > 自身をアップグレード](/cli-console/grav-cli-gpm#self-upgrade) にあります。
+> [!Tip]  
+> コマンドの詳しい情報は、[GPM コマンド > 自身をアップグレード](../../07.cli-console/04.grav-cli-gp/m#self-upgrade) にあります。
 
 ### Plugin and Theme Updates
 
@@ -55,6 +55,6 @@ bin/gpm selfupgrade -f
 ```bash
 bin/gpm update
 ```
-> [!TIPS]
-> コマンドの詳しい情報は、[GPM コマンド > 自身をアップグレード](/cli-console/grav-cli-gpm#self-upgrade) にあります。
+> [!Tip]  
+> コマンドの詳しい情報は、[GPM コマンド > 自身をアップグレード](../../07.cli-console/04.grav-cli-gp/m#self-upgrade) にあります。
 

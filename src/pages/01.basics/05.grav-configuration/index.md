@@ -3,23 +3,23 @@ title: '設定'
 layout: ../../../layouts/Default.astro
 ---
 
-すべてのGravの設定ファイルは、[YAML構文](/advanced/yaml/) で書かれており、拡張子は、`.yaml` です。YAMLは、非常に直感的なので、読み書きともにかんたんですが、利用可能な構文を完全に理解するには、[上級の章のYAMLページ](/advanced/yaml/)をチェックしてください。
+すべてのGravの設定ファイルは、[YAML構文](../../08.advanced/11.yaml/) で書かれており、拡張子は、`.yaml` です。YAMLは、非常に直感的なので、読み書きともにかんたんですが、利用可能な構文を完全に理解するには、[高度な設定の章のYAMLページ](../../08.advanced/11.yaml/)をチェックしてください。
 
-> [!TIPS]
-> **TIP:** 本番サイトを、安全にし、かつ最適するクイックガイドとして、[Security > Configuration](/security/configuration/)を参照してください。
+> [!Tip]  
+> **TIP:** 本番サイトを、安全にし、かつ最適するクイックガイドとして、[セキュリティ > 設定](../../13.security/02.configuration/) の章を参照してください。
 
-## System Configuration
+<h2 id="system-configuration">システム設定</h2>
 
-Gravは、ユーザにとってものごとを可能な限りかんたんにすることにフォーカスしており、設定においても同様です。Gravには、賢明な初期設定のオプションが用意されており、これらは `system/config/system.yaml` ファイルに含まれています。
+Gravは、ユーザにとって可能な限りかんたんにすることにフォーカスしており、設定においても同様です。Gravには、賢明な初期設定のオプションが用意されており、これらは `system/config/system.yaml` ファイルに含まれています。
 
 しかしながら、**絶対にこのファイルを変更しないでください** 。替わりに、あらゆる設定変更は、`user/config/system.yaml` というファイルに保存してください。このファイルに、同じ構造で、同じ名前の設定をすれば、すべて初期設定から上書きされます。
 
-> [!CAUTION]
+> [!Warning]  
 > 一般的に言って、`system/` フォルダ内のどんなことでも **決して** 変更するべきではありません。ユーザがすること（コンテンツを作る、プラグインをインストールする、設定を編集するなど）は、 `user/` フォルダ内で行ってください。こうすることで、アップグレードがかんたんになりますし、バックアップや同期のために、変更内容をひとつの場所にまとめておくことができるようになります。 
 
-これが、デフォルトの`system/config/system.yaml` ファイルにある変数です：
+デフォルトの`system/config/system.yaml` ファイルにある変数は次のとおりです：
 
-### Basic Options
+<h3 id="basic-options">基本オプション</h3>
 
 ```yaml
 absolute_urls: false
@@ -41,9 +41,9 @@ http_x_forwarded:
   ip: true
 ```
 
-これらの設定オプションは、それぞれの子セクションには表示されません。これらはサイトの運営方法、タイムゾーン、ベースURLに影響する一般的なオプションです。
+これらの設定オプションは、それぞれの子セクションには表示されません。これらはサイトの運用、タイムゾーン、ベースURLに影響する一般的なオプションです。
 
-| Property | Description |
+| プロパティ | 説明 |
 | -------- | ----------- |
 | **absolute_urls:** | Absolute or relative URLs for `base_url` |
 | **timezone:** | Valid values can be found [here](https://php.net/manual/en/timezones.php) |
@@ -76,9 +76,9 @@ languages:
   content_fallback: {}
 ```
 
-**Languages** 部分は、サイトの言語を設定します。どんな言語をサポートするか、URLのデフォルトの言語は何か、翻訳の設定などが含まれます。**Languages** 部分の内訳は、以下の通りです：
+**Languages** 部分は、サイトの言語を設定します。サポート対象とする言語の種類、URLのデフォルトの言語の指定、翻訳の設定などが含まれます。**Languages** 部分の内訳は、以下の通りです：
 
-| Property | Description |
+| プロパティ | 説明 |
 | -------- | ----------- |
 | **supported:** | List of languages supported. eg: `[en, fr, de]` |
 | **default_lang:** | Default is the first supported language. Must be one of the supported languages |
@@ -102,7 +102,7 @@ home:
 
 **Home** セクションでは、サイトのトップページのデフォルトのルートを設定します。URLのホームルートを非表示にすることもできます。
 
-| Property | Description |
+| プロパティ | 説明 |
 | -------- | ----------- |
 | **alias:** | Default path for home, ie: `/home` or `/` |
 | **hide_in_urls:** | Hide the home route in URLs. Can be `true` or `false` |
@@ -167,7 +167,7 @@ pages:
 
 `system/config/system.yaml` ファイルの **Pages** セクションでは、多くのテーマに関係した設定を行います。たとえば、サイトを表示する際に使うテーマを設定したり、ページの表示順や、twig、マークダウンプロセスのデフォルト設定、などです。ページの表示に影響を与える決定の多くが、この場所です。
 
-| Property | Description |
+| プロパティ | 説明 |
 | -------- | ----------- |
 | **type:** | Experimental setting to enable **Flex Pages** in frontend. Use `flex` to enable, `regular` otherwise. This defaults to `regular` (**Grav 1.7+**) |
 | **theme:** | This is where you set the default theme. This defaults to `quark` |
@@ -240,11 +240,11 @@ cache:
 
 **キャッシュ** セクションでは、サイトのキャッシュを設定できます。メソッドを有効化したり、無効化したり、選んだりできます。
 
-| Property | Description |
+| プロパティ | 説明 |
 | -------- | ----------- |
 | **enabled:** | Set to `true` to enable caching. Can be set to `true` or `false` |
 | **check:** | |
-| ... **method:** | Method to check for updates in pages. Options: `file`, `folder`, `hash` and `none`. [more details](../../advanced/performance-and-caching#grav-core-caching) |
+| ... **method:** | Method to check for updates in pages. Options: `file`, `folder`, `hash` and `none`. [more details](../../08.advanced/02.performance-and-caching#grav-core-caching) |
 | **driver:** | Select a cache driver. Options are: `auto`, `file`, `apcu`, `redis`, `memcache`, and `wincache` |
 | **prefix:** | Cache prefix string (prevents cache conflicts). Example: `g` |
 | **purge_at:** | Scheduler: How often to purge old cache using cron `at` syntax |
@@ -275,7 +275,7 @@ twig:
 
 **Twig** セクションでは、サイトのデバッグ、キャッシュ、最適化のためにTwigを設定するツールが用意されています。
 
-| Property | Description |
+| プロパティ | 説明 |
 | -------- | ----------- |
 | **cache:** | Set to `true` to enable Twig caching. Can be set to `true` or `false` |
 | **debug:** | Enable Twig debug. Can be set to `true` or `false` |
@@ -310,7 +310,7 @@ assets:
 
 **Assets** セクションでは、JavaScriptやCSSなどのアセット管理に関するオプションを設定できます。
 
-| Property | Description |
+| プロパティ | 説明 |
 | -------- | ----------- |
 | **css_pipeline:** | The CSS pipeline is the unification of multiple CSS resources into one file. Can be set to `true` or `false` |
 | **css_pipeline_include_externals:** | Include external URLs in the pipeline by default. Can be set to `true` or `false` |
@@ -327,7 +327,7 @@ assets:
 | **js_minify:** | Minify the JS during pipelining. Can be set to `true` or `false` |
 | **enable_asset_timestamp:** | Enable asset timestamps. Can be set to `true` or `false` |
 | **enable_asset_sri:** | Enable asset SRI. Can be set to `true` or `false` |
-| **collections:** | This contains collections, designated as sub-items. For example: `jquery: system://assets/jquery/jquery-3.x.min.js`. [Read more about this](/themes/asset-manager#collections-and-attributes) |
+| **collections:** | This contains collections, designated as sub-items. For example: `jquery: system://assets/jquery/jquery-3.x.min.js`. [Read more about this](../../03.themes/07.asset-manager/#collections-and-attributes) |
 
 ### Errors
 
@@ -337,9 +337,9 @@ errors:
   log: true
 ```
 
-**Errors** セクションは、Gravでエラーをどのように表示したりログに残したりするかを決定します。
+**Errors** セクションは、Gravでのエラーの表示やログ記録の方法を決定します。
 
-| Property | Description |
+| プロパティ | 説明 |
 | -------- | ----------- |
 | **display:** | Determines how errors are displayed. Enter either `1` for the full backtrace, `0` for Simple Error, or `-1` for System Error |
 | **log:** | Log errors to `/logs` folder. Can be set to `true` or `false` |
@@ -355,7 +355,7 @@ log:
 
 **log** セクションは、Gravの代替ログ機能を設定できます。
 
-| Property | Description |
+| プロパティ | 説明 |
 | -------- | ----------- |
 | **handler:** | Log handler. Currently supported: `file` \| `syslog` |
 | **syslog:** | |
@@ -374,7 +374,7 @@ debugger:
 
 **Debugger** セクションでは、Gravのデバッガーを有効化できます。開発中に便利なツールです。
 
-| Property | Description |
+| プロパティ | 説明 |
 | -------- | ----------- |
 | **enabled:** | Enable Grav debugger and following settings. Can be set to `true` or `false` |
 | **provider:** | Debugger provider: Can be set to `debugbar` or `clockwork` (**Grav 1.7+**) |
@@ -402,7 +402,7 @@ images:
 
 **Images** セクションでは、画像の再サンプリングのデフォルト画質を設定したり、画像のキャッシュやデバッグ機能を制御したりできます。
 
-| Property | Description |
+| プロパティ | 説明 |
 | -------- | ----------- |
 | **default_image_quality:** | Default image quality to use when resampling images. For example: `85` = 85% |
 | **cache_all:** | Cache all images by default. Can be set to `true` or `false` |
@@ -430,7 +430,7 @@ media:
 
 **Media** セクションでは、メディアファイルの制御に関する設定ができます。タイムスタンプの表示や、アップロードサイズなども含まれます。
 
-| Property | Description |
+| プロパティ | 説明 |
 | -------- | ----------- |
 | **enable_media_timestamp:** | Enable media timetsamps |
 | **unsupported_inline_types:** | Array of supported media types to try to display inline. These file types are placed within `[]` brackets |
@@ -456,7 +456,7 @@ session:
 
 これらのオプションは、サイトのセッション変数を決定します。
 
-| Property | Description |
+| プロパティ | 説明 |
 | -------- | ----------- |
 | **enabled:** | Enable Session support. Can be set to `true` or `false` |
 | **initialize:** | Initialize session from Grav (if `false`, plugin needs to start the session) |
@@ -480,9 +480,9 @@ gpm:
   official_gpm_only: true
 ```
 
-**GPM** セクションの選択肢は、GravのGPM（Grav・パッケージ・マネージャー）を制御します。たとえば、GPMが公式のソースを使用するように制限したり、パッケージを取得する方法を選択したりできます。また、安定版リリースやテストリリースを選択したり、プロキシURLの設定もできます。
+**GPM** セクションの選択肢は、GravのGPM（Grav パッケージ・マネージャー）を制御します。たとえば、GPMが公式のソースを使用するように制限したり、パッケージを取得する方法を選択したりできます。また、安定版リリースやテストリリースを選択したり、プロキシURLの設定もできます。
 
-| Property | Description |
+| プロパティ | 説明 |
 | -------- | ----------- |
 | **releases:** | Set to either `stable` or `testing` to determine if you want to update to the latest stable or testing build |
 | **proxy_url:** | Configure a manual proxy URL for GPM. For example: `127.0.0.1:3128` |
@@ -500,7 +500,7 @@ accounts:
 
 Accounts設定は、Flex Usersの新しい体験ができます。基本的に、ユーザは、より力強くパフォーマンスの良いFlex objectsとして保存されます。
 
-| Property | Description |
+| プロパティ | 説明 |
 | -------- | ----------- |
 | **type:** | Account type: `regular` or `flex` |
 | **storage:** | Flex storage type: `file` or `folder` |
@@ -523,7 +523,7 @@ flex:
 
 Flex Objectsのcacheは、**Grav 1.7** で新しく追加されました。これは、すべてのFlex typesのためのデフォルト設定ですが、それぞれの`Flex Directory` で上書き可能です。
 
-| Property | Description |
+| プロパティ | 説明 |
 | -------- | ----------- |
 | **cache:** | (**Grav 1.7+**) |
 | **... index:** | (**Grav 1.7+**) |
@@ -547,13 +547,13 @@ strict_mode:
 
 Strictモードは、新しいバージョンのYAMLとTwigプロセッサに移行することで、将来のバージョンのGravへの移行がよりかんたんになります。これらは、すべてのサードパーティ製拡張機能と互換性があるとは限りません。
 
-| Property | Description |
+| プロパティ | 説明 |
 | -------- | ----------- |
 | **yaml_compat:** | Enables YAML backwards compatibility |
 | **twig_compat:** | Enables deprecated Twig autoescape setting |
 | **blueprint_compat:** | Enables backward compatible strict support for blueprints |
 
-> [!TIPS]
+> [!Info]  
 > **すべての** 設定ファイルをコピーして上書きする必要はありません。最小限の上書きでも、最大限でも、好きなようにできます。ただし、上書きしたい特定の設定については、**正確に同じ名前の構造** となるように確認してください。
 
 <h2 id="site-configuration">サイト設定</h2>
@@ -602,23 +602,23 @@ blog:
 
 このサンプルファイルの要素を詳しく見ていきましょう：
 
-| Property | Description |
+| プロパティ | 説明 |
 | -------- | ----------- |
 | **title:** | The title is a simple string variable that can be referenced whenever you want to display the name of this site |
 | **author:** | |
 | ... **name:** | The name of the author of the site, that can be referenced whenever you need it |
 | ... **email:** | A default email for use in your site |
 | **taxonomies:** | An arbitrary list of high-level types that you can use to organize your content.  You can assign content to specific taxonomy types, for example, categories or tags. Feel free to edit, or add your own |
-| **metadata:** | Set default metadata for all your pages, see the [content page headers](../../content/headers) section for more details |
+| **metadata:** | Set default metadata for all your pages, see the [content page headers](../../02.content/02.headers) section for more details |
 | **summary:** | |
 | ... **size:** | A variable to override the default number of characters that can be used to set the summary size when displaying a portion of content |
 | **routes:** | This is a basic map that can provide simple URL alias capabilities in Grav.  If you browse to `/something/else` you will actually be sent to `/blog/sample-3`. Feel free to edit, or add your own as needed. **Regex Replacements** (`(.*) - $1`) are now supported at the end of route aliases.  You should put these at the bottom of the list for optimal performance |
 | **(custom options)** | You can create any option you like in this file and a good example is the `blog: route: '/blog'` option that is accessible in your Twig templates with `site.blog.route` |
 
-> [!TIPS]
+> [!Info]  
 > ほとんど場合、このファイルの最も重要な要素は、 `Taxonomy` リストです。コンテンツでタグやカテゴリーを使いたいならば、ここでタクソノミーのリストを **定義しなければなりません。**
 
-## Security
+<h2 id="security">セキュリティ</h2>
 
 セキュリティを強化するために、 `system/config/security.yaml` ファイルがあります。これは、いくつかの安全側のデフォルト設定がしてあり、コンテンツを **保存** したり、**ツール** の新しい **Reports** セクションに、Adminプラグインで使われます。
 
@@ -668,11 +668,11 @@ sanitize_svg: true
 
 これらの設定に変更を加えたいと思ったら、このファイルを `user/config/security.yaml` ファイルにコピーし、コピー先を編集してください。
 
-## Other Configuration Settings and Files
+<h2 id="other-configuration-settings-and-files">その他の設定とファイル設定</h2>
 
-ユーザー設定は、完全にオプションです。デフォルトの設定を、好きなように上書きできます。この上書きは、サイト上のシステム、サイト、そしていかなるプラグインにも適用されます。
+ユーザー設定は、完全に任意です。デフォルトの設定を、好きなように上書きできます。この上書きは、サイト上のシステム、サイト、そしていかなるプラグインにも適用されます。
 
-また、上記で解説した `user/config/system.yaml` や、`user/config/site.yaml` ファイルにも制限はありません。ほかの `.yaml` 設定ファイルを `user/config/` フォルダに作成できますし、Gravは自動的にそれらをピックアップするでしょう。
+また、上記で解説した `user/config/system.yaml` や、`user/config/site.yaml` ファイルにも制限はありません。ほかの `.yaml` 設定ファイルを `user/config/` フォルダに作成できますし、Gravでは、自動的にそれらを読み込まれます。
 
 たとえば、`user/config/data.yaml` という新しい設定ファイルがあったとして、このファイルのyaml変数でcountを呼び出すとします：
 
@@ -692,30 +692,30 @@ count: 39
 $count_var = Grav::instance()['config']->get('data.count');
 ```
 
-> [!TIPS]
-> また、カスタムファイルを管理プラグインで編集できるようにするために、カスタムのブループリントファイルを提供することもできます。関連する[Admin クックブックセクションのレシピ](/cookbook/admin-recipes#add-a-custom-yaml-file)を確認してください。
+> [!Note]  
+> また、カスタムファイルを管理プラグインで編集できるようにするために、カスタムのブループリントファイルを提供することもできます。関連する[Admin クックブックセクションのレシピ](../../10.cookbook/04.admin-recipes#add-a-custom-yaml-file)を確認してください。
 
-### Config Variable Namespacing
+<h3 id="config-variable-namespacing">設定変数の名前空間</h3>
 
-設定ファイルへのパスは、設定オプションの **名前空間(namespace)** として使われます。
+設定ファイルへのパスは、設定オプションの **名前空間（namespace）** として使われます。
 
 かわりに、すべてのオプションをひとつのファイルに詰めて、YAML構造を使い、設定オプションの階層を指定することもできます。この名前空間は、**パス + ファイル名 + オプション名** の組み合わせで作られます。
 
-たとえば：あるオプション `author: "フランク スミス"` が、`plugins/myplugin.yaml` にあったとして、これは次のようにアクセスできます： `plugins.myplugin.author` 。しかしながら、`plugins.yaml` というファイルもあった場合で、そのファイルに `myplugin: author: "フランク スミス"` という名前のオプションがあった場合に、同じ `plugins.myplugin.author` によりリーチ可能です。
+たとえば：あるオプション `author: "フランク スミス"` が、`plugins/myplugin.yaml` にあったとして、これは次のようにアクセスできます： `plugins.myplugin.author` 。しかしながら、`plugins.yaml` というファイルもあった場合で、そのファイルに `myplugin: author: "フランク スミス"` という名前のオプションがあった場合に、同じ `plugins.myplugin.author` によりたどりつけます。
 
 設定ファイルの構造を、いくつか例示します：
 
-| File | Description |
+| ファイル名 | 説明 |
 | -------- | ----------- |
-| **user/config/system.yaml**           | Global system configuration file                  |
-| **user/config/site.yaml**             | A site-specific configuration file                |
-| **user/config/plugins/myplugin.yaml** | Individual configuration file for myplugin plugin |
-| **user/config/themes/mytheme.yaml**   | Individual configuration file for mytheme theme   |
+| **user/config/system.yaml**           | グローバルなシステム設定ファイル |
+| **user/config/site.yaml**             | サイト固有の設定ファイル |
+| **user/config/plugins/myplugin.yaml** | 「myplugin」プラグインの個別設定ファイル |
+| **user/config/themes/mytheme.yaml**   | 「mytheme」テーマの個別設定ファイル |
 
-> [!TIPS]
-> 名前空間を持つ設定ファイルは、デフォルトの設定ファイルの同じパスを持つオプションをすべて上書きもしくはマスクするでしょう。
+> [!Info]  
+> 名前空間を持つ設定ファイルは、デフォルトの設定ファイルの同じパスを持つオプションをすべて上書きもしくはマスクします。
 
-### Plugins Configuration
+<h3 id="plugins-configuration">プラグインの設定</h3>
 
 ほとんどの **プラグイン** は、それぞれ独自のYAML設定ファイルを持ちます。このファイルを直接編集するよりは、 `user/config/plugins/` ディレクトリにコピーすることを推奨します。これにより、プラグインのアップデートにより、設定が上書きされないことを確認できますし、設定変更可能なオプションをひとつの便利な場所に留めることができます。
 
@@ -723,7 +723,7 @@ $count_var = Grav::instance()['config']->get('data.count');
 
 プラグインの主ディレクトリ内に存在するYAMLファイルは、二番目に働きます。そこに書かれている設定はすべて、ユーザーフォルダのコピーに無いとしても、Gravはピックアップし、利用します。
 
-### Themes Configuration
+<h3 id="themes-configuration">テーマの設定</h3>
 
 **テーマ** においても、プラグインと同じルールが適用されます。このため、 `user/themes/mytheme` というファイルに、`user/themes/mytheme/mytheme.yaml` という設定ファイルがあった場合、このファイルを `user/config/themes/mytheme.yaml` にコピーし、そこで編集できます。
 

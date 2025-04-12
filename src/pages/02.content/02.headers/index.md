@@ -5,7 +5,7 @@ layout: ../../../layouts/Default.astro
 
 ページの上部にある、ページのヘッダー（フロントマターとして知られているもの）は、完全に付随的なものです。Gravでページを表示するときに、無かったとしても全く問題のないものです。Gravには、3つの主要なページタイプがあります（**標準**、**一覧**、そして**モジュラー** ）が、それぞれはヘッダーと関係しています。
 
-> [!NOTE]  
+> [!Note]  
 > ヘッダは、**ページのフロントマター(Frontmatter)** とも呼ばれ、HTTPヘッダと混同されないように、そちらで呼ばれることがよくあります。
 
 <h2 id="basic-page-headers">基本的なページヘッダー</h2>
@@ -30,7 +30,7 @@ date: 01/01/2020 3:14pm
 
 `date` 変数は、このページに関連する特定の日付を設定します。これは、しばしばそのポストが作られた日であり、表示予定日や表示順序を決める目的に使われます。設定しなければ、そのページを最後に **修正した時間** がデフォルトで使われます。
 
-> [!]  
+> [!Note]  
 > `月/日/年` もしくは `日-月-年` による日付表記は、要素間のセパレータを見ることではっきりさせることができます：もしセパレータがスラッシュ（`/`）だった場合、**アメリカ式** で `月/日/年` が推定され、セパレータがダッシュ（`-`）やドット（`.`）だった場合、**ヨーロッパ式** で `日.月.年` が推定されます。
 
 ### Menu
@@ -103,7 +103,7 @@ cache_control: max-age=604800
 
 この変数を入力するときは、[適切な](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control) `cache-control` テキストを設定してください。
 
-> [!]  
+> [!Note]  
 > ページのコンテンツ情報が、ユーザーごとに変わる場合は、`no-cache` を使うことを確認してください。そうでなければ、他のユーザーにコンテンツ情報が漏洩するかもしれません。[Expires](#expires) の設定は、`expires: 0` と同じ影響があります。
 
 ### Date Format
@@ -138,7 +138,7 @@ expires: 604800
 
 ページの有効期限は、604800秒（=7日間）です。
 
-> [!]  
+> [!Note]  
 > ユーザごとにページのコンテンツ情報が変わるときは、`expires: 0` になっていることを確認してください。そうでなければ、他のユーザに漏洩する可能性があります。[Cache-Control](#cache-control)設定も、あわせて確認してください。
 
 ### External Url
@@ -212,7 +212,7 @@ redirect_after_login: '/profile'
       '<': 'lt'
 ```
 
-| Property | Description |
+| プロパティ | 設定 |
 | -------- | ----------- |
 | **extra:** | Markdown Extraサポートを有効化 (GFM by default) |
 | **auto_line_breaks:** | 自動改行を有効化 |
@@ -335,19 +335,19 @@ summary:
 
 **要約** オプションは、`page.summary()` メソッドの返り値を設定します。これは、しばしばブログ一覧のタイプを作るシナリオで使われますが、ページのコンテンツを要約したいときはいつでも使ってください。利用場面は、次の通りです。
 
-| Property | Description |
+| プロパティ | 説明 |
 | -------- | ----------- |
 | **enabled:** | Switch off page summary (the summary returns the same as the page content) |
 | **format:** | <ul><li>`long` = Any summary delimiter of the content will be ignored<li>`short` = Detect and truncate content up to summary delimiter position</ul> |
 
 `size` 属性は、`short` と `long` の設定によって意味が異なります。
 
-| Short Size | Description |
+| Short サイズ | 説明 |
 | -------- | ----------- |
 | **size: 0** | If no summary delimiter is found, the summary equals the page content, otherwise the content will be truncated up to summary delimiter position |
 | **size:** `int` | Always truncate the content after **int** chars. If a summary delimiter was found, then truncate content up to summary delimiter position |
 
-| Long Size | Description |
+| Long サイズ | 説明 |
 | -------- | ----------- |
 | **size: 0** | Summary equals the entire page content |
 | **size:** `int` | The content will be truncated after **int** chars, independent of summary delimiter position |

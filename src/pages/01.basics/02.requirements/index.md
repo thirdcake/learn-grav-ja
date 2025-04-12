@@ -1,25 +1,24 @@
 ---
 title: "システム要件"
 layout: ../../../layouts/Default.astro
-learnurl: "/basics/requirements"
 ---
 
 Gravは、意図的に少ない要件で設計されています。Gravは、あなたのローカルコンピュータや、99%のwebホスティングプロバイダでかんたんに動作します。手元にペンがあれば、以下のシステム要件を書き留めてください。
 
 1. Webサーバ（Apache, Nginx, LiteSpeed, Lightly, IIS など）
 2. PHP 7.3.6 以上
-3. ええと... これだけです、本当に！（ただし、円滑に動かすために[PHP要件](#php-requirements)をご覧ください）
+3. ええと... これだけです、本当に！（ただし、スムーズに動かすために[PHP要件](#php-requirements)をご覧ください）
 
 Gravは、コンテンツをプレーンなテキストファイルとして構築されます。データベースは不要です。
 
-> [!NOTE]
+> [!Info]  
 > パフォーマンスを最適化するため、APCuや、Memcached、RedisのようなPHPユーザキャッシュの使用を強く推奨します。しかし心配はいりません。ホスティングサービスにすでにパッケージされていることがほとんどです！
 
-## Webサーバ
+<h2 id="web-servers">Webサーバ</h2>
 
-Gravは、とてもシンプルで汎用的なので、動かすだけならwebサーバさえ不要です。直接、PHP7.3.6以上のビルトインサーバで動かせます。
+Gravは、とてもシンプルで汎用的なので、動かすだけならwebサーバさえ不要です。直接、PHP7.3.6以上のビルトイン・サーバで動かせます。
 
-ビルトインサーバによるテストは、Gravのインストール確認や手短かな開発作業には便利ですが、本番環境のサイトや、高度な開発作業では **推奨されません** 。[インストールガイド](../02.installation/#running-grav-with-the-built-in-php-webserver)で、方法を説明しています。
+ビルトイン・サーバによる動作テストは、Gravのインストール確認や、手短かな開発作業には便利ですが、本番環境のサイトや、高度な開発作業には **推奨されません** 。[インストールガイド](../03.installation/#running-grav-with-the-built-in-php-webserver)で、方法を説明しています。
 
 技術的には、スタンドアロンのwebサーバが不要とはいえ、ローカル環境であっても、webサーバを稼働させた方が良いです。素晴らしいオプションがたくさんあります：
 
@@ -46,7 +45,7 @@ Gravは、とてもシンプルで汎用的なので、動かすだけならweb�
 
 * Linuxの多くのディストリビューションには、すでにApacheとPHPが組み込まれています。そうでない場合、ディストリビューションは通常パッケージマネージャを提供しており、それを使ってそれほど大変でなくインストールすることができます。より高度な設定は、優れた検索エンジンの助けを借りて調べてください。
 
-### Apache Requirements
+<h3 id="apache-requirements">Apacheの要件</h3>
 
 Apacheのほとんどのディストリビューションには必要なものがすべて入っていますが、完全なものにするために、ここに必要なApacheモジュールのリストを示します：
 
@@ -56,27 +55,27 @@ Apacheのほとんどのディストリビューションには必要なもの�
 
 また、 `.htaccess` ファイルが正しく処理され、rewriteルールが有効になるように、 `<Directory>` や `<VirtualHost>` ブロックで `AllowOverride All` が設定されていることを確認してください。
 
-### IIS Requirements
+<h3 id="iis-requirements">IISの要件</h3>
 
 Although IIS is considered a web server ready to run 'out-of-the-box', some changes need to be made.
 
 To get **Grav** running on an IIS server, you need to install **URL Rewrite**. This can be accomplished using **Microsoft Web Platform Installer** from within IIS. You can also install URL Rewrite by going to [iis.net](https://www.iis.net/downloads/microsoft/url-rewrite).
 
-<h2 id="php-requirements">PHP要件</h2>
+<h2 id="php-requirements">PHPの要件</h2>
 
-ほとんどのホスティングプロバイダや、ローカルのLAMPでさえ、Gravを 'すぐに' 動作させるために必要なすべてが事前に設定されています。とはいえ、一部のWindowsや、Linuxディストリビューションのローカル環境やVPS（Debianを見ています！）では、PHPのコンパイルが最小限の状態となっていることがあります。よって、もしかすると以下のPHPモジュールをインストールし、有効化する必要があるかもしれません：
+ほとんどのホスティングプロバイダや、ローカルのLAMPでさえ、Gravを 'すぐに' 動かすために必要なすべてが事前に設定されています。とはいえ、一部のWindowsや、Linuxディストリビューションのローカル環境やVPS（Debianを想定！）では、PHPのコンパイルが最小限の状態となっていることがあります。よって、もしかすると以下のPHPモジュールをインストールし、有効化する必要があるかもしれません：
 
-* `curl` (client for URL handling used by GPM)
-* `ctype` (used by symfony/yaml/Inline)
-* `dom` (used by grav/admin newsfeed)
-* `gd` (a graphics library used to manipulate images)
-* `json` (used by Symfony/Composer/GPM)
-* `mbstring` (multibyte string support)
+* `curl` (GPM で使用される URL 処理用のクライアント)
+* `ctype` (symfony/yaml/Inline で使用)
+* `dom` (grav/admin のニュースフィードで使用)
+* `gd` (画像操作に使用されるグラフィック・ライブラリ)
+* `json` (Symfony/Composer/GPM で使用)
+* `mbstring` (マルチバイト文字列のサポート)
 * `openssl` (secure sockets library used by GPM)
 * `session` (used by toolbox)
-* `simplexml` (used by grav/admin newsfeed)
-* `xml` (XML support)
-* `zip` extension support (used by GPM)
+* `simplexml` (grav/admin のニュースフィードで使用)
+* `xml` (XML サポート)
+* `zip` extension support (GPM で使用)
 
 `openssl` と、 (un)zipサポートを有効化するには、Linuxディストリビューションの `php.ini` ファイルの以下のような行を見つける必要があります。
 
@@ -85,26 +84,26 @@ To get **Grav** running on an IIS server, you need to install **URL Rewrite**. T
 ;extension=zip.so
 ```
 
-行頭のセミコロンを消してください。
+行頭のセミコロンを削除してください。
 
-##### 追加するとより良いモジュール
+<h5 id="optional-modules">追加するとより良いモジュール</h5>
 
 * `apcu` for increased cache performance
 * `opcache` for increased PHP performance
 * `yaml` PECL Yaml provides native yaml processing and can dramatically increase performance
 * `xdebug` useful for debugging in a development environment
 
-### パーミッション
-
-Gravが正しく機能するためには、Webサーバにログやキャッシュを書き込むための適切な **ファイルパーミッション** が必要です。[CLI](/advanced/grav-cli) （コマンドライン・インターフェイス）や[GPM](/advanced/grav-gpm)（Gravのパッケージマネージャ）を利用する場合、そのユーザがコマンドラインから実行するPHPもまた、ファイルを修正するために適切なパーミッションが必要になります。
+<h3 id="permissions">パーミッション</h3>
+https://github.com/getgrav/grav-learn/blob/develop/pages/07.cli-console/04.grav-cli-gpm/docs.md
+Gravが正しく機能するためには、Webサーバにログやキャッシュを書き込むための適切な **ファイル・パーミッション** が必要です。[CLI](../../07.cli-console/02.grav-cli) （コマンドライン・インターフェイス）や[GPM](../../07.cli-console/04.grav-cli-gpm)（Gravのパッケージマネージャ）を利用する場合、そのユーザがコマンドラインから実行するPHPもまた、ファイルの変更に適切なパーミッションが必要になります。
 
 デフォルトでは、Gravは、ファイルとフォルダをそれぞれ `644` と `755` のパーミッションとしてインストールします。ほとんどのホスティングプロバイダは、利用者のユーザアカウントの範囲で、ファイルを作成したり修正したりできるように設定しています。このことにより、Gravは、大半のホスティングプロバイダ上で **すぐに** 動きます。
 
 しかしながら、専用サーバやローカル環境で動かすときは、 **ユーザ** と **webサーバ** がファイルを修正できるように、パーミッションを調整する必要があるかもしれません。そのための方法がいくつかあります。
 
-1. 利用環境が **ローカル開発環境** の場合、通常は、自身のユーザプロファイルのもとwebサーバを実行するよう設定できます。この設定方法により、webサーバはいつでもファイルの作成や修正を許可します。
+1. 利用環境が **ローカル開発環境** の場合、通常は、ユーザ自身のプロファイルのもとwebサーバを実行するよう設定できます。この設定方法により、webサーバはいつでもファイルの作成や修正を許可します。
 
-2. すべてのファイルとフォルダの **グループパーミッション** を変えることで、標準的なパーミッションを維持したまま、webサーバのグループは、書き込み権限を持ちます。この方法は、少しのコマンドの実行が必要です。
+2. すべてのファイルとフォルダの **グループ・パーミッション** を変えることで、標準的なパーミッションを維持したまま、webサーバのグループは、書き込み権限を持ちます。この方法は、少しのコマンドの実行が必要です。
 
 まず、どのユーザがApacheを実行しているのかを、以下のコマンドで探します：
 
@@ -131,7 +130,7 @@ umask 0002
 
 If you need to invoke superuser permissions, you would run `find … | sudo xargs chmod …` instead.
 
-## おすすめツール
+<h2 id="recommended-tools">おすすめツール</h2>
 
 ### PhpStorm
 
@@ -139,9 +138,9 @@ Grav is developed using [PhpStorm](https://www.jetbrains.com/phpstorm/), which m
 
 PhpStorm is best suited for PHP developers, including people who write complicated Grav plugins. It offers automated code compilation for Grav (you just need to add Grav and any plugin you use into includes), and many other tools to aid with the code development. It has also good support for formatting twig, yaml, html, js, scss and tailwind.
 
-### Text Editors
+<h3 id="text-editors">テキスト・エディタ</h3>
 
-メモ帳、Textedit、Viなど、お使いのプラットフォームに付属しているデフォルトのテキストエディタでも大丈夫ですが、よりかんたんに物事を進めるために、シンタックスハイライト機能を備えた優れたテキストエディタを使用することをおすすめします。おすすめの選択肢は以下の通りです：
+メモ帳、Textedit、Viなど、お使いのプラットフォームに付属しているデフォルトのテキストエディタでも問題ありませんが、作業効率を上げるために、シンタックス・ハイライト機能を備えた優れたテキスト・エディタを使用することをおすすめします。おすすめの選択肢は以下の通りです：
 
 1. [Visual Studio Code](https://code.visualstudio.com/) - Atomと同様に、Electronと、Node、HTML/CSSによって作られています。非常に軽量で、PHPとJavaScriptをとてもよくサポートしてくれる非常に多くのプラグインがあります。現在、Gravの開発に推奨されているエディタです。
 2. [SublimeText](https://www.sublimetext.com/) - MacOS/Windows/Linux - A commercial developer's editor, but well worth the price. Very powerful especially combined with plugins such as [Markdown Extended](https://sublime.wbond.net/packages/Markdown%20Extended), [Pretty YAML](https://sublime.wbond.net/packages/Pretty%20YAML), and [PHP-Twig](https://sublime.wbond.net/packages/PHP-Twig).
@@ -149,9 +148,9 @@ PhpStorm is best suited for PHP developers, including people who write complicat
 4. [Bluefish](https://bluefish.openoffice.nl/index.html) - MacOS/Windows/Linux - A free, open source text editor geared towards programmers and web developers.
 5. [Kate](https://kate-editor.org/about-kate/) - MacOS/Windows/Linux - A light yet powerfull and versatile opensource text editor and programming tool, supporting highlighting for over 300 languages (including Markdown).
 
-### Markdown Editors
+<h3 id="markdown-editors">マークダウン・エディタ</h3>
 
-もし主にコンテンツ制作をするのであれば、専用の **マークダウンエディタ** を使うという選択肢もあります。これらは、しばしばコンテンツづくりに特化しており、コンテンツをHTMLとしてレンダリングする **ライブプレビュー** 機能を提供します。これらのエディタは文字通り何百とありますが、良い選択肢は次の通りです：
+コンテンツ制作のみを主な作業とするのであれば、専用の **マークダウン・エディタ** を使うという選択肢もあります。これらは、しばしばコンテンツづくりに特化しており、コンテンツをHTMLとしてレンダリングする **ライブプレビュー** 機能を提供します。これらのエディタは、文字通り何百種類もありますが、良い選択肢は次の通りです：
 
 1. [MacDown](https://macdown.uranusjr.com/) - MacOS - Free, a simple, lightweight open source Markdown editor.
 2. [LightPaper](https://getlightpaper.com/) - MacOS - $17.99, clean, powerful. Our markdown editor of choice on the Mac. **Get 25% OFF with Discount Code: GET_GRAV_25**
@@ -159,9 +158,9 @@ PhpStorm is best suited for PHP developers, including people who write complicat
 4. [MarkdownPad](https://markdownpad.com/) - Windows - Free and Pro versions. Even has YAML front-matter support. An excellent solution for Windows users.
 5. [Mark Text](https://github.com/marktext/marktext) - Free, open source Markdown editor for Windows / Linux / MacOS.
 
-### FTP Clients
+<h3 id="ftp-clients">FTPクライアント</h3>
 
-**Grav** をデプロイする方法はいくつもありますが、基本的には、ローカル環境のサイトをホスティングプロバイダにコピーするだけです。その最も基本的な方法は、[FTPクライアント](https://ja.wikipedia.org/wiki/FTP%E3%82%AF%E3%83%A9%E3%82%A4%E3%82%A2%E3%83%B3%E3%83%88)です。たくさんありますが、おすすめは次のとおりです：
+**Grav** をデプロイする方法はいくつもありますが、基本的には、ローカル環境のサイトをホスティングプロバイダにコピーするだけです。その最も基本的な方法は、[FTPクライアント](https://ja.wikipedia.org/wiki/FTP%E3%82%AF%E3%83%A9%E3%82%A4%E3%82%A2%E3%83%B3%E3%83%88) を使用することです。たくさんの種類がありますが、おすすめは次のとおりです：
 
 
 1. [Transmit](https://panic.com/transmit/) - MacOS - The de facto FTP/SFTP client on MacOS. Easy to use, fast, folder-syncing and pretty much anything else you could ask for.
@@ -171,9 +170,8 @@ PhpStorm is best suited for PHP developers, including people who write complicat
 
 ### Git
 
-開発環境とサーバ環境で、[Git](https://git-scm.com/) 分散バージョン管理システムを利用している場合、[Github](https://github.com)や、[GitLab](https://about.gitlab.com/)のようなホスティングされたGitを使って、シンプルなワークフローをセットアップできます。セットアップの手間は多少増えますが、よりクリーンで堅牢なワークフローが提供され、バックアップも行ってくれます。もしGitとそのクライアントツールに慣れている場合は、この方法をお試しください。
+開発環境とサーバ環境で、[Git](https://git-scm.com/) 分散バージョン管理システムを利用している場合、[Github](https://github.com)や、[GitLab](https://about.gitlab.com/)のようなホスティングされたGitを使って、シンプルなワークフローを構築できます。構築の手間は多少増えますが、よりクリーンで堅牢なワークフローが提供され、バックアップも行ってくれます。もしGitとそのクライアントツールに慣れている場合は、この方法をお試しください。
 
 
-> [!TIP]
-> ワークフローにおけるGitの使い方は、のちほど、[Web Servers & Hosting](/09.webservers-hosting)の章の[Deploying with Git](/09.webservers-hosting/05.deploying-with-git)にて詳しく説明します。
-
+> [!Tip]  
+> ワークフローにおけるGitの使い方は、のちほど、[Webサーバとホスティング](../../09.webservers-hosting)の章の[Gitによるデプロイ](../../09.webservers-hosting/05.deploying-with-git)にて詳しく説明します。
