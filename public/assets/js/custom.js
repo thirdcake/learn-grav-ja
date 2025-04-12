@@ -37,20 +37,21 @@ function add_table_class () {
 
 // 不足しているblockquote classを補う
 function add_blockquote_class () {
+    const data = [
+        {needle: 'Note', csscolor: 'blue'},
+        {needle: 'Info', csscolor: 'orange'},
+        {needle: 'Tip', csscolor: 'green'},
+        {needle: 'Warning', csscolor: 'red'},
+        {needle: '訳注', csscolor: 'pink'},
+    ];
     document.querySelectorAll('.learn-grav-default blockquote').forEach(blockq => {
         const p = blockq.querySelectorAll('p')[0];
         if(!p) {return;}
-        if(p.textContent.startsWith('[!Note]')) {
-            blockq.style.borderLeftColor = 'var(--bs-blue);';
-        } else if(p.textContent.startsWith('[!Info]')) {
-            blockq.style.borderLeftColor = 'var(--bs-orange)';
-        } else if(p.textContent.startsWith('[!Tip]')) {
-            blockq.style.borderLeftColor = 'var(--bs-green)';
-        } else if(p.textContent.startsWith('[!Warning]')) {
-            blockq.style.borderLeftColor = 'var(--bs-red)';
-        } else if(p.textContent.startsWith('[!訳注]')) {
-            blockq.style.borderLeftColor = 'var(--bs-pink)';
-        }
+        data.forEach(({needle, csscolor})=>{
+            if(p.textContent.startsWith(`[!${needle}]`)) {
+                blockq.style.borderLeftColor = `var(--bs-${csscolor})`;
+            }
+        });
     });
 }
 
