@@ -6,7 +6,7 @@ function create_mokuji() {
         return;
     }
     const heads = document.querySelectorAll(
-        '.learn-grav-default h2, .learn-grav-default h3, .learn-grav-default h4, .learn-grav-default h5, .learn-grav-default h6'
+        '.learn-grav-default h2, .learn-grav-default h3'
     );
     const frag = [...heads].reduce((frag, hx) => {
         const text = hx.textContent;
