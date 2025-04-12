@@ -22,6 +22,7 @@ function create_mokuji() {
     }, document.createDocumentFragment());
     ul.appendChild(frag);
 }
+
 // 不足しているtable classを補う
 function add_table_class () {
     document.querySelectorAll('.learn-grav-default table').forEach(table => {
@@ -34,7 +35,27 @@ function add_table_class () {
     });
 }
 
+// 不足しているblockquote classを補う
+function add_blockquote_class () {
+    document.querySelectorAll('.learn-grav-default blockquote').forEach(blockq => {
+        const p = blockq.querySelectorAll('p')[0];
+        if(!p) {return;}
+        if(p.textContent.startsWith('[!Note]')) {
+            blockq.style.borderLeftColor = 'var(--bs-blue);';
+        } else if(p.textContent.startsWith('[!Info]')) {
+            blockq.style.borderLeftColor = 'var(--bs-orange)';
+        } else if(p.textContent.startsWith('[!Tip]')) {
+            blockq.style.borderLeftColor = 'var(--bs-green)';
+        } else if(p.textContent.startsWith('[!Warning]')) {
+            blockq.style.borderLeftColor = 'var(--bs-red)';
+        } else if(p.textContent.startsWith('[!訳注]')) {
+            blockq.style.borderLeftColor = 'var(--bs-pink)';
+        }
+    });
+}
+
 window.addEventListener('DOMContentLoaded', ()=>{
     create_mokuji();
     add_table_class();
+    add_blockquote_class();
 }, false);

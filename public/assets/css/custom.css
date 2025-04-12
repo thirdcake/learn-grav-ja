@@ -22,6 +22,11 @@ pre {
     padding-bottom: .7rem;
 }
 
+.learn-grav-default blockquote {
+    padding: 0 0 0 1em;
+    border-left: .25em solid var(--bs-gray);
+}
+
 @media (min-width:991.99px) {
     .offcanvas-lg {
         position: sticky;
