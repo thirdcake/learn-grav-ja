@@ -1,5 +1,5 @@
 ---
-title: "ページをリンクする"
+title: "ページリンク"
 layout: ../../../layouts/Default.astro
 ---
 

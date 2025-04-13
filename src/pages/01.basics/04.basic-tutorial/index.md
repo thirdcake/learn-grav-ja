@@ -103,5 +103,5 @@ This is the body of **my new page** and I can easily use _Markdown_ syntax here.
 **おめでとうございます** Gravで、新しいページができました。Gravでは、もっといろんなことができます。引き続き読み進めて、より高度な可能性とより深い特長を理解してください。
 
 > [!Info]  
-> この新しいページにアクセスするときに問題が発生した場合、（Apacheサーバの場合のみ）`.htaccess` ファイルが無いか、もしくは`.htaccess` ファイルの `RewriteBase` コマンドを編集する必要があるかもしれません。より詳しくは、[トラブルシューティング](../11.troubleshooting/)の章をご覧ください。
+> この新しいページにアクセスするときに問題が発生した場合、（Apacheサーバの場合のみ）`.htaccess` ファイルが無いか、もしくは`.htaccess` ファイルの `RewriteBase` コマンドを編集する必要があるかもしれません。より詳しくは、[トラブルシューティング](../../11.troubleshooting/)の章をご覧ください。
 
