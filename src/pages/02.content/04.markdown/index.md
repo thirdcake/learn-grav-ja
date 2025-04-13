@@ -3,22 +3,22 @@ title: "マークダウン構文"
 layout: ../../../layouts/Default.astro
 ---
 
-率直にいうと、webコンテンツを書くのは面倒です。WYSIWYG エディタは、助けになりますが、それらは一般的に、ひどいコードとなり、悪いだけでなく、見にくいwebページになってしまいます。
+率直にいうと、webコンテンツを書くのは面倒です。WYSIWYG エディタは、助けになりますが、それらはたびたびひどいコードとなり、ひどいだけでなく、見にくいwebページになってしまいます。
 
 **マークダウン** は、**HTML** を書くより良い方法です。それを書くにあたり、複雑さや見にくさを避けられます。
 
 重要なメリットは、以下のとおりです：
 
-1. Markdown is simple to learn, with minimal extra characters, so it's also quicker to write content.
+1. マークダウンは、最小限の文字が追加されるだけで、かんたんに学べるため、コンテンツ制作も早くできるようになります。
 2. Less chance of errors when writing in markdown.
 3. Produces valid XHTML output.
 4. Keeps the content and the visual display separate, so you cannot mess up the look of your site.
 5. Write in any text editor or Markdown application you like.
-6. Markdown is a joy to use!
+6. マークダウンは、使っていて楽しい！
 
 マークダウンを生み出したJohn Gruber は、次のように言います：
 
-> The overriding design goal for Markdown’s formatting syntax is to make it as readable as possible. The idea is that a Markdown-formatted document should be publishable as-is, as plain text, without looking like it’s been marked up with tags or formatting instructions. While Markdown’s syntax has been influenced by several existing text-to-HTML filters, the single biggest source of inspiration for Markdown’s syntax is the format of plain text email.
+> The overriding design goal for Markdown’s formatting syntax is to make it as readable as possible. The idea is that a Markdown-formatted document should be publishable as-is, as plain text, without looking like it’s been marked up with tags or formatting instructions. While Markdown’s syntax has been influenced by several existing text-to-HTML filters, the single biggest source of inspiration for Markdown’s syntax is the format of plain text email.  
 > -- <cite>John Gruber</cite>
 
 Grav は、最初から [Markdown](https://daringfireball.net/projects/markdown/) と [Markdown Extra](https://michelf.ca/projects/php-markdown/extra/) をサポートしています。**Markdown Extra** を使用したい場合は、`system.yaml` ファイルの設定を有効にしてください。
@@ -30,9 +30,9 @@ Without further delay, let us go over the main elements of Markdown and what the
 
 <h2 id="headings">見出し</h2>
 
-Headings from `h1` through `h6` are constructed with a `#` for each level:
+`h1` から `h6` までの見出しは、それぞれのレベルの `#` により作れます：
 
-```markdown
+```txt
 # h1 Heading
 ## h2 Heading
 ### h3 Heading
@@ -41,7 +41,7 @@ Headings from `h1` through `h6` are constructed with a `#` for each level:
 ###### h6 Heading
 ```
 
-Renders to:
+以下のようにレンダリングされます：
 
 # h1 Heading
 ## h2 Heading
@@ -50,7 +50,7 @@ Renders to:
 ##### h5 Heading
 ###### h6 Heading
 
-HTML:
+HTMLは、こうなります：
 
 ```html
 <h1>h1 Heading</h1>
@@ -61,9 +61,9 @@ HTML:
 <h6>h6 Heading</h6>
 ```
 
-## Comments
+<h2 id="comments">コメント</h2>
 
-Comments should be HTML compatible
+コメントは、HTMLと同じように書いてください
 
 ```html
 <!--
@@ -71,21 +71,22 @@ This is a comment
 -->
 ```
 
+次のコメントは、 **見えない** はずです：
 Comment below should **NOT** be seen:
 
 <!--
 This is a comment
 -->
 
-## Horizontal Rules
+<h2 id="horizontal-rules">水平線</h2>
 
-The HTML `<hr>` element is for creating a "thematic break" between paragraph-level elements. In markdown, you can create a `<hr>` with any of the following:
+HTMLの `<hr>` 要素は、段落レベルの要素間で、「内容の区切り」を作ります。マークダウンでは、次のように書きます：
 
-* `___`: three consecutive underscores
-* `---`: three consecutive dashes
-* `***`: three consecutive asterisks
+* `___`: 3つ連続のアンダースコア
+* `---`: 3つ連続のダッシュ
+* `***`: 3つ連続のアスタリスク
 
-renders to:
+次のようにレンダリングされます：
 
 ___
 
@@ -93,27 +94,27 @@ ___
 
 ***
 
-## Body Copy
+<h2 id="body-copy">本文</h2>
 
-Body copy written as normal, plain text will be wrapped with `<p></p>` tags in the rendered HTML.
+通常のプレーンなテキストで書かれた本文は、`<p></p>` タグで包まれてHTMLにレンダリングされます。
 
-So this body copy:
+よって、この本文は：
 
-```markdown
+```txt
 Lorem ipsum dolor sit amet, graecis denique ei vel, at duo primis mandamus. Et legere ocurreret pri, animal tacimates complectitur ad cum. Cu eum inermis inimicus efficiendi. Labore officiis his ex, soluta officiis concludaturque ei qui, vide sensibus vim ad.
 ```
 
-renders to this HTML:
+次のようにレンダリングされます：
 
 ```html
 <p>Lorem ipsum dolor sit amet, graecis denique ei vel, at duo primis mandamus. Et legere ocurreret pri, animal tacimates complectitur ad cum. Cu eum inermis inimicus efficiendi. Labore officiis his ex, soluta officiis concludaturque ei qui, vide sensibus vim ad.</p>
 ```
 
-A **line break** can be done with 2 spaces followed by 1 return.
+**改行** は、2つのスペースの後にリターンキーをすることによってできます。
 
-## Inline HTML
+<h2 id="inline-html">一行のHTML</h2>
 
-If you need a certain HTML tag (with a class) you can simply use HTML:
+HTMLタグが作りたい場合（classをつけるようなとき）は、シンプルにHTMLを使ってください：
 
 ```html
 Paragraph in Markdown.
@@ -125,81 +126,77 @@ Paragraph in Markdown.
 Paragraph in Markdown.
 ```
 
-## Emphasis
+<h2 id="emphasis">強調</h2>
 
-### Bold
+<h3 id="bold">太字</h3>
 
-For emphasizing a snippet of text with a heavier font-weight.
+太字で強調したいとき、次の文章の部分は、 **太字のテキストでレンダリングされます** 。
 
-The following snippet of text is **rendered as bold text**.
-
-```markdown
+```txt
 **rendered as bold text**
 ```
 
-renders to:
+次のようにレンダリングされます：
 
 **rendered as bold text**
 
-and this HTML:
+HTMLはこのようになります：
 
 ```html
 <strong>rendered as bold text</strong>
 ```
 
-### Italics
+<h3 id="italics">斜体</h3>
 
-For emphasizing a snippet of text with italics.
+斜体で強調したいとき、次の文章の部分は、 _斜体のテキストでレンダリングされます_ 。
 
-The following snippet of text is _rendered as italicized text_.
-
-```markdown
+```txt
 _rendered as italicized text_
 ```
 
-renders to:
+次のようにレンダリングされます：
 
 _rendered as italicized text_
 
-and this HTML:
+HTMLはこのようになります：
 
 ```html
 <em>rendered as italicized text</em>
 ```
 
-### Strikethrough
+<h3 id="strikethrough">見え消し</h3>
 
-In GFM (GitHub flavored Markdown) you can do strikethroughs.
+GFM（GitHubフレーバーのマークダウン）では、見え消しができます。
 
-```markdown
+```txt
 ~~Strike through this text.~~
 ```
 
-Which renders to:
+次のようにレンダリングされます：
 
 ~~Strike through this text.~~
 
-HTML:
+HTMLです：
 
 ```html
 <del>Strike through this text.</del>
 ```
 
-## Blockquotes
+<h2 id="blockquotes">引用ブロック</h2>
 
-For quoting blocks of content from another source within your document.
+他の文章のコンテンツを、自分の文章中に引用するためのものです。
 
-Add `>` before any text you want to quote.
+すべての引用文の頭に、`> ` を付け加えてください。
 
-```markdown
+```txt
 > **Fusion Drive** combines a hard drive with a flash storage (solid-state drive) and presents it as a single logical volume with the space of both drives combined.
 ```
 
-Renders to:
+次のようにレンダリングされます：
 
 > **Fusion Drive** combines a hard drive with a flash storage (solid-state drive) and presents it as a single logical volume with the space of both drives combined.
 
-and this HTML:
+HTMLです：
 
 ```html
 <blockquote>
@@ -207,43 +204,44 @@ and this HTML:
 </blockquote>
 ```
 
-Blockquotes can also be nested:
+引用ブロックは、入れ子にできます：
 
-```markdown
+```txt
 > Donec massa lacus, ultricies a ullamcorper in, fermentum sed augue.
 Nunc augue augue, aliquam non hendrerit ac, commodo vel nisi.
 >> Sed adipiscing elit vitae augue consectetur a gravida nunc vehicula. Donec auctor
 odio non est accumsan facilisis. Aliquam id turpis in dolor tincidunt mollis ac eu diam.
 ```
 
-Renders to:
+次のようにレンダリングされます：
 
 > Donec massa lacus, ultricies a ullamcorper in, fermentum sed augue.
 Nunc augue augue, aliquam non hendrerit ac, commodo vel nisi.
 >> Sed adipiscing elit vitae augue consectetur a gravida nunc vehicula. Donec auctor
 odio non est accumsan facilisis. Aliquam id turpis in dolor tincidunt mollis ac eu diam.
 
-## Notices
+<h2 id="notices">注意書き</h2>
 
-! The old mechanism for notices overriding the block quote syntax (`>>>`) has been deprecated.  Notices are now handled via a dedicated plugin called [Markdown Notices](https://github.com/getgrav/grav-plugin-markdown-notices)
+> [!Note]  
+> 引用ブロックを上書きした注意書き（`>>>`）はもう古く、非推奨です。[Markdown Notices](https://github.com/getgrav/grav-plugin-markdown-notices) という専用のプラグインを使ってください。
 
-## Lists
+<h2 id="lists">リスト</h2>
 
-### Unordered
+<h3 id="unordered">順番無しリスト</h3>
 
-A list of items in which the order of the items does not explicitly matter.
+アイテムのリストで、順番が大事でないときに使います。
 
-You may use any of the following symbols to denote bullets for each list item:
+箇条書きを示すために、次のような記号が使えます：
 
-```markdown
-* valid bullet
-- valid bullet
-+ valid bullet
+```txt
+* 適切な記号
+- 適切な記号
++ 適切な記号
 ```
 
-For example
+たとえば
 
-```markdown
+```txt
 + Lorem ipsum dolor sit amet
 + Consectetur adipiscing elit
 + Integer molestie lorem at massa
@@ -258,7 +256,7 @@ For example
 + Eget porttitor lorem
 ```
 
-Renders to:
+次のようにレンダリングされます：
 
 + Lorem ipsum dolor sit amet
 + Consectetur adipiscing elit
@@ -273,7 +271,7 @@ Renders to:
 + Aenean sit amet erat nunc
 + Eget porttitor lorem
 
-And this HTML
+そしてHTMLはこうなります
 
 ```html
 <ul>
@@ -295,11 +293,11 @@ And this HTML
 </ul>
 ```
 
-### Ordered
+<h3 id="ordered">順番ありリスト</h3>
 
-A list of items in which the order of items does explicitly matter.
+アイテムのリストで、順番が大事であるときに使います。
 
-```markdown
+```txt
 1. Lorem ipsum dolor sit amet
 2. Consectetur adipiscing elit
 3. Integer molestie lorem at massa
@@ -310,7 +308,7 @@ A list of items in which the order of items does explicitly matter.
 8. Eget porttitor lorem
 ```
 
-Renders to:
+次のようにレンダリングされます：
 
 1. Lorem ipsum dolor sit amet
 2. Consectetur adipiscing elit
@@ -321,7 +319,7 @@ Renders to:
 7. Aenean sit amet erat nunc
 8. Eget porttitor lorem
 
-And this HTML:
+そしてHTMLはこうなります
 
 ```html
 <ol>
@@ -336,9 +334,9 @@ And this HTML:
 </ol>
 ```
 
-**TIP**: If you just use `1.` for each number, Markdown will automatically number each item. For example:
+**TIP**: それぞれの番号を `1.` とした場合、マークダウンは自動的に番号を振ってくれます。たとえば：
 
-```markdown
+```txt
 1. Lorem ipsum dolor sit amet
 1. Consectetur adipiscing elit
 1. Integer molestie lorem at massa
@@ -349,7 +347,7 @@ And this HTML:
 1. Eget porttitor lorem
 ```
 
-Renders to:
+次のようにレンダリングされます：
 
 1. Lorem ipsum dolor sit amet
 2. Consectetur adipiscing elit
@@ -360,27 +358,27 @@ Renders to:
 7. Aenean sit amet erat nunc
 8. Eget porttitor lorem
 
-## Code
+<h2 id="code">コード</h2>
 
-### Inline code
+<h3 id="inline-code">1行コード</h3>
 
-Wrap inline snippets of code with `` ` ``.
+`` ` `` でコード部分を囲んでください。
 
-```markdown
+```txt
 In this example, `<section></section>` should be wrapped as **code**.
 ```
 
-Renders to:
+次のようにレンダリングされます：
 
 In this example, `<section></section>` should be wrapped with **code**.
 
-HTML:
+HTMLです：
 
 ```html
 <p>In this example, <code>&lt;section&gt;&lt;/section&gt;</code> should be wrapped with <strong>code</strong>.</p>
 ```
 
-### Indented code
+<h3 id="indented-code">インデント・コード</h3>
 
 Or indent several lines of code by at least four spaces, as in:
 
@@ -413,9 +411,9 @@ HTML:
 </pre>
 ```
 
-### Block code "fences"
+<h3 id="block-code-fences">ブロック・コード</h3>
 
-Use "fences"  ```` ``` ```` to block in multiple lines of code with a language attribute
+言語属性付きの複数行のコードブロックを作るには、"fences" `` 3つの` `` を使ってください。
 
 <pre>
 ```
@@ -431,9 +429,9 @@ HTML:
 </pre>
 ```
 
-### Syntax highlighting
+<h3 id="syntax-highlighting">構文のハイライト</h3>
 
-GFM, or "GitHub Flavored Markdown" also supports syntax highlighting. To activate it, simply add the file extension of the language you want to use directly after the first code "fence", ` ```js `, and syntax highlighting will automatically be applied in the rendered HTML. For example, to apply syntax highlighting to JavaScript code:
+GFM（GitHubフレーバーのマークダウン）は、構文のハイライトに対応しています。有効化すると、最初の"fence"に、言語の拡張子をつけるだけで、自動的に構文のハイライトが適用されます。たとえば、JavaScriptコードを適用できます：
 
 <pre>
 ```js
@@ -458,7 +456,7 @@ grunt.initConfig({
 ```
 </pre>
 
-Renders to:
+次のようにレンダリングされます：
 
 ```javascript
 grunt.initConfig({
@@ -481,13 +479,14 @@ grunt.initConfig({
 };
 ```
 
-!!! For syntax highlighting to work, the [Highlight plugin](https://github.com/getgrav/grav-plugin-highlight) needs to be installed and enabled. It in turn utilizes a jquery plugin, so jquery needs to be loaded in your theme too.
+> [!Tip]  
+> ハイライトさせるには、 [Highlight plugin](https://github.com/getgrav/grav-plugin-highlight) をインストールして、有効化する必要があります。これはjqueryを使っており、テーマでも読み込む必要があります。
 
-## Tables
+<h2 id="tables">表</h2>
 
-Tables are created by adding pipes as dividers between each cell, and by adding a line of dashes (also separated by bars) beneath the header. Note that the pipes do not need to be vertically aligned.
+表は、それぞれのセルをパイプ（ `|` ）で区切って作ります。そして、表のヘッダの下に、（バーで区切られた）ダッシュ（ `-` ）の行を）追加してください。なお、パイプは垂直に揃える必要はありません。
 
-```markdown
+```txt
 | Option | Description |
 | ------ | ----------- |
 | data   | path to data files to supply the data that will be passed into templates. |
@@ -497,13 +496,11 @@ Tables are created by adding pipes as dividers between each cell, and by adding 
 
 Renders to:
 
-[div class="table"]
 | Option | Description |
 | ------ | ----------- |
 | data   | path to data files to supply the data that will be passed into templates. |
 | engine | engine to be used for processing templates. Handlebars is the default. |
 | ext    | extension to be used for dest files. |
-[/div]
 
 And this HTML:
 
@@ -532,11 +529,11 @@ And this HTML:
 </table>
 ```
 
-### Right aligned text
+<h3 id="right-aligned-text">表のテキストを右に揃える</h3>
 
-Adding a colon on the right side of the dashes below any heading will right align text for that column.
+ダッシュの行の右側にコロンを追加すると、その列は右揃えになります。
 
-```markdown
+```txt
 | Option | Description |
 | ------:| -----------:|
 | data   | path to data files to supply the data that will be passed into templates. |
@@ -544,23 +541,22 @@ Adding a colon on the right side of the dashes below any heading will right alig
 | ext    | extension to be used for dest files. |
 ```
 
-[div class="table"]
 | Option | Description |
 | ------:| -----------:|
 | data   | path to data files to supply the data that will be passed into templates. |
 | engine | engine to be used for processing templates. Handlebars is the default. |
 | ext    | extension to be used for dest files. |
-[/div]
 
-## Links
+<h2 id="links">リンク</h2>
 
-### Basic link
+<h3 id="basic-link">普通のリンク</h3>
 
-```markdown
+```txt
 [Assemble](https://assemble.io)
 ```
 
-Renders to (hover over the link, there is no tooltip):
+次のようにレンダリングされます。
+リンクの上でホバーしてみると、ツールチップがありません：
 
 [Assemble](https://assemble.io)
 
@@ -570,13 +566,14 @@ HTML:
 <a href="https://assemble.io">Assemble</a>
 ```
 
-### Add a title
+<h3 id="add-a-title">タイトルをつけたリンク</h3>
 
-```markdown
+```txt
 [Upstage](https://github.com/upstage/ "Visit Upstage!")
 ```
 
-Renders to (hover over the link, there should be a tooltip):
+次のようにレンダリングされます。
+リンクの上でホバーしてみると、ツールチップが出ます：
 
 [Upstage](https://github.com/upstage/ "Visit Upstage!")
 
@@ -586,20 +583,20 @@ HTML:
 <a href="https://github.com/upstage/" title="Visit Upstage!">Upstage</a>
 ```
 
-### Named Anchors
+<h3 id="named-anchors">アンカー・リンク</h3>
 
-Named anchors enable you to jump to the specified anchor point on the same page. For example, each of these chapters:
+アンカーリンクは、同じページのアンカーポイントへジャンプする機能です。たとえば、次のようなそれぞれのチャプターは：
 
-```markdown
+```txt
 # Table of Contents
   * [Chapter 1](#chapter-1)
   * [Chapter 2](#chapter-2)
   * [Chapter 3](#chapter-3)
 ```
 
-will jump to these sections:
+以下のようなセクションに飛びます：
 
-```markdown
+```txt
 ## Chapter 1 <a id="chapter-1"></a>
 Content for chapter one.
 
@@ -612,32 +609,38 @@ Content for chapter one.
 
 **NOTE** that specific placement of the anchor tag seems to be arbitrary. They are placed inline here since it seems to be unobtrusive, and it works.
 
-## Images
+<h2 id="images">画像</h2>
 
+画像は、リンクの構文に似ていますが、イクスクラメーションマーク（ `!` ）が最初に付きます。
 Images have a similar syntax to links but include a preceding exclamation point.
 
-```markdown
+```txt
 ![Minion](https://octodex.github.com/images/minion.png)
 ```
+
 ![Minion](https://octodex.github.com/images/minion.png)
 
-or:
+もしくは：
 
-```markdown
+```txt
 ![Alt text](https://octodex.github.com/images/stormtroopocat.jpg "The Stormtroopocat")
 ```
+
 ![Alt text](https://octodex.github.com/images/stormtroopocat.jpg "The Stormtroopocat")
 
-Like links, images also have a footnote style syntax:
+リンクと同様、画像にも脚注のような構文があります：
 
-```markdown
+```txt
 ![Alt text][id]
 ```
+
 ![Alt text][id]
 
-With a reference later in the document defining the URL location:
+あとで、URLを指定することができます：
 
 [id]: https://octodex.github.com/images/dojocat.jpg  "The Dojocat"
 
+```txt
+[id]: https://octodex.github.com/images/dojocat.jpg  "The Dojocat"
+```
 
-    [id]: https://octodex.github.com/images/dojocat.jpg  "The Dojocat"
