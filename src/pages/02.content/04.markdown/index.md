@@ -612,7 +612,6 @@ Content for chapter one.
 <h2 id="images">画像</h2>
 
 画像は、リンクの構文に似ていますが、イクスクラメーションマーク（ `!` ）が最初に付きます。
-Images have a similar syntax to links but include a preceding exclamation point.
 
 ```txt
 ![Minion](https://octodex.github.com/images/minion.png)

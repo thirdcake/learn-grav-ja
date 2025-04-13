@@ -1,7 +1,6 @@
 ---
 title: ページ
 layout: ../../../layouts/Default.astro
-learnurl: '/content/content-pages'
 ---
 
 Gravでは、 **Page** とは、サイトの根本的な構成要素です。Gravシステムでは、これらページによって、コンテンツを書いたり、ナビゲーションを提供したりします。
