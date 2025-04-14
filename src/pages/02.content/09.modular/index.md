@@ -23,7 +23,7 @@ These subpages are in folders with names that begin with an underscore (`_`). By
 
 In the case of our One-Page Skeleton, we have created the folder structure pictured below.
 
-![Listing Page](modular-explainer-2.jpg?classes=shadow)
+![Listing Page](modular-explainer-2.jpg)
 
 Each subfolder contains a Markdown-file which acts as a page.
 
@@ -37,7 +37,7 @@ The data within these Module-folders - including Markdown-files, images, etc. - 
 
 Here is an example of the resulting modular page, highlighting the different modular folders which are used.
 
-![Listing Page](modular-explainer-1.jpg?classes=shadow)
+![Listing Page](modular-explainer-1.jpg)
 
 <h2 id="setting-up-the-primary-page">主ページのセットアップ</h2>
 
@@ -67,7 +67,7 @@ As you can see, there is no actual content in this file. Everything is handled i
 
 <h2 id="modules">モジュール</h2>
 
-![Listing Page](modular-explainer-3.jpg?classes=shadow)
+![Listing Page](modular-explainer-3.jpg)
 
 The Markdown-file for each Module can have its own template, settings, etc. For all intents and purposes, it has most of the features and settings of a regular page, it just isn't rendered as one. We recommend page-wide settings, such as **taxonomy**, be placed in the main Markdown-file that controls the whole page.
 
