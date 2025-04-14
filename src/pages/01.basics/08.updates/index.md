@@ -7,7 +7,7 @@ Gravと、プラグイン、テーマを最新に保つより良い方法は、*
 
 また、**GPM** は、[管理パネル](../../05.admin-panel)プラグインに統合されており、あらゆるアップデートをチェックし、プロンプトを表示し、自動的にインストールします。
 
-<h3 id="which-version-do-i-have">どのバージョンを使っているか</h3>
+<h3 id="which-version-do-i-have">バージョンの確認方法</h3>
 
 サイトが使うGravとプラグインのバージョンを知る方法は、いくつもあります：
 
@@ -27,7 +27,7 @@ The basic workflow is following:
 
 A detailed guide **[Upgrading from Grav <1.6](../../08.advanced/09.grav-development/01.grav-15-upgrade-guide)** should help you in the process.
 
-### Upgrading to the Next Version
+### 次のバージョンへのアップグレード
 
 次のバージョンにアップデートについては、アップグレード後もすべてが機能することを確認するための特別なガイドがあります。
 

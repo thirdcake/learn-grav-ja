@@ -23,7 +23,7 @@ Gravには、たくさんの柔軟な方法でリンクできるので、ある�
 | `()`   | 丸カッコは、リンク先を囲みます。角カッコの直後に置く必要があります |
 | `../`  | リンクの中で使われ、親ディレクトリに移動することを意味します |
 
-<h3 id="slug-relative">相対スラッグ</h3>
+<h3 id="slug-relative">スラッグによる相対リンク</h3>
 
 Gravでは、サイト内リンクを、ファイル名やフォルダ名だけに限定しません。ファイルのフロントマターに書いたスラッグによっても、ディレクトリ名などと同様に、リンクできます。このことから、特定のファイル名をいちいち覚える必要はなく、よりわかりやすいスラッグを覚えておくだけで、かんたんに素早くリンクを貼ることができます。
 
@@ -47,7 +47,7 @@ Gravのテンプレートエンジンは、ファイル名をテンプレート�
 
 `item.md` のフロントマターに、スラッグが指定されていると、デフォルトの値であるディレクトリ名（`green`）から、`tree-is-green` に置き換えられます。
 
-<h3 id="directory-relative">相対ディレクトリ</h3>
+<h3 id="directory-relative">ディレクトリによる相対リンク</h3>
 
 **相対ディレクトリ** リンクは、現在ページからの相対的な位置にある目的地へリンクします。これは、同じディレクトリ内の画像へのリンクのような、かんたんなものもありますし、いくつものディレクトリ階層を上り、特定のフォルダやファイルまで下っていくような、複雑なものもあります。
 
@@ -81,7 +81,7 @@ The next example is a lot like the file link we demonstrated earlier. Instead of
 
 <h3 id="absolute">絶対リンク</h3>
 
-Absolute links are similar to relative links, but are relative to the root of the site. In **Grav**, this is typically based in your **/user/pages/** directory. This type of link can be done in two different ways.
+絶対リンクは、相対リンクに似ていますが、サイトrootからの相対位置を示します。**Grav** においては、とくに **/user/pages/** ディレクトリがrootになります。絶対リンクには、2つの方法があります。
 
 You can do it in a similar fashion to the **Slug Relative** style which uses the slug, or directory name in the path for simplicity. This method removes potential issues of order changes later on (changing the number at the beginning of the folder name) breaking the link. This would be the most commonly used method of absolute linking.
 

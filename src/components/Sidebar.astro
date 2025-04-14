@@ -3,7 +3,7 @@ const { pages } = Astro.props;
 import Sidebarchild from '../components/Sidebar.astro';
 ---
 
-    <ul>
+    <ol>
     { pages.children.map(( page ) => {
         if(page.children === 0) {
             return <li>
@@ -16,5 +16,5 @@ import Sidebarchild from '../components/Sidebar.astro';
             </li>
         }
     }) }
-    </ul>
+    </ol>
 

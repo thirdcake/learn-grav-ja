@@ -32,7 +32,7 @@ Gravには、たくさんの柔軟な方法でリンクできるので、ある�
 > [!Tip]  
 > 画像リンクを、ページリンクで囲むことができます： `[![Alt text](/path/to/img.jpg)](http://example.net/)`
 
-<h3 id="slug-relative">相対スラッグ</h3>
+<h3 id="slug-relative">スラッグによる相対画像リンク</h3>
 
 **Relative** image links use destinations set relative to the current page. This can be as simple as linking to another file in the current directory, such as an image file associated with the current page, or as complex as going up several directory levels and then back down to the specific folder/file where an image may reside.
 
@@ -80,7 +80,7 @@ If we want to link `test-image-2.jpg` from **Test Post 2**, we would enter the f
 
 You will notice that we navigated up one directory using (`../`) and then down into the `test-slug` page folder using the slug which was set in `/pages/01.blog/test-post-2/item.md` file.
 
-<h3 id="directory-relative">相対ディレクトリ</h3>
+<h3 id="directory-relative">ディレクトリによる相対画像リンク</h3>
 
 **Directory Relative** image links use destinations set relative to the current page. The main difference between a slug relative, and directory relative link, is that rather than using the URL slugs, you reference via the full path with folder names.
 
@@ -93,7 +93,7 @@ An example of this would be something like:
 > [!Info]  
 > The main benefit of this, is that you can maintain link integrity in other systems outside of Grav, such as GitHub.
 
-<h3 id="absolute">絶対リンク</h3>
+<h3 id="absolute">絶対画像リンク</h3>
 
 Absolute links are similar to relative links, but are relative to the root of the site. In **Grav**, this is typically based in your **/user/pages/** directory. This type of link can be done in two different ways.
 
