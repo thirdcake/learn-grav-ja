@@ -109,27 +109,27 @@ In an absolute link, the link opens with a `/`. Here is an example of an absolut
 
 <h3 id="php-streams">PHPストリーム</h3>
 
-Grav has also the ability to reference and link images via PHP streams.  There are several built-in PHP streams available which are useful including:
+Gravでは、PHPストリームを使って、画像を参照したりリンクしたりすることもできます。いくつかのPHPストリームを用意しています：
 
-* `user://` - user folder. e.g. `user/`
-* `page://` - pages folder. e.g. `user/pages/`
-* `image://` - images folder. e.g. `user/images/`
-* `plugins://` - plugins folder.  e.g. `user/plugins/`
-* `theme://` - current theme.  e.g. `user/themes/antimatter/`
+* `user://` - userフォルダ. 例： `user/`
+* `page://` - pagesフォルダ 例： `user/pages/`
+* `image://` - imagesフォルダ 例： `user/images/`
+* `plugins://` - pluginsフォルダ  例： `user/plugins/`
+* `theme://` - 現在テーマ  例： `user/themes/antimatter/`
 
-These allow you to easily access images that are traditionally outside of the Pages hierarchy (`user/pages/`).
+これらにより、以前はpagesの階層（`user/pages/`）の外にあった画像へのアクセスが容易になります。
 
 ```markdown
 ![Stream Image](user://media/images/my-image.jpg)
 ```
 
-or:
+もしくは：
 
 ```markdown
 ![Stream Image](theme://images/my-image.jpg)
 ```
 
-For complete list of default stream locations, see [Multisite Setup - Streams](/advanced/multisite-setup#streams).
+デフォルトで使えるストリームの全体像は、[複数サイト設定 - ストリーム](../../08.advanced/05.multisite-setup#streams) を参照してください。
 
 <h3 id="remote">サイト外リンク</h3>
 

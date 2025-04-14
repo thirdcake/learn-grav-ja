@@ -33,13 +33,13 @@ Gravは、とてもシンプルで汎用的なので、動かすだけならweb�
 ### Windows
 
 * [Laragon](https://laragon.org/) portable, isolated, fast & powerful universal development environment for PHP, Node.js, and more. It is fast, lightweight, easy-to-use and easy-to-extend.
-* [XAMPP](https://www.apachefriends.org/index.html) provides Apache, PHP, and MySQL in one simple package.
+* [XAMPP](https://www.apachefriends.org/index.html) ひとつのシンプルなパッケージで、 Apacheと、PHP、MySQL が提供されます。
 * [EasyPHP](https://www.easyphp.org/) provides a personal Web hosting package as well as a more powerful developer version.
 * [MAMP for Windows](https://www.mamp.info/en/windows/) is a long-time Mac favorite, but now available for Windows.
 * [IIS with PHP](https://php.iis.net/) is a fast way to run PHP on Windows.
-* [DDEV](https://ddev.com/) for docker-based PHP development environments.
+* [DDEV](https://ddev.com/) DockerベースのPHP開発環境です。
 * [AMPPS](https://www.ampps.com/downloads) is a software stack from Softaculous enabling Apache, PHP, Perl, Python,.. This includes everything you need (and more) for GRAV development.
-* [Linux Subsystem](https://medium.freecodecamp.org/setup-a-php-development-environment-on-windows-subsystem-for-linux-wsl-9193ff28ae83) is a great way to Run a linux-like environment on Windows
+* [Linux Subsystem](https://medium.freecodecamp.org/setup-a-php-development-environment-on-windows-subsystem-for-linux-wsl-9193ff28ae83) Windows上で、Linuxライクな環境を実行できる素晴らしい方法です。
 
 ### Linux
 
@@ -94,7 +94,7 @@ To get **Grav** running on an IIS server, you need to install **URL Rewrite**. T
 * `xdebug` useful for debugging in a development environment
 
 <h3 id="permissions">パーミッション</h3>
-https://github.com/getgrav/grav-learn/blob/develop/pages/07.cli-console/04.grav-cli-gpm/docs.md
+
 Gravが正しく機能するためには、Webサーバにログやキャッシュを書き込むための適切な **ファイル・パーミッション** が必要です。[CLI](../../07.cli-console/02.grav-cli) （コマンドライン・インターフェイス）や[GPM](../../07.cli-console/04.grav-cli-gpm)（Gravのパッケージマネージャ）を利用する場合、そのユーザがコマンドラインから実行するPHPもまた、ファイルの変更に適切なパーミッションが必要になります。
 
 デフォルトでは、Gravは、ファイルとフォルダをそれぞれ `644` と `755` のパーミッションとしてインストールします。ほとんどのホスティングプロバイダは、利用者のユーザアカウントの範囲で、ファイルを作成したり修正したりできるように設定しています。このことにより、Gravは、大半のホスティングプロバイダ上で **すぐに** 動きます。
