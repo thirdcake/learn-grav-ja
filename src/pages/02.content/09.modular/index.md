@@ -15,19 +15,22 @@ Gravでは、[ページ](../01.content-pages) という概念は幅広いもの�
 
 <h2 id="example-folder-structure">フォルダ構造の例</h2>
 
-Using our **One-Page Skeleton** as an example, we will explain how Modular Pages work in greater detail.
+**1ページスケルトン** を例に使い、モジュラーページがどのように働くのかを詳しく説明します。
 
-The **Modular Page** itself is assembled from pages that exist in subfolders found under the page's primary folder. In the case of our One-Page Skeleton, this page is located in the `01.home` folder. Within this folder is a single `modular.md` file which tells Grav which subpages to pull in to assemble the Modular Page, and which order to display them in. The name of this file is important because it instructs Grav to use the `modular.html.twig`-template from the current theme to render the page.
+> [!訳注]  
+> 1ページスケルトンとは、[このスケルトン](https://github.com/getgrav/grav-skeleton-onepage-site) のことだと思います。
 
-These subpages are in folders with names that begin with an underscore (`_`). By using an underscore, you are telling Grav that these are **Modules**, not standalone pages. For example, subpage-folders can be named `_features` or `_showcase`. These pages are **not routable** - they cannot be pointed to directly in a browser, and they are **not visible** - they do not show up in a menu.
+**モジュラーページ** それ自体は、メインフォルダの中にあるサブフォルダに存在するページを集めたものです。1ページスケルトンにおいては、モジュラーページは、`01.home` フォルダにあります。このフォルダには、1つの `modular.md` ファイルがあり、このファイルがどのサブページをモジュラーページに集めるのかを指示し、さらにどんな順番で表示するのかを示します。このファイルの名前は重要です。現在のテーマから、`mojular.html.twig` テンプレートを使ってページを表示させるからです。
 
-In the case of our One-Page Skeleton, we have created the folder structure pictured below.
+サブページは、アンダースコア（`_`） で始まるフォルダに入っています。アンダースコアを使うことで、通常の単独ページではなく、**モジュール** のページであることをGravシステムに伝えます。たとえば、サブページのフォルダは、`_features` や、`_showcase` などの名前になります。これらのページは、**ルーティングされません** 。つまり、ブラウザでダイレクトに指定されても、それらのページは **表示されません** 。メニューにも追加されません。
+
+1ページスケルトンの場合、以下に示すようなフォルダ構成になっています。
 
 ![Listing Page](modular-explainer-2.jpg)
 
-Each subfolder contains a Markdown-file which acts as a page.
+それぞれのサブフォルダには、ページとして働くマークダウンファイルが収まっています。
 
-The data within these Module-folders - including Markdown-files, images, etc. - is then pulled and displayed on the Modular page. This is accomplished by creating a primary page, defining a [Page Collection](../03.collections) in the primary page's YAML FrontMatter, then iterating over this Collection in a Twig-template to generate the combined HTML page. A theme should already have a `modular.html.twig` template that will do this and is used when you create a Modular Page type. Here's a simple example from a `modular.html.twig`:
+これらモジュールフォルダ内のデータには、マークダウンファイルや、画像などがありますが、モジュラーページにより集められ、表示されます。メインページが作成され、メインページのYAMLフロントマターから [ページコレクション](../03/collections/) が定義され、このコレクションをTwigのテンプレートで繰り返し処理し、組み合わされたHTMLページを生成します。テーマには、すでに `mojulara.html.twig` テンプレートファイルがなければいけません。以下は、シンプルな `mojulara.html.twg` の例です：
 
 ```twig
 {% for module in page.collection() %}
@@ -35,13 +38,13 @@ The data within these Module-folders - including Markdown-files, images, etc. - 
 {% endfor %}
 ```
 
-Here is an example of the resulting modular page, highlighting the different modular folders which are used.
+以下は、モジュラーページの結果です。ハイライトされているのは、どのモジュラーページが使われているかの違いを明確にするためです。
 
 ![Listing Page](modular-explainer-1.jpg)
 
-<h2 id="setting-up-the-primary-page">主ページのセットアップ</h2>
+<h2 id="setting-up-the-primary-page">メインページのセットアップ</h2>
 
-As you can see, each section pulls content from a different Module-folder. Determining which Module-folders are used, and in what order, happens in the primary Markdown-file in the parent folder of the Module. Here is the content of the `modular.md` file in the `01.home` folder.
+上記のとおり、それぞれのセクションは、異なるモジュールフォルダからコンテンツを集めてきたものです。どのモジュールフォルダをどんな順番で利用するかは、モジュールたちの親フォルダにある、メインのマークダウンファイルに書かれます。以下は、`01.home` フォルダの`modular.md` ファイルのコンテンツです。
 
 ```yaml
 ---
@@ -63,15 +66,18 @@ content:
 ---
 ```
 
-As you can see, there is no actual content in this file. Everything is handled in the YAML FrontMatter in the header. The page's **Title**, **Menu** assignment, and other settings you would find in a typical page are found here. The [Content](../02.headers#ordering-options) instructs Grav to create the content based on a Collection of modular pages, and even provides a custom manual order for them to render.
+上記のとおり、このファイルに実質的なコンテンツはありません。ヘッダー内のYAMLフロントマターによる制御だけです。まずページの **title** や、 **menu** は割り当てられます。他の通常ページにも見られるような諸設定もあります。そして [content](../03.collections/#ordering-options) により、モジュラーページのコレクションに基づいたコンテンツを作成し、カスタムの順番で提供するように指示しています。
+
+> [!訳注]  
+> 上記の例では、`@self.modular` を使っていますが、[collectionsのモジュール部分](../03.collections/#atself-modules-modules-of-the-current-page) によると現在非推奨であり、`@self.modules` を使ったほうが良いようです。
 
 <h2 id="modules">モジュール</h2>
 
 ![Listing Page](modular-explainer-3.jpg)
 
-The Markdown-file for each Module can have its own template, settings, etc. For all intents and purposes, it has most of the features and settings of a regular page, it just isn't rendered as one. We recommend page-wide settings, such as **taxonomy**, be placed in the main Markdown-file that controls the whole page.
+それぞれのモジュールのマークダウンファイルは、それぞれ独自のテンプレートや設定などを持っています。これは通常ページの機能や設定をほとんど持っており、単に1ページとしてレンダリングされないというだけです。ページに適用される設定（たとえば **タクソノミー** ）は、メインファイルのマークダウンに置くことをおすすめします。
 
-The Modular Pages themselves are handled just like regular Pages. Here is an example using the `text.md` file in the `_callout` page which appears in the middle of the Modular page.
+モジュラーページ自身は、通常ページと同じように操作できます。モジュラーページの中段に現れる、`_callout` というフォルダの中の `text.md` という例をあげます。
 
 ```markdown
 ---
@@ -84,9 +90,9 @@ image_align: right
 No longer are you a _slave to your CMS_. Grav **empowers** you to create anything from a [simple one-page site](#), a [beautiful blog](#), a powerful and feature-rich [product site](#), or pretty much anything you can dream up!
 ```
 
-As you can see, the header of the page contains basic information you might find on a regular page. It has its own title that can be referenced, and [custom page options](../02.headers#custom-page-headers), such as the alignment of the image can be set here, just as it would on any other page.
+上記のとおり、ページのフロントマターには、通常ページに見られるのと同じような情報が書いてあります。参照用のtitleと、[カスタムページのヘッダー](../02.headers/#custom-page-headers) で書かれた画像の配置位置を示す設定です。他のページでも見られるようなものです。
 
-The template file for the `text.md` file should be located in the `/templates/modular`-folder of your theme, and should be named `text.html.twig`. This file, like any Twig-template file for any other page, defines the settings, as well as any styling-differences between it and the base page.
+この `text.md` ファイルのテンプレートファイルは、テーマフォルダの `/templates/modular` フォルダにあります。そして、`text.html.twig` という名前です。このファイルは、他のページのテンプレートファイルと同じように、設定を定義し、baseページとのスタイリングの違いも定義できます。
 
 ```twig
 <div class="modular-row callout">
@@ -98,4 +104,5 @@ The template file for the `text.md` file should be located in the `/templates/mo
 </div>
 ```
 
-Generally, Modular Pages are very simple. You just have to get used to the idea that each section in your page is defined in a Module that has its own folder below the actual page. They are displayed all at once to your visitors, but organized slightly differently than regular pages. Feel free to experiment and discover just how much you can accomplish with a Modular Page in Grav.
+一般に、モジュラーページはとてもシンプルです。ただ、ページ内の各セクションは、実質的なページの下にそれぞれのフォルダを持つモジュールページで定義されるというアイディアに慣れる必要はあります。閲覧者にとっては、一度に表示される内容ですが、通常ページよりも少し違った方法で構成されます。Gravのモジュラーページでどこまで達成できるか、気楽に体験し、発見してください。
+
