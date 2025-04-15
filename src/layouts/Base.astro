@@ -13,13 +13,12 @@ const normalizePath = (path: string) => path.endsWith('/') ? path.slice(0,-1) : 
 // 現在アクセスしているページのURL
 const currentpath = normalizePath(new URL(Astro.url).pathname);
 
-// ドキュメントページ全体を取得する
-const pages = await Astro.glob('../pages/**/index.md');
-pages.sort((a, b) => {
+// ページをソートする関数
+const sortPages = (a: any, b: any ): number => {
   const aarr = (a.url??'').split('/');
   const barr = (b.url??'').split('/');
   const cnt = Math.min(aarr.length, barr.length);
-  for(let i = 0; i<cnt; i++) {
+  for(let i = 0; i < cnt; i++) {
     if(aarr[i] > barr[i]) {
       return 1;
     } else if(aarr[i] < barr[i]) {
@@ -31,69 +30,36 @@ pages.sort((a, b) => {
   } else {
     return -1;
   }
-});
+};
+
+// ドキュメントページ全体を取得する
+const pages = (await Astro.glob('../pages/**/index.md')).sort(sortPages);
+
 
 // ページ左のサイドバーメニュー
-type TreeNode = {
-  title: string;
-  url?: string;
-  children: TreeNode[];
-};
-const sidebarPages = pages
-  .filter(page => {
-    const currentChapter = currentpath
-      .split('/')
-      .filter((_,i) => (i<3))
-      .join('/');
-    if( (page.url??'###').startsWith(currentChapter) ) {
-      return true;
-    }
-    const is_chaptertop = (page.url??'###').split('/').length < 4;
-    return is_chaptertop;
-  })
-  .reduce<TreeNode>((tree, page, index)=>{
-    const node:TreeNode = {
-      title: page.frontmatter.title,
-      url: page.url,
-      children: [],
-    }
-    const depth = (node.url??'###').split('/');
-    let cur = tree;
-    for(let i = 2; i<depth.length; i++) {
-      if(i === depth.length-1) {
-        cur.children.push(node);
-      } else {
-        const lastChild = cur.children.at(-1);
-        if(lastChild) {
-          cur = lastChild;
-        }
-      }
-    }
-    return tree;
-  }, {title:'', url:'', children:[]});
+const sidebarPages = pages.filter(page => {
+  const pageArr = (page.url??'').split('/');
+  const isTopChapter = pageArr.length < 4; 
+  if(isTopChapter) {
+    return true;
+  }
+  const isSameChapter = currentpath.split('/')[2] === pageArr[2];
+  return isSameChapter;
+});
 
 // ページ右上の前・次リンク
 const currentIndex = pages.findIndex(item => (item.url === currentpath));
-const prevurl = (currentIndex + 1 < pages.length) ? pages[currentIndex+1].url : '#';
-const nexturl = (0 < currentIndex) ? pages[currentIndex-1].url : '#';
+const prevurl = pages[currentIndex+1]?.url ?? '#';
+const nexturl = pages[currentIndex-1]?.url ?? '#';
 
 // ページ右上の編集リンク
-const currentPagePath = currentpath
-  .split('/')
-  .filter(x => (x !== 'learn-grav-ja'))
-  .join('/');
-const editPageUrl = bloburl + currentPagePath + '/index.md';
+const editPageUrl = `${bloburl}${currentpath.replace('/learn-grav-ja', '')}/index.md`;
 
 // ページ中央上のパンくずリスト
 const breadobj = pages.filter(page => (currentpath.startsWith(page.url??'###')));
 
 // ページ下部の翻訳元記事リンク
-const learnPagePath = currentpath
-  .split('/')
-  .filter(x => (x !== 'learn-grav-ja'))
-  .map(x => (x.replace(/^\d.+\./, '')))
-  .join('/');
-const learnFullUrl = learnurl + learnPagePath;
+const learnFullUrl = `${learnurl}${currentpath.replace('/learn-grav-ja','').replace(/\/\d+\./g,'/')}`;
 ---
 
 <!DOCTYPE html>
@@ -129,7 +95,7 @@ const learnFullUrl = learnurl + learnPagePath;
         <p style="text-align:center;background-color:#fff;border:thin solid #777;">
           検索は<a href={ learnurl }>翻訳元</a>へ
         </p>
-          <div class="mb-auto overflow-y-auto" style="height:100%">
+          <div class="mb-auto overflow-y-auto pb-5" style="height:100%">
             <Sidebar pages={ sidebarPages } currentpath={ currentpath } level={ 0 } />
           </div>
       </div>

@@ -1,20 +1,39 @@
 ---
-const { pages } = Astro.props;
 import Sidebarchild from '../components/Sidebar.astro';
+
+type Page = {
+    url: string;
+    title: string;
+    children: any[];
+}
+
+const { pages } = Astro.props;
+const renderPages: Page[] = [];
+
+let prevUrl = '###';
+pages.forEach((page:any) => {
+    if(page.url.startsWith(prevUrl)) {
+        renderPages.at(-1)?.children.push(page);
+    } else {
+        renderPages.push({
+            url: page.url,
+            title: page.frontmatter.title,
+            children: [],
+        });
+        prevUrl = page.url;
+    }
+});
 ---
 
     <ol>
-    { pages.children.map(( page ) => {
-        if(page.children === 0) {
-            return <li>
-                <a href={ page.url }>{ page.title }</a>
-            </li>
-        } else {
-            return <li>
-                <a href={ page.url }>{ page.title }</a>
-                <Sidebarchild pages={ page }  />
-            </li>
-        }
-    }) }
+    { renderPages.map(( page: any ) => 
+        <li class="my-1">
+            <a href={ page.url }>{ page.title }</a>
+            {(page.children.length > 0)
+                ? <Sidebarchild pages={ page.children }  />
+                : ''
+            }
+        </li>
+    ) }
     </ol>
 

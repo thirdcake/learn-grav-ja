@@ -11,6 +11,10 @@ pre {
     padding: .7rem;
 }
 
+main {
+    word-break: break-all;
+}
+
 .learn-grav-chapter h1 {
     margin-top: 5rem;
     margin-bottom: 5rem;
