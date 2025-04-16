@@ -56,9 +56,9 @@ layout: ../../../layouts/Default.astro
 
 <h2 id="custom-content-types">カスタム・コンテンツタイプ</h2>
 
-In order to send the data with the appropriate content type, Grav needs to know the MIME type that the browser expects in order for it to render that content type.  Grav knows about most of the standard content types as defined in the `system/config/media.yaml` file.  If you wish to handle a content type that is not provided, you just need to add an entry to this file.
+適切なコンテンツタイプでデータ送信するため、ブラウザが期待するMIMEタイプをGravに知らせる必要があります。標準的なコンテンツタイプであれば、`system/config/media.yaml` ファイルに定義されています。ここで提供されていないコンテンツタイプを使いたい場合、ここに付け加えるだけで良いです。
 
-For example, if you wish to be able to render iCal calendar events, you would need to add this media type to the `media.yaml`:
+たとえば、iCal カレンダーイベントをレンダリングしたいとき、`user/config/media.yaml` ファイルに以下のような追記をしてください：
 
 ```yaml
   ics:
@@ -67,5 +67,5 @@ For example, if you wish to be able to render iCal calendar events, you would ne
     mime: text/calendar
 ```
 
-This defines the `.ics` file extension as an `iCal` file with mime type: `text/calendar`.  Then all you need to do is provide the appropriate `.ics.twig` template to render any file you request of this type.
+ここでは、`iCal` ファイルに対して、`text/calendar` というmimeタイプとともに `.ics` ファイル拡張子を定義しています。その後必要なことは、このタイプに対して適切な`.ics.twig` テンプレートを提供することです。
 
