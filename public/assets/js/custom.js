@@ -9,7 +9,7 @@ function create_mokuji() {
         '.learn-grav-default h2, .learn-grav-default h3'
     );
     const frag = [...heads].reduce((frag, hx) => {
-        const text = hx.textContent;
+        const text = (hx.tagName === 'H3'? '| - ': '') + hx.textContent;
         const link = `#${hx.id}`;
         const a = document.createElement('a');
         a.textContent = text;

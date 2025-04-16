@@ -9,12 +9,12 @@ const { sitetitle, description, baseurl, bloburl, learnurl, hosturl } = siteConf
 const { frontmatter } = Astro.props;
 
 // urlを `/` 無しにそろえる
-const normalizePath = (path: string) => path.endsWith('/') ? path.slice(0,-1) : path;
+const normalizePath = (path: string) => path.replace(/\/$/, '');
 // 現在アクセスしているページのURL
 const currentpath = normalizePath(new URL(Astro.url).pathname);
 
-// ページをソートする関数
-const sortPages = (a: any, b: any ): number => {
+// sort()のためにページを比較する関数
+const cmpPages = (a: any, b: any ): number => {
   const aarr = (a.url??'').split('/');
   const barr = (b.url??'').split('/');
   const cnt = Math.min(aarr.length, barr.length);
@@ -25,15 +25,11 @@ const sortPages = (a: any, b: any ): number => {
       return -1;
     }
   }
-  if(aarr.length > barr.length) {
-    return 1;
-  } else {
-    return -1;
-  }
+  return (aarr.length - barr.length);
 };
 
 // ドキュメントページ全体を取得する
-const pages = (await Astro.glob('../pages/**/index.md')).sort(sortPages);
+const pages = (await Astro.glob('../pages/**/index.md')).sort(cmpPages);
 
 
 // ページ左のサイドバーメニュー
@@ -83,7 +79,7 @@ const breadcrumbJsonLd = JSON.stringify({
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content={description} />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href={hosturl + baseurl + currentpath + '/'} />
+  <link rel="canonical" href={hosturl + currentpath + '/'} />
   <meta name="generator" content={Astro.generator} />
   <link rel="icon" type="image/svg+xml" href={baseurl + '/favicon.svg'} />
   <link rel="stylesheet" href={ baseurl + '/assets/css/bootstrap.min.css'} />
