@@ -28,7 +28,7 @@ pages.forEach((page:any) => {
     <ol>
     { renderPages.map(( page: any ) => 
         <li class="my-1">
-            <a href={ page.url }>{ page.title }</a>
+            <a href={ page.url + '/' }>{ page.title }</a>
             {(page.children.length > 0)
                 ? <Sidebarchild pages={ page.children }  />
                 : ''

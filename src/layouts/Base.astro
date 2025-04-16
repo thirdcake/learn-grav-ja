@@ -4,7 +4,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
 import Sidebar from '../components/Sidebar.astro';
 
 import { siteConfig } from '../config';
-const { sitetitle, description, baseurl, bloburl, learnurl } = siteConfig;
+const { sitetitle, description, baseurl, bloburl, learnurl, hosturl } = siteConfig;
 
 const { frontmatter } = Astro.props;
 
@@ -60,6 +60,19 @@ const breadobj = pages.filter(page => (currentpath.startsWith(page.url??'###')))
 
 // ページ下部の翻訳元記事リンク
 const learnFullUrl = `${learnurl}${currentpath.replace('/learn-grav-ja','').replace(/\/\d+\./g,'/')}`;
+
+// 構造化データ
+const breadcrumbJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": breadobj.map((page, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "name": page.frontmatter.title,
+    "item": hosturl + (page.url ?? ""),
+  }))
+});
+
 ---
 
 <!DOCTYPE html>
@@ -68,30 +81,52 @@ const learnFullUrl = `${learnurl}${currentpath.replace('/learn-grav-ja','').repl
   <meta charset="UTF-8">
   <title>{ frontmatter.title } | { sitetitle }</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content={description} />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href={hosturl + baseurl + currentpath + '/'} />
   <meta name="generator" content={Astro.generator} />
+  <link rel="icon" type="image/svg+xml" href={baseurl + '/favicon.svg'} />
   <link rel="stylesheet" href={ baseurl + '/assets/css/bootstrap.min.css'} />
   <link rel="stylesheet" href={ baseurl + '/assets/css/custom.css'} />
   <script defer src={ baseurl + '/assets/js/bootstrap.min.js'} ></script>
   <script defer src={ baseurl + '/assets/js/custom.js'} ></script>
+
+  <!-- OGP -->
+  <meta property="og:title" content={frontmatter.title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content={baseurl + currentpath} />
+  <meta property="og:image" content={baseurl + '/assets/images/ogimage.jpg'} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content={sitetitle} />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={frontmatter.title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={baseurl + '/assets/images/ogimage.jpg'} />
+
+  <!-- 構造化データ：パンくずリスト -->
+  <script type="application/ld+json" set:html={breadcrumbJsonLd}></script>
 </head>
 <body>
   <div class="container-fluid d-flex flex-row flex-nowrap align-items-start">
 
     <div class="offcanvas-lg offcanvas-start flex-shrink-0 bg-body-tertiary border-end overflow-auto" 
       style="width: 280px;" 
-      tabindex="-1" id="offcanvasResponsive" 
-      aria-labelledby="offcanvasResponsiveLabel">
+      tabindex="-1" id="offcanvasResponsive">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasResponsiveLabel">メニュー</h5>
+        <div class="offcanvas-title" id="offcanvasResponsiveLabel">メニュー</div>
         <button type="button" class="btn-close" 
           data-bs-dismiss="offcanvas" data-bs-target="#offcanvasResponsive" 
           aria-label="Close"></button>
       </div>
       <div class="offcanvas-body d-flex flex-column flex-shrink-0 p-2 position-sticky top-0">
-        <h1 class="m-4">
-          <img alt={ sitetitle }
+        <div class="m-4">
+          <img alt={ sitetitle } width="445" height="106"
             src={ baseurl + '/assets/images/grav-text.svg' }>
-        </h1>
+        </div>
         <p style="text-align:center;background-color:#fff;border:thin solid #777;">
           検索は<a href={ learnurl }>翻訳元</a>へ
         </p>
