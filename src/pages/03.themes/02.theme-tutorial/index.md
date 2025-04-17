@@ -3,7 +3,7 @@ title: "テーマのチュートリアル"
 layout: ../../../layouts/Default.astro
 ---
 
-新しいことを学ぶのに最良の方法は、しばしば、具体例を使って、自分独自のものを作ってみることです。テーマづくりについて、この方法を採用してみましょう。
+新しいことを学ぶときに、具体例を使って、自分独自のものを作ってみることが最良の方法であるときがあります。テーマづくりについて、この方法を採用してみましょう。
 
 ## Quark
 
@@ -13,11 +13,11 @@ Spectre.css は、迅速で拡張性高い開発のための、軽量で、レ�
 
 Spectreは、基本的なタイポグラフィーや要素のスタイル、flexboxベースのレスポンシブ・レイアウト・システム、pure CSSコンポーネントとユーティリティを、ベストプラクティスのコーディングと一貫したデザイン言語とともに提供してくれます。
 
-しかしながら、よりシンプルなものから始めたほうが、より良いこともあります。
+しかしながら、もう少しシンプルなものから始めたほうが、より良いこともあります。
 
 ## Pure.css
 
-このチュートリアルのために、Yahoo!が開発した人気の[Pure.css フレームワーク](https://pure-css.github.io/) を使って、テーマを作っていきましょう。
+このチュートリアルのために、Yahoo!が開発した、人気の[Pure.css フレームワーク](https://pure-css.github.io/) を使って、テーマを作っていきましょう。
 
 Pure は、小さく、速く、レスポンシブなCSSフレームワークで、[Bootstrap](https://getbootstrap.jp/) や、[Foundation](https://get.foundation/) のような大きなフレームワークのオーバーヘッドが無い状態でサイトの開発ができます。Pureにはいくつかのモジュールがあり、それぞれ独立して使えますが、すべて合わせても **minifyしてgzipすると4.0KB** しかありません。
 
@@ -144,7 +144,7 @@ pages:
 * **`screenshot.jpg`** - 1009px x 1009px screenshot of the theme.
 * **`thumbnail.jpg`** - 300px x 300px screenshot of the theme.
 
-<h2 id="step-4-base-template">ベーステンプレート</h2>
+<h2 id="step-4-base-template">ステップ4: ベーステンプレート</h2>
 
 [前の章](../01.theme-basics) でみたとおり、Gravのコンテンツファイルは、特定のファイル名を持ちます。たとえば、`default.md` のように。これにより、Gravは `default.html.twig` というレンダリング用のTwigテンプレートを探します。1つのファイルごとに、表示したいものをすべて書いていくこともできますし、それでうまく機能します。しかし、もっと良い方法もあります。
 
@@ -255,7 +255,7 @@ Twigの[Extends](https://twig.symfony.com/doc/1.x/tags/extends.html) タグを�
 > [!訳注]  
 > ひとつひとつの変数をXSS対策するのは、のちのち本当に面倒なことになるので、`autoescape` は `true` でお願いします。
 
-<h2 id="step-5-breaking-it-down">ステップ5: 分解</h2>
+<h2 id="step-5-breaking-it-down">ステップ5: 分解しながら理解する</h2>
 
 何が起こっているのか、より深く理解するために、`base.html.twig` ファイルのコードを読み通してください。いくつかの注目すべき重要な点があります：
 
@@ -269,37 +269,37 @@ Twigの[Extends](https://twig.symfony.com/doc/1.x/tags/extends.html) タグを�
 
 1. 標準的なmeta タグをいくつか設定した後、`partials/metadata.html.twig` が参照され、呼び出されます（includeされます）。このファイルは、`systems/templates/partials` フォルダにあり、ページのメタデータをループします。これは実際には、`site.yaml` のメタデータとページで上書きしたデータを合わせた（mergeした）ものです。
 
-1. The `<link rel="icon"...` entry is set by pointing to a theme-specific image.  In this case it's located in theme directory under `images/logo.png`.  The syntax for this is `{{ url('theme://images/logo.png') }}`.
+1. `<link rel="icon"...` では、テーマ固有の画像を指し示します。このケースでは、テーマディレクトリ下の`images/logo.png` が使われます。このための構文は、`{{ url('theme://images/logo.png') }}` です。
 
-1. The `<link rel="canonical"...` entry sets a canonical URL for the page that is always set to the full URL of the page via `{{ page.url(true, true) }}`.
+1. `<link rel="canonical"...` では、canonical URL（重複しないためのURL）が設定されます。 `{{ page.url(true, true) }}` により、URL全体が常に設定されます。
 
-1. Now we define a block called `stylesheets`, and in here we use the [Asset Manager](/themes/asset-manager) to add several assets.  The first one loads the Pure.css framework.  The second one loads [FontAwesome](http://fontawesome.io/) to provide useful icons.  The last entry points to a `custom.css` file in the theme's `css/` folder.  In here are a few useful styles to get you started, but you can add more here.  Also you can add other CSS file entries as needed.
+1. 次に、`stylesheets` ブロックを定義します。ここでは、いくつかのアセット（css）を追加するために、 [アセット管理](../07.asset-manager/) を使います。最初は、Pure.cssフレームワークを読み込みます。次に、便利なアイコンを使うための [FontAwesome](http://fontawesome.io/) を読み込みます。最後に、テーマの`css/` フォルダにある `custom.css` ファイルです。ここには最初から便利なスタイルがありますが、さらに付け加えられます。また、必要であれば、さらにCSSファイルを追加できます。
 
-1. The `{{ assets.css()|raw }}` call is what triggers the template to render all the CSS link tags.
+1. `{{ assets.css()|raw }}` による呼び出しは、テンプレートがCSSのリンクタグをレンダリングするトリガーとなるものです。
 
-1. The `javascripts` block, like the `stylesheets` block is a good place to put your JavaScript files.  In this example, we only add the 'jquery' library which is already bundled with Grav, so you don't need to provide a path to it.
+1. `javascripts` ブロックも、`stylesheets` ブロックのように、JavaScriptファイルを置く場所です。この例では、すでにGravにバンドルされている 'jquery' ライブラリのみを追加しています。よって、ファイルへのパスを追加する必要はありません。
 
-1. The `{{ assets.js()|raw }}` will render all the JavaScript tags.
+1. `{{ assets.js()|raw }}` は、JavaScriptタグをレンダリングします。
 
-1. The `<body>` tag has a class attribute that will output anything you set in the `body_classes` variable of the page's frontmatter.
+1. `<body>` タグでは、ページのフロントマターで定義した `body_classes` 変数がすべてclass属性として出力されます。
 
-1. The `header` block has a few things that output the HTML header of the page.  One important thing to note is the logo is hyperlinked to the `base_url` with the logic: `{{ base_url == '' ? '/' : base_url }}`.  This is to ensure that if there is no subdirectory, the link is just `/`.
+1. `header` ブロックは、ページのHTMLヘッダー部分を出力します。注目すべき点は、ロゴが、`{{ base_url == '' ? '/' : base_url }}` というロジックとともに `base_url` でハイパーリンクされているところです。これは、サブディレクトリでない場合に、単に `/` にリンクすることを確定します。
 
-1. The title of the site is output as the logo in this example theme with `{{ config.site.title }}` but you could just replace this with a `<img>` tag to a logo if you wanted.
+1. この例のテーマで、サイトタイトルは、`{{ config.site.title }}` とともにロゴとして出力されます。しかしもし必要なら、`<img>` タグと入れ替えることもできます。
 
-1. The `<nav>` tag actually contains a link to `partials/navigation.html.twig` that contains the logic to loop over any **visible** pages and display them as a menu.  By default it supports dropdown menus for nested pages, but this can be turned off via the theme's configuration.  Have a look in this navigation file to get an idea of how the menu is generated.
+1. `<nav>` タグは、`partials/navigation.html.twig` へのリンクをincludeします。このtwigは、あらゆる **公開された** ページをループし、メニューとして表示させるロジックを持ちます。デフォルトでは、入れ子になったページについて、ドロップダウンメニューに対応していますが、テーマの設定でこの設定をオフにすることもできます。メニューを生成するための方法を知るため、このナビゲーションファイルを見てみてください。
 
-1. The use of `{% block content %}{% endblock %}` provides a placeholder that allows us to provide content from a template that extends this one. Remember we overrode this in `default.html.twig` to output the page's content.
+1. `{% block content %}{% endblock %}` を使用すると、このベーステンプレートを利用するテンプレートから、コンテンツを入力する場所を指定します。`default.html.twg` で、ページコンテンツを上書きしていたことを思い出してください。
 
-1. The `footer` block contains a simple footer, you can easily modify this for your needs.
+1. `footer` ブロックは、シンプルなフッターです。必要に応じて修正できます。
 
-1. Similar to the content block, the `{% block bottom %}{% endblock %}` is intended as a placeholder for templates to add custom JavaScript initialization or analytic codes. In this example, we output any JavaScript that was added to the `bottom` Asset Group.  Read more about this in the [Asset Manager](/themes/asset-manager) documentation.
+1. コンテンツブロックと同様、`{% block bottom %}{% endblock %}` ブロックは、テンプレートがカスタムのJavaScriptの起動コードや解析コードを追記するためのものです。この例では、`bottom` アセットグループに追加されているすべてのJavaScriptを出力しています。詳しい内容は、[アセット管理](../asset-manager) のドキュメントをお読みください。
 
 <h2 id="step-6-theme-css">ステップ6: テーマのCSS</h2>
 
-You might have noticed that in the `partials/base.html.twig` file we made reference to a custom theme css via Asset Manager: `do assets.add('theme://css/custom.css', 98)`.  This file will house any custom CSS we need to fill in the gaps not provided by the Pure.css framework.  As Pure is a very minimal framework, it provides the essentials but almost no styling.
+`partials/base.html.twig` ファイルは、アセット管理の `do assets.add('theme://css/custom.css', 98)` から、カスタムのCSSを参照していることにお気づきかもしれません。このファイルには、Pure.cssフレームワークで提供されない、不足したCSSをカスタムして書き込みます。Pureは、とてもミニマルなフレームワークなので、必要最小限のみ提供し、ほとんどの見た目の装飾的なスタイルは提供しません。
 
-1. In your `user/themes/my-theme/css` folder, take a look at `custom.css`:
+1. `user/themes/my-theme/css` フォルダで、`custom.css` を見てください：
 
 ```css
 /* Core Styles */
@@ -479,13 +479,13 @@ blockquote {
 }
 ```
 
-This is pretty standard CSS that sets some basic margins, fonts, colors, and utility classes. There is some basic content styling and some more extensive styling required to render the drop-down menu.  Feel free to modify this file as you need, or even add new CSS files (just ensure you add a reference in the `head` block by following the example for `custom.css`).
+上記は、とても標準的なCSSであり、marginや、font、colorや、便利なclassを設定しています。基本的なコンテンツのstyleと、ドロップダウンメニューをレンダリングするための拡張的なstyleがあります。このファイルは、必要に応じて、気楽に編集してください。もしくは、別のCSSファイルを追加してもかまいません（`head` ブロックに、`custom.css` への参照を付け加えるだけです）。
 
 <h2 id="step-7-testing">ステップ7: テスト</h2>
 
-To see your theme in action, open your browser, and point it to your Grav site.  You should see something like this:
+このテーマが実際に動作するか確認するために、ブラウザを開いて、Gravのサイトを表示させてみてください。以下のような表示になるはずです：
 
 ![](pure-theme.png)
 
-Congratulations, you have created your first theme!
+おめでとうございます！　あなたの最初のテーマができました！
 
