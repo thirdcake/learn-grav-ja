@@ -18,7 +18,7 @@ function create_mokuji() {
         li.appendChild(a);
         li.classList.add('list-group-item');
         if(hx.tagName === 'H3') {
-            li.classList.add('ms-2');
+            li.classList.add('ms-3');
         }
         frag.appendChild(li);
         return frag;
