@@ -9,12 +9,11 @@ const { sitetitle, description, baseurl, bloburl, learnurl, hosturl } = siteConf
 
 const { frontmatter } = Astro.props;
 
-// urlを `/` 無しにそろえる
-const normalizePath = (path: string) => path.replace(/\/$/, '');
 // 現在アクセスしているページのURL
-const currentpath = normalizePath(new URL(Astro.url).pathname);
+const currentpath = (new URL(Astro.url).pathname).replace(/\/$/, '');
 
-const pages: any[] = pagesCache;
+// ドキュメントページ全体を取得する
+const pages :any[] = pagesCache();
 
 // ページ左のサイドバーメニュー
 const sidebarPages = pages.filter(page => {

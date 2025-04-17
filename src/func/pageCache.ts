@@ -15,7 +15,13 @@ const cmpPages = (a: any, b: any ): number => {
 };
 
 // ドキュメントページ全体を取得する
-const pages = Object.values(import.meta.glob('../pages/**/index.md', { eager: true })).sort(cmpPages);
 
+let cachedPages: any[] | null = null;
 
-export default pages;
+export default ():any[] => {
+    if(!cachedPages) {
+        cachedPages = Object.values(import.meta.glob('../pages/**/index.md', { eager: true }));
+        cachedPages.sort(cmpPages);
+    }
+    return cachedPages;
+}
