@@ -1,101 +1,79 @@
 ---
-title: Twig Functions
+title: カスタム関数
 layout: ../../../../layouts/Default.astro
 ---
 
 > [!訳注]  
-> このページの内容は、Twigの関数を動的に実行している部分があるため、静的サイトでは再現できない部分があります。実行結果は、[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions)をご確認ください。
+> このページの内容は、Twigの関数を動的に実行している部分があり、静的サイトでは再現できません。実行結果は、[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions)をご確認ください。
 
-Twig functions are called directly with any parameters being passed in via parenthesis.
+Twig関数は、カッコ内にパラメータを渡して、ダイレクトに呼び出せます。
 
 ### `array`
 
-Cast a value to array
+値を配列型にします。
 
-{% verbatim %}
 ```twig
 {% set value = array(value) %}
 ```
-{% endverbatim %}
 
 ### `array_diff`
 
-Computes the difference of arrays.
+配列の差分を計算します。
 
-{% verbatim %}
 ```twig
 {% set diff = array_diff(array1, array2...) %}
 ```
-{% endverbatim %}
 
 ### `array_key_value`
 
-The `array_key_value` function allows you to add a key/value pair to an associate array
+キー/バリューのペアを配列に追加します。
 
-{% verbatim %}
 ```twig
 {% set my_array = {fruit: 'apple'} %}
 {% set my_array = array_key_value('meat','steak', my_array) %}
 {{ print_r(my_array)}}
 ```
-{% endverbatim %}
-
-{% set my_array = {fruit: 'apple'} %}
-{% set my_array = array_key_value('meat','steak', my_array) %}
-outputs: ** {{ print_r(my_array) }} **
 
 ### `array_key_exists`
 
-Wrapper for PHP's `array_key_exists` function that returns whether or not a key exists in an associative array.
+PHPの `array_key_exists` 関数と同じです。配列にキーが存在するかどうかを判断します
 
-{% verbatim %}
 ```twig
 {% set my_array = {fruit: 'apple', meat: 'steak'} %}
 {{ array_key_exists('meat', my_array) }}
 ```
-{% endverbatim %}
-
-{% set my_array = {fruit: 'apple', meat: 'steak'} %}
-outputs: **{{ array_key_exists('meat', my_array) }}**
 
 ### `array_intersect`
 
-The `array_intersect` function provides the intersection of two arrays or Grav collections.
+2つの配列もしくはGrav collectionsの間の共通部分を調べます
 
-{% verbatim %}
 ```twig
 {% set array_1 = {fruit: 'apple', meat: 'steak'} %}
 {% set array_2 = {fish: 'tuna', meat: 'steak'} %}
 {{ print_r(array_intersect(array_1, array_2)) }}
 ```
-{% endverbatim %}
-
-{% set array_1 = {fruit: 'apple', meat: 'steak'} %}
-{% set array_2 = {fish: 'tuna', meat: 'steak'} %}
-
-outputs: **{{ print_r(array_intersect(array_1, array_2)) }}**
 
 ### `array_unique`
 
-Wrapper for PHP `array_unique()` that removes duplicates from an array.
+PHPの `array_unique` 関数と同じです。配列から重複を除きます。
 
-`array_unique(['foo', 'bar', 'foo', 'baz'])` <i class="fa fa-long-arrow-right"></i> **{{ print_r(array_unique(['foo', 'bar', 'foo', 'baz'])) }}**
+`array_unique(['foo', 'bar', 'foo', 'baz'])` 
 
 ### `authorize`
 
-Authorizes an authenticated user to see a resource. Accepts a single permission string or an array of permission strings.
+そのリソースを見られるかどうか認証します。引数には、1つのstring型のパーミッション文字列か、複数のstring型のパーミッション文字列のみを要素に持つ配列を渡してください。
 
 `authorize(['admin.statistics', 'admin.super'])`
 
 ### `body_class`
 
-Takes an array of classes, and if they are not set on `body_classes` look to see if they are set in current theme configuration.
+クラス名の配列を渡してください。`body_classes` に設定されていなければ、現在のテーマ設定にセットされているか調べます。
 
 `set body_classes = body_class(['header-fixed', 'header-animated', 'header-dark', 'header-transparent', 'sticky-footer'])`
 
 ### `cron`
 
-Create a "Cron" object from cron syntax
+cronの構文から、"Cron" オブジェクトを作ります
 
 `cron("3 * * * *").getNextRunDate()|date(config.date_format.default)`
 
@@ -103,99 +81,100 @@ Create a "Cron" object from cron syntax
 
 ### `dump`
 
-Takes a valid Twig variable and dumps it out into the [Grav debugger panel](../../../advanced/debugging).  The debugger must be **enabled** to see the values in the messages tab.
+Twig変数を渡すと、[Gravデバッグパネル](../../../08.advanced/03.debugging/) に出力します。デバッガは、**enabled** になっていなければいけません。
 
 `dump(page.header)`
 
 ### `debug`
 
-Same as `dump()`
+`dump()` と同じです。
 
 ### `evaluate`
 
-The evaluate function can be used to evaluate a string as Twig:
+文字列をTwigとして評価します。
 
 `evaluate('grav.language.getLanguage')`
 
 ### `evaluate_twig`
 
-Similar to evaluate, but will evaluate and process with Twig
+evaluateに似ていますが、Twigとして評価した後に処理します。
 
-{% verbatim %}
-`evaluate_twig('This is a twig variable: {{ foo }}', {foo: 'bar'})`)  <i class="fa fa-long-arrow-right"></i> **This is a twig variable: bar**
-{% endverbatim %}
+`evaluate_twig('This is a twig variable: {{ foo }}', {foo: 'bar'})`  
 
 ### `exif`
 
-Output the EXIF data from an image based on its filepath. This requires that `media: auto_metadata_exif: true` is set in `system.yaml`. For example, in a Twig-template:
+filepathで渡した画像から、EXIFデータを出力します。これを実行するには、`system.yaml` で `media: auto_metadata_exif: true` が設定されている必要があります。たとえば、Twigテンプレート上で以下のようにします：
 
-{% verbatim %}
 ```twig
 {% set image = page.media['sample-image.jpg'] %}
 {% set exif = exif(image.filepath, true) %}
 {{ exif.MaxApertureValue }}
 ```
-{% endverbatim %}
 
-This would write the `MaxApertureValue`-value set in the camera, for example "40/10". You can always use {% verbatim %}`{{ dump(exif) }}`{% endverbatim %} to show all the available data in the debugger.
+これは、`MaxApertureValue` が出力されます。これはカメラに設定されている値で、たとえば"40/10"です。いつでも`{{ dump(exif) }}` を使うことで、デバッガ利用できるデータはすべて見られます。
 
 ### `get_cookie`
 
-Retrieve the value of a cookie with this function:
+cookieを取得します：
 
 `get_cookie('your_cookie_key')`
 
 ### `get_type`
 
-Gets the type of a variable:
+変数の型を取得します：
 
-`get_type(page)` <i class="fa fa-long-arrow-right"></i> **{{ get_type(page) }}**
+`get_type(page)` 
 
 ### `gist`
 
 Takes a Github Gist ID and creates appropriate Gist embed code
 
-`gist('bc448ff158df4bc56217')` <i class="fa fa-long-arrow-right"></i> **{{ gist('bc448ff158df4bc56217')|e }}**
+`gist('bc448ff158df4bc56217')` 
 
 ### `header_var`
+
 `header_var($variable, $pages = null)`
 
-Returns `page.header.<variable>`.
+`page.header.<variable>` を返します。
 
-! **NOTE:** Deprecated since Grav 1.7. `theme_var` should be used.
+> [!Note]  
+> **NOTE:** Grav 1.7 から非推奨になりました。 `theme_var` を使ってください。
 
-! The logic of finding the variable has changed, which might lead to unexptected results:
-! - If an array of lookup pages is provided as second parameter, only the first page will be used.
-! - If `<variable>` is not defined in het header of the page, Grav will search for the variable in the tree of parents of the page.
-! - If still not found, Grav will search for the variable in the config file of the theme
+> [!Note]  
+> The logic of finding the variable has changed, which might lead to unexptected results:  
+> - If an array of lookup pages is provided as second parameter, only the first page will be used.
+> - If `<variable>` is not defined in het header of the page, Grav will search for the variable in the tree of parents of the page.
+> - If still not found, Grav will search for the variable in the config file of the theme
 
 Given frontmatter of
+
 ```
 ---
 title: Home
 ---
 ```
 
-`header_var('title')` <i class="fa fa-long-arrow-right"></i> **Home**
+`header_var('title')` 
 
 ### `http_response_code`
 
-If response_code is provided, then the previous status code will be returned. If response_code is not provided, then the current status code will be returned. Both of these values will default to a 200 status code if used in a web server environment.
+レスポンスコードを渡すと、そのステータスコードを返します。渡さない場合、現在のステータスコードが返ります。webサーバ環境では、両方とも、デフォルトは200です。
 
 `http_response_code(404)`
 
 ### `isajaxrequest`
 
-the `isajaxrequest()` function can be used to check if `HTTP_X_REQUESTED_WITH` header option is set:
+`HTTP_X_REQUESTED_WITH` ヘッダが設定されているかチェックします。 
 
 
 ### `json_decode`
 
-You can decode JSON by simply applying this filter:
+JSONがシンプルにデコードできます：
 
 `json_decode({"first_name": "Guido", "last_name":"Rossum"})`
 
 ### `media_directory`
+
 
 Returns a media object for an arbitrary directory.  Once obtained you can manipulate images in a similar fashion to pages.
 
@@ -205,46 +184,40 @@ Returns a media object for an arbitrary directory.  Once obtained you can manipu
 
 Output a file size in a human readable nice size format
 
-`nicefilesize(612394)` <i class="fa fa-long-arrow-right"></i> **{{ nicefilesize(612394) }}**
+`nicefilesize(612394)` 
 
 ### `nicenumber`
 
 Output a number in a human readable nice number format
 
-`nicenumber(12430)` <i class="fa fa-long-arrow-right"></i> **{{ nicenumber(12430)}}**
+`nicenumber(12430)` 
 
 ### `nicetime`
 
 Output a date in a human readable nice time format
 
-`nicetime(page.date)` <i class="fa fa-long-arrow-right"></i> **{{ nicetime(page.date) }}**
+`nicetime(page.date)` 
 
 ### `nonce_field`
 
 Generate a Grav security nonce field for a form with a required `action`:
 
-`nonce_field('action')` <i class="fa fa-long-arrow-right"></i> **{{ nonce_field('action')|e }}**
+`nonce_field('action')` 
 
 ### `of_type`
 
 Checks the type of a variable to the param:
 
-`of_type(page, 'string')` <i class="fa fa-long-arrow-right"></i> **{{ of_type(page, 'string') ? 'true' : 'false' }}**
+`of_type(page, 'string')` 
 
 ### `pathinfo`
 
 Parses a path into an array.
 
-{% verbatim %}
 ```twig
 {% set parts = pathinfo('/www/htdocs/inc/lib.inc.php') %}
 {{ print_r(parts) }}
 ```
-{% endverbatim %}
-
-{% set parts = pathinfo('/www/htdocs/inc/lib.inc.php') %}
-
-outputs: **{{ print_r(parts) }}**
 
 ### `print_r`
 
@@ -252,31 +225,26 @@ Prints a variable in a readable format
 
 `print_r(page.header)`
 
-```txt
-{{ print_r(page.header) }}
-```
-
-
 ### `random_string`
 
 Will generate a random string of the required number of characters.  Particularly useful in creating a unique id or key.
 
-`random_string(10)` <i class="fa fa-long-arrow-right"></i> **{{ random_string(10) }}**
+`random_string(10)` 
 
 ### `unique_id`
 
 Generates a random string with configurable length, prefix and suffix. Unlike the built-in PHP `uniqid()` function and the `random_string` utils, this string will be generated truly unique and non-conflicting.
 
 
-`unique_id(9)` <i class="fa fa-long-arrow-right"></i> **{{ unique_id(9) }}**
-`unique_id(11, { prefix: 'user_' })` <i class="fa fa-long-arrow-right"></i> **unique_id(11, { prefix: 'user_' }) }}**
-`unique_id(13, { suffix: '.json' })` <i class="fa fa-long-arrow-right"></i> **unique_id(13, { suffix: '.json' }) }}**
+`unique_id(9)`  
+`unique_id(11, { prefix: 'user_' })`  
+`unique_id(13, { suffix: '.json' })` 
 
 ### `range`
 
 Generates an array containing a range of elements, optionally stepped
 
-`range(25, 300, 50)` <i class="fa fa-long-arrow-right"></i> **{{ print_r(range(25, 300, 50)) }}**
+`range(25, 300, 50)` 
 
 ### `read_file`
 
@@ -303,58 +271,30 @@ Performs a `preg_grep` on an array with a regex pattern
 
 `regex_filter(['pasta', 'fish', 'steak', 'potatoes'], "/p.*/")`
 
-{% set var = regex_filter(['pasta', 'fish', 'steak', 'potatoes'], "/p.*/") %}
-
-```txt
-{{ print_r(var) }}
-```
 
 ### `regex_replace`
 
 A helpful wrapper for the PHP [preg_replace()](https://php.net/manual/en/function.preg-replace.php) method, you can perform complex Regex replacements on text via this filter:
 
-{% verbatim %}
 `regex_replace('The quick brown fox jumps over the lazy dog.', ['/quick/','/brown/','/fox/','/dog/'], ['slow','black','bear','turtle'])`
-{% endverbatim %}
-
-{% set var = regex_replace('The quick brown fox jumps over the lazy dog.', ['/quick/','/brown/','/fox/','/dog/'], ['slow','black','bear','turtle']) %}
-```txt
-{{ var }}
-```
-
 
 ### `regex_match`
 
 A helpful wrapper for the PHP [preg_match()](https://php.net/manual/en/function.preg-match.php) method, you can perform complex regular expression match on text via this filter:
 
-{% verbatim %}
 `regex_match('http://www.php.net/index.html', '@^(?:http://)?([^/]+)@i')`
-{% endverbatim %}
-
-{% set var = regex_match('http://www.php.net/index.html', '@^(?:http://)?([^/]+)@i') %}
-```txt
-{{ print_r(var) }}
-```
 
 ### `regex_split`
 
 A helpful wrapper for the PHP [preg_split()](https://php.net/manual/en/function.preg-split.php) method. Split string by a regular expression on text via this filter:
 
-{% verbatim %}
 `regex_split('hypertext language, programming', '/\\s*,\\s*/u')`
-{% endverbatim %}
-
-{% set var = regex_split('hypertext language    ,    programming', '/\\s*,\\s*/u') %}
-```txt
-{{ print_r(var) }}
-```
-
 
 ### `repeat`
 
 Will repeat whatever is passed in a certain amount of times.
 
-`repeat('blah ', 10)` <i class="fa fa-long-arrow-right"></i> **{{ repeat('blah ', 10) }}**
+`repeat('blah ', 10)` 
 
 ### `string`
 
@@ -368,17 +308,12 @@ Returns a string from a value. If the value is array, return it json encoded
 
 Returns the content of an SVG image and adds extra classes as needed. Provides the benefits of inline svg without having to paste the code directly on the page. Useful for reusable images such as social media icons.
 
-{% verbatim %}
 `{{ svg_image(path, classes, strip_style) }}`
-{% endverbatim %}
 
-strip_style = remove the svg inline styling - useful for styling with css classes.
 
 example:
 
-{% verbatim %}
 `{{ svg_image('theme://images/something.svg', 'my-class-here mb-10', true) }}`
-{% endverbatim %}
 
 
 
@@ -397,17 +332,17 @@ It can optionally take a default value as fallback:
 
 ### `t`
 
-Translate a string, as the [`|t`](../filters#t) filter.
+Translate a string, as the [`|t`](../02.filters/#t) filter.
 
-`t('SITE_NAME')` <i class="fa fa-long-arrow-right"></i> **Site Name**
+`t('SITE_NAME')` 
 
 ### `ta`
 
-Functions the same way the [`|ta`](../filters#ta) filter does.
+Functions the same way the [`|ta`](../02.filters/#ta) filter does.
 
 ### `tl`
 
-Translates a string in a specific language. For more details check out the [multi-language documentation](../../content/multi-language#complex-translations).
+Translates a string in a specific language. For more details check out the [multi-language documentation](../../02.content/11.multi-language/#complex-translations).
 
 `tl('SIMPLE_TEXT', ['fr'])`
 
@@ -415,31 +350,20 @@ Translates a string in a specific language. For more details check out the [mult
 
 Will create a URL and convert any PHP URL streams into a valid HTML resources. A default value can be passed in in case the URL cannot be resolved.
 
-`url('theme://images/logo.png')|default('http://www.placehold.it/150x100/f4f4f4')` <i class="fa fa-long-arrow-right"></i> **{{ url('theme://images/logo.png')|default('http://www.placehold.it/150x100/f4f4f4') }}**
+`url('theme://images/logo.png')|default('http://www.placehold.it/150x100/f4f4f4')` 
 
 ### `vardump`
 
 The `vardump()` function outputs the current variable to the screen (rather than in the debugger as with `dump()`)
 
-{% verbatim %}
 ```twig
 {% set my_array = {foo: 'bar', baz: 'qux'} %}
 {{ vardump(my_array) }}
-```
-{% endverbatim %}
-
-{% set my_array = {foo: 'bar', baz: 'qux'} %}
-
-```twig
-[
-  "foo" => "bar"
-  "baz" => "qux"
-]
 ```
 
 ### `xss`
 
 Allow a manual check of a string for XSS vulnerabilities
 
-`xss('this string contains a <script>alert("hello");</script> XSS vulnerability')` <i class="fa fa-long-arrow-right"></i> **{{ xss('this string contains a <script>alert("hello");</script> XSS vulnerability') }}**
+`xss('this string contains a <script>alert("hello");</script> XSS vulnerability')` 
 

@@ -1,5 +1,5 @@
 ---
-title: Twig Filters
+title: カスタムフィルタ
 layout: ../../../../layouts/Default.astro
 ---
 
@@ -149,9 +149,7 @@ JSONをデコードします。
 {{ print_r(array) }}
 ```
 
-```txt
 （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
-```
 
 ### `ksort`
 
@@ -164,9 +162,7 @@ JSONをデコードします。
 {{ print_r(items) }}
 ```
 
-```txt
 （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
-```
 
 ### `ltrim`
 
@@ -193,9 +189,7 @@ string|markdown($is_block)
 <p class="paragraph">{{'A line with **markdown** and [a link](http://www.cnn.com)'|markdown(false) }}</p>
 ```
 
-```txt
 （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
-```
 
 ### `md5`
 
@@ -283,9 +277,7 @@ pad は、ある長さにするために他の文字で埋めます。これは�
 
 `page.header|print_r`
 
-```txt
 （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
-```
 
 ### `randomize`
 
@@ -298,9 +290,7 @@ pad は、ある長さにするために他の文字で埋めます。これは�
 {{ print_r(ritems) }}
 ```
 
-```txt
 （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
-```
 
 ### `regex_replace`
 
@@ -350,9 +340,7 @@ mailto リンクの例です：
 {% for person in people %}{{ person.email }}:{{ person.id }}, {% endfor %}
 ```
 
-```txt
 （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
-```
 
 ### `starts_with`
 
@@ -448,20 +436,16 @@ trancateは、5文字の後の単語の終わりで、一番近いところで�
 {{ array|yaml_encode }}
 ```
 
-```yaml
-{{ array|yaml_encode|e }}
-```
+（結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
 ### `yaml_decode`
 
-Decode/Parse a variable from YAML syntax
+YAML構文から変数にデコード・パースします。
 
 ```twig
 {% set yaml = "foo: [0, 1, 2, 3]\nbaz: qux" %}
 {{ yaml|yaml_decode|var_dump }}
 ```
 
-```txt
 （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
-```
 
