@@ -73,7 +73,7 @@ cd ~/webroot/grav
 composer install --no-dev -o
 ```
 
-3. [Grav CLIアプリケーション](../../07.cli-console/02.grav-cli)の `bin/grav` を使って、 **プラグイン** と、 **テーマの依存関係** をインストールしてください：
+3. [Grav CLIアプリケーション](../../07.cli-console/02.grav-cli/)の `bin/grav` を使って、 **プラグイン** と、 **テーマの依存関係** をインストールしてください：
 
 ```bash
 cd ~/webroot/grav
@@ -106,7 +106,7 @@ If you use Linode servers, there is an [easy, documented method using Linode Mar
 
 <h4 id="apache-iis-nginx">Apache/IIS/Nginx</h4>
 
-Gravを、Apacheや、IIS、Nginxなどのウェブサーバーで使用することは、Gravを[webroot](https://www.wordnik.com/words/webroot)下のフォルダに展開するのと同じくらい単純です。機能に必要なのは PHP 7.3.6 以上であることだけなので、サーバーインスタンスがその要件を満たしていることを確認してください。Grav の要件の詳細については、このガイドの[システム要件](../02.requirements)の章を参照してください。
+Gravを、Apacheや、IIS、Nginxなどのウェブサーバーで使用することは、Gravを[webroot](https://www.wordnik.com/words/webroot)下のフォルダに展開するのと同じくらい単純です。機能に必要なのは PHP 7.3.6 以上であることだけなので、サーバーインスタンスがその要件を満たしていることを確認してください。Grav の要件の詳細については、このガイドの[システム要件](../02.requirements/)の章を参照してください。
 
 もしwebrootが、たとえば `~/public_html` であるとき、このフォルダに展開し、`http://localhost` からサイトにつながります。 `~/public_html/grav` に展開したときは、 `http://localhost/grav` からつながります。 
 
@@ -178,12 +178,12 @@ https://127.0.0.1:8000
 
 ![Grav with Problems](problems.jpg)
 
-具体的な問題については、[Troubleshooting](../../11.troubleshooting)をご参照ください。
+具体的な問題については、[Troubleshooting](../../11.troubleshooting/)をご参照ください。
 
 > [!Note]  
-> ファイルのパーミッションに関する問題であれば、[Permissionsに関するトラブルシューティングのドキュメント](../../11.troubleshooting/05.permissions)をチェックしてください。また、さまざまなホスティング環境について解説している[ホスティングガイドのドキュメント](../../09.webservers-hosting)も、見てください。
+> ファイルのパーミッションに関する問題であれば、[Permissionsに関するトラブルシューティングのドキュメント](../../11.troubleshooting/05.permissions/)をチェックしてください。また、さまざまなホスティング環境について解説している[ホスティングガイドのドキュメント](../../09.webservers-hosting/)も、見てください。
 
 <h2 id="grav-updates">Gravのアップデート</h2>
 
-サイトを最新に保つため、[Gravとプラグインのアップデート](../../01.basics/08.updates)をお読みください。
+サイトを最新に保つため、[Gravとプラグインのアップデート](../../01.basics/08.updates/)をお読みください。
 

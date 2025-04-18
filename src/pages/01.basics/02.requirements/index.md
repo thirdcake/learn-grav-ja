@@ -61,7 +61,7 @@ Although IIS is considered a web server ready to run 'out-of-the-box', some chan
 
 To get **Grav** running on an IIS server, you need to install **URL Rewrite**. This can be accomplished using **Microsoft Web Platform Installer** from within IIS. You can also install URL Rewrite by going to [iis.net](https://www.iis.net/downloads/microsoft/url-rewrite).
 
-<h2 id="php-requirements">PHPの要件</h2>
+<h3 id="php-requirements">PHPの要件</h3>
 
 ほとんどのホスティングプロバイダや、ローカルのLAMPでさえ、Gravを 'すぐに' 動かすために必要なすべてが事前に設定されています。とはいえ、一部のWindowsや、Linuxディストリビューションのローカル環境やVPS（Debianを想定！）では、PHPのコンパイルが最小限の状態となっていることがあります。よって、もしかすると以下のPHPモジュールをインストールし、有効化する必要があるかもしれません：
 
@@ -174,4 +174,4 @@ PhpStorm is best suited for PHP developers, including people who write complicat
 
 
 > [!Tip]  
-> ワークフローにおけるGitの使い方は、のちほど、[Webサーバとホスティング](../../09.webservers-hosting)の章の[Gitによるデプロイ](../../09.webservers-hosting/05.deploying-with-git)にて詳しく説明します。
+> ワークフローにおけるGitの使い方は、のちほど、[Webサーバとホスティング](../../09.webservers-hosting/)の章の[Gitによるデプロイ](../../09.webservers-hosting/05.deploying-with-git/)にて詳しく説明します。
