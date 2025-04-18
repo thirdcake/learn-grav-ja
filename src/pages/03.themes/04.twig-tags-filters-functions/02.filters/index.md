@@ -4,188 +4,187 @@ layout: ../../../../layouts/Default.astro
 ---
 
 > [!訳注]  
-> このページの内容は、Twigのフィルタを動的に実行している部分があるため、静的サイトでは再現できない部分があります。実行結果は、[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)をご確認ください。
+> このページの内容は、Twigのフィルタを動的に実行している部分があり、静的サイトでは再現できません。実行結果は、[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)をご確認ください。
 
-Twig filters are applied to Twig variables by using the `|` character followed by the filter name.  Parameters can be passed in just like Twig functions using parenthesis.
+Twigのフィルタは、`|` という文字と、それに続くフィルタ名を使って、Twig変数に適用されます。Twig関数と同じように、カッコを使って引数を渡すことができます。
 
 ### `absolute_url`
 
-Takes an HTML snippet containing a `src` or `href` attribute which uses a relative path. Converts the path string to an absolute URL format including hostname.
+相対パスを使った `src` 属性や `href` 属性を持つHTML部分に使われます。相対パスを、ホスト名を含む絶対URL表記の文字列に変換します。
 
-`'<img src="/some/path/to/image.jpg" />'|absolute_url` <i class="fa fa-long-arrow-right"></i> &lt;img src=&quot;https://learn.getgrav.org/some/path/to/image.jpg&quot;&gt;
+`'<img src="/some/path/to/image.jpg" />'|absolute_url` -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
 ### `array_unique`
 
-Wrapper for PHP `array_unique()` that removes duplicates from an array.
+PHPの `array_unique()` 関数と同様のもので、配列から重複するものを取り除きます。
 
-`['foo', 'bar', 'foo', 'baz']|array_unique` <i class="fa fa-long-arrow-right"></i> **{{ print_r(['foo', 'bar', 'foo', 'baz']|array_unique) }}**
+`['foo', 'bar', 'foo', 'baz']|array_unique`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
 ### `base32_encode`
 
-Performs a base32 encoding on variable
-`'some variable here'|base32_encode` <i class="fa fa-long-arrow-right"></i> **{{ 'some variable here'|base32_encode }}**
+変数をbase32エンコードします。
+
+`'some variable here'|base32_encode`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
 ### `base32_decode`
 
-Performs a base32 decoding on variable
-`'ONXW2ZJAOZQXE2LBMJWGKIDIMVZGK'|base32_decode` <i class="fa fa-long-arrow-right"></i> **{{ 'ONXW2ZJAOZQXE2LBMJWGKIDIMVZGK'|base32_decode }}**
+変数をbase32デコードします。
+
+`'ONXW2ZJAOZQXE2LBMJWGKIDIMVZGK'|base32_decode`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
 ### `base64_encode`
 
-Performs a base64 encoding on variable
-`'some variable here'|base64_encode` <i class="fa fa-long-arrow-right"></i> **{{ 'some variable here'|base64_encode }}**
+変数をbase64エンコードします。
+
+`'some variable here'|base64_encode`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
 ### `base64_decode`
 
-Performs a base64 decoding on variable
-`'c29tZSB2YXJpYWJsZSBoZXJl'|base64_decode` <i class="fa fa-long-arrow-right"></i> **{{ 'c29tZSB2YXJpYWJsZSBoZXJl'|base64_decode }}**
+変数をbase64デコードします。
+
+`'c29tZSB2YXJpYWJsZSBoZXJl'|base64_decode`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
 ### `basename`
 
-Return the basename of a path.
+パスのbasenameを返します。
 
-`'/etc/sudoers.d'|basename` <i class="fa fa-long-arrow-right"></i> **{{ '/etc/sudoers.d'|basename }}**
+`'/etc/sudoers.d'|basename`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
 ### `camelize`
 
-Converts a string into "CamelCase" format
+文字列をキャメルケース表記に変換します。
 
-`'send_email'|camelize` <i class="fa fa-long-arrow-right"></i> **{{ 'send_email'|camelize }}**
+`'send_email'|camelize`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
-[version=16,17]
 ### `chunk_split`
 
-Splits a string into smaller chunks of a certain sizeOf
+文字列をあるサイズで小さく区切ります。
 
-`'ONXW2ZJAOZQXE2LBMJWGKIDIMVZGKA'|chunk_split(6, '-')` <i class="fa fa-long-arrow-right"></i> **{{ 'ONXW2ZJAOZQXE2LBMJWGKIDIMVZGKA'|chunk_split(6, '-') }}**
-[/version]
+`'ONXW2ZJAOZQXE2LBMJWGKIDIMVZGKA'|chunk_split(6, '-')`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
 ### `contains`
 
-Determine if a particular string contains another string
+ある文字列に別の文字列が含まれるか判断します。
 
-`'some string with things in it'|contains('things')` <i class="fa fa-long-arrow-right"></i> **{{ 'some string with things in it'|contains('things') }}**
+`'some string with things in it'|contains('things')`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
-#### Casting Values
+<h4 id="casting-values">値をキャストする</h4>
 
-PHP 7 is getting more strict type checks, which means that passing a value of wrong type may now throw an exception. To avoid this, you should use filters which ensure that the value passed to a method is valid:
+PHP7から、型チェックが厳しくなりました。これにより、間違った型の値には例外が投げられます。これを避けるため、値を適切にメソッドに渡すために、フィルタを使ってください。
 
 ### `string`
 
-Use `|string` to cast value to string.
+文字列型にするには、 `|string` を使ってください。
 
 ### `int`
 
-Use `|int` to cast value to integer.
+整数型にするには、 `|int` を使ってください。
 
 ### `bool`
 
-Use `|bool` to cast value to boolean.
+真偽値型にするには、 `|bool` を使ってください。
 
 ### `float`
 
-Use `|float` to cast value to floating point number.
+実数型にするには、 `|float` を使ってください。
 
 ### `array`
 
-Use `|array` to cast value to an array.
+配列型にするには、 `|array` を使ってください。
 
 ### `defined`
 
-Sometimes you want to check if some variable is defined, and if it's not, provide a default value.  For example:
+ときには、その変数が定義済みかどうかチェックしたいときがあります。未定義の場合、デフォルト値を渡したい場合です。たとえば：
 
 `set header_image_width  = page.header.header_image_width|defined(900)`
 
-This will set the variable `header_image_width` to the value `900` if it's not defined in the page header.
+この例では、ページのフロントマターで、 `header_image_width` 変数が未定義だった場合に、900を入れます。
 
 ### `dirname`
 
-Return the dirname of a path.
+パスのディレクトリ名を返します。
 
-`'/etc/sudoers.d'|dirname` <i class="fa fa-long-arrow-right"></i> **{{ '/etc/sudoers.d'|dirname }}**
+`'/etc/sudoers.d'|dirname`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
 
 ### `ends_with`
 
-Takes a needle and a haystack and determines if the haystack ends with the needle.  Also now works with an array of needles and will return `true` if **any** haystack ends with the needle.
+ニードルとヘイスタックを使って、ヘイスタックがニードルで終わっているか判断します。また、ニードルを配列で渡し、ヘイスタックがいずれかのニードルで終わっていれば `true` を返します。
 
-`'the quick brown fox'|ends_with('fox')` <i class="fa fa-long-arrow-right"></i> {{  'the quick brown fox'|ends_with('fox') ? 'true' : 'false' }}
+`'the quick brown fox'|ends_with('fox')`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
 ### `fieldName`
 
-Filters field name by changing dot notation into array notation
+フィールド名をドット表記から配列表記に変えます。
 
-`'field.name'|fieldName` <i class="fa fa-long-arrow-right"></i> **{{ 'field.name'|fieldName }}**
+`'field.name'|fieldName`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
 
 ### `get_type`
 
-Gets the type of a variable:
+変数の型を返します。
 
-`page|get_type` <i class="fa fa-long-arrow-right"></i> **{{ page|get_type }}**
+`page|get_type`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
 ### `humanize`
 
-Converts a string into a more "human readable" format
+文字列を「人間に読みやすい」表記に変えます。
 
-`'something_text_to_read'|humanize` <i class="fa fa-long-arrow-right"></i> **{{ 'something_text_to_read'|humanize }}**
+`'something_text_to_read'|humanize`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
 ### `hyphenize`
 
-Converts a string into a hyphenated version.
+ハイフン付き文字列に変えます。
 
-`'Something Text to Read'|hyphenize` <i class="fa fa-long-arrow-right"></i> **{{ 'Something Text to Read'|hyphenize }}**
+`'Something Text to Read'|hyphenize`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
 ### `json_decode`
 
-You can decode JSON by simply applying this filter:
+JSONをデコードします。
 
-`array|json_decode` {% verbatim %}
+`array|json_decode` 
+
 ```twig
 {% set array = '{"first_name": "Guido", "last_name":"Rossum"}'|json_decode %}
 {{ print_r(array) }}
 ```
-{% endverbatim %}
 
-{% set array = '{"first_name": "Guido", "last_name":"Rossum"}'|json_decode %}
 ```txt
-{{ print_r(array) }}
+（結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 ```
 
 ### `ksort`
 
-Sort an array map by each key
+配列をキーでソートします。
 
-`array|ksort` {% verbatim %}
+`array|ksort`
+
 ```twig
 {% set items = {'orange':1, 'apple':2, 'peach':3}|ksort %}
 {{ print_r(items) }}
 ```
-{% endverbatim %}
 
-{% set items = {'orange':1, 'apple':2, 'peach':3}|ksort %}
 ```txt
-{{ print_r(items) }}
+（結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 ```
 
 ### `ltrim`
 
-`'/strip/leading/slash/'|ltrim('/')` <i class="fa fa-long-arrow-right"></i> {{ '/strip/leading/slash/'|ltrim('/') }}
+`'/strip/leading/slash/'|ltrim('/')`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
-Left trim removes trailing spaces at the beginning of a string. It can also remove other characters by setting the character mask (see [https://php.net/manual/en/function.ltrim.php](https://php.net/manual/en/function.ltrim.php))
+Left trimは、文字列の最初の空白などを取り除きます。同時に、他の文字を設定すれば、その文字も取り除けます。（[https://www.php.net/manual/ja/function.ltrim.php](https://www.php.net/manual/ja/function.ltrim.php) もご覧ください）
 
 ### `markdown`
 
-Take an arbitrary string containing markdown and convert it to HTML using the markdown parser of Grav. Optional `boolean` parameter:
+マークダウンを含む文字列に対して、Gravのマークダウンパーサーを使ってHTMLに変換します。`boolean` パラメータを付けられます。
 
-* `true` (default): process as block (text mode, content will be wrapped in `<p>` tags)
-* `false`: process as line (content will not be wrapped)
+* `true` （デフォルト）: ブロックとして処理する（テキストモードで、`<p>` タグで囲まれます）
+* `false`: 行として処理する（何も囲まれません）
 
 ```
 string|markdown($is_block)
 ```
 
-{% verbatim %}
 ```twig
 <div class="div">
 {{ 'A paragraph with **markdown** and [a link](http://www.cnn.com)'|markdown }}
@@ -193,94 +192,83 @@ string|markdown($is_block)
 
 <p class="paragraph">{{'A line with **markdown** and [a link](http://www.cnn.com)'|markdown(false) }}</p>
 ```
-{% endverbatim %}
 
-{% set var %}
-<div class="div">
-{{ 'A paragraph with **markdown** and [a link](http://www.cnn.com)'|markdown }}
-</div>
-
-<p class="paragraph">{{'A line with **markdown** and [a link](http://www.cnn.com)'|markdown(false) }}</p>
-{% endset %}
 ```txt
-{{ var|e }}
+（結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 ```
 
 ### `md5`
 
-Creates an md5 hash for the string
+文字列に対するmd5ハッシュ値を作成します。
 
-`'anything'|md5` <i class="fa fa-long-arrow-right"></i> **{{ 'anything'|md5 }}**
+`'anything'|md5`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
 ### `modulus`
 
-Performs the same functionality as the Modulus `%` symbol in PHP. It operates on a number by passing in a numeric divider and an optional array of items to select from.
+PHPの `%` 記号（割り算の余り）と同じ機能です。ある数字に対して、割る数と、その中から選ばれる配列を渡して使います。
 
-`7|modulus(3, ['red', 'blue', 'green'])` <i class="fa fa-long-arrow-right"></i> **{{ 7|modulus(3, ['red', 'blue', 'green']) }}**
+`7|modulus(3, ['red', 'blue', 'green'])`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
 ### `monthize`
 
-Converts an integer number of days into the number of months
+日数を月数に変換します。
 
-`'181'|monthize` <i class="fa fa-long-arrow-right"></i> **{{ '181'|monthize }}**
+`'181'|monthize`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
-[version=16,17]
 
 ### `nicecron`
 
-Gets a human readable output for cron syntax
+cronの構文を人間にとって読みやすい出力にします。
 
-`"2 * * * *"|nicecron` <i class="fa fa-long-arrow-right"></i> **{{ '2 * * * *'|nicecron }}**
+`"2 * * * *"|nicecron`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
 ### `nicefilesize`
 
-Output a file size in a human readable nice size format
+人間にとって読みやすいファイルサイズを出力します。
 
-`612394|nicefilesize` <i class="fa fa-long-arrow-right"></i> **{{ 612394|nicefilesize }}**
+`612394|nicefilesize`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
 ### `nicenumber`
 
-Output a number in a human readable nice number format
+人間にとって読みやすい形式で数字を出力します。
 
-`12430|nicenumber` <i class="fa fa-long-arrow-right"></i> **{{ 12430|nicenumber }}**
+`12430|nicenumber`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 [/version]
 
 ### `nicetime`
 
-Output a date in a human readable nice time format
+人間にとって読みやすい形式で日付を出力します。
 
-`page.date|nicetime(false)` <i class="fa fa-long-arrow-right"></i> **{{ page.date|nicetime(false) }}**
+`page.date|nicetime(false)`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
-The first argument specifies whether to use a full format date description. It's `true` by default.
+最初の引数は、日付のフルフォーマットかどうかを示します。デフォルトでは `true` です。
 
-You can provide a second argument of `false` if you want to remove the time relative descriptor (like 'ago' or 'from now' in your language) from the result.
+第2引数に `false` を渡すと、相対的な時間の記述（'ago' や 'from now' など）が結果から取り除かれます。
 
-[version=16,17]
 
 ### `of_type`
 
-Checks the type of a variable to the param:
+引数の型かどうかチェックします：
 
-`page|of_type('string')` <i class="fa fa-long-arrow-right"></i> **{{ page|of_type('string') ? 'true' : 'false' }}**
-[/version]
+`page|of_type('string')`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
 ### `ordinalize`
 
-Adds an ordinal to the integer (such as 1st, 2nd, 3rd, 4th)
+順番のある整数値にします（1st, 2nd, 3rd, 4th など）
 
-`'10'|ordinalize` <i class="fa fa-long-arrow-right"></i> **{{ '10'|ordinalize }}**
+`'10'|ordinalize`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
 ### `pad`
 
-Pads a string to a certain length with another character. This is a wrapper for the PHP [str_pad()](https://php.net/manual/en/function.str-pad.php) function.
+pad は、ある長さにするために他の文字で埋めます。これは、PHPの[`str_pad`](https://www.php.net/manual/ja/function.str-pad.php) 関数と同じです。
 
-`'foobar'|pad(10, '-')` <i class="fa fa-long-arrow-right"></i> **{{ 'foobar'|pad(10, '-') }}**
+`'foobar'|pad(10, '-')`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
 ### `pluralize`
 
-Converts a string to the English plural version
+文字列を英語の複数形に変換します。
 
-`'person'|pluralize` <i class="fa fa-long-arrow-right"></i> **{{ 'person'|pluralize }}**
+`'person'|pluralize`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
 `pluralize` also takes an optional numeric parameter which you can pass in when you don't know in advance how many items the noun will refer to. It defaults to 2, so will provide the plural form if omitted. For example:
 
@@ -291,57 +279,57 @@ Converts a string to the English plural version
 
 ### `print_r`
 
-Prints human-readable information about a variable
+人間に読みやすい形式で変数を表示します。
 
 `page.header|print_r`
 
 ```txt
-{{ page.header|print_r }}
+（結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 ```
 
 ### `randomize`
 
-Randomizes the list provided.  If a value is provided as a parameter, it will skip first n values and keep them in order.
+一覧をランダムに入れ替えます。パラメータが与えられたら、その数まではスキップして、その順番のままとなります。
 
-`array|randomize` {% verbatim %}
+`array|randomize`
+
 ```twig
 {% set ritems = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']|randomize(2) %}
 {{ print_r(ritems) }}
 ```
-{% endverbatim %}
 
-{% set ritems = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']|randomize(2) %}
 ```txt
-{{ print_r(ritems) }}
+（結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 ```
 
 ### `regex_replace`
 
-A helpful wrapper for the PHP [preg_replace()](https://php.net/manual/en/function.preg-replace.php) method, you can perform complex Regex replacements on text via this filter:
+PHPの [`preg_replace`](https://www.php.net/manual/ja/function.preg-replace.php) 関数と同じ機能です。このフィルタを使えば、複雑な正規表現の書き換えができます：
 
-`'The quick brown fox jumps over the lazy dog.'|regex_replace(['/quick/','/brown/','/fox/','/dog/'], ['slow','black','bear','turtle'])` <i class="fa fa-long-arrow-right"></i> **{{ 'The quick brown fox jumps over the lazy dog.'|regex_replace(['/quick/','/brown/','/fox/','/dog/'], ['slow','black','bear','turtle']) }}**
+`'The quick brown fox jumps over the lazy dog.'|regex_replace(['/quick/','/brown/','/fox/','/dog/'], ['slow','black','bear','turtle'])`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
-! Use the `~`-delimiter rather than the `/`-delimiter where possible. Otherwise you'll most likely have to [double-escape certain characters](https://github.com/getgrav/grav/issues/833). Eg. `~\/\#.*~` rather than `'/\\/\\#.*/'`, which conforms more closely to the [PCRE-syntax](https://www.php.net/manual/en/regexp.reference.delimiters.php) used by PHP.
+> [!Note]  
+> Use the `~`-delimiter rather than the `/`-delimiter where possible. Otherwise you'll most likely have to [double-escape certain characters](https://github.com/getgrav/grav/issues/833). Eg. `~\/\#.*~` rather than `'/\\/\\#.*/'`, which conforms more closely to the [PCRE-syntax](https://www.php.net/manual/en/regexp.reference.delimiters.php) used by PHP.
 
 ### `rtrim`
 
-`'/strip/trailing/slash/'|rtrim('/')` <i class="fa fa-long-arrow-right"></i> {{ '/strip/trailing/slash/'|rtrim('/') }}
+`'/strip/trailing/slash/'|rtrim('/')`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
-Removes trailing spaces at the end of a string. It can also remove other characters by setting the character mask (see [https://php.net/manual/en/function.rtrim.php](https://php.net/manual/en/function.rtrim.php))
+文字列の最後の空白などを取り除きます。同時に、他の文字を設定すれば、その文字も取り除けます。（[https://www.php.net/manual/ja/function.rtrim.php](https://www.php.net/manual/ja/function.rtrim.php) もご覧ください）
 
 ### `singularize`
 
-Converts a string to the English singular version
+英語の単数形に変えます。
 
-`'shoes'|singularize` <i class="fa fa-long-arrow-right"></i> **{{ 'shoes'|singularize }}**
+`'shoes'|singularize`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
 ### `safe_email`
 
-The safe email filter converts an email address into ASCII characters to make it harder for email spam bots to recognize and capture.
+eメールアドレスをASCII文字に変換します。Eメールスパムボットに認識されづらくします。
 
-`"someone@domain.com"|safe_email` <i class="fa fa-long-arrow-right"></i> **{{ "someone@domain.com"|safe_email }}**
+`"someone@domain.com"|safe_email`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
-Usage example with a mailto link:
+mailto リンクの例です：
 
 ```html
 <a href="mailto:{{ 'your.email@server.com'|safe_email }}">
@@ -349,116 +337,116 @@ Usage example with a mailto link:
 </a>
 ```
 
-You might not notice a difference at first, but examining the page source (not using the Browser Developer Tools, the actual page source) will reveal the underlying characters encoding.
+最初に見たときは、違いが分からないかもしれませんが、ページソース（ブラウザのディベロッパーツールではなく、実際のページソース）を確かめてください。文字列がエンコードされています。
 
 ### `sort_by_key`
 
-Sort an array map by a particular key
+配列を特定のキーでソートします。
 
-`array|sort_by_key` {% verbatim %}
+`array|sort_by_key`
+
 ```twig
 {% set people = [{'email':'fred@yahoo.com', 'id':34}, {'email':'tim@exchange.com', 'id':21}, {'email':'john@apple.com', 'id':2}]|sort_by_key('id') %}
 {% for person in people %}{{ person.email }}:{{ person.id }}, {% endfor %}
 ```
-{% endverbatim %}
 
-<strong>
-{% set people = [{'email':'fred@yahoo.com', 'id':34}, {'email':'tim@exchange.com', 'id':21}, {'email':'john@apple.com', 'id':2}]|sort_by_key('id') %}
-{% for person in people %}{{ person.email }}:{{ person.id }}, {% endfor %}
-</strong>
+```txt
+（結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
+```
 
 ### `starts_with`
 
-Takes a needle and a haystack and determines if the haystack starts with the needle.  Also now works with an array of needles and will return `true` if **any** haystack starts with the needle.
+ニードルとヘイスタックを使って、ヘイスタックがニードルで始まるか調べます。ニードルが配列の場合、ヘイスタックがニードルの **いずれか** で始まるとき、`true` を返します。
 
-`'the quick brown fox'|starts_with('the')` <i class="fa fa-long-arrow-right"></i> **{{ 'the quick brown fox'|starts_with('the') ? 'true' : 'false' }}**
+`'the quick brown fox'|starts_with('the')`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
 ### `titleize`
 
-Converts a string to "Title Case" format
+文字列を"Title Case" フォーマットに変換します。
 
-`'welcome page'|titleize` <i class="fa fa-long-arrow-right"></i> **{{ 'welcome page'|titleize }}**
+`'welcome page'|titleize`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
 
 ### `t`
 
-Translate a string into the current language
+現在の言語に翻訳します。
 
-`'MY_LANGUAGE_KEY_STRING'|t` <i class="fa fa-long-arrow-right"></i> **'Some Text in English'**
+`'MY_LANGUAGE_KEY_STRING'|t`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
-This assumes you have these language strings translated in your site and have enabled 
--language support.  Please refer to the [multi-language documentation](../../../content/multi-language) for more detailed information.
+これは、あなたのサイトでその文字列が翻訳済みで、その言語がサポートされていることが前提です。詳しくは、[多言語サイトのドキュメント](../../../02.content/11.multi-language/) を参照してください。
 
 ### `tu`
 
-Translate a string into the current language set in the admin interface user preferences
+文字列を、管理者のユーザー設定した言語に翻訳します。
 
-`'MY_LANGUAGE_KEY_STRING'|tu` <i class="fa fa-long-arrow-right"></i> **'Some Text in English'**
+`'MY_LANGUAGE_KEY_STRING'|tu`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
-This uses the language field set in the user yaml.
+ユーザのyamlに設定された言語を使います。
 
 ### `ta`
 
-Translates an array with a language use the `|ta` filter. See the [multi-language documentation](../../../content/multi-language) for a detailed example.
+配列（array）に対して翻訳します。詳しくは、[多言語サイトのドキュメント](../../../02.content/11.multi-language/) を参照してください。
 
-`'MONTHS_OF_THE_YEAR'|ta(post.date|date('n') - 1)` <i class="fa fa-long-arrow-right"></i> **{{ now|date('F') }}**
+`'MONTHS_OF_THE_YEAR'|ta(post.date|date('n') - 1)`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
 ### `tl`
 
-Translates a string in a specific language. For more details check out the [multi-language documentation](../../../content/multi-language#complex-translations).
+文字列を特定の言語に翻訳します。詳しくは、[多言語サイトのドキュメント](../../../02.content/11.multi-language/) を参照してください。
 
 `'SIMPLE_TEXT'|tl(['fr'])`
 
 ### `truncate`
 
-You can easily generate a shortened, truncated, version of a string by using this filter.  It takes a number of characters as the only required field, but has some other options:
+かんたんに、文字列を短くし、切り捨てられます。数字を渡しますが、他のオプションもあります：
 
-`'one sentence. two sentences'|truncate(5)|raw` <i class="fa fa-long-arrow-right"></i> **{{ 'one sentence. two sentences'|truncate(5)|raw }}**
+`'one sentence. two sentences'|truncate(5)|raw`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
-Simply truncates to 5 characters.
+単に5文字に切り捨てます。
 
-`'one sentence. two sentences'|truncate(5, true)|raw` <i class="fa fa-long-arrow-right"></i> **{{ 'one sentence. two sentences'|truncate(5, true)|raw }}**
+`'one sentence. two sentences'|truncate(5, true)|raw`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
-!! The `|raw` Twig filter should be used with the default `&hellip;` (elipsis) padding element in order for it to render with Twig auto-escaping
+> [!Info]  
+> The `|raw` Twig filter should be used with the default `&hellip;` (elipsis) padding element in order for it to render with Twig auto-escaping
 
-Truncates to closest sentence-end after 5 characters.
+trancateは、5文字の後の単語の終わりで、一番近いところで切り捨てます。
 
-You can also truncate HTML text, but should first use the `|striptags` filter to remove any HTML formatting that could get broken if you end between tags:
+また、HTMLテキストを切り捨てることもできます。ただし、先に `|striptags` フィルタをして、HTMLフォーマットを取り除いてください。最後がタグ中だった場合、壊れてしまうので：
 
 `'<span>one <strong>sentence</strong>. two sentences</span>'
-|raw|striptags|truncate(25)` <i class="fa fa-long-arrow-right"></i> **{{ '<span>one <strong>sentence</strong>. two sentences</span>'|raw|striptags|truncate(25) }}**
+|raw|striptags|truncate(25)`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
 
-#### Specialized versions:
+<h4 id="specialized-versions">特別なバージョン：</h4>
 
 ### `safe_truncate`
 
-Use `|safe_truncate` to truncate text by number of characters in a "word-safe" manner.
+`|safe_truncate` を使うと、 "word-safe" な方法で、テキストを文字数で切り捨てます。
+
+> [!訳注]  
+> ここでの"word-safe" が何を指すのか分からないのですが、たぶんマルチバイト文字列のことかなと思います。
 
 ### `truncate_html`
 
-Use `|truncate_html` to truncate HTML by number of characters. not "word-safe"!
+`|truncate_html` を使うと、HTMLを文字数で切り捨てます。"word-safe" ではありません！
 
 ### `safe_truncate_html`
 
-Use `|safe_truncate_html` to truncate HTML by number of characters in a "word-safe" manner.
+`|safe_truncate_html` を使うと、 "word-safe" な方法で、HTMlを文字数で切り捨てます。
 
 ### `underscorize`
 
-Converts a string into "under_scored" format
+「アンダースコア」のフォーマットに文字列を変換します。
 
-`'CamelCased'|underscorize` <i class="fa fa-long-arrow-right"></i> **{{ 'CamelCased'|underscorize }}**
+`'CamelCased'|underscorize`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
 ### `yaml_encode`
 
-Dump/Encode a variable into YAML syntax
+変数をYAML構文に出力します。
 
 ```twig
 {% set array = {foo: [0, 1, 2, 3], baz: 'qux' } %}
 {{ array|yaml_encode }}
 ```
-
-{% set array = {foo: [0, 1, 2, 3], baz: 'qux' } %}
 
 ```yaml
 {{ array|yaml_encode|e }}
@@ -473,8 +461,7 @@ Decode/Parse a variable from YAML syntax
 {{ yaml|yaml_decode|var_dump }}
 ```
 
-{% set yaml = "foo: [0, 1, 2, 3]\nbaz: qux" %}
-```
-{{ yaml|yaml_decode|var_dump }}
+```txt
+（結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 ```
 

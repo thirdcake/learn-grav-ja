@@ -3,50 +3,45 @@ title: "Twigのタグ・フィルタ・関数"
 layout: ../../../layouts/Default.astro
 ---
 
-Although Twig already provides an extensive list of [filters, functions, and tags](https://twig.symfony.com/doc/1.x/#reference), Grav also provides a selection of useful additions to make the process of theming easier.
+Twigでもすでに、[フィルタ、関数、タグ](https://twig.symfony.com/doc/1.x/#reference) の幅広いリストを提供していますが、Gravでもテーマ処理を容易にする便利な追加機能を提供します。
 
-!! For information about developing your own custom Twig Filters, check out the [Custom Twig Filter/Function](/cookbook/twig-recipes/#custom-twig-filter-function) example in the **Twig Recipes** section of the **Cookbook** chapter.
+> [!Info]  
+> For information about developing your own custom Twig Filters, check out the [Custom Twig Filter/Function](../../10.cookbook/02.twig-recipes/#custom-twig-filter-function) example in the **Twig Recipes** section of the **Cookbook** chapter.
 
 ## Tags
 
-A tag provides high-level Twig functionality.  Examples of built-in tags include constructs such as `include`, `block`, `for`, `if` and many more. Tags are identified in Twig by the use of the {% verbatim %}`{% tagname %}`{% endverbatim %} syntax.  Also, most tags are closed with an {% verbatim %}`{% endtagname %}`{% endverbatim %}.
+タグは、Twigの高度な機能を提供します。組み込みのタグには、`include`、 `block`、 `for`、 `if` などたくさんあります。タグは、Twig上では、`{% tagname %}` という構文で識別されます。また、多くのタグは `{% endtagname %}` により閉じます。
 
-Grav includes several useful custom tags that provide functionality such as `cache`, `markdown`, `script`, `style`, `switch`, and more.
+Gravでは、いくつかの便利なカスタムタグを提供しています。`cache`、 `markdown`、 `script`、 `style`、 `switch` などです。
 
-[Grav Twig Tags <i class="fa fa-arrow-right"></i>](tags?classes=button,button-primary)
+[カスタムタグの説明](01.tags/)
 
 ## Filters
 
-Twig filters allow to you to apply functionality to the variable that appears on the left side of the pipe (`|`) symbol.  They are particularly useful when dealing with manipulating text or variables.  The first argument to the filter is always the item on the left, but subsequent arguments can be passed in parentheses. Filters have some special capabilities including the ability to be context and environment aware.
+Twigのフィルタは、パイプ記号（`|`）左にある変数について、機能を適用させることができます。これは、テキストや変数を操作したいときに、特に便利です。フィルタへの最初の引数は常に左側の項目ですが、それ以降の引数はカッコで囲んで渡せます。フィルタには、コンテキストや環境を認識する機能など、いくつかの特別な機能があります。
 
-Examples of built in Twig filters include `date`, `escape`, `join`, `lower`, `slice`, and many more. An example would be:
+Twigに組み込みのフィルタには、`date`、 `escape`、 `join`、 `lower`、 `slice` など、たくさんあります。たとえば：
 
-{% verbatim %}
 ```twig
 {% set foo = "one,two,three,four,five"|split(',', 3) %}
 ```
-{% endverbatim %}
 
-Grav includes several useful custom filters that provide functionality such as `hyphenize`, `nicetime`, `starts_with`, `contains`, `base64_decode`, and many more.
+Gravでは、いくつかのカスタムフィルタを提供します。 `hyphenize`, `nicetime`, `starts_with`, `contains`, `base64_decode`, などたくさんあります。
 
-[Grav Twig Filters <i class="fa fa-arrow-right"></i>](filters?classes=button,button-primary)
+[カスタムフィルタの説明](02.filters/)
 
-## Functions
+<h2 id="functions">関数</h2>
 
-Twig functions are another way to implement functionality in Twig. They are similar to filters, however rather than acting on a variable via a `|` you would call these functions directly and pass in any attributes they support between the parentheses after the function name.  Frequently, Grav provides both a filter and a function for the same logic and leaves it up to the user to choose the method they prefer.  
+Twigの関数は、Twigに機能を実装するもうひとつの方法です。フィルタに似ていますが、`|` を通じて変数に働きかけるのではなく、関数を直接呼び出して、関数名の後のカッコに、対象の属性を渡すことではたらきます。しばしば、Gravは同じロジックをフィルタと関数で提供し、ユーザが好みの方法を選べるようにしています。
 
-Examples of built in Twig filters include `block`, `dump`, `parent`, `random`, `range`, and more. An example would be:
+Twig組み込みの関数には、 `block`, `dump`, `parent`, `random`, `range`, などがあります。たとえば：
 
-{% verbatim %}
 ```twig
 {{ random(['apple', 'orange', 'citrus']) }}
 ```
-{% endverbatim %}
 
-Grav includes several useful custom functions that provide functionality such as `authorize`, `debug`, `evaluate`, `regex_filter`, `media`, and many more.
+Gravが提供する、カスタム関数には、`authorize`, `debug`, `evaluate`, `regex_filter`, `media` などたくさんあります。
 
-[Grav Twig Functions <i class="fa fa-arrow-right"></i>](functions?classes=button,button-primary)
-
-
+[カスタム関数の説明](03.functions/)
 
 

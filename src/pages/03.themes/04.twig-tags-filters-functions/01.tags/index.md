@@ -1,13 +1,13 @@
 ---
-title: Twig Tags
+title: "カスタムタグ"
 layout: ../../../../layouts/Default.astro
 ---
 
-Grav also provides a variety of custom Twig Tags that extend the already very capable Twig templating capabilities with some new tags that we've found useful.
+Twigにはすでに、優秀なタグがありますが、Gravではさらに、わたしたちが便利だと気づいたカスタムタグを、たくさん追加しています。
 
 ### `markdown`
 
-The Markdown tag provides a powerful new way to embed markdown in Twig template.  You could use a variable and render that variable with the `|markdown` filter, but the `{% markdown %}` syntax makes creating blocks of markdown text even simpler.
+markdownタグは、Twigテンプレートにマークダウンを組み込むための新しく強力な方法です。変数を使って、`|markdown` フィルタを変数にレンダリングすることは、これまでにも可能でしたが、`{% markdown %}` 構文では、シンプルなマークダウンテキストのブロックを作ることができます。
 
 ```twig
 {% markdown %}
@@ -19,22 +19,23 @@ This is **bold** and this _underlined_
 ```
 ### `script`
 
+scriptタグは、`{% do assets...%}` による方法に比べて、Twigを読みやすくするために便利なタグです。純粋に、別の書き方になります。
 The Script tag is really a convenience tag that keeps your Twig more readable compared to the usual `{% do assets...%}` approach.  It's purely an alternative way of writing things.
 
-#### Script File
+<h4 id="script-file">スクリプトファイル</h4>
 
 ```twig
 {% script 'theme://js/something.js' at 'bottom' priority: 20 with { defer: true, async: true } %}
 ```
 
-Grav 1.7.28 adds also support for modules:
+Grav 1.7.28 からは、module にも対応しました：
 
 ```twig
 {% script module 'theme://js/module.mjs' %}
 ```
 
 
-#### Inline Script
+<h4 id="inline-script">インラインのスクリプト</h4>
 
 ```twig
 {% script at 'bottom' priority: 20 %}
@@ -44,13 +45,13 @@ Grav 1.7.28 adds also support for modules:
 
 ### `style`
 
-#### CSS File
+<h4 id="css-file">CSS ファイル</h4>
 
 ```twig
 {% style 'theme://css/foo.css' priority: 20 %}
 ```
 
-#### Inline CSS
+<h4 id="inline-css">インラインの CSS</h4>
 
 ```twig
 {% style priority: 20 with { media: 'screen' } %}
@@ -67,7 +68,7 @@ Grav 1.7.28 adds also support for modules:
 
 ### `switch`
 
-In most programming language, using a `switch` statement is a common way to make a bunch of `if else` statements cleaner and more readabile.  Also they may prove to be marginally faster.  We just provide a simple way of creating these as they were missing in the base Twig functionality.
+ほとんどのプログラミング言語において、`switch` 文は、`if else` 文をよりクリーンで読みやすくしてくれる一般的な方法です。また、また、多少速くなるかもしれません。twigの機能では忘れられているこのswitch文を、Gravではシンプルな方法で提供します。
 
 ```twig
 {% switch type %}
@@ -82,9 +83,9 @@ In most programming language, using a `switch` statement is a common way to make
 
 ### `deferred`
 
-With traditional blocks, once the block has been rendered, it cannot be manipulated.  Take the example of a `{% block scripts %}` that might hold some entries for JavaScript includes.  If you have a child Twig template, and you extend a base template where this block is defined, you can extend the block, and add your own custom JavaScript entries.  However, partial twig templates that are included from this page, cannot reach or interact with the block.
+かつての block では、一度そのblockがレンダリングされてしまったら、再度操作することはできませんでした。`{% block scripts %}` を例に取ると、このブロックには、読み込みたい JavaScript を保持できます。もし、子テンプレートから、このブロックを持つベーステンプレートへ拡張するならば、このブロックにカスタムのJavaScriptファイルを追加できます。しかしながら、このページから includeする partial （部分的な）テンプレートの場合、このブロックにアクセスし、操作できません。
 
-The deferred attribute on the block which is powered by the [Deferred Extension](https://github.com/rybakit/twig-deferred-extension), means that you can define this block in any Twig template, but it's rendering is deferred, so that it renders after everything else.  This means that you can add JavaScript references via the `{% do assets.addJs() %}` call from anywhere in your page, and because the rendering is deferred, the output will contain all the assets that Grav knows about, no matter when you added them.
+deffered属性は、 [Deferred Extension](https://github.com/rybakit/twig-deferred-extension) により提供されているものですが、ブロックにdeferred 属性を付けると、あらゆるテンプレートからこのブロックを定義でき、ほかのものよりも遅れてレンダリングされます。このことにより、`{% do assets.addJs() %}` をどこでも呼び出すことで、参照したいJavaScriptを追加することができます。そしてレンダリングは遅れるので、すべてのアセットを追加できます。追加のタイミングを図る必要は、もうありません。
 
 ```twig
 {% block myblock deferred %}
@@ -92,7 +93,7 @@ The deferred attribute on the block which is powered by the [Deferred Extension]
 {% endblock %}
 ```
 
-It is also possible to merge the content of the parent block with the deferred block using `{{ parent() }}`. This can be especially useful for themes if additional css or javascript files are added.
+deffered したブロックに `{{ parent() }}` を使うことで、親ブロックのコンテンツと合体させることもできます。これは、CSSやJavaScript ファイルを追加したいときに、とくに便利です。
 
 ```twig
 {% block stylesheets %}
@@ -104,15 +105,15 @@ It is also possible to merge the content of the parent block with the deferred b
 
 ### `throw`
 
-There are certain situations where you need to manually throw an exception, so we have a tag for that too.
+手動で例外を投げたい状況がありえます。そのためのタグです。
 
 ```twig
 {% throw 404 'Not Found' %}
 ```
 
-### `try` & `catch`
+<h3 id="try-catch">`try` & `catch`</h3>
 
-Also it's useful to have more powerful PHP-style error handling in your Twig templates so we have a new `try/catch` tag.
+Twigテンプレート上で、PHP-スタイルのエラー制御ができると便利です。そのために、`try/catch` タグを提供します。
 
 ```twig
 {% try %}
@@ -124,16 +125,19 @@ Also it's useful to have more powerful PHP-style error handling in your Twig tem
 
 ### `render`
 
-Flex Objects are slowly making their way into more and more elements of Grav.  These are self-aware objects that have an associated Twig template structure, so they know how to render themselves.  In order to use these, we have implemented a new `render` tag that takes an optional layout which in turn controls which of the template layouts the object should be rendered with.
+Flex Objects は、Grav内の要素に、ゆっくりと浸透しています。これらは、Twigテンプレート構造と関連する、自己を認識したオブジェクトなので、Flex Objectには、レンダリングの方法まで含まれています。これらを使うために、新しい `render` タグを実装しました。このタグは、オプションのレイアウトを受け取り、オブジェクトがどのレイアウトでレンダリングされるかを制御します。
 
 ```twig
 {% render collection layout: 'list' %}
 {% render object layout: 'default' with { variable: 'value' } %}
 ```
 
+> [!訳注]  
+> Flex Objects のためのタグのようなので、詳しくはFlex Objectsの章をご覧ください。
+
 ### `cache`
 
-Sometimes you may need to cache parts of the page, which take a lot of time to render. You can do this with `cache` tag.
+ときどき、ページの部分的なキャッシュが必要になることがあります。レンダリングに時間がかかるようなときです。そのようなときは、`cache` タグを使ってください。
 
 ```twig
 {% cache 600 %}
@@ -141,5 +145,5 @@ Sometimes you may need to cache parts of the page, which take a lot of time to r
 {% endcache %}
 ```
 
-In the example `600` is an optional lifetime in seconds. If the parameter isn't passed, default cache lifetime will be used.
+この例での `600` とは、キャッシュが生きる秒数のことで、設定するかはオプションです。もし秒数を渡さなかった場合、デフォルトの秒数が使われます。
 

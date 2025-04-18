@@ -4,7 +4,7 @@ layout: ../../../../layouts/Default.astro
 ---
 
 > [!訳注]  
-> このページの内容は、Twigのフィルタを動的に実行している部分があるため、静的サイトでは再現できない部分があります。実行結果は、[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions)をご確認ください。
+> このページの内容は、Twigの関数を動的に実行している部分があるため、静的サイトでは再現できない部分があります。実行結果は、[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions)をご確認ください。
 
 Twig functions are called directly with any parameters being passed in via parenthesis.
 
