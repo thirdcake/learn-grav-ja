@@ -69,7 +69,7 @@ GravサイトのベースURLを、言語コード無しで返します。
 くわしくは、 [アセット管理](../07.asset-manager/) をお読みください。
 
 > [!Note]  
-> **TIP:** 代わりに、**[stylesタグ](./01.tags/#style)** や、**[scriptタグ](./01.tags/#script)** の使用をおすすめします。
+> **TIP:** 代わりに、**[stylesタグ](../04.twig-tags-filters-functions/01.tags/#style)** や、**[scriptタグ](../04.twig-tags-filters-functions/01.tags/#script)** の使用をおすすめします。
 
 <h3 id="config-object">`config` オブジェクト</h3>
 
@@ -295,93 +295,93 @@ This returns the internal routing for a page.  This is primarily used for intern
 
 ##### orderBy()
 
-This returns the order type for any sorted children of the page. Values typically include: `default`, `title`, `date` and `folder`. This value is typically configured in page headers.
+そのページの子ページの並べ方を返します。値は、 `default`, `title`, `date` そして `folder` のいずれかです。この値は、一般的にページのフロントマターで設定されます。
 
 ##### orderDir()
 
-This returns the order direction for any sorted children of the page.  Values can be either `asc` for ascending or `desc` for descending. This value is typically configured in page headers.
+そのページの子ページの並び順の方向を返します。値は、昇順ならば `asc` で、降順なら `desc` です。この値は、一般的にページのフロントマターで設定されます。
 
 ##### orderManual()
 
-This returns an array of manual page ordering for any children of the page. This value is typically configured in page headers.
+マニュアルに並べた順序で子ページの配列を返します。この値は、一般的にページのフロントマターで設定されます。
 
 ##### maxCount()
 
-This returns the maximum number of children pages that are allowed to be returned. This value is typically configured in page headers.
+コレクションとして返せる子ページの数の最大数を返します。この値は、一般的にページのフロントマターで設定されます。
 
 ##### children.count()
 
-This returns the number of child pages of the page.
+そのページの子ページの数を返します。
 
 ##### children.current()
 
-This returns the current child item.  Can be used while iterating over the children.
+現在の子ページを返します。子ページの繰り返しの中で使えます。
 
 ##### children.next()
 
-This returns the next child in the array of children.
+子ページの配列で、次の子ページを返します。
 
 ##### children.prev()
 
-This returns the previous child in the array of children.
+子ページの配列で、前の子ページを返します。
 
 ##### children.nth(position)
 
-This returns the child identified by the `position` which is an integer from `0` to `children.count() - 1` in the array of children.
+子ページの配列の中から、1つの `position` を持つ子ページを返します。この `position` は、 `0` から、 `children.count() - 1` までの間の整数値です。
 
 ##### children.sort(orderBy, orderDir)
 
-Reorders the children based on an **orderBy** (`default`, `title`, `date` and `folder`) and **orderDir** (`asc` or `desc`)
+
+**orderBy** (`default`, `title`, `date` そして `folder`) と、 **orderDir** (`asc` もしくは `desc`) によって、子ページを並べかえます。
 
 ##### parent()
 
-This returns the parent page object for this page. This is very useful when you need to navigate back up the nested tree structure of pages.
-
+そのページの親ページのオブジェクトを返します。木構造になったページで、上にナビゲーションで移動したいときにとても便利です。
 
 
 ##### isPage()
 
-This returns `true` or `false` based on whether this page has an actual `.md` file associated with it rather than just a folder for routing.
+そのページが、ただルーティングのためのフォルダではなく、 `.md` ファイルを持ったページであるかどうかを返します。
 
 ##### isDir()
 
-This returns `true` or `false` based on whether this page is only a folder for routing.
+そのページが、ルーティングのためだけのフォルダーかどうかを返します。
 
 ##### id()
 
-This returns a unique identifier for the page.
+そのページのユニークな識別子を返します。
 
 ##### modified()
 
-This returns a timestamp of when the page was last modified.
+そのページが更新されたタイムスタンプを返します。
 
 ##### date()
 
-This returns the date timestamp for the page.  Typically this is set in the headers to represent the date of a page or post.  If no value is defined explicitly, the file modified timestamp is used.
+ページのタイムスタンプを返します。これは一般的に、ページや投稿を表すためにフロントマターに設定された値です。明示的に定義されていない場合は、ファイルの更新日のタイムスタンプが使われます。
 
 ##### template()
 
-This returns the name of the page template without the `.md` extension. For example `default`
+`.md` 拡張子を除いた、そのページのテンプレート名が返ります。たとえば： `default`
 
 ##### filePath()
 
-This returns the full file path of the page. For example `/Users/yourname/sites/grav/user/pages/01.home/default.md`
+ページのフルファイルパスが返ります。たとえば、 `/Users/yourname/sites/grav/user/pages/01.home/default.md`
 
 ##### filePathClean()
 
-This returns the relative path from the root of the Grav site.  For example `user/pages/01.home/default.md`
+Gravのルートディレクトリからの相対パスが返ります。たとえば、 `user/pages/01.home/default.md`
 
 ##### path()
 
-This returns the full path to the directory containing the page.  For example `/Users/yourname/sites/grav/user/pages/01.home`
+そのページを持つディレクトリのフルパスが返ります。たとえば、 `/Users/yourname/sites/grav/user/pages/01.home`
 
 ##### folder()
 
-This returns the name of the folder for the page.  For example `01.home`
+ページのフォルダ名が返ります。たとえば、 `01.home`
 
 ##### taxonomy()
 
-This returns an array of the taxonomy associated with a page.  These can be iterated over. This is particularly useful for displaying items such as tags:
+ページに関係するタクソノミーの配列を返します。繰り返し可能です。タグを表示するときに特に便利です。
 
 ```twig
 {% for tag in page.taxonomy.tag %}
@@ -391,15 +391,16 @@ This returns an array of the taxonomy associated with a page.  These can be iter
 
 <h3 id="pages-object">`pages` オブジェクト</h3>
 
-The **pages** object is the root page which represents a nested tree of every **page** object that Grav knows about. This is particularly useful for creating a sitemap, navigation, or if you wish to find a particular **page**.
+**pages** オブジェクトは、Gravが確認できるすべての **page** オブジェクトのツリー構造を表したルートページです。サイトマップや、ナビゲーション、特定の **page** を探すようなときに、特に便利です。
 
-!! This object is not the same as `grav.pages` which is an instance of `Pages` class.
+> [!Info]  
+> このオブジェクトは、`Pages` クラスのインスタンスである `grav.pages` とは違うものです。
 
-##### children method
+<h5 id="children-method">children メソッド</h5>
 
-This returns the immediate child pages as an array of **page objects**. As the pages object represents the entire tree, you can fully recurse over every page in the Grav pages/ folder.
+**page objects** の配列から、直接の子ページを返します。pages オブジェクトは、すべての木構造を表すので、再帰的にすべての pages/ フォルダ内のページを取得可能です。
 
-Get the top-level pages for a simple menu:
+シンプルなメニューを作るため、トップレベルのページを取得してみます：
 
 ```twig
 <ul class="navigation">
@@ -413,7 +414,7 @@ Get the top-level pages for a simple menu:
 
 <h3 id="media-object">`media` オブジェクト</h3>
 
-There is a new object that allows you to access [media](../../02.content/07.media/) that is outside of Page objects via PHP streams from Twig. This works in a similar manner to [image linking in content](../../02.content/06.image-linking/#php-streams) by using streams to access images, and media processing to manipulate theme.
+ページオブジェクトの外にある[メディア](../../02.content/07.media/) に、TwigからPHPストリームを使ってアクセスできるオブジェクトです。これは、[画像リンク](../../02.content/06.image-linking/#php-stream) と似たような方法で機能します。ストリームを使って画像やメディアにアクセスし、テーマを操作します。
 
 ```twig
 {{ media['user://media/bird.png'].resize(50, 50).rotate(90).html()|raw }}
@@ -421,21 +422,22 @@ There is a new object that allows you to access [media](../../02.content/07.medi
 
 <h3 id="uri-object">`uri` オブジェクト</h3>
 
-!! The whole list of the Uri object methods is available on the [API site](https://learn.getgrav.org/api#class-gravcommonuri). Here's a list of the methods you'll find most useful.
+> [!Info]  
+> Uriオブジェクトのすべてのメソッドは [API site](https://learn.getgrav.org/api#class-gravcommonuri) を参照してください。ここでは、特に便利なものを列挙します。
 
-The Uri object has several methods to access parts of the current URI. For the full URL `http://mysite.com/grav/section/category/page.json/param1:foo/param2:bar/?query1=baz&query2=qux`:
+Uriオブジェクトには、現在のURIの部分にアクセスするメソッドがあります。フルのURIは、 `http://mysite.com/grav/section/category/page.json/param1:foo/param2:bar/?query1=baz&query2=qux` とします:
 
 ##### path()
 
-This returns the path portion of the URL: (e.g. `uri.path` = `/section/category/page`)
+URLのパス部分を返します： (例 `uri.path` = `/section/category/page`)
 
 ##### paths()
 
-This returns the array of path elements: (e.g. `uri.paths` = `[section, category, page]`)
+パスの要素の配列を返します： (例 `uri.paths` = `[section, category, page]`)
 
 ##### route([absolute = false][, domain = false])
 
-This returns the route as either an absolute or relative URL.  (e.g. `uri.route(true)` = `http://mysite.com/grav/section/category/page` or `uri.route()` = `/section/category/page`)
+絶対URLもしくは相対URLのルーティングを返します。  (例 `uri.route(true)` = `http://mysite.com/grav/section/category/page` or `uri.route()` = `/section/category/page`)
 
 ##### params()
 
@@ -483,9 +485,9 @@ The header object is an alias for `page.header()` of the original page.  It's a 
 
 <h3 id="content-string">`content` 文字列</h3>
 
-The content object is an alias for the `page.content()` of the original page.
+content オブジェクトは、オリジナルページの `page.content()` の別名（エイリアス）です。
 
-To display page content you should:
+ページのコンテンツを表示するには、次のようにします：
 
 ```twig
 {{ content|raw }}
@@ -493,13 +495,14 @@ To display page content you should:
 
 <h3 id="taxonomy-object">`taxonomy` オブジェクト</h3>
 
-The global Taxonomy object that contains all the taxonomy information for the site. For more information, see [Taxonomy](../../02.content/08.taxonomy/).
+グローバルのタクソノミーオブジェクトは、サイトのタクソノミー情報をすべて持っています。より詳しくは、[タクソノミー](../../02.content/08.taxonomy/) をご覧ください。
 
 <h3 id="browser-object">`browser` オブジェクト</h3>
 
-!! The whole list of the Browser object methods is available on the [API site](https://learn.getgrav.org/api#class-grav-common-browser). Here's a list of the methods you'll find most useful.
+> [!Info]  
+> ブラウザオブジェクトのすべてのメソッドは、 [API site](https://learn.getgrav.org/api#class-grav-common-browser) をご覧ください。ここでは、最も便利なメソッドを列挙します。
 
-Grav has built-in support for programmatically determining the platform, browser, and version of the user.
+Gravは組み込みで、ユーザーのプラットフォームや、ブラウザ、バージョンを調べるようにプログラムされています。
 
 ```twig
 {{ browser.platform|e }}   # macintosh
@@ -520,20 +523,20 @@ You can access the current logged in user object indirectly via the Grav object.
 
 <h2 id="adding-custom-variables">カスタム変数を追加</h2>
 
-You can easily add custom variables in a variety of ways.  If the variable is a site-wide variable, you can put the variable in your `user/config/site.yaml` file and then access it via:
+カスタム変数を追加するのは、さまざまな方法で、かんたんにできます。サイト全体で使いたい変数なら、`user/config/site.yaml` ファイルに追加できます。そして、以下のようにアクセスできます。
 
 ```twig
 {{ site.my_variable|e }}
 ```
 
-Alternatively, if the variable is only needed for a particular page, you can add the variable to your page's YAML front-matter, and access it via the `page.header` object.  For example:
+一方、特定のページでのみ必要な変数であれば、ページのYAMLフロントマターで変数を追加できます。 `page.header` オブジェクトでアクセスできます。たとえば：
 
 ```twig
 title: My Page
 author: Joe Bloggs
 ```
 
-could be used as:
+上記のように定義したとき、以下のように使えます：
 
 ```twig
 The author of this page is: {{ page.header.author|e }}
@@ -541,5 +544,5 @@ The author of this page is: {{ page.header.author|e }}
 
 <h2 id="adding-custom-objects">カスタムオブジェクトを追加</h2>
 
-An advanced way to add custom objects is to use a plugin to add objects to the Twig object.  This is an advanced topic and is covered in more detail in the [plugins chapter](../../04.plugins/04.event-hooks/).
+Twigオブジェクトにカスタムオブジェクトを追加するのは、発展的な方法で、プラグインを使います。これは発展的なトピックで、より詳しい内容は、[プラグインの章](../../04.plugins/04.event-fooks/) で解説します。
 
