@@ -3,11 +3,11 @@ title: "テーマ設定"
 layout: ../../../layouts/Default.astro
 ---
 
-In Grav you can easily access theme configuration and blueprint information from your Twig and PHP files.
+Gravでは、TwigやPHPファイルから、テーマ設定やブループリント（設計図）情報へかんたんにアクセスできます。
 
-## Accessing Theme Blueprint Information
+<h2 id="accessing-theme-blueprint-information">ブループリント情報へのアクセス</h2>
 
-Information from the currently active theme's `blueprints.yaml` file can be had from the `theme` object. Let's use the following `blueprints.yaml` file as an example:
+現在有効なテーマの `blueprints.yaml` ファイルの情報は、`theme` オブジェクトにあります。具体例として、次のような `blueprins.yaml` ファイルを使いましょう：
 
 ```yaml
 name: Antimatter
@@ -27,66 +27,66 @@ bugs: https://github.com/getgrav/grav-theme-antimatter/issues
 license: MIT
 ```
 
-You can reach any of these items via `grav.theme` by using the standard **dot-syntax**:
+これらの情報には、標準的な **ドット構文** を使い、 `grav.theme` からアクセス可能です。
 
 ```twig
 Author Email: {{ grav.theme.author.email }}
 Theme License: {{ grav.theme.license }}
 ```
 
-You can also reach these same values from a Grav plugin with PHP syntax:
+プラグインからは、同じ情報にPHP構文を使ってアクセスできます：
 
 ```php
 $theme_author_email = $this->grav['theme']['author']['email'];
 $theme_license = $this->grav['theme']['license'];
 ```
 
-## Accessing Theme Configuration
+<h2 id="accessing-theme-configuration">テーマ設定へのアクセス</h2>
 
-Themes have configuration files, too. A theme's configuration file is named `<themename>.yaml`. The default file lives in the theme's root folder (`user/themes/<themename>`).
+テーマには、設定ファイルもあります。テーマの設定ファイルは、`<テーマ名>.yaml` というファイルです。デフォルトでは、このファイルは、テーマのルートフォルダ（`user/themes/<テーマ名>/`）にあります。
 
-It is **strongly** recommended not to actually change the theme's default YAML file but to override the settings in the `user/config/themes` folder. This will ensure that the theme's original settings remain intact, allowing you to quickly access the changes and/or revert back whenever necessary.
+テーマのデフォルトのYAMLファイルを変更するのは、**強く** 非推奨ですので、その代わり、`user/config/themes` フォルダの設定で上書きしてください。これにより、テーマのオリジナルの設定が残り、変更部分に素早く対応できたり、必要な場合はもとに戻すこともできます。
 
-For example, let us consider the Antimatter theme.  By default, there is a file called `antimatter.yaml` in the theme's root folder. The contents of this configuration file look like this:
+たとえば、Antimatter テーマについて検討してみましょう。デフォルトでは、`antimatter.yaml` ファイルが、テーマのルートフォルダにあります。この設定ファイルは、次のようになっています：
 
 ```yaml
 enabled: true
 color: blue
 ```
 
-This is a simple file, but it provides you an idea of what you can do with theme configuration settings. Let us override these settings and add a new one.
+これは、シンプルなファイルですが、同時に、テーマで設定できるものが何なのか知ることができます。これらの設定を、新しいものに上書きしてみましょう。
 
-So, create a file in the following location: `user/config/themes/antimatter.yaml`.  In this file put the following contents:
+`user/config/themes/antimatter.yaml` に、ファイルを作成して下さい。そして次のように入力してください。
 
-> *I note that `enabled` is not repeated here. If the config files are merged and not simply replaced, then that should be explicitly stated.*
+> `enabled` は、ここでは繰り返さないことに注意してください。。設定ファイルが、単純に置き換えられるのではなく、マージされるとすれば、それは明示されていたほうが良いです。
 
 ```yaml
 color: red
 info: Grav is awesome!
 ```
 
-Then in your theme templates you can access these variables using the `grav.theme.config` object:
+そして、テーマテンプレート中、`grav.theme.config` オブジェクトを使って、これらの変数にアクセスできます：
 
 ```
 <h1 style="color:{{ grav.theme.config.color|e }}">{{ grav.theme.config.info|e }}</h1>
 ```
 
-This should render out as:
+これは、次のようにレンダリングされます：
 
 <h1 style="color:red">Grav is awesome!</h1>
 
-In PHP you can access the current theme's configuration with:
+PHPでは、現在のテーマの設定は、次のようにアクセス可能です：
 
 ```php
 $color = $this->grav['theme']->config()['color'];
 $info = $this->grav['theme']->config()['info'];
 ```
 
-Simple! The sky is the limit regarding the configuration of your themes.  You can use them for whatever you like! :)
+シンプルですね！ テーマの設定は無限です。好きなように使ってください！ :)
 
-### Alternative Notation
+<h3 id="alternative-notation">その他の注意事項</h3>
 
-The following aliases also work:
+次のような別名（エイリアス）も動きます：
 
 ```twig
 Theme Color Option: {{ config.theme.color_option|e }}
@@ -96,5 +96,5 @@ Theme Color Option: {{ theme_var(color_option)|e }}
 Theme Color Option: {{ grav.themes.antimatter.color_option|e }} [AVOID!]
 ```
 
-**Even though `grav.themes.<themename>` is supported, it should be avoided because it makes it impossible to inherit the theme properly.**
+**`grav.themes.<テーマ名>` がサポートされているとしても、適切に継承できなくなるので、使わないほうが良いです**
 

@@ -175,44 +175,43 @@ JSONがシンプルにデコードできます：
 
 ### `media_directory`
 
-
-Returns a media object for an arbitrary directory.  Once obtained you can manipulate images in a similar fashion to pages.
+任意のディエク鳥から、メディアオブジェクトを返します。一度取得すれば、ページと似た方法で画像を操作できます。
 
 `media_directory('theme://images')['some-image.jpg'].cropResize(200,200).html`
 
 ### `nicefilesize`
 
-Output a file size in a human readable nice size format
+人間に読みやすいファイルサイズを出力します
 
 `nicefilesize(612394)` 
 
 ### `nicenumber`
 
-Output a number in a human readable nice number format
+人間に読みやすい数字を出力します
 
 `nicenumber(12430)` 
 
 ### `nicetime`
 
-Output a date in a human readable nice time format
+人間に読みやすいフォーマットの日付を返します
 
 `nicetime(page.date)` 
 
 ### `nonce_field`
 
-Generate a Grav security nonce field for a form with a required `action`:
+`action` を渡すことで、フォームのセキュリティのための nonce フィールドを生成します：
 
 `nonce_field('action')` 
 
 ### `of_type`
 
-Checks the type of a variable to the param:
+変数の型をチェックします：
 
 `of_type(page, 'string')` 
 
 ### `pathinfo`
 
-Parses a path into an array.
+パスを配列にパースします。
 
 ```twig
 {% set parts = pathinfo('/www/htdocs/inc/lib.inc.php') %}
@@ -221,19 +220,19 @@ Parses a path into an array.
 
 ### `print_r`
 
-Prints a variable in a readable format
+読みやすい書式で、変数を表示します
 
 `print_r(page.header)`
 
 ### `random_string`
 
-Will generate a random string of the required number of characters.  Particularly useful in creating a unique id or key.
+渡された文字数分の、ランダムな文字列を生成します。ユニークなIDを作りたいときに便利です。
 
 `random_string(10)` 
 
 ### `unique_id`
 
-Generates a random string with configurable length, prefix and suffix. Unlike the built-in PHP `uniqid()` function and the `random_string` utils, this string will be generated truly unique and non-conflicting.
+接頭辞や接尾辞付きで、文字数分のランダムな文字列を作ります。PHP組み込みの `uniqid` 関数や、`random_string` カスタム関数と違い、この文字列は真にユニークで、コンフリクトしません。
 
 
 `unique_id(9)`  
@@ -242,13 +241,13 @@ Generates a random string with configurable length, prefix and suffix. Unlike th
 
 ### `range`
 
-Generates an array containing a range of elements, optionally stepped
+範囲内の要素を持つ配列を生成します。要素間の差も決められます
 
 `range(25, 300, 50)` 
 
 ### `read_file`
 
-Simple function to read a file based on a filepath and output it.
+ファイルのパスをもとに、ファイルを読み込み、それを出力します。
 
 `read_file('plugins://admin/README.md')|markdown`
 
@@ -261,44 +260,44 @@ This **admin plugin** for [Grav](https://github.com/getgrav/grav) is an HTML use
 
 ### `redirect_me`
 
-Redirects to a URL of your choosing
+選んだURLにリダイレクトします
 
 `redirect_me('http://google.com', 304)`
 
 ### `regex_filter`
 
-Performs a `preg_grep` on an array with a regex pattern
+PHPの `preg_grep` 関数のように、正規表現パターンに合う配列を返します
 
 `regex_filter(['pasta', 'fish', 'steak', 'potatoes'], "/p.*/")`
 
 
 ### `regex_replace`
 
-A helpful wrapper for the PHP [preg_replace()](https://php.net/manual/en/function.preg-replace.php) method, you can perform complex Regex replacements on text via this filter:
+PHPの [`preg_replace`](https://www.php.net/manual/ja/function.preg-replace.php) 関数のように、複雑な正規表現でテキストを書き換えます：
 
 `regex_replace('The quick brown fox jumps over the lazy dog.', ['/quick/','/brown/','/fox/','/dog/'], ['slow','black','bear','turtle'])`
 
 ### `regex_match`
 
-A helpful wrapper for the PHP [preg_match()](https://php.net/manual/en/function.preg-match.php) method, you can perform complex regular expression match on text via this filter:
+PHPの [`preg_match`](https://www.php.net/manual/ja/function.preg-match.php) 関数のように、複雑な正規表現にマッチするか調べられます。
 
 `regex_match('http://www.php.net/index.html', '@^(?:http://)?([^/]+)@i')`
 
 ### `regex_split`
 
-A helpful wrapper for the PHP [preg_split()](https://php.net/manual/en/function.preg-split.php) method. Split string by a regular expression on text via this filter:
+PHPの [`preg_split`](https://www.php.net/manual/ja/function.preg-split.php) 関数のように、正規表現で文字列を分割できます。
 
 `regex_split('hypertext language, programming', '/\\s*,\\s*/u')`
 
 ### `repeat`
 
-Will repeat whatever is passed in a certain amount of times.
+引数に渡されたものを、その回数分繰り返します。
 
 `repeat('blah ', 10)` 
 
 ### `string`
 
-Returns a string from a value. If the value is array, return it json encoded
+値から文字列を返します。配列が渡されると、JSONにエンコードしたものが返ります
 
 `string(23)` => **"23"**
 
@@ -306,55 +305,57 @@ Returns a string from a value. If the value is array, return it json encoded
 
 ### `svg_image`
 
-Returns the content of an SVG image and adds extra classes as needed. Provides the benefits of inline svg without having to paste the code directly on the page. Useful for reusable images such as social media icons.
+必要なクラスを付けて、SVG画像を返します。ページに直接コードを書くことなく、インラインのSVGの利益が得られます。ソーシャルメディアアイコンのような、再利用可能な画像のとき便利です。
 
 `{{ svg_image(path, classes, strip_style) }}`
 
 
-example:
+たとえば：
 
 `{{ svg_image('theme://images/something.svg', 'my-class-here mb-10', true) }}`
 
 
 
 ### `theme_var`
+
 `theme_var($variable, $default = null, $page = null)`
 
-Get a theme variable from the page's header, or, if not found, from its parent(s), the theme's config file, or the default value if provided:
+ページのフロントマターからテーマ変数を取得します。もし見つからない場合は、その親（先祖）や、テーマの設定ファイルや、デフォルト値が決められていればそれを取得します。
 
 `theme_var('grid-size')`
 
-This will first try `page.header.grid-size`, if not set, it will traverse the tree of parents. If still not found, it will try `theme.grid-size` from the theme's configuration file.
+上記の場合、まず`page.header.grid-size` を探します。無ければ、親フォルダのそれを探します。まだ見つからなければ、テーマの設定ファイルから、`theme.grid-size` を探します。
 
-It can optionally take a default value as fallback:
+見つからなかった時のための、デフォルト値を渡すこともできます：
 
 `theme_var('grid-size', 1024)`
 
 ### `t`
 
-Translate a string, as the [`|t`](../02.filters/#t) filter.
+
+[`|t`](../02.filters/#t) フィルタのように、文字列を翻訳します。
 
 `t('SITE_NAME')` 
 
 ### `ta`
 
-Functions the same way the [`|ta`](../02.filters/#ta) filter does.
+[`|ta`](../02.filters/#ta) フィルタと同じことをする関数です。
 
 ### `tl`
 
-Translates a string in a specific language. For more details check out the [multi-language documentation](../../02.content/11.multi-language/#complex-translations).
+文字列を特定の言語に翻訳します。詳しくは、[multi-language documentation](../../02.content/11.multi-language/#complex-translations) を参照してください。
 
 `tl('SIMPLE_TEXT', ['fr'])`
 
 ### `url`
 
-Will create a URL and convert any PHP URL streams into a valid HTML resources. A default value can be passed in in case the URL cannot be resolved.
+URLを作り、PHP URLストリームを適切なHTMLに変換します。URLとして解決できなかったときのため、デフォルト値を渡すこともできます。
 
 `url('theme://images/logo.png')|default('http://www.placehold.it/150x100/f4f4f4')` 
 
 ### `vardump`
 
-The `vardump()` function outputs the current variable to the screen (rather than in the debugger as with `dump()`)
+現在の変数を画面に表示します（`dump` のように、デバッガでなくても動きます）
 
 ```twig
 {% set my_array = {foo: 'bar', baz: 'qux'} %}
@@ -363,7 +364,7 @@ The `vardump()` function outputs the current variable to the screen (rather than
 
 ### `xss`
 
-Allow a manual check of a string for XSS vulnerabilities
+文字列のXSS脆弱性を手動でチェックできます
 
 `xss('this string contains a <script>alert("hello");</script> XSS vulnerability')` 
 
