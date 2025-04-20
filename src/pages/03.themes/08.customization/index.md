@@ -27,15 +27,15 @@ custom.css の追加の次のステップは、`_custom.scss` ファイルを使
 
 このように聞くと、最初は、少しやる気をくじかれるかもしれませんが、SCSSは、多くても少なくても好きなだけ使えばよく、最初のうちは、トラブルが起きれば伝統的なCSSに戻れば良いのです。約束です！
 
-The Quark theme has an `scss/` folder that contains a variety of `.scss` files. These should be compiled into the `css-compiled/` folder.
+Quarkテーマは、`scss/` フォルダに多様な`.scss` ファイルを持ちます。これらは、`css-compiled/` フォルダにコンパイルされます。
 
-You can create a file called `scss/theme/_custom.scss` and import it to the `theme.scss` file at the bottom using `@import 'theme/custom';`. There are several great benefits of putting your code in this file:
+`scss/theme/_custom.scss` というファイルを作ることができます。それを `theme.scss` ファイルの最後に `@import 'theme/custom';` としてインポートできます。このファイルにコードを入れておくと、いくつかのメリットが得られます：
 
-1. The resulting changes will be compiled into the `css-compiled/theme.min.css` file along with all the other CSS.
-2. You have access to all the variables and mix-ins that are available to any of the other SCSS used in the theme.
-3. You have access to all the standard SCSS features and functionality to make development easier.
+1. 変更の結果が、他のCSSとともに `css-compiled/theme.min.css` にコンパイルされます。
+1. 他のSCSSファイルがテーマで利用している変数やミックスインにアクセスできます。
+1. 標準的なSCSSの特長や機能にアクセスできるので、開発がかんたんになります。
 
-An example of this file would be:
+たとえば、このファイルを次のようにできます：
 
 **_custom.scss**
 
@@ -47,39 +47,42 @@ body {
 }
 ```
 
-The downside to this approach is that this file is overwritten during any *theme upgrade*, so you should ensure you create a backup of any custom work you do.  This issue is resolved by using theme inheritance as described below.
+この方法のデメリットは、 _テーマ・アップグレード_ のときに、このファイルが上書きされてしまうことです。そのため、きちんとバックアップを取っておいてください。この問題は、次に書くテーマの継承を使うことで解決されます。
 
 ## Wellington SCSS
 
-[Wellington](https://github.com/wellington/wellington) is a native wrapper for [libsass](http://libsass.org/) available for both Linux and MacOS. It provides a much faster solution for compiling SCSS than the default Ruby-based scss compiler.  By faster we mean about **20X faster!**. It's super easy to install (via brew):
+> [!訳注]  
+> wellingtonは5年以上コミットがないようですし、libsassも非推奨になっているので、以下の内容がどこまで現在も通用するものなのかわかりません。
+
+[Wellington](https://github.com/wellington/wellington) は、[libsass](https://sass-lang.com/libsass/) のネイティブなラッパーです。LinuxとMacOSで使えます。デフォルトのRubyベースのscssコンパイラよりも、ずっと速くコンパイルします。どれくらい早いかというと、 **20倍くらい早い！** です。インストールはかんたんです（brewを使います）：
 
 ```bash
 brew install wellington
 ```
 
-To take advantage of it to compile an `scss` folder into a `css-compiled` folder as in the example above you can [use this gist](https://gist.github.com/rhukster/bcfe030e419028422d5e7cdc9b8f75a8).
+上の例のように、`scss` フォルダから `css-compiled` フォルダへコンパイルするため、 [このgistを利用できます](https://gist.github.com/rhukster/bcfe030e419028422d5e7cdc9b8f75a8).
 
 > [!Info]  
-> Wellington is what we have been using for all _Team Grav_ themes and it's been working great!
+> Wellington は、 _Gravチーム_ のすべてのテーマに使われています。とても素晴らしいものです！
 
 
-## Theme Inheritance
+<h2 id="theme-inheritance">テーマの継承</h2>
 
-This is the preferred approach to modifying or customizing a theme, but it does require a little bit more setup.
+これは、テーマの修正やカスタマイズにより良いアプローチです。しかし、多少のセットアップを伴います。
 
-The basic concept is that you define a theme as the **base-theme** that you are inheriting from, and provide **only the bits you wish to modify** and let the base theme handle the rest. The great benefit to this is that you can more easily keep the base theme updated and current without directly impacting your customized inherited theme.
+基本的な考え方はこうです： 継承元となる **ベーステーマ** を決めます。 **ほんの少し修正するだけ** で、残りはベーステーマに任せます。この方法のメリットは、ベーステーマのアップーデートが容易であるということと、継承したテーマに直接影響を及ぼさないということです。
 
-There are two ways to inherit from an existing theme:
+既存のテーマから継承するには、2つの方法があります：
 
-1. Using the Command Line Interface (CLI) with the DevTools plugin.
-2. Manually.
+1. コマンドラインインターフェース（CLI） を使って、DevToolsプラグインを使います。
+2. 手作業でやります。
 
-### Inheriting using the CLI
+<h3 id="inheriting-using-the-cli">CLIを使った継承</h3>
 
-As discussed in the [Theme Tutorial](https://learn.getgrav.org/16/themes/theme-tutorial), you can create a new theme using the DevTools plugin. But you can also inherit from an existing theme. The procedure is simple.
+[テーマのチュートリアル](../02.theme-tutorial/) で解説したとおり、DevToolsプラグインで、新しいテーマを作れます。DevToolsでは、同時に、既存テーマから継承することもできます。処理はシンプルです。
 
-1. [Install the DevTools plugin](https://learn.getgrav.org/16/themes/theme-tutorial#step-1-install-devtools-plugin) if it is not already done.
-2. Then follow the [Create Base Theme](https://learn.getgrav.org/16/themes/theme-tutorial#step-2-create-base-theme) procedure, but when asked to `Please choose a template type`, type `inheritance`. If Quark is the only theme, it will be displayed as option 0. So type `0` to inherit from Quark. Your new inherited theme will be created.
+1. もしまだであれば、[DevToolsプラグインをインストールしてください](../02.theme-tutorial/#step-1-install-devtools-plugin) 。
+2. 続けて、[ベーステーマを作ってください](../02.theme-tutorial/#step-2-create-base-theme) 。ただし、`Please choose a template type` と聞かれたら、 `inheritance` と答えてください。テーマにQuarkしか無ければ、選択肢に0として表示されます。 `0` と入力してください。Quarkから継承します。継承されたテーマが作られます。
 3. Copy all the options from the theme YAML file you are inheriting from (or from the `user/config/themes` folder if you have customized it) at the top of the newly created YAML configuration file of your theme: `/user/themes/mytheme/mytheme.yaml`.
 4. Copy the “form” section from `/user/themes/quark/blueprints.yaml` file into `/user/themes/mytheme/blueprints.yaml` in order to include the customizable elements of the theme in the admin. (Or simply replace the file and edit its content.)
 5. Change your default theme to use your new **mytheme** by editing the `pages: theme:` option in your `user/config/system.yaml` configuration file:

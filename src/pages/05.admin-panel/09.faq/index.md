@@ -20,7 +20,7 @@ Extract each archive file into your `user/plugins` folder, then ensure the folde
 
 When you first install the Admin plugin, you will be prompted to create an admin user when you point your browser at your site. This is a simple web form that ensures at least one admin user has been created.
 
-![New User](../introduction/new-user.png)
+![New User](../01.introduction/new-user.png)
 
 You can easily add other users but it requires a bit of work in the terminal/command prompt to do. From your terminal, access the root of the Grav site you'd like to add users to, and type the following command:
 
