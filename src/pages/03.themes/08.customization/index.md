@@ -83,21 +83,21 @@ brew install wellington
 
 1. もしまだであれば、[DevToolsプラグインをインストールしてください](../02.theme-tutorial/#step-1-install-devtools-plugin) 。
 2. 続けて、[ベーステーマを作ってください](../02.theme-tutorial/#step-2-create-base-theme) 。ただし、`Please choose a template type` と聞かれたら、 `inheritance` と答えてください。テーマにQuarkしか無ければ、選択肢に0として表示されます。 `0` と入力してください。Quarkから継承します。継承されたテーマが作られます。
-3. Copy all the options from the theme YAML file you are inheriting from (or from the `user/config/themes` folder if you have customized it) at the top of the newly created YAML configuration file of your theme: `/user/themes/mytheme/mytheme.yaml`.
-4. Copy the “form” section from `/user/themes/quark/blueprints.yaml` file into `/user/themes/mytheme/blueprints.yaml` in order to include the customizable elements of the theme in the admin. (Or simply replace the file and edit its content.)
-5. Change your default theme to use your new **mytheme** by editing the `pages: theme:` option in your `user/config/system.yaml` configuration file:
+3. 継承元のテーマのYAMLファイルの設定（もしくは、カスタマイズ済みなら `user/config/themes` フォルダの設定）を、新しく作った `/user/themes/mytheme/mytheme.yaml` のYAML設定へ、すべてコピーしてください。
+4. `/user/themes/quark/blueprints.yaml` ファイルの "form" セクションを `/user/themes/mytheme/blueprints.yaml` へコピーしてください。これは、管理パネルでカスタマイズできるようにするためです（もしくは、単に、ファイルを入れ替えて、編集するのでもかまいません）。
+5. 新しい **mytheme** にデフォルトテーマを変更してください。`user/config/system.yaml` 設定ファイルの `pages: theme:` を編集します。
 
    ```yaml
    pages:
      theme: mytheme
    ```
 
-### Inheriting manually
+<h3 id="inheriting-manually">手作業の継承</h3>
 
-To achieve this you need to follow these steps:
+次のステップを踏んでください：
 
-1. Create a new folder: `user/themes/mytheme` to house your new theme.
-2. Copy the theme YAML file from the theme you're inheriting (or from the `user/config/themes` folder if you have customized it) to `/user/themes/mytheme/mytheme.yaml` and add the following content (replacing `user/themes/quark` with the name of the theme you are inheriting):
+1. 新しいフォルダを作ります： `user/themes/mytheme` テーマを入れるためのフォルダです。
+2. 継承元のテーマのYAMLファイル（もしくは、カスタマイズ済みならば `user/config/themes` フォルダの設定）を、`/user/themes/mytheme/mytheme.yaml` にコピーしてください。そして、以下のコンテンツを追記してください（`user/themes/quark` は、継承元のテーマ名にしてください）：
 
    ```yaml   
    streams:
@@ -111,19 +111,18 @@ To achieve this you need to follow these steps:
 
    ```
    
-   NOTE: Your `mytheme.yaml` must single quote the prefixes in 1.7. Older documentation shows no single-quotes sunch as `- user/themes/mytheme
-         - user/themes/quark`. The incorrect quoting in the `mytheme.yaml` may result in a fatal error upon activating your new theme `Template "@images/grav-logo.svg" is not defined in "partials/logo.html.twig" at line 7.`
+   注意： Grav 1.7 では、`mytheme.yaml` は、prefixes にシングルクオート（`'`）で囲んでください。古いドキュメントでは、シングルクオートがありませんでした。`-user/themes/mytheme, - user/themes/quark` のように。`mytheme.yaml` で間違った使い方をすると、致命的な（fatal）エラーになります。
    
-4. Copy the `/user/themes/quark/blueprints.yaml` file into `/user/themes/mytheme/blueprints.yaml` in order to include the customizable elements of the theme in the admin.
+4. `/user/themes/quark/blueprints.yaml` ファイルを `/user/themes/mytheme/blueprints.yaml` にコピーしてください。管理パネルでテーマのカスタマイズができるようにするためです。
 
-5. Change your default theme to use your new **mytheme** by editing the `pages: theme:` option in your `user/config/system.yaml` configuration file:
+5. デフォルトテーマを、新しい **mytheme** に変更してください。`user/config/system.yaml` 設定ファイルの `pages: theme:` 設定を以下のように編集します：
 
    ```yaml
    pages:
      theme: mytheme
    ```
 
-6. Create a new theme Class file that can be used to add advanced event-driven functionality. Create a `user/themes/mytheme/mytheme.php` file:
+6. テーマClassファイルを作ってください。発展的な、イベント駆動の機能を追加するために使われるものです。`user/themes/mytheme/mytheme.php` ファイルを作ってください：
 
    ```php
    <?php
@@ -136,19 +135,19 @@ To achieve this you need to follow these steps:
    ?>
    ```
 
-You have now created a new theme called **mytheme** and set up the streams so that it will first look in the **mytheme** theme first, then try **quark**.  So in essence, Quark is the base-theme for this new theme.
+これで、 **mytheme** という新しいテーマが作られました。最初に **mytheme** テーマを探し、その後 **quark** テーマを探すろいうストリームが設定されています。つまり、Quarkはこの新しいテーマのベーステーマであるということです。
 
-You can then provide just the files you need, including **JS**, **CSS**, or even modifications to **Twig template files** if you wish.
+あとは、必要なファイルを追加していくだけです。たとえば、**JS** 、 **CSS** などで、さらにお望みなら **Twig テンプレートファイル** を修正しても良いです。
 
-### Using SCSS
+<h3 id="using-scss">SCSSの利用</h3>
 
-In order to modify specific **SCSS** files, we need to use a little configuration so it knows to look in your new `mytheme` location first, then `quark` second. This requires a couple of things.
+特定の **SCSS** ファイルを修正するため、少し設定が必要です。新しい `mytheme` を最初に、それから `quark` を2つ目に、探すように知らせなければいけません。これには、いくつかの設定をします。
 
-1. First, you need to copy over the main SCSS file from quark that contains all the `@import` calls for various sub files. So, copy the `theme.scss` file from `quark/scss/` to `mytheme/scss/` folder.
-2. While inside the `theme.scss` file, change the beginning of all the import lines to `@import '../../quark/scss/theme/';` so it will know to use the files from the quark theme. So, for example the first line will be `@import '../../quark/scss/theme/variables';`.
-3. Add `@import 'theme/custom';` at the very bottom of the `theme.scss` file.
-4. The next step is to create a file located at `mytheme/scss/theme/_custom.scss`. This is where your modifications will go.
-5. Copy the `gulpfile.js` and `package.json` files into the base folder of the new theme.
+1. まず、さまざまなサブファイルを `@import` で呼び出しているメインの SCSS ファイルをコピーしなければいけません。`quark/scss/` から、 `mytheme/scss/` へ、`theme.scss` ファイルをコピーしてください。
+2. この `theme.scss` ファイル中、インポートしている行の始まりを、`@import '../../quark/scss/theme/';` に変更してください。これにより、quarkテーマからインポートファイルを利用することを知らせます。たとえば、最初の行はこうなります：`@import '../../quark/scss/theme/variables';`
+3. `theme.scss` ファイルの最後に、`@import 'theme/custom';` を追記してください。
+4. 次のステップでは、`mytheme/scss/theme/_custom.scss` ファイルを作ってください。このファイルが、修正可能なものになります。
+5. `gulpfile.js` ファイルと、`package.json` ファイルを、テーマのベースフォルダにコピーしてください。
 
-In order to compile the new scss for the **mytheme** you will need to open up terminal and navigate to the theme folder. Quark uses gulp to compile the sass so you will need those installed and yarn for the dependencies. Run `npm install -g gulp`, `yarn install`, and then `gulp watch`. Now, any changes made to the files will be recompiled.
+**mytheme** 用の新しいSCSSファイルをコンパイルするために、ターミナルを開いて、テーマフォルダまで移動してください。Quark はsassのコンパイルに gulp を使っているので、それらがインストールされ、依存関係が yarnされている必要があります。 `npm install -g gulp` を実行し、`yarn install` を実行してください。それから、`gulp wathc` を実行します。そうすると、ファイルにどんな変更を加えても、再コンパイルされるようになります。
 

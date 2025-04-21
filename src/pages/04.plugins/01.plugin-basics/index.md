@@ -9,31 +9,34 @@ Gravは、ページのみを扱うだけで良いように、**シンプル** �
 
 <h2 id="powerful">パワフル！</h2>
 
-All the key objects in Grav are accessible through a powerful [Dependency Injection Container](http://en.wikipedia.org/wiki/Dependency_injection).  With Grav's event hooks throughout the entire life cycle, you can access anything that Grav knows about, and manipulate it as you need.  With this system you have complete control to add as much functionality as you need.
+Gravでは、すべての重要なオブジェクトは、パワフルな[DIコンテナ（Dependency Injection Container）](https://en.wikipedia.org/wiki/Dependency_injection) からアクセス可能です。Gravが動作しているすべての期間で、Gravのイベントフックによって、Gravが認識し、計算するものすべてにアクセスできます。このシステムにより、必要な機能の追加を完全に制御できます。
 
-The plugins have proved so easy to write, and so flexible and powerful, that we can not stop creating them! We already have [over 300 freely downloadable plugins](https://getgrav.org/downloads/plugins#extras) that do everything from displaying a **sitemap**, providing **breadcrumbs**, displaying blog **archives**, a simple **search engine**, to providing a fully-functional JavaScript-powered **shopping cart**!
+プラグインは、かんたんに書けて、柔軟でパワフルなので、これらを作らない手はありません！ Gravにはすでに、[300を超えるダウンロード可能なプラグインがあります](https://getgrav.org/downloads/plugins#extras) 。なんでもできます。たとえば、 **sitemap** を表示したり、 **パンくずリスト** を提供したり、ブログの **アーカイブ** を表示したり、シンプルな **検索エンジン** を作ったり、JavaScriptによって完全に機能する **ショッピングカート** も提供できます。
 
-The best way to learn what can be done with plugins is to download some of these and look at what they are doing, and how they are doing it. In the next chapter we will [create a simple plugin from scratch](../03.plugin-tutorial/)!
+プラグインに何ができるかを知るベストな良い方法は、いくつかをダウンロードしてみて、何をどのようにやっているのか、見てみることです。後の章で、[かんたんなプラグインを作ってみましょう！](../03.plugin-tutorial/) 
 
 <h2 id="essentials">必要最小限</h2>
 
-All plugins are located in your `user/plugins` folder.  With the base Grav install, there are only two plugins provided: `error` and `problems`.
+すべてのプラグインは、`user/plugins` フォルダ内に置かれます。通常のGrav（スケルトンではないGrav）をインストールしたとき、既存のプラグインは、2つだけ置かれています： `error` と `problems` です。
 
-The `error` plugin is used to handle HTTP errors, like **404 Page Not Found**.
+> [!訳注]  
+> もしかすると、`markdown-notices` というプラグインも入っているかもしれません。あったら便利だけどなくても良いプラグインです。
 
-The `problems` plugin is useful for new Grav installations because it detects any issues with your **hosting setup**, **missing folders**, or **permissions** that could cause problems with Grav.  Only the `error` plugin is really essential for proper operation.
+`error` プラグインは、HTTPエラーを制御します。たとえば、 **404 Page Not Found** 。
 
-Every plugin in the `user/plugins` folder should have a unique name, and that name should closely define the function of the plugin.  Please do not use spaces, underscores, or capital letters in the plugin name.
+`problems` プラグインは、新しくGravをインストールするときに便利です。このプラグインは、 **ホスティングの設定** や、 **フォルダが見つからない** もしくは **パーミッション** などの問題がGravに起きていないかを調べてくれます。適切な運用中は、`error` プラグインだけが、本当に必要最小限のプラグインです。
+
+`user/plugins` フォルダ内のすべてのプラグインは、固有の名前を持っており、その名前は機能を表しているべきです。スペースや、アンダースコア、大文字を、プラグイン名には使わないでください。
 
 <h2 id="accessing-plugin-configuration-values-via-twig">Twigからプラグインの設定値にアクセス</h2>
 
-To access plugin configuration settings via Twig (i.e. within a Theme), the general format is:
+プラグインの設定に、（たとえばテーマ内の）Twig からアクセスしたいとき、一般的な方法は：
 
 ```twig
 config.plugins.pluginname.pluginproperty
 ```
 
-If plugin name contains dashes you should refer to its properties using :
+プラグイン名にダッシュが含まれている場合、プロパティを使った参照をしてください：
 
 ```twig
 config.plugins['plugin-name'].pluginproperty
@@ -41,8 +44,7 @@ config.plugins['plugin-name'].pluginproperty
 
 <h2 id="using-flex-in-plugins">プラグイン中にflexを使う</h2>
 
-The recommended way to start using flex in a plugin is to use the devtools and create a plugin with Flex basic support generated for you:
-https://learn.getgrav.org/17/basics/installation#option-1-install-from-zip-package
+プラグイン中でflex objectsを使い始めるときのおすすめの方法は、devtoolsを使い、flex objectsの基本的なサポート生成によって、プラグインを作ることです。
 
-See [Flex plugin section](../06.plugin-flex/)
+[Flexプラグインの章](../06.plugin-flex/) を見てください。
 
