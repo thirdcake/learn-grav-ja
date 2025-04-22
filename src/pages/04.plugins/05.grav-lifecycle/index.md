@@ -8,12 +8,10 @@ layout: ../../../layouts/Default.astro
 
 プラグインからGravを拡張するベストな方法を理解するために、Gravのプロセスを知っておくことはしばしば有益です。Gravのライフサイクルは、以下のとおりです：
 
-<div class="level level-1" markdown=1>
 ### index.php
 1. Check PHP version to ensure we're running at least version **7.1.3**
 1. Class loader initialization
 1. Obtain Grav instance
-    <div class="level level-2" markdown=1>
     ### Grav.php
     1. No instance exists, so call `load()`
     1. Add `loader`
@@ -74,9 +72,7 @@ layout: ../../../layouts/Default.astro
             1. Add `themes`
             1. Add `twig`
             1. Add `uri`
-    </div>
 1. call `Grav::process()`
-    <div class="level level-2" markdown="1">
     ### Grav.php
     1. Run Initialize Processor
         1. Configuration
@@ -140,7 +136,6 @@ layout: ../../../layouts/Default.astro
         1. Fire **onAssetsInitialized** event
     1. Run Twig Processor
         1. Initialize `$grav['twig']`
-            <div class="level level-3" markdown="1">
             ### Twig.php
             1. Set Twig template paths based on configuration
             1. Handle language templates if available
@@ -151,10 +146,8 @@ layout: ../../../layouts/Default.astro
             1. Load Twig extensions
             1. Fire **onTwigExtensions** event
             1. Set standard Twig variables (config, uri, taxonomy, assets, browser, etc)
-            </div>
     1. Run Pages Processor
         1. Initialize `$grav['pages']`
-            <div class="level level-3" markdown="1">
             ### Pages.php
             1. Call `buildPages()`
             1. (logic differs somewhat for Flex Pages, but the idea is the same)
@@ -163,7 +156,6 @@ layout: ../../../layouts/Default.astro
             1. If **cache is not good** call `recurse()`
             1. Fire **onBuildPagesInitialized** event in `recurse()`
             1. If a `.md` file is found:
-                <div class="level level-4" markdown="1">
                 ### Page.php
                 1. Call `init()` to load the file details
                 1. Set the `filePath`, `modified`, `id`
@@ -171,14 +163,12 @@ layout: ../../../layouts/Default.astro
                 1. Call `slug()` to set the URL slug
                 1. Call `visible()` to set visible state
                 1. Set `modularTwig()` status based on if folder starts with `_`
-                </div>
             1. Fire **onPageProcessed** event
             1. If a `folder` found `recurse()` the children
             1. Fire **onFolderProcessed** event
             1. Call `buildRoutes()`
             1. Initialize `taxonomy` for all pages
             1. Build `route` table for fast lookup
-            </div>
         1. Fire **onPagesInitialized** event with [pages]
         1. Fire **onPageInitialized** event with [page]
         1. If page is not routable:
@@ -197,7 +187,6 @@ layout: ../../../layouts/Default.astro
             1. Stop further processing and output the response
         1. Else:
             1. Render page with Twig's `processSite()` method
-                <div class="level level-3" markdown="1">
                 ### Twig.php
                 1. Fire **onTwigSiteVariables** event
                 1. Get the page output
@@ -207,7 +196,6 @@ layout: ../../../layouts/Default.astro
                 1. Set the template name based on file/header/extension information
                 1. Call `render()` method
                 1. Return resulting HTML
-                </div>
             1. Fire **onOutputGenerated** event
             1. Echo the output into output buffer
             1. Fire **onOutputRendered** event
@@ -220,15 +208,13 @@ layout: ../../../layouts/Default.astro
         1. Close session
         1. Close connection to client
         1. Fire **onShutdown** event
-    </div>
-</div>
-Whenever a page has its `content()` method called, the following lifecycle occurs:
 
-<div class="level level-1" markdown="1">
+ページで `content()` メソッドが呼び出された場合、以下のライフサイクルが起きます：
+
 ### Page.php
 1. If content is **NOT** cached:
     1. Fire **onPageContentRaw** event
     1. Process the page according to Markdown and Twig settings. Fire **onMarkdownInitialized** event
     1. Fire **onPageContentProcessed** event
 1. Fire **onPageContent** event
-</div>
+
