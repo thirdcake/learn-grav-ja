@@ -288,6 +288,9 @@ public function onPageInitialized(): void
 
 **DevTools** プラグインにより作られたプラグイン例は、`onPageContentRaw()` というイベントで使われるようになっています。このイベントは、新しいプラグインでは使いません。よって、関数全体を安全に消してください。
 
+> [!訳注]  
+> 2025年時点でpluginを作るとき、そのようなメソッドは見つからないので、もしかしたら古いバージョンのときの情報かもしれません。以下のclassになっていれば、問題ないです。
+
 <h2 id="step-10-final-plugin-class">ステップ10 - 最終的なプラグインclass</h2>
 
 これで最後です！ プラグインが完全にできました。プラグインclassは、次のようになっているはずです：
@@ -385,14 +388,14 @@ class RandomizerPlugin extends Plugin
 
 <h2 id="extending-blueprints">ブループリントの拡張</h2>
 
-If your plugin needs to extend blueprints, e.g. default.yaml from /system/blueprints/pages/default.yaml there's no need to register your blueprint via hooks if you respect the folder structure placing your extending blueprint inside of [your-plugin-directory]/blueprints/pages/default.yaml. Grav will merge your extended blueprint definitions while themes can do the same lateron.
+プラグインがブループリントを拡張する必要があるとき、たとえば `/system/blueprints/pages/default.yaml` から `default.yaml` を拡張するとき、`[your-plugin-directory]/blueprints/pages/default.yaml` 内に、拡張したブループリントを置けば、イベントフックを通じてブループリントを登録する必要はありません。Gravは、拡張されたブループリントをマージします。
 
-> system inheritance if you create this folder structure inside your plugin
+> プラグインフォルダに、以下のようなフォルダ構造を作ったら、システムが継承されます
 > > - blueprints
 > > - - pages
 > > - - - default.yaml
 
-> admin inheritance if you create this folder structure inside your plugin
+> プラグインフォルダに、以下のようなフォルダ構造を作ったら、adminが継承されます
 > > - blueprints
 > > - - admin
 > > - - - pages
@@ -400,8 +403,8 @@ If your plugin needs to extend blueprints, e.g. default.yaml from /system/bluepr
 > 
 > From admin you have to inherit raw or others and theme blueprints extending default won't make it into your configuration.
 
-If it's not pages, do it the same way for other inheritances...
-This way you can keep extending changes at a minimum, that's what extending is all about :-).
+もしpagesでなかったとしても、他の継承を同じようにできます...  
+このようにして、拡張による変更を最小限にできます。拡張とはこのようなものです :-)
 
 <h2 id="merging-plugin-and-page-configuration">プラグイン設定とページ設定のマージ</h2>
 

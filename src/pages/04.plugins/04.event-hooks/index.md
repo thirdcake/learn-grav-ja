@@ -3,15 +3,15 @@ title: "イベントフック"
 layout: ../../../layouts/Default.astro
 ---
 
-In the previous [Plugin Tutorial](../03.plugin-tutorial/) chapter, you might have noticed that our plugin logic was encompassed in two methods.  Each of these methods `onPluginsInitialized` and `onPageInitialized` correspond to **event hooks** that are available throughout the Grav life cycle.
+前回の[プラグインチュートリアル](../03.plugin-tutorial/) では、プラグインのプログラミングが、2つのメソッドで包まれていたことにお気づきかもしれません。これらのメソッド `onPluginInitialized` と、 `onPageInitialized` はそれぞれ、Gravのライフサイクルで利用可能な **イベントフック** に対応しています。
 
-To fully harness the power of Grav plugins you need to know which event hooks are available, in what order are these hooks called, and what is available during these calls. The **event hooks** have a direct relationship to the overall [Grav Lifecycle](../05.grav-lifecycle/).
+Gravのプラグインの力を完全に活用するには、利用可能なイベントフックを、その呼ばれる順番や、それが呼ばれている間にできることも含めて、知っておく必要があります。 **イベントフック** は、[Gravのライフサイクル](../05.grav-lifecycle/) と直接関係しています。
 
-## Event Order
+<h2 id="event-order">イベントの順番</h2>
 
-Most events within Grav fire in a specific order and it is important to understand this order if you are creating plugins:
+Grav内のほとんどのイベントは、特定の順番で発火します。プラグインを作る時、この順番を理解しておくことは重要です。
 
-1. [onFatalException](#onFatalException) _(no order, can occur anytime)_
+1. [onFatalException](#onFatalException) _（順番無し、いつでも起こる）_
 1. `PluginsLoadedEvent` class (1.7)
 1. `PluginsLoadedEvent` class (1.7)
 1. [onPluginsInitialized](#onPluginsInitialized)
@@ -29,7 +29,7 @@ Most events within Grav fire in a specific order and it is important to understa
 1. [onTwigLoader](#onTwigLoader)
 1. [onTwigInitialized](#onTwigInitialized)
 1. [onTwigExtensions](#onTwigExtensions)
-1. [onBuildPagesInitialized](#onBuildPagesInitialized) _(once when pages are reprocessed)_
+1. [onBuildPagesInitialized](#onBuildPagesInitialized) _（pagesが再処理されるときに一度だけ）_
   1. [onPageProcessed](#onPageProcessed) _(each page not cached yet)_
   1. onFormPageHeaderProcessed (1.6) _(each page not cached yet)_
   1. [onFolderProcessed](#onFolderProcessed) _(for each folder found)_
@@ -53,7 +53,7 @@ Most events within Grav fire in a specific order and it is important to understa
 1. [onOutputRendered](#onOutputRendered)
 1. [onShutdown](#onShutdown)
 
-Misc events:
+その他のイベント：
 
 1. [onBlueprintCreated](#onBlueprintCreated)
 1. onTwigTemplateVariables
@@ -71,19 +71,17 @@ Misc events:
 1. onHttpPostFilter (1.7)
 1. `PermissionsRegisterEvent`class (1.7)
 
-## Core Grav Event Hooks
+<h2 id="core-grav-event-hooks">Gravコアのイベントフック</h2>
 
-There are several core Grav event hooks that are triggered during the processing of a page:
-
+Gravコアのイベントフックがあります。ページを処理する間にトリガーします：
 
 #### onFatalException
 
-This is an event that can be fired at any time if PHP throws a fatal exception. This is currently used by the `problems` plugin to handle displaying a list of potential reasons why Grav throws the fatal exception.
-
+PHPが致命的な（fatal）エラーを投げたときに、いつでも発火するイベントです。現在、`problems` プラグインで、Gravが致命的エラーを投げた理由の一覧を表示するのに使われます。
 
 #### onPluginsInitialized
 
-This is the first plugin event available. At this point the following objects have been initiated:
+最初に利用可能なプラグインイベントです。この時点では、以下のオブジェクトが初期化されています。
 
 * Uri
 * Config
@@ -91,49 +89,50 @@ This is the first plugin event available. At this point the following objects ha
 * Cache
 * Plugins
 
-!!!! A plugin will not be loaded at all if the `enabled: false` configuration option has been set for that particular plugin.
+> [!Warning]  
+> プラグインの設定オプションで `enabled: false` となっているプラグインは、全く読み込まれません。
 
 #### onAssetsInitialized
 
-The event indicates the assets manager has been initialized and is ready for assets to be added and managed.
+アセット管理が初期化され、アセット（JSやCSSなど）を追加したり管理したりできるときに発火します。
 
 #### onPagesInitialized
 
-This event signifies that all the pages in Grav's `user/pages` folder have been loaded as objects and are available in the **Pages object**.
+Gravの `user/pages` フォルダ内のすべてのページが読み込まれ、**Pages オブジェクト** として利用可能になったときに発火します。
 
 #### onPageNotFound
 
-This is an event that can be fired if an expected page is not found. This is currently used by the `error` plugin to display a pretty 404 error page.
+期待されたページが見つからなかったときに発火します。 `error` プラグインで、特に404エラーページを表示するのに使われます。
 
 #### onPageInitialized
 
-The current page as requested by a URL has been loaded into the **Page object**.
+URLからリクエストされた現在ページが、**Page オブジェクト** として読み込まれたときに発火します。
 
 #### onOutputGenerated
 
-The output has been processed by the **Twig templating engine** and is now just a string of HTML.
+**Twigテンプレートエンジン** が出力し、HTML文字列となったときに発火します。
 
 #### onPageHeaders
 
-Allows the manipulation of the page headers object.
+ページのフロントマターを操作できます。
 
 #### onOutputRendered
 
-The output has been fully processed and sent to the display.
+出力処理が終わり、表示に送られるときに発火します。
 
 #### onShutdown
 
-A new and very powerful event that lets you perform actions after Grav has finished processing and the connection to the client has been closed.  This is particularly useful for performing actions that don't need user interaction and potentially could impact performance.  Possible uses include user tracking and jobs processing.
+これは新しく追加された、とても強力なイベントです。Gravが処理を終え、クライアントとのコネクションがクローズするときに、発火します。ユーザーとのインタラクションには関係ないが、パフォーマンスの重い処理をしたいときに、特に便利なイベントです。ユーザートラッキングや、ジョブプロセスで利用されるかもしれません。
 
 #### onBeforeDownload
 
-This new event passes in an event object that contains a `file`.  This event can be used to perform logging, or grant/deny access to download said file.
+この新しいイベントは、`file` を含むイベントオブジェクトを渡します。このイベントは、ログを残したり、ファイルのダウンロード時に許可・拒否するときに使われます。
 
 #### onGetPageTemplates
 
-This event enables plugins to provide their own templates in addition to the ones gathered from the theme's directory structure and core. This is especially useful if you wish the plugin to provide its own template.
+このイベントは、テーマのディレクトリ構造とコアから収集されるテンプレートに、プラグイン独自のテンプレートを追加することができます。プラグインから独自のテンプレートを追加したい場合に便利です。
 
-**Example**
+**具体例**
 
 ```php
 /**
@@ -147,15 +146,15 @@ public function onGetPageTemplates(Event $event)
 }
 ```
 
-This allows a plugin to register a template (that it might provide) so that it shows up in the dropdown list of page template types (like when editing a page). In the example above, a template type of `downloads` is added as there is a `downloads.html.twig` file in the `downloads` directory.
+これにより、プラグインは（独自に提供した）テンプレートを登録できます。そして、（編集ページで）テンプレートタイプのリストを表示できます。上記の例では、`downloads` ディレクトリに、`downloads.html.twig` ファイルがあったときに、`downloads` というテンプレートタイプが追加されます。
 
 ![](ongetpagetemplates.png)
 
 #### onGetPageBlueprints
 
-This event, like `onGetPageTemplates` enables the plugin to provide its own resources in addition to core and theme-specific ones. In this case, it's blueprints.
+このイベントは `onGetPageTemplates` に似て、テーマ特有のリソースを、プラグインからコアに追加することができます。このイベントでは、ブループリントを追加します。
 
-**Example**
+**具体例**
 
 ```php
 $scanBlueprintsAndTemplates = function () use ($grav) {
@@ -175,17 +174,17 @@ $scanBlueprintsAndTemplates = function () use ($grav) {
 };
 ```
 
-In this example, we are using both the `onGetPageTemplates` and `onGetPageBlueprints` hooks to make these plugin-provided resources (templates and blueprints) available to Grav for inheritance and other uses.
+上記の例では、`onGetPageTemplates` と `onGetPageBlueprints` フックの両方を使用して、プラグインが提供するリソース（テンプレートとブループリント）を Grav が継承やその他の用途で利用できるようにしています。
 
-## Twig Event Hooks
+<h2 id="twig-event-hooks">Twigイベントフック</h2>
 
-Twig has its own set of event hooks.
+Twgiには、独自のイベントフックが設定されています。
 
 #### onTwigTemplatePaths
 
-The base locations for template paths have been set on the **Twig object**.  If you need to add other locations where Twig will search for template paths, this is the event to use.
+テンプレートパスのベースとなる場所を、**Twigオブジェクト** に設定します。Twigテンプレートを探す場所を追加したいときに、このイベントを使います。
 
-**Example**
+**具体例**
 
 ```php
 /**
@@ -199,7 +198,7 @@ The base locations for template paths have been set on the **Twig object**.  If 
 
 #### onTwigInitialized
 
-The Twig templating engine is now initialized at this point.
+Twigテンプレートエンジンが初期化された時点で発火します。
 
 #### onTwigExtensions
 
@@ -207,57 +206,57 @@ The core Twig extensions have been loaded, but if you need to add [your own Twig
 
 #### onTwigPageVariables
 
-Where Twig processes a page directly, i.e. when you set `process: twig: true` in a page's YAML headers. This is where you should add any variables to Twig that need to be available to Twig during this process.
+Twigがページを直接処理するような場合（たとえば、`process: twig: true` がページフロントマターに設定されている場合）に使います。ここで、処理中にTwigに使って欲しい変数を追加できます。
 
 #### onTwigSiteVariables
 
-Where Twig processes the full site template hierarchy.  This is where you should add any variables to Twig that need to be available to Twig during this process.
+サイト全体でTwigが処理する場面で使います。ここで、処理中にTwigに使って欲しい変数を追加できます。
 
-## Collection Event Hooks
+<h2 id="collection-event-hooks">コレクション・イベントフック</h2>
 
 #### onCollectionProcessed
 
-If you need to manipulate a collection after it has been processed this is the time to do it.
+コレクションが処理された後で、それを操作したいときに利用できます。
 
-## Page Event Hooks
+<h2 id="page-event-hooks">ページ・イベントフック</h2>
 
 #### onBuildPagesInitialized
 
-This event is triggered once when pages are going to be reprocessed.  This typically happens if the cache has expired or needs refreshing.  This is a useful event to use for plugins that need to manipulate content and cache the results.
+pagesが、再処理されるときに、一度だけ発火します。キャッシュが失効した場合や、リフレッシュが必要なときに、起こります。コンテンツを操作し、結果をキャッシュする必要があるプラグインで、便利に使えます。
 
 #### onBlueprintCreated
 
-This is used for processing and handling forms.
+フォームを処理したり、操作したりするために使われます。
 
 #### onPageContentRaw
 
-After a page has been found, header processed, but content **not** processed.  This is fired for **every page** in the Grav system.  Performance is not a problem because this event will not run on a cached page, only when the cache is cleared or a cache-clearing event occurs.
+ページが見つかり、フロントマターが処理され、コンテンツが処理される **前** に発火します。このイベントは、Gravシステムの **すべてのページ** で発火します。このイベントは、キャッシュされたページでは実行されないため、パフォーマンスが問題になるのは、キャッシュがクリアされたり、キャシュクリアイベントが起こった時だけです。
 
 #### onPageProcessed
 
-After a page is parsed and processed.  This is fired for **every page** in the Grav system.  Performance is not a problem because this event will not run on a cached page, only when the cache is cleared or a cache-clearing event occurs.
+ページがパースされ、処理されたあとに発火します。このイベントは、Gravシステムの **すべてのページ** で発火します。このイベントは、キャッシュされたページでは実行されないため、パフォーマンスが問題になるのは、キャッシュがクリアされたり、キャシュクリアイベントが起こった時だけです。
 
 #### onMarkdownInitialized
 
-Called when Markdown has been initialized. Allows to override the default Parsedown processing implementation. See [an usage example on the PR that introduced it](https://github.com/getgrav/grav/pull/747#issuecomment-206821370).
+マークダウンが初期化されたときに呼び出されます。デフォルトのParsedown処理を上書きしたいときに使います。[使用例](https://github.com/getgrav/grav/pull/747#issuecomment-206821370) を見てください
 
 #### onPageContentProcessed
 
-This event is fired after the page's `content()` method has processed the page content.  This is particularly useful if you want to perform actions on the post-processed content but ensure the results are cached.  Performance is not a problem because this event will not run on a cached page, only when the cache is cleared or a cache-clearing event occurs.
+ページの `content()` メソッドが処理されたあとに発火します。コンテンツ処理後に、何か処理を付け加えて、キャッシュもしたいときに便利です。キャッシュされたページでは実行されないため、パフォーマンスが問題になるのは、キャッシュがクリアされたり、キャッシュクリアイベントが起こった時だけです。
 
 #### onFolderProcessed
 
-After a folder is parsed and processed.  This is fired for **every folder** in the Grav system.  Performance is not a problem because this event will not run on a cached page, only when the cache is cleared or a cache-clearing event occurs.
+フォルダがパースされ、処理された後に発火します。Gravシステム内の **すべてのフォルダ** で発火します。キャッシュされたページでは実行されないので、パフォーマンスが問題になるのは、キャッシュがクリアされたり、キャッシュクリアイベントが起こった時だけです。
 
 #### onPageFallBackUrl
 
-If a route is not recognized as a page, Grav tries to access a page media asset. The event is fired as soon as the procedure begins, so plugins can hook and provide additional functionality.
+ルーティングがページとして認識されないとき、Gravはメディアアセットにアクセスしようとします。このイベントは、この処理が始まるとすぐに発火するので、これをフックすれば、追加の機能を提供できます。
 
 #### onMediaLocate
 
-Adds support for custom media locations for excerpts.
+カスタムのメディア置き場をサポートします。
 
 #### onTwigLoader
 
-Adds support for use of namespaces in conjunction with two new methods in Twig class: `Twig::addPath($path, $namespace)` and `Twig::prependPath($path, $namespace)`.
+Twigクラスに2つのメソッドを追加することで、名前空間を使えるようにします： `Twig::addPath($path, $namespace)` と、 `Twig::prependPath($path, $namespace)` です。
 
