@@ -3,19 +3,19 @@ title: "Gravコマンド"
 layout: ../../../layouts/Default.astro
 ---
 
-Grav comes with a built-in command-line interface (CLI) which can be found at `bin/grav`. The CLI is extremely useful for running recurring tasks such as **clearing the cache**, making **backups**, and more.
+Grav には、組み込みで `bin/grav` というコマンドラインインターフェース（CLI） があります。繰り返しのタスク実行時に、CLIはとても便利です。たとえば、**キャッシュをクリアする** ときや、**バックアップ** を取るときなどです。
 
-Accessing the CLI is a simple process but you need to use a **terminal**.  On a mac this is called `Terminal`, on windows, it's called `cmd` and on Linux, it's just a shell. UNIX style commands are not natively available in Windows cmd. Installing the [msysgit](http://msysgit.github.io/) package on a Windows machine adds [Git](https://git-scm.com/) and Git BASH, which is an alternative command prompt that makes UNIX commands available.  If you are accessing your server remotely, you most likely will use **SSH** to remotely log in to your server.  Check out this [great tutorial for more information on SSH](http://code.tutsplus.com/tutorials/ssh-what-and-how--net-25138).
+CLIにアクセスするのは、シンプルな作業ですが、**ターミナル** を使う必要があります。MacOS では、`Terminal` と呼ばれ、Windowsでは、`cmd` と呼ばれ、Linuxでは、単にシェルと呼ばれます。Windows の cmd では、UNIX スタイルのコマンドは、そのままでは使えません。Windows マシンに [msysgit](http://msysgit.github.io/) をインストールし、[Git](https://git-scm.com/) と Git BASH という代替のコマンドプロンプトを追加することで、UNIX コマンドが利用可能になります。リモートでサーバーにアクセスするとき、**SSH** を使うでしょう。[SSHの素晴らしいチュートリアル](http://code.tutsplus.com/tutorials/ssh-what-and-how--net-25138) をチェックしてください。
 
-Although some operations can be performed manually, by _relying_ on the CLI, these tasks could be automated via _cronjobs_ that run daily.
+いくつかの処理を、手作業でやるのではなく、CLI に _頼る_ なら、それらの処理は、毎日の _cronjobs_ により自動化できます。
 
-To get a list of all the commands available in Grav, you can run the command:
+Grav で利用できるすべてのコマンドの一覧は、次のコマンドで表示できます：
 
 ```bash
 bin/grav list
 ```
 
-This should display something like:
+次のように表示されるでしょう：
 
 ```txt
 Available commands:
@@ -33,7 +33,7 @@ Available commands:
   security     Capable of running various Security checks
 ```
 
-To get help for a specific command, you can prepend help to the command:
+特定のコマンドのヘルプを見たいときは、コマンドの前に help を入れてください：
 
 ```bash
 bin/grav help install

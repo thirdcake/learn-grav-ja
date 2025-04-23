@@ -3,28 +3,28 @@ title: "GPMコマンド"
 layout: ../../../layouts/Default.astro
 ---
 
-Since the release of version **0.9.3**, Grav includes a _GPM_ (Grav Package Manager) which allows you to install, update, uninstall and list all the themes and plugins available on the Grav repository, as well as upgrade Grav itself to the latest version.
+バージョン **0.9.3** をリリースしてから、Grav には _GPM_ （Grav パッケージマネージャ）が搭載されています。この GPM により、Gravリポジトリにあるテーマやプラグインすべてを、インストールしたり、更新したり、アンインストールしたり、一覧表示したりできます。また、Grav そのものを最新バージョンにアップグレードできます。
 
-Like the [Grav CLI](../02.grav-cli/), the _GPM_ is a command-line tool which requires the user to run commands via a command-line interface, such as **Terminal** in MacOS. UNIX style commands are not natively available in Windows cmd. Installing the [msysgit](https://msysgit.github.io/) package on a Windows machine adds [Git](https://git-scm.com/) and Git BASH, which is an alternative command prompt that makes UNIX commands available.
+[Grav CLI](../02.grav-cli/) と同様、 _GPM_ は、MacOSにおける **Terminal** のような、コマンドラインインターフェースを通じてコマンドを実行する、コマンドラインツールです。UNIXスタイルのコマンドは、Windows の cmd では、ネイティブには動きません。Windows マシンに [msysgit](http://msysgit.github.io/) をインストールし、[Git](https://git-scm.com/) と Git BASH という代替のコマンドプロンプトを追加することで、UNIX コマンドが利用可能になります。
 
-To get started with _GPM_, you can run the following command to receive a list of all presently available commands:
+_GPM_ を使い始めるにあたり、利用可能なコマンドの一覧を得るため、次のコマンドを実行できます。
 
 ```bash
 bin/gpm list
 ```
 
-To receive help for a specific command, you can add help to the line before the command:
+特定のコマンドのヘルプが必要なときは、コマンドの前に help を追加してください：
 
 ```bash
 bin/gpm help install
 ```
 
 > [!Info]  
-> To be able to perform **install**, **upgrade**, and **selfupgrade**, PHP must have the `php_openssl` extension enabled.  If you get a fatal error while downloading, this is probably the cause.
+> **install** と、 **upgrade** 、 **selfupgrade** を実行したいとき、PHPには `php_openssl` 拡張が有効になっていなければいけません。もしダウンロード中に致命的エラーが出る場合、おそらくこれが原因です。
 
-#### PHP CGI-FCGI Information
+<h4 id="php-cgi-fcgi-information">PHP CGI-FCGI 情報</h4>
 
-To determine if your server is running `cgi-fcgi` on the command line, type the following:
+コマンドラインで、サーバーが `cgi-fcgi` で動いているか知るには、次のように入力してください：
 
 ```bash
 php -v
@@ -36,7 +36,7 @@ Zend Engine v2.5.0, Copyright (c) 1998-2014 Zend Technologies
 
 If you see a reference to `(cgi-fcgi)` you will need to prefix all `bin/gpm` commands with `php-cli`. Alternatively, you can set up an alias in your shell with something like: `alias php="php-cli"` which will ensure the **CLI** version of PHP runs from the command line.
 
-## How Does it Work?
+<h2 id="how-does-it-work">どのように動いているか？</h2>
 
 _GPM_ downloads the repository metadata from **GetGrav.org**. The repository contains all the details about the packages available and _GPM_ is also capable of determining whether any of these packages are already installed and if they need updating.
 
@@ -44,7 +44,7 @@ The repository itself gets cached locally, on the Grav instance machine running 
 
 Most of the commands (listed below) come with the option `--force (-f)` which allows the forcing a re-fetch of the repository. This could be extremely useful in the event an update is known to be out there and the user doesn't want to wait a full 24-hour cycle before the cache gets cleared.
 
-## Commands
+<h2 id="commands">コマンド</h2>
 
 Below, we have broken down all of the commands available for _GPM_. To run a command, launch your favorite terminal app and from within the root of your Grav instance, you can type `bin/gpm <command>`.
 
@@ -62,7 +62,7 @@ For instance, if we had a very old version of Antimatter (v1.1.1), but the lates
 
 ![](index-outdated.jpg)
 
-!! You can use --installed-only` option to show the state of **only your installed** plugins and themes.
+!! You can use `--installed-only` option to show the state of **only your installed** plugins and themes.
 
 ## Info
 

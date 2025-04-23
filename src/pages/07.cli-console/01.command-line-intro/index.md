@@ -3,13 +3,14 @@ title: "コマンドラインの導入"
 layout: ../../../layouts/Default.astro
 ---
 
-It's no secret that Grav was built with the command line in mind. While the Admin plugin is certainly making it easier to get more done without opening a Terminal (MacOS and Linux) or Command Prompt (Windows), there's a lot to be said about the speed and level of control that comes with working from the command line.
+Gravが、コマンドラインを念頭に作られたことは、よく知られています。管理パネルプラグインは、たしかに、ターミナル（MacOS や Linux）やコマンドプロンプト（Windows）を開かなくても、いろいろなことを、かんたんにできるようにしてくれますが、コマンドラインでできることのスピードやレベルについては、書くべきことが、たくさんあります。
 
-This is especially true for folks that are running their own development servers, or a remote server with which they have the ability to access the command line. The amount of tools at your disposal from the command line are incredible. You can control virtually all aspects of your site's hosting, Grav, and its plugins and themes with a handful of keystrokes.
+このことは、自社サーバーや、コマンドラインでアクセス可能なリモートサーバーで運用している方に、特に当てはまります。コマンドラインから使えるツールの量は、信じられないほどあります。わずかなキーストロークで、サイトのホスティングから、Gravシステム、そのプラグインやテーマまで、実質的にすべての面をコントロール可能です。
 
-In the end, it all comes down to personal preference. On this page, we will list some great resources out there to help you become familiar with the command line.
+結局は、すべては個人の好みに帰着します。このページでは、いくつかの素晴らしいリソースを取り上げます。それらは、コマンドラインに親しむのに役立ちます。
 
-!! Not all operating systems are compatible with one another when it comes to commands. There are minor differences between MacOS and many Linux distros, with Windows' Command Prompt having a very different set of commands from the other two.
+> [!Info]  
+> すべてのOSで、コマンドの互換性があるわけではありません。MacOS と 多くのLinux のディストリビューションの間には、細かい違いがありますし、Windows のコマンドプロンプトと比べれば、大きな違いがあります。
 
 ## MacOS
 
@@ -25,9 +26,9 @@ Here are some great resources to help you become accustomed to using the Termina
 
 ## Linux
 
-The vast majority of Linux (and Unix) distros out there have one big thing in common: the Bash command line interface (Terminal). Whether you are running a GUI such as Gnome, Unity, or KDE or not, there is a good chance that if you're running a Linux distro on your desktop or laptop you have visited the command line.
+世の中の Linux（および Unix ）ディストリビューションの多くには、共通点があります：Bash コマンドラインインターフェース（ターミナル）です。Gnomeや、Unity、KDE、その他いずれの GUI で動かしていたとしても、デスクトップであれ、ノートPCであれ、コマンドラインを訪れたチャンスはあるでしょう。
 
-After all, it's powerful. You can do pretty much anything you could with the GUI directly into the command line, often with more control over how the commands are carried out. Here are some excellent resources to help you get familiar with the Terminal in Linux:
+結局、CLIは、パワフルです。GUIでできることは、ほとんど何でも、直接コマンドラインで実現できます。Linux のターミナルに親しむための素晴らしいリソースは、次のようなものがあります：
 
 * [TechSpot's Beginner's Guide to the Linux Command Line](http://www.techspot.com/guides/835-linux-command-line-basics/) - An excellent beginner's guide to the command line.
 * [MakeUseOf's Quick Guide to Getting Started with the Linux Command Line](http://www.makeuseof.com/tag/a-quick-guide-to-get-started-with-the-linux-command-line/) - Another great resource for learning about the Terminal.
@@ -41,7 +42,8 @@ Windows sits apart from the pack for a number of reasons. Many of the commands i
 * [MakeUseOf's Beginner's Guide to the Windows Command Line](http://www.makeuseof.com/tag/a-beginners-guide-to-the-windows-command-line/) - A well-written introduction to the command line for Windows.
 * [DOSPrompt.info](http://dosprompt.info/) - An entire site devoted to familiarizing users with the Command Prompt.
 
-!! All of Grav's CLI commands rely on PHP, but this is not immediately available in Windows. You can find out whether it is installed by opening a console and typing `php -v` to check. If `'php' is not recognized as an internal or external command ...` returns, it is not.
+> [!Info]  
+> All of Grav's CLI commands rely on PHP, but this is not immediately available in Windows. You can find out whether it is installed by opening a console and typing `php -v` to check. If `'php' is not recognized as an internal or external command ...` returns, it is not.
 
 If you want to add PHP to your Windows system, you need to find your "Environment Variables", either by searching for it in the Start-Menu or going to Control Panel -> Advanced System Settings -> Click the "Environment Variables"-button.
 
@@ -49,15 +51,15 @@ Under "System Variables", find "Path" and click edit. Copy the "variable value" 
 
 When that is done, open a new console (or restart your current one) so the new path is applied. Then try `php -v` again, you should get an output like: `PHP 7.0.7 (cli) ...`. When you run Grav's commands, you will need to prepend `php` to them, for instance `php grav/gpm index`.
 
-## Grav-specific Commands
+<h2 id="grav-specific-commands">Grav特有のコマンド</h2>
 
 One of the coolest things about Grav is that you have a host of powerful commands at your disposal to do everything from installing additional plugins and themes to adding users to the Admin. In this section, we will list many of the most commonly used commands.
 
 All of the commands listed below are compatible with <strong>any operating system.</strong>
 
 
-| Command                           | Description                                                                                                                        |
-| :----------------                 | :--------------------------------------                                                                                            |
+| コマンド | 説明  |
+| :----------------   | :--------------------------------------  |
 | `bin/grav list`                   | Lists all commands available in Grav (excluding the GPM).                                                                          |
 | `bin/grav help <command>`         | Gives you help on a specific command.                                                                                              |
 | `bin/grav new-project <location>` | Used to create a new, clean Grav instance in a different folder. Can be run from an existing Grav install.                         |
@@ -83,11 +85,11 @@ All of the commands listed below are compatible with <strong>any operating syste
 
 The commands listed below, are compatible with <strong>mac or unix systems.</strong>
 
-| Command                                  | Description                                                                                                               |
+| コマンド                 | 説明                                                                                                           |
 | :----------------                        | :--------------------------------------                                                                                   |
 |  `bin/gpm index \| grep '\| installed'`  | Lists all plugins and themes you currently have installed. |
 
-## Symbolic Links
+<h2 id="symbolic-links">シンボリック・リンク</h2>
 
 Symbolic Links (also known as symlinks) are incredibly useful and easy to perform within the command line. What it does it create a virtual copy (clone) of a given folder or its contents and puts it wherever you'd like it to go. Unlike a true copy, it is simply a tunnel to the original so everything you see and change is reflected in multiple places at once.
 
@@ -97,7 +99,7 @@ Where Grav is concerned, symlinks are a great way to add plugins, themes, and co
 
 The process for performing a symlink is pretty straightforward, with minor differences between operating systems.
 
-### Symbolic Links in MacOS and Linux
+<h3 id="symbolic-links-in-macox-and-linux">MacOS と Linux でのシンボリックリンク</h3>
 
 ![](osx_symlink.png)
 
@@ -105,7 +107,7 @@ The command follows a common pattern of `ln -s <original file, directory, or its
 
 The commands that initiate a symlink differ between operating systems. For MacOS and the majority of Unix and Linux distros, `ln -s` is the command. The `ln` part tells the system you want to create a link. The `-s` switch sets the link as symbolic.
 
-### Symbolic Links in Windows
+<h3 id="symbolic-links-in-windows">Windows でのシンボリックリンク</h3>
 
 The basic structure of the command in Windows is `mklink <type> <put virtual copies here> <original file, directory, or its contents>`. Unlike MacOS or Linux, you will need to set the argument for the type of file you're symbolically linking. The source and destination are also flipped in this case, where the new symbolic link comes before the file you're linking to. There are three arguments you can use here:
 
@@ -114,7 +116,7 @@ The basic structure of the command in Windows is `mklink <type> <put virtual cop
 * `/d` - This creates a soft link, or a shortcut. It's not likely to be used for the purposes outlined here.
 
 
-### Example Commands
+<h3 id="example-commands">コマンドの例</h3>
 
 Basically, you state the command that initiates the symlink, what you're symbolically linking, and where you're putting the virtual copies. Below, we've detailed examples of these commands:
 
