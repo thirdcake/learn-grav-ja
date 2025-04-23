@@ -28,7 +28,7 @@ bin/gpm install devtools
 [detoolsを使って新しくプラグインを作成する](../03.plugin-tutorial/) ため、以下のコマンドを入力します。プラグイン名は、`myflexplugin` としましょう：
 
 ```sh
-grav-admin bin/plugin devtools new-plugin
+bin/plugin devtools new-plugin
 ```
 
 以下のように質問に答えてください。重要なのは、`Please choose an option:` で flex を選ぶことです。

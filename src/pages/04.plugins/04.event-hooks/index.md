@@ -11,10 +11,10 @@ Gravのプラグインの力を完全に活用するには、利用可能なイ�
 
 Grav内のほとんどのイベントは、特定の順番で発火します。プラグインを作る時、この順番を理解しておくことは重要です。
 
-1. [onFatalException](#onFatalException) _（順番無し、いつでも起こる）_
+1. [onFatalException](#onfatalexception) _（順番無し、いつでも起こる）_
 1. `PluginsLoadedEvent` class (1.7)
 1. `PluginsLoadedEvent` class (1.7)
-1. [onPluginsInitialized](#onPluginsInitialized)
+1. [onPluginsInitialized](#onpluginsinitialized)
 1. `FlexRegisterEvent` class (1.7)
 1. onThemeInitialized
 1. onRequestHandlerInit (1.6)
@@ -24,13 +24,13 @@ Grav内のほとんどのイベントは、特定の順番で発火します。�
   1. onAction.{action} (1.6)
 1. onBackupsInitialized
 1. onSchedulerInitialized (1.6)
-1. [onAssetsInitialized](#onAssetsInitialized)
-1. [onTwigTemplatePaths](#onTwigTemplatePaths)
-1. [onTwigLoader](#onTwigLoader)
-1. [onTwigInitialized](#onTwigInitialized)
-1. [onTwigExtensions](#onTwigExtensions)
-1. [onBuildPagesInitialized](#onBuildPagesInitialized) _（pagesが再処理されるときに一度だけ）_
-  1. [onPageProcessed](#onPageProcessed) _(each page not cached yet)_
+1. [onAssetsInitialized](#onassetsinitialized)
+1. [onTwigTemplatePaths](#ontwigtemplatepaths)
+1. [onTwigLoader](#ontwigloader)
+1. [onTwigInitialized](#ontwiginitialized)
+1. [onTwigExtensions](#ontwigextensions)
+1. [onBuildPagesInitialized](#onbuildpagesinitialized) _（pagesが再処理されるときに一度だけ）_
+  1. [onPageProcessed](#onpageprocessed) _(each page not cached yet)_
   1. onFormPageHeaderProcessed (1.6) _(each page not cached yet)_
   1. [onFolderProcessed](#onFolderProcessed) _(for each folder found)_
 1. [onPagesInitialized](#onPagesInitialized)
