@@ -27,54 +27,54 @@ Gravでは、ブループリントを次のように使います：
 
 <h4 id="themes-and-plugins">テーマとプラグイン</h4>
 
-テーマやプラグインを使う時、慣例的に、パッケージに **blurprints.yaml** ファイルを入れます。これにより、Gravは管理プラグインに導入するリソースのメタデータを得ることができます。
+テーマやプラグインを使う時、慣例的に、パッケージに **blurprints.yaml** ファイルを置きます。こうすることで、Gravにそのリソースのメタデータが伝わり、管理プラグイン上で表示できるようになります。
 
-**blueprints.yaml** ファイルは、あらゆるテーマやプラグインで重要です。GPM（Gravパッケージマネージャ）システムに不可欠です。GPMは、ユーザーにプラグインを使えるようにするため、ブループリントに入っている情報を使います。
+**blueprints.yaml** ファイルは、あらゆるテーマやプラグインで重要です。GPM（Gravパッケージマネージャ）システムに不可欠です。GPMは、ブループリントに入っている情報を使って、ユーザーがプラグインを使えるようにします。
 
-[プラグインのブループリント例](./02.example-plugin-blueprint/) では、**アセット** プラグインのブループリントを詳しく見ていきます。このブループリントには、名前や、作者情報、キーワード、ホームページ、バグレポートリンク、その他のメタデータがセットされています。また、どこでプラグインアップデートを探せるかをGravシステムに教えるだけでなく、管理プラグインからアクセス可能で便利なリソースを提供します。
+[具体例：プラグインのブループリント](./02.example-plugin-blueprint/) では、**Assets** プラグインのブループリントを詳しく見ていきます。このブループリントには、名前や、作者情報、キーワード、ホームページ、バグレポートリンク、その他のメタデータが入力されています。また、どこでプラグインアップデートを探せるかをGravシステムに教えるだけでなく、管理プラグインからアクセス可能で便利なリソースを提供します。
 
-Once this information is given, further down in the Blueprint's page, you find forms information. This information creates the Admin Forms that are accessible by the user in the backend of Grav. For example, if you wanted to add a toggle that enables or disables a particular feature of that plugin, you would add it here.
+このリソース情報が与えられたら、ブループリントのページのさらに下に、フォームの情報が見えるようになります。この情報は Grav のバックエンドでユーザーがアクセスできる管理フォームを作成します。例えば、プラグインの特定の機能を有効または無効にするトグルを追加したい場合、ここに追加します。
 
 ![Admin Forms](blueprints_1.png)
 
-The **blueprints.yaml** file works with the plugin's named YAML file (example: **assets.yaml**). The blueprint sets what the configurable options are, and the resource's self-named named YAML file sets their values. It's this named YAML file that is then duplicated to the Grav instance's `user/config` section to override these defaults either manually or through the Grav admin.
+**blurprints.yaml** ファイルは、プラグイン名のYAMLファイル（例：**assets.yaml**）と連携して機能します。ブループリントは、設定可能なオプションを定義します。プラグイン名のYAMLファイルは、それぞれの具体的な値を設定します。このプラグイン名のYAMLファイルは、後で `user/config` にコピーされ、デフォルト値を上書きできます。この複製は、手動でも、管理パネルからでも行えます。
 
-So essentially, when it comes to any configuration option for a theme or plugin, the **blueprints.yaml** file defines it, and the named YAML file for that resource tells you what it is set at.
+テーマやプラグインで設定オプションに関しては、**blurprint.yaml** ファイルで定義し、プラグイン名（テーマ名）のYAMLファイルでその設定内容を教えてくれます。
 
 <h4 id="pages">ページ</h4>
 
-Grav Pages can really be anything. A page can be a blog listing, a blog post, a product page, an image gallery, etc.
+Gravのページは、何にでもなれます。ブログの一覧ページにもなりえますし、ブログ投稿にも、製品ページにも、イメージギャラリーにも、その他でも。
 
-What determines what a page should do and how it should appear is the **Page Blueprint**.
+どのページが何をして、何を表すべきかを決めるのは、**ページのブループリント** です。
 
-Grav provides some basic Page Blueprints: Default and Modular. Those are the two main building blocks of Grav.
+Grav では、いくつかの基本的なページのブループリントを提供します：Default と、Modular です。これらは、Gravを構築する主要な2大要素です。
 
-Additional page Blueprints are added and set up by the theme, which might decide to add as many page Blueprints as possible, or focus on some particular Page blueprints focused on what it needs to do.
+ページのブループリントは、テーマによって追加され、セットアップされます。テーマは、できるだけ多くのページのブループリントを追加するかもしれませんし、特定の用途のためのページのブループリントに焦点を当てるかもしれません。
 
-A Grav theme is much more flexible and powerful than what you might be used to on other platforms.
+Grav のテーマは、他のプラットフォームで使われている以上に柔軟でパワフルです。
 
-This allows themes to be application specific. For example, a theme might specialize in one of those goals:
+この点で、テーマは特化させられます。たとえば、次のような目的のひとつに特化できます：
 
-- building a documentation site, like the one you are reading now.
-- building an e-commerce site.
-- build a blog.
-- build a portfolio site.
+- ドキュメントサイトを作りたい（あなたが今読んでいるような）
+- Eコマースサイトを作りたい
+- ブログを作りたい
+- ポートフォリオサイトを作りたい
 
-A theme can also allow its users to build all of them, but usually a fine-tuned theme created for a single purpose can satisfy that goal better than a generic theme.
+テーマは同時に、これらすべてを作ることも許容します。しかし通常は、ひとつの目的に集中してチューニングされたテーマは、何でもこなすテーマよりも、より目標を満たしてくれます。
 
-A page file is used by a page by setting its markdown file name, e.g. `blog.md`, `default.md` or `form.md`.
+ページファイルは、`blog.md` や、 `default.md` 、 `form.md` のようなマークダウンファイルを設定することで、ページとして使われます。
 
-Each of those files will use a different page file. You can also change the file type by [using the template header property](https://learn.getgrav.org/content/headers#template).
+それぞれのファイルは、異なるページファイルを使います。[フロントマターのtemplate](../../02.content/02.headers/#template) によってファイルタイプを変えることもできます。
 
-The template used by a page not only determines the "look and feel" in the frontend, but also determines how the Admin Plugin will render it, allowing you to add options, select boxes, custom inputs and toggles.
+ページで使われるテンプレートは、単にフロントエンドの "見た目や雰囲気" を決定するだけでなく、どのように管理パネルプラグインがレンダリングし、オプションやセレクトボックス、カスタム入力、トグル入力などを追加するかも決定します。。
 
-How to do it: in your theme, add a `blueprints/` folder and add a YAML file with the name of the page template you added. For example if you add a `blog` page template, add a `blueprints/blog.yaml` file. You can find an [example of this directory in the **Antimatter** theme](https://github.com/getgrav/grav-theme-antimatter/tree/develop/blueprints).
+そのやり方：テーマで、`blueprints/` フォルダを追加し、ページテンプレート名のYAML ファイルを追加します。たとえば、`blog` ページがある場合、`blueprints/blog.yaml` を追加してください。[**Antimatter** テーマの例](https://github.com/getgrav/grav-theme-antimatter/tree/develop/blueprints) があります。
 
-<h2 id="components-of-a-blueprint">ブループリントのコンポーネント</h2>
+<h2 id="components-of-a-blueprint">ブループリントの構成</h2>
 
-There are two sets of information presented in a **blueprints.yaml** file. The first set of metadata information is the identity of the resource itself, the second set is about the forms. All this information is stored in a single **blueprints.yaml** file stored at the root of each plugin and theme.
+**blueprints.yaml** ファイルに書かれる情報は、2種類あります。1種類目のメタデータ情報は、そのリソースそのもののアイデンティティです。2つ目は、フォームに関する情報です。これらすべてが、ひとつの **blurprints.yaml** ファイルに入力され、それぞれのプラグインやテーマのルートフォルダに置かれています。
 
-Here is an example of the metadata portion of a **blueprints.yaml** file:
+以下は、**blueprints.yaml** ファイルのメタデータ部分の例です：
 
 ```yaml
 name: GitHub
@@ -93,11 +93,11 @@ bugs: https://github.com/getgrav/grav-plugin-github/issues
 license: MIT
 ```
 
-As you can see here, this area contains a lot of general identifying information about the plugin, including its name, version number, description, author information, license, keywords, and URLs where you can find more information or report bugs. You can see this section in action in the screenshot taken from the Grav Admin below.
+見てのとおり、ここには、プラグインの一般的な識別情報が書かれます。たとえば、プラグイン名や、バージョン番号、説明、作者情報、ライセンス、キーワード、より詳しい情報を得るためやバグレポートするためのURL などです。このセクションは、以下のような管理パネルのスクリーンショットで見られます。
 
 ![Admin Forms](blueprints_2.png)
 
-The next section is the forms area, which is just a couple spaces below the data listed above. This area of the blueprint generates forms and fields used to configure the plugin from the Grav Admin. Here is a quick example of this area of the **blueprints.yaml** file.
+次のセクションは、フォームに関する部分で、上記のデータのすぐ下にあります。この部分は、管理パネルからプラグイン設定をするためのフォームや入力欄を生成します。以下は、**blueprints.yaml** ファイルのこの部分の簡易的な例です。
 
 ```yaml
 form:
@@ -115,7 +115,7 @@ form:
             type: bool
 ```
 
-This area of the file creates any administrative options accessible in the Grav Admin. In this particular instance, we have created a simple **Plugin Status** toggle which lets the user enable or disable the plugin from the admin (pictured below).
+ファイルのこの部分は、管理パネルからアクセス可能な管理オプションを作成します。この例では、管理画面からプラグインを有効または無効にできるシンプルなトグルを作成しています（以下の画像のようになります）
 
 ![Admin Forms](blueprints_3.png)
 

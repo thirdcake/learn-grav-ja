@@ -3,7 +3,7 @@ title: "GPMコマンド"
 layout: ../../../layouts/Default.astro
 ---
 
-バージョン **0.9.3** をリリースしてから、Grav には _GPM_ （Grav パッケージマネージャ）が搭載されています。この GPM により、Gravリポジトリにあるテーマやプラグインすべてを、インストールしたり、更新したり、アンインストールしたり、一覧表示したりできます。また、Grav そのものを最新バージョンにアップグレードできます。
+バージョン **0.9.3** をリリース以降、Grav には _GPM_ （Grav パッケージマネージャ）が搭載されています。この GPM により、Gravリポジトリにあるテーマやプラグインすべてを、インストールしたり、更新したり、アンインストールしたり、一覧表示したりできます。また、Grav そのものを最新バージョンにアップグレードできます。
 
 [Grav CLI](../02.grav-cli/) と同様、 _GPM_ は、MacOSにおける **Terminal** のような、コマンドラインインターフェースを通じてコマンドを実行する、コマンドラインツールです。UNIXスタイルのコマンドは、Windows の cmd では、ネイティブには動きません。Windows マシンに [msysgit](http://msysgit.github.io/) をインストールし、[Git](https://git-scm.com/) と Git BASH という代替のコマンドプロンプトを追加することで、UNIX コマンドが利用可能になります。
 
@@ -34,43 +34,45 @@ Zend Engine v2.5.0, Copyright (c) 1998-2014 Zend Technologies
     with the ionCube PHP Loader v4.6.1, Copyright (c) 2002-2014, by ionCube Ltd.
 ```
 
-If you see a reference to `(cgi-fcgi)` you will need to prefix all `bin/gpm` commands with `php-cli`. Alternatively, you can set up an alias in your shell with something like: `alias php="php-cli"` which will ensure the **CLI** version of PHP runs from the command line.
+もしPHPが `(cgi-fcgi)` を参照している場合、すべての `bin/gpm` コマンドの前に、`php-cli` を入力する必要があります。もしくは、シェルにエイリアスを設定することもできます。このように： `alias php="php-cli"` これは、PHPの **CLI** バージョンでコマンドラインからの実行を行うようにするためのものです。
 
 <h2 id="how-does-it-work">どのように動いているか？</h2>
 
-_GPM_ downloads the repository metadata from **GetGrav.org**. The repository contains all the details about the packages available and _GPM_ is also capable of determining whether any of these packages are already installed and if they need updating.
+_GPM_ は、**GetGrav.org** からリポジトリのメタデータをダウンロードします。そのリポジトリには、利用可能なすべてのパッケージの詳細が入っており、 _GPM_ により、これらのパッケージがインストール済みかどうかや、アップデートが必要かどうかを検討できます。
 
-The repository itself gets cached locally, on the Grav instance machine running the command, for 24 hours. Any further request after the cache has been generated will not contact the **GetGrav.org** server, but rather serve from the locally-stored repository. This approach guarantees a much quicker response.
+そのリポジトリ自身は、Gravのコマンドを実行したPCのローカル環境に、24時間キャッシュされます。キャッシュができた後のリクエストは、**GetGrav.org** サーバーではなく、ローカルに保存されたリポジトリに問い合わせます。このアプローチにより、迅速に対応できます。
 
-Most of the commands (listed below) come with the option `--force (-f)` which allows the forcing a re-fetch of the repository. This could be extremely useful in the event an update is known to be out there and the user doesn't want to wait a full 24-hour cycle before the cache gets cleared.
+（以下に表示する）コマンドのほとんどは、リポジトリを強制的にリフレッシュするための `--force (-f)` オプションが使えます。これは、アップデートがあることがわかっているのに、キャッシュがクリアされるまでの24時間を待てないような場合に、便利なコマンドオプションです。
 
 <h2 id="commands">コマンド</h2>
 
-Below, we have broken down all of the commands available for _GPM_. To run a command, launch your favorite terminal app and from within the root of your Grav instance, you can type `bin/gpm <command>`.
+以下に、 _GPM_ で使えるコマンドをすべて、解説します。コマンド実行のためには、お好みのターミナルアプリを立ち上げ、Grav をインストールしたルートディレクトリ内で、 `bin/gpm <コマンド>` と実行してください。
 
 ## Index
 
-The `index` command shows a list of all the available resources in the Grav repository, organized by _themes_ and _plugins_.
+_themes_ と _plugins_ ごとに整理して、Grav のリポジトリ内の利用可能なリソースの一覧を表示します。
 
 ![](index.jpg)
 
-Each row displays the **name**, **slug**, **version** and whether it's installed already or not.
+それぞれの行は、**名前** と、 **スラッグ** 、 **バージョン** 、すでにインストール済みかどうかを表示します。
 
-In this view, you can also quickly determine if there is a new version of any of the resources you have already installed.
+この表示から、インストール済みのリソースに新しいバージョンが無いか、すぐに調べられます。
 
-For instance, if we had a very old version of Antimatter (v1.1.1), but the latest version was v1.1.3, it will appear in the index as seen below.
+たとえば、とても古いバージョンの Antimatter テーマ（v1.1.1）があり、最新バージョンが v1.1.3だったとき、以下のようにすぐにわかります。
 
 ![](index-outdated.jpg)
 
-!! You can use `--installed-only` option to show the state of **only your installed** plugins and themes.
+> [!Info]  
+> `--installed-only` オプションを使うと、**インストール済みの** プラグインやテーマを表示できます。
 
 ## Info
 
-The `info` command displays the details of the desired package, such as description, author, homepage, etc.
+指定したパッケージの詳細を表示します。たとえば、そのパッケージの説明や、作者、ホームページなどです。
 
 ![](info.jpg)
 
-!! You will also be prompted to view the plugin/theme **Changelog** via this option.
+> [!Info]  
+> このプラグイン/テーマの **変更履歴（Changelog）** をこのオプションで見ることができます。
 
 ## Install
 

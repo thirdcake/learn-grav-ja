@@ -51,25 +51,25 @@ Under "System Variables", find "Path" and click edit. Copy the "variable value" 
 
 When that is done, open a new console (or restart your current one) so the new path is applied. Then try `php -v` again, you should get an output like: `PHP 7.0.7 (cli) ...`. When you run Grav's commands, you will need to prepend `php` to them, for instance `php grav/gpm index`.
 
-<h2 id="grav-specific-commands">Grav特有のコマンド</h2>
+<h2 id="grav-specific-commands">Grav 特有のコマンド</h2>
 
-One of the coolest things about Grav is that you have a host of powerful commands at your disposal to do everything from installing additional plugins and themes to adding users to the Admin. In this section, we will list many of the most commonly used commands.
+Grav のクールなところの1つは、何でもできるパワフルなコマンドを持っていることです。追加のプラグインやテーマをインストールしたり、ユーザーを管理パネルに追加したりできます。このセクションでは、最も一般的なコマンドを挙げます。
 
-All of the commands listed below are compatible with <strong>any operating system.</strong>
+以下のコマンドはすべて、**どのOSにも** 対応しています。
 
 
 | コマンド | 説明  |
 | :----------------   | :--------------------------------------  |
-| `bin/grav list`                   | Lists all commands available in Grav (excluding the GPM).                                                                          |
-| `bin/grav help <command>`         | Gives you help on a specific command.                                                                                              |
+| `bin/grav list`                   | Grav で使える（GPM 以外の）コマンドをリスト表示します|
+| `bin/grav help <command>`         | `<command>` のヘルプを表示します  |
 | `bin/grav new-project <location>` | Used to create a new, clean Grav instance in a different folder. Can be run from an existing Grav install.                         |
-| `bin/grav install`                | This command installs any dependencies needed to run your current Grav install.                                                    |
-| `bin/grav cache`                  | This command clears the cache of your Grav install. Options include: `--all`, `--assets-only`, `--images-only`, and `--cache-only` |
-| `bin/grav backup`                 | Creates a zip backup of your current Grav site.                                                                                    |
-| `bin/grav composer`               | Updates manually-installed composer-based vendor packages.                                                                         |
-| `bin/grav security`               | Runs through the configured XSS security checks on all Grav pages                                                                  |
-| `bin/gpm list`                    | Lists all commands available via Grav's GPM (Grav Package Manager)                                                                 |
-| `bin/gpm help <command>`          | Gives you help on a specific command.                                                                                              |
+| `bin/grav install`                | 現在の Grav に必要な依存関係をインストールします                                               |
+| `bin/grav cache`                  | キャッシュをクリアします。次のオプションが付けられます： `--all`, `--assets-only`, `--images-only`, and `--cache-only` |
+| `bin/grav backup`                 | 現在の Grav サイトのバックアップを zip で作ります                                                                                    |
+| `bin/grav composer`               | 手作業でインストールした、コンポーザーベースの vendor パッケージをアップデートします                       |
+| `bin/grav security`               | 設定されたXSS セキュリティチェックを、すべてのページに対して実行します                |
+| `bin/gpm list`                    | GPM（Gravパッケージマネージャー）経由で利用できるすべてのコマンドをリスト表示します                                             |
+| `bin/gpm help <command>`          | `<command>` のヘルプを表示します               |
 | `bin/gpm index`                   | Shows a list of all the available resources in the Grav repository, organized by themes and plugins.                               |
 | `bin/gpm info`                    | Displays the details of the desired package, such as description, author, homepage, etc.                                           |
 | `bin/gpm install`                 | Installs a resource from the repository to your current Grav instance with a simple command.                                       |
@@ -80,10 +80,10 @@ All of the commands listed below are compatible with <strong>any operating syste
 | `bin/gpm scheduler`               | Manage the scheduled jobs and manually run the scheduler process if required                                                       |
 
 
-> [!Info]  
-> These commands are explained in greater detail within the [Grav CLI](../02.grav-cli/) and [Grav GPM](../04.grav-cli-gpm/) documentation.
+> [!Info] 
+> これらのコマンドのより詳しい説明は、 [Grav CLI](../02.grav-cli/) と [Grav GPM](../04.grav-cli-gpm/) のドキュメントで解説します。
 
-The commands listed below, are compatible with <strong>mac or unix systems.</strong>
+以下のコマンドは、**mac もしくは unix 系システム** で使えます。
 
 | コマンド                 | 説明                                                                                                           |
 | :----------------                        | :--------------------------------------                                                                                   |
@@ -91,11 +91,11 @@ The commands listed below, are compatible with <strong>mac or unix systems.</str
 
 <h2 id="symbolic-links">シンボリック・リンク</h2>
 
-Symbolic Links (also known as symlinks) are incredibly useful and easy to perform within the command line. What it does it create a virtual copy (clone) of a given folder or its contents and puts it wherever you'd like it to go. Unlike a true copy, it is simply a tunnel to the original so everything you see and change is reflected in multiple places at once.
+シンボリックリンク（Symbolic Links、シムリンク symlinks とも言います）は、大変便利で、コマンドライン上でかんたんに実行できます。やることは、与えられたフォルダやコンテンツの仮想的なコピー（クローン）を作り、好きなところに置けます。真のコピーと違い、オリジナルとシンプルなトンネルでつながっています。これにより、内容の変更が一度に、オリジナルとシムリンクすべてに反映されます。
 
-Another great benefit of doing this is that it takes up virtually zero additional disk space since you don't have multiple copies of the same files.
+もうひとつの素晴らしいメリットは、同じファイルの複数のコピーを持つわけではないので、ディスク容量を圧迫しないことです。
 
-Where Grav is concerned, symlinks are a great way to add plugins, themes, and content to multiple instances and doing so in a way that makes it infinitely easier to update and modify. You make a change once, and it appears everywhere the file(s) are symlinked.
+Grav では、シムリンクは複数のインスタンスに、プラグインやテーマ、コンテンツを追加するのに最適な方法であり、更新や修正がかんたんになります。一度変更を加えれば、シムリンクされたすべてのファイルに反映されます。
 
 The process for performing a symlink is pretty straightforward, with minor differences between operating systems.
 
