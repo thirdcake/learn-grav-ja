@@ -12,15 +12,15 @@ layout: ../../../layouts/Default.astro
 
 <h2 id="create-a-simple-single-form">シンプルな1つのフォームを作る</h2>
 
-To add a form to a page of your site, create a page, and set its Page File to "Form". You can do it via the Admin Panel, or via filesystem directly by naming the page `form.md`.
+ページにフォームを追加するには、ページを作り、ページファイルに "フォーム" を設定します。これは管理パネルからできますし、`form.md` という名前のページで、ファイルシステムから直接することもできます。
 
-So, for example, `user/pages/03.your-form/form.md`.
+では、具体例として、 `user/pages/03.your-form/form.md` を考えてみましょう。
 
-The contents of this page will be:
+このページのコンテンツは、次のようになります：
 
 ```yaml
 ---
-title: A Page with an Example Form
+title: "フォーム例付きのページ"
 form:
     name: contact-form
     fields:
@@ -66,28 +66,30 @@ form:
 
 ---
 
-# My Form
+# 私のフォーム
 
-Regular **markdown** content goes here...
+通常の **マークダウン** コンテンツは、ここに書いてください...
 ```
 
-!!! This is the content of the `form.md` file, when viewed via file-system. To do this via Admin Plugin, open the page in **Expert Mode**, copy the part between the triple dashes `---`, and paste it in the Frontmatter field.
+> [!Tip]  
+> この例は、ファイルシステムから見たときの `form.md` ファイルのコンテンツです。管理パネルからする場合は、 **Expert Mode** でページを開き、3つのダッシュ `---` の間の部分をコピーし、フロントマターに貼り付けてください。
 
-This is enough to show a form in the page, below the page's content. It is a simple form with a name, email field, two buttons: one to submit the form and one to reset the fields. For more information on the available fields that are provided by the Form plugin, [check out the next section](fields-available).
+これで、ページコンテンツの後に、フォームが表示されます。名前と、Eメールフィールドと、2つのボタン（1つは送信用、もう1つはリセット用）を持つシンプルなフォームです。利用可能なフィールドに関するより詳しい情報は、[この後のセクションを見てください](./02.fields-available/)。
 
-What happens when you press the `Submit` button?  It executes the `process` actions in series. To find out about other actions, [check out the available options](reference-form-actions) or [create your own](reference-form-actions#custom-actions).
+`送信` ボタンを押すと、何が起こるでしょう？ `process` に書いたアクションを、順番に実行します。この他のアクションについては、[アクションのリファレンス](./04.reference-form-actions) を見ていただくか、[自身で作ることもできます](./04.reference-form-actions/#custom-actions) 。
 
-1. An email is sent to the email entered, with the subject `[Feedback] [name entered]`. The body of the email is defined in the `forms/data.html.twig` file of the theme in use.
+1. `[Feedback] {{ フォームに入力された名前 }}` という題名のメールを送信します。メール本文は、利用中のテーマの `forms/data.html.twig` ファイルで定義されます。
 
-2. A file is created in `user/data` to store the form input data. The template is defined in `forms/data.txt.twig` of the theme in use.
+2. `user/data` フォルダに、インプットされたデータを保存するファイルが作成されます。テンプレートは、利用中のテーマの `forms/data.txt.twg` ファイルで定義されます。
 
-3. The `thankyou` subpage is shown, along with the passed message. The `thankyou` page must be a subpage of the page containing the form.
+3. メッセージがパスすると、 `thankyou` サブページが表示されます。この `tyankyou` ページは、フォームページのサブページでなければいけません。
 
-!!! Make sure you configured the **Email** plugin to ensure it has the correct configuration in order to send email successfully.
+> [!Tip]  
+> **Email** プラグインを、メールが正しく送信されるように、設定しておいてください。
 
 <h2 id="multiple-forms">複数のフォーム</h2>
 
-With the release of **Form Plugin v2.0**, you are now able to define multiple forms in a single page.  The syntax is similar but each form is differentiated by the name of the form, in this case `contact-form` and `newsletter-form`:
+**Form プラグイン v2.0** がリリースされ、ひとつのページに複数のフォームを設置できるようになりました。構文は似ていますが、それぞれのフォームは、フォーム名を別にしなければいけません。以下の例では、 `contact-form` と、 `newsletter-form` となっています：
 
 ```yaml
 forms:
@@ -108,7 +110,7 @@ forms:
             ...
 ```
 
-You can even use this format for single forms, by just providing one form under `forms:`:
+このフォーマットは、ひとつのフォームでも使えます。ただ、`forms:` に続けて、1つのフォームを定義するだけです：
 
 ```yaml
 forms:
@@ -123,23 +125,23 @@ forms:
 
 <h2 id="displaying-forms-from-twig">Twigからフォームを表示する</h2>
 
-The easiest way to include a form is to simply include a Twig file in the template that renders the page where the form is defined.  For example:
+フォームを含める最もかんたんな方法は、フォームが定義されているページをレンダリングするテンプレートに、Twig ファイルを含めることです。たとえば：
 
 ```twig
 {% include "forms/form.html.twig" %}
 ```
 
-This will use the Twig template provided by the Form plugin itself.  In turn, it will render the form as you have defined in the page, and handle displaying a success message, or errors, when the form is submitted.
+上記は、Form プラグインそれ自体から提供される Twig テンプレートを使っています。そして、ページのフロントマターで定義したとおりにフォームをレンダリングし、フォームが送信されたときに、成功メッセージやエラーを表示します。
 
-There is however a more powerful method of displaying forms that can take advantage of the new multi-forms support.  With this method you actually pass a `form:` parameter to the Twig template specifying the form you wish to display:
+一方で、複数のフォームに対応した、より強力なフォーム表示方法があります。以下の方法で、 `form: ` パラメータをフォームを表示したい Twig テンプレートに渡します：
 
 ```twig
 {% include "forms/form.html.twig" with { form: forms('contact-form') } %}
 ```
 
-Using this method, you can choose a specific name of a form to display.  You can even provide the name of a form defined in other pages.  As long as all your form names are unique throughout your site, Grav will find and render the correct form!
+上記の方法を使えば、表示したいフォーム名を選択できます。別ページで定義したフォーム名さえ使うことができます。サイト全体で、そのフォーム名が単一である限り、Grav はそのフォームを見つけ出し、レンダリングします！
 
-You can even display multiple forms in one page:
+ひとつのページに、複数のフォームを表示することもできます：
 
 ```twig
 # Contact Form
@@ -149,20 +151,21 @@ You can even display multiple forms in one page:
 {% include "forms/form.html.twig" with { form: forms('newsletter-form') } %}
 ```
 
-An alternative way to display a form is to reference the page route rather than the form name using an array, for example:
+また別の方法では、フォーム名ではなくページのルーティングを参照して、フォームを表示できます。たとえば：
 
 ```twig
 # Contact Form
 {% include "forms/form.html.twig" with { form: forms( {route:'/forms/contact'} ) } %}
 ```
 
-This will find the first form from the page with route `/forms/contact`
+上記の例では、`/forms/contact` のルーティングでたどり着くページの最初のフォームが見つかります。
 
 <h2 id="displaying-forms-in-page-content">ページコンテンツ中にフォームを表示する</h2>
 
-You can also display a form from within your page content (for example `default.md`) directly without that page even having a form defined within it. Simply pass the name or route to the form.
+ページコンテンツ（たとえば： `default.md` ）の中から、そのページで定義されていないフォームを表示することもできます。単に、フォーム名やルーティングをフォームに渡すだけです。
 
-!!  **Twig processing** should be enabled and **page cache** should be disabled to ensure the form is dynamically processed on the page and not statically cached and form handling can occur.
+> [!Info]  
+> フォーム制御が発火するときに、フォームが動的に処理され、静的にキャッシュされないために、 **Twig プロセス** が有効化されており、**ページキャッシュ** が無効化されている必要があります。
 
 ```twig
 ---
@@ -181,15 +184,16 @@ cache_enable: false
 
 <h2 id="modular-forms">モジュラーフォーム</h2>
 
-With previous versions of the Form plugin, to get a form to display in a modular sub-page of your overall **modular** page, you had to define the form in the **top-level modular page**.  This way the form would be processed and available to display in the modular sub-page.
+以前のバージョンの Form プラグインでは、 **モジュラー** ページのサブページでフォームを表示するには、**トップレベルのモジュラーページ** でフォームを定義しなければいけませんでした。この方法により、フォームが処理され、モジュラーのサブページで表示されました。
 
-In **Form v2.0**, you can now define the form directly in the modular sub-page just like any other form.  However, if not found, the form plugin will look in the 'current page', i.e. the top-level modular page for a form, so it's fully backwards compatible with the 1.0 way of doing things.
+**From プラグイン v2.0** からは、他のフォームページと同様、直接、モジュラーのサブページにフォームを定義できます。しかし、そこにフォームが見つからなければ、form プラグインは、'現在のページ' つまりトップレベルのモジュラーページに、フォームが無いか探します。つまり、1.0 と完全な後方互換性があります。
 
-You can also configure your Modular sub-page's Twig template to use a form from another page, like the examples above.
+ここまでに書かれた具体例のように、モジュラーのサブページでの Twig テンプレートでも、フォームの設定ができます。
 
-! When using a form defined in a modular sub-page you should set the **action:** to the parent modular page and configure your form with a **redirect:** or **display:** action, as this modular sub-page is not a suitable page to load on form submission because it is **not routable**, and therefore not reachable by a browser.  
+> [!Note]  
+> モジュラーのサブページに定義したフォームを使う時、 **action:** に親モジュラーページを設定し、 **redirect:** や、 **display:** アクションは、そのモジュラーのサブページが **ルーティング外** であり、ブラウザからは到達できないので、送信時に読み込まれるべきでないものとして設定されていないといけません。
 
-Here's an example that exists at `form/modular/_form/form.md`:
+以下が、`form/modular/_form/form.md` での例です。
 
 ```yaml
 ---
