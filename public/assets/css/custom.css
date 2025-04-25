@@ -1,5 +1,5 @@
 :root {
-    --bs-breadcrumb-divider: '>'
+    --bs-breadcrumb-divider: '>';
 }
 
 img {
@@ -32,6 +32,10 @@ main {
 .learn-grav-default blockquote {
     padding: 0 0 0 1em;
     border-left: .25em solid var(--bs-gray);
+}
+
+.breadcrumb {
+    --bs-breadcrumb-margin-bottom: 0;
 }
 
 @media (min-width:991.99px) {

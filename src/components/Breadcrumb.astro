@@ -1,5 +1,6 @@
 ---
 const { breadobj } = Astro.props;
+const title = (rawTitle:string):string => (rawTitle.length>18)?rawTitle.slice(0,16)+'...':rawTitle;
 ---
 
 
@@ -7,9 +8,9 @@ const { breadobj } = Astro.props;
     {
         breadobj.map((page: any, index: number ) => {
           if (index === breadobj.length - 1) {
-            return <li class="breadcrumb-item">{ page.frontmatter.title }</li>;
+            return <li class="breadcrumb-item">{ title(page.frontmatter.title) }</li>;
           } else {
-            return <li class="breadcrumb-item"><a href={page.url + '/'}>{ page.frontmatter.title }</a></li>;
+            return <li class="breadcrumb-item"><a href={page.url + '/'}>{ title(page.frontmatter.title) }</a></li>;
           }
         })
       }
