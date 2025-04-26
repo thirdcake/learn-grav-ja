@@ -1,6 +1,4 @@
 ---
-import { undefined } from "astro:schema";
-
 const { breadobj } = Astro.props;
 const title = (rawTitle: string): string =>
     rawTitle.length > 18 ? rawTitle.slice(0, 16) + "..." : rawTitle;
