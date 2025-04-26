@@ -1,9 +1,11 @@
 ---
+import { undefined } from 'astro:schema';
 import Sidebarchild from '../components/Sidebar.astro';
 
 type Page = {
     url: string;
     title: string;
+    redirect: string|undefined;
     children: any[];
 }
 
@@ -18,6 +20,7 @@ pages.forEach((page:any) => {
         renderPages.push({
             url: page.url,
             title: page.frontmatter.title,
+            redirect: page.frontmatter.redirect ?? undefined,
             children: [],
         });
         prevUrl = page.url;
@@ -28,7 +31,11 @@ pages.forEach((page:any) => {
     <ol>
     { renderPages.map(( page: any ) => 
         <li class="my-1">
-            <a href={ page.url + '/' }>{ page.title }</a>
+            {(page.redirect === undefined)
+                ? <a href={ page.url + '/' }>{ page.title }</a>
+                : page.title
+            }
+            
             {(page.children.length > 0)
                 ? <Sidebarchild pages={ page.children }  />
                 : ''

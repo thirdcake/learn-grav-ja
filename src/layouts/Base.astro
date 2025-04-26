@@ -5,6 +5,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
 import Sidebar from '../components/Sidebar.astro';
 
 import { siteConfig } from '../config';
+import { undefined } from 'astro:schema';
 const { sitetitle, description, baseurl, bloburl, learnurl, hosturl } = siteConfig;
 
 const { frontmatter } = Astro.props;
@@ -26,10 +27,12 @@ const sidebarPages = pages.filter(page => {
   return isSameChapter;
 });
 
+// pages から redirect を除く
+const pagesWithoutRedirect = pages.filter(page => page.frontmatter.redirect === undefined);
 // ページ右上の前・次リンク
-const currentIndex = pages.findIndex(page => (page.url === currentpath));
-const prevurl = pages[currentIndex+1]?.url ?? '#';
-const nexturl = pages[currentIndex-1]?.url ?? '#';
+const currentIndex = pagesWithoutRedirect.findIndex(page => (page.url === currentpath));
+const prevurl = pagesWithoutRedirect[currentIndex+1]?.url ?? '#';
+const nexturl = pagesWithoutRedirect[currentIndex-1]?.url ?? '#';
 
 // ページ右上の編集リンク
 const editPageUrl = `${bloburl}${currentpath.replace('/learn-grav-ja', '')}/index.md`;

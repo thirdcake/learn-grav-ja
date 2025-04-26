@@ -1,17 +1,35 @@
 ---
-const { breadobj } = Astro.props;
-const title = (rawTitle:string):string => (rawTitle.length>18)?rawTitle.slice(0,16)+'...':rawTitle;
----
+import { undefined } from "astro:schema";
 
+const { breadobj } = Astro.props;
+const title = (rawTitle: string): string =>
+    rawTitle.length > 18 ? rawTitle.slice(0, 16) + "..." : rawTitle;
+---
 
 <ol class="breadcrumb">
     {
-        breadobj.map((page: any, index: number ) => {
-          if (index === breadobj.length - 1) {
-            return <li class="breadcrumb-item">{ title(page.frontmatter.title) }</li>;
-          } else {
-            return <li class="breadcrumb-item"><a href={page.url + '/'}>{ title(page.frontmatter.title) }</a></li>;
-          }
+        breadobj.map((page: any, index: number) => {
+            if (index === breadobj.length - 1) {
+                return (
+                    <li class="breadcrumb-item">
+                        {title(page.frontmatter.title)}
+                    </li>
+                );
+            } else if (page.frontmatter.redirect === undefined) {
+                return (
+                    <li class="breadcrumb-item">
+                        <a href={page.url + "/"}>
+                            {title(page.frontmatter.title)}
+                        </a>
+                    </li>
+                );
+            } else {
+                return (
+                    <li class="breadcrumb-item">
+                        {title(page.frontmatter.title)}
+                    </li>
+                );
+            }
         })
-      }
+    }
 </ol>

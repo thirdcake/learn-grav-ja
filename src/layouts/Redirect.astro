@@ -1,0 +1,17 @@
+---
+const { frontmatter } = Astro.props;
+import { siteConfig } from '../config';
+const { baseurl } = siteConfig;
+const redirecturl = baseurl + frontmatter.redirect;
+---
+
+<!doctype html>
+<title>Redirecting to: { redirecturl }</title>
+    <meta http-equiv="refresh" content={'2;url=' + redirecturl} />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href={ redirecturl } />
+<body>
+    <a href={ redirecturl } >
+        Redirecting to <code>{ redirecturl }</code>
+    </a>
+</body>
