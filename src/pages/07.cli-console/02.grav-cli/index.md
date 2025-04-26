@@ -41,9 +41,9 @@ bin/grav help install
 
 ## Backup
 
-The Grav backup system has been completely revamped in Grav 1.6 to support multiple backup profiles.  These profiles are configures in the `user/config/backups.yaml`.  If you don't have a custom configuration file, Grav will use the default one provided in `system/config/backups.yaml`.
+Grav のバックアップシステムは、Grav 1.6 で完全に刷新され、複数のバックアップ・プロファイルに対応しました。これらのプロファイルは、`user/config/backups.yaml` に設定があります。もしこのカスタム設定ファイルが無ければ、`system/config/backups.yaml` にある、デフォルトの設定ファイルを利用します。
 
-If Grav detects multiple backup profiles, the CLI command will prompt you to choose the one you wish to backup with the CLI command.
+Grav が複数のバックアッププロファイルを見つけたとき、CLI コマンドは、どのプロファイルでバックアップするかを選ぶよう、プロンプトで促します。
 
 ```bash
 cd ~/workspace/portfolio
@@ -57,7 +57,7 @@ Choose a backup?
   [1] Pages Backup
 ```
 
-Alternatively you can pass an index of the profile directly:
+もしくは、直接プロファイルのインデックスを渡すこともできます：
 
 ```bash
 $ cd ~/workspace/portfolio
@@ -68,11 +68,11 @@ Archiving 36 files [===================================================] 100% < 
  [OK] Backup Successfully Created: /users/joe/workspace/portfolio/backup/pages_backup--20190227120510.zip
 ```
 
-More information on the backup functionality can be found in the [Advanced -> Backups](../../08.advanced/07.backups/) section.
+バックアップ機能に関する、より詳しい情報は、 [応用的なこと -> バックアップ](../../08.advanced/07.backups/) をご覧ください。
 
 ## Clean
 
-This CLI command is primarily used during the package building process, as it removes extraneous files and folders from Grav.  It is strongly recommended you **do not use this** yourself unless you are using it build your own Grav packages.
+主に、パッケージをビルド処理する最中に使います。無関係なファイルやフォルダを Grav から取り除きます。独自の Grav パッケージをビルド処理するときに使うのでない限り、**このコマンドは使わない** ことを強く推奨します。
 
 ```bash
 bin/grav clean

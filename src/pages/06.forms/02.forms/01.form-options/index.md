@@ -136,8 +136,7 @@ form:
 
 ### Keep Alive
 
-セッションが切れても、フォームの送信に失敗しません。これを有効化すると、セッションが切れる前にAJAX リクエストが行われ、セッションが 'フレッシュ' に保たれます：
-You can ensure your forms do not fail to submit when your session expires, by enabling the `keep_alive` option on the form.  By enabling this, an AJAX request will be made to Grav before your session expires to keep it 'fresh':
+`keep_alive` を有効化すると、セッションが切れても、フォームの送信に失敗しません。これを有効化することにより、セッションが切れる前にAJAX リクエストが行われ、セッションが 'フレッシュ' に保たれます：
 
 ```yaml
 form:

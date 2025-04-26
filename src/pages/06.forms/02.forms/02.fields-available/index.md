@@ -5,72 +5,72 @@ layout: ../../../../layouts/Default.astro
 
 <h2 id="common-field-attributes">一般的なフィールドの属性</h2>
 
+すべてのフィールドは、使用可能な属性のリストを受け入れます。それぞれのフィールドは、一般的な属性を共有できますが、特定のフィールドでは無視されることがあります。フィールドで、どの属性が許可されているかチェックする最良の方法は、このページのフィールドの説明を確認して、どの属性が言及されているかを確認することです。
 
-Every field accepts a list of attributes you can use. Each field could share these common attributes, but particular fields might ignore them. The best way to check which attributes are allowed on a field is to check the field description in this page and see which attributes are mentioned.
+以下のリストは、共通する事項なので、各フィールドの説明では繰り返しません。
 
-This list provides a common ground so there's no need to repeat the description of a common field.
+| 属性           | 説明                                     |
+| :-----              | :-----                              |
+| `autocomplete`      | `on` もしくは `off` を受け付けます |
+| `autofocus`         | 有効化すると、フィールドでオートフォーカスします  |
+| `classes`           | 文字列を受けて、CSS クラスを追加します  |
+| `default`           | デフォルト値を設定します  |
+| `disabled`          | フィールドを disabled 状態にします |
+| `help`              | tooltip をフィールドに追加します  |
+| `id`                | フィールドに　id を設定します。また、label に `for` 属性を設定します |
+| `label`             | フィールドに label を設定します  |
+| `display_label`     | `true` もしくは `false` を受け付けます  |
+| `labelclasses`      | 文字列を受け取り、CSS クラスを追加します  |
+| `sublabel`          | フィールドに sublabel を設定します  |
+| `sublabelclasses`   | 文字列を受け取り、CSS クラスを追加します |
+| `name`              | フィールドの name を設定します |
+| `novalidate`        | フィールドを novalidate 状態にします |
+| `outerclasses`      | label とそのフィールドを囲む div にクラスを追加します |
+| `wrapper_classes`   | 説明とフィールドを含む wrapper にクラスを追加します  |
+| `placeholder`       | placeholder の値を設定します  |
+| `readonly`          | readonly 状態に設定します |
+| `size`              | フィールドに size を設定します。この size は、コンテナにクラスとして追加されます。  `large` 、 `x-small` 、 `medium` 、 `long` 、 `small` が適切な値ですが、もちろんフロントエンドで利用する場合に使える別の値を追加することも可能です |
+| `style`             | フィールドに style を設定します |
+| `title`             | フィールドに title の値を設定します |
+| `type`              | フィールドに type を設定します |
+| `validate.required` | true などのポジティブな値を設定すると、必須項目になります |
+| `validate.pattern`  | validation の pattern を設定します |
+| `validate.message`  | validation が失敗したときのメッセージを設定します |
 
-| 属性           | Description                                                                                                                                                                                                    |
-| :-----              | :-----                                                                                                                                                                                                         |
-| `autocomplete`      | Accepts `on` or `off`                                                                                                                                                                                          |
-| `autofocus`         | if enabled, autofocus on that field                                                                                                                                                                            |
-| `classes`           | accepts a string with one or more CSS classes to add                                                                                                                                                           |
-| `default`           | sets the field default value                                                                                                                                                                                   |
-| `disabled`          | sets the field disabled state                                                                                                                                                                                  |
-| `help`              | Adds a tooltip to the field                                                                                                                                                                                    |
-| `id`                | sets the field id. Also sets the `for` attribute on the label                                                                                                                                                  |
-| `label`             | sets the field label                                                                                                                                                                                           |
-| `display_label`     | Accepts `true` or `false`                                                                                                                                                                                           |
-| `labelclasses`      | accepts a string with one or more CSS classes to add                                                                                                                                                            |
-| `sublabel`             | sets the field sublabel                                                                                                                                                                                           |
-| `sublabelclasses`      | accepts a string with one or more CSS classes to add                                                                                                                                                            |
-| `name`              | sets the field name                                                                                                                                                                                            |
-| `novalidate`        | sets the field novalidate state                                                                                                                                                                                |
-| `outerclasses`      | Classes added to the div that includes the label and the field                                                                                                                                                 |
-| `wrapper_classes`      | Classes added to the wrapper that includes the description and the field                                                                                                                                                 |
-| `placeholder`       | sets the field placeholder value                                                                                                                                                                               |
-| `readonly`          | sets the field readonly state                                                                                                                                                                                  |
-| `size`              | sets the field size, which in turn adds a class to its container. Valid values are `large`, `x-small`, `medium`, `long`, `small`. You can ofcourse add more in the template you see, when used in the frontend |
-| `style`             | sets the field style                                                                                                                                                                                           |
-| `title`             | sets the field title value                                                                                                                                                                                     |
-| `type`              | sets the field type                                                                                                                                                                                            |
-| `validate.required` | if set to a positive value, sets the field as required.                                                                                                                                                        |
-| `validate.pattern`  | sets a validation pattern                                                                                                                                                                                      |
-| `validate.message`  | sets the message shown if the validation fails                                                                                                                                                                 |
-
-To add custom attributes, you can use:
+カスタム属性を追加することもできます：
 
 ```
 attributes:
   key: value
 ```
 
-To add custom data-* values, you can use:
+カスタムの `data-*` 値を追加することもできます：
 
 ```
 datasets:
   key: value
 ```
 
-The above shown `attributes` and `datasets` definitions lead to the following field definition:
+上記の `attributes` や、 `datasets` 定義は、次のようなフィールドになります：
 
 ```
 <input name="data[name]" value="" type="text" class="form-input " key="value" data-key="value">
 ```
 
-!!! NOTE: You can set positive values in multiple ways: `'on'`, `true`, `1`. Other values are interpreted as negative.
+> [!Tip]  
+> 注意： ポジティブな値は、複数の設定方法があります（`'on'` や、 `true` 、`1` など）。その他の値は、ネガティブな値として解釈されます。
 
 ---
 
-## Available Fields
+<h2 id="available-fields">利用可能なフィールド</h2>
 
 ### Basic-Captcha Field
 
-Added in Forms `7.0.0` as an local alternative to the Google ReCaptcha field.  This field is particularly handy when dealing with SPAM in contact forms when you don't want to deal with the hassle or perhaps GPDR restrictions that come with Google's offering. It uses **OCR-resistant** fonts to deter attacks, and can be configured with codes to be copied, or simple math questions.
+Forms プラグイン `7.0.0` で、Google ReCaptcha フィールドのローカルでの代替として追加されました。このフィールドは、Google の提供する GDPR 制限に惑わされたくない場合で、コンタクトフォームでのスパムを取り扱うときに、特に便利です。攻撃を阻止するため、**OCR-耐性** のあるフォントを利用し、コピーするコードや、かんたんな算数の問題を設定できます。
 
 ![Basic-Captcha](basic-captcha_field.gif)
 
-the `basic-captcha` field type is fully configurable via the `forms` configuration but comes with sensible defaults. The overall configuration of Basic-Captcha is configured in your global form configuration file (typically `user/config/plugins/form.yaml`).  The default options are:
+`basic-captcha` フィールドタイプは、`forms` 設定で、完全に制御できますが、適切なデフォルト値が設定されています。Basic-Captcha の全体的な設定は、グローバルなフォーム設定ファイル（通常は、 `user/config/plugins/form.yaml` ）で行います。デフォルトのオプションは：
 
 ```yaml
 basic_captcha:
@@ -91,7 +91,7 @@ basic_captcha:
     operators: ['+','-','*']  # operators that can be used in math
 ```
 
-Example:
+具体例：
 
 ```yaml
 basic-captcha:
@@ -100,11 +100,12 @@ basic-captcha:
     label: Are you human?
 ```
 
-This also requires a matching `process:` element to ensure the form is validated properly.
+これは、フォームのバリデーションが適切に行われるために、`process:` とも適合している必要があります。
 
-! This must be the first entry in the `process:` section of the form to ensure the form is not processed if captcha validation fails.
+> [!Note]  
+> もし captcha が失敗していたときに、フォームのプロセスがきちんと止まるようにするため、フォームの `process:` の中で、これが最初のエントリーでなければいけません。
 
-Example:
+具体例：
 
 ```yaml
 process:
@@ -114,28 +115,31 @@ process:
 
 ### Turnstile Captcha Field (Cloudflare)
 
-As of Form `v7.1.0`, Grav adds support for the new Cloudflare Turnstile field.  This field is a new way to prevent SPAM in forms, and is a great alternative to the Google ReCaptcha field and **GPDR** restrictions that come with Google's offering. This field is particularly handy when dealing with SPAM in contact forms.  [Learn more about Turnstile](https://blog.cloudflare.com/turnstile-private-captcha-alternative/?target=_blank).
+Form プラグイン `v7.1.0` から、新しく Cloudflare 社の Turnstile フィールドをサポートしました。このフィールドは、フォームの SPAM 除けの新しい方法です。Google ReCaptcha フィールドと、 Google からの **GDPR** 規制の代替となる素晴らしいものです。このフィールドは、コンタクトフォームで SPAM を取り扱うときに特に便利です。[Turnstile については、こちらを参照してください](https://blog.cloudflare.com/turnstile-private-captcha-alternative/) 
 
-##### Advantages over Google ReCaptcha
+<h5 id="advantages-over-google-recaptcha">Google ReCaptcha よりも優れている点</h5>
 
-1. GDPR compliant and user-privacy focused
-2. Extremely fast challenge verification
-3. Very simple to implement both in Cloudflare and Grav, no complex UIs or parameters to configure
+1. GDPR に準拠し、ユーザーのプライバシーを重視している
+2. 検証が極めて速い
+3. Cloudflare と Grav の両方で、実装がとても簡単で、複雑な UI やパラメータを設定する必要がない
 4. No fancy workarounds for asynchronous form submissions (ajax), it just works!
-4. Exceptional user experience compared to ReCaptcha, no more counting cars, traffic lights, or other nonsense
-5. Built on top of machine learning, it will get better over-time and adapt to new attack vectors
-6. Exhaustive analytics on the effectiveness of the challenge, [see screenshot](https://blog.cloudflare.com/content/images/2022/09/image1-64.png?target=_blank)
+5. ReCaptcha と比べて、ユーザー体験が良い。車や信号機を数えたり、その他のナンセンスなことをしなくて済む
+6. 機械学習の上に構築されているので、時間の経過とともに改良され、新しい攻撃にも適応する
+7. チャレンジの効果を徹底的に分析できる。 [スクリーンショットを見てください](https://blog.cloudflare.com/content/images/2022/09/image1-64.png)
 
 
-##### Integration
-Before integrating Grav Forms with Turnstile, you must first [create a new Turnstile site](https://dash.cloudflare.com/?to=/:account/turnstile?target=_blank), you can also follow the [official "get started" tutorial](https://developers.cloudflare.com/turnstile/get-started/?target=_blank).
-Here you can also choose the type of widget you want to use, it can be either `managed`, `non-interactive` or `invisible`. It is important to note that you can only change the type of widget from Cloudflare, you won't be able to configure this via Grav. However, if not happy with one choice, you will be able to change it later if you need to. [Learn more about the different widget types](https://developers.cloudflare.com/turnstile/reference/widget-types/?target=_blank).
+<h5 id="integration">統合</h5>
 
-! Make sure you add any Domain you might need to use the Turnstile field on, this might include your local environment.
+Grav のフォームを Turnstile と統合する前に、まずは [Turnstile サイトを新しく作らなければいけません](https://dash.cloudflare.com/?to=/:account/turnstile) 。そして、[公式の "get started" チュートリアル](https://developers.cloudflare.com/turnstile/get-started/) も進めてください。
+ここで、 widget のタイプを選べます。`managed` か、`non-interactive` か、 `invisible` のいずれかです。重要な注意点として、 widget のタイプは Cloudflare からのみ変更できます。Grav からは設定できません。しかし、ある選択が良くなかったとき、必要に応じて、後で変更は可能です。[widget タイプの違いについて、より詳しくはCloudflareで学んでください](https://developers.cloudflare.com/turnstile/reference/widget-types/) 
 
-Once you have created a site, you will be given a `site_key` and `site_secret` that you will need to configure in your form configuration file (typically `user/config/plugins/form.yaml`). You can ignore the script tag suggested, as Grav takes care of it for you.
+> [!Note]  
+> Turnstile フィールドを使うかもしれないドメインはすべて、忘れずに追加してください。これには、あなたのローカル環境も含まれます。
 
-The default options are:
+一度サイトを作成すると、`site_key` と `site_secret` が与えられます。これらはフォームの設定ファイル（通常は、`user/config/plugins/form.yaml` ）から設定するのに必要なものです。
+You can ignore the script tag suggested, as Grav takes care of it for you.
+
+デフォルトのオプションは、以下のとおりです：
 
 ```yaml
 turnstile:
@@ -144,12 +148,14 @@ turnstile:
   secret_key: <Your Turnstile Secret Key>
 ```
 
-Finally, you will also requires a matching `process:` element to ensure the form is validated properly.
+最後に、ここでもまた、バリデーションが適切に行われたことを確認するため、`process:` 要素との整合が必要になります。
 
-! This must be the first entry in the `process:` section of the form to ensure the form is not processed if captcha validation fails.
+> [!Note]  
+> キャプチャのバリデーションが失敗したとき、フォームの処理が実行されないように、キャプチャの整合確認は、`process:` セクションの最初になければいけません。
 
-##### Example
-A typical example for a contact form would look like the following.
+<h5 id="example">具体例</h5>
+
+コンタクトフォームの典型的な例は、以下のようになります。
 
 ```yaml
 form:
@@ -190,9 +196,10 @@ form:
 
 ### Google Captcha Field (ReCaptcha)
 
-The `captcha` field type is used to add a Google reCAPTCHA element to your form. Unlike other elements, it can only be used once in a form.
+`captcha` フィールドタイプは、Google reCAPTCHA 要素をフォームに追加するために使われます。他の要素と違い、1つのフォームに1回だけ使えます。
 
-! You should configure your Google reCAPTCHA configurations in the [reCAPTCHA Admin Console](https://www.google.com/recaptcha/admin?target=_blank)
+> [!Note]  
+> You should configure your Google reCAPTCHA configurations in the [reCAPTCHA Admin Console](https://www.google.com/recaptcha/admin)
 
 As of version `3.0`, the field supports 3 variations of reCAPTCHA.  The overall configuration of reCAPTCHA is best set in your global form configuration file (typically `user/config/plugins/form.yaml`).  The default options are:
 
@@ -213,11 +220,12 @@ These options should be set based on the following:
 | site_key | Your Google Site Key  |
 | secret_key | Your Google Secret Key |
 
-!! Please ensure the domain of the site is listed in Google's reCAPTCHA configuration
+> [!Info]  
+> Please ensure the domain of the site is listed in Google's reCAPTCHA configuration
 
 In the form definition, the `name` attribute of the captcha field must be `g-recaptcha-response`. The reason is that Google reCAPTCHA stores the Captcha confirmation code in a field named `g-recaptcha-response`.
 
-Example:
+具体例：
 
 ```yaml
 g-recaptcha-response:
@@ -241,7 +249,7 @@ g-recaptcha-response:
 | `recaptcha_site_key`      | The Google reCAPTCHA Site Key (optional)                   |
 | `recaptcha_not_validated` | The message to show if the captcha is not valid |
 
-| Common Attributes Allowed                      |
+| 利用可能な一般属性                      |
 | :-----                                         |
 | [help](#common-fields-attributes)              |
 | [label](#common-fields-attributes)             |
@@ -251,16 +259,17 @@ g-recaptcha-response:
 
 This also requires a matching `process:` element to ensure the form is validated properly.
 
-! This must be the first entry in the `process:` section of the form to ensure the form is not processed if ReCaptcha validation fails.
+> [!Note]  
+> This must be the first entry in the `process:` section of the form to ensure the form is not processed if ReCaptcha validation fails.
 
-Example:
+具体例：
 
 ```yaml
 process:
     captcha: true
 ```
 
-##### Server-side Captcha validation
+<h5 id="server-side-captcha-validation">サーバーサイドのキャプチャのバリデーション</h5>
 
 The above code will validate the Captcha in the frontend and prevent form submission if not correct. To also validate the captcha server-side, add the captcha process action to your forms:
 
@@ -278,7 +287,7 @@ You can also provide an optional success `message`, but if you don't no specific
       message: 'Successfully passed reCAPTCHA!'
 ```
 
-[See the Contact Form example](/forms/forms/example-form) to see it in action.
+[See the Contact Form example](../03.example-form/) to see it in action.
 
 ---
 
@@ -286,9 +295,9 @@ You can also provide an optional success `message`, but if you don't no specific
 
 ![Checkbox Field](checkbox_field.gif)
 
-The `checkbox` field type is used to add a single checkbox to your form.
+`checkbox` フィールドタイプは、ひとつのチェックボックスをフォームに追加します。
 
-Example:
+具体例：
 
 ```yaml
 agree_to_terms:
@@ -298,7 +307,7 @@ agree_to_terms:
       required: true
 ```
 
-| Common Attributes Allowed                      |
+| 利用可能な一般属性                      |
 | :-----                                         |
 | [autofocus](#common-fields-attributes)         |
 | [classes](#common-fields-attributes)           |
@@ -321,9 +330,9 @@ agree_to_terms:
 
 ![Checkboxes Field](checkboxes_field.gif)
 
-The `checkboxes` field type is used to add a group of checkboxes to your form.
+`checkboxes` フィールドタイプは、チェックボックスのグループをフォームに追加します。
 
-Examples:
+具体例：
 
 ```yaml
 pages.process:
@@ -357,14 +366,14 @@ my_field:
 ```
 
 
-| 属性 | 説明                                                                                                                                    |
-| :-----    | :-----                                                                                                                                         |
-| `use`     | When set to `keys`, the checkbox will store the value of the element key when the form is submitted. Otherwise, it will use the element value. |
-| `options` | An array of key-value options that will be allowed.                                                                                            |
-| `help_options` | An array of key-value with help for each option defined in `options`.                                                                     |
-| `disabled_options` | A list of options that will be displayed disabled.                                                                                             |
+| 属性 | 説明   |
+| :-----    | :-----  |
+| `use`     | `keys` を設定すると、チェックボックスは、フォームの送信時に要素の key の値を保存します。そうでない場合は、要素の値を使います |
+| `options` | key-value 形式の利用可能な選択肢の配列 |
+| `help_options` | `options` で定義したそれぞれの選択肢のヘルプの key-value 形式の配列 |
+| `disabled_options` | disabled 状態で表示する選択肢のリスト |
 
-| Common Attributes Allowed                      |
+| 利用可能な一般属性                      |
 | :-----                                         |
 | [autofocus](#common-fields-attributes)         |
 | [classes](#common-fields-attributes)           |
@@ -381,17 +390,18 @@ my_field:
 | [validate.pattern](#common-fields-attributes)  |
 | [validate.message](#common-fields-attributes)  |
 
-!! NOTE: The checkboxes field does not support the `remember` process action.
+> [!Info]  
+> 注意： checkboxes フィールドは、`remember` プロセスアクションはサポートしません。
 
 ---
+
 ### Conditional Field
 
+`conditional` フィールドタイプは、条件によっては表示されるフィールドです。
 
-The `conditional` field type is used to conditionally display some other fields base on a condition.
+具体例：
 
-Examples:
-
-If your conditional already returns a `true` or `false` then you can simply use this simplified format:
+すでに `true` もしくは `false` で条件が決まった場合、以下のようなシンプルなフォーマットが使えます：
 
 ```yaml
 my_conditional:
@@ -403,7 +413,7 @@ my_conditional:
       label: A text field
 ```
 
-However, if you require more complex conditions, you can perform some logic that returns `'true'` or `'false'` as strings, and the field will understand that too.
+しかし、より複雑な条件を要するなら、`true` もしくは `false` を文字列で返すロジックを実行できます。そしてこのフィールドはそのことも理解します。
 
 ```yaml
 my_conditional:
@@ -417,9 +427,9 @@ my_conditional:
 
 | 属性   | 説明                                                                       |
 | :-----      | :-----                                                                            |
-| `condition` | The condition evaluated by twig. Any variable accessible by twig can be evaluated |
+| `condition` | Twig で評価される条件。Twig から利用可能な変数であれば、評価できます |
 
-| Common Attributes Allowed             |
+| 利用可能な一般属性             |
 | :-----                                |
 | [disabled](#common-fields-attributes) |
 | [id](#common-fields-attributes)       |
@@ -432,9 +442,9 @@ my_conditional:
 
 ![Date Field](date_field.gif)
 
-The `date` field type is used to add an HTML5 `date` input field.
+`data` フィールドタイプは、HTML5 の `data` の input フィールドです。
 
-Example:
+具体例：
 
 ```yaml
 -
@@ -444,12 +454,12 @@ Example:
   validate.max: "2018-12-31"
 ```
 
-| 属性      | 説明                                                                                                                                                                                        |
-| :-----         | :-----                                                                                                                                                                                             |
-| `validate.min` | Sets the `min` attribute of the field (see [http://html5doctor.com/the-woes-of-date-input/#feature-min-max-attributes](http://html5doctor.com/the-woes-of-date-input/#feature-min-max-attributes)) |
-| `validate.max` | Sets the `max` attribute of the field (see [http://html5doctor.com/the-woes-of-date-input/#feature-min-max-attributes](http://html5doctor.com/the-woes-of-date-input/#feature-min-max-attributes)) |
+| 属性      | 説明     |
+| :-----         | :-----  |
+| `validate.min` | `min` 属性を設定します（次を見てください： [http://html5doctor.com/the-woes-of-date-input/#feature-min-max-attributes](http://html5doctor.com/the-woes-of-date-input/#feature-min-max-attributes) |
+| `validate.max` | `max` 属性を設定します（次を見てください： [http://html5doctor.com/the-woes-of-date-input/#feature-min-max-attributes](http://html5doctor.com/the-woes-of-date-input/#feature-min-max-attributes) |
 
-| Common Attributes Allowed                      |
+| 利用可能な一般属性                      |
 | :-----                                         |
 | [autofocus](#common-fields-attributes)         |
 | [classes](#common-fields-attributes)           |
@@ -475,6 +485,7 @@ Example:
 
 ![Display Field](display_field.jpg)
 
+`display` フィールドタイプは、
 The `display` field type is used to show some text or instructions inside the form. Can accept markdown content
 
 Example:
@@ -494,7 +505,7 @@ test:
 | `markdown` | boolean value that enables markdown processing on the content field |
 | `content`  | the textual content to show                                         |
 
-| Common Attributes Allowed                 |
+| 利用可能な一般属性                 |
 | :-----                                    |
 | [help](#common-fields-attributes)         |
 | [id](#common-fields-attributes)        |
@@ -530,7 +541,7 @@ header.email:
 | `validate.min` | same as minlength |
 | `validate.max`  | same as maxlength  |
 
-| Common Attributes Allowed                      |
+| 利用可能な一般属性                      |
 | :-----                                         |
 | [autofocus](#common-fields-attributes)         |
 | [classes](#common-fields-attributes)           |
@@ -574,7 +585,7 @@ my_files:
 
 !!! The File field in the admin is a bit different, allowing also to delete a file uploaded to a form, because the use-case in admin is to upload and then associate a file to a field.
 
-| Common Attributes Allowed                      |
+| 利用可能な一般属性                      |
 | :-----                                         |
 | [help](#common-fields-attributes)              |
 | [label](#common-fields-attributes)             |
@@ -600,7 +611,7 @@ header.some_field:
 | :-----    | :-----                                                                                                                          |
 | `name`    | The field name. If missing, the field name is got from the field definition element (in the example above: `header.some_field`) |
 
-| Common Attributes Allowed            |
+| 利用可能な一般属性            |
 | :-----                               |
 | [default](#common-fields-attributes) |
 
@@ -660,7 +671,7 @@ header.count:
 | `validate.max`  | maximum value  |
 | `validate.step`  | which increments to step up  |
 
-| Common Attributes Allowed                      |
+| 利用可能な一般属性                      |
 | :-----                                         |
 | [autofocus](#common-fields-attributes)         |
 | [classes](#common-fields-attributes)           |
@@ -693,7 +704,7 @@ password:
   label: Password
 ```
 
-| Common Attributes Allowed                      |
+| 利用可能な一般属性                      |
 | :-----                                         |
 | [autofocus](#common-fields-attributes)         |
 | [classes](#common-fields-attributes)           |
@@ -736,7 +747,7 @@ my_choice:
 | :-----    | :-----                                              |
 | `options` | An array of key-value options that will be allowed. |
 
-| Common Attributes Allowed                      |
+| 利用可能な一般属性                      |
 | :-----                                         |
 | [default](#common-fields-attributes)           |
 | [disabled](#common-fields-attributes)          |
@@ -767,7 +778,7 @@ header.choose_a_number_in_range:
     max: 10
 ```
 
-| Common Attributes Allowed                      |
+| 利用可能な一般属性                      |
 | :-----                                         |
 | [autofocus](#common-fields-attributes)         |
 | [classes](#common-fields-attributes)           |
@@ -867,7 +878,7 @@ pages.order.by:
 ```
 Otherwise the array of selected values will not be saved correctly.
 
-| Common Attributes Allowed                      |
+| 利用可能な一般属性                      |
 | :-----                                         |
 | [autofocus](#common-fields-attributes)         |
 | [classes](#common-fields-attributes)           |
@@ -912,7 +923,7 @@ header.newField:
 | `options`  | An array of key-value options that will be allowed. |
 | `multiple` | Allow the form to accept multiple values.           |
 
-| Common Attributes Allowed                      |
+| 利用可能な一般属性                      |
 | :-----                                         |
 | [autofocus](#common-fields-attributes)         |
 | [classes](#common-fields-attributes)           |
@@ -1011,7 +1022,7 @@ header.phone:
 | `validate.min` | same as minlength |
 | `validate.max`  | same as maxlength  |
 
-| Common Attributes Allowed                      |
+| 利用可能な一般属性                      |
 | :-----                                         |
 | [autofocus](#common-fields-attributes)         |
 | [classes](#common-fields-attributes)           |
@@ -1059,7 +1070,7 @@ header.title:
 | `validate.min` | same as minlength |
 | `validate.max`  | same as maxlength  |
 
-| Common Attributes Allowed                      |
+| 利用可能な一般属性                      |
 | :-----                                         |
 | [autofocus](#common-fields-attributes)         |
 | [classes](#common-fields-attributes)           |
@@ -1106,7 +1117,7 @@ header.content:
 | `validate.min` | same as minlength |
 | `validate.max`  | same as maxlength  |
 
-| Common Attributes Allowed                      |
+| 利用可能な一般属性                      |
 | :-----                                         |
 | [autofocus](#common-fields-attributes)         |
 | [classes](#common-fields-attributes)           |
@@ -1155,7 +1166,7 @@ summary.enabled:
 | `highlight` | The key of the option to highlight (set green when selected) |
 | `options`   | The list of key-value options                              |
 
-| Common Attributes Allowed                      |
+| 利用可能な一般属性                      |
 | :-----                                         |
 | [default](#common-fields-attributes)           |
 | [help](#common-fields-attributes)              |
@@ -1187,7 +1198,7 @@ header.url:
 | `validate.min` | same as minlength |
 | `validate.max`  | same as maxlength  |
 
-| Common Attributes Allowed                      |
+| 利用可能な一般属性                      |
 | :-----                                         |
 | [autofocus](#common-fields-attributes)         |
 | [classes](#common-fields-attributes)           |

@@ -97,15 +97,15 @@ Grav のクールなところの1つは、何でもできるパワフルなコ�
 
 Grav では、シムリンクは複数のインスタンスに、プラグインやテーマ、コンテンツを追加するのに最適な方法であり、更新や修正がかんたんになります。一度変更を加えれば、シムリンクされたすべてのファイルに反映されます。
 
-The process for performing a symlink is pretty straightforward, with minor differences between operating systems.
+シムリンクの実行プロセスは、OS間によって多少の違いはあるものの、非常にかんたんです。
 
 <h3 id="symbolic-links-in-macox-and-linux">MacOS と Linux でのシンボリックリンク</h3>
 
 ![](osx_symlink.png)
 
-The command follows a common pattern of `ln -s <original file, directory, or its contents> <put virtual copies here>`.
+コマンドのパターンは、 `ln -s <オリジナルのファイルまたは、ディレクトリ、コンテンツ> <仮想的なコピーをここに置きます>` のようになっています。
 
-The commands that initiate a symlink differ between operating systems. For MacOS and the majority of Unix and Linux distros, `ln -s` is the command. The `ln` part tells the system you want to create a link. The `-s` switch sets the link as symbolic.
+シムリンクを開始するコマンドは、OSにより異なります。MaxOS や、大半の Unix 及び Linux のディストロでは、`ln -s` がコマンドです。`ln` 部分がシステムにリンクを作るよう指示します。`-s` により、リンクをシンボリックにします。
 
 <h3 id="symbolic-links-in-windows">Windows でのシンボリックリンク</h3>
 
@@ -118,30 +118,29 @@ The basic structure of the command in Windows is `mklink <type> <put virtual cop
 
 <h3 id="example-commands">コマンドの例</h3>
 
-Basically, you state the command that initiates the symlink, what you're symbolically linking, and where you're putting the virtual copies. Below, we've detailed examples of these commands:
+基本的に、次のものを指定します。シムリンクを始めるコマンド、何をシンボリックリンクするか、どこに仮想的なコピーを置くか。以下に、これらの例を詳しく示します：
 
-##### Link Contents of One Folder to Another
+<h5 id="link-contents-of-one-folder-to-another">あるフォルダから別のフォルダへコンテンツをリンクする</h5>
 
 | MacOS and Linux             | Windows                           |
 | :-----                      | :-----                            |
 | `ln -s ~/folder1 ~/folder2` | `mklink /J C:\folder2 C:\folder1` |
 
-This command creates a symlink that takes contents originally placed in **folder1** and puts a symbolically linked copy of them in **folder2**. If **folder2** does not already exist, it is created with this command.
+このコマンドは、シムリンクを作り、 **folder1** にあるオリジナルコンテンツを使って、**folder2** の中にシンボリックリンクされたそれらのコピーを置きます。もし **folder2** が存在しなければ、このコマンドにより作られます。
 
-##### Link Entire Folders from One Place to Another
+<h5 id="link-entire-folders-from-one-place-to-another">ある場所から別の場所へフォルダ全体をリンクする</h5>
 
 | MacOS and Linux              | Windows                            |
 | :-----                       | :-----                             |
 | `ln -s ~/folder1 ~/folder2/` | `mklink /J C:\folder2\ C:\folder1` |
 
-This command copies the entire **folder1** directory and places it in the target location (in this case **folder2**). In this case, **folder2** would need to already exist as it will not be created with this command.
-Watch the slash or backslash at the ending when specifying **folder2**.
+このコマンドは、**folder1** 全体をコピーし、ターゲットの場所（この場合、**folder2** ）に配置します。この場合、**folder2** はすでに存在している必要があります。このコマンドによりフォルダは作成されません。**folder2** の末尾のスラッシュもしくはバックスラッシュに注目してください。
 
-##### Link Individual File(s) from One Place to Another
+<h5 id="link-individual-file-s-from-one-place-to-another">ある場所から別の場所へ単独のファイルをリンクする</h5>
 
 | MacOS and Linux                      | Windows                                     |
 | :-----                               | :-----                                      |
 | `ln -s ~/folder1/file.jpg ~/folder2` | `mklink /H C:\folder2\ C:\folder1\file.jpg` |
 
-This is a useful command for symbolically linking individual files. This is especially useful if you have files that are shared between multiple directories and you want to have them update everywhere at the same time. Keep in mind that the original file is the only actual copy, so it must remain where it is for all of the symbolic links to work.
+これは、単独のファイルをシンボリックリンクするときに便利です。ファイルを不k数雨のディレクトリ間のシェアしたいときに、特に便利で、あらゆる場所のそれらリンクのアップデートを同時にすることができます。オリジナルファイルが、唯一のシンボリックでないコピーなので、すべてのシンボリックリンクが機能するためには、オリジナルはその場所にいなければいけないことに留意してください。
 
