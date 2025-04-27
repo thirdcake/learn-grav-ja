@@ -1,5 +1,5 @@
 ---
-title: "リファレンス：フォーム入力欄"
+title: "リファレンス：form.fields の一覧"
 layout: ../../../../layouts/Default.astro
 ---
 
@@ -485,10 +485,9 @@ my_conditional:
 
 ![Display Field](display_field.jpg)
 
-`display` フィールドタイプは、
-The `display` field type is used to show some text or instructions inside the form. Can accept markdown content
+`display` フィールドタイプは、フォーム内でテキストや説明書きを表示するために使われます。マークダウンコンテンツを受け付けます
 
-Example:
+具体例：
 
 
 ```yaml
@@ -522,11 +521,13 @@ test:
 
 ![Email Field](email_field.gif)
 
-The `email` field type is used to present a text input field that accepts an email, using the [email HTML5 input](http://html5doctor.com/html5-forms-input-types/#input-email).
+`email` フィールドタイプは、 [HTML5のemail input](http://html5doctor.com/html5-forms-input-types/#input-email) を使い、Eメールを受け付ける入力欄を表示します。
 
-!! Emails are case-insensitive by design. Ensure that your application logic handles upper-, lower- or mixed case emails properly.
+> [!Info]  
+> Eメールは、大文字と小文字を区別しないように設計されています。アプリケーションロジックを書くときは、大文字、小文字、それらの混在を適切に扱ってください。
 
-Example:
+具体例：
+
 ```yaml
 header.email:
   type: email
@@ -536,10 +537,10 @@ header.email:
 
 | 属性 | 説明                                       |
 | :-----    | :-----                                            |
-| `minlength` | minimum text length |
-| `maxlength`  | maximum text length  |
-| `validate.min` | same as minlength |
-| `validate.max`  | same as maxlength  |
+| `minlength` | 最小文字数 |
+| `maxlength`  | 最大文字数 |
+| `validate.min` | minlength と同じ |
+| `validate.max`  | maxlength と同じ |
 
 | 利用可能な一般属性                      |
 | :-----                                         |
@@ -565,7 +566,7 @@ header.email:
 
 ### File Field
 
-With the `file` field type, you can let users upload files through the form. The field by default allows **one file** only, of type **image** and will get uploaded to the **current** page where the form has been declared.
+`file` フィールドタイプにより、ユーザーはフォームからファイルをアップロードできるようになります。デフォルトでは、**画像** タイプの **1つのファイル** のみを許容し、フォームが表示されている **現在の** ページにアップロードされます。
 
 ```yaml
 # Default settings
@@ -577,13 +578,14 @@ my_files:
     - image/*
 ```
 
-| 属性     | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| :-----        | :-----                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `multiple`    | Can be `true` or `false`, when set to **true**, multiple files can be selected at the same time                                                                                                                                                                                                                                                                                                                                                                                          |
-| `destination` | Can be either **@self**, **@page:/route**, **local/rel/path/**, or a PHP stream.<br> Set to **@self**, the files will be uploaded where the form has been declared (current .md). <br>Using **@page:/route** will upload to the specified route of a page, if exists (e.g., **@page:/blog/a-blog-post**).<br> Set to **'local/rel/path'**: Can be any path relative to the Grav instance. For instance, `user/images/uploads`. If the path doesn't exist, it will get created, so make sure it is writable.<br> You can also set the value to any valid PHP stream recognized by Grav like `user-data://my-form` or `theme://media/uploads`. |
-| `accept`      | Takes an array of MIME types that are allowed. For instance to allow only gifs and mp4 files: `accept: ['image/gif', 'video/mp4']`                                                                                                                                                                                                                                                                                                                                                       |
+| 属性     | 説明  |
+| :-----        | :----- |
+| `multiple`    | `true` もしくは `false` 。**true** を設定すると、一度に複数ファイルが選択できます |
+| `destination` | **@self** もしくは **@page:/route** 、 **local/rel/path/** もしくは PHPストリームを受け付けます。<br> **@self** を設定すると、フォームが宣言された（現在の .md ）フォルダにアップロードされます。<br> **@page:/route** を使うと、そのルーティングページが存在すれば、そこににアップロードされます。（例： **@page:/blog/a-blog-post** ）<br> **'local/rel/path'** を設定すると、Grav のルートディレクトリからの相対パスでどこでも保存できます。たとえば、`user/images/uploads` などです。path が存在しなければ、作成されます。このため、書き込み権限があることを確認してください。<br> これ以外にも、Grav が認識できる適切な PHPストリームに設定可能です。たとえば： `user-data://my-form` や、 `theme://media/uploads` などです。 |
+| `accept`      | 受け取れる MIME タイプの配列を渡します。たとえば、gif 画像と mp4 ファイルのみを受け付ける場合： `accept: ['image/gif', 'video/mp4']` |
 
-!!! The File field in the admin is a bit different, allowing also to delete a file uploaded to a form, because the use-case in admin is to upload and then associate a file to a field.
+> [!Tip]  
+> 管理プラグインでの File fields は少し違いがあり、フォームからアップロードされたファイルの削除もできます。なぜなら、管理パネルでのユースケースは、アップロードした後、ファイルをデータ項目に紐付けることだからです。
 
 | 利用可能な一般属性                      |
 | :-----                                         |
@@ -592,24 +594,25 @@ my_files:
 | [name](#common-fields-attributes)              |
 | [outerclasses](#common-fields-attributes)      |
 
-By default, in Admin the `file` field will overwrite an uploaded file that has the same name of a newer one, contained in the same folder you want to upload it, unless you set `avoid_overwriting` to `true` in the field definition.
+デフォルトでは、管理パネルでは、フィールド定義で、`avoid_overwriting` を `true` にしておかない限り、 `file` フィールドは同じフォルダに同じ名前のファイルがアップロードされると、上書きします。
 
 ---
 
 ### Hidden Field
 
-The `hidden` field type is used to add a hidden element to a form.
+`hidden` フィールドタイプは、フォームに hidden 要素を追加します。
 
-Example:
+具体例：
+
 ```yaml
 header.some_field:
   type: hidden
   default: my-value
 ```
 
-| 属性 | 説明                                                                                                                     |
-| :-----    | :-----                                                                                                                          |
-| `name`    | The field name. If missing, the field name is got from the field definition element (in the example above: `header.some_field`) |
+| 属性 | 説明  |
+| :-----    | :----- |
+| `name`    | フィールド名です。もし書き忘れた場合、要素の定義フィールドの名前になります（上の例では： `header.some_field` ）|
 
 | 利用可能な一般属性            |
 | :-----                               |
@@ -619,9 +622,9 @@ header.some_field:
 
 ### Honeypot Field
 
-The `honeypot` field type creates a hidden field that, when filled out, will return with an error. This is a useful way to prevent bots from filling out and submitting a form.
+`honeypot` フィールドタイプは、入力されるとエラーを返す hidden フィールドを作ります。入力を埋めて送信するだけのボットへの対策として便利です。
 
-Example:
+具体例：
 
 ```yaml
 fields:
@@ -629,17 +632,17 @@ fields:
       type: honeypot
 ```
 
-This is a simple text field which does not appear on the front end. Bots, which detect fields in the code and fill them out automatically, will likely fill the field out. The error prevents that form from being properly submitted. The error comes back next to the form element, rather than on the top in a message block.
+上記は、単純なテキストフィールドで、フロントエンドには表示されません。ボットは、コードを探索し、自動で入力欄を埋めるので、このフィールドも埋めてしまいます。エラーにより、フォームは正しく送信されません。エラーは、メッセージブロックの上部ではなく、フォーム要素の次に表示されます。
 
-A honeypot field is a popular alternative to captcha fields.
+honeypot は、captcha フィールドの代替として人気です。
 
 ---
 
 ### Ignore Field
 
-The `ignore` field type can be used to remove unused fields when extending from another blueprint
+`ignore` フィールドタイプは、他のブループリントから拡張されたときに、不使用のフィールドを削除します。
 
-Example:
+具体例：
 
 ```yaml
 header.process:
@@ -652,9 +655,10 @@ content:
 
 ### Number Field
 
-The `number` field type is used to present a text input field that accepts numbers only, using the [number HTML5 input](http://html5doctor.com/html5-forms-input-types/#input-number).
+`number` フィールドタイプは、 [HTML5 の number input](http://html5doctor.com/html5-forms-input-types/#input-number) を使い、数字のみを受け付ける入力欄を表示します。
 
-Example:
+具体例：
+
 ```yaml
 header.count:
   type: number
@@ -667,9 +671,9 @@ header.count:
 
 | 属性 | 説明                                       |
 | :-----    | :-----                                            |
-| `validate.min` | minimum value |
-| `validate.max`  | maximum value  |
-| `validate.step`  | which increments to step up  |
+| `validate.min` | 最小値 |
+| `validate.max`  | 最大値 |
+| `validate.step`  | 増減の step |
 
 | 利用可能な一般属性                      |
 | :-----                                         |
@@ -695,9 +699,10 @@ header.count:
 
 ### Password Field
 
-The `password` field type is used to present a password text input field.
+`password` フィールドタイプは、パスワード入力欄を表示します。
 
-Example:
+具体例：
+
 ```yaml
 password:
   type: password
@@ -730,9 +735,10 @@ password:
 
 ![Radio Field](radio_field.gif)
 
-The `radio` field type is used to present a set of radio fields
+ラジオボタンのセットを表示します
 
-Example:
+具体例：
+
 ```yaml
 my_choice:
   type: radio
@@ -745,7 +751,7 @@ my_choice:
 
 | 属性 | 説明                                         |
 | :-----    | :-----                                              |
-| `options` | An array of key-value options that will be allowed. |
+| `options` | key-value の選択肢の配列 |
 
 | 利用可能な一般属性                      |
 | :-----                                         |
@@ -766,9 +772,10 @@ my_choice:
 
 ![Range Field](range_field.gif)
 
-The `range` field is used to present a [range input field](http://html5doctor.com/html5-forms-input-types/#input-range).
+[input type="range"](http://html5doctor.com/html5-forms-input-types/#input-range) を表示します。
 
-Example:
+具体例：
+
 ```yaml
 header.choose_a_number_in_range:
   type: range
@@ -802,9 +809,9 @@ header.choose_a_number_in_range:
 
 ### Section Field
 
-The `Section` field type is used to divide a setting page into sections.
+ページをセクションに分けます。
 
-Example:
+具体例：
 
 ```yaml
 content:
@@ -830,9 +837,10 @@ content:
 
 ![Select Field](select_field.gif)
 
-The `select` field type is used to present a select field.
+select 入力欄を表示します。
 
-Example 1:
+具体例 1：
+
 ```yaml
 pages.order.by:
     type: select
@@ -847,7 +855,8 @@ pages.order.by:
         date: 'Date - based on date field in header'
 ```
 
-Example 2 - Disabling Individual Options:
+具体例 2 - 選択肢を disable にする：
+
 ```yaml
 my_element:
     type: select
@@ -867,16 +876,18 @@ my_element:
 
 | 属性  | 説明                                         |
 | :-----     | :-----                                              |
-| `options`  | An array of key-value options that will be allowed. The key will be submitted by the form. |
-| `multiple` | Allow the form to accept multiple values.           |
+| `options`  | key-value 形式の選択肢の配列。key はフォームで送信されます。 |
+| `multiple` | 複数の値を許容するか |
 
-If you set `multiple` to true, you need to add
+`multiple` を true にするとき、以下を追記してください
+
 ```
 pages.order.by:
   validate:
     type: array
 ```
-Otherwise the array of selected values will not be saved correctly.
+
+そうでなければ、選ばれた値の配列が正しく保存されません。
 
 | 利用可能な一般属性                      |
 | :-----                                         |
@@ -902,9 +913,10 @@ Otherwise the array of selected values will not be saved correctly.
 
 ![Select Optgroup Field](select_optgroup_field.gif)
 
-The `select_optgroup` field type is used to present a select field with groupings.
+グループに分かれた select 入力欄を表示します。
 
-Example:
+具体例：
+
 ```yaml
 header.newField:
     type: select_optgroup
@@ -920,8 +932,8 @@ header.newField:
 
 | 属性  | 説明                                         |
 | :-----     | :-----                                              |
-| `options`  | An array of key-value options that will be allowed. |
-| `multiple` | Allow the form to accept multiple values.           |
+| `options`  | key-value 形式の選択肢の配列 |
+| `multiple` | 複数の値を許容するか |
 
 | 利用可能な一般属性                      |
 | :-----                                         |
@@ -945,9 +957,9 @@ header.newField:
 
 ### Spacer Field
 
-The `spacer` field type is used to add some text, a headline or a hr tag
+テキストか、headline、hr タグを追加します
 
-Example:
+具体例：
 
 
 ```yaml
@@ -960,9 +972,9 @@ test:
 
 | 属性   | 説明                                            |
 | :-----      | :-----                                                 |
-| `title`     | add a h3 title to the form                             |
-| `text`      | Add some text. If title is set, add it after the title |
-| `underline` | boolean, add a `<hr>` tag if positive                  |
+| `title`     | h3 タイトルを追加します |
+| `text`      | テキストを追記します。タイトルが設定されていれば、タイトルの後に追加されます |
+| `underline` | 真偽値で、ポジティブな値の場合、`<hr>` タグを追加します。 |
 
 ---
 
@@ -970,9 +982,9 @@ test:
 
 ![Tabs](tabs_field_bp.gif)
 
-The `tabs` and `tab` field types are used to divide the contained form fields in tabs.
+フォームの入力欄をタブに分けます。
 
-Example:
+具体例：
 
 ```yaml
 tabs:
@@ -1000,15 +1012,16 @@ tabs:
 
 | 属性 | 説明           |
 | :-----    | :-----                |
-| `active`  | The active tab number |
+| `active`  | active にするタブ番号 |
 
 ---
 
 ### Tel Field
 
-The `tel` field type is used to present a text input field that accepts a  number, using the [tel HTML5 input](http://html5doctor.com/html5-forms-input-types/#input-tel).
+[HTML5 の input tel](http://html5doctor.com/html5-forms-input-types/#input-tel) を使って、電話番号入力欄を表示します。
 
-Example:
+具体例：
+
 ```yaml
 header.phone:
   type: tel
@@ -1017,10 +1030,10 @@ header.phone:
 
 | 属性 | 説明                                       |
 | :-----    | :-----                                            |
-| `minlength` | minimum text length |
-| `maxlength`  | maximum text length  |
-| `validate.min` | same as minlength |
-| `validate.max`  | same as maxlength  |
+| `minlength` | 最小文字数 |
+| `maxlength`  | 最大文字数  |
+| `validate.min` | minlength と同じ |
+| `validate.max`  | maxlength と同じ  |
 
 | 利用可能な一般属性                      |
 | :-----                                         |
@@ -1048,9 +1061,9 @@ header.phone:
 
 ![Text Field](text_field.gif)
 
-The `text` field is used to present a text input field.
+テキストの入力欄を表示します。
 
-Example:
+具体例：
 
 ```yaml
 header.title:
@@ -1063,12 +1076,12 @@ header.title:
 
 | 属性 | 説明                                       |
 | :-----    | :-----                                            |
-| `prepend` | prepend some text or HTML to the front of a field |
-| `append`  | append some text or HTML to the end of a field  |
-| `minlength` | minimum text length |
-| `maxlength`  | maximum text length  |
-| `validate.min` | same as minlength |
-| `validate.max`  | same as maxlength  |
+| `prepend` | フィールドの前にテキストや HTML を追加する |
+| `append`  | フィールドの後にテキストや HTML を追加する |
+| `minlength` | 文字数の最小値 |
+| `maxlength`  | 文字数の最大値 |
+| `validate.min` | minlength と同じ |
+| `validate.max`  | maxlength と同じ |
 
 | 利用可能な一般属性                      |
 | :-----                                         |
@@ -1096,9 +1109,10 @@ header.title:
 
 ![Textarea Field](textarea_field.gif)
 
-The `textarea` field is used to present a textarea input field.
+textarea を表示します。
 
-Example:
+具体例：
+
 ```yaml
 header.content:
   type: textarea
@@ -1110,12 +1124,12 @@ header.content:
 
 | 属性 | 説明                                                     |
 | :-----    | :-----                                                          |
-| `rows`    | Add a rows attribute with the value associated with this property |
-| `cols`    | Add a cols attribute with the value associated with this property |
-| `minlength` | minimum text length |
-| `maxlength`  | maximum text length  |
-| `validate.min` | same as minlength |
-| `validate.max`  | same as maxlength  |
+| `rows`    | rows 属性を追加します |
+| `cols`    | cols 属性を追加します |
+| `minlength` | 文字数の最小値 |
+| `maxlength`  | 文字数の最大値 |
+| `validate.min` | minlength と同じ |
+| `validate.max`  | maxlength と同じ |
 
 | 利用可能な一般属性                      |
 | :-----                                         |
@@ -1143,9 +1157,9 @@ header.content:
 
 ![Toggle Field](toggle_field_bp.gif)
 
-The `toggle` field type is an on/off kind of input, with configurable labels.
+オン/オフ 切り替え入力欄を、label と一緒に表示します。
 
-Example:
+具体例：
 
 ```yaml
 summary.enabled:
@@ -1163,8 +1177,8 @@ summary.enabled:
 
 | 属性   | 説明                                                  |
 | :-----      | :-----                                                       |
-| `highlight` | The key of the option to highlight (set green when selected) |
-| `options`   | The list of key-value options                              |
+| `highlight` | オプションのキーを強調（選択されたときに緑色に着色） |
+| `options`   | key-value 形式の選択肢のリスト |
 
 | 利用可能な一般属性                      |
 | :-----                                         |
@@ -1182,9 +1196,10 @@ summary.enabled:
 
 ### Url Field
 
-The `url` field type is used to present a text input field that accepts an URL, using the [url HTML5 input](http://html5doctor.com/html5-forms-input-types/#input-url).
+[HTML5 input url](http://html5doctor.com/html5-forms-input-types/#input-url) を使って、URLを受け付ける入力欄を表示します。
 
-Example:
+具体例：
+
 ```yaml
 header.url:
   type: url
@@ -1193,10 +1208,10 @@ header.url:
 
 | 属性 | 説明                                       |
 | :-----    | :-----                                            |
-| `minlength` | minimum text length |
-| `maxlength`  | maximum text length  |
-| `validate.min` | same as minlength |
-| `validate.max`  | same as maxlength  |
+| `minlength` | 文字数の最小値 |
+| `maxlength`  | 文字数の最大値 |
+| `validate.min` | minlength と同じ |
+| `validate.max`  | maxlength と同じ |
 
 | 利用可能な一般属性                      |
 | :-----                                         |
@@ -1219,7 +1234,7 @@ header.url:
 | [validate.message](#common-fields-attributes)  |
 
 
-## Currently Undocumented Fields
+<h2 id="currently-undocumented-fields">未ドキュメント化のfields</h2>
 
 
 | Field                                             | 説明                                                               |
@@ -1240,3 +1255,4 @@ header.url:
 | **Unique Id**                                     |                                                                           |
 | **Value**                                         |                                                                           |
 | **Week**                                          |                                                                           |
+

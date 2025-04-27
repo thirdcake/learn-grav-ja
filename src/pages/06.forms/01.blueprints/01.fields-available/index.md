@@ -1,65 +1,66 @@
 ---
-title: "リファレンス：ブループリントのフォーム入力欄"
+title: "リファレンス：ブループリントのform.fields"
 layout: ../../../../layouts/Default.astro
 ---
 
-<h2 id="available-form-fields-for-use-in-the-admin">管理プラグインで使えるフォーム入力欄</h2>
+<h2 id="available-form-fields-for-use-in-the-admin">管理プラグインで使えるform.fields</h2>
 
 管理パネルでは、さまざまな入力欄を作れます。このドキュメントでは、それぞれの入力欄のプロパティの完全なリファレンスと、使用例を提供します。
 
-管理パネルで特別に利用可能な、以下の入力欄一覧に加えて、フロントエンドで利用できるフォームも利用できます。[フロントエンドのフォーム入力欄のリファレンス](../../02.forms/02.fields-available/) に解説されています。
+管理パネルで利用可能な、以下の form.fields 一覧に加えて、フロントエンドで利用できる form.fields もすべて利用できます。[フロントエンドのフォーム入力欄のリファレンス](../../02.forms/02.fields-available/) に解説されています。
 
-<h3 id="special-form-fields-available-exclusively-in-the-admin">管理プラグインだけで利用できる特別なフォーム</h3>
+<h3 id="special-form-fields-available-exclusively-in-the-admin">管理プラグインだけで利用できる特別なフォームフィールド</h3>
 
-| Field                                             | Description                                                                                                                                                                                                 |
-| :-----                                            | :-----                                                                                                                                                                                                      |
-| **[Array](#array-field)**                         | used to create key-value arrays                                                                                                                                                                             |
-| **BackupHistory**                                 |                                                                                                                                                                                                             |
-| **Blueprint**                                     |                                                                                                                                                                                                             |
-| **[Colorpicker](#colorpicker-field)**             | show a color picker                                                                                                                                                                                         |
-| **[Columns](#columns-column-fields)**             | used to break the form into multiple columns                                                                                                                                                                |
-| **[Column](#columns-column-fields)**              | used to show a single column (used with the `Columns` field)                                                                                                                                                |
-| **Cron**                                          |                                                                                                                                                                                                             |
-| **CronStatus**                                    |                                                                                                                                                                                                             |
-| **[Dateformat](#dateformat-field)**               | a special select that renders the current date/time in the passed formats                                                                                                                                   |
-| **[Datetime](#datetime-field)**                   | a date and time selection field                                                                                                                                                                             |
-| **[Editor](#editor-field)**                       | show a markdown editor                                                                                                                                                                                      |
-| **[Elements](#elements-field)**                   | a conditional, and organizational, field to show/hide children based on the selected value of the "trigger". This is extremely useful to keep the clutter down when there are a lot of options to display                                                                                                                                                                                    |
-| **[Fieldset](#fieldset-field)**                   | group a set of fields inside a collapsible accordion                                                                                                                                                        |
+| フィールド                                             | 説明                                                  |
+| :-----                                            | :-----                                                       |
+| **[Array](#array-field)**                         | key-value 形式の配列を作ります                              |
+| **BackupHistory**                                 |                                                              |
+| **Blueprint**                                     |                                                              |
+| **[Colorpicker](#colorpicker-field)**             | カラーピッカーを表示                                         | 
+| **[Columns](#columns-column-fields)**             | 複数のカラムに分けます |
+| **[Column](#columns-column-fields)**              | （`Columns` フィールドで使われて）1つのカラムを表示します |
+| **Cron**                                          |                                                              |
+| **CronStatus**                                    |                                                              |
+| **[Dateformat](#dateformat-field)**               | 渡されたフォーマットで、今日/今の時間 をレンダリングする特別な選択 |
+| **[Datetime](#datetime-field)**                   | 日時を選択するフィールド |
+| **[Editor](#editor-field)**                       | markdown エディタを表示 |
+| **[Elements](#elements-field)**                   | a conditional, and organizational, field to show/hide children based on the selected value of the "trigger". This is extremely useful to keep the clutter down when there are a lot of options to display |
+| **[Fieldset](#fieldset-field)**                   | group a set of fields inside a collapsible accordion         |
 | **[File](#file-field)**                           | in Admin, **File** is specialized to be used in plugin and theme configurations (blueprints). Handles uploading a file to a location and deleting it, and removing it from the theme / plugin configuration |
-| **[Filepicker](#filepicker-field)**               | **Filepicker** allows to choose files from a location in the web server filesystem.                                                                                                                         |
-| **Frontmatter**                                   |                                                                                                                                                                                                             |
-| **IconPicker**                                    |                                                                                                                                                                                                             |
-| **[List](#list-field)**                           | used to create collections of fields                                                                                                                                                                        |
-| **Markdown**                                      |                                                                                                                                                                                                             |
-| **MediaPicker**                                   |                                                                                                                                                                                                             |
-| **Multilevel**                                    |                                                                                                                                                                                                             |
-| **Order**                                         |                                                                                                                                                                                                             |
-| **PageMedia**                                     |                                                                                                                                                                                                             |
+| **[Filepicker](#filepicker-field)**               | **Filepicker** allows to choose files from a location in the web server filesystem. |
+| **Frontmatter**                                   |                                                              |
+| **IconPicker**                                    |                                                              |
+| **[List](#list-field)**                           | used to create collections of fields                         |
+| **Markdown**                                      |                                                              |
+| **MediaPicker**                                   |                                                              |
+| **Multilevel**                                    |                                                              |
+| **Order**                                         |                                                              |
+| **PageMedia**                                     |                                                              |
 | **[PageMediaSelect](#pagemediaselect-field)**     | shows a select with all the page media. Used in Pages blueprints to let the user choose a media file to be assigned to a field.                                                                             |
-| **[Pages](#pages-field)**                         | shows a list of the site pages                                                                                                                                                                              |
-| **Parents**                                       |                                                                                                                                                                                                             |
-| **Permissions**                                   |                                                                                                                                                                                                             |
-| **Range**                                         |                                                                                                                                                                                                             |
+| **[Pages](#pages-field)**                         | shows a list of the site pages                               |
+| **Parents**                                       |                                                              |
+| **Permissions**                                   |                                                              |
+| **Range**                                         |                                                              |
 | **[Section](#section-field)**                     | used to divide a setting page into sections; each section comes with a title                                                                                                                                |
 | **[Selectize](#selectize-field)**                 | a hybrid of a text box and a select box. Mostly useful for tagging and other element picking fields.                                                                                                        |
-| **SelectUnique**                                  |                                                                                                                                                                                                             |
-| **[Taxonomy](#taxonomy-field)**                   | a special select preconfigured to select one or more taxonomies                                                                                                                                             |
-| **ThemeSelect**                                   |                                                                                                                                                                                                             |
-| **UserInfo**                                      |                                                                                                                                                                                                             |
-| **Xss**                                           |                                                                                                                                                                                                             |
+| **SelectUnique**                                  |                                                              |
+| **[Taxonomy](#taxonomy-field)**                   | a special select preconfigured to select one or more taxonomies |
+| **ThemeSelect**                                   |                                                              |
+| **UserInfo**                                      |                                                              |
+| **Xss**                                           |                                                              |
 
 <h3 id="common-fields-attributes">一般的な属性フィールド</h3>
 
-Every field accepts a list of attributes you can use. Each field could share these common attributes, but particular fields might ignore them. The best way to check which attributes are allowed on a field is to check the field description in this page, and see which attributes are mentioned.
+このリストの属性は、基本的にすべてのフィールドで利用可能です。それぞれのフィールドは、一般的な属性を共有しますが、特定のフィールドでは、適用されないこともあります。フィールドでどの属性が利用可能かを知る最良の方法は、このページの説明を読み、どの属性が言及されているか確認することです。
 
+このリストは共通事項なので、説明は繰り返しません。
 This list provides a common ground so there's no need to repeat the description of a common field.
 
-| Attribute           | Description                                                                                                                                                                                                     |
-| :-----              | :-----                                                                                                                                                                                                          |
-| `autocomplete`      | accepts `on` or `off`                                                                                                                                                                                           |
-| `autofocus`         | if enabled, autofocus on that field                                                                                                                                                                             |
-| `classes`           | accepts a string with one or more CSS classes to add                                                                                                                                                            |
+| 属性           | 説明    |
+| :-----              | :-----  |
+| `autocomplete`      | `on` もしくは `off` を受付 |
+| `autofocus`         | 有効化すると、フィールドをオートフォーカスします |
+| `classes`           | 文字列を受け付け、CSSのクラスを追加します |
 | `default`           | sets the field default value. This ensures you will always get back either a user-specified value _or_ this default value.  See also `placeholder`.                                                             |
 | `disabled`          | sets the field disabled state                                                                                                                                                                                   |
 | `help`              | Adds a tooltip to the field                                                                                                                                                                                     |
@@ -236,7 +237,7 @@ metadata:
 ```
 
 
-| Attribute           | Description |
+| 属性           | 説明 |
 | :-----              | :-----      |
 | `placeholder_key`   |             |
 | `placeholder_value` |             |
@@ -245,7 +246,7 @@ metadata:
 
 
 
-| Common Attributes Allowed                      |
+| 利用可能な一般属性                      |
 | :-----                                         |
 | [default](#common-fields-attributes)           |
 | [help](#common-fields-attributes)              |
@@ -273,7 +274,7 @@ color:
 ```
 
 
-| Common Attributes Allowed                      |
+| 利用可能な一般属性                      |
 | :-----                                         |
 | [autocomplete](#common-fields-attributes)      |
 | [autofocus](#common-fields-attributes)         |
@@ -319,7 +320,7 @@ columns:
 ```
 
 
-| Attribute | Description                    |
+| 属性 | 説明                    |
 | :-----    | :-----                         |
 | `fields`  | The columns / column subfields |
 
@@ -350,7 +351,7 @@ pages.dateformat.short:
 
 
 
-| Attribute   | Description                                             |
+| 属性   | 説明                                             |
 | :-----      | :-----                                                  |
 | `options`   | The field available key-value options                   |
 | `multiple`  | boolean. If positive, the field accepts multiple values |
@@ -358,7 +359,7 @@ pages.dateformat.short:
 
 
 
-| Common Attributes Allowed                      |
+| 利用可能な一般属性                      |
 | :-----                                         |
 | [autofocus](#common-fields-attributes)         |
 | [classes](#common-fields-attributes)           |
@@ -393,7 +394,7 @@ header.date:
 
 
 
-| Attribute      | Description           |
+| 属性      | 説明           |
 | :-----         | :-----                |
 | `format`       | A datetime format value, you may use any of the [PHP datetime formats](https://www.php.net/manual/en/datetime.format.php) avaliable. |
 | `validate.min` | A minimum valid value |
@@ -401,7 +402,7 @@ header.date:
 
 
 
-| Common Attributes Allowed                      |
+| 利用可能な一般属性                      |
 | :-----                                         |
 | [default](#common-fields-attributes)           |
 | [help](#common-fields-attributes)              |
@@ -441,14 +442,14 @@ frontmatter:
 
 
 
-| Attribute    | Description                                                                              |
+| 属性    | 説明                                                                              |
 | :-----       | :-----                                                                                   |
 | `codemirror` | A set of values to be set on the [codemirror editor](https://codemirror.net/doc/manual.html#config). By default uses mode: gfm (github flavored markdown) |
 | `resizer`    | If positive, enables the resizer. Otherwise the editor is fixed                          |
 
 
 
-| Common Attributes Allowed                      |
+| 利用可能な一般属性                      |
 | :-----                                         |
 | [default](#common-fields-attributes)           |
 | [help](#common-fields-attributes)              |
@@ -566,7 +567,7 @@ header.fieldset:
 You can use an icon to place in the header of the fieldset. The icon system used is [Fork Awesome](https://forkaweso.me).
 
 
-| Attribute     | Description                                                                                                |
+| 属性     | 説明                                                                                                |
 | :-----        | :-----                                                                                                     |
 | `icon`        | An icon for the box                                                                                        |
 | `collapsed`   | If `true`, the list is opened collapsed. By default it's expanded                                          |
@@ -574,7 +575,7 @@ You can use an icon to place in the header of the fieldset. The icon system used
 
 
 
-| Common Attributes Allowed                      |
+| 利用可能な一般属性                      |
 | :-----                                         |
 | [disabled](#common-fields-attributes)          |
 | [help](#common-fields-attributes)              |
@@ -619,7 +620,7 @@ custom_file:
 ```
 
 
-| Attribute           | Description                                                                                                |
+| 属性           | 説明                                                                                                |
 | :-----              | :-----                                                                                                     |
 | `destination`       | The folder where the files will be stored, using a stream or relative to the Grav root. E.g. `plugins://my-plugin/assets` |
 | `multiple`          | Whether or not to allow more than one file per field                                                       |
@@ -631,7 +632,7 @@ custom_file:
 
 
 
-| Common Attributes Allowed                      |
+| 利用可能な一般属性                      |
 | :-----                                         |
 | [default](#common-fields-attributes)           |
 | [disabled](#common-fields-attributes)          |
@@ -674,7 +675,7 @@ header.a_file:
 ```
 
 
-| Attribute     | Description                                                                                                |
+| 属性     | 説明                                                                                                |
 | :-----        | :-----                                                                                                     |
 | `folder` | The folder where the files will be looked up, using a stream or relative to the Grav root. Accepts any value in the [file field destination format](/forms/blueprints/how-to-add-file-upload#destination). |
 | `accept` | A list of accepted file extensions                                                          |
@@ -683,7 +684,7 @@ header.a_file:
 
 
 
-| Common Attributes Allowed                      |
+| 利用可能な一般属性                      |
 | :-----                                         |
 | [default](#common-fields-attributes)           |
 | [disabled](#common-fields-attributes)          |
@@ -797,7 +798,7 @@ Accessing and displaying the data of a `list` field is done with a simple twig f
 {% endfor %}
 ```
 
-| Attribute   | Description                                              |
+| 属性   | 説明                                              |
 | :-----      | :-----                                                   |
 | `fields`    | The subfields                                            |
 | `collapsed` | If `true`, the list is opened collapsed. By default it's expanded |
@@ -809,7 +810,7 @@ Accessing and displaying the data of a `list` field is done with a simple twig f
 | `min`       | Minimum number of items allowed in the list.             |
 | `max`       | Maximum number of items allowed in the list. 'Add item' button won't function past this number |
 
-| Common Attributes Allowed                      |
+| 利用可能な一般属性                      |
 | :-----                                         |
 | [default](#common-fields-attributes) |
 | [help](#common-fields-attributes) |
@@ -832,11 +833,11 @@ header.img_link:
   type: pagemediaselect
 ```
 
-| Attribute  | Description           |
+| 属性  | 説明           |
 | :-----     | :-----                |
 | `multiple` | Select multiple files |
 
-| Common Attributes Allowed                      |
+| 利用可能な一般属性                      |
 | :-----                                         |
 | [default](#common-fields-attributes)           |
 | [help](#common-fields-attributes)              |
@@ -875,7 +876,7 @@ home.alias:
     help: PLUGIN_ADMIN.HOME_PAGE_HELP
 ```
 
-| Attribute       | Description                            |
+| 属性       | 説明                            |
 | :-----          | :-----                                 |
 | `start_route`   | Choose a root route for the list       |
 | `show_fullpath` | Show page path instead of title        |
@@ -890,7 +891,7 @@ home.alias:
 
 If you set `multiple` to true, you need to add `validate.type: array`. Otherwise the array of selected pages will not be saved correctly.
 
-| Common Attributes Allowed                      |
+| 利用可能な一般属性                      |
 | :-----                                         |
 | [default](#common-fields-attributes)           |
 | [help](#common-fields-attributes)              |
@@ -925,7 +926,7 @@ content:
 ```
 
 
-| Attribute     | Description                                                    |
+| 属性     | 説明                                                    |
 | :-----        | :-----                                                         |
 | `title`       | A heading title                                                |
 | `underline`   | Add an underline after the title                               |
@@ -962,7 +963,7 @@ taxonomies:
 ```
 
 
-| Common Attributes Allowed                      |
+| 利用可能な一般属性                      |
 | :-----                                         |
 | [default](#common-fields-attributes)           |
 | [help](#common-fields-attributes)              |
@@ -975,7 +976,7 @@ taxonomies:
 
 
 
-| Common Attributes IN INPUT BLOCK              |
+| インプットブロック内の一般属性 |
 | :-----                                        |
 | [autocomplete](#common-fields-attributes)     |
 | [autofocus](#common-fields-attributes)        |
@@ -1010,13 +1011,13 @@ header.taxonomy:
 ```
 
 
-| Attribute  | Description                                             |
+| 属性  | 説明                                             |
 | :-----     | :-----                                                  |
 | `multiple` | boolean. If positive, the field accepts multiple values |
 
 
 
-| Common Attributes Allowed                      |
+| 利用可能な一般属性                      |
 | :-----                                         |
 | [autofocus](#common-fields-attributes)         |
 | [classes](#common-fields-attributes)           |
