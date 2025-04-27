@@ -30,31 +30,32 @@ dependencies:
   - { name: email, version: '~2.0' }
 ```
 
+
 There are different properties that you can use to give your resource an identity. Some are **required**, others are _optional_.
 
-| property         | description                                                                                                                                                                                                                                                                                                                                                                                                      |
-| :-----           | :-----                                                                                                                                                                                                                                                                                                                                                                                                           |
-| __name*__        | This is the name of the resource. Avoid appending Plugin or Theme, there is no need for that.                                                                                                                                                                                                                                                                                                                    |
-| __slug*__        | This is the unique identifier for the resource, it's also used to determine the name of the folder where the resource is stored, e.g. `user/plugins/__slug__` |
-| __type*__        | This is the type of the resource, it should be either `plugin` or `theme` |
-| __version*__     | The version of the resource. This value should always change on each release, incrementally. You should follow the [semver](http://semver.org/) standard, too.                                                                                                                                                                                                                                                   |
-| __description*__ | The description of your resource. Please don't exceed **200** characters. A description should be short and straight to the point. You can use markdown syntax if needed. It's also a good idea to wrap your description in quotation marks.                                                                                                                                                                     |
-| __icon*__        | Icon is what will be used on [getgrav.org](https://getgrav.org). At this stage, we are using [Font Awesome](https://fontawesome.com/icons) icons library, so if you are developing a new plugin or theme, it should be your job to ensure the icon you picked is not already used. Otherwise we will have to change it for you.                                                                |
-| _screenshot_     | _(optional)_ Screenshot is only ever evaluated for _Themes_ and completely ignored for _Plugins_. For _Themes_, this would be the filename of the screenshot that comes with the theme (default: `screenshot.jpg`). If you have a _screenshot.jpg_ image at the root of your theme, then you can avoid using this property. Our repository will automatically pick it up.                                        |
-| __author.name*__ | The developer full name                                                                                                                                                                                                                                                                                                                                                                                          |
-| _author.email_   | _(optional)_ The developer email.                                                                                                                                                                                                                                                                                                                                                                                |
-| _author.url_     | _(optional)_ The developer homepage.                                                                                                                                                                                                                                                                                                                                                                             |
-| _homepage_       | _(optional)_ If you have a dedicated homepage for your resource, this would be the place for it.                                                                                                                                                                                                                                                                                                                 |
-| _docs_           | _(optional)_ If you have written documentation for your resource, you can link them here.                                                                                                                                                                                                                                                                                                                        |
-| _demo_           | _(optional)_ If you have a demo up and running about your resource, link it here.                                                                                                                                                                                                                                                                                                                                |
-| _guide_          | _(optional)_ If you have tutorials or how-to guides for your resource, link it here.                                                                                                                                                                                                                                                                                                                             |
-| _keywords_       | _(optional)_ Although there is no real use of keywords yet, you can list keywords relative to your resource here, comma separated.                                                                                                                                                                                                                                                                               |
-| _bugs_           | _(optional)_ The URL where bugs can be reported, usually this would be the [GitHub issues](https://guides.github.com/features/issues/) link.                                                                                                                                                                                                                                                                     |
-| _license_        | _(optional)_ The type of license your resource is (MIT, GPL, etc). It is advised that you always provide a `LICENSE` file with your resource.                                                                                                                                                                                                                                                                    |
-| _dependencies_   | _(optional)_ A list of dependencies that the plugin/theme requires.  The default process is to use GPM to install them, however, if an optional GIT repository URL is provided, installing direct from the repository will be an option also. Also if you use an array, you can define a name and a version explicitly using [Composer-style package versions](https://getcomposer.org/doc/articles/versions.md) |
-| _gpm_            | _(optional)_ Whether to get updates from the GPM. Set to `false` to disable GPM updates for non-GPM resources. |
+| プロパティ         | 説明  |
+| :-----           | :-----  |
+| __name*__        | リソース名です。Plugin か Theme かを付ける必要はありません。 |
+| __slug*__        | リソースに対する一意の識別子です。また、リソースが保存されているフォルダ名を決定するためにも使われます（例： `user/plugins/slug` ） |
+| __type*__        | リソースのタイプです。 `plugin` か、 `theme` のいずれかです。 |
+| __version*__     | リソースのバージョンです。この値は、リリースごとに、常に増加すべきです。また、標準的な [セマンティックバージョニング](http://semver.org/) に従うべきです。 |
+| __description*__ | リソースの説明です。 **200** 文字を超えないでください。説明は短く、的を射たものとしてください。必要であれば markdown 構文が使えます。クオテーションマークで囲むのも良い考えです。 |
+| __icon*__        |  Icon は、 [getgrav.org](https://getgrav.org) で使われます。現時点では、 [Font Awesome](https://fontawesome.com/icons) ライブラリのアイコンを使っており、もし新たなプラグインやテーマを開発するなら、これまで使われていないアイコンを選んでください。そうしないと、私達がかわりに変更しなければならなくなります。 |
+|  _screenshot_     | _（オプション）_ スクリーンショットは、 _テーマ_ のときのみ有効化され、 _プラグイン_ では無視されます。テーマの場合、これはテーマに付属するスクリーンショットのファイル名（デフォルト： `screenshot.jpg` ）となります。テーマのルートフォルダに、 `screenshot.jpg` 画像があるとき、このプロパティを省略できます。わたしたちのリポジトリが、自動的にそれをピックアップします。 |
+| __author.name*__ | 開発者のフルネーム |
+| _author.email_   | _（オプション）_ 開発者のeメール |
+| _author.url_     | _（オプション）_ 開発者のホームページ |
+| _homepage_       | _（オプション）_ リソース専用のホームページがある場合は、ここに入力してください。 |
+| _docs_           | _（オプション）_ リソースのドキュメントがある場合は、ここにリンクを張ってください。 |
+| _demo_           | _（オプション）_ リソースのデモサイトがある場合は、ここにリンクを張ってください。 |
+| _guide_          | _（オプション）_ リソースのチュートリアルやハウツーガイドがある場合は、ここにリンクを張ってください |
+| _keywords_       | _（オプション）_ まだキーワードが使われるところはありませんが、リソースに関係するキーワードをここにカンマ区切りで列挙してください。 |
+| _bugs_           | _（オプション）_ バグ報告先の URL です。しばしば、 [GitHub issues](https://guides.github.com/features/issues/) リンクとなります。 |
+| _license_        | _（オプション）_ リソースのライセンスのタイプ（MIT, GPL, など）です。リソースには、常に `LICENSE` ファイルを提供することをおすすめします。 |
+| _dependencies_   | _（オプション）_ リソースの依存関係のリストです。デフォルトの処理では、 GPM を使ってインストールしますが、GIT リポジトリの URL をオプションで設定すると、リポジトリから直接インストールすることもできます。また、配列を使うときは、 [Composerスタイルのパッケージバージョン](https://getcomposer.org/doc/articles/versions.md) を使用して、名前とバージョンを明示的に定義することができます。 |
+| _gpm_            | _（オプション）_ GPM からアップデートするかどうかです。 `false` とすると、non-GPM リソースとして、GPM アップデートできません |
 
-Here is an example of the identity portion of the [GitHub plugin](https://github.com/getgrav/grav-plugin-github) blueprints:
+以下は、 [GitHub plugin](https://github.com/getgrav/grav-plugin-github) のブループリントのアイデンティティ部分の例です：
 
 ```yaml
 name: GitHub
@@ -73,5 +74,5 @@ bugs: https://github.com/getgrav/grav-plugin-github/issues
 license: MIT
 ```
 
-Theme blueprints work in very much the same way as plugins.
+テーマのブループリントも、プラグインと同じように機能します。
 
