@@ -70,17 +70,17 @@ Grav のクールなところの1つは、何でもできるパワフルなコ�
 | `bin/grav security`               | 設定されたXSS セキュリティチェックを、すべてのページに対して実行します                |
 | `bin/gpm list`                    | GPM（Gravパッケージマネージャー）経由で利用できるすべてのコマンドをリスト表示します                                             |
 | `bin/gpm help <command>`          | `<command>` のヘルプを表示します               |
-| `bin/gpm index`                   | Shows a list of all the available resources in the Grav repository, organized by themes and plugins.                               |
-| `bin/gpm info`                    | Displays the details of the desired package, such as description, author, homepage, etc.                                           |
-| `bin/gpm install`                 | Installs a resource from the repository to your current Grav instance with a simple command.                                       |
-| `bin/gpm update`                  | Checks installed plugins and themes for available updates and lists them.                                                          |
-| `bin/gpm uninstall`               | Removes an installed theme or plugin and clears the cache.                                                                         |
-| `bin/gpm self-upgrade`            | Enables you to update Grav to the latest version.                                                                                  |
+| `bin/gpm index`                   | テーマとプラグインで整理して、Grav リポジトリの利用可能なリソースの一覧を表示します |
+| `bin/gpm info`                    | 目的のパッケージの詳細を表示します。たとえば、説明、作者、ホームページなど。 |
+| `bin/gpm install`                 | リポジトリから、利用中の Grav へ、シンプルなコマンドでリソースをインストールします |
+| `bin/gpm update`                  | インストール済みのプラグインやテーマでアップデート可能かをチェックし、一覧表示します |
+| `bin/gpm uninstall`               | インストール済みのプラグインやテーマを削除し、キャッシュもクリアします |
+| `bin/gpm self-upgrade`            | Grav を最新版にアップデートします |
 | `bin/gpm logviewer`               | Easily view Grav logs with configuration options to pick log file, number of lines, and verbosity                                  |
-| `bin/gpm scheduler`               | Manage the scheduled jobs and manually run the scheduler process if required                                                       |
+| `bin/gpm scheduler`               | スケジュールされたジョブを管理し、必要に応じてスケジュールされた処理を手動で実行します |
 
 
-> [!Info] 
+> [!Info]  
 > これらのコマンドのより詳しい説明は、 [Grav CLI](../02.grav-cli/) と [Grav GPM](../04.grav-cli-gpm/) のドキュメントで解説します。
 
 以下のコマンドは、**mac もしくは unix 系システム** で使えます。

@@ -53,68 +53,67 @@ layout: ../../../../layouts/Default.astro
 
 このリストの属性は、基本的にすべてのフィールドで利用可能です。それぞれのフィールドは、一般的な属性を共有しますが、特定のフィールドでは、適用されないこともあります。フィールドでどの属性が利用可能かを知る最良の方法は、このページの説明を読み、どの属性が言及されているか確認することです。
 
-このリストは共通事項なので、説明は繰り返しません。
-This list provides a common ground so there's no need to repeat the description of a common field.
+このリストは共通事項なので、フィールドで説明は繰り返しません。
 
 | 属性           | 説明    |
 | :-----              | :-----  |
 | `autocomplete`      | `on` もしくは `off` を受付 |
 | `autofocus`         | 有効化すると、フィールドをオートフォーカスします |
 | `classes`           | 文字列を受け付け、CSSのクラスを追加します |
-| `default`           | sets the field default value. This ensures you will always get back either a user-specified value _or_ this default value.  See also `placeholder`.                                                             |
-| `disabled`          | sets the field disabled state                                                                                                                                                                                   |
-| `help`              | Adds a tooltip to the field                                                                                                                                                                                     |
-| `id`                | sets the field id as well as the `for` attribute on the label                                                                                                                                                   |
-| `label`             | sets the field label                                                                                                                                                                                            |
-| `name`              | sets the field name                                                                                                                                                                                             |
-| `novalidate`        | sets the field novalidate state                                                                                                                                                                                 |
-| `placeholder`       | sets the field placeholder value. This is to set a value the user can see as a prompt for their own value, but it does not influence what value ultimately gets written.  See also `default`.                   |
-| `readonly`          | sets the field read-only state                                                                                                                                                                                  |
-| `size`              | sets the field size, which in turn adds a class to its container. Valid values are `large`, `x-small`, `medium`, `long`, `small`. You can of course add more in the template you see, when used in the frontend |
-| `style`             | sets the field style. If set to `vertical`, the field is able to appear full width. This is an easy way to clean up the form.                                                                                   |
-| `title`             | sets the field title value                                                                                                                                                                                      |
-| `toggleable`        | add a checkbox that will toggle the enabled/disabled attribute of the field                                                                                                                                     |
-| `validate.required` | if set to a positive value, sets the field as required                                                                                                                                                          |
-| `validate.pattern`  | sets a validation pattern                                                                                                                                                                                       |
-| `validate.message`  | sets the message shown if the validation fails                                                                                                                                                                  |
-| `validate.type`     | sets the field type used during validation                                                                                                                                                                      |
+| `default`           | デフォルト値を設定します。ユーザーが指定した値か、このデフォルト値が必ず入力されます。`placeholder` も見てください。 |
+| `disabled`          | フィールドを disabled 状態にします |
+| `help`              | フィールドに tooltip を追加します |
+| `id`                | label の `for` 属性とともに、フィールドに id を設定します |
+| `label`             | label を設定します |
+| `name`              | フィールドの name を設定します |
+| `novalidate`        | フィールドをバリデーション対象外にします |
+| `placeholder`       | フィールドに placeholder 値を設定します。ユーザーが自分の値のプロンプトとして見ることができる値ですが、最終的な書き込みには影響しません。`default` も見てください。 |
+| `readonly`          | フィールドを読み取り専用にします |
+| `size`              | フィールドに size を設定します。この size は、コンテナにクラスとして追加されます。`large`, `x-small`, `medium`, `long`, `small` が適切な値ですが、もちろんフロントエンドで使える別の値を追加することも可能です。 |
+| `style`             | フィールドに style を設定します。`vertical` を設定すると、フィールドが最大幅で表示されます。これはフォームをすっきりさせる簡単な方法です。 |
+| `title`             | フィールドのタイトル値を設定します |
+| `toggleable`        | フィールドの 有効化/無効化 をトグルするチェックボックスを追加します |
+| `validate.required` | ポジティブな値（`true` など）を設定すると、フィールドが required になります |
+| `validate.pattern`  | バリデーションのパターンを設定します |
+| `validate.message`  | バリデーションが失敗したときに表示されるメッセージを設定します |
+| `validate.type`     | バリデーション中に使われるフィールドタイプを設定します |
 
 <h3 id="know-more-about-fields">フィールドについてより詳しく知る</h3>
 
-You can read how the fields are built from the source: [Fields added by the Form Plugin](https://github.com/getgrav/grav-plugin-form/tree/master/templates/forms) and [Fields only available in Admin](https://github.com/getgrav/grav-plugin-admin/tree/master/themes/grav/templates/forms).
+どのようにソースコードからフィールドがビルドされるかは、ここで読めます： [Form Plugin によるフィールドの追加](https://github.com/getgrav/grav-plugin-form/tree/master/templates/forms) 及び [管理パネルでのみ利用可能なフィールド](https://github.com/getgrav/grav-plugin-admin/tree/master/themes/grav/templates/forms) 。
 
 ### Validation
 
-Most of the fields allow validation.
+ほとんどのフィールドで、バリデーションできます。
 
 ```yaml
 validate:
     required: true
 ```
 
-will cause the field to be marked as required.
+上記により、そのフィールドは required となります。
 
 ```yaml
 validate:
     message: 'Some message'
 ```
 
-will show the defined message when the field is not correctly filled.
+上記では、フィールドが正しく入力されなかったときに、定義されたメッセージを表示します。
 
 ```yaml
 validate:
     pattern: 'Some pattern'
 ```
 
-will validate the field value against the passed regex pattern. Examples: `pattern: "[1-9][0-9]*"`, `pattern: '[A-Za-z0-9-]+'`, `pattern: '[a-z0-9-]+'`, ` pattern: '^[a-z0-9_-]{3,16}$'`, `pattern: '(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}'`
+上記では、入力値を、渡された正規表現でバリデーションします。たとえば： `pattern: "[1-9][0-9]*"`, `pattern: '[A-Za-z0-9-]+'`, `pattern: '[a-z0-9-]+'`, ` pattern: '^[a-z0-9_-]{3,16}$'`, `pattern: '(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}'`
 
 #### validate.type
 
-`validate.type` indicates which type should it validate against.
+`validate.type` は、どの type （型）に対して入力値を検証するかを指定します。
 
-Some examples:
+いくつかの具体例：
 
-An editor will result in a `textarea`:
+editor タイプの入力欄への入力を、`textarea` タイプに適合するかチェックしたい：
 
 ```yaml
 content:
@@ -123,7 +122,7 @@ content:
       type: textarea
 ```
 
-A selectize will be a `commalist`:
+selectize タイプの入力欄への入力を、 `commalist` タイプに適合するかチェックしたい：
 
 ```yaml
 taxonomies:
@@ -143,7 +142,7 @@ filters.category:
     type: commalist
 ```
 
-Validate an email address:
+text タイプの入力欄への入力を、eメール タイプに適合するかチェックしたい：
 
 ```yaml
 author.email:
@@ -155,7 +154,7 @@ author.email:
         type: email
 ```
 
-Make sure a value is a bool:
+toggle タイプの入力欄への入力を、bool タイプに適合するかチェックしたい：
 
 ```yaml
 summary.enabled:
@@ -170,7 +169,7 @@ summary.enabled:
         type: bool
 ```
 
-Make sure a value is an integer between 0 and 65536:
+text タイプの入力欄への入力を、int 型で、0から65536の間にあるかチェックしたい：
 
 ```yaml
 summary.size:
@@ -184,7 +183,7 @@ summary.size:
         max: 65536
 ```
 
-Make sure a value is a number > 1:
+text タイプの入力欄への入力を、数字で 1以上 に適合するかチェックしたい：
 
 ```yaml
 pages.list.count:
@@ -197,7 +196,7 @@ pages.list.count:
         min: 1
 ```
 
-Validate a taxonomy type as an array:
+taxonomy タイプの入力欄への入力を、array 型に適合するかチェックしたい：
 
 ```yaml
 header.taxonomy:
@@ -208,7 +207,7 @@ header.taxonomy:
     type: array
 ```
 
-Validate a text field as a slug:
+text タイプの入力欄への入力を、slug 型に適合するかチェックしたい：
 
 ```yaml
 folder:
@@ -222,9 +221,9 @@ folder:
 
 ![Array](array_field_bp.gif)
 
-The `array` field type is used to create a simple list of key - values objects, or just a list of values if you use the `value_only` option.
+シンプルな key - values オブジェクト（一般的な連想配列）を作ります。もしくは、 `value_only` オプションを使うと、ただの values のリスト（配列） を作ります。
 
-Example:
+具体例：
 
 ```yaml
 metadata:
@@ -241,9 +240,8 @@ metadata:
 | :-----              | :-----      |
 | `placeholder_key`   |             |
 | `placeholder_value` |             |
-| `value_only`        | Do not require or store array keys, just store a simple array of values. |
-| `value_type`        | Set to `textarea` to display a [textarea field](/forms/forms/fields-available#textarea-field) for entering array values rather than the smaller [text field](/forms/forms/fields-available#text-field). |
-
+| `value_only`        | 配列の key を求めたり、保存したりしないでください。シンプルな値のみの配列を保存してください。 |
+| `value_type`        | 配列値を入力する際に、小さい [text field](../../02.forms/02.fields-available/#text-field) ではなく、 [textarea field](../../02.forms/02.fields-available/#textarea-field) で表示したい場合に、`textarea` を設定してください |
 
 
 | 利用可能な一般属性                      |
@@ -262,9 +260,9 @@ metadata:
 
 ![Colorpicker](colorpicker_field.png)
 
-The `colorpicker` field type is used to display a color picker field
+カラーピッカーを表示します
 
-Example:
+具体例：
 
 ```yaml
 color:
@@ -298,9 +296,9 @@ color:
 
 ![Columns](columns_field_bp.gif)
 
-The `columns` and `column` field types are used to divide the contained form fields in columns
+`columns` と `column` フィールドタイプは、フィールドをカラムに分けます（縦に分割します）
 
-Example:
+具体例：
 
 ```yaml
 columns:
@@ -322,16 +320,16 @@ columns:
 
 | 属性 | 説明                    |
 | :-----    | :-----                         |
-| `fields`  | The columns / column subfields |
+| `fields`  | columns / column のサブフィールド |
 
 
 ### Dateformat Field
 
 ![DateFormat](dateformat_field_bp.gif)
 
-The `dateformat` field type is used to
+日付のフォーマットの選択肢です
 
-Example:
+具体例：
 
 ```yaml
 pages.dateformat.short:
@@ -349,14 +347,11 @@ pages.dateformat.short:
         "jS M Y": Date5
 ```
 
-
-
 | 属性   | 説明                                             |
 | :-----      | :-----                                                  |
-| `options`   | The field available key-value options                   |
-| `multiple`  | boolean. If positive, the field accepts multiple values |
+| `options`   | key-value 型の選択肢                   |
+| `multiple`  | 真偽値。もしポジティブ（`true` など）なら、複数の値を許容します |
 | `selectize` |                                                         |
-
 
 
 | 利用可能な一般属性                      |
@@ -380,9 +375,9 @@ pages.dateformat.short:
 
 ![DateTime](datetime_field.gif)
 
-The `datetime` field type is used to store and present a date and time field.
+日時のフィールドを保存し、表示します
 
-Example:
+具体例：
 
 ```yaml
 header.date:
@@ -396,9 +391,9 @@ header.date:
 
 | 属性      | 説明           |
 | :-----         | :-----                |
-| `format`       | A datetime format value, you may use any of the [PHP datetime formats](https://www.php.net/manual/en/datetime.format.php) avaliable. |
-| `validate.min` | A minimum valid value |
-| `validate.max` | A maximum valid value |
+| `format`       |  日時のフォーマット値です。 [PHPのdatetime formats](https://www.php.net/manual/ja/datetime.format.php) がすべて使えます |
+| `validate.min` | 許容する最小値 |
+| `validate.max` | 許容する最大値 |
 
 
 
@@ -419,9 +414,9 @@ header.date:
 
 ![Editor Field](editor_field_bp.gif)
 
-The `editor` field type is used to present the Codemirror editor
+Codemirror エディタを表示します
 
-Example:
+具体例：
 
 ```yaml
 frontmatter:
@@ -444,8 +439,8 @@ frontmatter:
 
 | 属性    | 説明                                                                              |
 | :-----       | :-----                                                                                   |
-| `codemirror` | A set of values to be set on the [codemirror editor](https://codemirror.net/doc/manual.html#config). By default uses mode: gfm (github flavored markdown) |
-| `resizer`    | If positive, enables the resizer. Otherwise the editor is fixed                          |
+| `codemirror` | [codemirror editor](https://codemirror.net/doc/manual.html#config) の設定値。デフォルトでは、gfm（github flavored markdown）モードです |
+| `resizer`    | ポジティブな値の場合、resizer を有効化します。そうでない場合、エディタは固定です。 |
 
 
 
@@ -471,9 +466,9 @@ frontmatter:
 
 ![Elements](elements_field.gif)
 
-This field is only organizational and allows grouping items within a named group that will only be showed if the selected element value matches the group.
+このフィールドは、整理するだけのものです。アイテムをグループ化し、名前を付け、select 要素の値と一致すればそれだけを表示します。
 
-Example:
+具体例：
 
 ```yaml
 header.elements-demo.type:
@@ -516,10 +511,10 @@ header.elements-demo.type:
 ### Fieldset Field
 
 ![Fieldset Field](fieldset-gif.gif)
-The `fieldset` groups a set of fields inside a collapsible box.
 
+表示したり消したりできるボックスに、フィールドをまとめます。
 
-Example:
+具体例：
 
 ```yaml
 header.fieldset:
@@ -540,9 +535,11 @@ header.fieldset:
       label: textarea
 ```
 
-!Fieldsets have to be saved in the frontmatter too, with `header.`, in order for their sub-field states to be correctly remembered!
+> [!Note]  
+> Fieldsets have to be saved in the frontmatter too, with `header.`, in order for their sub-field states to be correctly remembered!
 
-!! **Known issue :** if fields in a fieldset use a `toggleable:`, their state won't be memorized if the fieldset named isn't prefixed with `header.`. Here's an example of a valid structure with a modification of the *pagination* option :
+> [!Info]  
+> **Known issue :** if fields in a fieldset use a `toggleable:`, their state won't be memorized if the fieldset named isn't prefixed with `header.`. Here's an example of a valid structure with a modification of the *pagination* option :
 
 ```yaml
 header.fieldset:
@@ -564,14 +561,14 @@ header.fieldset:
 
 #### Icon of the fieldset
 
-You can use an icon to place in the header of the fieldset. The icon system used is [Fork Awesome](https://forkaweso.me).
+フィールドセットのヘッダにアイコンが使えます。システムの使うアイコンは、[Fork Awesome](https://forkaweso.me) です。
 
 
 | 属性     | 説明                                                                                                |
 | :-----        | :-----                                                                                                     |
-| `icon`        | An icon for the box                                                                                        |
-| `collapsed`   | If `true`, the list is opened collapsed. By default it's expanded                                          |
-| `collapsible` | Whether one can expand the fieldset or not                                                                 |
+| `icon`        | box 用のアイコン |
+| `collapsed`   | `true` にすると、閉じた状態でページが表示されます。デフォルトでは、開いた状態です。 |
+| `collapsible` | フィールドセットの開閉するかどうか |
 
 
 
@@ -590,13 +587,16 @@ You can use an icon to place in the header of the fieldset. The icon system used
 
 ![File Field](file_field_bp.gif)
 
-!! The `file` field is intended to be used by **configuration**, **theme**, and **plugins** blueprints, **NOT page blueprints**.  For pages, you should use the existing `pagemedia` field and then utilize the [filepicker](#filepicker-field) field to select the files.
+> [!Info]  
+> The `file` field is intended to be used by **configuration**, **theme**, and **plugins** blueprints, **NOT page blueprints**.  For pages, you should use the existing `pagemedia` field and then utilize the [filepicker](#filepicker-field) field to select the files.
 
-!! The `file` field does not currently work as expected in a list field. Use a single `pagemedia` field separate from the list with one or more `filepicker` fields in the list.
+> [!Info]  
+> The `file` field does not currently work as expected in a list field. Use a single `pagemedia` field separate from the list with one or more `filepicker` fields in the list.
 
-! More details can be found in the dedicated [How To: Add a File Upload](../how-to-add-file-upload) section. Also note that displaying an image uploaded in a file field is not done the same way as with a filepicker field. More details about how to access images uploaded in a file field can be found on this [cookbook entry](https://learn.getgrav.org/cookbook/twig-recipes#displaying-an-image-uploaded-in-a-file-field).
+> [!Note]  
+> More details can be found in the dedicated [How To: Add a File Upload](../04.how-to-add-file-upload/) section. Also note that displaying an image uploaded in a file field is not done the same way as with a filepicker field. More details about how to access images uploaded in a file field can be found on this [cookbook entry](../../../10.cookbook/02.twig-recipes/#displaying-an-image-uploaded-in-a-file-field).
 
-Example:
+具体例：
 
 ```yaml
 custom_logo_login_screen:
@@ -653,7 +653,7 @@ custom_file:
 
 The `filepicker` field type can be used in pages, plugin and theme configurations (blueprints). Handles selecting a file from a location and saving it to the page headers or theme / plugin configuration.
 
-Example:
+具体例：
 
 ```yaml
 picked_image:
@@ -702,7 +702,7 @@ header.a_file:
 
 The `honeypot` field type creates a hidden field that, when filled out, will return with an error. This is a useful way to prevent bots from filling out and submitting a form.
 
-Example:
+具体例：
 
 ```yaml
 fields:
@@ -721,7 +721,7 @@ A honeypot field is a popular alternative to captcha fields.
 
 The `list` field type is used to create collections of fields. The field accepts a `fields` attribute that will host subfields, and there will be an "Add item" button to allow the user to add more items to the collection.
 
-Example:
+具体例：
 
 ```yaml
 header.buttons:
@@ -912,7 +912,7 @@ If you set `multiple` to true, you need to add `validate.type: array`. Otherwise
 
 The `Section` field type is used to divide a setting page into sections.
 
-Example:
+具体例：
 
 ```yaml
 content:
@@ -941,7 +941,7 @@ content:
 
 The `selectize` field type is used to show a hybrid of a text box and a select box. Mostly useful for tagging and other element picking fields.
 
-Example:
+具体例：
 
 ```yaml
 taxonomies:
@@ -999,7 +999,7 @@ taxonomies:
 
 The `taxonomy` field type is a special select preconfigured to select one or more taxonomy values.
 
-Example:
+具体例：
 
 ```yaml
 header.taxonomy:

@@ -80,43 +80,43 @@ bin/grav clean
 
 ## Clear-Cache
 
-You can clear the cache by deleting all the files and folders under `cache/`.
+`cache/` フォルダ下のファイルやフォルダをすべて削除することで、キャッシュをクリアできます。
 
-The equivalent CLI command is:
+対応する CLI コマンドは：
 
 ```bash
 $ cd ~/webroot/my-grav-project
 bin/grav cache
 ```
 
-There are several aliases for compatibility (`cache`, `cache-clear`, `clearcache`, `clear`).
+同じ内容の別名がいくつかあります（`cache`, `cache-clear`, `clearcache`, `clear`）。
 
-The default option is the standard cache clearing process however, you can control this further with these options:
+デフォルトでは、標準的なキャッシュクリア処理を行いますが、以下のオプションを付けると、より詳しく制御できます：
 
 ```txt
---purge           If set purge old caches
---all             If set will remove all including compiled, twig, doctrine caches
---assets-only     If set will remove only assets/*
---images-only     If set will remove only images/*
---cache-only      If set will remove only cache/*
---tmp-only        If set will remove only tmp/*
+--purge           古いキャッシュを削除
+--all             すべてを削除します。コンパイルされたもの、twig、doctrine caches も含みます
+--assets-only     assets/* のみ削除します
+--images-only     images/* のみ削除します
+--cache-only      cache/* のみ削除します
+--tmp-only        tmp/* のみ削除します
 ```
 
 ## Composer
 
-If you installed Grav via GitHub and have manually installed composer-based vendor packages, you can easily update with:
+もし Grav をGitHub からインストールし、コンポーザーベースの vendor パッケージをインストールしていた場合、次のように、簡単にアップデートできます：
 
 ```bash
 bin/grav composer
 ```
 
-You can also pass composer options such as `install`:
+composer に `install` のようなオプションを渡すこともできます：
 
 ```bash
 bin/grav composer --install
 ```
 
-or
+もしくは
 
 ```bash
 bin/grav composer --update
