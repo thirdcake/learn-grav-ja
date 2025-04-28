@@ -27,7 +27,7 @@ layout: ../../../layouts/Default.astro
 
 <h2 id="exporting-users-from-wordpress">WordPressからユーザーのエクスポート</h2>
 
-![WordPress users exported to Grav](users.png)
+![WordPress users exported to Grav](users.webp)
 
 WordPress users on left exported to Grav on the right.
 
@@ -48,15 +48,15 @@ Copy the `EXPORT/accounts` directory to your `user` directory (e.g. username.yam
 
 <h2 id="exporting-user-roles-from-wordpress">WordPressからユーザーロールのエクスポート</h2>
 
-![WordPress roles exported to Grav groups](roles.png)
+![WordPress roles exported to Grav groups](roles.webp)
 
 WordPress users with roles on left exported to Grav groups on the right.
 
-<h3 id="command">コマンド</h3>
+<h3 id="command-1">コマンド</h3>
 
 `wp wp2grav-roles` will generate a Grav groups.yaml file.
 
-<h3 id="results">結果</h3>
+<h3 id="results-1">結果</h3>
 
 WordPress user roles export as Grav groups in a `groups.yaml` file at `config/groups.yaml`. Some notes about the role exporting:
 
@@ -76,11 +76,11 @@ Copy the `EXPORT/config` directory to `users/config`.
 
 WordPress post types are converte to Grav page types, with a pre-pended "WP" in front of each type (highlighted in yellow here).
 
-<h3 id="command">コマンド</h3>
+<h3 id="command-2">コマンド</h3>
 
 * `wp wp2grav-post-types` will generate a basic Grav plugin, along with page types that match the WordPress post types.
 
-<h3 id="results">結果</h3>
+<h3 id="results-2">結果</h3>
 
 * A Grav plugin will be generated that will present basic field functionality within the Admin tool.
 
@@ -91,21 +91,21 @@ WordPress post types are converte to Grav page types, with a pre-pended "WP" in 
 
 <h2 id="exporting-posts-from-wordpress">WordPressから投稿のエクスポート</h2>
 
-![Sample page, admin view](sample-page-admin.png)
+![Sample page, admin view](sample-page-admin.webp)
 
 Admin view of WordPress "Sample Page" on left exported to Grav markdown on the right.
 
 
-![Sample page, page view](sample-page-render.png)
+![Sample page, page view](sample-page-render.webp)
 
 User view of WordPress "Sample Page" on left exported and rendered via Grav on the right.
 
 
-<h3 id="command">コマンド</h3>
+<h3 id="command-3">コマンド</h3>
 
 * `wp wp2grav-posts` will export all posts.
 
-<h3 id="results">結果</h3>
+<h3 id="results-3">結果</h3>
 
 * Each post/page will be exported to directories matching metadata from the post, typically the post/ page title.
 * Library media will be copied to the `data/wp-content` and in-line content will (eventually) be included within the page's directory.
@@ -117,15 +117,15 @@ User view of WordPress "Sample Page" on left exported and rendered via Grav on t
 
 <h2 id="exporting-site-metadata-from-wordpress">WordPressからサイトのメタデータのエクスポート</h2>
 
-![Sample page, admin view](site-metadata.png)
+![Sample page, admin view](site-metadata.webp)
 
 Admin view of WordPress General Settings on left exported to Grav Site Config on the right.
 
-<h3 id="command">コマンド</h3>
+<h3 id="command-4">コマンド</h3>
 
 * `wp wp2grav-site` will export site metadata.
 
-<h3 id="results">結果</h3>
+<h3 id="results-4">結果</h3>
 
 * Grav site metadata is stored in `EXPORT/config/site.yaml`.
 
