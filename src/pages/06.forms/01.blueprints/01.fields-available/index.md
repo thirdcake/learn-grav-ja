@@ -7,7 +7,7 @@ layout: ../../../../layouts/Default.astro
 
 管理パネルでは、さまざまな入力欄を作れます。このドキュメントでは、それぞれの入力欄のプロパティの完全なリファレンスと、使用例を提供します。
 
-管理パネルで利用可能な、以下の form.fields 一覧に加えて、フロントエンドで利用できる form.fields もすべて利用できます。[フロントエンドのフォーム入力欄のリファレンス](../../02.forms/02.fields-available/) に解説されています。
+管理パネルでは、以下に一覧表示されている、 form.fields に加えて、フロントエンドで利用できる form.fields もすべて利用できます。[フロントエンドのフォーム入力欄のリファレンス](../../02.forms/02.fields-available/) に解説されています。
 
 <h3 id="special-form-fields-available-exclusively-in-the-admin">管理プラグインだけで利用できる特別なフォームフィールド</h3>
 
@@ -24,10 +24,10 @@ layout: ../../../../layouts/Default.astro
 | **[Dateformat](#dateformat-field)**               | 渡されたフォーマットで、今日/今の時間 をレンダリングする特別な選択 |
 | **[Datetime](#datetime-field)**                   | 日時を選択するフィールド |
 | **[Editor](#editor-field)**                       | markdown エディタを表示 |
-| **[Elements](#elements-field)**                   | a conditional, and organizational, field to show/hide children based on the selected value of the "trigger". This is extremely useful to keep the clutter down when there are a lot of options to display |
-| **[Fieldset](#fieldset-field)**                   | group a set of fields inside a collapsible accordion         |
-| **[File](#file-field)**                           | in Admin, **File** is specialized to be used in plugin and theme configurations (blueprints). Handles uploading a file to a location and deleting it, and removing it from the theme / plugin configuration |
-| **[Filepicker](#filepicker-field)**               | **Filepicker** allows to choose files from a location in the web server filesystem. |
+| **[Elements](#elements-field)**                   | 選択された "トリガー" の値をもとに、子要素を見せたり/隠したりする条件付きの整理用フィールドです。表示するオプションが多いとき、煩雑さを抑えるのにとても便利です |
+| **[Fieldset](#fieldset-field)**                   | 折りたたみ可能なアコーディオン内にフィールドのセットをグルーピングします   |
+| **[File](#file-field)**                           | 管理プラグイン内では、 **File** は、プラグインやテーマ設定（ブループリント）で使用されることに特化しています。ファイルのアップロード保存と、そのファイルの削除、テーマ/プラグイン設定からの参照の削除などを行います |
+| **[Filepicker](#filepicker-field)**               | **Filepicker** により、web サーバーのファイルシステムに保存したファイルを選択できます |
 | **Frontmatter**                                   |                                                              |
 | **IconPicker**                                    |                                                              |
 | **[List](#list-field)**                           | used to create collections of fields                         |
@@ -536,10 +536,10 @@ header.fieldset:
 ```
 
 > [!Note]  
-> Fieldsets have to be saved in the frontmatter too, with `header.`, in order for their sub-field states to be correctly remembered!
+> Fieldsets は、サブフィールドの状態を正しく記憶させるため、 `header.` 付きで、テーマ設定ファイルのフロントマターに保存されなければいけません！
 
 > [!Info]  
-> **Known issue :** if fields in a fieldset use a `toggleable:`, their state won't be memorized if the fieldset named isn't prefixed with `header.`. Here's an example of a valid structure with a modification of the *pagination* option :
+> **既知の問題：** フィールドセット内のフィールドで `toggleable:` を使う場合、　`header.` が接頭辞として付いていないと、それらの状態が記憶されません。以下は、 *ページネーション* オプションを変更する、適切な構造の例です：
 
 ```yaml
 header.fieldset:
@@ -564,11 +564,11 @@ header.fieldset:
 フィールドセットのヘッダにアイコンが使えます。システムの使うアイコンは、[Fork Awesome](https://forkaweso.me) です。
 
 
-| 属性     | 説明                                                                                                |
-| :-----        | :-----                                                                                                     |
+| 属性     | 説明   |
+| :-----        | :----- |
 | `icon`        | box 用のアイコン |
 | `collapsed`   | `true` にすると、閉じた状態でページが表示されます。デフォルトでは、開いた状態です。 |
-| `collapsible` | フィールドセットの開閉するかどうか |
+| `collapsible` | フィールドセットを開閉できるかどうか |
 
 
 
@@ -588,13 +588,13 @@ header.fieldset:
 ![File Field](file_field_bp.gif)
 
 > [!Info]  
-> The `file` field is intended to be used by **configuration**, **theme**, and **plugins** blueprints, **NOT page blueprints**.  For pages, you should use the existing `pagemedia` field and then utilize the [filepicker](#filepicker-field) field to select the files.
+> `file`  フィールドは、**configration** と、 **テーマ** と、**プラグイン** のブループリントで使われるためのもので、 **ページのブループリントのためのものではありません** 。ページのためには、既存の `pagemedia` フィールドを使うべきです。その後のファイルの選択には、 [filepicker](#filepicker-field) を使ってください。
 
 > [!Info]  
 > The `file` field does not currently work as expected in a list field. Use a single `pagemedia` field separate from the list with one or more `filepicker` fields in the list.
 
 > [!Note]  
-> More details can be found in the dedicated [How To: Add a File Upload](../04.how-to-add-file-upload/) section. Also note that displaying an image uploaded in a file field is not done the same way as with a filepicker field. More details about how to access images uploaded in a file field can be found on this [cookbook entry](../../../10.cookbook/02.twig-recipes/#displaying-an-image-uploaded-in-a-file-field).
+> より詳しくは、 [ハウツー： アップロードでファイルを追加](../04.how-to-add-file-upload/) セクションをご覧ください。 また、 file フィールドにアップロードされた画像の表示方法は、 filepicker フィールドによるものとは、同じ方法ではないことにも注意してください。 file フィールドでアップロードした画像へのアクセスに関する詳細は、この [レシピ](../../../10.cookbook/02.twig-recipes/#displaying-an-image-uploaded-in-a-file-field) をご覧ください。
 
 具体例：
 
@@ -620,15 +620,15 @@ custom_file:
 ```
 
 
-| 属性           | 説明                                                                                                |
-| :-----              | :-----                                                                                                     |
-| `destination`       | The folder where the files will be stored, using a stream or relative to the Grav root. E.g. `plugins://my-plugin/assets` |
-| `multiple`          | Whether or not to allow more than one file per field                                                       |
-| `limit`             | When `multiple` is enabled, allows to constrain the amount of files permitted to be uploaded               |
-| `filesize`          | The size in MB each file is allowed                                                                        |
-| `accept`            | Add a list of accepted page mime types and extensions. E.g. `["image/*", '.mp3']`                          |
-| `random_name`       | Uses a random filename for each file                                                                       |
-| `avoid_overwriting` | Will append a timestamp before each filename if a conflict would occur                                     |
+| 属性  | 説明  |
+| :-----              | :----- |
+| `destination`       | ファイルを保存するフォルダです。ストリームか、Grav ルートフォルダからの相対パスを使います 例： `plugins://my-plugin/assets` |
+| `multiple`          | フィールドごとに、複数のファイルを許可するかどうか  |
+| `limit`             | When `multiple` を有効化したときに、アップロードできるファイルの数を制限できます         |
+| `filesize`          | 各ファイルに許可される MB 単位のサイズ    |
+| `accept`            | 受け入れ可能なページの mime タイプと拡張子のリストを追加します 例： `["image/*", '.mp3']`  |
+| `random_name`       | 各ファイルにランダムなファイル名を使用します。  |
+| `avoid_overwriting` | 競合が発生した場合、各ファイル名の前にタイムスタンプを追加します |
 
 
 
@@ -651,7 +651,7 @@ custom_file:
 
 ![Filepicker Field](filepicker_field.png)
 
-The `filepicker` field type can be used in pages, plugin and theme configurations (blueprints). Handles selecting a file from a location and saving it to the page headers or theme / plugin configuration.
+`filepicker` フィールドタイプは、ページ、プラグイン、テーマの設定（ブループリント）で使われます。特定の場所からファイルを選択し、ページヘッダーもしくはテーマ / プラグイン設定に保存します。
 
 具体例：
 
@@ -675,13 +675,12 @@ header.a_file:
 ```
 
 
-| 属性     | 説明                                                                                                |
-| :-----        | :-----                                                                                                     |
-| `folder` | The folder where the files will be looked up, using a stream or relative to the Grav root. Accepts any value in the [file field destination format](/forms/blueprints/how-to-add-file-upload#destination). |
-| `accept` | A list of accepted file extensions                                                          |
-| `preview_images` | If enabled, image files will have a little preview |
-| `on_demand` | If enabled, will only load the files and images when the filepicker is focused. This is useful for reducing admin edit page load times when there is large media or many filepicker fields |
-
+| 属性     | 説明   |
+| :-----        | :-----  |
+| `folder` | ストリームもしくは Grav ルートからの相対パスを使い、ファイルを探す対象のフォルダ。 Accepts any value in the [file field destination format](../../01.blueprints/06.how-to-add-file-upload/#destination) |
+| `accept` | 受け入れるファイル拡張子のリスト   |
+| `preview_images` | 有効化すると、画像ファイルに小さなプレビューが表示されます |
+| `on_demand` | 有効化すると、ファイルピッカーにフォーカスが当たっているときのみファイルや画像が読み込まれます。大きいメディアや、たくさんのファイルピッカーフィールドがある場合に、管理パネルの編集ページの読み込み時間を短縮するのに役に立ちます  |
 
 
 | 利用可能な一般属性                      |
@@ -700,7 +699,7 @@ header.a_file:
 
 ### Honeypot Field
 
-The `honeypot` field type creates a hidden field that, when filled out, will return with an error. This is a useful way to prevent bots from filling out and submitting a form.
+`honeypot` フィールドタイプは、入力されるとエラーを返す hidden フィールドを作成します。ボットによるフォームの入力と送信を防ぐのに便利です。
 
 具体例：
 
@@ -710,9 +709,9 @@ fields:
       type: honeypot
 ```
 
-This is a simple text field which does not appear on the front end. Bots, which detect fields in the code and fill them out automatically, will likely fill the field out. The error prevents that form from being properly submitted. The error comes back next to the form element, rather than on the top in a message block.
+これは、シンプルな text フィールドですが、フロントエンドには表示されません。コード内のフィールドを探索し、自動入力するボットは、このフィールドも入力する可能性があります。このエラーにより、フォームは適切に送信されません。エラーは、メッセージブロックの上部ではなく、フォーム要素の次に表示されます。
 
-A honeypot field is a popular alternative to captcha fields.
+ハニーポットは、captcha フィールドの代替としてよく利用されます。
 
 
 ### List Field
