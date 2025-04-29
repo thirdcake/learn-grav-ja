@@ -1,6 +1,6 @@
 ---
 title: "PHP ビルトインサーバー"
-layout: ../../layouts/Chapter.astro
+layout: ../../../layouts/Default.astro
 ---
 
 <h2 id="test-hosting-with-the-php-built-in-web-server">PHPのビルトインサーバーでテストホスティング</h2>
