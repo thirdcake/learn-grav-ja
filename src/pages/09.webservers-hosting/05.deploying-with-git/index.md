@@ -3,40 +3,42 @@ title: "Gitによるデプロイ"
 layout: ../../../layouts/Default.astro
 ---
 
-開発環境とサーバ環境で、バージョン管理システムの [Git](https://git-scm.com/) を使っているなら、ホスト式のGitサービスである [GitHub](https://github.com) や、[Gitlab](https://about.gitlab.com/) を使ったシンプルなワークフローを構築できます。Gitにやそのクライアントツールに親しんでいるなら、試してみてください。
+開発環境とサーバ環境で、バージョン管理システムの [Git](https://git-scm.com/) を使っているなら、ホスティング形式の Git サービスである [GitHub](https://github.com) や、[Gitlab](https://about.gitlab.com/) を使ったシンプルなワークフローを構築できます。 Git や、そのクライアントツールに親しんでいるなら、試してみてください。
 
-Its benefits include:
-* it's **cleaner**: you only need to issue a few command line instructions and these can be automated to any degree
-* **more reliable**: you don't need to remember which files to upload and you can be sure that you only escalate the changes you want (particularly useful when you only want some changes uploaded within files)
-* **safety**: by using a cloud host for your canonical repo ("origin"), (versioned) source backups come free; you can even manage your tasks using issues.
+そのメリットは：
+
+- **クリーン** ： いくつかのコマンドライン命令を出すだけで、いくらでも自動化可能
+- **信頼性** ： アップロードするファイルを覚えておく必要がなく、必要な変更だけを確実にエスカレーション可能（特に、ファイル内の一部だけを更新した場合に便利です）
+* **安全** ： クラウドホスティングを正規のリポジトリ（ "origin" ）に利用することにより、（バージョン管理された）ソースのバックアップが無料で使えます； issue を使ってタスク管理もできます。
 
 <h2 id="setting-up">セットアップ</h2>
 
-A Git-based workflow requires some setup. Here is a broad overview of the configuration. Depending on whether you want to commit folders that contain third party code like `plugins`, there may be some more steps when you first set it up on your server.
+Git ベースのワークフローには、いくつかのセットアップが必要です。以下は、構成のおおまかな概要です。`plugins` のようなサードパーティー製のコードを含むフォルダに commit したいかどうかによって、最初にサーバーにセットアップするときのステップが少し増えるかもしれません。
 
-* On your development environment, your `user` folder is a Git repository.
-* Your `user` folder repository is also hosted in the cloud. Choose a provider that supports private repositories if you don't want to share your code with the world.
-* Your hosted copy is your local and server environment's "remote" `origin`.
-* Push changes to your Grav site from the local environment to `origin` on your Git cloud host.
-* On your server, you have Grav installed and its `user` folder is a clone of your remote repository.
-* When you are ready to update your Grav site on your server, use Git to pull from your remote's `origin`.
+- あなたの開発環境で、 Grav の `user` フォルダが、Git リポジトリであるとします。
+- `user` フォルダは、クラウドにもホスティングされています。もし世界にシェアされたくない場合は、private リポジトリに対応しているプロバイダを選んでください。
+- ホスティングしたコピーは、ローカル環境やサーバー環境から見れば "リモート" にある `origin` です。
+- Grav サイトへの変更を、ローカル環境から、Git のクラウドホスティング上の `origin` に push します。
+- サーバー上には、Grav がインストールされており、その `user` フォルダは、リモートリポジトリのクローンです。
+- サーバー上で Grav サイトを更新したいなら、リモートの `origin` から Git で pull してください。
 
 <h2 id="updates">アップデート</h2>
 
-After intial setup, you only really need to perform two steps after each significant update:
-* push from your local environment,
-* pull changes to your server.
+最初のセットアップが終わったら、重要な更新ごとに、2つのステップを踏むだけです：
+
+- ローカル環境から push する
+- サーバーへ変更を pull する
 
 <h2 id="extending-your-setup">セットアップの拡張</h2>
 
-If you want more advanced automation, you can set up [Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) or use a feature like [Github's webhooks](https://docs.github.com/en/developers/webhooks-and-events/webhooks/about-webhooks). You could also integrate content changes from web editors making edits on their own installations through the Admin console. You can keep (almost) immutable records of what is published using Git tags.
+さらに高度な自動化を望むなら、[Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) をセットアップできます。もしくは、 [Github's webhooks](https://docs.github.com/en/developers/webhooks-and-events/webhooks/about-webhooks) のような機能を使うこともできます。また、web 編集者たちが、管理プラグインを使って、それぞれ自身のインストール環境で編集したコンテンツの変更を、統合することもできます。Git タグを使って、公開された内容を（ほぼ）不変の記録として残すことができます。
 
-The tools available support all kinds of multi-environment workflows and automations.
+利用できるツールは、すべての種類のマルチ環境のワークフローと自動化をサポートします。
 
 > [!Tip]  
-> You can also exploit Git for your content workflow using the [Git Sync plugin](https://github.com/trilbymedia/grav-plugin-git-sync), so that your content editors can deploy changes via the Administration console.
+> [Git Sync plugin](https://github.com/trilbymedia/grav-plugin-git-sync) を使えば、コンテンツワークフローに Git を利用できます。コンテンツ編集者は、管理パネルプラグインを通して、変更をデプロイできます。
 
-Here is a suggestion for your `.gitignore` file in your `user` folder repository. This will help keep your deployment clean:
+以下は、 `user` フォルダのリポジトリの `.gitignore` ファイルの例です。これにより、デプロイがクリーンに保たれるでしょう：
 
 ```git
 accounts/*
@@ -54,5 +56,5 @@ themes/*
 ```
 
 > [!Info]  
-> If you are using a custom or inherited theme that you want to include in your source control, subsitute `MY_CUSTOM_THEME` above with the theme name. Consider doing the same for any site-specific custom plugins.
+> もしコントロールしたいソースを含むカスタムテーマや、テーマの継承を使っているときは、上記の `MY_CUSTOM_THEME` を、そのテーマ名に変更してください。サイト特有のカスタムプラグインについても、同様の検討をしてください。
 
