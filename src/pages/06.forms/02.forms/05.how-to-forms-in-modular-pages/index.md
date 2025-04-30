@@ -3,20 +3,20 @@ title: "ハウツー：モジュラーページ中のフォーム"
 layout: ../../../../layouts/Default.astro
 ---
 
-## Using forms in modular pages
+<h2 id="using-forms-in-modular-pages">モジュラーページでのフォームの使用</h2>
 
-If your theme does not provide a `templates/forms/form.html.twig` file, it's not set up to use forms, but no fear - just copy the form templates from Antimatter, the default Grav theme:
+テーマに `templates/forms/form.html.twig` ファイルが提供されていないときは、フォームが利用できるようにセットアップされていませんが、心配無用です。 - Grav デフォルトテーマの Antimatter からテンプレートをコピーするだけです：
 
 - `templates/form.html.twig`
 - `templates/formdata.html.twig`
 
-Now, create a modular folder with page type `form.md`
+次に、 `form.md` というページタイプを持つモジュラーフォルダを作ります。
 
-For example: `01.your-modular-page/_contact/form.md`
+例えば： `01.your-modular-page/_contact/form.md`
 
-The `form.md` page will not contain any form definition. It’s just an indication that this is the part that should output the form.
+この `form.md` ページは、フォームの定義を含みません。これは、フォームを出力する部分であることを示すだけのものです。
 
-Important: set
+重要：次のように設定してください
 
 ```yaml
 ---
@@ -24,15 +24,16 @@ cache_enable: false
 ---
 ```
 
-in that page frontmatter header, because of how modular pages work, if you forget this the form will be cached, along with the nonce that is generated every 12 hours. So when reaching the 12 hours change, the form will stop working until the cache is refreshed. This step is not needed for standalone page forms.
+モジュラーページの仕組み上、ページのフロントマターヘッダーに、この設定を忘れると、12時間ごとに生成される nonce と一緒に、フォームがキャッシュされます。12時間が経過すると、キャッシュが更新されるまで、フォームは機能を停止します。この設定は、独立したページのフォームでは不要な設定です。
 
-Now add the form header to the main modular page, `modular.md`
+次に、メインのモジュラーページに、フォームヘッダーを追加します、 `modular.md` 
 
-The modular.md page should contain the whole form definition, with fields etc, as if it was a “full-page” form.md file header. With its own page path as the `form.action` field.
+modular.md ページには、 "フルページの" form.md ファイルに書くのと同じように、フォーム定義の全体（fields などを含む）を書いてください。 `form.action` フィールドとして、独自のページ path を使用します。
 
-!!! In Form v2.0, you can now define the form directly in the modular sub-page just like any other form. However, if not found, the form plugin will look in the 'current page', i.e. the top-level modular page for a form, so it's fully backwards compatible with the 1.0 way of doing things. !!!
+> [!Tip]  
+> Form v2.0 では、他のフォームと同様に、モジュラー サブページ内で直接フォームを定義できるようになりました。ただし、フォームが見つからない場合、フォームプラグインは、 '現在のページ' （例えば、フォームのトップレベルのモジュラーページ）を探します。よって、 1.0 の実装方法と完全に下位互換性があります。
 
-For example:
+例えば：
 
 ```yaml
 ---
@@ -64,27 +65,27 @@ form:
 
 ```
 
-In the form header, make sure you add the `action` parameter, with the modular page route
+フォームヘッダーで、 `action` パラメータに、モジュラーページのルーティングを忘れずに追加してください。
 
-Like present in the example above.
-This step is needed because if you don't explicitly add `form.action`, the code usually looks for the page route, but being the form in a modular subpage, not an actual page, the path is wrong and breaks the form submit.
+上記例のように。
+このステップが必要なのは、明示的に `form.action` を追加しないと、コードは、通常ページのルーティングを検索しますが、フォームは実際のページではなく、モジュラーのサブページにあるため、 path が間違えており、フォーム送信が失敗するためです。
 
-So if the modular page is e.g. `site.com/my-page`, just put `form: action: /my-page` in `modular.md`.
-Even if the modular page is the homepage, use the page route, e.g. `form: action: /home`
+よって、モジュラーページが、たとえば `site.com/my-page` にあるときは、 `modular.md` ファイルに `form: action: /my-page` を追記してください。
+たとえモジュラーページがホームページであっても、ページルーティングを使ってください。たとえば： `form: action: /home`
 
-#### A live example
+<h4 id="a-live-example">実行できる具体例</h4>
 
-The Deliver skeleton has a modular form page ready to see while reading this tutorial:
+Deliver スケルトンには、子のチュートリアルを読みながら確認できるモジュラーフォームページが用意されています。
 
 [Live page](http://demo.getgrav.org/deliver-skeleton/contact)
 
 [Page markdown file](https://github.com/getgrav/grav-skeleton-deliver-site/blob/develop/pages/07.contact/modular_alt.md)
 
-#### Troubleshooting forms in modular pages
+<h4 id="troubleshooting-forms-in-modular-pages">モジュラーページのフォームのトラブルシューティング</h4>
 
-The best way to troubleshoot a form is to first get back to the roots, and add your customizations one-by-one to see what might be going wrong.
+フォームのトラブルシューティングする最善の方法は、まず根本に戻って、カスタマイズを1つずつ追加し、何が問題になっているのかを確認することです。
 
-- I suggest creating a "regular form", making sure it works, then try putting that into a modular form.
-- Try making the form work on an Antimatter-based skeleton, which provides all the files you already need.
-- If the form fields do not appear, if you have installed the Assets plugin disable / uninstall it. There's a known issue with it breaking modular forms will be soon fixed.
+- "通常のフォーム" を作り、それが機能することを確認してから、それをモジュラーフォームに組み込んでみることをおすすめします。
+- 必要なファイルがすべて提供されている Antimatter ベースのスケルトンでフォームを動作させてみましょう。
+- フォームフィールドが表示されない場合、Assets プラグインがインストールされているなら、それを無効化 / アンインストールしてください。Assets プラグインがモジュラーフォームを動作させなくなるという問題が知られていますが、まもなく修正される予定です。
 
