@@ -30,21 +30,21 @@ layout: ../../../../layouts/Default.astro
 | **[Filepicker](#filepicker-field)**               | **Filepicker** により、web サーバーのファイルシステムに保存したファイルを選択できます |
 | **Frontmatter**                                   |                                                              |
 | **IconPicker**                                    |                                                              |
-| **[List](#list-field)**                           | used to create collections of fields                         |
+| **[List](#list-field)**                           | フィールドのコレクションを作ります |
 | **Markdown**                                      |                                                              |
 | **MediaPicker**                                   |                                                              |
 | **Multilevel**                                    |                                                              |
 | **Order**                                         |                                                              |
 | **PageMedia**                                     |                                                              |
-| **[PageMediaSelect](#pagemediaselect-field)**     | shows a select with all the page media. Used in Pages blueprints to let the user choose a media file to be assigned to a field.                                                                             |
-| **[Pages](#pages-field)**                         | shows a list of the site pages                               |
+| **[PageMediaSelect](#pagemediaselect-field)**     | すべてのページメディアからの選択を表示します。ページのブループリントで使われ、ユーザーがそのフィールドに適用されたメディアファイルを選べるようになります |
+| **[Pages](#pages-field)**                         | サイトページの一覧を表示します |
 | **Parents**                                       |                                                              |
 | **Permissions**                                   |                                                              |
 | **Range**                                         |                                                              |
-| **[Section](#section-field)**                     | used to divide a setting page into sections; each section comes with a title                                                                                                                                |
-| **[Selectize](#selectize-field)**                 | a hybrid of a text box and a select box. Mostly useful for tagging and other element picking fields.                                                                                                        |
+| **[Section](#section-field)**                     | 設定ページをセクションに区切ります； each section comes with a title                                                                                                                                |
+| **[Selectize](#selectize-field)**                 | テキストボックスとセレクトボックスのハイブリッドです。タグなどの要素をピックアップするのに便利です。 |
 | **SelectUnique**                                  |                                                              |
-| **[Taxonomy](#taxonomy-field)**                   | a special select preconfigured to select one or more taxonomies |
+| **[Taxonomy](#taxonomy-field)**                   | タクソノミーを1つもしくは複数選択するために、事前に設定された特別な選択肢 |
 | **ThemeSelect**                                   |                                                              |
 | **UserInfo**                                      |                                                              |
 | **Xss**                                           |                                                              |
@@ -909,7 +909,7 @@ If you set `multiple` to true, you need to add `validate.type: array`. Otherwise
 
 ### Section Field
 
-The `Section` field type is used to divide a setting page into sections.
+`Section` フィールドタイプは、設定ページをセクションに分けます。
 
 具体例：
 
@@ -927,16 +927,17 @@ content:
 
 | 属性     | 説明                                                    |
 | :-----        | :-----                                                         |
-| `title`       | A heading title                                                |
-| `underline`   | Add an underline after the title                               |
-| `text`        | A text to show beneath                                         |
-| `security`    | An array of credentials a user needs to visualize this section |
+| `title`       | タイトルの見出し |
+| `underline`   | タイトルの後にアンダーラインを引く |
+| `text`        | 下に表示するテキスト |
+| `security`    | このセクションを見せる必要のあるユーザーの credentials の配列 |
 
 
 
 ### Selectize Field
 
 ![Selectize](selectize_field_bp.gif)
+
 
 The `selectize` field type is used to show a hybrid of a text box and a select box. Mostly useful for tagging and other element picking fields.
 
