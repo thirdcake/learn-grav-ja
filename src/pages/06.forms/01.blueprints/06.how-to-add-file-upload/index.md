@@ -57,25 +57,26 @@ multiple: false # [false | true]
 destination: 'self@' # [<path> | <stream> | self@ | page@:<path>]
 ```
 
-Destination is the location where uploaded files should be stored. This can be either a regular `path` (relative to the root of Grav), a `stream` (such as `theme://images`), `self@` or the special  `page@:` prefix. You can also reference a subfolder relative to the current page with `self@/path`. 
+Destination とは、アップロードしたファイルの保存先となる場所です。これは、通常の `path` （Grav のルートからの相対パス）か、 `stream` （たとえば `theme://images` ）か、 `self@` か、もしくは特別な `page@` 接頭辞のあるパスのいずれかです。現在のページからの相対的なサブフォルダを `self@/path` により参照することも可能です。
 
-!! `self@` is not allowed outside the Pages or Flex Objects scope, an error will be thrown. If you use a file field outside a Page or Flex Object, you should always change the `destination` setting.
+> [!Info]  
+> `self@` は、ページ外や、Flex Objects では許可されず、エラーを投げます。もし ページ外や Flex Object で file フィールドを使うなら、常に `destination` を設定してください。
 
 <h5 id="examples">具体例</h5>
 
-1. If it's desired to upload files to a plugin `testing` folder (`user/plugins/testing`), destination would be:
+1. もし、プラグインの `testing` フォルダ（ `user/plugins/testing` ）にファイルをアップロードしたい場合、destination は、以下のようになります：
 
   ```yaml
   destination: 'plugins://testing'
   ```
 
-2. Assuming we have a blog item at the route `/blog/ajax-upload` (physical location being `user/pages/02.blog/ajax-upload`), with the `page@:` prefix the destination would be:
+2. ルーティングで `/blog/ajax-upload` となるページ （実際のパスは `user/pages/02.blog/ajax-upload` ）に、ブログの投稿ページがあったとして、そのページが `page@:` 接頭辞を使う時、 destination は、次のようになります：
 
   ```yaml
   destination: 'page@:/blog/ajax-upload'
   ```
 
-3. Assuming the current theme is `antimatter` and we want to upload to the assets folder (physical location being `user/themes/antimatter/assets`), with the `theme` stream the destination would be:
+3. 現在のテーマが `antimatter` で、`assets` フォルダ（実際のパスは `user/themes/antimatter/assets/` ）に `theme` ストリームでアップロードしたい場合、 destination は、次のようになります：
 
    ```yaml
    destination: 'theme://assets'
@@ -87,7 +88,7 @@ Destination is the location where uploaded files should be stored. This can be e
 random_name: false # [false | true]
 ```
 
-When the `random_name` is enabled, the uploaded file will get renamed with a random string **15** characters long. This is helpful if you wish to hash your uploaded files or if you are looking for a way to reduce names collision.
+`random_name` を有効化すると、アップロードしたファイル名が、 **15** 文字のランダムな文字列になります。これは、アップロードしたファイル名をハッシュ化したい場合や、名前の衝突を減らす方法を探しているときに便利です。
 
 <h5 id="example">具体例</h5>
 
@@ -101,7 +102,7 @@ When the `random_name` is enabled, the uploaded file will get renamed with a ran
 avoid_overwriting: false # [false | true]
 ```
 
-When the `avoid_overwriting` is enabled and a file with the same name of the uploaded one already exists in `destination`, it will be renamed. The newly uploaded file will be prefixed with the current date and time, concatenated by a dash.
+`avoid_overwriting` を有効化すると、 `destination` にすでに存在しているファイルと同じファイル名をアップロードしたとき、ファイル名を変更されます。新たにアップロードされたファイル名は、現在日時が接頭辞として追加され、ダッシュを介して合体します。
 
 <h5 id="example-1">具体例</h5>
 
@@ -115,45 +116,46 @@ When the `avoid_overwriting` is enabled and a file with the same name of the upl
 limit: 10 # [1...X | 0 (unlimited)]
 ```
 
-When the [`multiple`](#multiple) setting is enabled, `limit` allows to constrain the number of allowed files for an individual field. If `multiple` is not enabled (not enabled by default), `limit` automatically falls back to **1**.
+[`multiple`](#multiple) 設定が有効化されたとき、 `limit` により、個々のフィールドで許可されるファイル数が制限されます。 `multiple` が無効化（デフォルトでは無効）されている場合は、 `limit` は自動的に **1** になります。
 
-When `limit` is set to **0**, it means that there are no restrictions on the amount of allowed files that can be uploaded.
+`limit` に **0** を設定した場合、アップロードできるファイル数に制限は無いということになります。
 
-!! It is good practice to always ensure you have a set limit of allowed files that can be uploaded. This way you have more control over your server resources utilizations.
+> [!Info]  
+> アップロードできるファイルに、常に limit を設定することは良い方法です。この方法により、サーバーのリソース使用を、より制御できます。
 
 #### `accept`
 
-[prism classes="language-yaml line-numbers"]
+```yaml
 accept:
   - 'image/*' # Array of MIME types and/or extensions. ['*'] for allowing any file.
-[/prism]
+```
 
-The `accept` setting allows an array of MIME type as well as extensions definitions. All of the extensions need to be starting with the `.` (dot) plus the extension itself.
+`accept` は、MIME タイプや、拡張子の配列で設定します。拡張子はすべて、 `.` （ドット）で始めなければいけません。
 
-In addition you can also allow any file by simply using the __*__ (star) notation `accept: ['*']`.
+加えて、あらゆるファイルを許可するときは、シンプルに  __*__ （スター）記法を使ってください。 `accept: ['*']` 。
 
 <h5 id="examples-1">具体例</h5>
 
-1. To only allow `yaml` and `json` files:
+1. `yaml` ファイルと `json` ファイルのみ許可する場合：
    ```yaml
      accept:
        - .yaml
        - .json
    ```
-2. To only allow images and videos:
+2. images と videos のみ許可する場合：
    ```yaml
      accept:
        - 'image/*'
        - 'video/*'
    ```
-3. To allow any image, any video and only mp3 files:
+3. あらゆる image と、あらゆる video と、mp3 ファイルだけを許可する場合：
    ```yaml
      accept:
        - 'image/*'
        - 'video/*'
        - .mp3
    ```
-4. To allow any file:
+4. あらゆるファイルを許可する場合：
    ```yaml
      accept:
        - '*'
