@@ -3,13 +3,16 @@ title: "具体例：ページのブループリント"
 layout: ../../../../layouts/Default.astro
 ---
 
-**Page Blueprints** extend from the default page, and give you the ability to add options. Basically, custom pages can come to life by using page blueprints. With a page blueprint, you can 100% configure the editing form for a page as it appears in the Admin.
+**ページのブループリント** は、デフォルトのページを拡張し、オプションを追加できる機能を提供します。基本的に、カスタムページは、ページのブループリントを使うことで成立します。ページのブループリントによって、管理パネル上のページの編集画面を 100% 設定できます。
 
-### A first example
+> [!訳注]  
+> このドキュメント中に明示的に書かれていませんが、ページのフォームタイプは、基本的にページのファイル名と一致する YAML ファイルのようです。（よって、おのずとテーマのテンプレート名にも一致するはずです）。たとえば、 `/user/pages/01.home/default.md` のページに対するページのブループリントは、 `/user/blueprints/pages/deafult.yaml` もしくは、 `/user/themes/あなたのテーマ/blueprints/default.yaml` であることが多いはずです。
 
-If you want to use the default page form, and just add a couple of select boxes for example, you can extend from the default page.
+<h3 id="a-first-example">最初の例</h3>
 
-This will use the default page form, and append a text field to the **Advanced** tab, under the **Overrides** section:
+デフォルトのページフォームをベースに、たとえばいくつかの select ボックスを追加するだけの場合、デフォルトのページから拡張できます。
+
+以下のようにすることで、デフォルトのページフォームが使用された上で、 **Overrides** セクションの中に、 **Advanced** タブのテキストフィールドを追加します。
 
 ```yaml
 title: Gallery
@@ -37,7 +40,7 @@ form:
                     type: int
 ```
 
-This will instead add a new tab, called **Gallery**, with some fields in it.
+以下の例では、いくつかのフィールドを含む、 **Grallery** と呼ばれる新しいタブを追加します。
 
 ```yaml
 title: Gallery
@@ -75,17 +78,17 @@ form:
                 three: Three
 ```
 
-The fields types you can add are listed in [Available form fields for use in the admin](../01.fields-available/)
+追加できるフィールドタイプは、[管理パネルで塩生可能なフォームフィールド](../01.fields-available/) に一覧表示されています。
 
-### How to name fields
+<h3 id="how-to-name-fields">フィールドの命名法</h3>
 
-It's important that fields use the `header.*` structure, so field content is saved to the **Page Header** when saved.
+フィールドが `header.*` という構造を使うことは重要です。これにより、ページの保存時に、フィールドのコンテンツは **ページヘッダー** に保存されます。
 
-### Create a completely custom page form
+<h3 id="create-a-completely-custom-page-form">完全にカスタムされたページのフォームを作成する</h3>
 
-You can avoid extending from the default form, and create a page form that is completely unique.
+デフォルトのフォームを拡張せずに、完全に独自のページフォームを作成することができます。
 
-For example:
+具体例：
 
 ```yaml
 title: Gallery
@@ -126,32 +129,34 @@ form:
 
 ```
 
-!! **WARNING:** `route` field has changed in Grav 1.7. Please update your existing blueprints to use the new `type: parents`.
+> [!Info]  
+> **WARNING:** `route` フィールドは、Grav 1.7 で変更されました。既存のブループリントを、新しい `type: parents` に更新してください。
 
-### A note for Expert mode
+<h3 id="a-note-for-expert-mode">エキスパートモードに関する注意</h3>
 
-When editing pages in **Expert** mode, the **Blueprint** is not read, and the page form is the same across all pages. This is because in Expert mode you edit the page fields directly in the **Frontmatter** field, and there is no need to have a customized presentation.
+ページを **エキスパート** モードで編集する場合、 **ブループリント** は読み込まれず、ページの編集フォームは全てのページで同じになります。このようになっている理由は、エキスパートモードでは、 **フロントマター** フィールドを直接編集するため、編集画面をカスタマイズする必要が無いからです。
 
-### Where to put the Page Blueprints
+<h3 id="where-to-put-the-page-blueprints">ページのブループリントを保存する場所</h3>
 
-In order for the Admin Plugin to pick up the blueprints, and thus show the new Page types, you need to put the blueprints in the correct place.
+管理パネルプラグインが、ブループリントを取得して、新しいページタイプを表示するために、ブループリントを正しい場所に配置する必要があります。
 
-#### In the User Blueprints folder
+<h4 id="in-the-user-blueprints-folder">ユーザーのブループリントフォルダ</h4>
 
-Put them in `user/blueprints/pages/`. This is a good place to put them when you simply want your blueprints to be present in your site.
+`user/blueprints/pages/` 内に保存します。ブループリントをサイトにシンプルに反映させたいときは、ここに置くのが良いです。
 
-#### In the Theme
+<h4 id="in-the-theme">テーマ</h4>
 
-Put them in `user/themes/YOURTHEME/blueprints/`. This is best when you also intend to distribute your theme: the theme will provide the page blueprints and it will be easier to use.
+`user/themes/YOURTHEME/blueprints/` 内に保存します。テーマを配布する予定がある場合、ここが最適です。テーマがページのブループリントを提供し、使いやすくなります。
 
-#### In the Data folder
+<h4 id="in-the-data-folder">データフォルダ</h4>
 
-If you are using a Gantry5 based theme, the best location is `user/data/gantry5/themes/YOURTHEME/blueprints/`, otherwise your files may be lost during a theme update.
+Gantry5 ベースのテーマを利用している場合、`user/data/gantry5/themes/YOURTHEME/blueprints/` 内が、最適な場所です。そうでない場合、テーマのアップデート中に、ファイルが消えてしまうかもしれません。
 
-#### In a Plugin
+<h4 id="in-a-plugin">プラグイン</h4>
 
-Put them in `user/plugins/YOURPLUGIN/blueprints/`. This is the place where to put them if you define and add custom pages in the plugin.
+`user/plugins/YOURPLUGIN/blueprints/` 内に保存します。これは、プラグインでカスタムページを定義して追加するようなときに保存する場所です。
 
+次に、 `onGetPageBlueprints` イベントを登録し、Grav に追加します。以下の例は、 `blueprints/` フォルダからブループリントを追加します。
 Then subscribe to the `onGetPageBlueprints` event and add them to Grav. The following example adds the blueprints from the `blueprints/` folder.
 
 ```php

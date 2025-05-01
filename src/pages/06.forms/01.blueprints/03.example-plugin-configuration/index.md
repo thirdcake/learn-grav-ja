@@ -3,13 +3,13 @@ title: "具体例：プラグイン設定"
 layout: ../../../../layouts/Default.astro
 ---
 
-[前回の例](../02.example-plugin-blueprint/) では、プラグインやテーマでのブループリントの定義方法を見ました。
+[前回の例](../02.example-plugin-blueprint/) では、プラグインやテーマでのブループリントの定義方法を説明しました。
 
-今回は、プラグインやテーマに、管理パネルで表示される設定オプションを設定する方法を見ていきましょう。
+今回は、プラグインやテーマに、管理パネルで表示される設定オプションを提供する方法を見ていきましょう。
 
-If you want your plugin (or theme) to have options directly configurable from the admin interface, you need to fill the blueprints.yaml file with forms.
+プラグイン（またはテーマ）に、管理パネルのインターフェースから直接設定できるオプションを持たせたい場合、 blueprints.yaml ファイルに、フォームを入力する必要があります。
 
-For example, here is the **Archives** plugin's **archives.yaml** file:
+たとえば、 **Archives** プラグインの **archives.yaml** ファイルの場合、次のようになります：
 
 ```yaml
 enabled: true
@@ -25,9 +25,9 @@ filters:
     category: blog
 ```
 
-Those are the default settings of the plugin. Without the Admin plugin to configure those settings, the user needs to copy this file in the `/user/config/plugins/` folder and them there.
+上記は、プラグインのデフォルト設定です。管理プラグイン無しでこれらの設定を変更するには、 `/user/config/plugins/` フォルダにこのファイルをコピーし、そこで変更する必要があります。
 
-By providing a correctly-formatted **blueprints.yaml** file, you can allow the user to change the settings from the Admin interface. When the settings are saved, they're automatically written to `/user/config/plugins/archives.yaml` (or under config/themes, if it's a theme). The structure starts as follows:
+正しくフォーマットされた **blueprints.yaml** ファイルを提供することで、ユーザーは、管理パネルのインターフェースで設定を変更できるようになります。設定が保存されたとき、自動で `/user/config/plugins/archives.yaml` に保存されます（テーマの場合は、 `/user/config/themes/` フォルダ以下に保存されます）。構造は、以下のように始まります：
 
 ```yaml
 name: Archives
@@ -49,7 +49,7 @@ form:
   fields:
 ```
 
-Here comes the part that we need. Every field in the **archives.yaml** file needs a corresponding form element, for example:
+ここからが、必要な部分です。 **archives.yaml** ファイルのすべてのフィールドは、対応するフォーム要素が必要です。たとえば：
 
 **Toggle**
 
@@ -95,11 +95,11 @@ limit:
     min: 1
 ```
 
-The root element (in those examples `enabled`, `date_display_format`, `limit`) is the name of the option. The additional components of each field determines how this field is displayed. For example, its type (`type`), its size (`size`), the label shown (`label`) and an optional helpful tooltip that appears on hover (`help`). `default` and `placeholder` let you create some defaults and improve how the fields renders to the user.
+最上位のルート（root）要素（この例では、 `enabled`, `date_display_format`, `limit` ）は、オプション名です。各フィールドの追加コンポーネントにより、そのフィールドの表示方法が決まります。たとえば、そのタイプは、`type` で、そのサイズは、 `size` で、ラベル表示は、 `label` で、そしてオプションのホバーした時に表示される便利なツールチップは、 `help` で決まります。`default` により、デフォルト値を作成し、 `placeholder` により、ユーザーに、改善されたフィールドの見た目を提供します。
 
-The rest of the fields can change depending on the field type. For example the `select` field type requires and `options` list.
+残りのフィールドは、フィールドタイプに応じて変更可能です。たとえば、 `select` フィールドタイプは、 `options` リストが必要です。
 
-Nested options are reachable via dot notation (e.g. `order.dir`)
+ネストされたオプションは、ドット表記で指定できます（例： `order.dir` ）
 
 ```yaml
 order.dir:
@@ -112,8 +112,8 @@ order.dir:
     desc: Descending
 ```
 
-The Admin plugin defines many other field types that can be used, in `plugins/admin/themes/grav/templates/forms/fields`.
+管理パネルプラグインでは、他にも多くのフィールドが定義されています。それらは、`plugins/admin/themes/grav/templates/forms/fields` にあります。
 
-It's important to note that when `form.validation` is set to `strict`, like in the **Archives** plugin example, you need to add form blueprints for _all_ the options, otherwise an error will pop up on save.
-If you instead want to just allow to customize a couple of fields to the Admin interface, not all of them, set `form.validation` as `loose`.
+重要な点として、 **Archives** プラグインの例のように、 `form.validation` が `strict` だったとき、ブループリントのフォームを _すべて_ 追加しなければいけません。そうでなければ、保存時にエラーが表示されます。
+管理パネルのインターフェースに、すべてではなく、いくつかのフィールドのみをカスタマイズできるようにしたい場合は、  `form.validation` を `loose` に設定してください。
 

@@ -718,7 +718,7 @@ fields:
 
 ![List Field](list_field_bp.gif)
 
-The `list` field type is used to create collections of fields. The field accepts a `fields` attribute that will host subfields, and there will be an "Add item" button to allow the user to add more items to the collection.
+`list` フィールドタイプは、フィールドのコレクションを作成します。このフィールドには、サブフィールドの親となる `fields` 属性を与えます。 "Add item" ボタンが表示され、ユーザーはコレクションにアイテムを追加することができます。
 
 具体例：
 
@@ -747,11 +747,11 @@ header.buttons:
           type: bool
 ```
 
-This example will generate this Admin interface:
+この例では、次のような管理パネルのインターフェースが生成されます：
 
 ![](field_list_1.png)
 
-When saving the page, we'll see the following YAML added to the page frontmatter:
+ページを保存すると、次のような YAML がページのフロントマターに追加されます：
 
 ```yaml
 buttons:
@@ -765,9 +765,9 @@ buttons:
         primary: true
 ```
 
-This will be used in the Theme Twig to output the list in some nice way.
+これは、テーマの Twig で、適切な方法でリストを出力するために使われます。
 
-Another example of this field definition is this list of Features, used by Antimatter's Features Modular child page. Every feature has an icon, a header and some text:
+このフィールド定義の別の例として、Features のリストがあります。Antimatter テーマの Features Modular child page で使われます。すべての feature には、アイコンと、ヘッダーと、テキストが含まれます：
 
 ```yaml
 header.features:
@@ -787,7 +787,7 @@ header.features:
       label: Text
 ```
 
-Accessing and displaying the data of a `list` field is done with a simple twig for loop, like in the example below:
+`list` フィールドのデータにアクセスし、表示するには、シンプルな twig のループを使います。次の例のように：
 
 ```twig
 {% for feature in page.header.features %}
@@ -799,15 +799,15 @@ Accessing and displaying the data of a `list` field is done with a simple twig f
 
 | 属性   | 説明                                              |
 | :-----      | :-----                                                   |
-| `fields`    | The subfields                                            |
-| `collapsed` | If `true`, the list is opened collapsed. By default it's expanded |
-| `style`     | Can be set to `vertical` to conserve horizontal space    |
-| `btnLabel`  | The "add new item" label text                            |
-| `sort`      | Boolean. If negative, disables the ability to sort items |
-| `controls`  | Decides where the "Add Item" button will be placed. Can be set to `[top|bottom|both]`. Defaults to `bottom`.  |
-| `placement` | Decides where the added item will be placed. Can be set to `[top|bottom|position]`. Defaults to `bottom`. If `placement` value is `top` or `bottom`, both buttons add item to top or bottom respectively. If `placement` value is `position`, item is added depending on a clicked button position - if top button is clicked, item will be added to top and if bottom button - to bottom.  |
-| `min`       | Minimum number of items allowed in the list.             |
-| `max`       | Maximum number of items allowed in the list. 'Add item' button won't function past this number |
+| `fields`    | サブフィールド                                            |
+| `collapsed` | `true` のとき、初期表示のリストは折りたたまれます。デフォルトでは展開されています。 |
+| `style`     | 水平方向の空間を節約するため、 `vertical` を設定できます |
+| `btnLabel`  | "add new item" のラベルのテキスト |
+| `sort`      | 真偽値。ネガティブの場合、アイテムの並べ替えをできなくします |
+| `controls`  | "Add Item" ボタンをどこに追加するか決めます。 `[top|bottom|both]` のいずれかに設定できます。デフォルトは、 `bottom` です。  |
+| `placement` | アイテムをどこに追加するか決めます。 `[top|bottom|position]` のいずれかに設定できます。デフォルトは `bottom` です。 もし `placement` の値が `top` や `bottom` のとき、どちらのボタンでも、指定した top もしくは bottom にアイテムが追加されます。もし `placement` の値が `position` のときは、クリックしたボタンの場所をもとに、アイテムは追加されます。 - もし上のボタンがクリックされたら、アイテムは最初に追加され、下のボタンであれば下になります |
+| `min`       | リストで許容されるアイテムの最小値。 |
+| `max`       | リストで許容されるアイテムの最大値。この数字を超えると、 'Add item' ボタンが機能しなくなります |
 
 | 利用可能な一般属性                      |
 | :-----                                         |
@@ -822,9 +822,9 @@ Accessing and displaying the data of a `list` field is done with a simple twig f
 
 ### PageMediaSelect Field
 
-The `pagemediaselect` field type is used to allow the users to choose a media from one of the page media already uploaded through FTP or using the page media manager.
+`pagemediaselect` フィールドタイプは、 FTP 経由またはページのメディアマネージャーを使用して、すでにアップロードされているページメディアのいずれかからユーザーがメディアを選択できるようにします。
 
-Example
+具体例
 
 ```yaml
 header.img_link:
@@ -834,7 +834,7 @@ header.img_link:
 
 | 属性  | 説明           |
 | :-----     | :-----                |
-| `multiple` | Select multiple files |
+| `multiple` | 複数のファイルを選択します |
 
 | 利用可能な一般属性                      |
 | :-----                                         |
@@ -858,9 +858,9 @@ header.img_link:
 
 ![Pages Field](pages_field_bp.gif)
 
-The `pages` field type shows a list of the site pages.
+`pages` フィールドタイプは、サイトページのリストを表示します。
 
-Example
+具体例
 
 ```yaml
 home.alias:
@@ -877,18 +877,19 @@ home.alias:
 
 | 属性       | 説明                            |
 | :-----          | :-----                                 |
-| `start_route`   | Choose a root route for the list       |
-| `show_fullpath` | Show page path instead of title        |
-| `show_slug`     | Show slug                              |
-| `show_all`      | Shows all pages                        |
-| `show_modular`  | Shows modular pages                    |
-| `show_root`     | Shows root page                        |
-| `options`       | An optional list of additional choices |
-| `multiple`      | Select multiple pages                  |
-| `limit_levels`  | How many levels to show                |
+| `start_route`   | リストのルート（根）となるルーティングを選びます |
+| `show_fullpath` | タイトルの代わりに、ページの path を表示します |
+| `show_slug`     | slug を表示                              |
+| `show_all`      | すべてのページを表示               |
+| `show_modular`  | モジュラーページを表示 |
+| `show_root`     | ルート（根）ページを表示 |
+| `options`       | 追加する選択肢のオプションのリスト |
+| `multiple`      | 複数ページを選択       |
+| `limit_levels`  | 表示するレベル数      |
 | `selectize`     |                                        |
 
-If you set `multiple` to true, you need to add `validate.type: array`. Otherwise the array of selected pages will not be saved correctly.
+`multiple` を true に設定するときは、`validate.type: array` を追加する必要があります。
+そうでなければ、選択されたページの配列が、正しく保存されません。
 
 | 利用可能な一般属性                      |
 | :-----                                         |
@@ -938,8 +939,7 @@ content:
 
 ![Selectize](selectize_field_bp.gif)
 
-
-The `selectize` field type is used to show a hybrid of a text box and a select box. Mostly useful for tagging and other element picking fields.
+`selectize` フィールドタイプは、text ボックスと select ボックスのハイブリッドを表示します。主に、タグ付けやその他の要素選択フィールドに便利です。
 
 具体例：
 
@@ -997,7 +997,7 @@ taxonomies:
 
 ![Taxonomy](taxonomy_field_bp.gif)
 
-The `taxonomy` field type is a special select preconfigured to select one or more taxonomy values.
+`taxonomy` フィールドタイプは、1つ以上のタクソノミー値を選択するために、事前に設定された、特別な入力欄です。
 
 具体例：
 
@@ -1013,7 +1013,7 @@ header.taxonomy:
 
 | 属性  | 説明                                             |
 | :-----     | :-----                                                  |
-| `multiple` | boolean. If positive, the field accepts multiple values |
+| `multiple` | 真偽値。ポジティブのとき、フィールドは複数の値を受け入れます |
 
 
 
