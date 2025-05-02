@@ -24,6 +24,7 @@ function create_mokuji() {
         return frag;
     }, document.createDocumentFragment());
     ul.appendChild(frag);
+    // todo: できれば h3 の margin を li ではなく a に当てたい。
 }
 
 // 不足しているtable classを補う
@@ -58,8 +59,14 @@ function add_blockquote_class () {
     });
 }
 
+// サイドバーのページナビゲーションで 今いるページを強調
+function activate_currenturl_in_sidebar () {
+    const current_url = new URL(window.location);
+
+}
 window.addEventListener('DOMContentLoaded', ()=>{
     create_mokuji();
     add_table_class();
     add_blockquote_class();
+    // activate_currenturl_in_sidebar();
 }, false);

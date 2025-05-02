@@ -10,72 +10,73 @@ layout: ../../../layouts/Default.astro
 
 <h2 id="introduction">導入</h2>
 
-**Flex** is a set of **Directories** of a given type. Grav has its own built-in types, such as **User Accounts** and **Pages**. Plugins and themes can also define their own types and register those with Grav.
+**Flex** は、型のある **Directories** の集まりです。Grav は、自身で組み込まれた型を持ちます。たとえば、 **ユーザーアカウント** や、 **ページ** のような型です。プラグインとテーマでも、それぞれ自身の型を定義でき、Grav に登録できます。
 
 
 #### Flex
 
-**[Flex](./02.using/01.flex/)** is a container for **Flex Directories**.
+**[Flex](./02.using/01.flex/)** とは、 **Flex ディレクトリ** を持つ箱（コンテナ）です。
 
-This gives a single access point for all the data in the site, given that the data is inside a Flex Directory. This makes all the objects available to every page and plugin in your site.
+Flex は、サイト内の Flex ディレクトリに入ったすべてのデータへ、ひとつのアクセスポイントを提供します。これにより、すべてのオブジェクトが、サイト内のすべてのページやプラグインから、利用可能となり、
 
-! **TIP:** Even if Flex *User Accounts* or *Pages* are not enabled, you can still access Flex versions of them in both frontend and Admin Panel.
+> [!Note]  
+> **TIP:** Even if Flex *User Accounts* or *Pages* are not enabled, you can still access Flex versions of them in both frontend and Admin Panel.
 
 #### Flex Type
 
-**Flex Type** is the blueprint for your **Flex Directory**.
+**Flex タイプ** とは、**Flex ディレクトリ** のためのブループリントです。
 
-It defines everything that is needed to display and modify the content: data structure, form fields, permissions, template files, even storage layer.
+Flex タイプは、コンテンツを表示したり、修正したりするのに必要なすべてを定義します。たとえば：データ構造、フォームフィールド、パーミッション、テンプレートファイル、ストレージレイヤさえも定義します。
 
 #### Flex Directory
 
-**[Flex Directory](./02.using/02.directory/)** keeps a collection of **Flex Objects** of a single **Flex Type**.
+**[Flex ディレクトリ](./02.using/02.directory/)** とは、ひとつの **Flex タイプ** に適合する **Flex Objects** のコレクションをキープします。
 
-Each Directory contains a **Collection** of **Objects** with optional support for **Indexes** to speed up queries to **Storage**.
+各 Flex ディレクトリは、それぞれ **Objects** の **Collection** を持っています。オプションで、クエリーの **Storage** をスピードアップさせる **Indexes** もサポートします。
 
 #### Flex Collection
 
-**[Flex Collection](./02.using/03.collection/)** is a structure that contains **Flex Objects**.
+**[Flex コレクション](./02.using/03.collection/)** とは、 **Flex オブジェクト** を持つ構造です。
 
-The collection usually contains only the objects which are needed to display the page or to perform the given action. It provides useful tools to further filter or manipulate the data as well as methods to render the whole collection.
+Flex コレクションは、一般的に、ページに表示したり、与えられた処理を実行したりするための Flex オブジェクトのみを持ちます。データをさらにフィルタしたり、操作したりする便利なツールと、コレクション全体をレンダリングするメソッドを提供します。
 
 #### Flex Object
 
-**[Flex Object](./02.using/04.object/)** is a single instance of some **Flex Type**.
+**[Flex オブジェクト](./02.using/04.object/)** とは、 **Flex タイプ** のひとつのインスタンスです。
 
-The object represents a single entity. The object gives access to its properties, including any associated data, such as **[Media](../../02.content/07.media/)**. Object also knows how to **Render** itself or which **Form** to use to edit its contents. Actions like creating, updating and deleting objects are supported by the object itself.
+Flex オブジェクトは、ひとつのエンティティを表します。Flex オブジェクトにより、プロパティへアクセスできます。あらゆる関係データ、たとえば **[メディア](../../02.content/07.media/)** にもアクセス可能です。また、Flex オブジェクトは、自身がどのように **レンダリング** されるかや、コンテンツを編集するときに使用される **フォーム** も定義されています。オブジェクトの作成・更新・削除のようなアクションは、オブジェクトそれ自身でサポートされています。
 
 #### Flex Index
 
-**Flex Index** is used to make fast queries to **Flex Directory**.
+**Flex インデックス** は、**Flex ディレクトリ** のクエリーを速くします。
 
-It contains meta-data for the **Flex Objects**, but not the objects themselves.
+**Flex オブジェクト** のメタデータを含みます。しかし、オブジェクトそのものは含みません。
 
 #### Flex Storage
 
-**Flex Storage** is a storage layer for the **Flex Objects**.
+**Flex ストレージ** は、**Flex オブジェクト** のストレージレイヤーです。
 
-It can be a single file, set of files in a single folder or set of folders. Flex also supports custom storages, such as database storages.
+ストレージの形式は、1つのファイルでも、1つのフォルダに複数のファイルでも、複数のフォルダでも良いです。Flex は、カスタムストレージにも対応しており、データベースストレージも可能です。
 
 #### Flex Form
 
-**Flex Form** integrates to **Form Plugin** and allows **Flex Object** to be created or edited.
+**Flex フォーム** は、**Form プラグイン** と統合し、 **Flex オブジェクト** を作成したり、編集したりできるようにします。
 
-Flex supports multiple views, which allow different parts of the object to be modified.
+Flex は、オブジェクトの異なる部分を修正できるようにする、複数の views をサポートします。
 
 #### Flex Administration 
 
-**[Flex Administration](../01.administration/)** is implemented by **Flex Objects Plugin**.
+**[Flex 管理](../01.administration/)** とは、 **Flex Objects プラグイン** で実装されるものです。
 
-It adds a new section to **Admin Plugin** allowing site administrators to manage **Flex Objects**. Each **Flex Directory** comes with CRUD-type ACL, which can be used to restrict parts of Admin and actions within them to certain users.
+サイト管理者が **Flex オブジェクト** を管理するために、 **管理パネルプラグイン** 上に、新しいセクションを追加します。各 **Flex ディレクトリ** は、 CRUD タイプの ACL （Create, Read, Update, Delete タイプのアクセスコントロールリスト）を用意しており、これを使用することで、管理パネルの一部やその中のアクションを特定のユーザーに制限することができます。
 
-## Current Limitations
+<h2 id="current-limitations">現状の制限事項</h2>
 
-There is still a lot of work to do. Here are the current limitations when considering use of Flex Objects:
+改善点は、まだたくさんあります。以下は、Flex オブジェクトを使用を検討する際の、現状の制限事項です：
 
-* Multi-language support has only been implemented for **Pages**, also admin cannot be fully translated yet
-* Frontend only has a basic routing; for your custom tasks, such as saving, you need your own implementation
-* Bulk update features have not yet been implemented in Admin (in code, they are easy)
-* Due to indexing limitations, it is not recommended to use Flex for objects that are constantly being updated
-* Customizing your **Flex Type** requires a good coding knowledge and creating your own classes
+* 多言語サポートは、 **Pages**  にのみ実装され、管理パネルも完全には翻訳されていません
+* フロントエンドにのみ、基本的なルーティングを持っています。たとえば保存のような、カスタムのタスクを処理するには、別途、独自の実装が必要です
+* 管理パネルからのバルクアップデート（一斉アップデート）機能は、まだ実装されていません（コードからするのは、簡単です）
+* インデックスの作成に限界があるため、常に更新されるオブジェクトには Flex は推奨されません
+* **Flex タイプ** をカスタマイズするには、コーディングの知識が必要になり、独自クラスを作れる必要があります
 
