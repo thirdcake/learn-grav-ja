@@ -3,26 +3,26 @@ title: "具体例：コンタクトフォーム"
 layout: ../../../../layouts/Default.astro
 ---
 
-## Simple Contact Form
+<h2 id="simple-contact-form">シンプルなコンタクトフォーム</h2>
 
-The **Grav Form Plugin** is the easiest way to use forms on your site. Let's see how we can create a simple contact form.
+**Grav の Form プラグイン** は、サイトでフォームを使用する最も簡単な方法です。シンプルなお問い合わせフォームの作成方法を見ていきましょう。
 
+<h3 id="a-live-example">試せる実例</h3>
 
-### A Live Example
+Sora Article スケルトンには、このチュートリアルを読んでいる間に、すぐに分かるフォームページがあります。
 
-The Sora Article skeleton has a form page ready to see while reading this tutorial:
+[ライブページ](http://demo.getgrav.org/soraarticle-skeleton/contact)
 
-[Live page](http://demo.getgrav.org/soraarticle-skeleton/contact)
+[ページのマークダウンファイル](https://raw.githubusercontent.com/getgrav/grav-skeleton-soraarticle-blog/develop/pages/03.contact/form.md)
 
-[Page markdown file](https://raw.githubusercontent.com/getgrav/grav-skeleton-soraarticle-blog/develop/pages/03.contact/form.md)
+<h3 id="setup-the-page">ページのセットアップ</h3>
 
-### Setup the Page
+サイト内のどのページ内にも、フォームを配置できます。やるべきことはただ、ページのマークダウンファイル名を `form.md` にするか、[template](../../../02.content/02.headers/#template) ヘッダーを、フロントマターに追加し、 `form` テンプレートを使えるようにするだけです。
 
-You can put a form inside any page of your site. All you need to do is rename the page markdown file to `form.md`, or add a [template](../../../02.content/02.headers/#template) header in the page frontmatter, to make it use the `form` template.
+> [!Info]  
+> **Grav の Form プラグイン** がページの input をレンダリングするために、ページのテンプレートか、ページの親テンプレートで、`{% block content %}` タグを実装する必要があります。
 
-!! Your page's template, or page's parent template, must implement the `{% block content %}` tag in order for the **Grav Form Plugin** to render your inputs on the page.
-
-The form fields and processing instructions are defined in the YAML frontmatter of the page, so just open the page markdown file with your favorite editor, and put the following code in it:
+フォームの fields と process 手順は、ページの YAML フロントマターで定義されなければいけません。よって、ページのマークダウンファイルをお好みのエディタで開き、以下のコードを入力してください：
 
 ```yaml
 ---
@@ -85,11 +85,16 @@ form:
 Some sample page content
 ```
 
-!!! Make sure you configured the "Email from" and "Email to" email addresses in the Email plugin with your email address
+> [!Tip]  
+> Email プラグインで、 "Email from" と "Email to" のメールアドレスを、あなたのメールアドレスに設定していることを確認してください。
 
-!! This example uses Google reCAPTCHA via the [captcha field](https://learn.getgrav.org/forms/forms/fields-available#captcha-field), and you should configure your `site_key` and `secret_key` in the form plugin in order for this to work.  If you don't want to use Google reCaptcha, simply remove the `g-recaptcha-response` field and the `captcha: true` process.
+> [!Info]  
+> この例では、 Google reCAPTCHA を [captcha フィールド](../02.fields-available/#google-captcha-field-recaptcha) から使っています。これが機能するように、 form プラグインで `site_key` と `secret_key` を設定するようにしてください。 Google reCaptcha を使いたくない場合は、単に `g-recaptcha-response` フィールドと `captcha: true` プロセスを削除してください。
 
-Now within your contact page folder create a subfolder named `thankyou/`, create a new file named `formdata.md`. And paste the following code into the file:
+> [!訳注]  
+> 上記リンク先のリファレンスによれば、google reCaptcha は recaptcha フィールドになっているので、captcha フィールドが今も有効なのか、分かりません。もし試された方がいらっしゃれば、教えてください。もし新規で作成するなら、cloudflare の turnstile の方が良さそうです。
+
+次に、コンテンツページのフォルダに、 `thankyou/` というフォルダ名のサブフォルダを作り、 `formdata.md` というファイル名の新しいファイルを作ってください。そして、そのファイルに以下のコードをペーストしてください：
 
 ```yaml
 ---
@@ -102,22 +107,25 @@ process:
 ## Email sent!
 ```
 
-That's it!
+これだけです！
 
 
-### Live Demo
+<h3 id="live-demo">ライブデモ</h3>
 
-[Live page](http://demo.getgrav.org/soraarticle-skeleton/contact)
+[ライブページ](http://demo.getgrav.org/soraarticle-skeleton/contact)
 
-[Page markdown file](https://raw.githubusercontent.com/getgrav/grav-skeleton-soraarticle-blog/develop/pages/03.contact/form.md)
+[ページのマークダウンファイル](https://raw.githubusercontent.com/getgrav/grav-skeleton-soraarticle-blog/develop/pages/03.contact/form.md)
 
-!!! Forms in modular pages work differently. To learn more about that we recommend reading [using forms in modular pages](https://learn.getgrav.org/forms/forms/how-to-forms-in-modular-pages)
+> [!Tip]  
+> モジュラーページのフォームは、異なる動作をします。詳細については、 [モジュラーページでフォームを使う](../05.how-to-forms-in-modular-pages/) をお読みください。
 
-When users submit the form, the plugin will send an email to you (as set in the `form` setting of the Grav Email Plugin), and will save the entered data in the data/ folder.
+ユーザーがフォームを送信するとき、プラグインは（ Grav の Email プラグインで `form` 設定をしているので）あなたにメールを送ります。また、入力されたデータを data/ フォルダに保存します。
 
-! For full details on setting up and configuring email, please read the [Email plugin documentation](https://github.com/getgrav/grav-plugin-email/blob/develop/README.md)
+> [!Note]  
+> メールの設定や構成の詳細については、 [Email プラグインのドキュメント](https://github.com/getgrav/grav-plugin-email/blob/develop/README.md) をお読みください。
 
-You can activate the **Grav Data Manager** plugin to see that data in the **Admin Plugin**.
+**Grav データマネージャー** プラグインを有効化すると、 **管理パネルプラグイン** でデータを確認できます。
 
-!!! In the future we want Grav to be able to dynamically generate forms from the Admin Plugin
+> [!Tip]  
+> 将来的には、Grav が 管理パネルプラグインから動的にフォームを生成できるようにしたいと考えています。
 

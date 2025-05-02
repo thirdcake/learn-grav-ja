@@ -241,18 +241,18 @@ process:
 
 <h2 id="custom-actions">カスタムアクション</h2>
 
-You can "hook" into a form processing and perform any kind of operation. Perform custom processing, add data for an online web application, even save to a database.
+フォームの process に "hook" することで、あらゆる種類の処理を実行できます。カスタム処理の実行や、オンラインの web アプリケーションへのデータの追加、さらにはデータベースへの保存さえ可能です。
 
-To do this, in the form process field add your own processing action name, for example 'yourAction'.
+これを行うには、フォームの process フィールドに、独自の処理アクション名（たとえば 'yourAction' ）を追加します。
 
 ```yaml
 process:
     yourAction: true
 ```
 
-Then, create a simple plugin.
+次に、シンプルなプラグインを作成します。
 
-In its main PHP file, register for the event `onFormProcessed`
+メインの PHP ファイルで、 `onFormProcessed` イベントに登録します。
 
 ```php
 namespace Grav\Plugin;
@@ -270,7 +270,7 @@ class EmailPlugin extends Plugin
 }
 ```
 
-Then provide a handler for the saveToDatabase action:
+次に、 saveToDatabase アクションのハンドラーを提供します：
 
 ```php
     public function onFormProcessed(Event $event)
@@ -286,21 +286,21 @@ Then provide a handler for the saveToDatabase action:
     }
 ```
 
-If your processing might go wrong and you want to stop the next form actions, which are executed in series, you can stop the processing by calling `stopPropagation` on the $event object:
+process がうまくいかなかったときに、連続して実行される次の form action へ進みたくない場合、$event オブジェクトから `stopPropagation` を呼び出して、処理をストップできます。
 
 ```php
 $event->stopPropagation();
 return;
 ```
 
-Sample code with form handling is available in the Form plugin, and in the Email plugin repositories.
+フォーム制御のサンプルコードは、 From プラグインと、Email プラグインのリポジトリで入手できます。
 
-#### An example of custom form handling
+<h4 id="an-example-of-custom-form-handling">カスタムフォーム制御の具体例</h4>
 
-The Form plugin offers this ability of sending emails, saving files, setting status messages and it’s really handy.
-Sometimes however you need total control. That’s for example what the Login plugin does.
+Form プラグインは、メールの送信、ファイルの保存、メッセージの設定などの機能を提供し、本当に便利です。
+しかしときどき、トータルの制御が必要になることもあります。たとえば、ログインプラグインの場合です。
 
-It defines the `login.md` page frontmatter:
+以下は、 `login.md` ページのフロントマターを定義します：
 
 ```yaml
 title: Login
@@ -320,13 +320,13 @@ form:
           placeholder: Password
 ```
 
-The Forms plugin correctly generates and shows the form. Notice there’s no `process` defined.
+Form プラグインは、フォームを正しく生成し、表示します。ここで `process` 定義が無いことに注目してください。
 
-The form `buttons` are missing too, since they’re manually added in `templates/login.html.twig`. That’s where the form `action` and `task` are defined too.
+フォームの `buttons` もまた、ありません。というのも、 `templates/login.html.twig` で、手動で追加しているからです。そこでは、フォームの `action` と `task` もまた、定義されています。
 
-In this case, `task` is `login.login`, and `action` is set to the page url.
+このケースでは、 `task` は `login.logn` で、 `action` はページの URL を設定することです。
 
-When a user presses 'Login' in the form, Grav calls the `onTask.login.login` event.
+ユーザーが、フォーム上の 'Login' を実行するとき、 Grav は `onTask.login.login` イベントを呼び出します。
 
-`user/plugins/login/login.php` hooks up to `onTask.login.login` to its `classes/controller.php` file, and that's where the authentication happens.
+`user/plugins/login/login.php` は、 `onTask.login.login` をフックして、そのイベントが起きたときに、その `classes/controller.php` を処理します。そしてそこで、認証が実行されます。
 

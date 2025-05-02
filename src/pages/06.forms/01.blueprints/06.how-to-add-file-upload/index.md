@@ -163,17 +163,17 @@ accept:
 
 #### `filesize`
 
-The max file size is limited by:
+ファイルサイズの最大値は、次のように制限されます：
 
-1. field level  `filesize:`, then ...
+1. フィールドレベルの `filesize:` 。それが無ければ ...
 
-2. Form plugin level configuration `user/plugins/form.yaml` setting `files: filesize:`, then if neither of those are limiting...
+2. Form プラグインレベルの設定値。  `user/plugins/form.yaml` ファイルに設定した `files: filesize:` の値。そこでも制限されていなければ ...
 
-3. PHP level configuration for `upload_max_filesize` for individual files that are uploaded, and `post_max_size` for the max form post total size.
+3. PHP レベルの設定値。 `upload_max_filesize` として、アップロードされた個々のファイルが設定され、 `post_max_size` として、POST フォームでのトータルのサイズが設定されます。
 
 <h5 id="examples-2">具体例</h5>
 
-1. To limit a specific field to `5M`
+1. 特定のフィールドを `5M` に制限するには：
    ```yaml
    custom_file:
      name: myfile
@@ -185,7 +185,7 @@ The max file size is limited by:
        - image/*
    ```
 
-2. To limit all file fields to `5M`, edit your `user/config/form.yaml` file:
+2. すべての file フィールドを `5M` に制限するには、 `user/config/form.yaml` ファイルを編集してください：
    ```yaml
    files:
      multiple: false
@@ -197,12 +197,12 @@ The max file size is limited by:
      accept:
        - 'image/*
    ```
-   
-   ### Legacy File Upload Processing and Manual Control
 
-   For basic file handling, all you need is the field defintion. The files get uploaded to a temporary location via the Dropzone widget via an XHR call to the server.  On form submission, the files are moved from their temporary location to their final location automatically.  You can however use the `upload: true` action in the `process:` block to manually trigger where in the workflow you want those files to be moved.
+<h3 id="legacy-file-upload-processing-and-manual-control">従来のファイルアップロード処理と手動制御</h3>
 
-   ##### Example:
+基本的なファイル制御のためにやることは、フィールドを定義するだけです。ファイルは、サーバーの一時的な場所に保存されます。その際、Dropzone ウィジェットを通し、 XHR の呼び出しによります。 form を送信すると、そのファイルは一時的な場所から最終的な保存先へ、自動的に移動します。しかし、`process:` ブロックで `upload: true` アクションを使うことで、ワークフローの中のどこでファイルを移動させるのか、手動でトリガーすることもできます。
+
+<h5 id="example-2">具体例</h5>
 
 ```yaml
 process:

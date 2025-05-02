@@ -3,31 +3,33 @@ title: "ハウツー：Ajax送信"
 layout: ../../../../layouts/Default.astro
 ---
 
-## Submitting forms via XHR/Ajax
+<h2 id="submitting-forms-via-xhr-ajax">XGR/Ajax でフォームを送信</h2>
 
-The default mechanism for form processing relies on standard HTML style form submission that causes the contents of an HTML form to be sent to the server via either `POST` or `GET` (default is `POST`). After the form has been [validated](../02.fields-available/), and [processed](../04.reference-form-actions/), results are sent back to the form (or to a [redirected page](../04.reference-form-actions/#redirect)) where messages are displayed and the form can be edited for re-submission if required.
+フォーム処理のデフォルトのメカニズムは、 HTML 標準のフォーム送信によっており、 HTML フォームは、 `POST` または `GET` （デフォルトは `POST` ）でサーバーに送られます。送られたフォームは、 [バリデーション](../02.fields-available/) され、 [処理](../04.reference-form-actions/) された後に、結果がフォームに送り返され（もしくは、 [リダイレクトされたページへ遷移し](../04.reference-form-actions/#redirect) ）、メッセージが表示されたり、必要に応じて再送信するための編集ができたりします。
 
-This involves a page reload, and that is sometimes undesirable.  This is where a form submitted via JavaScript using Ajax or XHR is the preferred option.  Luckily, Grav's form capabilities are up to the task.
+これは、ページのリロードを伴うため、ときどき、望ましくないこともあります。このような場合、 Ajax や XHR を使った JavaScript 経由で、フォームを送信することがより良い選択になります。幸運なことに、 Grav のフォーム機能は、このタスクに対応しています。
 
-## Automatic Approach (Form plugin >= `v7.3.0`)
+<h2 id="automatic-approach-form-plugin-v7-3-0">自動的なアプローチ（From プラグイン `v7.3.0` 以上）</h2>
 
-With the release of Form plugin version `7.3.0` the ability to submit forms with XHR to process the form in-place and not require an entire page reload is now available with a quick setup option.
+Form プラグインのバージョン `7.3.0` のリリースにより、XHR によるフォーム送信機能が、素早いセットアップオプションで利用可能になりました。XHR により、フォームのその場所での処理となり、ページ全体のリロードは不要になります。
 
-To enable this simply add this option to your Form blueprint:
+これを有効にするには、単純に、このオプションを Form のブループリントに追記するだけです：
 
 ```yaml
 xhr_submit: true
 ```
 
-You are not required to provide `action:`, `template:`, or even `id:`.  The plugin will just 'work' even with multiple ajax forms on a single page. This uses a new `form-xhr.html.twig` template that the plugin provides as well as including some vanilla JS code to make the request.
+`action:` や、 `template:` 、 `id:` さえ設定する必要はありません。1ページに複数の ajax フォームがあったとしても、プラグインは '機能' します。これは、新しい `form-xhr.html.twig` テンプレートを使い、 vanilla JS（ライブラリを利用しないJavaScript）コードでリクエストを行います。
 
-!! This approach submits the whole form via an XHR request and replaces the entire form HTML from the response. This is intended to be a simple approach, you can still create your own more advanced solutions if required.
+> [!Info]  
+> このアプローチでは、 XHR を使って、フォーム全体を送信し、フォームの HTML 全体をレスポンスで書き換えます。これはシンプルなアプローチですが、必要に応じて独自の高度なソリューションを作成できます。
 
-!!! The Javacript code used for the XHR request is located in `form/layouts/xhr.html.twig`. If you require, you can copy this to your theme's `templates` folder (maintaining the path structure) and modify as needed.
+> [!Tip]  
+> XHR リクエストに使用される JavaScript コードは、 `form/layouts/xhr.html.twig` にあります。必要であれば、これを あなたのテーマの `templates` フォルダに（パス構造を維持しながら）コピーし、必要な修正をほどこしてください。
 
-## Manual Approach (required for Form plugin < `v7.3.0`)
+<h2 id="manual-approach-required-for-form-plugin-v7-3-0">手動のアプローチ（Form プラグイン `v7.3.0` 未満）</h2>
 
-### Creating the form
+<h3 id="creating-the-form">フォームを作成する</h3>
 
 You can create any standard form you like, so for this example, we'll keep the form as simple as possible to focus on the Ajax handling parts. First, we'll create a form in a page called: `forms/ajax-test/` and create a form page called `form.md`:
 
@@ -57,7 +59,8 @@ form:
 
 As you can see this is a very basic form that simply asks for your name and provides a submit button.  The only thing that stands out is the `template: form-messages` part.  As outlined in the [Frontend Forms](../) section, you can provide a custom Twig template with which to display the result of the form processing.  This is a great way for us to process the form, and then simply return the messages via Ajax and inject them into the page.  There is already a `form-messages.html.twig` template provided with the forms plugin that does just this.
 
-!! NOTE: We use a hard-coded `action: '/forms/ajax-test'` so the ajax has a consistent URL rather than letting the form set the action to the current page route. This resolves an issue with the Ajax request not handling redirects properly. This can otherwise cause issues on the 'home' page. It doesn't have to be the current form page, it just needs to be a consistent, reachable route.
+> [!Info]  
+> NOTE: We use a hard-coded `action: '/forms/ajax-test'` so the ajax has a consistent URL rather than letting the form set the action to the current page route. This resolves an issue with the Ajax request not handling redirects properly. This can otherwise cause issues on the 'home' page. It doesn't have to be the current form page, it just needs to be a consistent, reachable route.
 
 ![](simple-form.png)
 

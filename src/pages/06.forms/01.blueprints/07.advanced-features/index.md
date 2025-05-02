@@ -5,9 +5,9 @@ layout: ../../../../layouts/Default.astro
 
 ブループリントには、それらを拡張し、動的にフィールドを使える高度な機能があります。
 
-<h2 id="defining-validation-rules">バリデーションルールを決める</h2>
+<h2 id="defining-validation-rules">バリデーションルールの定義</h2>
 
-If you need the same validation rules multiple times, you can create your own custom rule for it.
+同じバリデーションルールが複数回必要な場合、独自のカスタムルールを作成できます。
 
 ```yaml
 rules:
@@ -24,11 +24,11 @@ form:
         rule: slug
 ```
 
-Above example creates rule `slug`, which is then used in the folder field of the form.
+上記の例では、 `slug` というルールを作り、フォームの folder フィールドで使っています。
 
-## Extending Base Type (extends@)
+<h2 id="extending-base-type-extendsat">ベースタイプの拡張（extends@）</h2>
 
-You can extend existing blueprint, which allows you to add new fields as well as modify existing ones from the base blueprint.
+既存のブループリントを拡張して、新しいフィールドを追加したり、基本となるブループリントから既存のフィールドを変更したりすることができます。
 
 ```yaml
 extends@: default
