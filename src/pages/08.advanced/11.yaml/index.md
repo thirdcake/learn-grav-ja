@@ -5,33 +5,33 @@ layout: ../../../layouts/Default.astro
 
 <h2 id="introduction">はじめに</h2>
 
-YAML stands for _"YAML Ain't Markup Language"_ and it is used extensively in Grav for its configuration files, blueprints, and also in page settings.
+YAML は、 _"YAML Ain't Markup Language"（YAML はマークアップ言語じゃねーよ）_ の頭文字を取っており、Grav では config 設定ファイルや、ブループリント、ページの設定のおいても、幅広く使われています。
 
-YAML is to configuration what markdown is to markup. It’s basically a human-readable structured data format. It is less complex and ungainly than XML or JSON, but provides similar capabilities. It essentially allows you to provide powerful configuration settings, without having to learn a more complex code type like CSS, JavaScript, and PHP.
+YAML は設定です、マークダウンがマークアップであるのと同じように。基本的に、人間に読める構造をしたデータフォーマットです。XML や、JSON よりも複雑さや見づらさを減らしつつ、それらと同じ機能を提供します。CSS や JavaScript 、 PHP のような複雑なコードを学ぶことなく、本質的に強力な設定ができます。
 
-YAML is built from the ground up to be simple to use. At its core, a YAML file is used to describe data. One of the benefits of using YAML is that the information in a single YAML file can be easily translated to multiple language types.
+YAML は、シンプルに使えるように、ゼロから構築されています。その核心において、YAML ファイルは、データを記述するために使われます。YAML を使用するメリットのひとつは、1つの YAML ファイルの情報を、複数の言語タイプに、簡単に翻訳できることです。
 
-Basically, the data you enter in a YAML file is used in conjunction with a library to create the pages you see within Grav.
+基本的に、YAML ファイルに入力したデータは、Grav 内で表示されるページを作成するライブラリとともに使われます。
 
 <h2 id="yaml-basic-rules">YAMLの基本ルール</h2>
 
-There are some rules that YAML has in place to avoid issues related to ambiguity in relation to various languages and editing programs. These rules make it possible for a single YAML file to be interpreted consistently, regardless of which application and/or library is being used to interpret it.
+YAML には、いくつかのルールがあります。さまざまな言語との関係や、プログラミングの曖昧さにより生じる問題を避けるためです。これらのルールのおかげで、どのアプリケーションやライブラリで使われたかに関わらず、1つの YAML ファイルは、一意に解釈されます。
 
-* YAML files should end in `.yaml` whenever possible in Grav.
-* YAML is case sensitive.
-* YAML does not allow the use of tabs.
+* Grav 内では、いつでも、できる限り YAML ファイルは `.yaml` で終わるべきです。
+* YAML は、大文字/小文字を識別します。
+* YAML では、タブ文字は使用できません。
 
 <h2 id="basic-data-types">基本的なデータ型</h2>
 
-YAML excels at working with **mappings** (hashes / dictionaries), **sequences** (arrays / lists), and **scalars** (strings / numbers). While it can be used with most programming languages, it works best with languages that are built around these data structure types. This includes: PHP, Python, Perl, JavaScript, and Ruby.
+YAML は、 **マップ型** （ハッシュ型/辞書型）と、 **シークエンス型** （配列型/リスト型）と、 **スカラ型** （文字列型/数字型）を得意とします。 YAML は、ほとんどのプログラミング言語で使われますが、これらのデータ構造型を中心に構築された言語で、最も良く機能します。たとえば、 PHP, Python, Perl, JavaScript, そして Ruby です。
 
 <h2 id="scalars">スカラ型</h2>
 
-Scalars are a pretty basic concept. They are the strings and numbers that make up the data on the page. A scalar could be a boolean property, like `true`, integer (number) such as `5`, or a string of text, like a sentence or the title of your website.
+スカラは、極めて基本的な概念です。それらは、ページ上のデータを構成する文字列と数字です。スカラは、 `true` のような真偽値も可能ですし、 `5` のような整数値（数字）も、 ウェブサイトの文章やタイトルのようなテキストの文字列も可能です。
 
-Scalars are often called variables in programming. If you were making a list of types of animals, they would be the names given to those animals.
+スカラは、しばしばプログラミングでは変数と呼ばれます。もし動物のタイプのリストを作るとすれば、それは動物に付けられた名前になるでしょう。
 
-Most scalars are unquoted, but if you are typing a string that uses punctuation and other elements that can be confused with YAML syntax (dashes, colons, etc.) you may want to quote this data using single `'` or double `"` quotation marks. Double quotation marks allow you to use escapings to represent ASCII and Unicode characters.
+ほとんどのスカラは、クオテーションで囲みませんが、句読点やYAML構文と混同されかねない他の要素（ダッシュやコロンなど）を使うときは、シングルの `'` もしくはダブルの `"` クオテーションマークを使って、データを囲むでしょう。ダブルクオテーションマークは、ASCII と Unicode 文字をエスケープできます。
 
 ```yaml
 integer: 25
@@ -40,11 +40,12 @@ float: 25.0
 boolean: true
 ```
 
-! **TIP:** Words `true`, `false`, `null`, `~` and dates have special meaning in YAML. Please quote them if you do not want to use them as a boolean, null or datetime type. Same is true with version numbers, they should be quoted to separate them from float values.
+> [!Note]  
+> **TIP:** Words `true`, `false`, `null`, `~` そしてダッシュには、YAML で特別な意味があります。これらを真偽値や、null や、datetime 型で使う意図がなければ、クオテーションマークで囲ってください。 バージョンの数字にも同じことが言えます。float 型の数字と区別するため、バージョンの数字もクオテーションマークで囲ってください。
 
 <h2 id="sequences">シークエンス型</h2>
 
-Here is a simple sequence you might find in Grav. It is a basic list with each item in the list placed in its own line with an opening dash.
+以下は、Grav で見られるシンプルなシークエンスです。それぞれのアイテムが、ダッシュ始まりの1行に収まる、ベーシックなリストです。
 
 ```yaml
 - Cat
@@ -52,7 +53,7 @@ Here is a simple sequence you might find in Grav. It is a basic list with each i
 - Goldfish
 ```
 
-This sequence places each item in the list at the same level. If you want to create a nested sequence with items and sub-items, you can do so by placing a single space before each dash in the sub-items. YAML uses spaces, **NOT** tabs, for indentation. You can see an example of this below.
+このシークエンスでは、それぞれのアイテムは同じレベルです。アイテムとサブアイテムからなる、ネストされたシークエンスを作成したいときは、サブアイテムについて、ひとつのスペースをそれぞれのダッシュ文字の前に置くことでできます。YAML は、インデントにスペースを使います。タブでは **ありません** 。以下のような例になります。
 
 ```yaml
 -
@@ -65,7 +66,7 @@ This sequence places each item in the list at the same level. If you want to cre
  - Tiger
 ```
 
-If you wish to nest your sequences even deeper, you just need to add more levels.
+シークエンスを、より深くネストしたい場合、ただレベルを増やすだけです。
 
 ```yaml
 -
@@ -75,17 +76,17 @@ If you wish to nest your sequences even deeper, you just need to add more levels
   - Goldfish
 ```
 
-Sequences can be added to other data structure types, such as mappings or scalars.
+シークエンスには、マップ型やスカラ型など、他のデータ構造を追加できます。
 
 <h2 id="mappings">マップ型</h2>
 
-Mapping gives you the ability to list keys with values. This is useful in cases where you are assigning a name or a property to a specific element.
+マップは、キーとバリューからなるリストを提供します。特定の要素に、名前やプロパティを付けたい場合に、マップは便利です。
 
 ```yaml
 animal: pets
 ```
 
-This example maps the value of `pets` to the `animal` key. When used in conjunction with a sequence, you can see that you are starting to build a list of `pets`. In the following example, the dash used to label each item counts as indentation, making the line items the child and the mapping line `pets` the parent.
+この例では、 `pets` という値を `animal` にマップしています（位置づけています）。シークエンスと合わせて使うときは、 `pets` のリストを作ることから始めます。以下の例では、それぞれのアイテムをラベルしているダッシュが、インデントを持ち、それによりその行のアイテムは子要素になっています。そしてマップの行である `pets` が親になります。
 
 ```yaml
 pets:
@@ -96,7 +97,7 @@ pets:
 
 <h2 id="resources-and-further-documentation">ドキュメント</h2>
 
-For more information about YAML, including detailed documentation about how it works, check out the resources linked below.
+YAML に関するより詳しい情報は、それがどのように機能するかの詳細なドキュメントとともに、以下のリンク先のようなリソースをチェックしてください。
 
 * [Dave's YAML Primer](https://github.com/darvid/trine/wiki/YAML-Primer)
 * [Official YAML 1.2 Documentation](https://yaml.org/spec/1.2/spec.html)
@@ -104,3 +105,4 @@ For more information about YAML, including detailed documentation about how it w
 * [Xavier Shay's YAML Tutorial](http://rhnh.net/2011/01/31/yaml-tutorial)
 * [YAMLLint](https://www.yamllint.com/)
 * [YAML Tools](https://yamline.com/)
+

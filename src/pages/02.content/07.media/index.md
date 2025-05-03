@@ -23,7 +23,7 @@ Gravでは、**スマートキャッシュ** システムが使われており�
 | Video              | mp4, mov, m4v, swf, flv, webm, ogv      |
 | Data / Information | txt, doc, docx, html, htm, pdf, zip, gz, 7z, tar, css, js, json, xml, xls, xlt, xlm, xlsm, xld, xla, xlc, xlw, xll, ppt, pps, rtf, bmp, tiff, mpeg, mpg, mpe, avi, wmv |
 
-サポート対象のmimeタイプの全リストは、`system/config/media.yaml` にあります。もしまだサポートされていないmimeタイプがあれば、自身で`user/config/media.yaml` を作り、そこに書き加えてください。オリジナルのmedia.yaml と同じ書式となるように注意してください。最もシンプルな方法は、元のファイルをすべてコピーして、それに書き加える方法です。
+サポート対象の mime タイプの全リストは、 `system/config/media.yaml` にあります。もしまだサポートされていない mime タイプがあれば、自身で `user/config/media.yaml` を作り、そこに書き加えてください。オリジナルの media.yaml と同じ書式となるように注意してください。最もシンプルな方法は、元のファイルをすべてコピーして、それに書き加える方法です。
 
 <h2 id="where-to-put-your-media-files">メディアファイルを置く場所</h2>
 
@@ -33,7 +33,7 @@ Gravでは、**スマートキャッシュ** システムが使われており�
 ![my image](image.jpg)
 ```
 
-ひとつのフォルダで画像を管理したい場合は、`user/pages/images` フォルダを作り、そこに置くこともできます。この方法では、twigは、次のようにして画像にアクセスできます
+ひとつのフォルダで画像を管理したい場合は、`user/pages/images` フォルダを作り、そこに置くこともできます。この方法では、 twig は、次のようにして画像にアクセスできます
 
 ```twig
 {% set my_image = page.find('/images').media['my-image.jpg'] %}
@@ -63,16 +63,16 @@ Gravでは、**スマートキャッシュ** システムが使われており�
 ![my image](user://themes/mytheme/images/my-image.jpg)
 ```
 
-Twigの `Media` オブジェクトにより、同じことができます：
+Twig の `Media` オブジェクトにより、同じことができます：
 
 ```twig
 {{ media['user://themes/mytheme/images/my-image.jpg'].html()|raw }}
 ```
 
 > [!Warning]  
-> Gravには、ルート（一番上のフォルダ）に、`/images` フォルダがあります。しかしこのフォルダには入れないでください。これはGravが自動で生成したキャッシュ画像が入る場所だからです。
+> Gravには、ルート（一番上のフォルダ）に、`/images` フォルダがあります。しかしこのフォルダには入れないでください。これは Grav が自動で生成したキャッシュ画像が入る場所だからです。
 
-また、すべてのメディアファイルをそれぞれ自身のフォルダに入れたいと思うかもしれません。その場合、ファイルは一度にアクセスすることができます。たとえば、すべてのMP3ファイルを、（visibleでない）`user/pages/mp3s` というひとつのフォルダで管理するとします。そして、あるページで、そのページに関係するMP3ファイルの名前を、そのページのフロントマターに`thistrack` というフィールドで定義したとします。すると、HTML5のオーディオ要素でアクセスするには、次のようなコードを書いてください：
+また、すべてのメディアファイルをそれぞれ自身のフォルダに入れたいと思うかもしれません。その場合、ファイルは一度にアクセスすることができます。たとえば、すべての MP3 ファイルを、（ visible でない）`user/pages/mp3s` というひとつのフォルダで管理するとします。そして、あるページで、そのページに関係する MP3 ファイルの名前を、そのページのフロントマターに `thistrack` というフィールドで定義したとします。すると、 HTML5 のオーディオ要素でアクセスするには、次のようなコードを書いてください：
 
 ```twig
 <audio controls>
@@ -83,13 +83,12 @@ Twigの `Media` オブジェクトにより、同じことができます：
 <h2 id="display-modes">ディスプレイ・モード</h2>
 
 Gravには、すべてのメディアオブジェクトに対して、いくつかの異なるディスプレイモードがあります。
-Grav provides a few different display modes for every kind of media object.
 
-| Mode      | Explanation                                                                     |
-| :-----    | :-----                                                                          |
-| source    | Visual representation of the media itself, i.e. the actual image, video or file |
-| text      | Textual representation of the media                                             |
-| thumbnail | The thumbnail image for this media object                                       |
+| モード    | 説明  |
+| :-----    | :----- |
+| source    | メディア自身のビジュアルで表現されます。 例： 画像、video ファイル |
+| text      | メディアのテキスト表現  |
+| thumbnail | そのメディアオブジェクトのサムネイル画像 |
 
 > [!Warning]  
 > **Data / Information** タイプのメディアは、`source` モードに対応していません。他の設定がなければ、基本的に、`text` モードです。
@@ -98,59 +97,58 @@ Grav provides a few different display modes for every kind of media object.
 
 Gravでは、3つのサムネイル画像の保存場所があります。
 
-1. In the same folder as your media file: `[media-name].[media-extension].thumb.[thumb-extension]` where `media-name` and `media-extension` are respectively the name and extension of the original media file and `thumb-extension` is any extension that is supported by the `image` media type. Examples are `my_video.mp4.thumb.jpg` and `my-image.jpg.thumb.png`
-**For images only!** The image itself will be used as thumbnail.
-2. Your user folder: `user/images/media/thumb-[media-extension].png` where `media-extension` is the extension of the original media file. Examples are `thumb-mp4.png` and `thumb-jpg.jpg`
-3. The system folder: `system/images/media/thumb-[media-extension].png` where `media-extension` is the extension of the original media file. **The thumbnails in the system folders are pre-provided by Grav.**
+1. メディアファイルと同じフォルダ： `[media-name].[media-extension].thumb.[thumb-extension]` ここでの `media-name` と `media-extension` は、それぞれオリジナルのメディアファイルの名前と拡張子であり、 `thumb-extension` は、`image` メディアタイプがサポートする拡張子です。たとえば、 `my_video.mp4.thumb.jpg` や、 `my-image.jpg.thumb.png` などです。 **画像のみです！** 画像それ自体が、サムネイルとして使われます。
+2. ユーザーフォルダ： `user/images/media/thumb-[media-extension].png` ここでの `media-extension` は、オリジナルのメディアファイルの拡張子です。 たとえば、 `thumb-mp4.png` や、 `thumb-jpg.jpg` です。
+3. システムフォルダ： `system/images/media/thumb-[media-extension].png` ここでの `media-extension` は、オリジナルのメディアファイルの拡張子です。 **system フォルダ内のサムネイルは、Grav が準備するものです。**
 
 > [!Info]  
-> You can also manually select the desired thumbnail with the actions explained below.
+> 以下に説明するような方法で、手動でサムネイルを選ぶこともできます。
 
 <h2 id="links-and-lightboxes">リンクとlightbox</h2>
 
-The display modes above can also be used in combination with links and lightboxes, which are explained in more detail later. Important to note however is:
+上記のディスプレイ・モードは、リンクと lightbox でも使えます。詳細は後ほど説明しますが、さしあたり重要な点は：
 
 > [!Warning]  
 > Gravは、初期状態ではlightbox機能を提供しません。プラグインが必要です。 [FeatherLight Grav plugin](https://github.com/getgrav/grav-plugin-featherlight) を使ってください。
 
-When you use Grav's media functionality to render a lightbox, all Grav does is output an **anchor** tag that has some attributes for the lightbox plugin to read. If you are interested in using a lightbox library that is not in our plugin repository or you want to create your own plugin, you can use the table below as a reference.
+lightbox をレンダリングするために Grav のメディア機能を使う場合、Grav がやるのは、**アンカー** タグの出力です。そのタグは、 lightbox プラグインが読めるようにするためのいくつかの属性を持ちます。わたしたちのプラグインリポジトリのものではない lightbox ライブラリの使用に興味があり、自身のプラグインを作成したい場合は、以下の表を参照して使ってください。
 
-| Attribute   | Explanation  |
-| :-----      | :-----                                                                                                       |
-| rel         | A simple indicator that this is not a regular link, but a lightbox link. The value will always be `lightbox`. |
-| href        | A URL to the media object itself.                                                                             |
-| data-width  | The width the user requested this lightbox to be.                                                             |
-| data-height | The height the user requested this lightbox to be.                                                            |
-| data-srcset | In case of image media, this contains the `srcset` string. ([more info](../media#responsive-images))         |
+| 属性   | 説明  |
+| :-----      | :-----  |
+| rel         | 通常のリンクではなく、lightbox のリンクであることを示すシンプルな指標です。その値は、常に `lightbox` です。 |
+| href        | メディアオブジェクトそのものへの URL |
+| data-width  | この lightbox に望まれる幅 |
+| data-height | この lightbox に望まれる高さ |
+| data-srcset | 画像メディアの場合に、 `srcset` の文字列をここに入力できます（ [more info](#responsive-images) ） |
 
 <h2 id="actions">アクション</h2>
 
-Grav employs a **builder-pattern** when handling media, so you can perform **multiple actions** on a particular medium. Some actions are available for every kind of medium while others are specific to the medium.
+Grav は、メディアを制御するとき、 **builder-pattern** を使います。このため、特定のメディアに、**複数のアクション** を実行できます。いくつかのアクションは、すべての種類のメディアで利用可能であり、その他は特定のメディアでのみ使えます。
 
 <h3 id="general">一般</h3>
 
-These actions are available for all media types.
+すべてのメディアで使えるアクションです。
 
 <h4 id="url">url</h4>
 
 > [!Info]  
-> This method is only intended to be used in **Twig** templates, hence the lack of Markdown syntax.
+> このメソッドは、**Twig** テンプレートでのみ使われることを想定しています。そのため、マークダウンでは使えません。
 
-This returns **raw url path** to the media.
+そのメディアへの **生のURL path** 返します。
 
 ```twig
 {{ page.media['sample-image.jpg'].url|e }}
 ```
 
 ```html
-{{ page.media['sample-image.jpg'].url|e }}
+実行結果は<a href="https://learn.getgrav.org/content/media#url">翻訳元</a>を見てください
 ```
 
 
 <h4 id="html">html</h4>
 
 > [!Info]  
-> In Markdown this method is implicitly called when using the `![]` syntax.
+> マークダウンでは、このメソッドは `![]` 構文を使って、暗黙的に呼び出されます。
 
 The `html` action will output a valid HTML tag for the media based on the current display mode.
 
@@ -161,7 +159,7 @@ The `html` action will output a valid HTML tag for the media based on the curren
 {{ page.media['sample-image.jpg'].html('My title', 'Some ALT text', 'myclass')|raw }}
 ```
 ```html
-{{ page.media['sample-image.jpg'].html('My title', 'Some ALT text', 'myclass')|e }}
+実行結果は<a href="https://learn.getgrav.org/content/media#html">翻訳元</a>を見てください
 ```
 
 
@@ -282,7 +280,7 @@ This adds an additional HTML attribute to the output.
 ```
 
 
-## Image Actions
+<h2 id="image-actions">画像のアクション</h2>
 
 #### resize
 
@@ -868,7 +866,7 @@ Some examples of this:
 > 事例は、[翻訳元](https://learn.getgrav.org/content/media#animated-vectorized-actions) で確認してください
 
 
-## Audio Actions
+<h2 id="audio-actions">オーディオのアクション</h2>
 
 Audio media will display an HTML5 audio link:
 
@@ -1179,13 +1177,13 @@ Instead of letting Grav generate the sizes in even steps between given boundarie
 
 This will generate downsized versions of the `retina.jpg` image in three widths: 360, 720 and 1200px.
 
-## Metafiles
+<h2 id="metafiles">メタファイル</h2>
 
-Every medium that you reference in Grav, e.g. `image1.jpg`, `sample-trailer.mov`, or even `archive.zip` has the ability to have variables set or even overridden via a **metafile**.  These files take the format of `<filename>.meta.yaml`.  For example, for an image with the filename `image1.jpg` you could create a metafile called `image1.jpg.meta.yaml`.
+Grav で参照するすべてのメディアは（例： `image1.jpg`, `sample-trailer.mov`, もしくは `archive.zip` さえ）、 **メタファイル** を介して、変数を設定できたり、上書きしたりできます。これらのファイルは、 `<filename>.meta.yaml` という形式を取ります。たとえば、 `image1.jpg` というファイル名の画像に対しては、 `image1.jpg.meta.yaml` と呼ばれるメタファイルを作ることができます。
 
-You can add just about any setting or piece of metadata you would like using this method.
+この方法を使えば、あらゆる設定やメタデータを追加することができます。
 
-The contents of this file should be in YAML syntax, an example could be:
+このファイルのコンテンツは、YAML 構文であるべきです。例としては：
 
 ```yaml
 image:
@@ -1196,15 +1194,15 @@ image:
 alt_text: My Alt Text
 ```
 
-If you are using this method to add file-specific styling or meta tags for a single file, you will want to put the YAML file in the same folder as the referenced file. This will ensure that the file is pulled along with the YAML data. It's a handy way to even set file-specific metadata as you are unable to do so from the page itself.
+もしこの方法を使って、ひとつのファイルにファイル特有のにスタイルやメタタグを付け加えているなら、YAML ファイルは、参照先のファイルと同じフォルダに入れたいと思うでしょう。ファイルは、YAML データとともに取得されます。ページ自体からはできないので、ファイル特有のメタデータを設定するのは便利な方法です。
 
-Let's say you wanted to just pull the ``alt_text`` value listed for the image file `sample-image.jpg`. You would then create a file called `sample-image.jpg.meta.yaml` and place it in the folder with the referenced image file. Then, insert the data used in the example above and save that YAML file. In the markdown file for the page, you can display this data by using the following line:
+たとえば、 `sample-image.jpg` という画像ファイルに列挙されている ``alt_text`` の値のみを取得したいとします。そのときは、 `sample-image.jpg.meta.yaml` ファイルを作り、参照する画像ファイルと同じフォルダに置きます。それから、上記の例のようなデータを入力し、YAML ファイルを保存してください。ページのマークダウンでは、次のような行を使うことで、このデータを表示できます：
 
 ```yaml
 {{ page.media['sample-image.jpg'].meta.alt_text|e }}
 ```
 
-This will pull up the example phrase `My Alt Text` instead of the image. This is just a basic example. You can use this method for a number of things, including creating a gallery with multiple unique data points you want to have referenced for each image. Your images, in essence, have a set of data unique to them that can be easily referenced and pulled as needed.
+これにより、上記の例でいえば `My Alt Text` というフレーズが、画像の代わりに取得されます。これは基本的な例です。このメソッドは、様々なことに使えます。たとえば、複数のおのおのの画像に対して独自データを持たせたいギャラリーを作ることができます。つまり、画像それぞれに、独自のデータセットを与え、簡単に参照し、必要な時に取り出せるようになります。
 
 ## Video Options
 
@@ -1218,10 +1216,10 @@ Here is an example:
 
 The options are as follows:
 
-| Attribute   | Explanation                                                                               |
-| :-----      | :-----                                                                                    |
-| autoplay    | Enables (`1`) or Disables (`0`) autoplay for the video on pageload.                       |
-| controls    | Enables (`1`) or Disables (`0`) media controls for the embedded video.                    |
+| 属性   | 説明      |
+| :-----      | :-----   |
+| autoplay    | Enables (`1`) or Disables (`0`) autoplay for the video on pageload.  |
+| controls    | Enables (`1`) or Disables (`0`) media controls for the embedded video. |
 | loop        | Enables (`1`) or Disables (`0`) automatic looping for the video, replaying it as it ends. |
-| muted       | Mute video and generally allow it to autoplay.                                            |
+| muted       | Mute video and generally allow it to autoplay.  |
 

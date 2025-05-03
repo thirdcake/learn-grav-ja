@@ -1,5 +1,5 @@
 ---
-title: '設定'
+title: 'config 設定'
 layout: ../../../layouts/Default.astro
 ---
 

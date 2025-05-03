@@ -5,24 +5,24 @@ layout: ../../../layouts/Default.astro
 
 このFAQでは、管理パネルを最大限に利用するために役立つ、便利なチュートリアルや、チップス、トリックを提供します。
 
-### Manual Installation of Admin
+<h3 id="manual-installation-of-admin">管理プラグインを手動でインストールする</h3>
 
-Manual installation is not the recommended method of installation, however, it is still possible to install the admin plugin manually. Basically, you need to download each of the following plugins individually:
+手動でのインストールは、推奨しませんが、管理パネルプラグインを手動でインストールすることは可能ではあります。基本的に、以下のプラグインを個別にダウンロードする必要があります。
 
 * [admin](https://github.com/getgrav/grav-plugin-admin/archive/master.zip)
 * [login](https://github.com/getgrav/grav-plugin-login/archive/master.zip)
 * [form](https://github.com/getgrav/grav-plugin-form/archive/master.zip)
 * [email](https://github.com/getgrav/grav-plugin-email/archive/master.zip)
 
-Extract each archive file into your `user/plugins` folder, then ensure the folders are renamed to just `admin/`, `login/`, `form/`, and `email/`.  Then proceed with the **Usage instructions below**.
+それぞれのアーカイブファイルを、`user/plugins` フォルダに展開し、フォルダ名を単に `admin/`、 `login/`、 `form/`、 そして `email/` にしてください。その後は、 **それ以降の使用方法** に従ってください。
 
-### Adding and Managing Users
+<h3 id="adding-and-managing-users">ユーザーの追加と管理</h3>
 
-When you first install the Admin plugin, you will be prompted to create an admin user when you point your browser at your site. This is a simple web form that ensures at least one admin user has been created.
+最初に管理パネルプラグインをインストールするとき、ブラウザからアクセスすると、管理ユーザーを作るようにプロンプトで促されます。これはシンプルな web のフォームで、最低でも1人の管理ユーザーを作る必要があります。
 
 ![New User](../01.introduction/new-user.png)
 
-You can easily add other users but it requires a bit of work in the terminal/command prompt to do. From your terminal, access the root of the Grav site you'd like to add users to, and type the following command:
+他のユーザーを追加することは簡単にできますが、少しだけ ターミナル/コマンドプロンプト 作業が必要になります。ユーザーを追加したい Grav サイトをインストールしている root ディレクトリに移動し、以下のコマンドを入力します：
 
 ```bash
 bin/plugin login newuser
@@ -30,14 +30,15 @@ bin/plugin login newuser
 
 ![Admin FAQ](faq_1.png)
 
-This will initiate a series of prompts to guide you through the creation of a new user. These include creating a user name, password, email address, and setting the new user's permissions level.
+これにより、一連のプロンプトが表示され、新しいユーザーを作成するガイドをしてくれます。プロンプトで聞かれることには、ユーザー名、パスワード、メールアドレス、そしてそのユーザーのパーミッションレベルが含まれます。
 
-!!!! You will need to have a user name consisting of between 3 and 16 characters which can include lowercase letters, numbers, underscores, and hyphens. Uppercase letters, spaces, and special characters are not allowed for the user name.
+> [!Warning]  
+> You will need to have a user name consisting of between 3 and 16 characters which can include lowercase letters, numbers, underscores, and hyphens. Uppercase letters, spaces, and special characters are not allowed for the user name.
 
 At one point during the creation process you will be asked to choose a set of permissions for the new user. There are currently three options:
 
-| Role(s)        | Description                                                                                                       |
-| :-----         | :-----                                                                                                            |
+| Role(s)        | Description    |
+| :-----         | :-----         |
 | Admin          | Gives the user access to the Admin back end. This role does not include front end access to protected pages. |
 | Site           | Gives user access to all pages in the front end. This is the equivalent of a logged-in user.                      |
 | Admin and Site | Gives user access to the entire site, front and back end.                                                         |

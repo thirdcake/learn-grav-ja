@@ -7,9 +7,9 @@ Grav を魅力的なものとしている中心機能のひとつは、その速
 
 <h2 id="performance">パフォーマンス</h2>
 
-1. **PHP caching is critical**.  You should run a PHP **opcache** and **usercache** (such as **APCu**) in order to get the best performance out of Grav.
+1. **PHP のキャッシュは重要です** 。Grav のベストパフォーマンスを出すには、 PHP **opcache** と **usercache** （たとえば **APCu**）を実行してください。
 
-2. **SSD drives** can make a big difference. Most things can get cached in PHP user cache, but some are stored as files, so SSD drives can make a big impact on performance. Avoid using network filesystems such as NFS with Grav.
+2. **SSD ドライブ** can make a big difference. Most things can get cached in PHP user cache, but some are stored as files, so SSD drives can make a big impact on performance. Avoid using network filesystems such as NFS with Grav.
 
 3. **Native hosting** will always be faster than a Virtual Machine.  VMs are a great way hosting providers can offer flexible “cloud” type environments. These add a layer of processing that will always affect performance. Grav can still be fast on a VM (much faster than wordpress, joomla, etc), but still, for optimal performance, you can't beat a native hosting option.
 
@@ -21,7 +21,8 @@ Grav を魅力的なものとしている中心機能のひとつは、その速
 
 7. **PECL Yaml Parser**.  Installing the native PHP PECL Yaml parser can increase YAML parsing speed by as much as 400%!  This is well worth looking at if you are looking for some extra speed.
 
-!! The getgrav.org runs on a single dedicated server with quad core processors, 16GB of memory and 6G SSD drives. We also run PHP 7.4 with Zend opcache and APCu user cache. The web servers do run a few other websites but not as many as you would find in a shared-hosting environment.
+> [!Info]  
+> The getgrav.org runs on a single dedicated server with quad core processors, 16GB of memory and 6G SSD drives. We also run PHP 7.4 with Zend opcache and APCu user cache. The web servers do run a few other websites but not as many as you would find in a shared-hosting environment.
 
 <h2 id="caching-options">キャッシュ・オプション</h2>
 
@@ -73,7 +74,8 @@ By default, Grav uses the `file` check method for its caching.  What this means 
 
 If automatic re-caching of changed pages is not critical to you (or if your site is rather large), then setting this value to `none` will speed up a production environment even more. You will just need to manually [clear the cache](../../07.cli-console/02.grav-cli/#clear-cache) after changes are made. This is intended as a **Production-only** setting.
 
-!!!! Deleting a page does not clear the cache as cache clears are based on folder-modified timestamps.
+> [!Warning]  
+> Deleting a page does not clear the cache as cache clears are based on folder-modified timestamps.
 
 <!-- -->
 

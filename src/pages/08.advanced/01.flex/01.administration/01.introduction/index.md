@@ -1,5 +1,5 @@
 ---
-title: "はじめに"
+title: "導入"
 layout: ../../../../../layouts/Default.astro
 ---
 

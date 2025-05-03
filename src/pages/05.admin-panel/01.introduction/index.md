@@ -1,5 +1,5 @@
 ---
-title: "はじめに"
+title: "導入"
 layout: ../../../layouts/Default.astro
 ---
 
@@ -9,73 +9,74 @@ layout: ../../../layouts/Default.astro
 
 <h3 id="features">機能</h3>
 
-* User login with automatic password hashing
-* Forgot password functionality
-* Logged-in-user management
-* One click Grav core updates
-* Dashboard with maintenance status, site activity and latest page updates
-* Ajax-powered backup capability
-* Ajax-powered clear-cache capability
-* System configuration management
-* Site configuration management
-* Normal and Expert modes which allow editing via forms or YAML
-* Page listing with filtering and search
-* Page creation, editing, moving, copying, and deleting
-* Powerful syntax highlighting code editor with instant Grav-powered preview
-* Editor features, hot keys, toolbar, and distraction-free fullscreen mode
-* Drag-n-drop upload of page media files including drag-n-drop placement in the editor
-* One click theme and plugin updates
-* Plugin manager that allows listing and configuration of installed plugins
-* Theme manager that allows listing and configuration of installed themes
-* GPM-powered installation of new plugins and themes
-* ACL for admin users access to features
+* 自動のパスワードハッシュを伴うユーザーログイン
+* パスワードを忘れたときの機能
+* ログインユーザーの管理
+* ワンクリックでできる Grav コアのアップデート
+* ダッシュボードで、ステータスや、サイト活動、最新のページ更新をメンテナンス
+* Ajax によるバックアップ機能
+* Ajax によるキャッシュクリア機能
+* System config 設定の管理
+* Site config 設定の管理
+* フォームや YAML を通して編集を可能にする ノーマルモードとエキスパートモード
+* フィルターや検索機能のあるページの一覧表示
+* ページの作成、編集、移動、コピー、削除機能
+* 即時プレビュー機能と強力なシンタックスハイライト機能のあるコードエディタ
+* エディタ機能、ホットキー、ツールバー、邪魔にならないフルスクリーンモード
+* ドラッグアンドドロップでメディアファイルをページにアップロードし、ドラッグアンドドロップでエディタに配置
+* ワンクリックでできる テーマとプラグインのアップデート
+* プラグインマネージャーで、インストール済みプラグインの一覧表示及び config 設定
+* テーママネージャーで、インストール済みテーマの一覧表示及び config 設定
+* GPM による新しいプラグインやテーマのインストール
+* 管理ユーザーのアクセスを制御する ACL
 
 <h3 id="support">サポート</h3>
 
-The Adminstration Panel is quite an ambitious plugin with lots of functionality that will give you a lot of power and flexibility when building out your Grav sites. So if you have any questions, problems, suggestions or find one of those rare bugs in it, please use one of the following ways to get support from us.
+管理パネルは、たくさんの機能のついた、とてもよくばりなプラグインです。Grav サイトを構築するための、強力で柔軟な機能をたくさん提供します。このため、何か疑問や、問題点、気づき、発現しにくいバグがあれば、以下の方法で、サポートを受けてください。
 
-For **live chatting**, please use the [Discord Chat Server](https://chat.getgrav.org) for discussions  related to the admin plugin.
+**ライブチャット** するなら、管理パネルプラグインに関する [Discord チャットサーバー](https://chat.getgrav.org) を使ってください。
 
-For **bugs, features, improvements**, please ensure you [create issues in the admin plugin GitHub repository](https://github.com/getgrav/grav-plugin-admin).
+**バグ、機能、改善** などについては、 [管理パネルプラグインの GitHub リポジトリに issues を作成してください](https://github.com/getgrav/grav-plugin-admin) 。
 
 <h3 id="installation">インストール</h3>
 
-First ensure you are running the latest Grav version, **{{ grav_version }} or later**.  This is required for the admin plugin to run properly.  Check for and upgrade to new Grav versions like this (`-f` forces a refresh of the GPM index):
+まず、Grav を [最新バージョン](../../01.basics/08.updates/#which-version-do-i-have/) にしてください。これにより、管理パネルプラグインが適切に動きます。Grav の新しいバージョンのチェックとアップグレードは、次のようにしてください（ `-f` は、GPM インデックスを強制的にリフレッシュします）：
 
 ```bash
 bin/gpm version -f
 bin/gpm selfupgrade
 ```
 
-The admin plugin actually requires the help of 3 other plugins, so to get the **admin** plugin to work you first need to install the **login**, **forms**, and **email** plugins.  These are available via GPM, and because the plugin has dependencies you just need to proceed and install the admin plugin, and agree when prompted to install the others:
+管理パネルプラグインのインストールには、他に3つのプラグインが必要になります。 **admin** プラグイン の機能のため、 **login** プラグイン、**forms** プラグイン、そして **email** プラグインをインストールしてください。これらは、GPM から入手可能です。プラグインには依存関係があるので、admin プラグインをインストールするだけでよく、他のインストールについては、プロンプトで聞かれたときに同意するだけです：
 
 ```bash
 bin/gpm install admin
 ```
 
-You can also [install the plugin manually](../09.faq/#manual-installation-of-admin) if you are unable to use GPM on your system.
+システムで GPM を使えない場合、[プラグインを手動でインストール](../09.faq/#manual-installation-of-admin) することもできます。
 
 <h3 id="creating-a-user">ユーザーを作成</h3>
 
-With the latest version of the Admin, you will be prompted to create an admin user account when you point your browser to your site.  You must complete this step to ensure straight away a valid admin user is under your control.
+最新バージョンの管理パネルプラグインは、ブラウザでサイトを表示したときに、管理ユーザーアカウントを作成するプロンプトが表示されます。適切な管理ユーザーを制御するために、このプロンプトを埋めなければいけません。
 
 ![](new-user.png)
 
-Simply fill out the form and click the `Create User` button.
+シンプルに、フォームをすべて埋め、 `Create User` ボタンをクリックしてください。
 
-The user information is stored in the `user/accounts/` folder of your Grav installation.  You can edit the values manually or via the Admin plugin itself.  You can also create new users manually or via the `bin/plugin login newuser` CLI command.  More information is contained in the [Admin FAQ](../09.faq/#adding-and-managing-users).
+Grav がインストールされているフォルダ中の `user/accounts/` フォルダに、ユーザー情報が保存されます。この値は、手動で編集できますし、管理パネルからも編集可能です。また、新しいユーザーの作成も、手動でもできますし、CLI コマンドの `bin/plugin login newuser` からも可能です。より詳しい情報は、[管理パネルの FAQ](../09.faq/#adding-and-managing-users) で説明しています。
 
 <h3 id="username-and-password-complexity">ユーザー名とパスワードの複雑さ</h3>
 
-Regex patterns for usernames and passwords are defined in `system/config/system.yaml`.
+ユーザー名とパスワードの正規表現パターンは、 `system/config/system.yaml` で定義されています。
 
-The default pattern for users (`system.username_regex`) is only lowercase characters, digits, dashes, and underscores. Usernames must be between 3 - 16 characters in length.
+ユーザー名のデフォルトパターン（ `system.username_regex` ） は、英小文字、数字、ダッシュとアンダースコアです。ユーザー名の長さは、3以上16文字以内でなければいけません。
 
-The default pattern for passwords (`system.pwd_regex`) is a minimum of eight (8) characters, with at least one number, one uppercase, and one lowercase letter.
+パスワードのデフォルトパターン（ `system.pwd_regex` ）は、最小8文字で、最低でも 1つ以上の数字、1つ以上の大文字、1つ以上の小文字が必要です。
 
-### Usage
+<h3 id="usage">利用方法</h3>
 
-By default, you can access the admin by pointing your browser to `http://yoursite.com/admin`. You can simply log in with the `username` and `password` set in the YAML file you configured earlier.
+デフォルトでは、ブラウザから `http://yoursite.com/admin` にアクセスすると、管理パネルにアクセスできます。 YAML ファイルに設定した `ユーザー名` と `パスワード` で、シンプルにログインできます。
 
-> After logging in, your **plaintext password** will be removed and replaced by an **encrypted** one.
+> [!Note]  
+> ログイン後、**プレーンテキストのパスワード** は取り除かれ、**暗号化された** ものに置き換わります。
 

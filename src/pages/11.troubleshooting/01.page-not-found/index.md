@@ -8,24 +8,26 @@ layout: ../../../layouts/Default.astro
 ![404 Not Found](404-not-found.png)
 
 > [!Info]  
-> 以下の具体例は、Apache ウェブサーバーのものです。最も一般的に使われているサーバーソフトウェアです。
+> 以下の具体例は、Apache webサーバーのものです。最も一般的に使われているサーバーソフトウェアです。
+
+> [!訳注]  
+> 「具体例は Apache サーバーのものです」と言った直後に、なぜいきなり IIS サーバーの話が始まるのか、謎です。
 
 ### IIS use of .htaccess file
 
-After adding URL Rewrite to the IIS server using the Web Platform Installer, restart the IIS server. Go to the management interface, IIS, double-click on URL Rewrite, under Inbound Rules, click on Import Rules, under Rules to Import, browse to the Configuration file, choosing the .htaccess file in the root, and then click on Import. Restart the IIS server. Access Grav now.
+Web Platform Installer を使って IIS サーバーに URL Rewrite を追加したあと、IIS サーバーを再起動します。IIS の管理インターフェースから URL Rewrite をダブルクリックし、Inbound Rules の下にある Import Rules をクリックし、Rules to Import の下にある Configuration ファイルを閲覧し、ルートにある .htaccess ファイルを選択し、それから Import をクリックします。IIS サーバーを再起動します。これで、Grav にアクセスできます。
 
 ### Missing .htaccess File
 
-The first thing to check is if you have the provided `.htaccess` file at the root of your Grav installation. Because this is a **hidden** file, you won't normally see this in your explorer or finder windows.  If you have extracted Grav then **selected** and **moved** or **copied** the files, you may well have left this very important file behind.
+最初にチェックしてほしいのは、 Grav をインストールしたルートフォルダに、 `.htaccess` ファイルがっ提供されているかどうかです。 .htaccess ファイルは **隠し** ファイルであるため、エクスプローラーや windows のファインダーからは、普通は見えません。 Grav を展開し、ファイルを **選択** し、それから　**移動** もしくは **コピー** した場合、このとても重要なファイルが、前のフォルダに置き去りにされてしまうことがあります。
 
-It is **strongly advised** to unzip Grav and move the **entire folder** into place, then simply rename the folder. This will ensure all the files retain their proper positions.
+Grav を展開して、 **すべてのフォルダを** 移し替えることを **強く推奨します** それから、フォルダ名を変更してください。これにより、すべてのファイルが適切な位置を保つことが確認できます。
 
 ### AllowOverride All
 
-In order for the Grav-provided `.htaccess` to be able to set the rewrite rules required for routing to work properly, Apache needs to first read the file.  When your `<Directory>` or `<VirtualHost>` directive is setup with `AllowOverride None`, the `.htaccess` file is completely ignored.  The simplest solution is to change this to `AllowOverride All`
-where RewriteRule is used, **FollowSymLinks** or **SymLinksIfOwnerMatch** needs to be set in Options directive. Simply add on the same line '+FollowSymlinks' after 'Options'
+Grav が提供する `.htaccess` が設定する rewrite ルールで、ルーティング機能が適切に機能するためには、Apache がまずそのファイルを読み込まなければいけません。`<Directory>` や `<VirtualHost>` ディレクティブが、`AllowOverride None` とともにセットアップされると、 `.htaccess` ファイルは完全に無視されます。最もシンプルな解決策は、 RewriteRule が使用可能なところで、この設定を `AlloOverride All` に変更することです。また、Options ディレクティブに、**FollowSymLinks** または **SymLinksIfOwnerMath** が必要です。同じ行の 'Options' の後に '+FollowSymlinks' を追加するだけです。
 
-More details on `AllowOverride` and all the possible configuration options can be found in the [Apache Documentation](http://httpd.apache.org/docs/2.4/mod/core.html#allowoverride).
+`AllowOverride` の詳細と、options の設定については、 [Apache ドキュメント](http://httpd.apache.org/docs/2.4/mod/core.html#allowoverride) で探せます。
 
 ### RewriteBase Issue
 
