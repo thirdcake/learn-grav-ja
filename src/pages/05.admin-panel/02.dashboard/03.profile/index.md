@@ -1,50 +1,50 @@
 ---
-title: Profile
+title: "プロフィール"
 layout: ../../../../layouts/Default.astro
 ---
 
 ![Admin Profile](grav-profile.png)
 
-The profile page in the admin enables you to view and update your individual profile settings. This is where your avatar, email address, name, language, and more are set. For administrators, this is also where you can adjust the groups and permission levels for individual users.
+管理パネルのプロフィールページから、あなた個人のプロフィール設定を閲覧したり、更新したりできます。アバターや、メールアドレス、名前、言語、その他たくさんの設定ができる場所です。管理者にとっては、個々のユーザーにグループやパーミッションのレベルを設定する場所でもあります。
 
-Accessing the profile page is simple. Once you are logged in to the admin, you can access your profile by selecting the area of the sidebar with your avatar image and name. This will take you directly to your own profile.
+プロフィールページへのアクセスは簡単です。管理パネルにログインしたら、サイドバーのアバター画像と名前が書いてあるエリアを選択してください。あなた自身のプロフィールページへ直接リンクしています。
 
-Additionally, administrators will enjoy the ease of jumping to another user's profile page by appending `admin/user/example` to their site's URL. Replacing `example` with the username of the user they wish to edit profile information and/or permissions for.
+加えて、管理者にとっては、サイト URL に、 `admin/user/ユーザー名` と付け加えることで、 他のユーザーのプロフィールページへ簡単に飛べます。 `ユーザー名` のところは、プロフィール情報やパーミッションを編集したいと思っているユーザーのユーザー名に書き換えてください。
 
-### Profile Photo
+<h3 id="profile-photo">プロフィール写真</h3>
 
 ![Admin Profile](grav-profile2.png)
 
-The **Profile** area of the admin gives you a quick, styled look at your avatar, name, and title. Your avatar is automatically generated through [Gravatar](http://en.gravatar.com/), a global avatar service that enables you to upload a single profile image and use it across multiple sites and services.
+管理パネルの **プロフィール** エリアでは、すばやく、整理された見た目で、あなたのアバターや、名前、タイトルが表示されます。アバターは、 [Gravatar](http://en.gravatar.com/) というグローバルなアバターサービスで自動的に生成されます。そこに、ひとつのプロフィール画像をアップロードすれば、それが有効化され、これは、複数のサイトや複数のサービスをまたいで利用可能です。
 
 ![Admin Profile](grav-profile2b.png)
 
-If you don't have an image uploaded to Gravatar, or if you'd prefer to use an image of your choosing, you can upload an image here by dragging and dropping the image file into the **Drop Your Files Here or Click This Area** section of the page. You can also click the area to bring up a file chooser that will enable you to find, select, and upload an image file from your system.
+Gravatar に画像をアップロードしていなければ、もしくは、あなたが選んだ画像を使いたい場合は、ページの **Drop Your Files Here or Click This Area** と書いてあるセクションに、画像をドラッグ・アンド・ドロップすることで、ここの画像をアップロードできます。そのエリアをクリックすることでも、ファイル選択が立ち上がり、そこで選び、手元のシステムから画像ファイルをアップロードできます。
 
-Once you have a new image uploaded, simply select the **Save** button in the upper-right corner of the page.
+新しい画像をアップロードしてから、ページ上部の右端にある **Save** ボタンを選択してください。
 
-### Account
+<h3 id="account">アカウント</h3>
 
 ![Admin Profile](grav-profile3.png)
 
-The **Account** section of the profile page is where you can update your contact information, name, language, and more. You are not able to edit your **Username** here, as this is tied directly to where your user information is stored, but you can edit anything else you need to.
+プロフィールページの **アカウント** セクションでは、コンタクト情報や、名前、言語その他を更新できます。ここでは、 **ユーザー名** は編集できません。ユーザー名は、あなたのユーザー情報が保存されている場所と直接結びついているためです。しかし、ユーザー名以外については、編集可能です。
 
-### 2-Factor Authentication
+<h3 id="2-factor-authentication">2要素認証</h3>
 
 ![Admin Profile](grav-profile5.png)
 
-**2-Factor Authentication** provides an extra layer of security for your website. Find out more about this feature in the [**Security**](../../06.security/01.2fa/) area of this guide.
+**2要素認証** は、別レイヤーの web サイトセキュリティを提供します。この機能については、このガイドの [**セキュリティ**](../../06.security/01.2fa/) エリアで詳しく解説しています。
 
-### Access Levels
+<h3 id="access-levels">アクセスレベル</h3>
 
 ![Admin Profile](grav-profile4.png)
 
-Administrators will find the permissions area especially useful. This is where you can configure exactly what a user will be able to access and do within the administrator.
+管理者には、特に便利なパーミッションのエリアが表示されます。このエリアでは、ユーザーが、管理画面内でどこにアクセスでき、なにができるのかを正確に設定できます。
 
-Here is a quick breakdown of the permissions options and what they enable someone to do.
+以下に、ざっくりとパーミッションのオプションと、その人がなにができるのかを掘り下げます。
 
-| Option                         | Description                                                                                                      |
-| :-----                         | :-----                                                                                                           |
+| オプション | 説明 |
+| :-----     | :-----  |
 | **admin.super**                | Designates the user as a super admin, giving them the ability to see and configure all areas of the site.        |
 | **admin.login**                | Enables the user to log in to the admin. This must be set to **Yes** to enable the user to log in.               |
 | **admin.cache**                | Gives the user access to the cache reset buttons.                                                                |

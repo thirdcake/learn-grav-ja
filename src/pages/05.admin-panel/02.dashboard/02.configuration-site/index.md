@@ -1,5 +1,5 @@
 ---
-title: Config設定（Site）
+title: "Site 設定"
 layout: ../../../../layouts/Default.astro
 ---
 

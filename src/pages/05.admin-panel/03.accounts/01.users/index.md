@@ -3,6 +3,9 @@ title: "ユーザーアカウント"
 layout: ../../../../layouts/Default.astro
 ---
 
+> [!訳注]  
+> 何らかの経緯でこうなっているのだろうと思いますが、このページの内容は、 [ダッシュボードのプロフィール](../../02.dashboard/03.profile/) とほぼ同じです。最後の [アクセスタブ](#access-tab) のところだけ、多少違います。
+
 ![User Listing](accounts-user1.png)
 
 <h2 id="user-profile">ユーザープロフィール</h2>
@@ -39,7 +42,7 @@ Gravatar に画像をアップロードしていなければ、もしくは、�
 
 ![2-Factor Authentication](../../02.dashboard/03.profile/grav-profile5.png)
 
-**2要素認証** は、別レイヤーの web サイトセキュリティを提供します。この機能については、このガイドの [**Security**](../../06.security/01.2fa/) エリアで詳しく解説しています。
+**2要素認証** は、別レイヤーの web サイトセキュリティを提供します。この機能については、このガイドの [**セキュリティ**](../../06.security/01.2fa/) エリアで詳しく解説しています。
 
 <h3 id="access-tab">アクセスタブ</h3>
 

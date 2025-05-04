@@ -9,20 +9,20 @@ Grav を魅力的なものとしている中心機能のひとつは、その速
 
 1. **PHP のキャッシュは重要です** 。Grav のベストパフォーマンスを出すには、 PHP **opcache** と **usercache** （たとえば **APCu**）を実行してください。
 
-2. **SSD ドライブ** can make a big difference. Most things can get cached in PHP user cache, but some are stored as files, so SSD drives can make a big impact on performance. Avoid using network filesystems such as NFS with Grav.
+2. **SSD ドライブ** により、大きく変化します。ほとんどの場合、PHP のユーザーキャッシュからキャッシュを取得できますが、ファイルから取得するものもあります。そのため、 SSD ドライブは、パフォーマンスに大きく影響します。 NFS のようなネットワークファイルシステムを Grav で使用するのは避けてください。
 
-3. **Native hosting** will always be faster than a Virtual Machine.  VMs are a great way hosting providers can offer flexible “cloud” type environments. These add a layer of processing that will always affect performance. Grav can still be fast on a VM (much faster than wordpress, joomla, etc), but still, for optimal performance, you can't beat a native hosting option.
+3. **ネイティブ・ホスティング** は、仮想マシン（VM）と比べると、常に速いです。たしかに VM は、ホスティングプロバイダが、柔軟に "クラウド" タイプの環境を提供できるすばらしい方法です。これらは、パフォーマンスに影響を与える処理レイヤーを追加します。 VM 上のGrav は、（wordpress や joomla などよりは） 十分速いですが、パフォーマンスを最適化するなら、ネイティブ・ホスティングを選択しないわけにはいきません。
 
-4. **Faster memory** is better. Because Grav is so fast, and because many of its caching solutions use memory heavily, the speed of the memory on your server can have a big impact on performance. Grav does not use extensive amounts of memory compared to some platforms so the amount of memory is not as important, nor does it impact performance as much, as memory type and speed.
+4. **より速いメモリー** は、より良いです。 Grav はとても速く、多くのキャッシュ機能は、メモリーを高頻度で利用するので、サーバーのメモリーのスピードは、パフォーマンスに大きく影響します。 Grav はいくつかのプラットフォームと比べて、大量のメモリーを使うわけではないので、メモリーの量は、メモリーのタイプやスピードほどにはパフォーマンスに影響せず、重要ではありません。
 
-5. **Fast Multi-core processors** are better. Faster and more advanced processors will always help, but not as much as the other points.
+5. **速いマルチコア・プロセッサ** も、より良いです。より速く、より高度なプロセッサは、常に助けになります。ただし、他のポイントほどではありません。
 
-6. **Shared hosting** is cheap and readily available, but sharing resources will always slow things down a bit. Again, Grav can run very well on a shared server (better than other CMSes), but for ultimate speed, a dedicated server is the way to go.
+6. **レンタルサーバー** は、安くて準備された環境が手に入ります。が、共用されたリソースは、常に少し遅いです。もう一度いいますが、Grav は、（他の CMS よりは）レンタルサーバーでもとても良く動作します。しかし、究極のスピードを求めるなら、専用サーバーがおすすめです。
 
-7. **PECL Yaml Parser**.  Installing the native PHP PECL Yaml parser can increase YAML parsing speed by as much as 400%!  This is well worth looking at if you are looking for some extra speed.
+7. **PECL Yaml パーサー** ネイティブの PHP PECL Yaml パーサーをインストールすると、YAML をパースするスピードが早くなります。最大 400% です！ さらなるスピードを求めるなら、一見の価値があります。
 
 > [!Info]  
-> The getgrav.org runs on a single dedicated server with quad core processors, 16GB of memory and 6G SSD drives. We also run PHP 7.4 with Zend opcache and APCu user cache. The web servers do run a few other websites but not as many as you would find in a shared-hosting environment.
+> getgrav.org サイトは、1つの専用サーバーで、クアッドコアのプロセッサーと、16GB のメモリーと、6G のSSD ドライブとで、運用されています。また、PHP 7.4 の実行に、 Zend opcache と、APCu ユーザーキャッシュを利用しています。この web サーバーは、いくつか他の web サイトも運用していますが、レンタルサーバー環境ほどたくさんではありません。
 
 <h2 id="caching-options">キャッシュ・オプション</h2>
 
@@ -30,8 +30,8 @@ Caching is an integral feature of Grav that has been baked in from the start.  T
 
 Grav uses the established and well-respected [Doctrine Cache](https://www.doctrine-project.org/projects/doctrine-cache/en/latest/index.html) library. This means that Grav supports any caching mechanism that Doctrine Cache supports.  This means that Grav supports:
 
-* **Auto** _(Default)_ - Finds the best option automatically
-* **File** - Stores in cache files in the `cache/` folder
+* **Auto** _（デフォルト）_ - 自動で最適な選択をします
+* **File** - `cache/` フォルダにキャッシュファイルを保存します
 * **APCu** - [https://php.net/manual/en/book.apcu.php](https://php.net/manual/en/book.apcu.php)
 * **Memcache** - [https://php.net/manual/en/book.memcache.php](https://php.net/manual/en/book.memcache.php)
 * **Redis** - [https://redis.io](https://redis.io)
@@ -79,9 +79,10 @@ If automatic re-caching of changed pages is not critical to you (or if your site
 
 <!-- -->
 
-!!! You can easily force the cache to clear by just touching/saving a configuration file.
+> [!Tip]  
+> You can easily force the cache to clear by just touching/saving a configuration file.
 
-#### Memcache Specific Options
+<h4 id="memcache-specific-options">Memcache に特有のオプション</h4>
 
 There are some extra configuration options that are required if you are connecting to a **memcache** server via the `memcache` driver option.  These options should go under the `cache:` group in your `user/config/system.yaml`:
 
@@ -93,8 +94,7 @@ cache:
     port: 11211
 ```
 
-
-#### Memcached Specific Options
+<h4 id="memcached-specific-options">Memcached に特有のオプション</h4>
 
 Similar to memcache, memcached has some extra configuration options that are required if you are connecting to a **memcached** server via the `memcached` driver option.  These options should go under the `cache:` group in your `user/config/system.yaml`:
 
@@ -106,8 +106,7 @@ cache:
     port: 11211
 ```
 
-
-#### Redis Specific Options
+<h4 id="redis-specific-options">Redis に特有のオプション</h4>
 
 There are some extra configuration options that are required if you are connecting to a **redis** server via the `redis` driver option.  These options should go under the `cache:` group in your `user/config/system.yaml`:
 
@@ -139,9 +138,9 @@ cache:
 
 _you will also need the php-redis installed in your system_
 
-#### Twig Specific Options
+<h4 id="twig-specific-options">Twig に特有のオプション</h4>
 
-The Twig templating engine uses its own file based cache system, and there are a few options associated with it.
+Twig テンプレートエンジンは、独自のファイルベースのキャッシュシステムを使います。そして、それに伴い、いくつかのオプションがあります。
 
 ```yaml
 twig:
@@ -151,9 +150,9 @@ twig:
   autoescape: false                     # Autoescape Twig vars
 ```
 
-For slight performance gains, you can disable the `debug` extension, and also disable `auto_reload` which performs a similar function to `cache: check: method: none` as it will not look for changes in `.html.twig` files to trigger cache refreshes.
+パフォーマンスを少し良くするため、`debug` 拡張を無効にできます。また、`cache: check: method: none` と似た機能を持つ `auto_reload` も無効にできます。それにより、キャッシュがリフレッシュされるまで、 `.html.twig` ファイルの変更を探しません。
 
-## Caching and Events
+<h2 id="caching-and-events">キャッシュとイベント</h2>
 
-For the most part, [events are still fired](../../04.plugins/04.event-hooks/) even when caching is enabled.  This holds true for all the events except for `onPageContentRaw`, `onPageProcessed`, `onPageContentProcessed`, `onTwigPageVariables`, and `onFolderProcessed`.  These events are run as all pages and folders are recursed and they fire on each page or folder found.  As their name implies they are only run during the **processing**, and not after the page has been cached.
+ほとんどの場合、キャッシュが有効化されていたとしても、 [イベントは発火します](../../04.plugins/04.event-hooks/) 。イベントが、 `onPageContentRaw`, `onPageProcessed`, `onPageContentProcessed`, `onTwigPageVariables`, もしくは `onFolderProcessed` 以外であるとき、これは正しいです。例外となるイベントは、すべてのページとフォルダが再起されるときに実行され、ページやフォルダが見つかるごとに発火します。イベント名から示唆されるとおり、 **処理中** にのみ実行され、キャッシュされたあとには実行されません。
 

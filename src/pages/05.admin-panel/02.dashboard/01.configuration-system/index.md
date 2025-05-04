@@ -1,5 +1,5 @@
 ---
-title: Config 設定（システム）
+title: "System 設定"
 layout: ../../../../layouts/Default.astro
 ---
 
