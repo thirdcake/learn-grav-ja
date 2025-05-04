@@ -966,13 +966,15 @@ header.newField:
 test:
     type: spacer
     title: A title
+    title_type: h2
     text: Some text
     underline: true
 ```
 
 | 属性   | 説明                                            |
 | :-----      | :-----                                                 |
-| `title`     | h3 タイトルを追加します |
+| `title`     | タイトルを追加します |
+| `title_type` | タイトルの HTML タグ（例: `h1`, `h2`, `h3`, など）を決定します。指定しなければ、デフォルトでは `h3` です |
 | `text`      | テキストを追記します。タイトルが設定されていれば、タイトルの後に追加されます |
 | `underline` | 真偽値で、ポジティブな値の場合、`<hr>` タグを追加します。 |
 
