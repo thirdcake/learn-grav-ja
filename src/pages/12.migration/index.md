@@ -7,4 +7,4 @@ layout: ../../layouts/Chapter.astro
 
 # サイトの引っ越し
 
-この章では、Drupalや、WordPressのような他のCMSからの引っ越しをサポートします。
+この章では、 Drupal や、 WordPress のような他の CMS からの引っ越しをサポートします。

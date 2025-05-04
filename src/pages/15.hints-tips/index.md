@@ -1,11 +1,11 @@
 ---
-title: "ヒントとTips"
+title: "ヒントと Tips"
 layout: ../../layouts/Chapter.astro
 ---
 
 ### 第15章
 
-# ヒントとTips
+# ヒントと Tips
 
-GravユーザからのヒントとTipsを紹介します。
+Grav ユーザからのヒントと Tips を紹介します。
 

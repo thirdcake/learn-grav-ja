@@ -1,6 +1,6 @@
 export const siteConfig = {
-    sitetitle: "Gravドキュメントの私的日本語訳",
-    description: "learn.getgrav.orgを日本語に訳するものです",
+    sitetitle: "Grav CMS ドキュメントの私的和訳",
+    description: "learn.getgrav.org を日本語に訳しています。",
     baseurl: "/learn-grav-ja",
     hosturl: "https://thirdcake.github.io",
     bloburl: "https://github.com/thirdcake/learn-grav-ja/blob/main/src/pages",
