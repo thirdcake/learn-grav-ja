@@ -3,15 +3,15 @@ title: "スケジューラ"
 layout: ../../../layouts/Default.astro
 ---
 
-The Grav scheduler is a new feature that was added in Grav 1.6 that allows jobs to be run on a periodic basis.  The underlying processing relies on the server's **cron** scheduler, but once a single entry has been added to the cron service, all jobs and specific schedules can be configured via Grav.
+Grav のスケジューラは、 Grav 1.6 で追加された新しい機能で、ジョブを定期的に実行します。基本的な処理は、サーバーの **cron** スケジューラに依存しますが、 cron サービスにエントリーを1つ追加すると、すべてのジョブと特定のスケジュールを Grav から設定できるようになります。
 
-One of the main advantages of utilizing the scheduler to handle tasks is that they can be performed without any user interaction and independently of the front end.  Tasks such as periodic cache clearing, backups, synchronization, search indexing, etc., are all prime candidates for scheduled jobs.
+スケジューラを使ってタスクを処理する主な利点のひとつは、ユーザーによる操作の必要なく、フロントエンドから独立してタスクを実行できることです。定期的なキャッシュクリア、バックアップ、同期、検索インデックス作成などのタスクは、いずれもスケジュールジョブの最適な候補です。
 
 ## Installation
 
 The first step in getting the scheduler setup and ready for tasks, is to add the `bin/grav scheduler` command to the cron service.  The simplest approach is to utilize the CLI command itself to output the appropriate command to run for installation:
 
-[prism classes="language-bash command-line" highlight="10" cl-output="2-10"]
+```bash
 $ bin/grav scheduler -i
 
 Install Scheduler
@@ -22,26 +22,27 @@ Install Scheduler
  ! [NOTE] To install, run the following command from your terminal:
 
  (crontab -l; echo "* * * * * cd /Users/andym/grav;/usr/local/bin/php bin/grav scheduler 1>> /dev/null 2>&1") | crontab -
-[/prism]
+```
 
 On my mac system, the full command required is displayed, so all you need to do is to copy and paste the entire then into your terminal and hit return.
 
-!! You need to be logged in to the shell with the same user as your webserver.  This is to ensure that the user that runs the schdeduler commands matches the webserver user that needs to interact with those files.  If you install the crontab entry with another user (e.g. `root`) any files created will be created as that `root` user and not the `webserver` user which can lead to problems.
+> [!Info]  
+> You need to be logged in to the shell with the same user as your webserver.  This is to ensure that the user that runs the schdeduler commands matches the webserver user that needs to interact with those files.  If you install the crontab entry with another user (e.g. `root`) any files created will be created as that `root` user and not the `webserver` user which can lead to problems.
 
-[prism classes="language-bash command-line"]
+```bash
 (crontab -l; echo "* * * * * cd /Users/andym/grav;/usr/local/bin/php bin/grav scheduler 1>> /dev/null 2>&1") | crontab -
-[/prism]
+```
 
  You won't get a response, but you should not get any errors either.  After that you can confirm things look good by re-running the `bin/grav scheduler -i` command:
 
-[prism classes="language-bash command-line" cl-output="2-10"]
+```bash
 bin/grav scheduler -i
 
 Install Scheduler
 =================
 
  [OK] All Ready! You have already set up Grav's Scheduler in your crontab
-[/prism]
+```
 
 You can also get the needed command from the admin plugin by simply navigating to **Tools** → **Scheduler**.
 
@@ -49,7 +50,7 @@ You can also get the needed command from the admin plugin by simply navigating t
 
 In order to schedule a job the frequency is controlled by a flexible format.
 
-[prism classes="language-text"]
+```txt
 * * * * * *
 | | | | | |
 | | | | | +-- Year              (range: 1900-3000)
@@ -58,7 +59,7 @@ In order to schedule a job the frequency is controlled by a flexible format.
 | | +-------- Day of the Month  (range: 1-31)
 | +---------- Hour              (range: 0-23)
 +------------ Minute            (range: 0-59)
-[/prism]
+```
 
 Some examples:
 
@@ -77,7 +78,7 @@ Advanced options:
 
 You can see which jobs are currently available to the Scheduler  by running the `bin/grav scheduler -j` command:
 
-[prism classes="language-bash command-line" cl-output="2-16"]
+```bash
 bin/grav scheduler -j
 
 Scheduler Jobs Listing
@@ -94,24 +95,24 @@ Scheduler Jobs Listing
 └─────────────────────┴────────────────────────────────────┴───────────┴─────────┴──────────────────┴─────────┘
 
  ! [NOTE] For error details run "bin/grav scheduler -d"
-[/prism]
+```
 
 The Grav scheduler is controlled by a primary configuration file.  This is located in `user/config/scheduler.yaml` and is required to have any job `enabled` in order to run.
 
 Below the configruation shows the jobs that are available and if they are enabled to run or not.  Simply set an entry to `disabled` to stop it from running.
 
-[prism classes="language-yaml line-numbers"]
+```yaml
 status:
   ls-job: enabled
   cache-purge: enabled
   cache-clear: enabled
   default-site-backup: enabled
   pages-backup: enabled
-[/prism]
+```
 
 To see more details about any potential **errors** or to see the next time the job will run you can use the `/bin/grav scheduler -d` command:
 
-[prism classes="language-bash command-line" cl-output="2-14"]
+```bash
 bin/grav scheduler -d
 
 Job Details
@@ -126,21 +127,21 @@ Job Details
 │ pages-backup        │ 2018-09-20 09:55 │ 2019-02-22 03:00 │ None   │
 │ ls-job              │ 2019-02-21 11:29 │ 2019-02-21 11:31 │ None   │
 └─────────────────────┴──────────────────┴──────────────────┴────────┘
-[/prism]
+```
 
 ## Manually Running Jobs
 
 The CLI command provides an simple way to manually run any jobs.  In fact this is what the scheduler is doing when it runs periodically.
 
-[prism classes="language-bash command-line"]
+```bash
 bin/grav scheduler
-[/prism]
+```
 
 This will silently run the jobs, but you can also see details of what run using:
 
-[prism classes="language-bash command-line"]
+```bash
 bin/grav scheduler -v
-[/prism]
+```
 
 ## Grav System Jobs
 

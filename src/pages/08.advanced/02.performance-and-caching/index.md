@@ -26,9 +26,9 @@ Grav を魅力的なものとしている中心機能のひとつは、その速
 
 <h2 id="caching-options">キャッシュ・オプション</h2>
 
-Caching is an integral feature of Grav that has been baked in from the start.  The caching mechanism that Grav employs is the primary reason Grav is as fast as it is.  That said, there are some factors to take into account.
+キャッシュは、Grav に最初から組み込まれている不可欠な機能です。Grav が採用しているキャッシュメカニズムのおかげで、 Grav は高速に動きます。とはいえ、考慮すべき要素もいくつかあります。
 
-Grav uses the established and well-respected [Doctrine Cache](https://www.doctrine-project.org/projects/doctrine-cache/en/latest/index.html) library. This means that Grav supports any caching mechanism that Doctrine Cache supports.  This means that Grav supports:
+Grav は定評のある [Doctrine Cache](https://www.doctrine-project.org/projects/doctrine-orm/en/latest/reference/caching.html) ライブラリを使用しています。つまり、 Doctrine Cache でサポートされるあらゆるキャッシュメカニズムは、Grav でもサポートされます。つまり、Grav は以下をサポートします：
 
 * **Auto** _（デフォルト）_ - 自動で最適な選択をします
 * **File** - `cache/` フォルダにキャッシュファイルを保存します
@@ -37,11 +37,11 @@ Grav uses the established and well-respected [Doctrine Cache](https://www.doctri
 * **Redis** - [https://redis.io](https://redis.io)
 * **WinCache** - [https://www.iis.net/downloads/microsoft/wincache-extension](https://www.iis.net/downloads/microsoft/wincache-extension)
 
-By default, Grav comes preconfigured to use the `auto` setting.  This will try **APC**, then **WinCache**, and lastly **File**.  You can, of course, explicitly configure the cache in your `user/config/system.yaml` file, which could make things ever so slightly faster.
+デフォルトでは、 Grav は `auto` を使うように事前に設定されています。これは、 **APC** を試し、それから **WinCach** 、そして最後に **File** を試します。もちろん、`user/config/system.yaml` ファイルで、キャッシュ設定を明示することもできます。これにより、少し早くなるかもしれません。
 
 <h2 id="caching-types">キャッシュ・タイプ</h2>
 
-There are actually **5 types** of caching happening in Grav.  They are:
+Grav では、 **5種類** のキャッシュが行われます。それは：
 
 1. YAML configuration caching into PHP.
 2. Core Grav caching for page objects.
@@ -49,11 +49,11 @@ There are actually **5 types** of caching happening in Grav.  They are:
 4. Image caching for media resources.
 5. Asset caching of CSS and JQuery with pipelining.
 
-The YAML configuration caching is not configurable, and will always compile and cache the configuration into the `/cache` folder. Image caching is also always on, and stores its processed images in the `/images` folder.
+YAML 設定のキャッシュは変更できません。常にコンパイルされ、 `/cache` フォルダにキャッシュされます。Image キャッシュも常に on になっており、処理済みの画像が `/images` フォルダに保存されます。
 
 <h3 id="grav-core-caching">Grav のコア・キャッシュ</h3>
 
-Core Grav caching has the following configuration options as configured in your `user/config/system.yaml` file:
+Core Grav キャッシュには、`user/config/system.yaml` ファイルに設定できる、次のような設定オプションがあります：
 
 ```yaml
 cache:
@@ -64,23 +64,23 @@ cache:
   prefix: 'g'                          # Cache prefix string (prevents cache conflicts)
 ```
 
-As you can see, the options are documented in the configuration file itself.  During development sometimes it is useful to disable caching to ensure you always have the latest page edits.
+ご覧のとおり、オプションは設定ファイル自体に記載します。開発時は、キャッシュができない方が、最新のページ編集を確認できるので、便利な場合があります。
 
-By default, Grav uses the `file` check method for its caching.  What this means is that every time you request a Grav URL, Grav uses a highly optimized routing to run through all the **files** in the `user/pages`  folder to determine if anything has changed.
+デフォルトでは、 Grav はキャッシュのチェックメソッド（ `cache.check.method` ）に `file` を使います。これはつまり、 Grav の URL にリクエストするたびに、 Grav は高度に最適化されたルーティングを使い、 `user/pages` フォルダ内のすべての **ファイル** を調べ、変更がないか確認します。
 
-`folder` cache check is going to be slightly faster than `file` but will not work reliably in all environments.  You will need to check if Grav picks up modifications to pages on your server when using the `folder` option.
+`folder` キャッシュチェックは、 `file` よりも少し高速ですが、すべての環境確実に機能するとは限りません。 `folder` オプションを使うときは、Grav がサーバーでページの修正を検知するかを確認する必要があります。
 
-`hash` checking uses a fast hash algorithm on all of the files in each page folder.  This may be faster than file checking in some situations and does take into account every file in the folder.
+`hash` チェックは、各ページフォルダ内のすべてのファイルで、高速なハッシュアルゴリズムを使います。これは状況によって file チェックよりも高速で、フォルダ内のすべてのファイルが対象です。
 
-If automatic re-caching of changed pages is not critical to you (or if your site is rather large), then setting this value to `none` will speed up a production environment even more. You will just need to manually [clear the cache](../../07.cli-console/02.grav-cli/#clear-cache) after changes are made. This is intended as a **Production-only** setting.
+変更されたページを自動で再キャッシュすることが重要でない場合（もしくは、比較的大規模なサイトである場合）、この値に `none` を設定すると、本番環境が高速化します。変更後は、手動での[キャッシュクリア](../../07.cli-console/02.grav-cli/#clear-cache) だけは必要です。これは **本番環境専用** の設定です。
 
 > [!Warning]  
-> Deleting a page does not clear the cache as cache clears are based on folder-modified timestamps.
+> ページの削除で、キャッシュはクリアされません。キャッシュクリアが、フォルダの編集タイムスタンプに基づいて行われるためです。
 
 <!-- -->
 
 > [!Tip]  
-> You can easily force the cache to clear by just touching/saving a configuration file.
+> config 設定ファイルを作成/保存するだけで、簡単にキャッシュクリアを強制できます。
 
 <h4 id="memcache-specific-options">Memcache に特有のオプション</h4>
 

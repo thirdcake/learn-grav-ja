@@ -3,14 +3,14 @@ title: "バックアップ"
 layout: ../../../layouts/Default.astro
 ---
 
-The backup system in Grav has been completely rewritten for Grav 1.6 to provide more features and functionality. The improvements include:
+Grav のバックアップシステムは、 Grav 1.6 で完全に書きかえられ、より多くの特長や機能が提供されました。改善点は、次のとおりです：
 
-* Integration into the new Grav [Scheduler](../06.scheduler/) to allow for offline backups to run whenever you wish
-* Ability to create multiple backup **profiles** each with their own set of files, exclude path and file rules, and schedule configuration
+* Grav の新しい [スケジューラ](../06.scheduler/) と統合されたことで、好きな時にオフラインバックアップが取れるようになりました
+Ability to create multiple backup **profiles** each with their own set of files, exclude path and file rules, and schedule configuration
 * New **auto-purge** options based on `number`, `space`, or `time`.
 * New dedicated backups page in the **Tools** section of the admin plugin.
 
-<h2 id="configuration">設定</h2>
+<h2 id="configuration">config 設定</h2>
 
 For backwards compatibility, the default configuration mimics the system prior to Grav 1.6, however, it does now have a 5GB limit by default for backup space.  You should copy the default configuration file (`system/config/backups.yaml`) to your `user/config/`
 

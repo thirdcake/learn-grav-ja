@@ -3,60 +3,67 @@ title: "WSL(Windows Subsystem for Linux)"
 layout: ../../../layouts/Default.astro
 ---
 
-The Windows Subsystem for Linux lets developers run GNU/Linux environment -- including most command-line tools, utilities, and applications -- directly on Windows, unmodified, without the overhead of a virtual machine.
+Windows Subsystem for Linux を使うと、開発者は、仮想マシンのオーバーヘッド無しで、直接 Windows から GNU/Linux 環境（ほとんどのコマンドラインツール、ユーティリティ、アプリケーションを含む）を実行できます。
 
-You can:
-- Choose your favorite GNU/Linux distributions from the Windows Store.
-- Run common command-line free software such as grep, sed, awk, or other ELF-64 binaries.
-- Run Bash shell scripts and GNU/Linux command-line applications including:
-  - Tools: vim, emacs, tmux
-  - Languages: Javascript/node.js, Ruby, Python, C/C++, C# & F#, Rust, Go, etc.
-  - Services: sshd, MySQL, Apache, lighttpd
-- Install additional software using own GNU/Linux distribution package manager.
-- Invoke Windows applications using a Unix-like command-line shell.
-- Invoke GNU/Linux applications on Windows.
+できること：
+- Windows Store から、お気に入りの GNU/Linux ディストリビューションを選びます。　
+- grep, sed, awk, その他 ELF-64 バイナリなどの一般的なコマンドラインのフリーソフトウェアを実行します。
+- 以下の Bash シェルスクリプトと GNU/Linux コマンドラインアプリケーションを実行します：
+  - ツール： vim, emacs, tmux
+  - 言語： Javascript/node.js, Ruby, Python, C/C++, C# & F#, Rust, Go, など。
+  - サービス： sshd, MySQL, Apache, lighttpd
+- 自身の GNU/Linux ディストリビューションのパッケージマネージャーを使って、追加のソフトウェアをインストールします。
+- Unix ライクなコマンドラインシェルで、Windows アプリケーションを呼び出せます。
+- Windows 上で、GNU/Linux アプリケーションを呼び出せます。
 
-For more information visit: [Windows Subsustem for Linux Documentation](https://docs.microsoft.com/en-us/windows/wsl/about)
+より詳しい情報は： [Windows Subsustem for Linux ドキュメント](https://learn.microsoft.com/ja-jp/windows/wsl/about) をご覧ください。
 
-## Installing Windows Subsystem for Linux
+<h2 id="installing-windows-subsystem-for-linux">WSL のインストール</h2>
 
-The installation of *Windows Subsystem for Linux* is well described by Microsoft's own document [Install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
-Instead of the standard Ubuntu distro mentioned in the installation guide, search for and choose the latest Ubuntu 18.04 LTS.
+*Windows Subsystem for Linux* のインストールについては、 Microsoft 自身のドキュメント [WSL を使用して Windows に Linux をインストールする方法](https://learn.microsoft.com/ja-jp/windows/wsl/install) に詳しく書かれています。
+インストールガイドに書かれている標準の Ubuntu ディストロのかわりに、最新の Ubuntu 18.04 LTS を検索して選択してください。
 
-To initialize and update the Ubuntu installation follow [Initializing a newly installed distro](https://docs.microsoft.com/en-us/windows/wsl/initialize-distro).
-This step may be skipped if you have already initialized the Ubuntu distro in the previous step.
+Ubuntu のインストールを初期化してアップデートするには、"Initializing a newly installed distro"（リンク切れ）に従ってください。
+前の手順で、 Ubuntu ディストロをすでに初期化していれば、この手順は、スキップできるかもしれません。
 
-! An important aspect of WSL is that **Windows tools** are **not** able to access files stored inside Ubuntu. However, Ubuntu can (almost) freely read/write the Windows filesystem. Therefore, files that need to be accessed by Windows tools (e.g. your IDE, Backup) need to be stored on the Windows filesystem.<br><br>
-! When accessing the Windows filesystem from within the bash shell, you need to prepend the path with `/mnt/c/`. Although not required, it is best to use the exact same file path casing when creating symlinks.
+> [!Note]  
+> WSL の重要な特徴のひとつは、 **Windows tools** が Ubuntu 内に保存されているファイルにアクセス **できない** ことです。しかし Ubuntu は（ほぼ） Windows のファイルシステムに読み書きできます。そのため、Windows tools からアクセスする必要のあるファイル（たとえば： IDE やバックアップなど）は、 Windows のファイルシステムに保存する必要があります。  
+> bash シェル内から Windows ファイルシステムにアクセスするには、path に `/mnt/c/` を付ける必要があります。必須ではありませんが、シムリンクを作成する際は、大文字小文字まで正確に同じファイルパスにすることをおすすめします。
 
+> [!訳注]  
+> Ubuntu のバージョンは、18でなくても、20 でも 24 でも大丈夫そうです。  
+> また、上記のリンク切れ部分は、とりあえず Linux のユーザー名とパスワードを設定できれば問題なさそうです。マイクロソフトのドキュメントで説明されているので、初期化に困ることはないと思います。  
+> Ubuntu から Windows のファイルシステムにリンクを張ると、ホストと仮想マシン間のI/Oが発生し、処理が遅くなることがあるようです。Ubuntu 上で完結させられるなら、その方が良いかもしれません。
 
-## Installing Apache
+<h2 id="installing-apache">Apache のインストール</h2>
 
-Use the following command in the bash shell to install Apache:
+Apache をインストールするには、 bash シェルで次のコマンドを使用します：
 
 ```bash
 sudo apt install apache2
 ```
 
-!!! The terminal used by WSL does not support the pasting of text as you are used to. Use **right-click** for pasting.
+> [!Tip]  
+> WSL で使うターミナルでは、通常のテキスト貼り付けはサポートされていません。 **右クリック** を使って貼り付けできます。
 
-Create a project folder for your websites. For reasons mentioned above, this folder needs to be outside of the WSL filesystem. You could use for example: `C:/Users/<Username>/Documents/Development/Web/webroot`, or simply `C:/webroot`.
+web サイト用のプロジェクトフォルダを作成してください。上述のとおり、このフォルダは WSL ファイルシステムの外に作る必要があります。たとえば： `C:/Users/<Username>/Documents/Development/Web/webroot` もしくはシンプルに： `C:/webroot`
 
-In Ubuntu, create a symbolic link to the `webroot` folder.
+Ubuntu では、 `webroot` フォルダにシンボリックリンクを作成します。
 
 ```bash
 sudo ln -s /mnt/c/your/path/to/webroot /var/www/webroot
 ```
 
-Open the Apache default virtual host configuration file:
+Apache のデフォルトの仮想ホスト config ファイルを開きます：
 
 ```bash
 sudo nano /etc/apache2/sites-available/000-default.conf
 ```
 
-!!! Remove existing content by keeping the `Shift`-key pressed and scroll down using the `↓`-key. Then press `Ctrl`<small>+</small>`K` to cut the selection.
+> [!Tip]  
+> `Shift` キーを押したまま `↓` キーを使ってスクロールダウンして、既存のコンテンツを削除します。 `Ctrl` キー + `k` キーを押して、選択範囲を切り取ります。
 
-Insert the following VirtualHost configuration:
+次の VirtualHost config を挿入します：
 
 ```apacheconf
 <VirtualHost *:80>
@@ -78,10 +85,14 @@ Insert the following VirtualHost configuration:
 </VirtualHost>
 ```
 
-!!! Save the file by pressing `Ctrl`<small>+</small>`O`, and hit `Enter` to confirm. Exit with `Ctrl`<small>+</small>`X`.<br>
-!!! (In the command bar: `^` meants `Ctrl` and `M` means `Alt`)
+> [!Tip]  
+> `Ctrl` + `o` を同時に押して、ファイルを保存し、 `Enter` キーを押して確定します。`Ctrl` + `x` で終了します。  
+> （コマンドバー： `^` は、 `Ctrl` を、 `M` は、 `Alt` を意味します）
 
-Open your favorite Windows editor/IDE, and create an `index.html` file in your webroot folder with the following content:
+> [!訳注]  
+> 上記の Tip はおそらく、nano エディタの話だと思います。
+
+Windows のお好みの エディタ/IDE を開き、`index.html` ファイルを webroot フォルダに作成し、次のようなコンテンツを書いてください：
 
 ```html
 <!DOCTYPE html>
@@ -96,36 +107,39 @@ Open your favorite Windows editor/IDE, and create an `index.html` file in your w
 </html>
 ```
 
-Start the Apache service:
+Apache サービスをスタートさせます：
 
 ```bash
 sudo service apache2 start
 ```
 
-!! You will probably get the following known error message [which you can ignore](https://github.com/Microsoft/WSL/issues/1953):<br>
-!! *(92)Protocol not available: AH00076: Failed to enable APR_TCP_DEFER_ACCEPT*
+> [!Info]  
+> おそらく、次の既知のエラーメッセージが表示されますが、 [無視できます](https://github.com/Microsoft/WSL/issues/1953) ：  
+> *(92)Protocol not available: AH00076: Failed to enable APR_TCP_DEFER_ACCEPT*
 
-Open [http://localhost](http://localhost) in your browser and you should see the text 'It works!'.
+[http://localhost](http://localhost) を開くと、 'It works!' というテキストが表示されます。
 
-For your future Grav sites to work properly, the Apache module `rewrite` needs to be enabled.
+将来の Grav サイトが適切に機能するには、 Apache モジュールの `rewrite` を有効にする必要があります。
 
 ```bash
 sudo a2enmod rewrite
 ```
 
-## Installing PHP
-Use the following command to install the latest PHP version:
+<h2 id="installing-php">PHP のインストール</h2>
+
+最新の PHP バージョンをインストールするには、次のコマンドを使用します：
 
 ```bash
 sudo apt install php
 ```
 
-To verify that PHP is installed and checking its version, run the following command:
+インストールされた PHP と、そのバージョンを確認するには、次のコマンドを実行します：
 
 ```bash
 php -v
 ```
-You should get a response similar to this:
+
+次のようなレスポンスが返ります：
 
 ```bash
 PHP 7.2.7-0ubuntu0.18.04.2 (cli) (built: Jul  4 2018 16:55:24) ( NTS )
@@ -133,90 +147,98 @@ Copyright (c) 1997-2018 The PHP Group
 Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
 ```
 
-To meet Grav's PHP requirements, a few extra PHP extensions need to be installed:
+Grav の PHP 要件を満たすには、いくつか追加で PHP 拡張機能をインストールする必要があります：
 
 ```bash
 sudo apt install php-mbstring php-gd php-curl php-xml php-zip
 ```
 
-Restart Apache to pick up the changes:
+変更を有効にするために、 Apache を再起動します：
 
 ```bash
 sudo service apache2 restart
 ```
 
-## Installing Grav
-You can install Grav either from within Windows or from within Ubuntu.
+<h2 id="installing-grav">Grav をインストール</h2>
 
-#### Option 1: Windows
-Install Grav by downloading the ZIP package and extracting it:
-1. Download the latest-and-greatest [**Grav**](https://getgrav.org/download/core/grav/latest) or [**Grav + Admin**](https://getgrav.org/download/core/grav-admin/latest) package.
-1. Extract the ZIP file into the webroot you have created before.
-1. Rename the extracted folder to `mysite`.
-1. Open [http://localhost/mysite](http://localhost/mysite) in the browser and you should have a working Grav installation.
+Grav は Windows 内からでも Ubuntu 内からもインストールできます。
 
-#### Option 2: Ubuntu
-Run the following commands to install Grav inside the default webroot of Apache:
+<h4 id="option-1-windows">オプション1： Windows</h4>
+
+ZIP パッケージをダウンロードし、展開することで、 Grav をインストールします：
+1. 最新の  [**Grav**](https://getgrav.org/download/core/grav/latest) または [**Grav + Admin**](https://getgrav.org/download/core/grav-admin/latest) パッケージをダウンロードしてください。
+1. ZIP ファイルを、上記で作成した webroot に展開します。
+1. 展開したフォルダ名を `mysite` に変更します。
+1. ブラウザで [http://localhost/mysite](http://localhost/mysite) を開くと、Grav のインストールが機能しているはずです。
+
+<h4 id="option-2-ubuntu">Option 2: Ubuntu</h4>
+次のコマンドを実行して、 Apache のデフォルトの webroot 内に Grav をインストールします：
 
 ```bash
 wget -O grav.zip https://getgrav.org/download/core/grav/latest
-sudo apt install unzip  # unzip is not installed by default on WSL/Ubuntu
+sudo apt install unzip  # unzip コマンドは WSL/Ubuntu ではデフォルトではインストールされていないことがある
 unzip grav.zip -d /var/www/webroot
 mv /var/www/webroot/grav /var/www/webroot/mysite
 ```
 
-Open [http://localhost/mysite](http://localhost/mysite) in the browser and you should have a working Grav installation.
+ブラウザで [http://localhost/mysite](http://localhost/mysite) を開くと、Grav のインストールが機能しているはずです。
 
-For other installation options, visit Grav's [Installation](https://learn.getgrav.org/basics/installation) documentation.
+他のインストールオプションについては、 Grav の [インストール](../../01.basics/03.installation/) ドキュメントを確認してください。
 
-## Installing XDebug (optional)
+<h2 id="installing-xdebug-optional">XDebug のインストール（オプション）</h2>
 
-If you are a developer and want to develop your own plugins and themes, you ~~probably~~ inevitably need to debug your code at some point...
+もしあなたが開発者で、独自のプラグインやテーマを開発したい場合、 ~~おそらく~~ 必然的に、いくつかの地点でコードをデバッグする必要があります ...
 
-Install XDebug using the following command:
+次のコマンドで、 XDebug をインストールします：
 
 ```bash
 sudo apt install php-xdebug
 ```
 
-XDebug needs to be enabled in `php.ini`.  
-Open the editor:
+XDebug は、 `php.ini` で有効化する必要があります。  
+エディタを開いてください：
 
 ```bash
 sudo nano /etc/php/7.2/apache2/php.ini
 ```
 
-And add the following lines to the end of the file:
+そして、ファイルの最後に、次の行を追加します：
 
 ```txt
 [XDebug]
 xdebug.remote_enable = 1
 ```
 
-!!! In Nano, you can use `Alt`<small>+</small>`/` to jump to the bottom of the file.
+> [!Tip]  
+> Nano エディタでは、 `Alt` + `/` を使ってファイルの最後にジャンプできます。
 
-Restart Apache again:
+再度、Apache を再起動します：
 
 ```bash
 sudo service apache2 restart
 ```
 
-#### Activating debugger
-In order to start debugging, you first need to activate the debugger on the server. For this, you need to set a special GET/POST or COOKIE parameter. You can do that [manually](https://xdebug.org/docs/remote#starting), but it is much more convenient to use a browser extension. It allows you to enable the debugger with the click of a button. When the extension is active, it sends the XDEBUG_SESSION cookie directly, instead of going through XDEBUG_SESSION_START. Below you can find a table with the link to the relevant extension for your browser.
+<h4 id="activating-debugger">デバッガの有効化</h4>
+
+デバッグを始めるには、まずサーバーでデバッガーを有効化する必要があります。
+このため、特別な GET/POST または COOKIE パラメーターを設定する必要があります。
+これは、 [手動](https://xdebug.org/docs/remote#starting) でもできますが、ブラウザ拡張機能を使う方がはるかに便利です。
+ボタンをクリックするだけで、デバッガーが有効化されます。拡張機能が有効化されると、 XDEBUG_SESSION_START を経由せずに、 XDEBUG_SESSION クッキーが直接送信されます。以下に、お使いのブラウザに対応する拡張機能へのリンクの表を示します。
 
 
-| Browser       | Helper extension  |
-| ------------- |-------------|-----|
+| ブラウザ       | ヘルパー 拡張機能  |
+| ------------- |------------------|
 |Chrome         |[Xdebug Helper](https://chrome.google.com/extensions/detail/eadndfjplgieldjbigjakmdgkmoaaaoc)|
-|Firefox|[Xdebug Helper](https://addons.mozilla.org/en-US/firefox/addon/xdebug-helper-for-firefox/) or [The easiest Xdebug](https://addons.mozilla.org/en-US/firefox/addon/the-easiest-xdebug/)|
+|Firefox|[Xdebug Helper](https://addons.mozilla.org/en-US/firefox/addon/xdebug-helper-for-firefox/) または [The easiest Xdebug](https://addons.mozilla.org/en-US/firefox/addon/the-easiest-xdebug/)|
 |Opera  |[Xdebug launcher](https://addons.opera.com/addons/extensions/details/xdebug-launcher/)|
 
-When you want to switch on/off debugging for a website, just toggle 'Debug' in the browser extention.
+web サイトのデバッグを オン/オフを切り替えるには、ブラウザ拡張機能で 'Debug' を切り替えるだけです。
 
-#### Launching debugger in Visual Studio Code (optional)
-When using Vistual Studio Code, the default PHP debug launchers won't work when Apache/PHP is running in WSL, because of the file mappings.
+<h4 id="launching-debugger-in-visual-studio-code-optional">Visual Studio Code でデバッガを使う（オプション）</h4>
 
-Insert the following configuration into an already created PHP [launch configuration](https://code.visualstudio.com/docs/editor/debugging#_launch-configurations) in `.vscode/launch.json`:
+Vistual Studio Code を使用する場合、ファイルマッピングのため、Apache/PHP が WSL で実行されていると、デフォルトの PHP デバッグランチャーは機能しません。
+
+次のような config を、 `.vscode/launch.json` に作成されている PHP の [launch configuration](https://code.visualstudio.com/docs/editor/debugging#_launch-configurations) に書き込みます。
 
 ```json
 {
@@ -230,45 +252,49 @@ Insert the following configuration into an already created PHP [launch configura
 }
 ```
 
-## Adding extra virtual hosts (optional)
-During the different stages in the lifecycle of our site (development, testing, production) different Grav configurations may be needed. Take for example caching or asset pipelines. You might want to switch them off during development and switch them on when testing performance. For more information see the documentation on [Automatic Environment Configuration](https://learn.getgrav.org/advanced/environment-config#automatic-environment-configuration).
-- Start an editor as Administrator and open file `C:/Windows/System32/drivers/etc/hosts`.
-You could, for example, add the following hosts:
+<h2 id="adding-extra-virtual-hosts-optional">仮想ホストの追加（オプション）</h2>
 
-    ```bash
-    127.0.0.1 mysite-dev
-    127.0.0.1 mysite-prod
-    ```
+サイトのライフサイクルの各段階（開発、テスト、本番）では、 Grav の異なる設定が必要になることがあります。たとえば、キャッシュやアセットパイプラインなどです。開発環境では、これらをオフにし、パフォーマンステストではオンにしたいでしょう。詳しくは、 [自動の環境設定](../../08.advanced/04.environment-config/#automatic-environment-configuration) のドキュメントをご覧ください。
+- 管理者としてエディタを起動し、ファイルを開きます。  
+  たとえば、以下のホストを追加できます：
 
-    Hosts defined in Windows hosts file will automatically be available in `/etc/hosts` in WSL/Ubuntu.
-- Create new VirtualHost config files in folder `/etc/apache2/sites-available`.
-    ```bash
-    sudo nano /etc/apache2/sites-available/mysite-dev.conf
-    ```
-    Past the following into the editor:
-    ```apacheconf
-    <VirtualHost *:80>
+  ```bash
+  127.0.0.1 mysite-dev
+  127.0.0.1 mysite-prod
+  ```
+  
+  Windows ホストファイルで定義されたホストは、自動で WSL/Ubuntu の `/etc/hosts` でも利用できます。
+- `/etc/apache2/sites-available` フォルダに新しい仮想ホストの設定ファイルを作成します。
 
-        ServerName mysite-dev
+  ```bash
+  sudo nano /etc/apache2/sites-available/mysite-dev.conf
+  ```
+　
+　エディタに次の内容を貼り付けます。
 
-        ServerAdmin webmaster@localhost
-        DocumentRoot  /var/www/webroot/mysite
+  ```apacheconf
+  <VirtualHost *:80>
 
-        <Directory /var/www/>
-            Options Indexes FollowSymLinks
-            AllowOverride All
-            Require all granted
-        </Directory>
+      ServerName mysite-dev
 
-        ErrorLog ${APACHE_LOG_DIR}/error.log
-        CustomLog ${APACHE_LOG_DIR}/access.log combined
+      ServerAdmin webmaster@localhost
+      DocumentRoot  /var/www/webroot/mysite
 
-    </VirtualHost>
-    ```
+      <Directory /var/www/>
+          Options Indexes FollowSymLinks
+          AllowOverride All
+          Require all granted
+      </Directory>
+
+      ErrorLog ${APACHE_LOG_DIR}/error.log
+      CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+  </VirtualHost>
+  ```
 
 Repeat the above commands for `mysite-prod.conf` and use `ServerName mysite-prod` as server.
 
-Enable the new VirtualHosts in the Apache configuration:
+Apache の設定で、新しい仮想ホストを有効にします：
 
 ```bash
 sudo a2ensite mysite-*
@@ -276,33 +302,34 @@ sudo service apache2 reload
 sudo service apache2 restart
 ```
 
-Now you can point the browser to [http://mysite-dev](http://mysite-dev) and it will open the Grav installation at `C:/your/path/to/webroot/mysite` using the config files in folder `/user/mysite-dev/config/`.
+これにより、ブラウザで [http://mysite-dev](http://mysite-dev) を指し示すと、 `/user/mysite-dev/config/` フォルダ内の設定ファイルを使って、 `C:/your/path/to/webroot/mysite` にインストールした Grav が開きます。
 
-## Automatically start Apache (optional)
-For starting and stopping Apache, elevated privileges are required. And to be granted the elevated privileges, a password is requested. To prevent Ubuntu asking for a password you can grant yourself permanent elevated privileges for certain services.
+<h2 id="automatically-start-apache-optional">Apache を自動で起動する（オプション）</h2>
 
-Start the [visudo](http://manpages.ubuntu.com/manpages/trusty/man8/visudo.8.html) editor to edit the sudoer file:
+Apache の起動と停止には、上位の権限が必要です。また、上位の権限を付与するには、パスワードが求められます。Ubuntu がパスワードを要求しないようにするには、特定のサービスに対して永続的に上位の権限を付与することができます。
+
+[visudo](http://manpages.ubuntu.com/manpages/trusty/man8/visudo.8.html) エディタを起動して、 sudoer ファイルを編集します：
 
 ```bash
 sudo visudo -f /etc/sudoers.d/services
 ```
 
-Copy the following lines into the editor:
+次の行をエディタにコピーします：
 
 ```bash
 %sudo ALL=(root) NOPASSWD: /usr/sbin/service *
 %wheel ALL=(root) NOPASSWD: /usr/sbin/service *
 ```
 
-Apache can now be started with elevated privileges without providing a password.
+パスワードを入力せずに、上位権限で Apache を起動できるようになりました。
 
-To start Apache whenever an Ubuntu shell is started, the `sudo service apache2 start` command needs to be added to the `.bashrc` startup script. This script is run whenever you start a WSL terminal.
+Ubuntu のシェルを起動するとき、いつでも Apache が起動しているようにするには、`sudo service apache2 start` コマンドを `.bashrc` 起動スクリプトに追加する必要があります。 WSL ターミナルを開始するたびに、このスクリプトが実行されます。
 
 ```bash
 nano .bashrc
 ```
 
-Add the following script to the end of the file:
+ファイルの末尾に次のスクリプトを追加します：
 
 ```apacheconf
 ## Start apache2 if not running
@@ -313,7 +340,7 @@ then
 fi
 ```
 
-And add the following to `.bash_logout` to stop Apache when closing the bash shell.
+また、次のコードを `.bash_logout` に追加し、bash シェルが閉じるときに Apache を停止します。
 
 ```apacheconf
 ## Stop apache2 if running
@@ -324,13 +351,14 @@ then
 fi
 ```
 
-## Tips and Tricks
+<h2 id="tips-and-tricks">Tips と Tricks</h2>
 
-### GUI Linux terminal emulator
+<h3 id="gui-linux-terminal-emulator">GUI Linux ターミナルエミュレータ</h3>
 
-If you're not a fan of the default terminal experience and would like to install a "native" Linux GUI terminal, you might want to have a look at the article [Configuring a pretty and usable terminal emulator for WSL](https://blog.ropnop.com/configuring-a-pretty-and-usable-terminal-emulator-for-wsl/).
+デフォルトのターミナル体験が良くなく、 "ネイティブの" Linux GUI ターミナルをインストールしたい場合は、 [Configuring a pretty and usable terminal emulator for WSL](https://blog.ropnop.com/configuring-a-pretty-and-usable-terminal-emulator-for-wsl/) という記事が参考になるかもしれません。
 
-### Multiple websites, one Grav codebase
 
-If you are like me and have multiple Grav websites deployed for separate projects, you might want to read the documentation on [Symbolic Links](https://learn.getgrav.org/cli-console/command-line-intro#symbolic-links) and on [Copying a Project](https://learn.getgrav.org/cli-console/grav-cli#copying-a-project) to create a symlinked copy of a single Grav core.
+<h3 id="multiple-websites-one-grav-codebase">1つの Grav コードベースで複数のweb サイト</h3>
+
+私のように、別々のプロジェクトに、複数の Grav web サイトをデプロイしている場合、1つの Grav コアのシムリンクのコピーを作成するため、 [シンボリックリンク](../../07.cli-console/01.command-line-intro/#symbolic-links) と [プロジェクトのコピー](../../07.cli-console/02.grav-cli/#copying-a-project) のドキュメントが役に立つかもしれません。
 
