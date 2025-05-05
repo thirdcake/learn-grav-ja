@@ -22,36 +22,39 @@ layout: ../../../layouts/Default.astro
 たとえば、他のキャッシュを残したまま、 **画像キャッシュ** のみクリアしたいとき、ここのドロップダウンで、それができます。
 
 2つ目のボタンは、サイトのアップデート状況をチェックできます。
-The second button initiates an update check for your site. This includes any supported plugins, themes, and Grav itself. If new updates are discovered, you receive a notification on the Dashboard. This isn't the only method Grav has for checking for new updates.
+チェック対象は、すべてのサポート対象のプラグインと、テーマと、 Grav 自身です。
+新しいアップデートが見つかれば、ダッシュボードに通知が表示されます。
+Grav が新しいアップデート情報をチェックする方法は、これだけではありません。
 
 > [!Info]  
-> Update checks are also triggered whenever a new page in the admin is loaded, and cached for one day. If you clear all of Grav's cache and load a new page in the admin, an update check will automatically take place.
+> アップデートは、管理パネルで新しいページが読み込まれるときにチェックされ、1日キャッシュされます。 Grav のすべてのキャッシュをクリアし、管理パネルで新しいページを読み込むと、自動的にアップデートチェックが行われます。
 
-### Maintenance and Page View Statistics
+<h3 id="maintenance-and-page-view-statistics">メンテナンスとページビューの統計</h3>
 
 ![Admin Dashboard](grav-dashboard-maintenance.png)
 
-The **Maintenance** and **Page View Statistics** sections give you quick access to important information about your site.
+**Maintenance** と **Page View Statistics** のセクションでは、サイトの重要情報にすばやくアクセスできます。
 
-On the **Maintenance** side, you can see a percentage graph letting you know how many of Grav's bits and pieces are completely up-to-date.
+**Maintenance** サイドは、 Grav の部分がどの程度アップデートされているかを知らせる円グラフです。
 
 ![Admin Dashboard](grav-dashboard-maintenance-2.png)
 
-If new updates are available, an <i class="fa fa-cloud-download"></i> **Update** button will appear that enables you to perform a one-click update for all plugins and themes. This button will not update Grav itself, which notifies you about a required update just above the Maintenance and Page View Statistics sections.
+新しいアップデートが利用可能になったら、 **Update** ボタンが表示され、すべてのプラグインとテーマについて、1クリックアップデートが実行できるようになります。このボタンは、 Grav そのものはアップデートしません。メンテナンスとページビュー統計セクションのすぐ上で、アップデートが必要であることを知らせます。
 
-You can update Grav's core by selecting the **Update Grav Now** button in its notification bar.
+Grav のコアは、その通知バーの **Update Grav Now** ボタンを選択することによって、アップデートされます。
 
-There is also a graph indicating how long the site has gone without being backed up. Selecting the <i class="fa fa-database"></i> **Backup** button will generate a zip file you can download and store as a backup for your site's data.
+どれくらいの間、サイトのバックアップが作成されていないかを示すグラフも表示されます。 **Backup** ボタンを選択すると、zip ファイルを生成し、サイトデータのバックアップをダウンロード・保存できるようになります。
 
-!! Backups are also stored in the `backup/` folder of your Grav install.  You can grab them via FTP or web manager tools provided by your hosting company.
+> [!Info]  
+> バックアップは、 Grav をインストールしているルートフォルダ下の `backup/` フォルダにも保存されます。FTP や、ホスティング会社のウェブ管理ツールで、それらを手に入れられます。
 
-The **Page View Statistics** section displays simple, at-a-glance traffic data breaking down the number of page views the front end of the site has received in the past day, week, and month (30 days). Page View Statistics for the past week are displayed in a bar graph separated by days of the week.
+**Page View Statistics** セクションでは、過去1日、1週間、1ヶ月（30日）間のサイトのフロントエンドのページビューを分かりやすく、シンプルに、ひと目でわかるトラフィックデータにして表示します。過去1週間のページビューの統計は、その集の日付ごとに分けられた棒グラフで表示されます。
 
-### Latest Page Updates
+<h3 id="latest-page-updates">最新のページ更新</h3>
 
 ![Admin Dashboard](grav-dashboard-latest.png)
 
-The **Latest Page Updates** area of the admin gives you an at-a-glance view of the latest content changes made to pages in your Grav site. This list is sorted by most recently updated, and is generated each time you refresh the page. Selecting the title of a page in this list will take you directly to the page's editor in the admin.
+管理パネルの **Latest Page Updates** エリアは、 Grav サイトのページによる最新のコンテンツ更新の一覧が表示されます。リストは、最新の更新状況を保存し、それぞれの更新時期を表示します。このリストのページタイトルを選択すると、管理パネル内のそのページの編集画面に直接リンクしています。
 
-The **Manage Pages** button takes you to the **Pages** administrative panel.
+**Manage Pages** ボタンは、**Pages** 管理ページへリンクします。
 

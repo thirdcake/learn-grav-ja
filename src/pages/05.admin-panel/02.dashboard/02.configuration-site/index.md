@@ -10,55 +10,55 @@ layout: ../../../../layouts/Default.astro
 > [!Info]  
 > Configuration ページには、 `access.admin.super` もしくは `access.admin.configuration` のアクセスレベルが必要です。
 
-The **Site** tab enables you to customize the settings found in the `/user/config/site.yaml` file. This tab gives you access to options and fields that determine site-related variables, such as the name, default author, and metadata used in your site.
+**Site** タブでは、 `user/config/site.yaml` ファイルの設定をカスタマイズできます。サイトに関係する変数（たとえばサイト名、デフォルトの著者、サイトで使うメタデータなど）を決定するオプションやフィールドに、このタブからアクセスできます。
 
-Below is a breakdown of the different configuration sections that appear in the **Site** tab.
+以下は、**Site** タブに表示される個々の設定セクションを説明したものです。
 
 ### Defaults
 
 ![Admin Configuration](configuration-site-defaults.png)
 
-This section is where you set the basic properties of content handling for your site. The home page, default theme, and various other content display options are set here.
+このセクションでは、サイトでのコンテンツ制御の基本的なプロパティを設定します。サイトタイトルや、デフォルトの著者が設定できます。
 
-| Option             | Description                                                           |
-| :-----             | :-----                                                                |
-| **Site Title**     | Default title for your site, often used by themes.                    |
-| **Default Author** | A default author name, often used in themes or page content.          |
-| **Default Email**  | A default email to reference in themes or pages.                      |
-| **Taxonomy Types** | Taxonomy types must be defined here if you wish to use them in pages. |
+| オプション | 説明 |
+| :----- | :----- |
+| **Site Title**     | サイトのデフォルトタイトルで、しばしばテーマで使われます。 |
+| **Default Author** | デフォルトの著者名で、しばしばテーマとページコンテンツで使われます。 |
+| **Default Email**  | テーマやページで参照されるデフォルトの email です。 |
+| **Taxonomy Types** | タクソノミータイプをページで使いたい場合、ここで定義されなければいけません。  |
 
 ### Page Summary
 
 ![Admin Configuration](configuration-site-page.png)
 
-Page summaries are a great way to give a small preview of a page's content. You can use a delimiter in the page to set a "cut off" point between the summary content, and the full body content of the page. These settings give you the ability to
+ページ概要（summary）は、ページコンテンツの小さなプレビューを表示する良い方法です。ページ中に区切り（delimiter）を使い、ページの概要コンテンツと、本文を分ける "カットオフ" ポイントを設定できます。これらの設定は、以下でできます
 
 
-| Option           | Description                                                                                                                                                  |
-| :-----           | :-----                                                                                                                                                       |
-| **Enabled**      | Enable page summary (the summary returns the same as the page content)                                                                                       |
-| **Summary Size** | The amount of characters of a page to use as a content summary                                                                                               |
-| **Format**       | **short** = use the first occurrence of delimiter or size; **long** = summary delimiter will be ignored                                                      |
-| **Delimiter**    | The summary delimiter (default '==='). You would typically place this after an opening paragraph, with everything prior to it appearing in the page summary. |
+| オプション | 説明 |
+| :----- | :----- |
+| **Enabled**      | ページ概要を有効化します（概要はページコンテンツと同じものを返します）|
+| **Summary Size** | コンテンツ概要として使われる文字数 |
+| **Format**       | **short** = 最初の区切りもしくは文字数を使います； **long** = 概要区切りは無視されます |
+| **Delimiter**    | 概要の区切り（デフォルトでは '==='）。これは通常、冒頭の段落の後に置かれ、それ以前はページ概要として表示されます。 |
 
 ### Metadata
 
 ![Admin Configuration](configuration-site-metadata.png)
 
-Metadata is an important part of a page's behind-the-scenes makeup. It can improve SEO, how your links appear in various search engines and social feeds, and more. You can set various metadata properties here.
+メタデータ（ `<meta>タグ` ）は、ページのメークアップの舞台裏で、重要な部分です。SEO を改善し、さまざまな検索エンジンやソーシャルフィードでのリンクの見え方を向上させ、その他のこともできます。さまざまなメタデータのプロパティをここで設定できます。
 
-| Option       | Description                                                                                 |
-| :-----       | :-----                                                                                      |
-| **Metadata** | Default metadata values that will be displayed on every page unless overridden by the page. |
+| オプション | 説明 |
+| :----- | :----- |
+| **Metadata** | デフォルトのメタデータの値。ページで上書きされなければ、すべてのページに表示されます。 |
 
 ### Redirects and Routes
 
 ![Admin Configuration](configuration-site-redirects.png)
 
-Redirects and routing have never been easier. Just set it all up in this section, and you're good to go.
+リダイレクトとルーティングは、かつてないほど簡単になりました。このセクションをすべて設定すれば、うまくいきます。
 
-| Option               | Description                                                             |
-| :-----               | :-----                                                                  |
-| **Custom Redirects** | Routes to redirect to other pages. Standard Regex replacement is valid. |
-| **Custom Routes**    | Routes to alias to other pages. Standard Regex replacement is valid.    |
+| オプション | 説明 |
+| :----- | :----- |
+| **Custom Redirects** | 他のページへリダイレクトするルーティング設定。標準的な正規表現による書き換えが使えます。 |
+| **Custom Routes**    | 他のページの別名にするルーティング設定。標準的な正規表現による書き換えが使えます。 |
 

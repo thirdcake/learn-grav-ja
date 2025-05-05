@@ -10,44 +10,45 @@ layout: ../../../../layouts/Default.astro
 > [!Info]  
 > Configuration ページには、 `access.admin.super` もしくは `access.admin.configuration` のアクセスレベルが必要です。
 
-The **System** tab enables you to customize the settings found in the `/user/config/system.yaml` file. These settings affect how many of the primary system-related features of Grav operate. The site's home page, caching settings, and more can be configured here.
+**System** タブは、 `/user/config/system.yaml` ファイルで設定できることをカスタマイズできます。
+これらの設定は、 Grav が操作する system に関係する機能の数によります。サイトのホームページや、キャッシュの設定、その他について、ここで設定できます。
 
-These settings are separated into several sections, each focusing on a specific aspect of Grav's operation.
+これらの設定は、いくつかのセクションに分けられ、それぞれ、 Grav 操作の特定の側面を設定できます。
 
-Below is a breakdown of the different configuration sections that appear in the **System** tab.
+以下は、**System** タブに表示される個々の設定セクションを説明したものです。
 
 ### Content
 
 ![Admin Configuration](configuration-system-content.png)
 
-This section is where you set the basic properties of content handling for your site. The home page, default theme, and various other content display options are set here.
+このセクションでは、サイト内でのコンテンツ制御の基本的なプロパティを設定します。ホームとなるページや、デフォルトテーマ、その他さまざまなコンテンツ表示オプションを、ここで設定します。
 
-| Option                      | Description                                                                |
-| :-----                      | :-----                                                                     |
-| **Home Page**               | Select the page you wish to have appear as the home page for your site.    |
-| **Default Theme**           | Sets the primary default theme used in your site.                          |
-| **Process**                 | Control how pages are processed. Can be set per-page rather than globally. |
-| **Timezone**                | Override the server's default timezone.                                    |
-| **Short Date Format**       | Set the short date format that can be used by themes.                      |
-| **Long Date Format**        | Set the long date format that can be used by themes.                       |
-| **Default Ordering**        | Pages in a list will render using this order unless it is overridden.      |
-| **Default Order Direction** | The direction of pages in a list.                                          |
-| **Default Page Count**      | Default maximum pages count in a list.                                     |
-| **Date-based Publishing**   | Automatically (un)publish posts based on their date.                       |
-| **Events**                  | Enable or Disable specific events.  Disabling these can break plugins.     |
-| **Redirect Default Route**  | Automatically redirect to a page's default route.                          |
+| オプション | 説明 |
+| :----- | :----- |
+| **Home Page**  | サイトのホームページとして表示させたいページを選びます。 |
+| **Default Theme**  | サイトで使うデフォルトテーマを設定します。 |
+| **Process**  | どのようにページを処理するかを制御します。サイト全体ではなくページごとにも設定できます。 |
+| **Timezone** | サーバーのデフォルトのタイムゾーンを上書きします。|
+| **Short Date Format** | テーマで使う日付の短いフォーマットを設定します。 |
+| **Long Date Format** | テーマで使う日付の長いフォーマットを設定します。 |
+| **Default Ordering** | リストの中のページは、上書きされない限り、ここで設定した順序でレンダリングされます。 |
+| **Default Order Direction** | リストページの方向です。 |
+| **Default Page Count** | リストページの1ページあたりの最大表示数のデフォルト値。|
+| **Date-based Publishing**   | 日付をもとに、自動で投稿を公開・非公開します |
+| **Events** | 特定のイベントの有効化・無効化。無効化するとプラグインにフックさせないことができます。 |
+| **Redirect Default Route**  | 自動でページのデフォルトのルーティングにリダイレクトします。 |
 
 ### Languages
 
 ![Admin Configuration](configuration-system-languages.png)
 
-Multilanguage features are set in this section.
+このセクションでは、多言語機能を設定します。
 
-| Option                             | Description                                                               |
-| :-----                             | :-----                                                                    |
-| **Supported**                      | Comma separated list of 2-letter language codes (for example 'en,fr,de'). |
-| **Translations Enabled**           | Support translations in Grav, plugins and extensions.                     |
-| **Translations Fallback**          | Fallback through supported translations if active language doesn't exist. |
+| オプション | 説明 |
+| :----- | :----- |
+| **Supported**  | 2文字の言語コードのカンマ区切りのリスト（たとえば、`en,fr,de`）  |
+| **Translations Enabled** | Gravや、プラグイン、拡張機能で翻訳をサポートする |
+| **Translations Fallback**  |  Fallback through supported translations if active language doesn't exist. |
 | **Active Language in Section**     | Store the active language in the session.                                 |
 | **Home Redirect Include Language** | Include language in home redirect (/en).                                  |
 | **Home Redirect Include Route**    | Home redirect include route.                                              |
@@ -56,42 +57,42 @@ Multilanguage features are set in this section.
 
 ![Admin Configuration](configuration-system-http.png)
 
-HTTP header options can be set in this section. This is useful for browser-based caching and optimization.
+HTTP ヘッダオプションは、このセクションで設定できます。ブラウザベースのキャッシュと、最適化に便利です。
 
-| Option                   | Description                                                                     |
-| :-----                   | :-----                                                                          |
-| **Expires**              | Sets the expires header. The value is in seconds.                               |
-| **Last Modified**        | Sets the last modified header that can help optimize proxy and browser caching. |
-| **ETag**                 | Sets the etag header to help identify when a page has been modified.            |
-| **Vary Accept Encoding** | Sets the *Vary: Accept Encoding* header to help with proxy and CDN caching.     |
+| オプション | 説明 |
+| :----- | :----- |
+| **Expires**  | expires ヘッダを設定します。 値は秒数です。  |
+| **Last Modified**  | last modified ヘッダを設定します。プロキシとブラウザキャッシュの最適化を助けます。 |
+| **ETag**  | etag ヘッダを設定します。ページがいつ修正されたかの識別を助けます。 |
+| **Vary Accept Encoding** |  *Vary: Accept Encoding* ヘッダ設定します。プロキシと CDN キャッシュを助けます。 |
 
 ### Markdown
 
 ![Admin Configuration](configuration-system-markdown.png)
 
-Markdown makes up the bulk of Grav's page content. This section gives you options to enable Markdown Extra, as well as to set how Grav handles Markdown.
+マークダウンは、Grav のページコンテンツの大部分を占めています。このセクションでは、Markdown Extra の有効化オプションや、Grav がどのようにマークダウンを制御するかの設定ができます。
 
-| Option               | Description                                                                                   |
-| :-----               | :-----                                                                                        |
-| **Markdown Extra**   | Enable default support for [Markdown Extra](https://michelf.ca/projects/php-markdown/extra/). |
-| **Auto Line Breaks** | Enable support for automatic line breaks in markdown.                                         |
-| **Auto URL Links**   | Enable automatic conversion of URLs into HTML hyperlinks.                                     |
-| **Escape Markup**    | Escape markup tags into HTML entities.                                                        |
+| オプション | 説明 |
+| :----- | :----- |
+| **Markdown Extra**   |  [Markdown Extra](https://michelf.ca/projects/php-markdown/extra/) のデフォルトでのサポートを有効化する |
+| **Auto Line Breaks** | マークダウンでの自動改行を有効化する |
+| **Auto URL Links**   | URL を HTML ハイパーリンクに自動変換する機能を有効化する |
+| **Escape Markup**    | マークアップタグを HTML エンティティにエスケープする |
 
 ### Caching
 
 ![Admin Configuration](configuration-system-caching.png)
 
-Grav's integrated caching feature helps make it one of the fastest flat-file CMS options out there. You can configure your site's primary caching functions in this section.
+Grav の統合されたキャッシュ機能のおかげで、Grav は最速のフラットファイル CMS のひとつとなっています。このセクションで、サイトの主要なキャッシュ機能の設定ができます。
 
-| Option                 | Description                                                                                 |
-| :-----                 | :-----                                                                                      |
-| **Caching**            | Global ON/OFF switch to enable/disable Grav caching.                                        |
-| **Cache Check Method** | Sets the cache check method. The options are **File**, **Folder**, and **None**.            |
-| **Cache Driver**       | Choose which cache driver Grav should use. 'Auto Detect' attempts to find the best for you. |
-| **Cache Prefix**       | An identifier for part of the Grav key.  Don't change unless you know what you're doing.    |
-| **Lifetime**           | Sets the cache lifetime in seconds. 0 = infinite.                                           |
-| **Gzip Compression**   | Enable GZip compression of the Grav page for increased performance.                         |
+| オプション | 説明 |
+| :----- | :----- |
+| **Caching** | Grav のキャッシュの有効化/無効化をグローバルに設定 |
+| **Cache Check Method** | キャッシュのチェック方法の設定。選択肢は、 **File**, **Folder**, そして **None** |
+| **Cache Driver** | Grav が使用すべきキャッシュドライバの選択。 'Auto Detect' で、最適な方法を探します |
+| **Cache Prefix**  | Grav キー部分の識別子。内容が分からない場合は変更しないでください。 |
+| **Lifetime** | キャッシュのライフタイム秒数。  0 = 無限 |
+| **Gzip Compression**   | パフォーマンス向上のために Grav ページの GZip 圧縮を有効化するかどうか |
 
 ### Twig Templating
 
@@ -99,8 +100,8 @@ Grav's integrated caching feature helps make it one of the fastest flat-file CMS
 
 This section focuses on Grav's Twig templating feature. You can set Twig caching, debug, and change detection settings here.
 
-| Option                   | Description                                                                                   |
-| :-----                   | :-----                                                                                        |
+| オプション | 説明 |
+| :----- | :----- |
 | **Twig Caching**         | Control the Twig caching mechanism. Leave this enabled for best performance.                  |
 | **Twig Debug**           | Allows the option of not loading the Twig Debugger extension.                                 |
 | **Detect Changes**       | Twig will automatically recompile the Twig cache if it detects any changes in Twig templates. |
@@ -112,8 +113,8 @@ This section focuses on Grav's Twig templating feature. You can set Twig caching
 
 This section deals with assets handling, including CSS and JavaScript assets.
 
-| Option                          | Description                                                                     |
-| :-----                          | :-----                                                                          |
+| オプション | 説明 |
+| :----- | :----- |
 | **CSS Pipeline**                | The CSS pipeline is the unification of multiple CSS resources into one file.    |
 | **CSS Minify**                  | Minify the CSS during pipelining.                                               |
 | **CSS Minify Windows Override** | Minify Override for Windows platforms. False by default due to ThreadStackSize. |
@@ -129,8 +130,8 @@ This section deals with assets handling, including CSS and JavaScript assets.
 
 You can set how Grav handles error reporting and display here. This is a useful tool to have during site development.
 
-| Option            | Description                              |
-| :-----            | :-----                                   |
+| オプション | 説明 |
+| :----- | :----- |
 | **Display Error** | Display full backtrace-style error page. |
 | **Log Errors**    | Log errors to /logs folder.              |
 
@@ -140,8 +141,8 @@ You can set how Grav handles error reporting and display here. This is a useful 
 
 Like error handling, Grav's integrated debugging tools give you the ability to locate and troubleshoot issues. This is especially useful during development.
 
-| Option                        | Description                                                            |
-| :-----                        | :-----                                                                 |
+| オプション | 説明 |
+| :----- | :----- |
 | **Debugger**                  | Enable Grav debugger and following settings.                           |
 | **Debug Twig**                | Enable debugging of Twig templates.                                    |
 | **Shutdown Close Connection** | Close the connection before calling onShutdown(). false for debugging. |
@@ -152,8 +153,8 @@ Like error handling, Grav's integrated debugging tools give you the ability to l
 
 This section determines how Grav handles media content. Image quality and other media handling options are configured here.
 
-| Option                         | Description                                                                                               |
-| :-----                         | :-----                                                                                                    |
+| オプション | 説明 |
+| :----- | :----- |
 | **Default Image Quality**      | Default image quality to use when resampling or caching images (85%).                                     |
 | **Cache All Images**           | Run all images through Grav's cache system even if they have no media manipulations.                      |
 | **Image Debug Watermark**      | Show an overlay over images indicating the pixel depth of the image when working with Retina for example. |
@@ -167,8 +168,8 @@ This section determines how Grav handles media content. Image quality and other 
 
 This section gives you the ability to enable session support, set timeout limits, and the name of the session cookie used to handle this information.
 
-| Option      | Description                                                                                                                                  |
-| :-----      | :-----                                                                                                                                       |
+| オプション | 説明 |
+| :----- | :----- |
 | **Enable**  | Enable session support within Grav.                                                                                                          |
 | **Timeout** | Sets the session timeout in seconds.                                                                                                         |
 | **Name**    | An identifier used to form the name of the session cookie. Use alphanumeric, dashes or underscores only. Do not use dots in the session name |
@@ -179,8 +180,8 @@ This section gives you the ability to enable session support, set timeout limits
 
 This section contains advanced system options.
 
-| Option                  | Description                                                                |
-| :-----                  | :-----                                                                     |
+| オプション | 説明 |
+| :----- | :----- |
 | **Absolute URLs**       | Absolute or relative URLs for `base_url`.                                  |
 | **Parameter Separator** | Separater for passed parameters that can be changed for Apache on Windows. |
 
