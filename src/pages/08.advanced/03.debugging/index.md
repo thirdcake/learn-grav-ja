@@ -75,7 +75,9 @@ It's possible to output multiple dump commands at the same time but it can get c
 {{ dump('page.header output:',page.header) }}
 ```
 
+```
 ![](twig-dump-text.png)
+```
 
 ### Dump to browser console from Twig
 
