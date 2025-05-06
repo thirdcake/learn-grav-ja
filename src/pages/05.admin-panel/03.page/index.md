@@ -40,37 +40,36 @@ layout: ../../../layouts/Default.astro
 この情報を入力し、**Continue** を選ぶことで、新規ページのエディタが表示されます。ページエディタの詳細については、[この後のガイド](./01.editor/) で解説します。
 
 > [!Info]  
-> Whether a page is visible or not in these settings only has an effect on navigation. A page's ability to be visited by a browser is determined by the page's [publishing settings](../../02.content/02.headers/#published).
+> これらの設定でのページの表示・非表示は、ナビゲーションについてのみ影響します。ページがブラウザで表示できるかどうかについては、ページの [publishing 設定](../../02.content/02.headers/#published) で決定されます。
 
 #### Add Modular Page
 
 ![Admin Pages](add3.png)
 
-管理パネルの **Pages** 画面の上部にある 2つ目のボタンは、
-The second button along the top of the **Pages** area of the admin allows you to add a modular subpage to your site. Modular pages are different from regular pages because they are actually a collection of pages, arranged and displayed as one page. This button specifically lets you create subpages and assign them to a parent modular page.
+管理パネルの **Pages** 画面の上部にある 2つ目のボタンは、モジュラーサブページをサイトに追加します。モジュラーページは、標準（regular）ページと違い、実際には複数のページのコレクションであり、並べられ、1つのページとして表示されるものです。このボタンは、サブページを作り、親のモジュラーページにそれを適用します。
 
-Here is a breakdown of the fields and options that appear in the **Add Modular Page** button's popup.
+以下は、 **Add Modular Page** ボタンによりポップアップされるフィールドとオプションを解説するものです。
 
 | オプション | 説明 |
 | :-----    | :----- |
-| Page Title       | Sets a title for the modular page.                                                                                 |
-| Folder Name      | You can set a custom folder name for the page, or keep the automatically-generated one based on the title.         |
-| Page             | Sets the parent page for the new modular subpage. This is the page your new modular page's content will appear on. |
-| Modular Template | Displays a list of templates provided by the theme for modular pages you can choose from for the new page.         |
+| Page Title       | タイトルをモジュラーページに設定する |
+| Folder Name      | そのページにカスタムのフォルダ名を設定できます。設定しない場合は、タイトルを元にした自動生成のままとすることもできます |
+| Page             | 新しく作るモジュラーサブページの親ページを設定します。これは、新しいモジュラーページのコンテンツが表示されるページです |
+| Modular Template | テーマで提供されているモジュラーページ用のテンプレートで、新しく作るページ用に選べるリストが表示されます。|
 
-Once you have filled out this information, selecting **Continue** will take you to the new page's editor. We will cover the Page Editor in more detail in [a following guide](../page-editor).
+この情報を入力したら、 **Continue** を選択し、新しいページエディタが表示されます。ページエディタについてより詳しくは、 [後述のガイド](./01.editor/) をご覧ください。
 
-### Pages List
+<h3 id="pages-list">ページリスト</h3>
 
 ![Admin Pages](pages2.png)
 
-The pages list that appears in this area gives you quick access to all of your current pages, as well as an at-a-glance method for seeing whether or not the pages are visible.
+このエリアに表示される ページリストにより、現在のページすべてにすばやくアクセスでき、ひと目でページの表示・非表示がわかります。
 
-Selecting the title of any page will take you directly to that page's editor. The big **X** icon to the right of each page lets you delete the page.
+ページのタイトルを選択すると、そのページの編集画面に遷移します。各ページの右にある大きな **X** アイコンで、ページを消せます。
 
-If you hover over the icon directly to the left of a page, it will tell you its current status. For example, it may say **Page • Routable • Visible** if a page is routable (visible via the URL) and visible (appears in navigation menus).
+ページの左側にあるアイコンをホバーすると、現在のステータスがわかります。たとえば、ページが routable （URL で訪れることができる）で、 visible （ナビゲーションメニューに表示される）とき、**Page・Routable・Visible** となるでしょう。
 
-You can **filter** and **search** your pages to make it easy to find the exact page you're looking for. For example, using the **Add Filters** option, you can filter pages by type so that only **Modular**, **Visible**, and/or **Routable** pages appear in the list.
+探しているページを見つけやすくするため、 **filter** と **search** が使えます。たとえば、 **Add Filters** オプションを使って、リストの中のページから、 **Modular**, **Visible**, and/or **Routable** ページだけをフィルタできます。
 
-If you have a specific page title (or part of a title) in mind, you can use the search bar to quickly find the specific page you're looking for.
+特定のページタイトル（もしくは、タイトルの一部分）がわかっていれば、検索バーを使って、探している特定のページをすぐに探すことができます。
 

@@ -3,6 +3,9 @@ title: "config 設定"
 layout: ../../../../layouts/Default.astro
 ---
 
+> [!訳注]  
+> このページの内容は、 [`アカウント>config 設定`](../../03.accounts/03.configuration/) と同じで、画像もリンク切れしており、 管理パネルの Pages に configuration タブも無いので、コピペミスか何かだと思います。詳しい方がおられたら、教えてください。
+
 ```
 ![Compatibility Tab](page-configuration.png)
 ```
@@ -26,5 +29,5 @@ For more information, see Flex Objects.
 | **Enable Render Caching** | Render caching speeds up rendering the content by caching the resulting HTML. |
 | **Render Cache Lifetime (seconds)** | Lifetime for render caching in seconds. |
 
-If the rendered HTML has dynamic content, render cache can be disabled from the Twig template by {% verbatim %}```{% do block.disableCache() %}```{% endverbatim %}.
+If the rendered HTML has dynamic content, render cache can be disabled from the Twig template by `{% do block.disableCache() %}`.
 

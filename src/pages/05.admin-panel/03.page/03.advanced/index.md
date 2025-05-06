@@ -1,77 +1,78 @@
 ---
-title: "エディタ（高度な機能）"
+title: "エディタ（Advanced タブ）"
 layout: ../../../../layouts/Default.astro
 ---
 
 ![Admin Page Editor](page-advanced.png)
 
-The **Page Editor** in the admin is a powerful text editor and page manager that enables you to create your page's content (including media files), its publishing and taxonomy options, settings, overrides, and theme-specific options.
+管理パネルの **Page Editor** は、パワフルなテキストエディタであり、ページ管理マネージャーです。ページのコンテンツ（やメディアファイル）を作成したり、公開設定やタクソノミー設定をしたり、その他設定、上書きをしたり、テーマ特有のオプションを設定できたりします。
 
-It's essentially a one-stop-shop for managing a specific page.
+これにより、特定のページをワンストップで管理できます。
 
-In this page, we will go over the features and functionality found in the **Advanced** tab of the **Page Editor**.
+このページでは、 **Page Editor** の **Advanced** タブについて、その特長と機能を説明します。
 
-!! Accessing the Pages functionality requires an `access.admin.super` or `access.admin.pages.list` permission, see [User Accounts](/admin-panel/accounts/users) and [User Groups](/admin-panel/accounts/groups)
+> [!Info]  
+> このページ機能にアクセスするには、 `access.admin.super` パーミッションもしくは `access.admin.pages.list` パーミッションが必要です。 [ユーザーアカウントのページ](../../03.accounts/01.users/) と [ユーザーグループのページ](../../03.accounts/02.groups/) をご覧ください。
 
-! You might notice the check boxes to the left of some of the options in this area of the admin. These boxes indicate that you would like to override the default values for this page. Leaving them unchecked reverts to blank or default states.
+> 管理パネルのこのエリアにある、いくつかの選択肢の左側に、チェックボックスがあることに気づいたかもしれません。これらのボックスは、このページのデフォルト値を上書きしたいときにチェックします。チェックを外したままにすると、空白またはデフォルトの状態に戻ります。
 
 ### Settings
 
 ![Admin Page Editor](page-advanced-settings.png)
 
-The **Settings** area focuses on various critical options for your page. This is where you would go to change the name of the folder the page is stored in, its parent, and the template used when displaying the page.
+**Settings** エリアは、ページにとって重要なさまざまなオプションが集まっています。ページの保存されるフォルダ名を変更したり、親を変更したり、表示されるテンプレートを変更したりできます。
 
-| Option                | Description                                                                                                                      |
-| :-----                | :-----                                                                                                                           |
-| Folder Numeric Prefix | Numeric prefix that provides manual ordering and implies visibility.                                                             |
-| Folder Name           | Sets the name of the folder the page is contained in.                                                                            |
-| Parent                | Sets the parent of the current page. This can be - Root- for top-level pages, or specific pages to have them appear as subpages. |
-| Display Template      | Sets the template (provided by the theme) to be applied to the page. This has a direct effect on how the page looks.             |
-| Body Classes          | Classes entered in this field are applied to the body of the page.                                                               |
+| オプション | 説明 |
+| :-----  | :-----  |
+| Folder Numeric Prefix | 手動の順番付けや、ナビゲーション表示に使われる、数字の接頭辞 |
+| Folder Name | ページが入っているフォルダ名を設定 |
+| Parent | 現在のページの親を設定。これは、トップレベルのページとして Root とすることもできますし、特定のページを指定して、サブページにすることもできます。 |
+| Display Template | ページに適用される（テーマが提供する）テンプレートを設定。これは、ページの見た目に直結します。 |
+| Body Classes | このフィールドに class を入力すると、ページの body に適用されます。 |
 
 ### Ordering
 
 ![Admin Page Editor](page-advanced-ordering.png)
 
-The **Ordering** section gives you the ability to configuring page ordering of non-numbered folders.
+**Ordering** セクションでは、番号付けしていないフォルダの順番を設定できます。
 
-| Option     | Description                                         |
-| :-----     | :-----                                              |
-| Page Order | Enables you to configure the ordering for the page. |
+| オプション | 説明 |
+| :-----  | :-----  |
+| Page Order | ページの順番を設定できます |
 
 ### Overrides
 
 ![Admin Page Editor](page-advanced-overrides.png)
 
-Overrides are those options that give your page extra functionality, set its slug to something different than the default one based on the folder name, caching settings, navigation visibility, and make a page unreachable via a direct URL.
+Overrides は、ページに追加の機能を設定します。スラッグは、フォルダ名に基づくデフォルトの URL とは異なるものを設定できます。キャッシュの設定ができます。ナビゲーションでの表示・非表示が設定できます。また、直接 URL からページを表示させないこともできます。
 
-You can also use this area to turn on and off various processes for the page, such as Twig which enables you to inject Twig into your page content and have it render.
+また、このエリアの on / off により、ページにさまざまなプロセスを設定できます。たとえば Twig を有効化すると、ページコンテンツの中に Twig 構文を入れて、レンダリングさせることができます。
 
-| Options                | Description                                                                                                        |
-| :-----                 | :-----                                                                                                             |
-| Menu                   | The string to be used in a menu.  If not set, <b>Title</b> will be used.                                           |
-| Slug                   | The slug variable allows you to specifically set the page's portion of the URL.                                    |
-| Process                | Processes you would like to have run, and made available in the page's content.                                    |
-| Default Child Template | Sets a default page type for child pages.                                                                          |
-| Routable               | Sets whether or not this page is reachable by a URL. If disabled, the page will not be reachable on the front end. |
-| Caching                | Enables or disables caching for the page.                                                                          |
-| Visible                | Determines if a page is visible in the navigation.                                                                 |
+| オプション | 説明 |
+| :-----  | :-----  |
+| Menu  | メニューで利用される文字列。設定されなければ、 **Title** が使用されます。 |
+| Slug | スラッグ変数により、 URL のページ部分を具体的に設定できます。 |
+| Process | ページコンテンツで利用したいプロセス。 |
+| Default Child Template | 子ページのデフォルトのページタイプを設定。 |
+| Routable | URL によるルーティング対象とするかどうかの設定。disable にすると、そのページはフロントエンドからアクセスできなくなります |
+| Caching  | ページのキャッシュを有効化・無効化 |
+| Visible | ページをナビゲーションに表示するかどうか |
 
 ### Route Overrides
 
 ![Admin Page Editor](page-advanced-route.png)
 
-| Options         | Description                                             |
-| :-----          | :-----                                                  |
-| Default Route   | Enter a new default route.                              |
-| Canonical Route | Enter a new value for to use for the canonical routing. |
-| Route Aliases   | Create route aliases.                                   |
+| オプション | 説明 |
+| :-----  | :-----  |
+| Default Route   | 新しいデフォルトのルーティングを入力します |
+| Canonical Route | canonical ルーティングとして使いたい値を入力します。 |
+| Route Aliases   | ルーティングの別名（alias）を作成します。 |
 
 ### Admin Specific Overrides
 
 ![Admin Page Editor](page-advanced-admin.png)
 
-| Options                | Description                                                                                   |
-| :-----                 | :-----                                                                                        |
-| Children Display Order | Set the order children are displayed in. You can choose folder name or collection definition. |
+| オプション | 説明 |
+| :-----  | :-----  |
+| Children Display Order | 子ページが表示される順番を設定します。フォルダ名か collectio 定義を選択します。 |
 

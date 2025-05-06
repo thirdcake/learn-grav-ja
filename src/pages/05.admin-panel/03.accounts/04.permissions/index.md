@@ -5,26 +5,28 @@ layout: ../../../../layouts/Default.astro
 
 ![Accounts Permissions](accounts-permissions.png)
 
-User and Group permissions for managing account related information are:
+アカウントに関連する情報を管理するための、ユーザーとグループのパーミッションは：
 
-| Option                                | Value                             | Description                                                       |
-| :-----                                | :-----                            | :-----                                                            |
-| **Configuration**                     | *admin.configuration*             | Gives the user access to the **Configuration** area of the admin. |
-| &nbsp; &nbsp; **Accounts Configuration** | *admin.configuration.accounts*    | Gives the user access to the **Accounts Configuration** found inside the **Accounts** area of the admin.  |
-| **Accounts**                          | *admin.accounts*                  | Gives the user full access to the **Accounts** area of the admin.    |
-| &nbsp; &nbsp; **Create**              | *admin.accounts.create*           | Gives the user access to **Create** user accounts and groups.        |
-| &nbsp; &nbsp; **Read**                | *admin.accounts.read*             | Gives the user access to **Read** user accounts and groups.          |
-| &nbsp; &nbsp; **Update**              | *admin.accounts.update*           | Gives the user access to **Update** user accounts and groups.        |
-| &nbsp; &nbsp; **Delete**              | *admin.accounts.delete*           | Gives the user access to **Delete** user accounts and groups.        |
-| &nbsp; &nbsp; **List**                | *admin.accounts.list*             | Gives the user access to **Accounts** area of the admin.             |
+| オプション | 値 | 説明 |
+| :----- | :----- | :----- |
+| **Configuration**  | *admin.configuration*  | 管理パネルの **Configuration** エリアへユーザーをアクセスできるようにします |
+| &nbsp; &nbsp; **Accounts Configuration** | *admin.configuration.accounts* | 管理パネルの **Accounts** 内の **Accounts Configuration** へのアクセス許可 |
+| **Accounts** | *admin.accounts* | 管理パネルの **Accounts** エリアへのフルアクセスを許可 |
+| &nbsp; &nbsp; **Create** | *admin.accounts.create* | ユーザーアカウントとグループを **Create** する権限を与えます |
+| &nbsp; &nbsp; **Read** | *admin.accounts.read* | ユーザーアカウントとグループを **Read** する権限を与えます |
+| &nbsp; &nbsp; **Update** | *admin.accounts.update* | ユーザーアカウントとグループを **Update** する権限を与えます |
+| &nbsp; &nbsp; **Delete** | *admin.accounts.delete* | ユーザーアカウントとグループを **Delete** する権限を与えます |
+| &nbsp; &nbsp; **List** | *admin.accounts.list* | 管理パネルの **Accounts** エリアへのアクセスを許可 |
 
-The possible values for the permissions are:
+パーミッションとして受け入れ可能な値は：
 
-| Option                                | Value                         | Description                                                                               |
-| :-----                                | :-----                        | :-----                                                                                    |
-| **Allowed**                           | `true`                        | **Allows** action to be performed if there is no **Denied** permission at the same level. |
-| **Denied**                            | `false`                       | **Denies** action from being performed. If user has both **Allowed** and **Denied** set, **Denied** permission wins. |
-| **Not set**                           | `null`                        | No effect, but acts as **Denied** if no other rules apply.                                |
+| オプション | 値 | 説明 |
+| :----- | :----- | :----- |
+| **Allowed** | `true`  | 同じレベルに **Denied** パーミッションがひとつも無ければ、 **許可** する |
+| **Denied** | `false` | **不許可** にする。ユーザーに **Allowed** と **Denied** があったら、**Denied** が勝ちます |
+| **Not set** | `null` | 影響を与えず、もし他のルールが適用されなければ、 **Denied** になる |
 
-Permissions set specifically for the user account take precedence over the group permissions. If the permission has not been set in the user account, access check will be performed against all the user groups the user belongs to. If any of the user groups have **Denied** the action, user has no permission for the action. Otherwise, if any of the user groups have **Allowed** the action, permission will be granted. If permission has not been set in any of the user's groups, **Super User** permission acts as universal **Allowed**, otherwise **Denied** will be applied.
+ユーザーアカウントに対して特に設定されたパーミッションは、グループパーミッションより優先されます。ユーザーアカウントにパーミッションが設定されていない場合、そのユーザーが属するすべてのユーザーグループに対してアクセスチェックされます。
+もしアクションを **Denied** するユーザーグループがひとつでもあれば、そのアクションに対してパーミッションは許可されません。一方、すべｔねおグループで **Allowed** だったら、そのアクションは許可されます。
+いずれのグループにもパーミッションが設定されていなければ、 **Super User** パーミッションは全体に対して **Allowed** になり、そうでなければ **Denied** が適用されます。
 

@@ -1,75 +1,80 @@
 ---
-title: "エディタ（コンテンツ）"
+title: "エディタ（Content タブ）"
 layout: ../../../../layouts/Default.astro
 ---
 
 ![Admin Page Editor](page-editor.png)
 
-The **Page Editor** in the admin is a powerful text editor and page manager that enables you to create your page's content (including media files), its publishing and taxonomy options, settings, overrides, and theme-specific options.
+管理パネルの **Page Editor** は、パワフルなテキストエディタであり、ページ管理マネージャーです。ページのコンテンツ（やメディアファイル）を作成したり、公開設定やタクソノミー設定をしたり、その他設定、上書きをしたり、テーマ特有のオプションを設定できたりします。
 
-It's essentially a one-stop-shop for managing a specific page.
+これにより、特定のページをワンストップで管理できます。
 
-!! Accessing the Pages functionality requires an `access.admin.super` or `access.admin.pages.list` permission, see [User Accounts](../../03.accounts/01.users/) and [User Groups](../../03.accounts/02.groups/)
+> [!Info]  
+> このページ機能にアクセスするには、 `access.admin.super` パーミッションもしくは `access.admin.pages.list` パーミッションが必要です。 [ユーザーアカウントのページ](../../03.accounts/01.users/) と [ユーザーグループのページ](../../03.accounts/02.groups/) をご覧ください。
 
-Tabs that appear in the **Page Editor** are not universal. There are a default set of form fields that are commonly found in Grav themes, however these can vary between themes. The admin pulls form field information from a number of sources including the theme and the template used for the specific page.
+**Page Editor** で表示されるタブは、すべての人に同じ表示がされるわけではありません。Grav テーマでよく見られるフォームフィールドのデフォルトセットはありますが、テーマによって変更可能です。管理パネルは、テーマや特定のページ用のテンプレートを含むたくさんのソースから、フォームフィールド情報を取得します。
 
-!! The tabs and options represented in this documentation are by default. Theme developers have the ability to add their own options to these tabs, or even to do away with these tabs and replace them with something entirely different. We are documenting a common-case scenario based on the Antimatter theme to serve as an example.
+> [!Info]  
+> このドキュメントで説明するタブとオプションは、デフォルトのものです。テーマ開発者により、これらのタブにオプションを付け加えることが可能ですし、これらのタブを削除したり、全く違う何かに変更してしまうことも可能です。わたしたちは、このドキュメントでの具体例として、 Antimatter テーマをもとにした一般的なケースを説明します。
 
-In this page, we will go over the features and functionality found in the **Content** tab of the **Page Editor**.
+このページでは、 **Page Editor** の **Content** タブについて、その特長と機能を説明します。
 
 ### Controls
 
 ![Admin Page Editor](page-editor-1.png)
 
-Along the top of the page, you will find the administrative controls that enable you to save, delete, copy, and move your page. Additionally, you can hit the **Back** button to get back to the main **Pages** area of the admin.
+ページの上部に沿って、管理用のコントロールボタンが並んでいます。ページを save（保存）, delete（削除）, copy（コピー）, そして move（移動） することができます。加えて、 **Back** ボタンを押すと、メインの **Pages** エリアに戻ります。
 
-The **Save** and **Delete** buttons are pretty self-explanatory. They save and delete the currently-accessed page, respectively.
+**Save** ボタンと **Delete** ボタンは、一目瞭然でしょう。これらは、現在アクセスしているページをそれぞれ、保存したり、削除したりします。
 
-Selecting the **Move** button activates a popup that gives you the ability to assign a new parent to the page. You have the same option in the **Advanced** tab.
+**Move** ボタンを選択すると、ポップアップが現れて、ページを新しい親に割り当てられます。 **Advanced** タブにも、同じオプションがあります。
 
-**Copy** creates a duplicate of your current page, appending a `-2` (or other numeric prefix if `-2` is already in use) to the end of the folder name. You can change both the folder name and title as you see fit.
+**Copy** ボタンは、現在のページの複製を作成します。フォルダ名に `-2` （ `-2` がすでに使われていれば、別の数字）が付け加えられます。フォルダ名とタイトルの療法を変更可能です。
 
 ### Title
 
 ![Admin Page Editor](page-editor-2.png)
 
-The title of a page is typically set during that page's creation, however you can edit it after the fact here. Note that changing the page's title here will not have a direct impact on the folder name (which is used for navigation purposes) but it will change what people see on the front end.
+ページのタイトルは、通常、ページ作成時に設定されますが、後からでも編集できます。ただし、ここでページタイトルを変更しても、フォルダ名（ナビゲーション目的で使われます）に直接影響しないことに気をつけてください。フロントエンドで表示されるタイトルが変更されます。
 
 ### Page Editor Content
 
 ![Admin Page Editor](page-editor-3.png)
 
-This is the heart of the Page Editor. It is where your page's content body is written and edited. It features many powerful tools typically only found in premium browser-based text editors.
+ここが、ページエディタの心臓部です。ここで、ページのコンテンツ本文を書き、編集します。ブラウザベースのテキストエディタでのみ使える、パワフルなツールがたくさんあります。
 
-For example, you can switch between edit and preview views using the <i class="fa fa-code"></i> and <i class="fa fa-eye"></i> buttons located in the upper-right area of the editor.
+たとえば、編集画面と、プレビュー画面を、エディタの右上にある「code アイコン」ボタンと「eye アイコン」ボタンでスイッチできます。
 
-Because Grav's content is primarily based in markdown, the editing shortcuts automatically append markdown tags to your content. For example, highlighting a block of text and selecting the **B** icon surrounds the highlighted area with `**(selected area)**` bold tags.
+> [!訳注]  
+> このサイトには Font Awesome を入れていないので、ツールアイコンは表示されません。 [翻訳元](https://learn.getgrav.org/admin-panel/page/editor) をご覧ください。
 
-Here is a breakdown of the tools found in the content editor:
+Grav のコンテンツは、主にマークダウンをベースにしているので、ショートカットを編集すると、自動的にマークダウンタグがコンテンツに追加されます。たとえば、テキストブロックをハイライトし、**bold**  アイコンを選択すると、ハイライトしたエリアを `**（選んだエリア）**` ボールドタグで囲みます。
 
-| Tool                                      | Description                                       |
-| :-----                                    | :-----                                            |
-| <i class="fa fa-fw fa-bold"></i>          | Adds **Bold** tags to your content.               |
-| <i class="fa fa-fw fa-italic"></i>        | Adds *Italic* tags to your content.               |
-| <i class="fa fa-fw fa-strikethrough"></i> | Adds ~~Strikethrough~~ tags to your content.      |
-| <i class="fa fa-fw fa-link"></i>          | Adds [links](https://getgrav.org) to your content. |
-| <i class="fa fa-fw fa-picture-o"></i>     | Adds media to your content.                       |
-| <i class="fa fa-fw fa-quote-right"></i>   | Adds quote tags to your content.                  |
-| <i class="fa fa-fw fa-list-ul"></i>       | Creates an unordered list.                        |
-| <i class="fa fa-fw fa-list-ol"></i>       | Creates an ordered list.                           |
-| <i class="fa fa-fw fa-code"></i>          | Activates the edit view.                          |
-| <i class="fa fa-fw fa-eye"></i>           | Activates the content preview.                    |
-| <i class="fa fa-fw fa-expand"></i>        | Toggles to a full-page edit or preview view.      |
+以下は、コンテンツエディタのツールの解説です。
+
+| ツール | 説明 |
+| :-----| :----- |
+| bold アイコン | コンテンツに **Bold** タグを追加 |
+| italic アイコン | コンテンツに *Italic* タグを追加 |
+| strikethrough アイコン  | コンテンツに ~~Strikethrough~~ タグを追加 |
+| link アイコン  | コンテンツに [links](https://getgrav.org) を追加 |
+| picture-o アイコン | コンテンツにメディアを追加 |
+| quote-right アイコン | コンテンツに quote タグを追加 |
+| list-ul アイコン | 順番無しリストを作成 |
+| list-ol アイコン | 順番ありリストを作成 |
+| code アイコン | 編集表示を有効化 |
+| eye アイコン | コンテンツプレビューを有効化 |
+| expand アイコン | フルページ編集表示とプレビュー表示をスイッチ |
 
 ### Page Media
 
 ![Admin Page Editor](page-editor-4.png)
 
-The **Page Media** section at the bottom of the **Content** tab is all about media files for your page. These files exist in the same folder as the page's markdown file. Uploading new media files is as simple as **dragging-and-dropping** a file, or **tapping** in the white area of the section. This will bring up a file selector that enables you to pick files for upload.
+**Content** タブの下の方にある **Page Media** セクションは、ページのためのメディアファイルです。これらのファイルは、ページのマークダウンファイルと同じフォルダに入っています。新しいメディアファイルをアップロードするには、シンプルに、ファイルと **ドラッグアンドドロップ** するか、セクションの白いエリアを **タップ** してください。ファイル選択画面が立ち上がり、アップロードするファイルをピックアップできます。
 
-Already have media files you'd like to insert into your page? Just move your mouse cursor over the image thumbnail and **drag-and-drop** the image into the editor.
+ページに追加したいメディアファイルはアップロードされていますか？ それなら、画像サムネイルを動かして、エディタへ **ドラッグアンドドロップ** してください。
 
-Alternatively you can select **Insert** option on the image thumbnail. This will insert the media directly into your page's content.
+もしくは、画像サムネイルの **Insert** オプションを選択することもできます。 これにより、ページコンテンツに直接メディアが挿入されます。
 
-You can also delete media files by selecting **Delete**.
+**Delete** を選択すれば、メディアファイルを削除できます。
 

@@ -1,5 +1,5 @@
 ---
-title: "エディタ（セキュリティ）"
+title: "エディタ（Security タブ）"
 layout: ../../../../layouts/Default.astro
 ---
 
@@ -7,26 +7,26 @@ layout: ../../../../layouts/Default.astro
 ![Security Tab > Page Access](page-security.png)
 ```
 
-This section defines frontend access to the page.
+このセクションでは、フロントエンドでのページアクセスを定義します。
 
-| Option                                | Description |
-| :-----                                | :----- |
-| **Menu Visibility Requires Access**   | Set to Yes if page should be shown in menus only if user can access them. |
-| **Page Access**                       | User with following access permissions can access the page. |
+| オプション | 説明 |
+| :-----  | :-----  |
+| **Menu Visibility Requires Access** | ユーザーがアクセス可能なときのみメニューに表示したい場合、 Yes を設定します。 |
+| **Page Access**  | ここに追加されたアクセスパーミッションのあるユーザーがそのページにアクセス可能となります。 |
 
 ```
 ![Security Tab > Page Permissions](page-security.png)
 ```
 
-This section defines administration access to the page.
+このセクションでは、ページの管理アクセスを定義します。
 
-Page specific CRUD ACL works by using user groups only. In addition, it has two special groups named `authors` and `defaults`, which give special access to page owners, and a default fallback to all logged in users.
+ページの特定の CRUD （作成・読込・更新・削除）の ACL （アクセスコントロールリスト）は、ユーザーグループによってのみ機能します。加えて、2つの特別なグループ（ `authors` と `defaults` ）があり、ページオーナーに特別なアクセスと、それ以外のすべてのログインユーザーにデフォルトのフォールバックを提供します。
 
-| Option                        | Description |
-| :-----                        | :----- |
-| **Inherit Permissions**       | Inherit ACL from parent page. |
-| **Page Authors**              | Members of Page Authors have owner level access to this page defined in special 'Authors' page group. |
-| **Page Groups**               | Members of Page Groups have special access to this page. |
+| オプション | 説明 |
+| :-----  | :-----  |
+| **Inherit Permissions**  | 親ページから ACL を継承します |
+| **Page Authors** | ここに入力されたユーザーは、特別な 'Authors' グループのメンバーとして定義され、このページにオーナーレベルでアクセスできます。 |
+| **Page Groups** | ここに入力されたグループのメンバーは、そのグループに許可された CRUD の範囲でアクセスできます。 |
 
-For more information how the CRUD permissions work, please check [Page Permissions](/admin-panel/page/permissions).
+CRUD パーミッションの機能などの詳しい情報は、[ページ パーミッション](../06.permissions/) をご覧ください。
 

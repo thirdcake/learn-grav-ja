@@ -7,10 +7,10 @@ layout: ../../../../layouts/Default.astro
 ![Pages Permissions](page-permissions.png?width=2030&classes=shadow)
 ```
 
-User / Group permissions for Pages are:
+ページの ユーザー / グループ パーミッションは：
 
-| Option                                | Value                         | Description                                                       |
-| :-----                                | :-----                        | :-----                                                            |
+| オプション | 値 | 説明 |
+| :----- | :----- | :----- |
 | **Configuration**                     | *admin.configuration*         | Gives the user access to the **Configuration** area of the admin. |
 | &nbsp; &nbsp; **Pages Configuration** | *admin.configuration.pages*   | Gives the user access to the **Pages Configuration** found inside the **Pages** area of the admin.  |
 | **Pages**                             | *admin.pages*                 | Gives the user full access to the **Pages** area of the admin.    |
@@ -20,14 +20,16 @@ User / Group permissions for Pages are:
 | &nbsp; &nbsp; **Delete**              | *admin.pages.delete*          | Gives the user access to **Delete** pages.                        |
 | &nbsp; &nbsp; **List**                | *admin.pages.list*            | Gives the user access to **Pages** area of the admin.             |
 
-!! **WARNING:** All actions in Grav are only checked against a single permission type. If you prevent user from listing or reading pages in admin, but still allow users to perform create, update and delete, they can perform those actions. This means that even if users cannot see the `Pages` in admin, they can visit the edit page directly and perform those actions from there.
+> [!Info]  
+> **WARNING:** All actions in Grav are only checked against a single permission type. If you prevent user from listing or reading pages in admin, but still allow users to perform create, update and delete, they can perform those actions. This means that even if users cannot see the `Pages` in admin, they can visit the edit page directly and perform those actions from there.
 
-!!! **TIP:** Starting from Grav 1.7, you can and should restrict the **CRUD** access for the individual pages and their children directly from the pages themselves.
+> [!Tip]  
+> **TIP:** Starting from Grav 1.7, you can and should restrict the **CRUD** access for the individual pages and their children directly from the pages themselves.
 
 The possible values for the permissions are:
 
-| Option                                | Value                         | Description                                                                               |
-| :-----                                | :-----                        | :-----                                                                                    |
+| オプション | 値 | 説明 |
+| :----- | :----- | :----- |
 | **Allowed**                           | `true`                        | **Allows** action to be performed if there is no **Denied** permission at the same level. |
 | **Denied**                            | `false`                       | **Denies** action from being performed. If user has both **Allowed** and **Denied** set, **Denied** permission wins. |
 | **Not set**                           | `null`                        | No effect, but acts as **Denied** if no other rules apply.                                |

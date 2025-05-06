@@ -5,22 +5,22 @@ layout: ../../../../layouts/Default.astro
 
 ![Compatibility Tab](accounts-configuration1.png)
 
-| Option                        | Description |
-| :-----                        | :----- |
-| **Admin event compatibility** | Enables `onAdminSave` and `onAdminSaveAfter` events for plugins. Enabled by default. |
+| オプション | 説明 |
+| :----- | :----- |
+| **Admin event compatibility** | プラグインで `onAdminSave` イベントと `onAdminSaveAfter` イベントを有効化します。デフォルトで有効です。 |
 
 ![Caching Tab](accounts-configuration2.png)
 
-For more information, see Flex Objects.
+詳しい情報は、 Flex Objects をご覧ください。
 
-| Option                        | Description |
-| :-----                        | :----- |
-| **Enable Index Caching** | Index caching speeds up searches by creating temporary lookup indexes for the queries. |
-| **Index Cache Lifetime (seconds)** | Lifetime for index caching in seconds. |
-| **Enable Object Caching** | Object caching speeds up loading the object data and images. |
-| **Object Cache Lifetime (seconds)** | Lifetime for object caching in seconds. |
-| **Enable Render Caching** | Render caching speeds up rendering the content by caching the resulting HTML. |
-| **Render Cache Lifetime (seconds)** | Lifetime for render caching in seconds. |
+| オプション | 説明 |
+| :----- | :----- |
+| **Enable Index Caching** | インデックスキャッシュは、クエリに対する一時的な検索 index を作成することで、検索をスピードアップします |
+| **Index Cache Lifetime (seconds)** | インデックスキャッシュの有効秒数 |
+| **Enable Object Caching** | オブジェクトキャッシュは、オブジェクトデータや画像の読み込みをスピードアップします |
+| **Object Cache Lifetime (seconds)** | オブジェクトキャッシュの有効秒数 |
+| **Enable Render Caching** | レンダーキャッシュは、結果となる HTML をキャッシュすることで、コンテンツのレンダリングをスピードアップします。 |
+| **Render Cache Lifetime (seconds)** | レンダーキャッシュの有効秒数 |
 
-If the rendered HTML has dynamic content, render cache can be disabled from the Twig template by {% verbatim %}```{% do block.disableCache() %}```{% endverbatim %}.
+レンダリングされた HTML に 動的なコンテンツがある場合、 `{% do block.disableCache() %}` により、 Twig テンプレートでキャッシュのレンダリングを無効にできます。
 
