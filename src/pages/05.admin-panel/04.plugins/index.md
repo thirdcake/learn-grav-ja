@@ -16,25 +16,24 @@ layout: ../../../layouts/Default.astro
 
 ![Admin Plugins](plugins-1.png)
 
-
-The **Controls** area at the top of the page gives you the ability to add new plugins, as well as check for updates for existing ones.
+ページの上部にある **Controls** エリアでは、新しくプラグインを追加したり、既存のプラグインのアップデートをチェックしたりできます。
 
 ![Admin Plugins](plugins-2.png)
 
-The <i class="fa fa-plus"></i> Add button takes you to a page listing all of the currently available Grav plugins, enabling you to view their information and install them by selecting the <i class="fa fa-plus"></i> Install button to the right of the plugin.
+`+ Add` ボタンで、現在利用可能な全 Grav プラグインのリストページに移動し、それらプラグインの情報を見たり、プラグインの右側にある `+ Install` ボタンを選択してインストールしたりできます。
 
 > [!Note]  
-> The <span color="purple"><i class="fa fa-check-circle"></i></span> icon indicates that the plugin is created and supported by the Grav team. Plugins without this icon were created by third-party developers.
+> `check circle（チェックマークを丸で囲んだ）アイコン` は、Grav チームが作成し、サポートしているプラグインを意味します。このアイコンの無いプラグインは、サードパーティー開発者により作成されたプラグインです。
 
 ### Installed Plugins
 
 ![Admin Plugins](plugins-4.png)
 
-This area of the Plugins administrator shows you, at a glance, which plugins are presently installed on your Grav site. Additionally, you can enable and disable these plugins by selecting the <i class="fa fa-fw fa-toggle-on"></i> toggle icon to the right of each plugin.
+プラグイン管理ページの `Installed Plugins` エリアでは、現在 Grav サイトにインストール済みのプラグインの一覧を表示します。加えて、それぞれのプラグインの右側にある `toggle （トグル）アイコン` を選択することで、それらのプラグインを有効化・無効化できます。
 
 ![Admin Plugins](plugins-3.png)
 
-Selecting the <i class="fa fa-chevron-down"></i> chevron icon will give you more information about the plugin, including its author, project home page and bug tracker, as well as its license and a brief description. You can also quickly access the plugin's readme file for additional information and usage guide.
+`chevron （山型）アイコン` を選択すると、そのプラグインの情報を取得できます。たとえば、作者や、プロジェクトのホームページや、バグトラッカーや、ライセンス、及び短い説明などです。また、プラグインの readme ファイルに簡単にアクセスして、追加情報や使用ガイドを得ることもできます。
 
-You can also click the plugin's name to go to a more-detailed page including the plugin's settings area where you can configure the plugin.
+プラグインの名前部分をクリックすることでも、プラグインの詳細ページへ遷移し、プラグインの設定エリアで設定することもできます。
 

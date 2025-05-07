@@ -5,47 +5,47 @@ layout: ../../../../layouts/Default.astro
 
 ![Admin Options](grav-options1.png)
 
-The Admin Panel plugin has a set of options of its own accessible in the **Plugins** area of the admin. To reach them, simply navigate to **Plugins > Admin Panel** and select the title link for the plugin called **Admin Panel**. This will open a page filled with useful options to help you customize your experience with the Admin.
+管理パネルプラグインには、管理パネルの **Plugins** エリアで、自身にアクセス可能なオプションの設定項目があります。それらを設定するには、単に、 サイドバーの **Plugins** をクリック後、表示されたプラグイン一覧の中から **Admin Panel** のプラグイン名をクリックします。ページが開いて、管理パネルでの運用体験をカスタマイズできる便利なオプションページが現れます。
 
 ### Plugin Information
 
 ![Admin Options](grav-options2.png)
 
-The top of the Admin Panel options page gives you some information about the Admin Panel plugin. This includes the plugin author, homepage, and license, in addition to other links and information to help you find additional information and report any bugs.
+Admin Panel のオプションページの上部には、 Admin Panel プラグインについての情報が表示されています。ここに書かれているのは、プラグインの作者や、そのホームページ、ライセンス、その他、追加情報やバグ報告に便利なリンクや情報などです。
 
-This is a pretty standard feature in any plugin's options page.
+上記の内容は、すべてのプラグインで同様で、そのプラグインのオプションページにおける標準的な機能です。
 
 ### Basics
 
 ![Admin Options](grav-options3.png)
 
-The **Basics** section of this page gives you a set of options to help you define your experience within the Admin. This includes being able to change the text that appears at the top of the sidebar, create a custom path to the administrator, and more.
+このページの **Basics** セクションでは、管理プラグイン内での運営体験を決定する助けになるオプションを設定できます。これには、サイドバーの丈夫に表示するテキストを変更したり、管理ページにカスタム path を作成したり、その他いろいろできます。
 
-We've broken down these options, and what they do, below.
+これらのオプションと、それぞれ何をするのかを、以下に解説します。
 
-| Option                          | Description                                                                                                                                 |
-| :-----                          | :-----                                                                                                                                      |
-| Enable Admin Caching            | Caching in the admin can be **Enabled** or **Disabled** here. This allows you to disable admin caching without affecting front end caching. |
-| Administrator Path              | Changing the path to the administrator is done here. The default path is `/admin`, but you can make it whatever you'd like from this field. |
-| Logo Text                       | This is where you define the text that appears at the top of the administrator's sidebar.                                                   |
-| Body Classes                    | Want to give the body of your admin a different look? You can add body class(es) here. Separate multiple classes with a space.              |
-| Sidebar Activation              | Choose between **Tab** and **Hover** methods of expanding the sidebar.                                                                      |
-| Hover Delay                     | Set the delay time your cursor needs to hover over the compressed sidebar to expand in **Hover** mode.                                      |
-| Sidebar Size                    | Choose between **Automatic** and **Small** as your default sidebar size.                                                                    |
-| Edit Mode                       | Choose your default content editor. By default, the options are **Normal** and **Expert**.                                                  |
-| Use Google Fonts                | Use Google custom fonts.  Disable this to use Helvetica. Useful when using Cyrillic and other languages with unsupported characters.        |
-| Show GitHub Link                | **Enable** or **Disable** display of the "Found an issue? Please report it on GitHub." message.                                             |
+| オプション | 説明 |
+| :----- | :----- |
+| Enable Admin Caching | 管理プラグインでのキャッシュは、ここで **Enabled** か **Disabled** を設定します。フロントエンドのキャッシュに影響を与えることなく、管理プラグインでのキャッシュを無効化できます。 |
+| Administrator Path | 管理画面への path を変更できます。デフォルトの path は、 `/admin` ですが、このフィールドに入力した path に変更できます。 |
+| Logo Text | This is where you define the text that appears at the top of the administrator's sidebar.                                                   |
+| Body Classes | Want to give the body of your admin a different look? You can add body class(es) here. Separate multiple classes with a space.              |
+| Sidebar Activation  | Choose between **Tab** and **Hover** methods of expanding the sidebar.                                                                      |
+| Hover Delay | Set the delay time your cursor needs to hover over the compressed sidebar to expand in **Hover** mode.                                      |
+| Sidebar Size | Choose between **Automatic** and **Small** as your default sidebar size.                                                                    |
+| Edit Mode | Choose your default content editor. By default, the options are **Normal** and **Expert**.                                                  |
+| Use Google Fonts | Use Google custom fonts.  Disable this to use Helvetica. Useful when using Cyrillic and other languages with unsupported characters.        |
+| Show GitHub Link | **Enable** or **Disable** display of the "Found an issue? Please report it on GitHub." message.                                             |
 | Automatically Check for Updates | Choose to automatically check for updates to the **Admin Panel** plugin.                                                                    |
-| Session Timeout                 | Set the session timeout (in seconds) here.                                                                                                  |
+| Session Timeout | Set the session timeout (in seconds) here.                                                                                                  |
 
 ### Dashboard
 
 ![Admin Options](grav-options4.png)
 
-This section of the page lets you customize the items that appear in the main dashboard of the admin. Not a fan of the News Feed and want to get rid of it? Want to streamline your dashboard down to one or two sections you love? This is where you can do that.
+ページのこのセクションでは、管理パネルのメインのダッシュボードに表示するアイテムをカスタマイズできます。News Feed は好みではなく、取り除きたいですか？ ダッシュボードをお気に入りの1つか2つのセクションだけにスリム化したいですか？ ここでそれができます。
 
-| Option                    | Description                                                                                                  |
-| :-----                    | :-----                                                                                                       |
+| オプション | 説明 |
+| :----- | :----- |
 | Maintenance Widget        | **Enable** or **Disable** the display of the **Maintenance** area of the main Dashboard page in the Admin.   |
 | Statistics Widget         | **Enable** or **Disable** the display of the **Statistics** area of the main Dashboard page in the Admin.    |
 | Notifications Feed Widget | **Enable** or **Disable** the display of the **Notifications** area of the main Dashboard page in the Admin. |
@@ -56,10 +56,10 @@ This section of the page lets you customize the items that appear in the main da
 
 ![Admin Options](grav-options5.png)
 
-You can enable or disable specific types of notifications from this section. You can turn off feed update notifications, as well as notifications for plugins and/or themes.
+このセクションで、特定のタイプの通知を有効化・無効化できます。アップデート通知を無効化することもできますし、プラグイン通知のみ、テーマ通知のみ、その両方を無効化することもできます。
 
-| Option                  | Description                                                           |
-| :-----                  | :-----                                                                |
+| オプション | 説明 |
+| :----- | :----- |
 | Feed Notifications      | **Enable** or **Disable** feed-based notifications in the admin.      |
 | Dashboard Notifications | **Enable** or **Disable** dashboard-based notifications in the admin. |
 | Plugins Notifications   | **Enable** or **Disable** plugins-based notifications in the admin.   |
@@ -69,10 +69,10 @@ You can enable or disable specific types of notifications from this section. You
 
 ![Admin Options](grav-options6.png)
 
-One of the Admin's great features is its ability to track and display traffic information from the Admin's dashboard. This section of the Admin plugin's options gives you the ability to enable or disable traffic tracking, and configure how that data is displayed.
+管理パネルの素晴らしい機能のひとつは、管理パネルのダッシュボードから、トラフィック情報を追跡・表示できることです。管理パネルプラグインのオプションページにおけるこのセクションは、トラフィックの追跡を有効化・無効化したり、どのようにデータを表示するかの設定をしたりできます。
 
-| Option           | Description                                                                                        |
-| :-----           | :-----                                                                                             |
+| オプション | 説明 |
+| :----- | :----- |
 | Visitor tracking | You can **Enable** or **Disable** the visitor tracking feature here.                               |
 | Days of stats    | This field lets you set the number of days of visitor data kept in the graph before being dropped. |
 | Ignore           | Ignore traffic to specific URLs in your site. For example `/test` or `/modular`                    |
