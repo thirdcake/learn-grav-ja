@@ -32,13 +32,13 @@ Gravは、とてもシンプルで汎用的なので、動かすだけならweb�
 
 ### Windows
 
-* [Laragon](https://laragon.org/) portable, isolated, fast & powerful universal development environment for PHP, Node.js, and more. It is fast, lightweight, easy-to-use and easy-to-extend.
+* [Laragon](https://laragon.org/) ポータブルで、独立しており、処理が速く、パワフルな開発環境で、PHP, Node.js, その他が動きます。処理が速く、軽く、簡単に使えて、拡張も容易です。
 * [XAMPP](https://www.apachefriends.org/index.html) ひとつのシンプルなパッケージで、 Apacheと、PHP、MySQL が提供されます。
-* [EasyPHP](https://www.easyphp.org/) provides a personal Web hosting package as well as a more powerful developer version.
-* [MAMP for Windows](https://www.mamp.info/en/windows/) is a long-time Mac favorite, but now available for Windows.
-* [IIS with PHP](https://php.iis.net/) is a fast way to run PHP on Windows.
+* [EasyPHP](https://www.easyphp.org/) よりパワフルな開発者バージョンとともに、パーソナルな web ホスティングパッケージを提供します。
+* [MAMP for Windows](https://www.mamp.info/en/windows/) 長い間 Mac 専用でしたが、今では Windows でも利用可能です。
+* [IIS with PHP](https://php.iis.net/) Windows 上で PHP を速く動かせます。
 * [DDEV](https://ddev.com/) DockerベースのPHP開発環境です。
-* [AMPPS](https://www.ampps.com/downloads) is a software stack from Softaculous enabling Apache, PHP, Perl, Python,.. This includes everything you need (and more) for GRAV development.
+* [AMPPS](https://www.ampps.com/downloads) Softaculous による Apache, PHP, Perl, Python, などのソフトウェアスタックです。Grav 開発に必要なものはすべて入っています。
 * [Linux Subsystem](https://medium.freecodecamp.org/setup-a-php-development-environment-on-windows-subsystem-for-linux-wsl-9193ff28ae83) Windows上で、Linuxライクな環境を実行できる素晴らしい方法です。
 
 ### Linux
@@ -50,16 +50,16 @@ Gravは、とてもシンプルで汎用的なので、動かすだけならweb�
 Apacheのほとんどのディストリビューションには必要なものがすべて入っていますが、完全なものにするために、ここに必要なApacheモジュールのリストを示します：
 
 * `mod_rewrite`
-* `mod_ssl` (もしGravをSSL下で動かしたい場合)
-* `mod_mpm_itk_module` (if you wish to run Grav under its own user account)
+* `mod_ssl` （もしGravをSSL下で動かしたい場合）
+* `mod_mpm_itk_module` （もし Grav を自身のユーザーアカウント下で動かしたい場合）
 
 また、 `.htaccess` ファイルが正しく処理され、rewriteルールが有効になるように、 `<Directory>` や `<VirtualHost>` ブロックで `AllowOverride All` が設定されていることを確認してください。
 
 <h3 id="iis-requirements">IISの要件</h3>
 
-Although IIS is considered a web server ready to run 'out-of-the-box', some changes need to be made.
+IIS は、 'すぐ使える' web サーバーだと思われていますが、おそらくいくつかの設定が必要です。
 
-To get **Grav** running on an IIS server, you need to install **URL Rewrite**. This can be accomplished using **Microsoft Web Platform Installer** from within IIS. You can also install URL Rewrite by going to [iis.net](https://www.iis.net/downloads/microsoft/url-rewrite).
+IIS サーバーで **Grav** を動かすには、**URL Rewrite** をインストールしてください。これは、 IIS 内の **Microsoft Web Platform Installer** を使って利用できます。もしくは、 [iis.net](https://www.iis.net/downloads/microsoft/url-rewrite) からも URL Rewrite はインストール可能です。
 
 <h3 id="php-requirements">PHPの要件</h3>
 
@@ -88,10 +88,10 @@ To get **Grav** running on an IIS server, you need to install **URL Rewrite**. T
 
 <h5 id="optional-modules">追加するとより良いモジュール</h5>
 
-* `apcu` for increased cache performance
-* `opcache` for increased PHP performance
-* `yaml` PECL Yaml provides native yaml processing and can dramatically increase performance
-* `xdebug` useful for debugging in a development environment
+* `apcu` キャッシュパフォーマンスを向上させるため
+* `opcache` PHP パフォーマンスを向上させるため
+* `yaml` PECL Yaml により、ネイティブの yaml 処理ができ、パフォーマンスがドラマチックに良くなります
+* `xdebug` 開発環境でのデバッグに便利です
 
 <h3 id="permissions">パーミッション</h3>
 
@@ -128,7 +128,7 @@ find . -type d | xargs chmod +s
 umask 0002
 ```
 
-If you need to invoke superuser permissions, you would run `find … | sudo xargs chmod …` instead.
+スーパーユーザーのパーミッションで実行するなら、かわりに次のように実行してください： `find … | sudo xargs chmod …`
 
 <h2 id="recommended-tools">おすすめツール</h2>
 

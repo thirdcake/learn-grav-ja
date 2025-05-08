@@ -123,34 +123,34 @@ bin/grav composer --update
 ```
 
 > [!Info]  
-> These all use the `--no-dev` composer option, so to be able to perform testing you should use composer directly: `bin/composer.phar`
+> これらはすべて、 composer オプションの `--no-dev` を利用します。よって、パフォーマンステストのためには、composer を直接使った方が良いです： `bin/composer.phar`
 
 ## Install
 
-To install the dependencies Grav relies on (**error** plugin, **problems** plugin, **antimatter** theme), launch a **terminal** or **console** and navigate to the grav folder where you want to install the dependencies and run the CLI command.
+Grav が依存するプログラム（ **error** プラグイン、 **problems** プラグイン、 **antimatter** テーマ）をインストールするには、 **ターミナル** もしくは **コンソール** を立ち上げ、その依存関係をインストールしたい Grav フォルダに移動し、CLI コマンドを実行します。
 
 ```bash
 $ cd ~/webroot/my-grav-project
 bin/grav install
 ```
 
-You should now have the dependencies installed under:
+依存関係は、以下にインストールされます：
 * `~/webroot/my-grav-project/user/plugins/error`
 * `~/webroot/my-grav-project/user/plugins/problems`
 * `~/webroot/my-grav-project/user/themes/antimatter`
 
 ## Log Viewer
 
-As part of Grav 1.6, a new logviewer CLI command was created to allow for quick viewing of Grav logs.
+Grav 1.6 の途中から、 CLI コマンドの新しいログのビューワが作成され、 Grav のログがすばやく見られるようになりました。
 
-The simplest way to use this command is to simply type:
+このコマンドを使う最も単純な方法は、次のように入力するだけです：
 
 ```bash
 cd ~/webroot/my-grav-project
 bin/grav logviewer
 ```
 
-This will output the last 20 log entries of the `logs/grav.log` file.  There are a few options:
+これにより、 `logs/grav.log` ファイルの直近の 20 ログエントリーを表示します。これには、いくつかのオプションがあります：
 
 ```txt
 -f, --file[=FILE]     custom log file location (default = grav.log)
@@ -158,7 +158,7 @@ This will output the last 20 log entries of the `logs/grav.log` file.  There are
 -v, --verbose         verbose output including a stack trace if available
 ```
 
-e.g.
+たとえば：
 
 ```bash
 bin/grav logviewer --lines=4                                                                           [12:27:20]
@@ -174,7 +174,7 @@ viewing last 4 entries in grav.log
 2019-02-27 12:26:00 [NOTICE] Backup Created: /Users/joe/my-grav-project/backup/pages_backup--20190227122600.zip
 ```
 
-And verbose output with stack traces:
+そして、スタックトレースを含んだ出力もできます：
 
 ```bash
 bin/grav logviewer -v                                                                                                       [16:12:12]
@@ -203,21 +203,24 @@ viewing last 20 entries in grav.log
 
 ## New Project
 
-Every time you want to start a new project with Grav, you need to start with a clean Grav instance. Through the CLI, this process is super easy and takes only a few seconds.
+Grav で新しいプロジェクトを始めるときはいつでも、クリーンな Grav インスタンスで始める必要があります。CLI によって、この処理がとても簡単になり、数秒で終わります。
 
-1. Launch a **terminal** or **console** and navigate to the _grav_ folder (for the sake of this document we will assume it resides under  `~/Projects/grav`)
+1. **ターミナル** または **コンソール** を立ち上げ、 _grav_ フォルダに移動します（このドキュメントでは `~/Projects/grav` 下にあるものとします）
 
 ```bash
 cd ~/Projects/grav
 ```
 
-2. Run the Grav CLI to create a new project, with the destination being the location where your project will reside in (usually the [webroot](http://en.wikipedia.org/wiki/Webroot) of your Web server). Let us assume we are creating a **portfolio** and we want it at `~/Webroot/portfolio`.
+2. Grav CLI を実行し、新しいプロジェクトを作成します。プロジェクトを置く場所を指定します（一般的には、あなたのサーバーの [webroot](http://en.wikipedia.org/wiki/Webroot) です）。ここでの例では、 **ポートフォリオ** を作成するとしましょう。 `~/Webroot/portfolio` にそれを置きます。
 
 ```bash
 bin/grav new-project ~/webroot/portfolio
 ```
 
-This will create a new Grav instance and download all the dependencies required.
+これにより、新しい Grav インスタンスが作成され、必要な依存関係もすべてダウンロードされました。
+
+> [!訳注]  
+> Grav 1.7.48 で試してみましたが、Grav は新しくインストールされるものの、テーマやプラグインはダウンロードされず、別途作業が必要になりました。
 
 ## Sandbox
 
