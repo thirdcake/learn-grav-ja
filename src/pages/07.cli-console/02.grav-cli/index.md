@@ -224,27 +224,27 @@ bin/grav new-project ~/webroot/portfolio
 
 ## Sandbox
 
-Grav has a nifty utility called `sandbox`, which can quickly create a [symlinked](../01.command-line-intro#symbolic-links) copy of the Grav-installation. Simply put, running `bin/grav sandbox -s DESTINATION` - where "DESTINATION" is the path to the folder where you want the copied installation - recreates the Grav-installation in another folder.
+Grav には、 `sandbox` という気の利いたツールがあります。 sandbox は、 [シムリンクされた](../01.command-line-intro#symbolic-links) Grav のコピーをすばやく作成します。 `bin/grav sandbox -s DESTINATION` （ "DESTINATION" は、 Grav のコピーを作りたいフォルダのパス）を実行すると、そのフォルダに　Grav のインストールが再作成されます。
 
-For example, running:
+たとえば：
 
 ```bash
 bin/grav sandbox -s ../copy
 ```
 
-From your current Grav-folder creates a sibling-folder named `copy`, where the following folders are virtual copies: `/bin, /system, /vendor, /webserver-configs`, as well as standard files that typically reside in Grav's root-folder. All content in /user will be carbon copies, not virtual, so you can easily get started with customizing the new installation without having created overhead from core files.
+現在の Grav のフォルダから、 `copy` という名前の兄弟フォルダが作成され、そこに仮想のコピーが続きます：  `/bin, /system, /vendor, /webserver-configs` 及び、 Grav のルートフォルダにある典型的な標準ファイルも含まれます。 /user フォルダ内のすべてのコンテンツは、シムリンクのコピーではなく、実コピーされ、そのため、コアファイルのオーバーヘッドの必要なく、新しいインストールのカスタマイズを簡単に始められます。
 
 ## Scheduler
 
-As outlined in the [Advanced -> Scheduler](../../08.advanced/06.scheduler) section, The scheduler can be monitored via the CLI command.
+[スケジューラー](../../08.advanced/06.scheduler) セクションで解説したように、CLI コマンドでスケジューラをモニターすることができます。
 
-The base command will manually run the scheduler tasks that are due:
+以下の基本コマンドは、期限が来たスケジューラータスクを手動で実行します：
 
 ```bash
 bin/grav scheduler
 ```
 
-To get some more detail you can run with the optional `-v` option:
+詳細情報を取得するには、 `-v` オプションを付けて実行することもできます：
 
 ```bash
 bin/grav scheduler -v
@@ -257,7 +257,7 @@ Running Scheduled Jobs
 [2019-02-27T12:34:07-07:00] Success: ls -lah
 ```
 
-Other options include:
+他にもオプションはあります：
 
 ```txt
 -i, --install         Show Install Command
@@ -265,11 +265,11 @@ Other options include:
 -d, --details         Show Job Details
 ```
 
-Please refer to the [Advanced -> Scheduler](../../08.advanced/06.scheduler/) section, for more detailed information on these options.
+[スケジューラー](../../08.advanced/06.scheduler/) セクションをぜひ参照してください。これらのオプションに関するより詳しい情報が書かれています。
 
 ## Security
 
-Added in Grav 1.5 is a new security scanner CLI command.  You can run this to quickly scan your contents against the [configured security settings](../../01.basics/05.grav-configuration#security).
+Grav 1.5 で追加された、セキュリティスキャン機能の CLI コマンドです。 [セキュリティ設定での設定内容](../../01.basics/05.grav-configuration/#security) について、コンテンツのスキャンを実行します。
 
 ```bash
 bin/grav security                                                                                       [12:34:12]
@@ -282,9 +282,9 @@ Scanning 11 pages [===================================================] 100% < 1
 [OK] Security Scan complete: No issues found...
 ```
 
-#### PHP CGI-FCGI Information
+<h4 id="php-cgi-fcgi-imformation">PHP CGI-FCGI 情報</h4>
 
-To determine if your server is running `cgi-fcgi` on the command line, type the following:
+コマンドラインで あなたのサーバーが `cgi-fcgi` で動いているかどうかを知るには、次の入力をしてください：
 
 ```bash
 $ php -v
@@ -294,6 +294,6 @@ Zend Engine v2.5.0, Copyright (c) 1998-2014 Zend Technologies
     with the ionCube PHP Loader v4.6.1, Copyright (c) 2002-2014, by ionCube Ltd.
 ```
 
-If you see a reference to `(cgi-fcgi)` you will need to prefix all `bin/grav` commands with `php-cli`. Alternatively, you can set up an alias in your shell with something like: `alias php="php-cli"` which will ensure the **CLI** version of PHP runs from the command line.
+`(cgi-fcgi)` と表示されていたら、すべての `bin/grav` コマンドの前に `php-cli` が必要です。もしくは、  `alias php="php-cli"` のようなエイリアスをシェルに設定することもできます。これにより、コマンドラインでは **CLI** バージョンの PHP で実行することができます。
 
 

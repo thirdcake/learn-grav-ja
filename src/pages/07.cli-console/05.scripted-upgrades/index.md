@@ -3,11 +3,11 @@ title: "Scriptによるアップデート"
 layout: ../../../layouts/Default.astro
 ---
 
-Or: Upgrading multiple Grav-installations at once.
+もしくは： 複数の Grav を一度にアップグレードします
 
-This is a guide to make upgrading multiple Grav-installations easier, using [Deployer](https://deployer.org/). By multiple I mean separate installations, not a [multisite-installation](../../08./advanced/05.multisite-setup/). We'll use the path to each installation to run [Grav's CLI](../02.grav-cli/) commands, but without having to type each of them manually.
+このページは、[Deployer](https://deployer.org/) を使って、複数の Grav を簡単にアップグレードするためのガイドです。「複数」という意味は、別々の Grav がインストールされている状況であり、[複数サイトインストール](../../08.advanced/05.multisite-setup/) のことではありません。[Grav のCLI](../02.grav-cli/) を実行するため、各インストールの path を使いますが、それらの path を手打ちするようなことはしません。
 
-A benefit of a task-runner like Deployer is that as it runs through its tasks, it will let you know exactly what it is doing along the way. It will also show you any output from the server from the commands being run. For example, this is an output from Deployer:
+Deployer のようなタスクランナーのメリットは、タスクの実行中、実行内容を正確に知らせてくれることです。コマンドが実行されているサーバーからの出力も表示されます。たとえば、次のような出力が Deployer からされます：
 
 ```txt
 Executing task packages
@@ -34,6 +34,7 @@ Cleared:  /home/username/public_html/deployer/grav/cache/compiled/*
 
 Touched: /home/username/public_html/deployer/grav/user/config/system.yaml
 ```
+
 
 And as simple as that, Deployer told Grav to upgrade all packages, which upgraded the Email-plugin to its newest version.
 
