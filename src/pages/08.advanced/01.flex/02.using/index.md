@@ -8,11 +8,11 @@ layout: ../../../../layouts/Default.astro
 > [!Note]  
 > **TIP:** Flex ディレクトリを有効化し、表示するためには、 [ディレクトリの有効化](../01.administration/01.introduction/) をお読みください。
 
-## Using `flex-objects` Page Type
+<h2 id="using-flex-objects-page-type"> flex-objects ページタイプの使用</h2>
 
 `directories/flex-objects.md` ページで複数の Flex ディレクトリを表示するには：
 
-```text
+```markdown
 title: Directories
 flex:
   layout: default
@@ -26,7 +26,7 @@ flex:
 
 または、各 Flex ディレクトリにそれぞれのパラメータを渡すこともできます：
 
-```text
+```markdown
 title: Directories
 flex:
   layout: default
@@ -48,7 +48,7 @@ flex:
 
 `contacts/flex-objects.md` ページで、ひとつの Flex ディレクトリを表示するには：
 
-```text
+```markdown
 title: Contacts
 flex:
   directory: contacts
@@ -67,7 +67,7 @@ flex:
 
 `my-contact/flex-objects.md` ページで、ひとつの Flex オブジェクトを表示するには：
 
-```text
+```markdown
 title: Contact
 flex:
   directory: contacts
@@ -91,9 +91,9 @@ https://www.domain.com/contacts/id:ki2ts4cbivggmtlj
 > [!Note]  
 > **TIP:** `flex` 内で独自のパラメータを渡すことができ、自身のコレクションのテンプレートファイルや、オブジェクトテンプレートファイルで利用できます。
 
-## Rendering Collections and Objects
+<h2 id="rendering-collections-and-objects">コレクションとオブジェクトのレンダリング</h2>
 
-Both Collections and Objects support rendering their output in HTML. Output can be customized with two parameters: layout and context. Layout allows you to set custom looks, for example you can have list of cards and then more detailed output for details. Context allows you to pass variables to be used in the template files.
+コレクションとオブジェクトはどちらも、 HTML での出力に対応しています。出力は、 レイアウトとコンテキストという2つのパラメータでカスタマイズされます。レイアウトにより、見た目をカスタマイズできます。たとえば、カードのリストを表示し、より詳しくは詳細ページを出力する、というように。そして、コンテキストにより、テンプレートファイルで利用する変数を渡すことができます。
 
 ```twig
 {% render collection layout: 'custom' with { context_variable: true } %}
@@ -101,11 +101,11 @@ Both Collections and Objects support rendering their output in HTML. Output can 
 {% render object layout: 'custom' with { context_variable: true } %}
 ```
 
-See more detailed documentation: [Render Collection](03.collection/#render) and [Render Object](04.object/#render).
+詳しくは、ドキュメントをお読みください： [コレクションのレンダリング](03.collection/#render) と、 [オブジェクトのレンダリング](04.object/#render)
 
-## Templating Basics
+<h2 id="templating-basics">テンプレートの基本</h2>
 
-Flex templates are located in `templates/flex` folder:
+Flex テンプレートは、 `templates/flex` フォルダにあります：
 
 ```text
 templates/
@@ -117,15 +117,17 @@ templates/
         default.html.twig
 ```
 
-Each type has two folders, one for rendering collection and one for rendering object. The files inside are layouts, named after the filename. In our example, we have `default` layout for both the collection and the object.
+各タイプには、2つのフォルダがあり、1つはコレクションのレンダリング用、もうひとつはオブジェクトのレンダリング用です。中のファイルはレイアウトで、ファイル名に基づいて名前が付けられています。上記の例では、コレクションとオブジェクトの両方に対する `default` レイアウトがあります。
 
-### Collection Template
+<h3 id="collection-template">コレクションのテンプレート</h3>
 
-Collection template `flex/contacts/collection/default.html.twig` is responsible for rendering all the objects in the collection. Rendered output is cached by default. Cache key is defined by the collection and the context passed to the `render()` method.
+コレクションテンプレートの `flex/contacts/collection/default.html.twig` は、コレクション内のすべてのオブジェクトのレンダリングに対応します。レンダリング出力は、デフォルトでキャッシュされます。キャッシュキーは、コレクションと `render()` メソッドに渡すコンテキストによって定義されます。
 
-!! **WARNING:** If context contains non-scalar values, caching will be turned off. Try to keep the context as simple as possible!
+> [!Info]  
+> **WARNING:** コンテキストにスカラー値以外の値が含まれている場合、キャッシュは無効になります。コンテキストはできるだけシンプルに保ってください！
 
-Here is an example from Contacts Type:
+以下は、 Contacts タイプの例です：
+
 ```twig
 <div id="flex-objects">
   <div class="text-center">
@@ -152,15 +154,18 @@ Here is an example from Contacts Type:
 </script>
 ```
 
-! **TIP:** If the rendered HTML has dynamic content, render cache can be disabled from the Twig template by `{% do block.disableCache() %}`.
+> [!Note]  
+> **TIP:** レンダリングされた HTML に動的コンテンツを含む場合、Twig テンプレートで `{% do block.disableCache() %}` により、キャッシュを無効にすることができます。
 
-### Object Template
+<h3 id="object-template">オブジェクトのテンプレート</h3>
 
-Object template `flex/contacts/object/default.html.twig` is responsible for rendering a single object. Rendered output is cached by default. Cache key is defined by the object and the context passed to the `render()` method.
+オブジェクトテンプレートの `flex/contacts/object/default.html.twig` は、1つのオブジェクトのレンダリングに対応します。レンダリング出力は、デフォルトでキャッシュされます。キャッシュキーは、オブジェクトと `render()` メソッドに渡すコンテキストによって定義されます。
 
-!! **WARNING:** If context contains non-scalar values, caching will be turned off. Try to keep the context as simple as possible!
+> [!Info]  
+> **WARNING:** コンテキストにスカラー値以外の値が含まれている場合、キャッシュは無効になります。コンテキストはできるだけシンプルに保ってください！
 
-Here is an example from Contacts Type:
+以下は、 Contacts タイプの例です：
+
 ```twig
 <div class="entry-details">
     {% if object.website %}
@@ -179,13 +184,15 @@ Here is an example from Contacts Type:
 </div>
 ```
 
-! **TIP:** If the rendered HTML has dynamic content, render cache can be disabled from the Twig template by `{% do block.disableCache() %}`.
+> [!Note]  
+> **TIP:** レンダリングされた HTML に動的コンテンツを含む場合、Twig テンプレートで `{% do block.disableCache() %}` により、キャッシュを無効にすることができます。
 
-### Custom Layouts
+<h3 id="custom-layouts">カスタムレイアウト</h3>
 
-By using custom layouts, you can create an infinite amount of different views into both of your collections and objects.
+カスタムレイアウトを使用すると、コレクションとオブジェクトの両方に、無限に異なる見た目を作成できます。
 
-You can create your custom layouts by just adding a new file next to `default.html.twig` file. The basename of the file is the same as your layout name.
+カスタムレイアウトを作成するには、ただ新しいファイルを `default.html.twig` と同じフォルダに追加するだけです。ファイルのベース名は、レイアウト名と同じです。
 
-! **TIP:** In collection layouts, it is recommended to call `{% render object layout: 'xxx' %}` instead of outputting the object variables directly into the collection template.
+> [!Note]  
+> **TIP:** コレクションレイアウトでは、オブジェクト変数をコレクションテンプレートに直接出力するのではなく、 `{% render object layout: 'xxx' %}` を呼び出すことをおすすめします。
 

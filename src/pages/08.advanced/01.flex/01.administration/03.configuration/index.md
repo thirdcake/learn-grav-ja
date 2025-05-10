@@ -1,34 +1,35 @@
 ---
-title: "Config設定"
+title: "Config 設定画面"
 layout: ../../../../../layouts/Default.astro
 ---
 
-**Configuration** has common settings for the **Flex Directory**.
+**Config 設定** には、 **Flex ディレクトリ** の共通事項を設定します。
 
-These settings are typically used for changing the behaviour of the directory, setting defaults for the objects or alter rendering of the layouts.
+これらの設定は、通常、 flex ディレクトリのふるまいを変更するのに使われたり、オブジェクトのデフォルトを設定するのに使われたり、レイアウトのレンダリングを変更したりするのに使われます。
 
-!! The settings are different in every Directory, this document contains only the common settings found in every directory.
+> [!Info]  
+> 設定項目は、すべてのディレクトリで違います。このドキュメントでは、すべてのディレクトリに共通する設定のみを記載しています。
 
-#### Controls
+<h4 id="controls">コントロール</h4>
 
-Along the top of the page, you will find the administrative controls.
+ページの上部に、管理コントロール部分があります。
 
-- **Back**: Go back to **[Content Listing](/advanced/flex/administration/views-list)**
-- **Save**: Save configuration and return back to **[Content Listing](/advanced/flex/administration/views-list)**
+- **Back**: **[コンテンツリスト](../01.views-list/)** に戻る
+- **Save**: config 設定を保存し、 **[コンテンツリスト](../01.views-list/)** に戻る
 
-### Caching Tab
+<h3 id="caching-tab">キャッシュタブ</h3>
 
-| Option                        | Description |
-| :-----                        | :----- |
-| **Enable Index Caching** | Index caching speeds up searches by creating temporary lookup indexes for the queries. |
-| **Index Cache Lifetime (seconds)** | Lifetime for index caching in seconds. |
-| **Enable Object Caching** | Object caching speeds up loading the object data and images. |
-| **Object Cache Lifetime (seconds)** | Lifetime for object caching in seconds. |
-| **Enable Render Caching** | Render caching speeds up rendering the content by caching the resulting HTML. |
-| **Render Cache Lifetime (seconds)** | Lifetime for render caching in seconds. |
+| オプション | 説明 |
+| :-----  | :----- |
+| **Enable Index Caching** | インデックスキャッシュは、クエリの一時的な検索インデックスを作成することで、検索をスピードアップさせます。 |
+| **Index Cache Lifetime (seconds)** | インデックスキャッシュの有効秒数。 |
+| **Enable Object Caching** | オブジェクトキャッシュは、オブジェクトデータや画像の読み込みをスピードアップさせます。 |
+| **Object Cache Lifetime (seconds)** | オブジェクトキャッシュの有効秒数。 |
+| **Enable Render Caching** | レンダリングキャッシュは、結果の HTML をキャッシュすることで、コンテンツのレンダリングをスピードアップします。 |
+| **Render Cache Lifetime (seconds)** | レンダリングキャッシュの有効秒数。 |
 
-If the rendered HTML has dynamic content, render cache can be disabled from the Twig template by 
+レンダリングされた HTML に動的コンテンツが含まれる場合、 Twig テンプレートからレンダリングキャッシュを無効化できます。
+
 ```
 {% do block.disableCache() %}
 ```
-

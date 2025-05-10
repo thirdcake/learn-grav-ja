@@ -1,32 +1,32 @@
 ---
-title: "コンテンツリスト"
+title: "コンテンツリスト画面"
 layout: ../../../../../layouts/Default.astro
 ---
 
 ![List View](flex-objects-list.png)
 
-The **Content Listing** usually contains a paginated list of your content, but some directories, like **[Pages](/admin-panel/page)**, may have a highly customized look.
+**コンテンツリスト** とは、通常、コンテンツのリストでページ分けされたものを指しますが、 **[Pages](../../../../05.admin-panel/03.page/) のような一部の flex ディレクトリでは、高度にカスタマイズされた見た目になっていることがあります。
 
-This is where you can create, edit, and delete your content. The page also has powerful tools to **Search** and **Order** the items.
+ここでは、コンテンツを作成、編集、削除できます。また、アイテムを **検索** したり **並べ替え** したりする強力なツールも用意されています。
 
-## Controls
+<h2 id="controls">コントロール</h2>
 
-Along the top of the page, you will find the administrative controls. The controls may differ per **Flex Type**, but here is a list of some of the most common ones:
+ページの上部に、管理コントロールがあります。このコントロール部分は、 **Flex タイプ** によって違うかもしれませんが、ここでは、最も一般的なものを列挙します：
 
-- **Back**: Return one level up, usually to [**Dashboard**](../../../../05.admin-panel/02.dashboard/) or **[Directory Listing](/advanced/flex/administration#directory-listing)**
-- **Export**: Export content to a file, usually CSV
-- **Add**: Add a new content item
-- [**Configuration**](../03.configuration/): Modify directory settings
+- **Back**: 1つ上のレベルに戻る、通常は、 [**ダッシュボード**](../../../../05.admin-panel/02.dashboard/) もしくは **[ディレクトリのリスト](../../01.administration/#directory-listing)** に戻ります
+- **Export**: コンテンツをファイル（通常は CSV ）にエクスポート
+- **Add**: コンテンツアイテムを新規追加
+- [**Configuration**](../03.configuration/): ディレクトリ設定の修正
 
-## Navigation
+<h2 id="navigation">ナビゲーション</h2>
 
-- **Filter**: Text input for searching
-- **Display Number**: Number of objects to display
-- **Ordering**: Click on the column titles to change ordering
-- **Pagination**: Quickly navigate through objects
+- **Filter**: 検索用のテキスト入力欄
+- **Display Number**: 表示するオブジェクトの数
+- **Ordering**: 列のタイトルをクリックして、並び替えます
+- **Pagination**: オブジェクトを素早く移動
 
-## Single Row
+<h2 id="single-row">1行</h2>
 
-- **Columns**: Type specific columns for quick overview on objects
-- **Actions**: Actions for the single object, usually: **Preview**, **Edit**, **Delete**...
+- **Columns**: オブジェクトの概要を知るための Flex タイプ特有の列
+- **Actions**: 単一のオブジェクトに対すアクションで、通常は： **Preview**, **Edit**, **Delete**...
 

@@ -15,40 +15,41 @@ Grav 1.7 で、 **管理パネル** を使ったことがあれば、すでに *
 > Flex プラグインの有効化というのは、`user/config/plugins/flex-objects.yaml` ファイルの `enable: true # or false` のことを指し、 Flex ディレクトリの有効化というのは、同じ yaml ファイルの `directories: - 'blueprints: ...'` となっているリストに載っていることを指しています。  
 > 管理パネルでの方法は、以下説明されます。
 
-<h2 id="enabling-a-directory">Flex ディレクトリを有効化</h2>
+<h2 id="enabling-a-directory">Flex ディレクトリの有効化</h2>
 
-カスタムの **Flex ディレクトリ** を有効化するには、管理パネルで、サイドバーの **Plugins** > **Flex Objects** とページ遷移してください。
+カスタムの **Flex ディレクトリ** を有効化するには、管理パネルで、サイドバーの **Plugins** > **Flex Objects** へとページ移動してください。
 
-プラグイン内の **Directories** オプションには、探索されたすべての **Flex ディレクトリ** がリストになっています。有効化したいディレクトリを選択し、 `Enabled` になっているか確認してください。
+プラグイン内の **Directories** オプションには、検出されたすべての **Flex ディレクトリ** がリストになっています。有効化したいディレクトリを選択し、 `Enabled` になっているか確認してください。
 
 **Save** ボタンをクリックすると、ページをロード後、ディレクトリが表示されます。
 
 > [!Note]  
 > **TIP:** ディレクトリを表示するページの作り方は、 **[はじめに](./01.introduction/)** を、ひととおりチェックしてください。
 
-<h2 id="directory-listing">Flex ディレクトリを一覧にする</h2>
+<h2 id="directory-listing">Flex ディレクトリの一覧</h2>
 
 ![Directories View](./01.views-list/flex-objects-list.png)
 
-デフォルトでは、 **Flex オブジェクト** のナビゲーションメニューアイテムは、サイトで有効化されている **Flex ディレクトリ** すべてです。
+デフォルトでは、 **Flex オブジェクト** のナビゲーションメニューアイテムは、サイトで有効化されている **Flex ディレクトリ** すべてが含まれます。
 
 > [!Info]  
-> Some Flex Directories choose to hide from this list and show up elsewhere. **Accounts** and **Pages** are good examples of this.
+> ただし、いくつかの Flex ディレクトリは、このリストに表示されず、別の場所に表示されます。 **Accounts** と **Pages** がその良い例です。
 
-#### Controls
+<h4 id="controls">コントロール</h4>
 
-Along the top of the page, you will find the administrative controls.
+ページの上部に、管理用のコントロール部分があります。
 
-- **Back**: Go back to **[Dashboard](/admin-panel/dashboard)**
-- **Configure**: Redirects to **Plugins** > **Flex Objects**, see [Enabling a Directory](#enabling-a-directory)
+- **Back** ： **[Dashboard](../../../05.admin-panel/02.dashboard/)** に戻る 
+- **Configure** ：  **Plugins** > **Flex Objects** にリダイレクトします。 [ディレクトリを有効化してください](#enabling-a-directory)
 
-#### Directories
+<h4 id="directories">flex ディレクトリ</h4>
 
-When you select a Directory, you will end up at the **Content Listing** view.
+flex ディレクトリを選択すると、 **Content Listing** 画面が表示されます。
 
-In **[Content Listing](/advanced/flex/administration/views-list)** you can browse through the objects, use **Search**, and change **Ordering**. Additionally each object has **Actions**, notably **Edit** and **Delete**. You can also add new objects by using the **Add** button at top of any page. Next to it is also the **Configuration** button to change directory-wide settings.
 
-In **[Content Editor](/advanced/flex/administration/views-edit)** you can edit the object and **Save** it.
+**[コンテンツリスト](./01.views-list/)** では、flex オブジェクトを閲覧し、 **検索** 、や **順序** の変更ができます。さらに、各オブジェクトに **アクション** があり、とりわけ **編集** や **削除** ができます。また、ページ上部の **Add** ボタンにより、新しい flex オブジェクトを追加することも可能です。その隣には、 **Configuration** ボタンもあり、ディレクトリ全体の設定を変更することもできます。
 
-In **[Configuration](/advanced/flex/administration/configuration)** you can change configuration, which changes the behavior of the whole directory. Usually caching is among these options.
+**[コンテンツエディタ](./02.views-edit/)** では、 flex オブジェクトを編集し、 **保存** できます。
+
+**[Config 設定](./03.configuration/)** では、ディレクトリ全体のふるまいを変更できます。通常、キャッシュもこれらのオプションのひとつです。
 

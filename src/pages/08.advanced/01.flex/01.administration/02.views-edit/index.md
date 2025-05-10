@@ -1,29 +1,29 @@
 ---
-title: "コンテンツエディタ"
+title: "コンテンツエディタ画面"
 layout: ../../../../../layouts/Default.astro
 ---
 
 ![Edit View](flex-objects-edit.png)
 
-The **Content Editor** is a powerful view in **Flex Objects** that enables you to create and update your content type.
+**コンテンツ・エディタ** は、コンテンツタイプを作成し、更新できる **Flex オブジェクト** の強力な画面です。
 
-Editor may look very different with different **Controls**, **Tabs** and **Form Fields** as they are all specific for the directory type you're editing.
+エディタの見た目は、異なる **コントロール** や、 **タブ** 、 **フォームフィールド** ごとに大きく異なります。設定された flex ディレクトリのタイプごとにすべて指定されているためです。
 
-### Controls
+<h3 id="controls">コントロール</h3>
 
-Along the top of the page, you will find the administrative controls.
+ページの上部に、管理コントロールがあります。
 
-By default, there are three buttons **Back**, **Save** and **Delete**. Controls may also include other actions, such as **Preview**, **Export** etc...
+デフォルトでは、 **Back** ボタンと、 **Save** ボタンと、 **Delete** ボタンの3つがあります。コントロールには、 **Preview** や **Export** 、その他のアクションも含まれることがあります。
 
-- **Back**: Go back to **[Content Listing](/advanced/flex/administration/views-list)**
-- **Save**: Save Object and return back to **[Content Listing](/advanced/flex/administration/views-list)**
-- **Delete**: Delete Object and return back to **[Content Listing](/advanced/flex/administration/views-list)**
+- **Back**: **[コンテンツリスト](../01.views-list/)** に戻る
+- **Save**: オブジェクトを保存し、 **[コンテンツリスト](../01.views-list/)** に戻る
+- **Delete**: オブジェクトを削除し、 **[コンテンツリスト](../01.views-list/)** に戻る
 
-### Edit Form
+<h3 id="edit-form">フォームの編集</h3>
 
-Form is usually organized by **Tabs** and **Sections** to make the content easier to edit.
+フォームは通常、コンテンツの編集を簡単にするための **タブ** と **セクション** で構成されます。
 
-- [Form fields](../../../../06.forms/01.blueprints/01.fields-available/)
-- Media (images and other files)
+- [Form フィールド](../../../../06.forms/01.blueprints/01.fields-available/)
+- メディア（画像やその他のファイル）
 
 

@@ -20,7 +20,7 @@ layout: ../../../layouts/Default.astro
 Flex は、サイト内の Flex ディレクトリに入ったすべてのデータへ、ひとつのアクセスポイントを提供します。これにより、すべてのオブジェクトが、サイト内のすべてのページやプラグインから、利用可能となり、
 
 > [!Note]  
-> **TIP:** Even if Flex *User Accounts* or *Pages* are not enabled, you can still access Flex versions of them in both frontend and Admin Panel.
+> **TIP:** Flex *ユーザー アカウント* または Flex *ページ* が有効になっていい場合でも、フロントエンドや管理パネルの両方から、それぞれの Flex バージョンにアクセスすることが可能です。
 
 #### Flex Type
 

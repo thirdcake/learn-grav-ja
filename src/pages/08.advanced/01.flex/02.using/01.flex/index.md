@@ -33,18 +33,16 @@ $count = $flex->count();
 
 ## getDirectories()
 
-`getDirectories( [names] ): array` Get list of directories.
+`getDirectories( [names] ): array` ディレクトリのリストを取得
 
 パラメータ：
-- **names** Optional: List of directory names (`array`)
+- **names** Optional: ディレクトリ名のリスト (`array`)
 
 返り値：
-- `array` list of **[Directories](/advanced/flex/using/directory)**
+- `array` **[ディレクトリ](../02.directory/)** のリスト
 
 > [!Note]  
 > **TIP:** 名前のリストが渡されなかった場合、メソッドは Flex に登録されたすべてのディレクトリを返します。
-
-
 
 ```twig
 {% set flex = grav.get('flex') %}
@@ -57,7 +55,6 @@ $count = $flex->count();
 
 {# Do something with the directories #}
 ```
-
 
 ```php
 use Grav\Common\Grav;
@@ -80,29 +77,24 @@ $listedDirectoriesWithMissing = $flex->getDirectories(['contacts', 'phonebook'],
 // = ['contacts' => FlexDirectory, 'phonebook' => null]
 ```
 
-
-
 > [!Note]  
-> **TIP:** You may want to make sure you return only the directories you want to.
+> **TIP:** 必要なディレクトリのみ返すようにしてください。
 
 ## hasDirectory()
 
-`hasDirectory( name ): bool`: Check if directory exists.
+`hasDirectory( name ): bool`: ディレクトリが存在するかどうかチェック
 
 パラメータ：
-- **name** Name of the directory (`string`)
+- **name** ディレクトリ名 (`string`)
 
 返り値：
-- `bool` True if found, false otherwise
-
-
+- `bool` 見つかった場合は True、そうでなければ false
 
 ```twig
 {% set flex = grav.get('flex') %}
 
 Flex has {{ not flex.hasDirectory('contacts') ? 'not' }} contacts directory.
 ```
-
 
 ```php
 use Grav\Common\Grav;
@@ -115,20 +107,16 @@ $flex = Grav::instance()->get('flex');
 $exists = $flex->hasDirectory('contacts');
 ```
 
-
-
 ## getDirectory()
 
-`getDirectory( name ): Directory | null` Get a directory, returns null if it was not found.
+`getDirectory( name ): Directory | null` ディレクトリを取得。見つからなければ null を返します。
 
 パラメータ：
-- **name** Name of the directory (`string`)
+- **name** ディレクトリ名 (`string`)
 
 返り値：
-- **[Directory](/advanced/flex/using/directory)** (`object`)
-- `null` Directory not found
-
-
+- **[Directory](../02.directory/)** (`object`)
+- `null` ディレクトリが無かった場合
 
 ```twig
 {% set flex = grav.get('flex') %}
@@ -138,7 +126,6 @@ $exists = $flex->hasDirectory('contacts');
 
 {# Do something with the contacts directory #}
 ```
-
 
 ```php
 use Grav\Common\Grav;
@@ -155,23 +142,20 @@ if ($directory) {
 }
 ```
 
-
-
-!!! Check what you can do with **[Flex Directory](/advanced/flex/using/directory)**
+> [!Tip]  
+> **[Flex ディレクトリ](../02.directory/)** でできることをチェックしてください。
 
 ## getObject()
 
-`getObject( id, directory ): Object | null` Get an object, returns null if it was not found.
+`getObject( id, directory ): Object | null` オブジェクトを取得。見つからない場合は null を返します。
 
 パラメータ：
-- **id** ID of the object (`string`)
-- **directory** Name of the directory (`string`)
+- **id** オブジェクトの ID (`string`)
+- **directory** ディレクトリ名 (`string`)
 
 返り値：
-- **[Object](/advanced/flex/using/object)** (`object`)
-- `null` Object not found
-
-
+- **[Object](../04.object/)** (`object`)
+- `null` 見つからなかった場合
 
 ```twig
 {% set flex = grav.get('flex') %}
@@ -186,7 +170,6 @@ if ($directory) {
   Oops, contact has been removed!
 {% endif %}
 ```
-
 
 ```php
 use Grav\Common\Grav;
@@ -203,20 +186,19 @@ if ($object) {
 }
 ```
 
-
-
-!!! Check what you can do with **[Flex Object](/advanced/flex/using/object)**
+> [!Tip]  
+> **[Flex オブジェクト](../04.object/)** でできることをチェックしてください。
 
 ## getCollection()
 
-`getCollection( directory ): Collection | null` Get collection, returns null if it was not found.
+`getCollection( directory ): Collection | null` コレクションを取得。見つからない場合は null を返します。
 
 パラメータ：
-- `directory` Name of the directory (`string`)
+- `directory` ディレクトリ名 (`string`)
 
 返り値：
-- **[Collection](/advanced/flex/using/collection)** (`object`)
-- `null` Directory not found
+- **[Collection](../03.collection/)** (`object`)
+- `null` 見つからない場合
 
 ```twig
 {% set flex = grav.get('flex') %}
@@ -247,5 +229,6 @@ if ($collection) {
 }
 ```
 
-!!! Check what you can do with **[Flex Collection](/advanced/flex/using/collection)**
+> [!Tip]  
+> **[Flex コレクション](../03.collection/)** でできることをチェックしてください。
 
