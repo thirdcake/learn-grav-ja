@@ -49,15 +49,16 @@ export PATH
 
 <h2 id="creating-a-simple-gallery">シンプルなギャラリーを作る</h2>
 
-##### Problem:
+<h5 id="problem">問題：</h5>
+
 
 よくある web デザインで、ページ内に、いくつかの方法でレンダリングされるギャラリーが欲しいということがあります。新しく家族となったペットの写真や、これまでのデザインワークのポートフォリオ、閲覧者に向けてディスプレイし、販売したい製品のカタログなどです。この例では、下にキャプションの付いたたくさんの写真を表示するしたいだけだと仮定します。もちろん、この例は、他の利用方法にも応用できます。
 
-##### Solution:
+<h5 id="solution">解決策：</h5>
 
 この課題への最もシンプルな解決策は、 Grav の [メディア機能](../../02.content/07.media/) を使うことです。この機能により、ページから、そのフォルダ内の画像が利用可能となります。
 
-Let's assume you have a page you've called `gallery.md` and also you have a variety of images in the same directory. The filenames themselves are not important as we will just iterate over each of the images.  Because we want to have extra data associated with each image, we will include a `meta.yaml` file for each image.  For example, we have a few images:
+`gallery.md` というページがあったとしましょう。そして、同じディレクトリにたくさんの画像があるものとします。それぞれのファイル名自体は、重要ではなく、画像は繰り返し表示できれば良いものとします。それぞれの画像に関係する追加データが欲しいので、 `meta.yaml` ファイルをそれぞれの画像につき追加します。たとえば、いくつかの画像について、次のようになります：
 
 ```yaml
 - fido-playing.jpg
@@ -70,16 +71,16 @@ Let's assume you have a page you've called `gallery.md` and also you have a vari
 - fido-growling.jpg.meta.yaml
 ```
 
-Each of the `.jpg` files are a relatively good size that is appropriate for a full-size version, 1280px x 720px in size. Each of the `meta.yaml` files contain a few key entries, let's look at `fido-playing.jpg.meta.yaml`:
+それぞれの `.jpg` ファイルは、フルサイズのバージョンに適した比較的良いサイズで、 1280px x 720px あります。 `meta.yaml` ファイルには、それぞれいくつかの重要な項目が含まれています。 `fido-playing.jpg.meta.yaml` を見てみましょう：
 
 ```yaml
 title: Fido Playing with his Bone
 description: The other day, Fido got a new bone, and he became really captivated by it.
 ```
 
-You have **complete control** over what you put in these meta files, they can be absolutely anything you need.
+これらのメタファイルに何を書くかは、 **完全にコントロールできます** 。必要なものは何でも書けます。
 
-Now we need to display these images in reverse chronological order so the newest images are shown first and display them.  Because our page is called `gallery.md` we should create an appropriate `templates/gallery.html.twig` to contain the rendering logic we need:
+次に、これらの画像を表示していきます。時間降順で、つまり新しい画像から先に表示していきます。ページは、 `gallery.md` というファイル名なので、適切な `templates/gallery.html.twig` ファイルを作成し、必要なレンダリングロジックを書いていきます：
 
 ```twig
 {% extends 'partials/base.html.twig' %}
@@ -104,7 +105,7 @@ Now we need to display these images in reverse chronological order so the newest
 {% endblock %}
 ```
 
-For a modular gallery to be displayed inside another page, remove the following code from the Twig file in order to make it work:
+別のページ内に表示するモジュラーギャラリーにするには、機能させるために、以下のコードを Twig ファイルから削除してください：
 
 ```twig
 {% extends 'partials/base.html.twig' %}
@@ -113,7 +114,7 @@ For a modular gallery to be displayed inside another page, remove the following 
     {{ page.content|raw }}
 ```
 
-and
+及び、
 
 ```twig
 {% endblock %}
@@ -127,11 +128,11 @@ You could make a more advanced gallery-implementation by using creating filters 
 
 ## Render content in columns
 
-##### Problem:
+<h5 id="problem-1">問題：</h5>
 
 A question that has come up several times is how to quickly render a single page in multiple columns.
 
-##### Solution:
+<h5 id="solution-1">解決策：</h5>
 
 There are many potential solutions, but one simple solution is to divide up your content into logical sections using a delimiter such as the HTML `<hr />` or *thematic break* tag.  In markdown, this is represented by 3 or more dashes or `---`.  We simply create our content and separate our sections of content with these dashes:
 
@@ -173,11 +174,11 @@ You can see how the content is being **split** by the `<hr />` tag and converted
 
 ## Really simple css image slider
 
-##### Problem:
+<h5 id="problem-2">問題：</h5>
 
 You need an image slider without any overhead.
 
-##### Solution:
+<h5 id="solution-2">解決策：</h5>
 
 This recipe is for 4 images and a page called `slider.md`! Simply put the images where the .md file is. Next, create a new Twig template and extend `base.html.twig`.
 
