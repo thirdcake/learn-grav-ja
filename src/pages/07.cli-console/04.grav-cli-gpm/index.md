@@ -76,74 +76,76 @@ _themes_ と _plugins_ ごとに整理して、Grav のリポジトリ内の利�
 
 ## Install
 
-The `install` command does exactly what it states. It installs a resource from the repository to your current Grav instance with a simple command.
+`install` コマンドは、その言葉のとおりインストールします。シンプルなコマンドで、リポジトリから 現在の Grav 環境へリソースをインストールします。
 
-The command will also detect if a resource is already installed, or if it is symbolically linked, and prompts you on what to do.
+このコマンドは、そのリソースがインストール済みかどうか、もしくはシンボリックリンクされているかどうかを検知し、プロンプトで教えてくれます。
 
-You can also install multiple resources at once by separating the slugs with a space.
+また、スラッグをスペースで区切ることで、複数のリソースを一度にインストールすることもできます。
 
-[plugin:youtube](https://www.youtube.com/watch?v=SUUtcYl2xrE)
+[YouTube](https://www.youtube.com/watch?v=SUUtcYl2xrE)
 
-!! You can use the option `--all-yes (-y)` to skip any prompts. Existing resources will be overridden and if they are symbolic links will automatically be skipped.
+> [!Info]  
+> `--all-yes (-y)` オプションを使うことで、プロンプトをスキップすることもできます。既存のリソースは上書きされ、それがシンボリックリンクであれば、自動的にスキップされます。
 
 ## Update
 
-The `update` command shows a list of updatable resources and works similarly to `install`.
+`update` コマンドは、アップデート可能なリソースのリストを表示します。 `install` と似た機能をします。
 
 ![](update.jpg)
 
-[plugin:youtube](https://www.youtube.com/watch?v=jkxk2xBr5TM)
+[YouTube](https://www.youtube.com/watch?v=jkxk2xBr5TM)
 
-Alternatively, you can limit the updates to specific resources only.
+また、特定のリソースのみにアップデートを制限することもできます。
 
 ![](update-limit.jpg)
 
-[plugin:youtube](https://www.youtube.com/watch?v=rSWdmdx9TDA)
+[YouTube](https://www.youtube.com/watch?v=rSWdmdx9TDA)
 
 ## Uninstall
 
-The `uninstall` command removes an installed theme or plugin and clears the cache. Because Grav is purely filesystem, uninstalling a theme or a plugin means deleting the folder physically.
+`uninstall` コマンドは、インストール済みのテーマやプラグインを削除し、キャッシュをクリアします。 Grav は純粋なファイルシステムなので、テーマやプラグインのアンインストールとは、フォルダの物理的な削除を意味します。
 
-The command will also detect if a resource is symbolically linked, and prompts you on what to do.
+このコマンドも、リソースがシンボリックリンクかどうか検知し、プロンプトで教えてくれます。
 
-You can also uninstall multiple resources at once by separating the slugs with a space.
+また、スラッグをスペースで区切ることで、複数のリソースを一度にアンインストールできます。
 
-!! You can use the option `--all-yes (-y)` to skip any prompts. If a resource is detected as symbolic link, it will automatically be skipped.
+> [!Info]  
+> `--all-yes (-y)` オプションを使えば、プロンプトをスキップできます。リソースがシンボリックリンクだった場合、自動的にスキップします。
 
 ## Self-upgrade
 
-The `self-upgrade` (or selfupgrade) allows you to update Grav to the latest available version. If no upgrade is needed, a message will tell you so, noting also which version you are currently running and when the release was published.
+`self-upgrade` （もしくは、 selfupgrade ） コマンドにより、Grav を最新バージョンにアップデートできます。アップグレードの必要なない場合、必要が無い旨と、現在のバージョン番号、そのリリース公開日についてのメッセージが表示されます。
 
-It is strongly advised to always do a backup before performing a self-upgrade (see _Creating a Backup_ in the [CLI section](../grav-cli)).
+self-upgrade 実行前には、いつもバックアップを取っておくことを強く推奨します。（ [CLI セクション](../02.grav-cli/) の _バックアップの作成_ をご覧ください）
 
-!! The self-upgrade only upgrades portions of your Grav instance, like `system/` folder, `vendor/` folder, `index.php`, and others. Your **`user`** and **`images`** folders will never be touched.
+> [!Info]  
+> self-upgrade コマンドは、 Grav の一部のみをアップグレードします。具体的には、 `system/` フォルダや、 `vendor/` フォルダ、 `index.php` などです。 **`user`** フォルダや **`images`** フォルダは影響を受けません。
 
 ![](upgrade.jpg)
 
-[plugin:youtube](https://www.youtube.com/watch?v=15-E8l5aaUo)
+[YouTube](https://www.youtube.com/watch?v=15-E8l5aaUo)
 
-## Important Developer Information
+<h2 id="important-developer-information">開発者向け重要情報</h2>
 
-#### Blueprints
+<h4 id="blueprints">ブループリント</h4>
 
-With the introduction of _GPM_, we now have strict rules about valid `blueprints`. Whether it's a _theme_ or a _plugin_ you are developing, you should always ensure `blueprints` are formatted properly.
+_GPM_ の導入に際して、`blueprints` のバリデーションには、厳密なルールがあります。開発対象が _テーマ_ であれ、 _プラグイン_ であれ、常に `blueprints` のフォーマットが適切であることを確認してください。
 
-A blueprint can serve several different purposes, including defining your resource identity. Please refer to the [Blueprints](../blueprints) for more detailed documentation about what blueprints are and how they should be compiled.
+ブループリントは、いくつかの異なる目的で作成されます。その中には、あなたの開発するリソースの識別も含まれます。より詳しいドキュメントは、 [ブループリント](../../06.forms/01.blueprints/) を参照してください。ブループリントがどんなもので、どのようにコンパイルされるのか説明されています。
 
-#### Releases
+<h4 id="releases">リリース</h4>
 
-Grav repository refreshes every hour and automatically detects when there are new releases, this implies that as a developer you followed our [Contributing](https://github.com/getgrav/grav#contributing) requirements.
+Grav のリポジトリは毎時間リフレッシュされ、新しいリリースがあったときは、自動検出されます。これは、開発者として、 Grav の [コントリビュート](https://github.com/getgrav/grav#contributing) 要件に従っていることを意味します。
 
-On your end all you have to do is ensure you have updated the blueprints with the new version, and that you tagged and released the new version. The Grav repository will do the rest for you and as soon as your release is picked up, it will be available to everyone via Grav website or through _GPM_.
+最終的にやらなければならないことは、ブループリントを新しいバージョンで更新し、その新バージョンでタグ付けしリリースすることです。Grav リポジトリが、残りの作業を行います。あなたのリリースをピックアップし、すぐに Grav の web サイトや _GPM_ を通じてすべてのユーザーが利用できるようにします。
 
-#### Add your resource to the repository
+<h4 id="add-your-resource-to-the-repository">リポジトリにリソースを追加する</h4>
 
-advanced/grav-development#themeplugin-release-process
-Follow the instructions in the [Theme/Plugin Release Process](../../advanced/grav-development#themeplugin-release-process) section.
+[テーマ/プラグインのリリースプロセス](../../08.advanced/09.grav-development/#themeplugin-release-process) セクションの解説に従ってください。
 
-To add your new plugin/theme to the Grav repository, please open a Grav Issue on GitHub. You can also [use this precompiled link](https://github.com/getgrav/grav/issues/new?title=[add-resource]%20New%20Plugin/Theme&body=I%20would%20like%20to%20add%20my%20new%20plugin/theme%20to%20the%20Grav%20Repository.%0AHere%20are%20the%20project%20details:%20**user/repository**). Make sure you update the body to the proper `user/repository`.
+Grav の公式リポジトリに新しくプラグインやテーマを追加するには、 GitHub 上で issue を立ててください。[この precompiled link を使うこともできます](https://github.com/getgrav/grav/issues/new?title=[add-resource]%20New%20Plugin/Theme&body=I%20would%20like%20to%20add%20my%20new%20plugin/theme%20to%20the%20Grav%20Repository.%0AHere%20are%20the%20project%20details:%20**user/repository**) 。本文の `user/repository` を適切に書き換えるのを忘れないでください。
 
-More details about what the plugin/theme does are welcome and can be placed in the Issue.
+そのプラグイン/テーマが何をするのかについて、その Issue に詳しく書いていただくのは大歓迎です。
 
-Also please be aware that before adding a repository, the Grav team will inspect your plugin/theme ensuring that it fits the Grav standards. The team may also respond with requests for additional information, suggest minor improvements, etc. prior to closing the issue and adding the plugin/theme.
+また、リポジトリへ追加する前に、 Grav team によって、プラグイン/テーマが Grav 標準に適合しているかどうかの検査が行われることに注意してください。Grav team は、追加情報を求めたり、軽微な改善を推奨したりすることもあります。その後、 issue はクローズされ、プラグイン/テーマが追加されます。
 

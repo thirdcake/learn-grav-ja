@@ -3,9 +3,10 @@ title: "ブループリント"
 layout: ../../../../../layouts/Default.astro
 ---
 
-Basic structure of **Flex Blueprint** contains `title`, `description` and `type`, which describe the type and three sections: `config`, `blueprints` and `form`, which describe different aspects from the directory type.
+**Flex ブループリント** の基本構造は、flex タイプを説明する `title` と、 `description` と、 `type` があり、 Flex タイプのそれぞれ異なる側面を説明する3つのセクション（ `config` と、 `blueprints` と `form` ）もあります。
 
-Main structure of `contacts.yaml`:
+`contacts.yaml` の主要構造は、次のようになっています：
+
 ```yaml
 title: Contacts
 description: Simple contact directory with tags.
@@ -21,17 +22,19 @@ blueprints: {}
 form: {}
 ```
 
-To create your own custom Directory, you need to start by naming your `type` (filename) and filling in the `title` and `description`.
+ご自身でカスタムディレクトリを作成するには、まず `type` （ファイル名）を名付けて、 `title` と `description` を入力します。
 
-After creating the file and filling in the basic information, the next step is to either copy your existing form or to add some fields into the file.
+ファイルを作成し、基本情報が入力できたら、次のステップとして、ファイルに既存のフォームをコピーするか、フィールドを追加します。
 
-! **TIP:** We assume that you already know how to create your own **[Forms and Blueprints](/forms)**.
+> [!Note]  
+> **TIP:** ここでは、オリジナルの **[フォームとブループリント](../../../../06.forms/)** の作成方法を知っているという前提で、話を進めます。
 
-!! **WARNING:** It is better not to use the simple list format to describe the fields as described in **[Create a simple single form](/forms/forms#create-a-simple-single-form)**. Also do not pass `process` section of the form to this file, it will not be used by Flex.
+> [!Info]  
+> **WARNING:** **[シンプルな1つのフォームを作成](../../../../06.forms/02.forms/#create-a-simple-single-form)** で説明したような、シンプルなリストフォーマットは使わない方が良いでしょう。また、 `process` セクションは、このファイルの form には渡さないでください。 Flex では利用できません。
 
 ## Form
 
-In our contacts example the form section looks like this:
+contacts の例では、form セクションは次のようになっています：
 
 ```yaml
 # Flex Object Form
@@ -82,15 +85,16 @@ form:
         type: commalist
 ```
 
-The form looks the same regardless if it was taken from a page or from a configuration, plugin or theme blueprint file. This is the main blueprint for every object in your directory and it should contain all the fields defined in the object. Think it as a form that is displayed to the administrator.
+form の見た目は、ページから取り出されたものも、config 設定や、プラグインやテーマのブループリントファイルから取り出されたものも、同じです。これが、この flex ディレクトリ内のすべての flex オブジェクトに適用されるメインのブループリントであり、オブジェクトに定義されるフィールドはすべて含まれている必要があります。管理パネルに表示されるフォームのように考えてください。
 
-!! **WARNING:** Be careful when you modify a blueprint for existing Flex Type. Make sure objects you have already saved are compatible with the new version of the blueprint - meaning that you should be able to both save and display the older objects.
+> [!Info]  
+> **WARNING:** 既存の Flex タイプのブループリントを修正するときは気をつけてください。保存済みのオブジェクトが、新しいバージョンのブループリントに適合することを確認してください。 - つまり、古いオブジェクトも保存や表示できるようにすべきという意味です。
 
-We are not quite done yet. There is still two things that needs to be done to make the Directory to work: we need to configure the data storage layer and define the fields to display in the Admin List view. We can do both of those inside `config` section.
+まだ終わっていません。あと2項目ほど、 flex ディレクトリを機能させるために必要です：データストレージレイヤーの設定と、管理パネルでの一覧画面に表示するフィールドの定義が必要です。これらはどちらも、 `config` セクションでできます。
 
 ## Config
 
-Config section is the most complicated part of Flex Blueprint, though a lot of it is just to allow customization. It contains `data`, `admin` and `site` sections.
+Config セクションは、 Flex ブループリントで最も複雑な部分です。しかしその多くは、ただのカスタム用です。セクションには、 `data` と、 `admin` と、`site` があります。
 
 ```yaml
 # Flex Configuration
@@ -106,7 +110,7 @@ config:
   site: {}
 ```
 
-The minimum configuration looks something like this:
+最小の config 設定は、次のようになります：
 
 ```yaml
 # Flex Configuration
@@ -130,11 +134,11 @@ config:
         website:
 ```
 
-There are two mandatory sections in the configuration: `config.data.storage` and `config.admin.list.fields`. The latter defines fields displayed inside admin list view. Data storage on the other hand defines how the data will be stored.
+config 設定には、2つの必須セクションがあります： `config.data.storage` と、 `config.admin.list.fields` です。後者は、管理パネルでのリスト表示画面で表示されるフィールドを定義します。前者のデータストレージは、データをどのように保存するかを定義します。
 
 ### Config > Data
 
-**Flex Directory** is highly customizable. You can use your own `object`, `collection` and `index` PHP classes to add your own behavior. Additionally, you can configure the `storage` layer to best fit your needs. Directory also has it's default `ordering` and `search` functionality.
+**Flex ディレクトリ** は、柔軟にカスタマイズできます。 `object` と、 `collection` と、 `index` の3つの PHP class に、独自のふるまいを追加できます。さらに、`storage` レイヤーを好きなところに設定できます。 flex ディレクトリは、デフォルトの `ordering` （順序）と、 `search` （検索）機能を付けることもできます。
 
 ```yaml
 config:
@@ -153,7 +157,7 @@ config:
     search: {}
 ```
 
-Object, collection and index take class names. If they are not provided, Grav will use the following default configuration:
+Object と、 collection と、 index は、class 名を使います。これらを入力しなかった場合、 Grav は以下のデフォルトの config 設定を使います：
 
 ```yaml
 config:
@@ -163,9 +167,9 @@ config:
     index: 'Grav\Common\Flex\Types\Generic\GenericIndex'
 ```
 
-These classes will together define the behavior for your type. If you want to customize your own type, it is possible by extending these classes and passing your own classes here.
+これらの class は、一緒に flex type へふるまいを定義します。独自の flex type をカスタマイズしたい場合、これらの class を拡張し、独自の class をここで渡すことで可能になります。
 
-One of the most important parts is to define where and how the data is being stored:
+最も重要な部分のひとつは、データをどこに、どのように保存するかを定義するところです：
 
 ```yaml
 config:
@@ -178,7 +182,7 @@ config:
         folder: user-data://flex-objects/contacts.json
 ```
 
-Above is a special case which can also be written in a short form:
+上記は、短いフォームで書かれる場合の、特別なケースです。
 
 ```yaml
 config:
@@ -186,33 +190,27 @@ config:
     storage: user-data://flex-objects/contacts.json
 ```
 
-Grav 1.7 provides 3 different storage strategies, though you can easily create your own:
+Grav 1.7 では、3つの異なるストレージ戦略がありますが、独自のものも、簡単に作れます：
 
-[div class="table-keycol"]
-| Name | Class | Description |
+| 名前 | Class名 | 説明 |
 |------|-------|-------------|
-| Simple Storage | Grav\Framework\Flex\Storage\SimpleStorage | All objects are stored into a single file. Does not support media. |
-| File Storage | Grav\Framework\Flex\Storage\FileStorage | Objects are stored into separate files in a single folder. |
-| Folder Storage | Grav\Framework\Flex\Storage\FolderStorage | Every object is stored into a separate folder. |
-[/div]
+| Simple Storage | Grav\Framework\Flex\Storage\SimpleStorage | すべてのオブジェクトが1つのファイルに保存されます。メディアファイルはサポートしません |
+| File Storage | Grav\Framework\Flex\Storage\FileStorage | オブジェクトは、1つのフォルダに、それぞれファイルに分かれて保存されます。 |
+| Folder Storage | Grav\Framework\Flex\Storage\FolderStorage | すべてのオブジェクトは、それぞれ別のフォルダに保存されます。 |
 
-Additionally you can provide file format with `options.formatter.class`:
+さらに、 `options.formatter.class` により、ファイルフォーマットも提供できます：
 
-[div class="table-keycol"]
-| Name | Class | Description |
+| 名前 | Class名 | 説明 |
 |------|-------|-------------|
-| JSON | Grav\Framework\File\Formatter\JsonFormatter | Use JSON file format. |
-| YAML | Grav\Framework\File\Formatter\YamlFormatter | Use YAML file format. |
-| Markdown | Grav\Framework\File\Formatter\MarkdownFormatter | Use Grav's Markdown file format with YAML frontmatter. |
-| Serialize | Grav\Framework\File\Formatter\SerializeFormatter | Use PHP serializer. Fast but not human readable. |
-| INI | Grav\Framework\File\Formatter\IniFormatter | Use INI file format. Not recommended. |
-| CSV | Grav\Framework\File\Formatter\CsvFormatter | Use CSV file format. Not recommended. |
-[/div]
+| JSON | Grav\Framework\File\Formatter\JsonFormatter | JSON ファイルフォーマットを使用 |
+| YAML | Grav\Framework\File\Formatter\YamlFormatter | YAML ファイルフォーマットを使用 |
+| Markdown | Grav\Framework\File\Formatter\MarkdownFormatter | Grav のマークダウンファイルフォーマットと YAML フロントマターを使用 |
+| Serialize | Grav\Framework\File\Formatter\SerializeFormatter | PHP のシリアライザを使用。速いですが、人間に読める形式ではありません |
+| INI | Grav\Framework\File\Formatter\IniFormatter | INI ファイルフォーマットを使用。非推奨。 |
+| CSV | Grav\Framework\File\Formatter\CsvFormatter | CSV ファイルフォーマットを使用。非推奨。 |
 
-Configuration options (with defaults) for the default formatters can be found below inside the tabs:
+デフォルトのフォーマッタの（デフォルトでの）オプションは、以下のタブ内にあります：
 
-[ui-tabs]
-[ui-tab title="JSON"]
 ```yaml
 # JSON
 formatter:
@@ -224,8 +222,7 @@ formatter:
     decode_depth: 512  # Decode up to 512 levels
     decode_options: '' # See https://www.php.net/manual/en/function.json-decode.php (separate options with space)
 ```
-[/ui-tab]
-[ui-tab title="YAML"]
+
 ```yaml
 # YAML
 formatter:
@@ -237,8 +234,7 @@ formatter:
     native: true        # Use native YAML decoder if available
     compat: true        # If YAML cannot be decoded, use compatibility mode (SLOW)
 ```
-[/ui-tab]
-[ui-tab title="Markdown"]
+
 ```yaml
 # Markdown
 formatter:
@@ -251,8 +247,7 @@ formatter:
     yaml:
       inline: 20        # YAML options, see YAML formatter from above
 ```
-[/ui-tab]
-[ui-tab title="Serialize"]
+
 ```yaml
 # PHP Serialize
 formatter:
@@ -262,8 +257,7 @@ formatter:
     decode_options:
       allowed_classes: ['stdClass'] # List of allowed / safe classes during unserialize
 ```
-[/ui-tab]
-[ui-tab title="INI"]
+
 ```yaml
 # INI
 formatter:
@@ -271,8 +265,7 @@ formatter:
   options:
     file_extension: '.ini'
 ```
-[/ui-tab]
-[ui-tab title="CSV"]
+
 ```yaml
 # CSV
 formatter:
@@ -282,10 +275,8 @@ formatter:
     delimiter: ','      # Delimiter to separate the values
     mime: 'text/x-csv'  # MIME type for downloading file
 ```
-[/ui-tab]
-[/ui-tabs]
 
-You can also set default ordering, which is defined by `key: ASC|DESC` pairs:
+デフォルトの順序を設定することもできます。 `key: ASC|DESC` ペアで定義されます：
 
 ```yaml
 config:
@@ -296,7 +287,7 @@ config:
       timestamp: ASC
 ```
 
-Finally, you can add search fields, which are looked at when you call `collection.search()`:
+最後に、検索フィールドを追加できます。 `collection.search()` で呼び出すことにより表示できます：
 
 ```yaml
 config:
@@ -312,23 +303,22 @@ config:
         - contains: 1   # If field contains the search string, assign weight 1 to the object
 ```
 
-**Fields** contain a list of fields to be searched against.
+**Fields** は、検索対象フィールドのリストです。
 
-Search options can be:
+Search のオプションは、次のとおりです：
 
-[div class="table-keycol"]
-| Name | Value | Description |
+| 名前 | 値 | 説明 |
 |------|-------|-------------|
-| case_sensitive | `true` or `false` | If true, all checks are case sensitive, defaults to false |
+| case_sensitive | `true` or `false` | true にすると、大文字・小文字を区別します。デフォルトは false |
 | same_as | 0 ... 1 | Value of the field must be identical to the search string |
 | starts_with | 0 ... 1 | Value of the field must start with the search string |
 | ends_with | 0 ... 1 | Value of the field must end with the search string |
 | contains | 0 ... 1 | Value of the field must contain the search string |
-[/div]
 
-Search function returns 0 if the field does not match and weight between 0 and 1 if there is a match. Weight is used for ordering the search results. Object which gets the highest core has better match than one with a lower score.
+検索機能は、マッチしなかった場合、0 を返します。マッチした場合は、 0 から 1 の重みを付けます。重みは、検索結果の順序付けに利用されます。最も高いスコアを得たオブジェクトが、それより低いスコアのオブジェクトよりも、よくマッチしています。
 
-!!! Currently, search does not support having different weights or strategies per field.
+> [!Tip]  
+> 現在、検索機能は、フィールドごとの重み付けや戦略には対応していません。
 
 ### Config > Admin
 
@@ -474,8 +464,7 @@ config:
 
 **Fields** contains the fields you want to display in the directory listing. Each field has a key, which is the name of the field. Value can be omitted or it can contain the following configuration options:
 
-[div class="table-keycol"]
-| Name | Value | Example | Description |
+| 名前 | 値 | 具体例 | 説明 |
 |------|-------|-------------|
 | width | `integer` | 8 | Width of the field in pixels |
 | alias | `string` | 'header.published' | Name of the form field to use. VueTable doesn't like dots in the names, so set alias for nested variables. |
@@ -485,7 +474,6 @@ config:
 | sort | `array` | field: 'first_name' | You can specify different value if you use different field name when querying data on the server side, e.g. first_name. |
 | title_class | `string` | 'center' | CSS classes used in titles. |
 | data_class | `string` |  'left' | CSS classes used in data columns. |
-[/div]
 
 #### Edit View
 
@@ -605,7 +593,9 @@ blueprints:
               type: bool
 ```
 
-! **TIP:** These configuration options can be modified in **[Configuration](/advanced/flex/administration/configuration)** section of the **[Flex Directory Administration](/advanced/flex/administration)**.
+> [!Note]  
+> **TIP:** These configuration options can be modified in **[Configuration](../../01.administration/03.configuration/)** section of the **[Flex Directory Administration](../../advanced/flex/administration/)**.
 
-!!! **NOTE:** Currently the only used configuration options are inside the cache section. For your custom settings, you need to add logic to use them by yourself.
+> [!Tip]  
+> **NOTE:** Currently the only used configuration options are inside the cache section. For your custom settings, you need to add logic to use them by yourself.
 

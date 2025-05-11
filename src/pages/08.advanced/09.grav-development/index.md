@@ -3,45 +3,44 @@ title: "Grav の開発"
 layout: ../../../layouts/Default.astro
 ---
 
-Grav によって開発したい場合、通常の Grav ユーザーに必要とされるものよりも洗練されたセットアップの恩恵があります。これには、次のようなあらゆるタイプの開発が含まれます：**Grav Core** 、**Grav プラグイン** 、 **Grav スケルトン** そして **Grav テーマ** 。
+Grav を使った開発では、通常の Grav ユーザーに必要なセットアップよりも洗練されたセットアップを使うことで、メリットが得られます。これには、次のようなあらゆるタイプの開発が含まれます：**Grav Core** 、**Grav プラグイン** 、 **Grav スケルトン** そして **Grav テーマ** 。
 
 まず、さまざまな開発のタイプを分類しましょう：
 
 ## Grav Core
 
-When we talk about the **Grav Core**, we are effectively talking about things in the `system` folder.  This folder controls everything about Grav and is really the very essence of the [Grav workflow and lifecycle](../../04.plugins/05.grav-lifecycle/).
+**Grav Core** という時は、特に `system` フォルダ内のものごとを指しています。このフォルダは、 Grav のすべてを制御し、 [Grav のワークフローとライフサイクル](../../04.plugins/05.grav-lifecycle/) において本当に重要な中心部分です。
 
-Grav is intentionally focused on working with pages in an efficient manner.  Manipulation of pages and extensive functionality are often best served by creating a plugin.  We strongly encourage our community to contribute bug fixes, and even propose development of appropriate functionality within the core of Grav.
+Grav は、ページを効率的な方法で機能させることに、意図的に集中しています。ページ操作と広範な機能は、しばしばプラグインを作成することが最善です。わたしたちは、コミュニティに対し、バグ修正に貢献することはもとより、Grav のコア内の適切な機能開発を提案することさえも強く推奨しています。
 
-## Running Tests
+<h2 id="running-tests">テスト実行</h2>
 
-First, install the development dependencies by running composer install from the Grav root.
+まず、Grav のルートフォルダで、composer install を実行することにより、開発用の依存関係をインストールしてください。
 
 ```bash
 composer install
 ```
 
-Then you can run the tests:
+次に、テストを実行できます：
 
 ```bash
 composer test
 ```
 
-This will run the full suite of existing tests which should always be executed successfully on any site.
+これにより、すべてのテストが実行されます。どのサイトでも、正常に実行される、既存のテストです。
 
-You can also run a single unit test file, e.g.
+また、ひとつのユニットテストを実行することもできます。たとえば：
 
 ```bash
 composer test tests/unit/Grav/Common/Markdown/ParsedownTest::testAttributeLinks
 ```
 
-An alternative method to calling these tests is:
+これらのテストを呼び出す他の方法として、次のものがあります：
 
 ```bash
 ./vendor/bin/codecept run
 ./vendor/bin/codecept run tests/unit/Grav/Common/Markdown/ParsedownTest::testAttributeLinks
 ```
-
 
 ## Grav Plugins
 

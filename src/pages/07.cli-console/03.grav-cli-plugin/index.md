@@ -34,7 +34,7 @@ layout: ../../../layouts/Default.astro
 | `-n`, `--no-interaction`   | インタラクティブな質問を聞かない |
 | `-v\|vv\|vvv`, `--verbose`   | メッセージの詳細度を増加します： 1つの場合ノーマル出力、2つの場合より詳しい出力、 3つの場合デバッグ用です |
 
-## How to Use the CLI for Plugins
+<h2 id="how-to-use-the-cli-for-plugins">プラグインでの CLI の使い方</h2>
 
 **list** と **help** コマンドは、まだプラグイン CLI の使い方に詳しくないときに、とても便利です。
 
@@ -68,9 +68,9 @@ Repeat the password: *********
 Success! User joeuser created.
 ```
 
-## Developers: Integrate the CLI in Plugin
+<h2 id="developers-integrate-the-cli-in-plugin">開発者向け：プラグインでの CLI 統合</h2>
 
-As a Developer, you might want to create CLI commands for admins or users to run. It is extremely easy to add such functionality in a Plugin.
+開発者の方は、管理パネルやユーザーが実行できる CLI コマンドを作りたくなるかもしれません。プラグインにそのような機能を追加するのは、とても簡単です。
 
 The first thing you want to do is to create a subfolder `cli/` at the root of your plugin. This folder will be processed by `bin/plugin` and scanned for commands classes.
 

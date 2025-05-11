@@ -5,7 +5,11 @@ layout: ../../../../layouts/Default.astro
 
 多くのサイトで、 **Flex ディレクトリ** を使う主な理由は、独自のカスタムデータタイプを定義できるためです。そのようなカスタムデータタイプは、config 設定で解決できるほどシンプルでも小さくも無く、1ページに収めて表示するには適切ではないようなものです。
 
-Flex ディレクトリは、このような課題を解決するものです。 **Flex タイプ** は、
-Flex Directories solve this issue for you. Since **Flex Types** use the common design principles to both configuration and pages, it is really easy to convert your existing configuration and pages to use Flex. You may also have existing forms in the site, which you'd want to manage from the Administration Panel, or maybe you want to display selected comments in your site. These forms can also be converted to use Flex.
+Flex ディレクトリは、このような課題を解決してくれます。
+**Flex タイプ** は、 config 設定とページの両方に共通する設計原理に従うので、既存の config 設定やページを Flex 用に変換するのは、本当に簡単です。
+また、あなたのサイト内には、管理パネルで管理したいと思っていた既存のフォームがあるかもしれません。あるいは、サイト内のコメントを選んで表示したいと思っているかもしれません。
+これらのフォームも、 Flex に変換することが可能です。
 
-The base of a **Flex Type** is its **Blueprint**. The blueprint defines both the form and the fields of the object. It also has some additional configuration, which can be used to customize the directory and its objects, where it shows up in Admin Panel and ACL.
+**Flex タイプ** のベースには、 **ブループリント** があります。ブループリントは、フォームとオブジェクトのフィールドの両方を定義します。
+管理パネルと ACL で表示され、ディレクトリとオブジェクトのカスタマイズに使われる、追加の設定もできます。
+
