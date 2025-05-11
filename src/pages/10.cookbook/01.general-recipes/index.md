@@ -10,7 +10,7 @@ layout: ../../../layouts/Default.astro
 ターミナルで、ときどき、web サーバーの PHP バージョンと異なる PHP が使われていることがあります。
 
 CLI で動いている PHP のバージョンをチェックするには、`php -v` コマンドを実行できます。
-PHP バージョンが 5.5.9 未満だったら、Grav は少なくとも PHP 5.5.9 以上がシステム要件であるため、動かないでしょう。
+Grav のシステム要件は少なくとも PHP 5.5.9 以上であるため、 PHP バージョンが 5.5.9 未満の場合、起動しないでしょう。
 
 > [!訳注]  
 > おそらく、上記のバージョンは古い情報で、Grav 1.7 は PHP 7.3.6 以上、Grav 1.8 は、PHP 8.2 以上になると思われます。
@@ -120,23 +120,27 @@ description: The other day, Fido got a new bone, and he became really captivated
 {% endblock %}
 ```
 
-Basically, this extends the standard `partials/base.html.twig` (assuming your theme has this file), it then defines the `content` block and provides the content for it.  The first thing we do is echo out any `page.content`.  This would be the content of the `gallery.md` file, so it could contain a title, and a description of this page.
+基本的に、これは標準的な `partials/base.html.twig` を拡張するものです（あなたのお使いのテーマに、このファイルがある前提での話です）。その次の行で、 `content` ブロックを定義し、そこにコンテンツを提供します。最初にやるべきは、なにか `page.content` を出力することです。これは、 `gallery.md` ファイルのコンテンツなので、このページのタイトルと説明を含んでいます。
 
-The next section simply loops over all the media of the page that are **images**.  We are outputting these in an unordered list to make the output semantic, and easy to style with CSS.  we are assigning each image the variable name `image` and then we are able to perform a simple `cropResize()` method to resize the image to something suitable, and then below it, we provide an information section with the `title` and `description`.
+> [!訳注]  
+> モジュールにしたときに、 page.content が不要になるのは、別モジュールで説明やコンテンツに相当するものを書くだろうという想定なのだろうと思います。
 
-You could make a more advanced gallery-implementation by using creating filters for camera-data, with the [EXIF](../../03.themes/04.twig-tags-filters-functions/03.functions/#exif)-function.
+次のセクションでは、ページのすべての画像メディアを、シンプルにループで繰り返しています。これらの出力は、順番無しリスト（ `<ul>` ）としています。出力をセマンティック（意味論的）にするためと、 CSS でスタイルを当てやすくするためです。各画像に、 `image` という twig 変数を割り当て、シンプルに `cropResize()` メソッドを実行し、画像の良い感じにリサイズしています。それから、その下の行で、情報セクションを提供しています。画像のメタデータの `title` と、 `description` です。
 
-## Render content in columns
+[EXIF](../../03.themes/04.twig-tags-filters-functions/03.functions/#exif) 機能を使って、カメラのデータをフィルタリングすることで、もっと高度なギャラリーを実装することもできます。
+
+<h2 id="render-content-in-columns">カラムに分けてコンテンツをレンダリングする</h2>
 
 <h5 id="problem-1">問題：</h5>
 
-A question that has come up several times is how to quickly render a single page in multiple columns.
+ときどき来る質問ですが、ひとつのページを、複数のカラムで縦に分割してすばやくレンダリングする方法についてです。
 
 <h5 id="solution-1">解決策：</h5>
 
-There are many potential solutions, but one simple solution is to divide up your content into logical sections using a delimiter such as the HTML `<hr />` or *thematic break* tag.  In markdown, this is represented by 3 or more dashes or `---`.  We simply create our content and separate our sections of content with these dashes:
+ありうる解決策はたくさんありますが、シンプルなものとして、コンテンツを意味のあるセクションごとに、区切り（ HTML の `<hr />` や、 *themantic break* タグ）で分割するという方法があります。マークダウンでは、区切りは 3つ以上のダッシュもしくは `---` で表現されます。コンテンツをシンプルに作り、これらのダッシュマークでコンテンツをセクションごとに分割します。
 
 **columns.md**
+
 ```md
 ---
 title: 'Columns Page Test'
@@ -150,9 +154,11 @@ Phasellus id eleifend risus. In dui tellus, dignissim id viverra non, convallis 
 ---
 Praesent eleifend commodo purus, sit amet viverra nunc dictum nec. Mauris vehicula, purus sed convallis blandit, massa sem egestas ex, a congue odio lacus non quam. Donec vitae metus vitae enim imperdiet tempus vitae sit amet quam. Nam sed aliquam justo, in semper eros. Suspendisse magna turpis, mollis quis dictum sit amet, luctus id tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eu rutrum mi.
 ```
-!! Note: the extra line after the column and before the `---`.  This is because if you put a triple dash right underneath text, it's actually interpreted as a header.
 
-Then we simply need to render this content with a `columns.html.twig` template (as the page file was named `columns.md`):
+> [!Note]  
+> カラムが終わった後と、 `---` の前には、空行が必要です。なぜなら、テキストのすぐ下に3つのダッシュマークを置くと、マークダウンの見出しとして解釈されてしまうからです。
+
+それから、このコンテンツを `columns.html.twig` テンプレート（ページファイル名が `columns.md` だったとします）により、レンダリングする必要があります：
 
 ```twig
 {% extends 'partials/base.html.twig' %}
@@ -168,19 +174,21 @@ Then we simply need to render this content with a `columns.html.twig` template (
 {% endblock %}
 ```
 
-You can see how the content is being **split** by the `<hr />` tag and converted into an array of 3 columns which we loop over and render.  In this example we are using a simple HTML table tag, but you could use anything you wish.
+見てのとおり、コンテンツが `<hr />`タグによって **split** （分割）されており、3つのカラムの配列に変換され、それをループで繰り返し、レンダリングしています。この例では、シンプルな HTML の table タグを使っていますが、お好みのものをお使いください。
 
-!! Note: When using plugin page-toc, you'll need use `|split('<hr>')` since the page-toc plugin cleanses the HTML code.
+> [!Note]  
+> page-toc プラグインを使う場合は、このプラグインは HTML コードをきれいにするため、 `|split('<hr>')` を使う必要があります。
 
-## Really simple css image slider
+
+<h2 id="really-simple-css-image-slider">本当にシンプルな CSS 画像スライダー</h2>
 
 <h5 id="problem-2">問題：</h5>
 
-You need an image slider without any overhead.
+余計な読み込み無しの画像スライダーが欲しい場合です。
 
 <h5 id="solution-2">解決策：</h5>
 
-This recipe is for 4 images and a page called `slider.md`! Simply put the images where the .md file is. Next, create a new Twig template and extend `base.html.twig`.
+このレシピでは、4つの画像を使い、 `slider.md` というページを作ります！ シンプルに画像を `.md` ファイルのあるフォルダに置きます。次に、新しく Twig テンプレートを作成し、 `base.html.twig` を拡張します。
 
 
 ```twig
@@ -200,22 +208,21 @@ This recipe is for 4 images and a page called `slider.md`! Simply put the images
 {% endblock %}
 ```
 
-For modular slider, please remove the
+モジュラーページで使うスライダーなら、以下の部分を上記の Twig ファイルから削除してください。
+
 ```twig
 {% extends 'partials/base.html.twig' %}
 
 {% block content %}
 ```
 
-and
+及び、
 
 ```twig
 {% endblock %}
 ```
 
-from the previous Twig file.
-
-Time for css stuff. Add this to your _custom.scss
+CSS の編集をします。以下の内容を、` _custom.scss` ファイルに追記してください。
 
 ```scss
 @keyframes slidy {
@@ -245,15 +252,15 @@ div#slider figure {
 }
 ```
 
-That's all.
+以上です。
 
 <h2 id="wrapping-markdown-into-html">マークダウンを HTML に入れる</h2>
 
-On some pages you might want to wrap parts of the markdown content into some custom html code instead of creating a new Twig template.
+ページによっては、新しく Twig テンプレートを作ることなく、マークダウンコンテンツの一部を、カスタムの HTML コードに入れて使いたいことがあります。
 
-To achieve this you follow these steps:
+これを解決するため、以下のようなステップを踏みます：
 
-in your system configuration file `user/config/system.yaml` make sure to activate the markdown extra option:
+config ファイルの `user/config/system.yaml` で、markdown extra オプションを有効化してください：
 
 ```yaml
 pages:
@@ -261,7 +268,7 @@ pages:
     extra: true
 ```
 
-in your wrapper tag make sure to add the parameter `markdown="1"` to activate processing of markdown content:
+マークダウンを囲みたいタグに、 `markdown="1"` というパラメータを追加して、マークダウンコンテンツの処理を実行してください：
 
 ```md
 <div class="myWrapper" markdown="1">
@@ -271,17 +278,17 @@ this content is wrapped into a div with class "myWrapper"
 </div>
 ```
 
-done.
+以上です。
 
 <h2 id="add-a-recent-post-widget-to-your-sidebar">サイドバーに最近の投稿ウィジェットを追加する</h2>
 
-#### Problem:
+<h5 id="problem-3">問題：</h5>
 
-You want to create a recent post widget on the sidebar
+サイドバーに、最近の投稿を表示するウィジェットを作りたいです。
 
-#### Solution:
+<h5 id="solution-3">解決策：</h5>
 
-It's always possible to create a partial template extending `partials/base.html.twig` (see other solutions on this page), but here you're going to create a full template instead. The final code for your Twig template is shown below:
+部分的なテンプレートを `partials/base.html.twig` で拡張させるのは、常に可能です（このページの他の解決策の例を見てみてください）。しかし、ここでは完全なテンプレートを作っていきます。最終的な Twig テンプレートは、以下のようになります：
 
 ```twig
 <div class="sidebar-content recent-posts">
@@ -303,9 +310,10 @@ It's always possible to create a partial template extending `partials/base.html.
 </div>
 ```
 
-All this code does is sort the children (blog posts) of the `/blog` page by decending date order. It then takes the first five blog posts using the `slice` Twig filter. By the way, `slice(n,m)` takes elements from `n` to `m-1`. In this example, any blog posts that have a banner image have been named `banner.jpg`. This is set in a variable `bannerimage`. If `bannerimage` exists, it is shrunk down to a `60px x 60px` box and will appear to the left of the post title text and date. If it does not exist, the website logo is resized to `60px x 60px` and placed to the left of the title and date text instead.
+このコードでやっていることは、 `/blog` ページのすべての子ページ（ブログ投稿）を、日付降順でソートします。それから、最初の5つのブログ投稿を、 Twig フィルターの `slice` を使って切り出します（ところで、 `slice(n,m)` は、`n` 個目から `m-1` 個目を取り出します）。
+この例では、バナー画像を持つブログ投稿のバナー画像には、 `banner.jpg` という名前が付いているという前提です。この画像に、 `bannerimage` という twig 変数を設定します。もし `bannerimage` が存在すれば、 `60px x 60px` の正方形に小さくされ、投稿タイトルと日付の左側に表示されます。存在しなければ、かわりに web サイトのロゴが `60px x 60px` にリサイズされ、タイトルと日付の左に表示されます。
 
-The CSS for this widget is listed below:
+このウィジェットの CSS は、以下のようになります：
 
 ```css
 .sidebar-content .recent-post {
@@ -346,29 +354,30 @@ The CSS for this widget is listed below:
     margin: 0;
 }
 ```
-Adjust the spacing between recent post items, font-family, font-size and font-weight to taste.
+
+投稿アイテムどうしの余白や、font-family, font-size, font-weight などは、お好みに合わせて調節してください。
 
 <h2 id="create-a-private-area">プライベートエリアを作る</h2>
 
-Grav makes it very easy to create a private area on a website.
-It all works thanks to the Login Plugin.
+Grav なら、 web サイトにプライベートエリアを作るのも簡単です。
+すべて Login プラグインのおかげです。
 
 <h2 id="require-users-to-login-prior-to-access-a-part-of-the-site">サイトの一部にアクセスするためにユーザーにログインを要求する</h2>
 
-If you don’t have it already, install it through the Admin Panel or using the GPM command line utility.
+もしまだなら、 Login プラグインを管理パネルか、 GPM コマンドラインを使ってインストールしてください。
 
-Next, open a page in Admin, switch to expert mode and in the FrontMatter section add
+次に、管理パネルでページを開きます。 expert モードに変え、フロントマターのセクションに、次を追加します。
 
 ```yaml
 access:
     site.login: true
 ```
 
-Users accessing the page will need to login prior to see the page content.
+ページにアクセスしたユーザーは、ページのコンテンツを見たいならログインする必要があります。
 
-Notice that the permission does not extend by default to subpages. To do so, from the Login plugin configuration enable "Use parent access rules".
+注意点として、デフォルトではサブページにパーミッションは拡張されません。拡張するには、 Login プラグインから設定で、 "Use parent access rules" を有効化します。
 
-This option allows you to create extended private areas without worrying further about access level. Just put all under a page which has a restriction on access.
+このオプションにより、アクセスレベルを気にすることなく、プライベートエリアを拡張できます。アクセス制限のあるページの下に、すべてを置くだけです。
 
 <h2 id="require-special-permissions-to-view-one-or-more-pages">ページの閲覧に特別なパーミッションを要求する</h2>
 
