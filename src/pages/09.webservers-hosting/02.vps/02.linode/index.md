@@ -11,7 +11,7 @@ layout: ../../../../layouts/Default.astro
 
 After creating an account and navigating to the **Linode Manager**, you first need to add a Linode. For this test, we will pick the smallest and cheapest option at $10/month for 1 CPU core and 24GB of SSD Disk space. There are plenty of scaling options here all the way up to 20 CPU cores and 2GB of disk space! Also remember to choose an appropriate location from the drop-down:
 
-![](add-linode)
+![](add-linode.png)
 
 After the Linode has been created you will need to click the **Dashboard** link from the options column. This will take you to the page where you can now choose your distribution. From the Dashboard, choose **Deploy an Image**.
 
