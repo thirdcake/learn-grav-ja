@@ -3,21 +3,21 @@ title: 'config 設定'
 layout: ../../../layouts/Default.astro
 ---
 
-すべてのGravの設定ファイルは、[YAML構文](../../08.advanced/11.yaml/) で書かれており、拡張子は、`.yaml` です。YAMLは、非常に直感的なので、読み書きともにかんたんですが、利用可能な構文を完全に理解するには、[高度な設定の章のYAMLページ](../../08.advanced/11.yaml/)をチェックしてください。
+すべての Grav の設定ファイルは、 [YAML 構文](../../08.advanced/11.yaml/) で書かれており、拡張子は、 `.yaml` です。YAML は、非常に直感的なので、読み書きともにかんたんですが、利用可能な構文を完全に理解するには、 [高度な設定の章の YAML ページ](../../08.advanced/11.yaml/) をチェックしてください。
 
 > [!Tip]  
-> **TIP:** 本番サイトを、安全にし、かつ最適するクイックガイドとして、[セキュリティ > 設定](../../13.security/02.configuration/) の章を参照してください。
+> 本番サイトを、安全にし、かつ最適するクイックガイドとして、 [セキュリティ > 設定](../../13.security/02.configuration/) の章を参照してください。
 
 <h2 id="system-configuration">システム設定</h2>
 
-Gravは、ユーザにとって可能な限りかんたんにすることにフォーカスしており、設定においても同様です。Gravには、賢明な初期設定のオプションが用意されており、これらは `system/config/system.yaml` ファイルに含まれています。
+Grav は、ユーザにとって可能な限りかんたんにすることにフォーカスしており、設定においても同様です。Grav には、賢明な初期設定のオプションが用意されており、これらは `system/config/system.yaml` ファイルに含まれています。
 
-しかしながら、**絶対にこのファイルを変更しないでください** 。替わりに、あらゆる設定変更は、`user/config/system.yaml` というファイルに保存してください。このファイルに、同じ構造で、同じ名前の設定をすれば、すべて初期設定から上書きされます。
+しかしながら、 **絶対にこのファイルを変更しないでください** 。替わりに、あらゆる設定変更は、 `user/config/system.yaml` というファイルに保存してください。このファイルに、同じ構造で、同じ名前の設定をすれば、すべて初期設定から上書きされます。
 
 > [!Warning]  
-> 一般的に言って、`system/` フォルダ内のどんなことでも **決して** 変更するべきではありません。ユーザがすること（コンテンツを作る、プラグインをインストールする、設定を編集するなど）は、 `user/` フォルダ内で行ってください。こうすることで、アップグレードがかんたんになりますし、バックアップや同期のために、変更内容をひとつの場所にまとめておくことができるようになります。 
+> 一般的に、 `system/` フォルダ内のどんなことでも **決して** 変更するべきではありません。ユーザがすること（コンテンツを作る、プラグインをインストールする、設定を編集するなど）は、 `user/` フォルダ内で行ってください。こうすることで、アップグレードがかんたんになりますし、バックアップや同期のために、変更内容をひとつの場所にまとめておくことができるようになります。 
 
-デフォルトの`system/config/system.yaml` ファイルにある変数は次のとおりです：
+デフォルトの `system/config/system.yaml` ファイルにある変数は次のとおりです：
 
 <h3 id="basic-options">基本オプション</h3>
 
@@ -41,23 +41,23 @@ http_x_forwarded:
   ip: true
 ```
 
-これらの設定オプションは、それぞれの子セクションには表示されません。これらはサイトの運用、タイムゾーン、ベースURLに影響する一般的なオプションです。
+これらの設定オプションは、それぞれの子セクションには表示されません。これらはサイトの運用、タイムゾーン、ベース URL に影響する一般的なオプションです。
 
 | プロパティ | 説明 |
 | -------- | ----------- |
-| **absolute_urls:** | Absolute or relative URLs for `base_url` |
-| **timezone:** | Valid values can be found [here](https://php.net/manual/en/timezones.php) |
-| **default_locale:** | Default locale (defaults to system) |
-| **param_sep:** | This is used for Grav parameters in the URL.  Don't change this unless you know what you are doing.  Grav automatically sets this to `;` for users running Apache web server on Windows |
-| **wrapped_site:** | For themes/plugins to know if Grav is wrapped by another platform. Can be `true` or `false` |
-| **reverse_proxy_setup:** | Running in a reverse proxy scenario with different webserver ports than proxy. Can be `true` or `false` |
-| **force_ssl:** | If enabled, Grav forces to be accessed via HTTPS (NOTE: Not an ideal solution). Can be `true` or `false` |
-| **force_lowercase_urls:** |If you want to support mixed cased URLs set this to `false` |
-| **custom_base_url:** | Manually set the base\_url here |
-| **username_regex:** | Only lowercase chars, digits, dashes, underscores. 3 - 16 chars |
-| **pwd_regex:** | At least one number, one uppercase and lowercase letter, and be at least 8+ chars |
-| **intl_enabled:** | Special logic for PHP International Extension (mod\_intl) |
-| **http_x_forwarded:** | Configuration options for the various HTTP\_X\_FORWARD headers (**Grav 1.7.0+**) |
+| **absolute_urls:** | `base_url` の絶対もしくは相対 URL |
+| **timezone:** | 受け取れる値は、 [こちら](https://php.net/manual/en/timezones.php) |
+| **default_locale:** | デフォルトのロケール（システムにとってのデフォルト） |
+| **param_sep:** | Grav での URL のパラメータに使います。変更の影響が分からないうちは触らないでください。 Windows 上の Apache web サーバーでの運用中は、 Grav は自動的に `;` を設定します。 |
+| **wrapped_site:** | テーマやプラグインに、 Grav が他のプラットフォームに含まれているかを知らせます。 `true` もしくは `false` が使えます |
+| **reverse_proxy_setup:** |  Running in a reverse proxy scenario with different webserver ports than proxy. `true` または `false` の値 |
+| **force_ssl:** | 有効化すると、 Grav は強制的に HTTPS でアクセスします（注意：理想的な解決策ではありません）。 `true` か `false` が使えます |
+| **force_lowercase_urls:** | 大文字/小文字に対応した URL をサポートしたい場合、これを `false` にしてください |
+| **custom_base_url:** | `base_url` を手作業で設定するならここでしてください |
+| **username_regex:** | 上記の例は小文字、数字、ダッシュ、アンダースコアで、 3-16 文字 |
+| **pwd_regex:** | 上記の例は1つ以上の数字、1つ以上の大文字と小文字で、8文字以上 |
+| **intl_enabled:** | PHP の国際化用拡張モジュールの特別なロジック（ `mod_intl` ） |
+| **http_x_forwarded:** | 多様な `HTTP_X_FORWARD` ヘッダのための設定オプション（ **Grav 1.7.0 以上** ） |
 
 ### Languages
 
@@ -76,20 +76,20 @@ languages:
   content_fallback: {}
 ```
 
-**Languages** 部分は、サイトの言語を設定します。サポート対象とする言語の種類、URLのデフォルトの言語の指定、翻訳の設定などが含まれます。**Languages** 部分の内訳は、以下の通りです：
+**Languages** 部分は、サイトの言語を設定します。サポート対象とする言語の種類、 URL のデフォルトの言語の指定、翻訳の設定などが含まれます。 **Languages** 部分の内訳は、以下の通りです：
 
 | プロパティ | 説明 |
 | -------- | ----------- |
-| **supported:** | List of languages supported. eg: `[en, fr, de]` |
-| **default_lang:** | Default is the first supported language. Must be one of the supported languages |
-| **include_default_lang:** | Include the default lang prefix in all URLs. Can be `true` or `false` |
-| **include_default_lang_file_extension:** | If enabled, saving a page will prepend the default language to the file extension (eg. `.en.md`). Disable it to keep the default language using `.md` file extension. Can be `true` or `false` (**Grav 1.7.0+**) |
-| **pages_fallback_only:** | Only fallback to find page content through supported languages. Can be `true` or `false` |
-| **translations:** | Enable translations by default. Can be `true` or `false` |
-| **translations_fallback:** | Fallback through supported translations if active lang doesn't exist. Can be `true` or `false` |
-| **session_store_active:** | Store active language in session. Can be `true` or `false` |
-| **http_accept_language:** | Attempt to set the language based on http\_accept\_language header in the browser. Can be `true` or `false` |
-| **override_locale:** | Override the default or system locale with language specific one. Can be `true` or `false` |
+| **supported:** | サポート対象言語のリスト。例： `[en, fr, de]` |
+| **default_lang:** | デフォルトは、上記の supported 言語で最初に書いた言語。 supported 言語の中から選ばなければいけません |
+| **include_default_lang:** | URL すべてに、default lang の接頭辞を追加する。 `true` もしくは `false` |
+| **include_default_lang_file_extension:** | 有効化すると、ページを保存するときに、デフォルトの言語をファイル拡張子に追加します（例： `.en.md` ）デフォルト言語でも `.md` ファイル拡張子を使い続けたい場合は、無効化してください。 `true` または `false` の値 (**Grav 1.7.0+**) |
+| **pages_fallback_only:** | サポートされている言語からページコンテンツを探してフォールバックします。 `true` または `false` の値 |
+| **translations:** | デフォルトで翻訳を有効化します。 `true` または `false` の値 |
+| **translations_fallback:** |  Fallback through supported translations if active lang doesn't exist. `true` または `false` の値 |
+| **session_store_active:** | Store active language in session. `true` または `false` の値 |
+| **http_accept_language:** | Attempt to set the language based on http\_accept\_language header in the browser. `true` または `false` の値 |
+| **override_locale:** | Override the default or system locale with language specific one. `true` または `false` の値 |
 | **content_fallback:** | By default if the content isn't translated, Grav will display the content in the default language. Use this setting to override that behavior per language basis. (**Grav 1.7.0+**) |
 
 ### Home
@@ -100,12 +100,12 @@ home:
   hide_in_urls: false
 ```
 
-**Home** セクションでは、サイトのトップページのデフォルトのルートを設定します。URLのホームルートを非表示にすることもできます。
+**Home** セクションでは、サイトのトップページのデフォルトのルーティングを設定します。 URL のホームページへのルーティングを非表示にすることもできます。
 
 | プロパティ | 説明 |
 | -------- | ----------- |
-| **alias:** | Default path for home, ie: `/home` or `/` |
-| **hide_in_urls:** | Hide the home route in URLs. Can be `true` or `false` |
+| **alias:** | home ページへのデフォルト path 。例： `/home` or `/` |
+| **hide_in_urls:** | URL で home ページへのルーティングを隠す。 `true` または `false` の値 |
 
 ### Pages
 
@@ -180,39 +180,39 @@ pages:
 | ... **default:** | The default date format Grav expects in the `date: ` field |
 | ... **short:** | Short date format. Example: `'jS M Y'` |
 | ... **long:** | Long date format. Example: `'F jS \a\t g:ia'` |
-| **publish_dates:** | Automatically publish/unpublish based on dates. Can be set `true` or `false` |
+| **publish_dates:** | Automatically publish/unpublish based on dates. `true` または `false` の値 |
 | **process:** | |
-| ... **markdown:** | Enable or disable the processing of markdown on the front end. Can be set `true` or `false` |
-| ... **twig:** | Enable or disable the processing of twig on the front end. Can be set `true` or `false` |
-| **twig_first:** | Process Twig before markdown when processing both on a page. Can be set `true` or `false` |
-| **never_cache_twig:** | Enabling this will allow you to add a processing logic that can change dynamically on each page load, rather than caching the results and storing it for each page load. This can be enabled/disabled site-wide in the **system.yaml**, or on a specific page. Can be set `true` or `false` |
+| ... **markdown:** | Enable or disable the processing of markdown on the front end. `true` または `false` の値 |
+| ... **twig:** | Enable or disable the processing of twig on the front end. `true` または `false` の値 |
+| **twig_first:** | Process Twig before markdown when processing both on a page. `true` または `false` の値 |
+| **never_cache_twig:** | Enabling this will allow you to add a processing logic that can change dynamically on each page load, rather than caching the results and storing it for each page load. This can be enabled/disabled site-wide in the **system.yaml**, or on a specific page. `true` または `false` の値 |
 | **events:** | |
-| ... **page:** | Enable page-level events. Can be set `true` or `false` |
-| ... **twig:** | Enable Twig-level events. Can be set `true` or `false` |
+| ... **page:** | Enable page-level events. `true` または `false` の値 |
+| ... **twig:** | Enable Twig-level events. `true` または `false` の値 |
 | **markdown:** | |
-| ... **extra:** | Enable support for Markdown Extra support (GitHub-flavored Markdown (GFM) by default). Can be set `true` or `false` |
-| ... **auto_line_breaks:** | Enable automatic line breaks. Can be set `true` or `false` |
-| ... **auto_url_links:** | Enable automatic HTML links. Can be set `true` or `false` |
-| ... **escape_markup:** | Escape markup tags into entities. Can be set `true` or `false` |
+| ... **extra:** | Enable support for Markdown Extra support (GitHub-flavored Markdown (GFM) by default). `true` または `false` の値 |
+| ... **auto_line_breaks:** | Enable automatic line breaks. `true` または `false` の値 |
+| ... **auto_url_links:** | Enable automatic HTML links. `true` または `false` の値 |
+| ... **escape_markup:** | Escape markup tags into entities. `true` または `false` の値 |
 | ... **special_chars:** | List of special characters to automatically convert to entities. Each character consumes a line below this variable. Example: `'>': 'gt'` |
 | ... **valid_link_attributes:** | Valid attributes to pass through via markdown links (**Grav 1.7+**) |
 | **types:** | List of valid page types. For example: `[txt,xml,html,htm,json,rss,atom]` |
 | **append_url_extension:** | Append page's extension in Page URLs (e.g. `.html` results in **/path/page.html**) |
 | **expires:** | Page expires time in seconds (604800 seconds = 7 days) (`no cache` is also possible) |
 | **cache_control:** | Can be blank for no setting, or a [valid](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control) `cache-control` text value |
-| **last_modified:** | Set the last modified date header based on file modification timestamp. Can be set `true` or `false` |
-| **etag:** | Set the etag header tag. Can be set to `true` or `false` |
-| **vary_accept_encoding:** | Add `Vary: Accept-Encoding` header. Can be set to `true` or `false` |
-| **redirect_default_route:** | Automatically redirect to a page's default route. Can be set to `true` or `false` |
+| **last_modified:** | Set the last modified date header based on file modification timestamp. `true` または `false` の値 |
+| **etag:** | Set the etag header tag. `true` または `false` の値 |
+| **vary_accept_encoding:** | Add `Vary: Accept-Encoding` header. `true` または `false` の値 |
+| **redirect_default_route:** | Automatically redirect to a page's default route. `true` または `false` の値 |
 | **redirect_default_code:** | Default code to use for redirects. For example: `302` |
 | **redirect_trailing_slash:** | Handle automatically or 302 redirect a trailing / URL |
 | **ignore_files:** | Files to ignore in Pages. Example: `[.DS_Store] ` |
 | **ignore_folders:** | Folders to ignore in Pages. Example: `[.git, .idea]` |
-| **ignore_hidden:** | Ignore all Hidden files and folders. Can be set to `true` or `false` |
-| **hide_empty_folders:** | If folder has no .md file, should it be hidden. Can be set to `true` or `false` |
-| **url_taxonomy_filters:** | Enable auto-magic URL-based taxonomy filters for page collections. Can be set to `true` or `false` |
+| **ignore_hidden:** | Ignore all Hidden files and folders. `true` または `false` の値 |
+| **hide_empty_folders:** | If folder has no .md file, should it be hidden. `true` または `false` の値 |
+| **url_taxonomy_filters:** | Enable auto-magic URL-based taxonomy filters for page collections. `true` または `false` の値 |
 | **frontmatter:** | |
-| ... **process_twig:** | Should the frontmatter be processed to replace Twig variables? Can be set to `true` or `false` |
+| ... **process_twig:** | Should the frontmatter be processed to replace Twig variables? `true` または `false` の値 |
 | ... **ignore_fields:** | Fields that might contain Twig variables and should not be processed. Example: `['form','forms']` |
 
 ### Cache
@@ -242,7 +242,7 @@ cache:
 
 | プロパティ | 説明 |
 | -------- | ----------- |
-| **enabled:** | Set to `true` to enable caching. Can be set to `true` or `false` |
+| **enabled:** | Set to `true` to enable caching. `true` または `false` の値 |
 | **check:** | |
 | ... **method:** | Method to check for updates in pages. Options: `file`, `folder`, `hash` and `none`. [more details](../../08.advanced/02.performance-and-caching#grav-core-caching) |
 | **driver:** | Select a cache driver. Options are: `auto`, `file`, `apcu`, `redis`, `memcache`, and `wincache` |
@@ -253,7 +253,7 @@ cache:
 | **clear_images_by_default:** | By default grav does not include processed images when cache clears, this can be enabled by setting this to `true` |
 | **cli_compatibility:** | Ensures only non-volatile drivers are used (file, redis, memcache, etc.) |
 | **lifetime:** | Lifetime of cached data in seconds (`0` = infinite). `604800` is 7 days |
-| **gzip:** | GZip compress the page output. Can be set to `true` or `false` |
+| **gzip:** | GZip compress the page output. `true` または `false` の値 |
 | **allow_webserver_gzip:** | This option will change the header to `Content-Encoding: identity` allowing gzip to be more reliably set by the webserver although this usually breaks the out-of-process `onShutDown()` capability.  The event will still run, but it won't be out of process, and may hold up the page until the event is complete |
 | **redis:** | |
 | **... socket:** | The path to the redis socket file |
@@ -277,13 +277,13 @@ twig:
 
 | プロパティ | 説明 |
 | -------- | ----------- |
-| **cache:** | Set to `true` to enable Twig caching. Can be set to `true` or `false` |
-| **debug:** | Enable Twig debug. Can be set to `true` or `false` |
-| **auto_reload:** | Refresh cache on changes. Can be set to `true` or `false` |
-| **autoescape:** | Autoescape Twig vars. Can be set to `true` or `false` |
-| **undefined_functions:** | Allow undefined functions. Can be set to `true` or `false` |
-| **undefined_filters:** | Allow undefined filters. Can be set to `true` or `false` |
-| **umask_fix:** | By default Twig creates cached files as 755, fix switches this to 775. Can be set to `true` or `false` |
+| **cache:** | Set to `true` to enable Twig caching. `true` または `false` の値 |
+| **debug:** | Enable Twig debug. `true` または `false` の値 |
+| **auto_reload:** | Refresh cache on changes. `true` または `false` の値 |
+| **autoescape:** | Autoescape Twig vars. `true` または `false` の値 |
+| **undefined_functions:** | Allow undefined functions. `true` または `false` の値 |
+| **undefined_filters:** | Allow undefined filters. `true` または `false` の値 |
+| **umask_fix:** | By default Twig creates cached files as 755, fix switches this to 775. `true` または `false` の値 |
 
 ### Assets
 
@@ -312,21 +312,21 @@ assets:
 
 | プロパティ | 説明 |
 | -------- | ----------- |
-| **css_pipeline:** | The CSS pipeline is the unification of multiple CSS resources into one file. Can be set to `true` or `false` |
-| **css_pipeline_include_externals:** | Include external URLs in the pipeline by default. Can be set to `true` or `false` |
-| **css_pipeline_before_excludes:** | Render the pipeline before any excluded files. Can be set to `true` or `false` |
-| **css_minify:** | Minify the CSS during pipelining. Can be set to `true` or `false` |
-| **css_minify_windows:** | Minify Override for Windows platforms. `false` by default due to ThreadStackSize. Can be set to `true` or `false` |
-| **css_rewrite:** | Rewrite any CSS relative URLs during pipelining. Can be set to `true` or `false` |
-| **js_pipeline:** | The JS pipeline is the unification of multiple JS resources into one file. Can be set to `true` or `false` |
-| **js_pipeline_include_externals:** | Include external URLs in the pipeline by default. Can be set to `true` or `false` |
-| **js_pipeline_before_excludes:** | Render the pipeline before any excluded files. Can be set to `true` or `false` |
-| **js_module_pipeline** | The JS Module pipeline is the unification of multiple JS Module resources into one file. Can be set to `true` or `false` |
-| **js_module_pipeline_include_externals** | Include external URLs in the pipeline by default. Can be set to `true` or `false` |
-| **js_module_pipeline_before_excludes** | Render the pipeline before any excluded files. Can be set to `true` or `false` |
-| **js_minify:** | Minify the JS during pipelining. Can be set to `true` or `false` |
-| **enable_asset_timestamp:** | Enable asset timestamps. Can be set to `true` or `false` |
-| **enable_asset_sri:** | Enable asset SRI. Can be set to `true` or `false` |
+| **css_pipeline:** | The CSS pipeline is the unification of multiple CSS resources into one file. `true` または `false` の値 |
+| **css_pipeline_include_externals:** | Include external URLs in the pipeline by default. `true` または `false` の値 |
+| **css_pipeline_before_excludes:** | Render the pipeline before any excluded files. `true` または `false` の値 |
+| **css_minify:** | Minify the CSS during pipelining. `true` または `false` の値 |
+| **css_minify_windows:** | Minify Override for Windows platforms. `false` by default due to ThreadStackSize. `true` または `false` の値 |
+| **css_rewrite:** | Rewrite any CSS relative URLs during pipelining. `true` または `false` の値 |
+| **js_pipeline:** | The JS pipeline is the unification of multiple JS resources into one file. `true` または `false` の値 |
+| **js_pipeline_include_externals:** | Include external URLs in the pipeline by default. `true` または `false` の値 |
+| **js_pipeline_before_excludes:** | Render the pipeline before any excluded files. `true` または `false` の値 |
+| **js_module_pipeline** | The JS Module pipeline is the unification of multiple JS Module resources into one file. `true` または `false` の値 |
+| **js_module_pipeline_include_externals** | Include external URLs in the pipeline by default. `true` または `false` の値 |
+| **js_module_pipeline_before_excludes** | Render the pipeline before any excluded files. `true` または `false` の値 |
+| **js_minify:** | Minify the JS during pipelining. `true` または `false` の値 |
+| **enable_asset_timestamp:** | Enable asset timestamps. `true` または `false` の値 |
+| **enable_asset_sri:** | Enable asset SRI. `true` または `false` の値 |
 | **collections:** | This contains collections, designated as sub-items. For example: `jquery: system://assets/jquery/jquery-3.x.min.js`. [Read more about this](../../03.themes/07.asset-manager/#collections-and-attributes) |
 
 ### Errors
@@ -342,7 +342,7 @@ errors:
 | プロパティ | 説明 |
 | -------- | ----------- |
 | **display:** | Determines how errors are displayed. Enter either `1` for the full backtrace, `0` for Simple Error, or `-1` for System Error |
-| **log:** | Log errors to `/logs` folder. Can be set to `true` or `false` |
+| **log:** | Log errors to `/logs` folder. `true` または `false` の値 |
 
 ### Log
 
@@ -376,9 +376,9 @@ debugger:
 
 | プロパティ | 説明 |
 | -------- | ----------- |
-| **enabled:** | Enable Grav debugger and following settings. Can be set to `true` or `false` |
+| **enabled:** | Enable Grav debugger and following settings. `true` または `false` の値 |
 | **provider:** | Debugger provider: Can be set to `debugbar` or `clockwork` (**Grav 1.7+**) |
-| **censored:** | Censor potentially sensitive information (POST parameters, cookies, files, configuration and most array/object data in log messages). Can be set to `true` or `false` (**Grav 1.7+**) |
+| **censored:** | Censor potentially sensitive information (POST parameters, cookies, files, configuration and most array/object data in log messages). `true` または `false` の値 (**Grav 1.7+**) |
 | **shutdown:** | |
 | ... **close_connection:** | Close the connection before calling `onShutdown()`. `false` for debugging |
 
@@ -405,9 +405,9 @@ images:
 | プロパティ | 説明 |
 | -------- | ----------- |
 | **default_image_quality:** | Default image quality to use when resampling images. For example: `85` = 85% |
-| **cache_all:** | Cache all images by default. Can be set to `true` or `false` |
+| **cache_all:** | Cache all images by default. `true` または `false` の値 |
 | **cache_perms:** | **Must be in quotes!** Default cache folder perms. Usually `'0755'` or `'0775'` |
-| **debug:** | Show an overlay over images indicating the pixel depth of the image when working with retina, for example. Can be set to `true` or `false` |
+| **debug:** | Show an overlay over images indicating the pixel depth of the image when working with retina, for example. `true` または `false` の値 |
 | **auto_fix_orientation:** | Try to automatically fix images uploaded with non-standard rotation |
 | **seofriendly:** | SEO-friendly processed image names |
 | **cls:** | Cumulative Layout Shift. [More details](https://web.dev/optimize-cls/) |
@@ -458,13 +458,13 @@ session:
 
 | プロパティ | 説明 |
 | -------- | ----------- |
-| **enabled:** | Enable Session support. Can be set to `true` or `false` |
+| **enabled:** | Enable Session support. `true` または `false` の値 |
 | **initialize:** | Initialize session from Grav (if `false`, plugin needs to start the session) |
 | **timeout:** | Timeout in seconds. For example: `1800` |
 | **name:** | Name prefix of the session cookie. Use alphanumeric, dashes or underscores only. Do not use dots in the session name. For example: `grav-site` |
 | **uniqueness:** | Should sessions be `path` based or `security.salt` based |
-| **secure:** | Set session secure. If `true`, indicates that communication for this cookie must be over an encrypted transmission. Enable this only on sites that run exclusively on HTTPS. Can be set to `true` or `false` |
-| **httponly:** | Set session HTTP only. If `true`, indicates that cookies should be used only over HTTP, and JavaScript modification is not allowed. Can be set to `true` or `false` |
+| **secure:** | Set session secure. If `true`, indicates that communication for this cookie must be over an encrypted transmission. Enable this only on sites that run exclusively on HTTPS. `true` または `false` の値 |
+| **httponly:** | Set session HTTP only. If `true`, indicates that cookies should be used only over HTTP, and JavaScript modification is not allowed. `true` または `false` の値 |
 | **samesite:** | Set session SameSite. Possible values are Lax, Strict and None. See [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite) |
 | **domain:** | The session domain to be used in the responses. Use only if you you rewrite the site domain for example in a Docker Container. |
 | **path:** | The session path to be used in the responses. Use only if you you rewrite the site subfolder for example in a Docker Container. |
