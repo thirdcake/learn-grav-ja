@@ -1,58 +1,60 @@
 ---
-title: "複数サイト設定"
+title: "マルチサイト設定"
 layout: ../../../layouts/Default.astro
 ---
 
-!! Grav has preliminary multisite support available.  However, the Admin plugin still need to be updated to fully support multisite configurations.  We will continue to work on this in subsequent releases of Grav.
+> [!Info]  
+> Grav は暫定的にマルチサイトをサポートしています。 しかし、マルチサイト設定を完全にサポートするには、管理パネルプラグインに、さらなるアップデートが必要です。Grav の今後のリリースで、引き続き取り組んでいきます。
 
-### What is a Multisite Setup?
+<h3 id="what-is-a-multisite-setup">マルチサイト設定とは？</h3>
 
-A multisite setup allows you to create and manage a network of multiple websites, all running on a single installation.
+マルチサイト設定とは、1つの Grav のインストールで、複数の web サイトネットワークを作成したり、管理したりできるようにする設定です。
 
-Grav has built-in multisite support. This functionality extends the [basic environment configuration](../04.environment-config/), which lets you define custom environments for your production and development sites.
+Grav は、組み込みでマルチサイトをサポートしています。この機能は、本番サイトと開発サイトでカスタム環境変数を定義できる [基本的な環境設定](../04.environment-config/) を拡張しています。
 
-A full multisite setup gives you the power to change how and from where Grav loads all its files.
+完全なマルチサイト設定により、そのファイルすべてをどこから、どのように読み込むかを変更することができます。
 
-### Requirements for a Grav Multisite Setup
+<h3 id="requirements-for-a-grav-multisite-setup">Grav マルチサイト設定の要件</h3>
 
-The most important thing you will need to run a Grav multisite network is good website hosting. If you are not planning to create many sites and do not expect many visitors, then you can get away with shared hosting. However, due to the nature of multisites, you’d probably need a VPS or dedicated server as your sites grow.
+Grav で複数のサイトネットワーク運営するために最も重要なのは、良い web サイトホスティング環境です。多くのサイトを作成しようと考えていなければ、そして多くの閲覧者を想定していなければ、レンタルサーバーでも大丈夫です。しかし、マルチサイトの性質上、サイトが増えたり、成長するにつれて、 VPS や専用サーバーが必要になるでしょう。
 
-### Setup and installation
+<h3 id="setup-and-installation">セットアップとインストール</h3>
 
-Before you begin, you’ll want to be sure your web server is capable of running multiple websites i.e., you have access to your Grav root directory.
+始める前に、あなたの web サーバーが、複数の web サイトを運用できるかどうか確認をしてください。つまり、 Grav の root ディレクトリへのアクセス権が必要です。
 
-This is essential since serving multiple websites from the same installation is based on a `setup.php` file located in your Grav root.
+1つの同じインストールから、複数の web サイトを提供するのは、 Grav の root ディレクトリに置いた `setup.php` ファイルをベースとして行われるので、これは必須です。
 
 #### Quickstart (for Beginners)
 
-Once created, the `setup.php` is called every time a user requests a page. In order to serve multiple websites from one single installation, this script (roughly speaking) has to tell Grav where the files (for the configurations, themes, plugins, pages etc.) for a specific subsite are located.
+一度作成すれば、 `setup.php` は、ユーザーがページをリクエストするたびに呼ばれます。1つのインストールから複数の web サイトを提供するために、（大まかに言えば）このスクリプトは、 Grav に特定のサブサイトのためのファイル（設定ファイル、テーマファイル、プラグインファイル、ページファイル、その他のファイル）が、どこに置かれているのかを伝えなければいけません。
 
-The provided snippets below setup your Grav installation in such a way that a request like
+以下のスニペットは、左のようなリクエストが来たときに、右の対応方法をするように Grav のインストールにセットアップします。
 
-[prism classes="language-text"]
+```txt
 https://<subsite>.example.com   -->   user/env/<subsite>.example.com
-[/prism]
-or
-[prism classes="language-text"]
+```
+
+もしくは
+
+```txt
 https://example.com/<subsite>   -->   user/env/<subsite>
-[/prism]
+```
 
-will use the `user/env` directory as the base "user" path instead of the `user` directory.
+`user` ディレクトリではなく、その中の `user/env` ディレクトリを使ってください。
 
-If you choose sub-directories or path based URLs for subsites, then the only thing you need is to create a directory for each subsite in the `user/env` directory containing at least the required folders `config`, `pages`, `plugins`, and `themes`.
+サブサイトに、サブディレクトリや path ベースの URL を選んだ場合、 `user/env` ディレクトリの中に、サブサイトごとにディレクトリを作ることだけが必要です。そのディレクトリには、少なくとも  `config`, `pages`, `plugins`, そして `themes` フォルダが必要です。
 
-If you choose sub-domains for structuring your website network, then you will have to configure (wildcard) sub-domains on your server in addition to the setup of your subsites in your `user/env` directory.
+web サイトネットワーク構造にサブドメインを選んだ場合、 `user/env` ディレクトリにサブサイトの設定をした上で、サーバー上に（ワイルドカード）サブドメインを設定しなければいけません。
 
-Either way, decide which setup suits you best.
+どちらの方法でも、あなたのベストなセットアップを選んでください。
 
-##### Snippets
+<h5 id="snippets">スニペット</h5>
 
 For subsites accessible via sub-domains copy the `setup_subdomain.php` file, otherwise for subsites accessible via sub-directories the `setup_subdirectory.php` file into your `setup.php`.
 
 !!! The `setup.php` file must be put in the Grav root folder, the same folder where you can find `index.php`, `README.md` and the other Grav files.
 
 **setup_subdomain.php**:
-[prism classes="language-php line-numbers"]
 
 ```php
 <?php
@@ -92,6 +94,7 @@ return [
 ```
 
 **setup_subdirectory.php**:
+
 ```php
 <?php
 /**
@@ -140,6 +143,7 @@ You can place your language specific configs in `config/<lang-context>/site.yaml
 This way `yoursite.com/de-AT/index.html` would load `config/de-AT/site.yaml`, `yoursite.com/de-CH/index.html` would load `config/de-CH/site.yaml` and so on.
 
 **setup_subdir_config_switch.php**:
+
 ```php
 <?php
 /**
@@ -188,6 +192,7 @@ return [];
 ```
 
 ##### GPM (Grav Package Manager) and multiple setups
+
 Should you need to manage your subsites' plugins and themes with the [GPM](https://learn.getgrav.org/17/cli-console/grav-cli-gpm), 
 Keep both `user/themes` + `user/plugins`, so that the GPM fetches and updates them in a single location. Then symlink the needed items under `user/env/my.site.com/themes` or `user/env/my.site.com/plugins`. Then setup individual yaml configurations `user/env/my.site.com/config/plugins` for each subsites.
 
@@ -258,7 +263,8 @@ In multi-site setups, some of these default settings may not be what you want. G
 Mapping physical directories to a logical device can be done by setting up `prefixes`. Here is an example where we separate pages, images, accounts, data, cache and logs from the rest of the sites, but make everything else to look up from the default locations:
 
 `user/env/domain.com/config/streams.yaml`:
-[prism classes="language-yaml line-numbers"]
+
+```yaml
 schemes:
   account:
     type: ReadOnlyStream
@@ -285,7 +291,7 @@ schemes:
     type: Stream
     prefixes:
       '': ['logs/domain.com']
-[/prism]
+```
 
 In Grav streams are objects, mapping a set of physical directories of the system to a logical device. They are classified via their `type` attribute. For read-only streams that's the `ReadOnlyStream` type and for read-writeable streams that's the `Stream` type.
 
@@ -294,7 +300,6 @@ For example, if you use `image://mountain.jpg` stream, Grav looks up `environmen
 
 Prefixes allows you to combine several physical paths into one logical stream. If you look carefully at `cache` stream definition, it is a bit different. In this case `cache://` resolves to `cache`, but `cache://images` resolves to `images`.
 
-[version=17]
 ### Server Based Multi-Site Configuration
 
 Grav 1.7 adds support to customize initial environment from your server configuration.
@@ -305,7 +310,6 @@ The following environment variables can be used to customize the default paths w
 
 !!! **Note:** You can use either environment variables or PHP constants, but they need to be set before Grav runs.
 
-[div class="table-keycol"]
 | Variable | Default | Description |
 | -------- | ------- | ----------- |
 | **GRAV_SETUP_PATH** | AUTO DETECT | A custom path to `setup.php` file including the filename. By default Grav looks the file from `GRAV_ROOT/setup.php` and `GRAV_ROOT/GRAV_USER_PATH/setup.php`. |
@@ -314,7 +318,6 @@ The following environment variables can be used to customize the default paths w
 | **GRAV_LOG_PATH** | `logs` | A relative path for `log://` stream. |
 | **GRAV_TMP_PATH** | `tmp` | A relative path for `tmp://` stream. |
 | **GRAV_BACKUP_PATH** | `backup` | A relative path for `backup://` stream. |
-[/div]
 
 In addition there are variables to customize the environments. Better documentation for these can be found in [Server Based Environment Configuration](../04.environment-config#server-based-environment-configuration).
 
@@ -348,6 +351,7 @@ In above example `__` (double underscore) represents nested variable, which in t
 You can also use environment variables in `setup.php`. This allows you for example to store secrets outside the configuration:
 
 `user/setup.php`:
+
 ```php
 <?php
 
@@ -380,9 +384,7 @@ return [
 
 After defining the variables in `setup.php`, you can then set those in your server:
 
-[ui-tabs]
-[ui-tab title="Apache 2"]
-[prism classes="language-apacheconf line-numbers"]
+```apacheconf
 <VirtualHost 127.0.0.1:80>
     ...
 
@@ -393,10 +395,9 @@ After defining the variables in `setup.php`, you can then set those in your serv
     SetEnv DYNAMODB_SESSION_REGION us-east-1
     SetEnv GOOGLE_MAPS_KEY         XWIozB2R2GmYInTqZ6jnKuUrdELounUb4BIxYmp
 </VirtualHost>
-[/prism]
-[/ui-tab]
-[ui-tab title="NGINX php-fpm"]
-[prism classes="language-nginx line-numbers"]
+```
+
+```nginx
 location / {
     ...
 
@@ -407,10 +408,9 @@ location / {
     fastcgi_param DYNAMODB_SESSION_REGION us-east-1;
     fastcgi_param GOOGLE_MAPS_KEY         XWIozB2R2GmYInTqZ6jnKuUrdELounUb4BIxYmp;
 }
-[/prism]
-[/ui-tab]
-[ui-tab title="NGINX php-cgi"]
-[prism classes="language-nginx line-numbers"]
+```
+
+```nginx
 location / {
 ...
 
@@ -421,10 +421,9 @@ location / {
     env[GDYNAMODB_SESSION_REGION] = us-east-1
     env[GGOOGLE_MAPS_KEY]         = XWIozB2R2GmYInTqZ6jnKuUrdELounUb4BIxYmp
 }
-[/prism]
-[/ui-tab]
-[ui-tab title="Docker"]
-[prism classes="language-yaml line-numbers"]
+```
+
+```yaml
 web:
   environment:
     - GRAV_SETUP_PATH=user/setup.php
@@ -433,20 +432,16 @@ web:
     - DYNAMODB_SESSION_SECRET=CVjwH+QkfnPhKgVvJvrG24s0ABi343cJ7WTPxvb7
     - DYNAMODB_SESSION_REGION=us-east-1
     - GOOGLE_MAPS_KEY=XWIozB2R2GmYInTqZ6jnKuUrdELounUb4BIxYmp
-[/prism]
-[/ui-tab]
-[ui-tab title="PHP"]
-[prism classes="language-php line-numbers"]
+```
+
+```php
 putenv('GRAV_SETUP_PATH', 'user/setup.php');
 putenv('GRAV_ENVIRONMENT', 'production');
 putenv('DYNAMODB_SESSION_KEY', 'JBGARDQ06UNJV00DL0R9');
 putenv('DYNAMODB_SESSION_SECRET', 'CVjwH+QkfnPhKgVvJvrG24s0ABi343cJ7WTPxvb7');
 putenv('DYNAMODB_SESSION_REGION', 'us-east-1');
 putenv('GOOGLE_MAPS_KEY', 'XWIozB2R2GmYInTqZ6jnKuUrdELounUb4BIxYmp');
-[/prism]
-[/ui-tab]
-[/ui-tabs]
+```
 
 In this example, server will also use `production` environment stored in `user/env/production` folder.
 
-[/version]
