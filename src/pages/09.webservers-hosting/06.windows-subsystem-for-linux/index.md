@@ -65,7 +65,7 @@ sudo nano /etc/apache2/sites-available/000-default.conf
 
 次の VirtualHost config を挿入します：
 
-```apacheconf
+```txt
 <VirtualHost *:80>
 
     ServerName localhost
@@ -272,7 +272,7 @@ Vistual Studio Code を使用する場合、ファイルマッピングのため
 　
 　エディタに次の内容を貼り付けます。
 
-  ```apacheconf
+  ```txt
   <VirtualHost *:80>
 
       ServerName mysite-dev
@@ -331,7 +331,7 @@ nano .bashrc
 
 ファイルの末尾に次のスクリプトを追加します：
 
-```apacheconf
+```txt
 ## Start apache2 if not running
 status=`service apache2 status`
 if [[ $status == *"apache2 is not running" ]]
@@ -342,7 +342,7 @@ fi
 
 また、次のコードを `.bash_logout` に追加し、bash シェルが閉じるときに Apache を停止します。
 
-```apacheconf
+```txt
 ## Stop apache2 if running
 status=`service apache2 status`
 if [[ $status == *"apache2 is running" ]]

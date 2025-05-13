@@ -452,7 +452,7 @@ is set to `true` in your `system.yaml`.
 
 Add the following to your **.htaccess** file and adopt the language slugs and domain names to your needs:
 
-```htaccess
+```txt
 # http://www.cheat-sheets.org/saved-copy/mod_rewrite_cheat_sheet.pdf
 # http://www.workingwith.me.uk/articles/scripting/mod_rewrite
 
@@ -471,7 +471,7 @@ If you know how to simplify the rewrite rules, please edit this page on GitHub b
 
 Here's a simplified version of the rule set:
 
-```htaccess
+```txt
 # http://www.cheat-sheets.org/saved-copy/mod_rewrite_cheat_sheet.pdf
 # http://www.workingwith.me.uk/articles/scripting/mod_rewrite
 

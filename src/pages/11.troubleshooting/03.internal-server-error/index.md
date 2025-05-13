@@ -34,7 +34,7 @@ layout: ../../../layouts/Default.astro
 
 PHP 5.3 や 5.4 から 5.5 に最近アップグレードした場合、 `php.ini` ファイルに古い設定が残っていることがあります。 **500 Internal Server Error** の原因となりうるものの1つとして、 `register_globals` 設定があります。単純にこの行を削除するか、コメントアウトしてください：
 
-```apacheconf
+```txt
 register_global = On
 ```
 
@@ -44,7 +44,7 @@ register_global = On
 
 サーバーが Windows 上で動作している場合、 500 Internal Server Error が **ThreadStackSize** が小さすぎることによって起こることがあります。このコードを `httpd.conf` ファイルの末尾に追加してください。
 
-```apacheconf
+```txt
 <IfModule mpm_winnt_module>
   ThreadStackSize 8388608
 </IfModule>
@@ -58,7 +58,7 @@ Grav では、フォルダのディレクトリ一覧を表示させないため
 
 このような場合に、Grav の `.htaccess` ファイルの以下の行をコメントアウトすることで、 Internal Server error 問題が解決できたというレポートを見てきました。
 
-```apacheconf
+```txt
 # Prevent file browsing
 #Options -Indexes
 ```
@@ -67,13 +67,13 @@ Grav では、フォルダのディレクトリ一覧を表示させないため
 
 1&1 ホスティング（それ以外の会社でも適用可能です）で、RewriteBase を設定しなかったことで 500 Internal Server Errors が発生したと、いくつか報告されています。
 
-```apacheconf
+```txt
 # RewriteBase /
 ```
 
 上記を、下記のように変更してみてください：
 
-```apacheconf
+```txt
 RewriteBase /
 ```
 

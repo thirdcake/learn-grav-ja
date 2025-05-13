@@ -59,7 +59,7 @@ Related issue: [admin#951](https://github.com/getgrav/grav-plugin-admin/issues/9
 
 If you are running PHP with Zend OPache and you receive this error, then your current OPCache configuration is [limiting access to OPcache API function to scripts only from a specified string](https://php.net/manual/en/opcache.configuration.php). The simplest solution to this is to find the location of this directive either in your `php.ini` file or in a specialized `opcache.ini` file that is being pulled in to your overall `php.ini` file and set this value to nothing:
 
-```apacheconf
+```txt
 opcache.restrict_api=
 ```
 

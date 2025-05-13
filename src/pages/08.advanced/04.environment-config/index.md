@@ -98,7 +98,7 @@ The simplest way to set environment is by using `GRAV_ENVIRONMENT`. Value of `GR
 
 The following example selects **development** environment for the localhost:
 
-```apacheconf
+```txt
 <VirtualHost 127.0.0.1:80>
     ...
 
@@ -145,7 +145,7 @@ Value of `GRAV_ENVIRONMENTS_PATH` has to be existing path under `GRAV_ROOT`. Do 
 
 In the next example, all the environments will be located in `user/sites/GRAV_ENVIRONMENT`, where `GRAV_ENVIRONMENT` is either automatically detected or manually set in the server configuration:
 
-```apacheconf
+```txt
 <VirtualHost 127.0.0.1:80>
 ...
 
@@ -190,7 +190,7 @@ In the next example, only the current environment will be located in `user/devel
 
 
 
-```apacheconf
+```txt
 <VirtualHost 127.0.0.1:80>
 ...
 

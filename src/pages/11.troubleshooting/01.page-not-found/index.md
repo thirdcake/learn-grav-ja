@@ -37,7 +37,7 @@ The default `.htaccess` that comes bundled with Grav works fine out-of-the-box i
 
 There is a short explanation of this in the `.htaccess` file itself:
 
-```apacheconf
+```txt
 ##
 # If you are getting 404 errors on subpages, you may have to uncomment the RewriteBase entry
 # You should change the '/' to your appropriate subfolder. For example if you have
@@ -56,7 +56,7 @@ We've included additional information to help you locate and troubleshoot your `
 
 Some webserver packages (I'm looking at your EasyPHP and WAMP!) do not come with the Apache **rewrite** module enabled by default. They usually can be enabled from the configuration settings for Apache, or you can do so manually via the `httpd.conf` by uncommenting this line (or something similar) so they are loaded by Apache:
 
-```apacheconf
+```txt
 #LoadModule rewrite_module modules/mod_rewrite.so
 ```
 
@@ -78,7 +78,7 @@ mv .htaccess .htaccess-backup
 
 And then try this simple `.htaccess` file:
 
-```apacheconf
+```txt
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteRule ^.*$ htaccess_tester.php

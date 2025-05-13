@@ -1,0 +1,6 @@
+{
+    "require": {
+        "symfony/finder": "^6.4",
+        "spatie/yaml-front-matter": "^2.1"
+    }
+}

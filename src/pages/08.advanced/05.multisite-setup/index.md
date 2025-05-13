@@ -384,7 +384,7 @@ return [
 
 After defining the variables in `setup.php`, you can then set those in your server:
 
-```apacheconf
+```txt
 <VirtualHost 127.0.0.1:80>
     ...
 
