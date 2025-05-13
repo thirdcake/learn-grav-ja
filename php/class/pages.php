@@ -4,6 +4,7 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
 
+// Symfony Finder から fileInfo を受け取って作る Page オブジェクト
 class Page {
     public string $loc;  // sitemap.xml の <loc>
     public string $priority;  // sitemap.xml の <priority>
@@ -45,13 +46,13 @@ class Page {
 
 }
 
+// sitemap などを作成するための Page の集まり。
+// list 形式と tree （ネスト）形式の2つが必要
 class Pages {
     private array $list;
-    private bool $is_list;
     private array $root;
     public function __construct() {
         $this->list = [];
-        $this->is_list = false;
         $this->root = [];
     }
     public function addChild(SplFileInfo $fileInfo) {
@@ -59,23 +60,9 @@ class Pages {
         $this->list[] = $page;
     }
     public function toPageList():array {
-        usort($this->list, function (Page $a, Page $b): int {
-            $apath = $a->pathname;
-            $bpath = $b->pathname;
-            if(str_starts_with($apath, $bpath) || str_starts_with($bpath, $apath)) {
-                return strlen($apath) <=> strlen($bpath);
-            }
-            return strcmp($apath, $bpath);
-        });
-        $this->is_list = true;
         return $this->list;
     }
     public function toPageTree():array {
-        if($this->is_list === false) {
-            $this->toPageList();
-        }
-    }
-    private function cmp(Page $a, Page $b): int {
-
+        return $this->root;
     }
 }

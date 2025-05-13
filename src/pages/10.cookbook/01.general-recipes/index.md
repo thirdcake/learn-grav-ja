@@ -381,16 +381,16 @@ access:
 
 <h2 id="require-special-permissions-to-view-one-or-more-pages">ページの閲覧に特別なパーミッションを要求する</h2>
 
-Similarly to the above process, you can assign any permission you want to a page. You can even come up with your own permission names.
+上記の処理と似た方法で、ページに好きなパーミッションを割り当てられます。独自のパーミッション名を設定することも可能です。
 
-For example:
+具体例：
 
 ```yaml
 access:
     site.onlybob: true
 ```
 
-Next, add the `site.onlybob` permission to Bob, in its `bob.yaml` user file under the `user/accounts` folder:
+次に、 `site.onlybob` パーミッションを Bob に追加します。 `user/accounts` フォルダの `bob.yaml` ユーザーファイルでできます：
 
 ```yaml
 access:
@@ -399,9 +399,9 @@ access:
 
 <h2 id="use-group-based-permissions">グループ単位のパーミッションを使う</h2>
 
-You can also assign users to a group, and assign permissions to the group instead of to individual users. Users will inherit the group permissions.
+また、ユーザーをグループに分け、パーミッションを個々のユーザーではなく、グループに割り当てることもできます。ユーザーは、グループのパーミッションを継承します。
 
-Add a `user/config/groups.yaml` file, for example with this content:
+たとえば、以下の内容で、 `user/config/groups.yaml` ファイルを追加してください：
 
 ```yaml
 registered:
@@ -419,24 +419,24 @@ premium:
       paid: true
 ```
 
-Now assign users to a group by adding
+次に、`user/accouns` フォルダ以下の yaml ユーザーファイルに、
 
 ```yaml
 groups:
       - premium
 ```
 
-to their yaml user file, under `user/accounts`
+上記の内容を追加することで、ユーザーを割り当ててください。
 
-Now users belonging to the `premium` group will be allowed to access pages with a `site.paid` permission.
+これで、 `premium` グループに属しているユーザーは、 `site.paid` パーミッションのあるページにアクセスできるようになりました。
 
 <h2 id="add-javascript-to-the-footer">フッターにJavaScript を追加する</h2>
 
-In many cases you'd want "some" javascript to be added to the footer instead of the page header, to be loaded after the content has been rendered.
+多くのケースで、 "いくつかの" JavaScript を、コンテンツがレンダリングされたあとに読み込むために、ページのヘッダーではなく、フッターに追加したいことがあるでしょう。
 
-A good example of doing this is to check the Antimatter theme.
+これを実行する良い例として、 Antimatter テーマをチェックしましょう。
 
-Antimatter's `templates/partials/base.html.twig` defines a bottom block for js by calling `{{ assets.js('bottom') }}`
+Antimatter の `templates/partials/base.html.twig` では、 js のために `{{ assets.js('bottom') }}`を呼び出して、 bottom ブロックを定義しています。
 
 ```twig
 {% block bottom %}
@@ -444,19 +444,23 @@ Antimatter's `templates/partials/base.html.twig` defines a bottom block for js b
 {% endblock %}
 ```
 
-You can add assets in that block in Twig for example by calling
+このブロックに、アセットを追加できます。たとえば、 Twig では、以下を呼び出します。
 
-`{% do assets.addJs('theme://js/slidebars.min.js', {group: 'bottom'}) %}`
+```twig
+{% do assets.addJs('theme://js/slidebars.min.js', {group: 'bottom'}) %}
+```
 
-or in PHP by calling
+もしくは、 PHP では、以下を呼び出します。
 
-`$this->grav['assets']->addJs($this->grav['base_url'] . '/user/plugins/yourplugin/js/somefile.js', ['group' => 'bottom']);`
+```php
+$this->grav['assets']->addJs($this->grav['base_url'] . '/user/plugins/yourplugin/js/somefile.js', ['group' => 'bottom']);
+```
 
 <h2 id="override-the-default-logs-folder-location">デフォルトのログフォルダの場所を上書きする</h2>
 
-The default location for the logs output of Grav is simply called `logs/`.  Unfortunately, there are instances where that `logs/` folder is already used or is off-limits.  Grav's flexible stream system allows the ability to customize the locations of these folders.
+Grav がログを出力する場所は、デフォルトではシンプルに `logs/` と呼ばれています。残念ながら、（レンタルサーバーの設定や別システムによって） `logs/` フォルダがすでに使われていたり、立ち入り禁止になっていたりする場合があります。Grav の柔軟なシステムによって、これらのフォルダの場所をカスタマイズできます。
 
-First, you need to create your new folder.  In this example, we'll create a new folder in the root of your Grav install called `grav-logs/`.  Then create a new root-level file called `setup.php` and paste the following code:
+まず、新しいフォルダを作成する必要があります。この例では、 `grav-logs/` という新しいフォルダを Grav をインストールしたルートフォルダの中に作成しました。それから、新しく `setup.php` というファイルをルートレベルに作り、以下のコードを貼り付けます：
 
 ```php
 <?php
@@ -477,15 +481,15 @@ return [
 ];
 ```
 
-This basically overrides the `log` stream with the `grav-logs/` folder rather than the default `logs/` folder as defined in `system/src/Grav/Common/Config/Setup.php`.
+これは、基本的に `system/src/Grav/Common/Config/Setup.php` で定義されている `log` ストリームを、デフォルトの `logs/` フォルダではなく `grav-logs/` フォルダに上書きしています。
 
-<h2 id="split-vertical-menu-system">メニューシステムを垂直に分ける</h2>
+<h2 id="split-vertical-menu-system">メニューシステムを縦に分ける</h2>
 
-To create a vertical, collapsible, hierarchical menu of pages you need a Twig-loop, a bit of CSS, and a bit of JavaScript. The final result will, when using the Antimatter-theme, look like this:
+縦に分けられた、折りたたみ式の、階層性のあるページメニューを作るには、 Twig のループと、少しの CSS と、少しの JavaScript が必要です。 Antimatter テーマを使った、最終的な結果は、以下のような見た目になります：
 
 ![Vertical Menu](vertical_menu.png)
 
-Let's start with Twig:
+Twig から始めていきましょう：
 
 ```twig
 <ol class="tree">
@@ -519,11 +523,11 @@ Let's start with Twig:
 </ol>
 ```
 
-This creates an ordered list which iterates over all visible pages within Grav, going three levels deep to create a structure for each level. The list wrapped around the entire structure has the class *tree*, and each list-item has the class *parent* if it contains children or *item* if it does not.
+ここでは、 Grav 内のすべての公開ページを繰り返して、順番付きリストを作成しています。深さで3つのレベルに分け、それぞれのレベルの構造を作成しています。全体の構造を包んでいるリストは、 *tree* という class を持ち、それぞれのリストアイテムは、子要素があれば *parent* という class を持ち、子要素が無ければ *item* という class を持ちます。
 
-Clicking on a parent opens the list, whilst regular items link to the page itself. You could add this to virtually any Twig-template in a Grav theme, provided that Grav can access the visible pages.
+parent 要素をクリックすると、リストが開きます。通常の item のリンクは、ページそのものに飛びます。 Grav が公開ページにアクセスできるなら、このコードは、 Grav テーマ内のほぼすべての Twig テンプレートに追加できます。
 
-To add some style, we add some CSS:
+少しスタイルをあてるため、 CSS を追加します：
 
 ```css
 <style>
@@ -545,9 +549,9 @@ ol.tree li.parent.open:after {
 </style>
 ```
 
-This should generally be placed before the Twig-structure, or ideally be streamed into the [Asset Manager](../../03.themes/07.asset-manager/) in your theme. The effect is to add **[+]** after each parent-item, indicating that it can be opened, which disappears when opened.
+これは一般的に、 Twig 構造の前に置かれるか、理想的には、テーマの [アセット管理](../../03.themes/07.asset-manager/) へ流し込むべきです。効果としては、各 parent アイテムの後に **[+]** を追加し、開くことを示し、開くと消えます。
 
-Finally, let's add a bit of JavaScript to [handle toggling](https://stackoverflow.com/a/36297446/603387) the *open*-class:
+最後に、 *open* class を [トグルするハンドル](https://stackoverflow.com/a/36297446/603387) のため、少しの JavaScript を追加しましょう：
 
 ```js
 <script type="text/javascript">
@@ -570,17 +574,18 @@ for(var i = 0; i < tree.length; i++){
 </script>
 ```
 
-This should always be placed **after** the Twig-structure, also ideally in the [Asset Manager](../../03.themes/07.asset-manager/).
+このコードは、常に Twig 構造の **後に** 置かなければいけません。こちらも、理想的には [アセット管理](../../03.themes/07.asset-manager/) を使ってください。
 
-## Dynamically style one or more pages
-You can dynamically style different pages/posts in your Grav site (independent of template file assignment) by customizing a Theme's Twig file to apply a CSS class passed as a variable in a page's FrontMatter.
+<h2 id="dynamically-style-one-or-more-pages">1つ以上のページで動的にスタイルをあてる</h2>
 
-You can style different posts/pages in your Grav site by two methods:
+テーマの Twig ファイルをカスタマイズすることで、ページのフロントマターで変数として渡された CSS class を（テンプレートファイルの適用とは独立して）適用し、 Grav サイトのそれぞれ異なるページや投稿に、動的にスタイルをあてることができます。
 
-1. If you are using the Antimatter theme, you can use the existing `body_classes` header property to set your custom CSS class for that page
-2. If you are using a theme not based on Antimatter (or not implementing `body_classes` as it does), you can customize a Theme's Twig file to apply a CSS class passed as a variable in a page's header property
+2つの方法により、このスタイル設定ができます：
 
-For example, in your theme's `base.html.twig` file or a more specific template such as `page.html.twig` file you could add a class to the display of page content, such as:
+1. Antimatter テーマを使っている場合、そのページのためにカスタム CSS class を設定するための既存の `body_classes` というヘッダープロパティを使えます。
+2. Antimatter をベースにしていないテーマを使っている場合（もしくは Antimatter のような `body_classes` を実装していない場合）、テーマの Twig ファイルをカスタマイズして、ページのヘッダープロパティで変数として渡された CSS class を適用できます。
+
+たとえば、テーマの `base.html.twig` ファイルや、 `page.html.twig` ファイルのような特定のテンプレートで、ページコンテンツの表示に使われる class を追加できます。このように：
 
 ```html
 <div class="{{ page.header.body_classes }}">
@@ -588,17 +593,18 @@ For example, in your theme's `base.html.twig` file or a more specific template s
 </div>
 ```
 
-Then, for each page you wish to have a unique style, you would add the following header property (assuming you have defined a CSS class for `featurepost`):
+そして、ユニークなスタイルをあてたいそれぞれのページに、次のようなヘッダープロパティを追加します（CSS class として `featurepost` が定義されているという前提です）：
 
 ```yaml
 body_classes: featurepost
 ```
 
-Note: This is how the Antimatter theme applies page-specific classes, and so it's a good standard to follow.
+> [!Note]  
+> このようにして、 Antimatter テーマはページに特有の class を適用しています。これは参考にして欲しい標準的な良い方法です。
 
-## Migrate an HTML theme to Grav
+<h2 id="migrate-an-html-theme-to-grav">HTML テーマを Grav に移植する</h2>
 
-Migrating an HTML theme to Grav is a common task. Here is a hands-on step-by-step process that can be used to achieve this goal.
+HTML テーマの Grav への移植作業は、よくある作業です。ここではハンズオン形式で、この目標を達成するためのプロセスをひとつずつ紹介します。
 
 You probably have downloaded the theme, and it's composed of several HTML files. Let's start with simply making Grav load the home page. No custom content, just replicate the HTML theme, but within a Grav structure.
 
@@ -687,6 +693,7 @@ Edit your template and add your asset with the `{{ parent() }}`.
 ## Reuse page or modular content on another page
 
 #### Problem:
+
 You have many pages or modules and would like to share the same content block on more than one page without having to maintain multiple separate instances of the same text.
 
 #### Solution:
