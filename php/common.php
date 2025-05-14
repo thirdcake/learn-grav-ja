@@ -1,6 +1,6 @@
 <?php
 
-// php php/sitemap.php
+// $pages = getPages();
 
 require_once dirname(__DIR__).'/vendor/autoload.php';
 require_once __DIR__.'/class/pages.php';
@@ -22,7 +22,7 @@ function getPages():Pages {
     // check if there are any search results
     if ($finder->hasResults()) {
         foreach ($finder as $fileInfo) {
-            $pages->addChild($fileInfo);
+            $pages->addPage($fileInfo);
         }
     }
 

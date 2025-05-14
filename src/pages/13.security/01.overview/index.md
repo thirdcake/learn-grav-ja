@@ -3,41 +3,41 @@ title: "概要"
 layout: ../../../layouts/Default.astro
 ---
 
-もしGravや、その拡張機能に関連するセキュリティ上の問題を発見されたら、コア・チームへEメールをしてください（[contact@getgrav.org](mailto:contact@getgrav.org)）。速やかに対応します。
+もし Grav またはその拡張機能に関連するセキュリティ上の問題を発見されたら、コア・チームにメールしてください（[contact@getgrav.org](mailto:contact@getgrav.org)）。速やかに対応します。
 
-コア・チームがその問題を検討し、解決のために関係者に連絡を取るまでは、その問題を公表しないでください。それは、GitHub上でも、Discord上でも、Discourseフォーラム上でも、公表は待ってください。また、その問題が、Gravユーザーにとってセキュリティ上の脅威でない場合は、GitHub の [issue](https://github.com/getgrav/grav/blob/develop/CONTRIBUTING.md#bug-reports) として送信していただくのが良いでしょう。判断がつかない場合は、ご連絡いただければ、どちらの問題に属するかの判断をお助けします。
+コア・チームがその問題を調査し、関係者に連絡して解決するまでは、その問題を公表すべきではありません。これは、 GitHub 上でも、 Discord 上でも、 Discourse フォーラム上でも、公表は待ってください。また、その問題が、 Grav ユーザーにとってセキュリティ上の脅威でない場合は、 GitHub の [issue](https://github.com/getgrav/grav/blob/develop/CONTRIBUTING.md#bug-reports) として送信していただくのが良いでしょう。判断がつかない場合は、ご連絡いただければ、どちらの問題に属するかの判断をお助けします。
 
 <h2 id="submitting-a-report">レポートの送信</h2>
 
 Grav のコアや、拡張機能のひとつに、潜在的な脆弱性を発見した場合は、適切な注意のもと報告をお願いします：
 
-1. Include the **version numbers** of Grav and any installed extensions, as well as **which component** the issue relates to.
-2. Describe the vulnerability in a **detailed and concise manner**, so that less time is spent on searching for its source.
-3. Write down exact steps needed to **reproduce the environment** in which the vulnerability occurs: What settings are set in system.yaml, what content is created, and what system settings applied?
-4. If possible, describe the source of the vulnerability and how to **patch it** so developers can both reconstruct and secure it.
+1. Grav の **バージョン番号** とインストールされている拡張機能、および、問題に関連する **コンポーネント** を含めてください。
+2. 脆弱性を **詳細かつ簡潔に** 記述することで、その原因の探索にかかる時間が短縮されます。
+3. 脆弱性が起きる **環境を再現する** ために必要なステップを正確に書き留めてください： system.yaml ファイルに何が設定されているか、どんなコンテンツが作成されているか、そしてどのようなシステム設定が適用されているか？ などです。
+4. もし可能ならば、脆弱性の原因と、開発者が再構築してセキュリティ対応できる **パッチの適用** 方法を記述してください。
 
-<h3 id="responsible-disclosure">責任ある情報公開</h3>
+<h3 id="responsible-disclosure">責任ある開示</h3>
 
-Grav follows the _responsible disclosure_ model for submittal of discovered vulnerabilities. This means that once an issue is discovered, tested, and successfully demonstrated, the developer(s) should be allowed a period of time to patch the vulnerability before it is publicly disclosed. This is because finding and testing solutions to reported issues are time-consuming and time-sensitive, and Grav is an open-source project whose authors do not have unlimited time to dedicate to it. It is therefore recommended that you also propose how to solve the issue or patch it, if you have knowledge of the relevant code.
+Grav は、発見された脆弱性の報告のため、 _責任ある開示_ モデルに従います。これはつまり、問題が発見され、テストされ、実証に成功した場合に、その脆弱性が公開される前に、開発者には、一定期間のパッチ適用期間が与えられるべき、ということです。なぜなら、報告された問題に対する解決策の発見とテストには、時間がかかるうえに一刻を争うからです。 Grav は、オープンソースプロジェクトであり、作者はそれのみに無限に時間をかけられるわけではありません。よって、関連するコードに関する知識を有する場合は、問題解決やパッチ適用の方法も、ご提案いただくことを推奨しています。
 
 <h2 id="process-of-resolution">解決のプロセス</h2>
 
-If your report is accurate and a new security issue is reproduced, the core team will address it as soon as possible. When this is done, the issue and its solution will be included in the [public repository of reports](../06.reports/). You will be credited by name and with an optional link to your website/social media profile, but if you prefer you can request it be credited to a pseudonym or "anonymous reporter".
+報告いただいた内容が正確で、新しいセキュリティ問題が再現された場合、コア・チームは可能な限り速やかに対応します。対応が完了すると、問題とその解決策は、 [レポートの公開のリポジトリ](../06.reports/) に掲載されます。報告者は、お名前と、オプションで web サイト/ソーシャルメディアのプロフィールへのリンクがクレジットされますが、ご希望があれば、仮名または "匿名報告者" としてクレジットされることもできます。
 
-Reports and issues are kept private until the issue is resolved. In the case that the maintainer of an extension fails to address the issue in a timely manner, the extension is removed from the Grav Package Manner until it is resolved.
+レポートと問題は、問題が解決されるまでは、非公開のままです。拡張機能のメンテナーが、問題をタイムリーに解決できない場合、その拡張機能は、解決されるまで Grav パッケージマネージャーから削除されます。
 
 <h2 id="supported-versions">サポートされるバージョン</h2>
 
-Only the current `major.minor` version of Grav is supported. This means that patches are implemented in `major.minor.patch`, but not regressively backwards for older versions of Grav. Keeping your installation up-to-date is important, and many changes are beneficial even if not explicitly needed from a security perspective.
+Grav の現在の `major.minor` バージョンのみが、サポート対象です。つまり、パッチは `major.minor.patch` バージョンに実装されます。 Grav の古いバージョンに戻ることはありません。インストールを最新状態にすることは重要です。多くの変更は、明らかなセキュリティ上の理由が無かったとしても有益です。
 
 <h2 id="risk-levels">リスクのレベル</h2>
 
-There are five levels of risk involved with Grav as a software:
+ソフトウェアとして、 Grav には 5つのリスクレベルがあります。
 
-- Highly Critical
-- Critical
-- Moderately Critical
-- Less Critical
-- Not Critical
+- Highly Critical （非常に重大）
+- Critical （重大）
+- Moderately Critical （中程度に重大）
+- Less Critical （それほど重大ではない）
+- Not Critical （重大ではない）
 
-These are calculated based on the "[Common Misuse Scoring System](https://www.nist.gov/news-events/news/2012/07/software-features-and-inherent-risks-nists-guide-rating-software)" (CMSS) by the [National Institute of Standards and Technology](https://www.nist.gov/) (NIST). For lack of an easily available calculator for Grav, use Drupal's [RiskCalc](https://security.drupal.org/riskcalc) ([notes](https://www.mydropwizard.com/blog/understanding-drupal-security-advisories-risk-calculator)).
+これらは、 [National Institute of Standards and Technology](https://www.nist.gov/) (NIST) による "[Common Misuse Scoring System](https://www.nist.gov/news-events/news/2012/07/software-features-and-inherent-risks-nists-guide-rating-software)" (CMSS) をベースに計算されます。 Grav 用の簡単に利用できる計算機が無い場合は、 Drupal の [RiskCalc](https://security.drupal.org/riskcalc) をご利用ください。 ([注意](https://www.mydropwizard.com/blog/understanding-drupal-security-advisories-risk-calculator))

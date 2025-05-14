@@ -6,34 +6,31 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 // Symfony Finder から fileInfo を受け取って作る Page オブジェクト
 class Page {
+    public string $pathname;  // path 名
     public string $loc;  // sitemap.xml の <loc>
     public string $priority;  // sitemap.xml の <priority>
     public string $changefreq;  // sitemap.xml の <changefreq>
     public string $lastmod;  // sitemap.xml の <lastmod>
-    public string $pathname;  // path 名
     public string $title;  // ページのタイトル
     public string|bool $redirect;  // redirect があるかどうか、あれば対象ページ
-    public array $children;  // 子ページ
     public function __construct(SplFileInfo $fileInfo) {
-        $relativePathname = $fileInfo->getRelativePathname();
-        $this->loc = $this->set_loc($relativePathname);
+        $this->pathname = $this->set_pathname($fileInfo->getRelativePathname());
+        $this->loc = 'https://thirdcake.github.io/learn-grav-ja/'.$this->pathname.'/';
         $this->priority = '1.0';
         $this->changefreq = 'yearly';
         $this->lastmod = $this->set_lastmod($fileInfo->getMTime());
-        $this->pathname = $relativePathname;
         $frontmatter = YamlFrontMatter::parse(file_get_contents($fileInfo->getRealPath()));
         $this->title = $frontmatter->matter('title');
         $this->redirect = $frontmatter->matter('redirect') ?? false;
-        $this->children = [];
     }
 
-    // set $this->loc
-    private function set_loc(string $pathname):string {
-        if(str_ends_with($pathname, 'index.md')) {
-            $loc = substr($pathname, 0, -8);
+    // set $this->pathname
+    private function set_pathname(string $pathname):string {
+        $lastSlashPos = strrpos($pathname, '/');
+        if($lastSlashPos === false) {
+            return $pathname;
         }
-        $loc = 'https://thirdcake.github.io/learn-grav-ja/'.$loc;
-        return $loc;
+        return substr($pathname, 0, $lastSlashPos);
     }
     
     // set $this->lastmod
@@ -46,23 +43,74 @@ class Page {
 
 }
 
+// Pages で tree を作るために必要
+class Node {
+    public Page|null $page;
+    public string|null $name;
+    public array $children;
+    public function __construct() {
+        $this->page = null;
+        $this->name = null;
+        $this->children = [];
+    }
+
+    public function searchChild(string $route): Node {
+        if($route==='') {
+            return $this;
+        }
+        foreach($this->children as $child) {
+            if($child->name === $route) {
+                return $child;
+            }
+        }
+        $newNode = new Node();
+        $newNode->name = $route;
+        $this->children[] = $newNode;
+        return $newNode;
+    }
+
+    public function sortedChildren(): array {
+        // 子 Node を sort
+        usort($this->children, 
+            fn(Node $a, Node $b): int => strcmp($a->name, $b->name)
+        );
+        $list = [];
+        foreach($this->children as $child) {
+            $list[] = $child;
+            $list = array_merge($list, $child->sortedChildren());
+        }
+        return $list;
+    }
+
+}
+
 // sitemap などを作成するための Page の集まり。
 // list 形式と tree （ネスト）形式の2つが必要
 class Pages {
     private array $list;
-    private array $root;
+    private Node $root;
     public function __construct() {
         $this->list = [];
-        $this->root = [];
+        $this->root = new Node();
     }
-    public function addChild(SplFileInfo $fileInfo) {
+
+    public function addPage(SplFileInfo $fileInfo):void {
         $page = new Page($fileInfo);
-        $this->list[] = $page;
+        $routes = explode('/', trim($page->pathname, '/'));
+        $node = $this->root;
+        foreach($routes as $route) {
+            $node = $node->searchChild($route);
+        }
+        $node->page = $page;
     }
+
     public function toPageList():array {
+        $this->list = $this->root->sortedChildren();
         return $this->list;
     }
-    public function toPageTree():array {
+
+    public function toPageTree():Node {
         return $this->root;
     }
+
 }

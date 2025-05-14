@@ -7,6 +7,6 @@ GitHub では、各リポジトリのセキュリティ勧告がサポートさ�
 
 最も重要なのは、Grav そのものと、管理パネルプラグインが、その他の拡張機能の基礎となっていることです。したがって、これらの勧告とポリシーに従うことは、とても重要です：
 
-- Grav Core [Security Advisories](https://github.com/getgrav/grav/security/advisories) and [Security Policy](https://github.com/getgrav/grav/security/policy)
-- Admin [Security Advisories](https://github.com/getgrav/grav-plugin-admin/security/advisories) and [Security Policy](https://github.com/getgrav/grav-plugin-admin/security/policy)
+- Grav コア [セキュリティアドバイザリー](https://github.com/getgrav/grav/security/advisories) 及び [セキュリティポリシー](https://github.com/getgrav/grav/security/policy)
+- 管理パネルプラグイン [セキュリティアドバイザリー](https://github.com/getgrav/grav-plugin-admin/security/advisories) 及び [セキュリティポリシー](https://github.com/getgrav/grav-plugin-admin/security/policy)
 

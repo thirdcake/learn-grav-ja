@@ -3,11 +3,11 @@ title: "推奨するセキュリティ設定"
 layout: ../../../layouts/Default.astro
 ---
 
-Like with every other application, it is important that you check through the configuration options to secure and optimize your site.
+他のすべてのアプリケーションと同様、サイトを保護し、最適化するために config 設定をチェックするのは重要です。
 
 <h2 id="production-site">本番サイト</h2>
 
-It is important to secure your production site by hardening the configuration. To do this, we recommend you to set your main configuration in `user/config/` to contain the default settings you want to use in your production environment and override these settings in your development site environment such as `user/env/localhost` or `user/env/site.local`. You can also override production site settings through the environments, for example if you're using multi-site setup over multiple domains.
+config 設定の強化により、本番環境のサイトのセキュリティを強化するのは重要です。これを実行するには、 `user/config/` にメインの config 設定を設定し、本番環境で利用したいデフォルト設定をします。そのうえで、開発環境ではこれらを上書きすることをおすすめします。 たとえば、 `user/env/localhost` もしくは `user/env/site.local` に上書きします。また、環境変数により、本番サイト設定を上書きすることもできます。たとえば、複数のドメインにまたがるマルチサイトで可能です。
 
 <h3 id="system-configuration-user-config-system-yaml">システム設定（`user/config/system.yaml`）</h3>
 
@@ -46,13 +46,14 @@ strict_mode:          # Test your site before changing these. Removes backward c
   blueprint_compat: false
 ```
 
-<h2 id="development-dite">開発サイト</h2>
+<h2 id="development-site">開発サイト</h2>
 
-For development server, there are a few settings we should change to make it more convenient to update the site.
+開発サーバーのために、サイトの更新をより便利にする設定がいくつかあります。
 
 <h3 id="system-configuration-user-env-localhost-config-sys">システム設定（`user/env/localhost/config/system.yaml`）</h3>
 
-!!! **TIP:** Replace localhost with your local server name.
+> [!Tip]  
+> localhost をあなたのローカルサーバー名に書きかえてください。
 
 ```yaml
 force_ssl: false      # If the development site doesn't use SSL
