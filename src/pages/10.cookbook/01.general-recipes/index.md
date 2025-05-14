@@ -604,29 +604,30 @@ body_classes: featurepost
 
 <h2 id="migrate-an-html-theme-to-grav">HTML テーマを Grav に移植する</h2>
 
-HTML テーマの Grav への移植作業は、よくある作業です。ここではハンズオン形式で、この目標を達成するためのプロセスをひとつずつ紹介します。
+HTML テーマを Grav へ移植するのは、よくある作業です。ここではハンズオン形式で、この目標を達成するためのプロセスをひとつずつ紹介します。
 
-You probably have downloaded the theme, and it's composed of several HTML files. Let's start with simply making Grav load the home page. No custom content, just replicate the HTML theme, but within a Grav structure.
+おそらくあなたは、テーマをダウンロードしたことがあり、そしてそれは、いくつかの HTML ファイルで構成されているでしょう。シンプルに、 Grav がホームページを読み込むようにするところから始めましょう。コンテンツはカスタマイズせず、ただ Grav 構造の中で HTML テーマを複製するだけです。
 
-First, [use the Grav Devtools plugin](../../03.themes/02.theme-tutorial/) to create a blank theme, and set Grav to use it in the System settings.
+まず、空のテーマを作るために、 [Grav Devtools プラグインを使います](../../03.themes/02.theme-tutorial/) 。そして、 Grav のシステム設定で、それを使えるように設定します。
 
-Create a `templates/home.html.twig` Twig template inside the theme’s templates folder. This will represent a template specific for the home page. Usually, the home is a unique page on the site, so it probably deserves a dedicated Twig file.
+テーマの templates フォルダに、 Twig ファイルの `templates/home.html.twig` を作ります。これは、ホームページ専用のテンプレートになります。通常、ホームページ（トップのページ）は、サイトで唯一無二のページなので、おそらく専用の Twig ファイルを用意するでしょう。
 
-Copy the HTML code from the template's home page, starting at `<html>` and ending at `</html>` to your new `home.html.twig` file.
+テンプレートのホームページから、 `home.html.twig` ファイルへ、 HTML のコードを `<html>` から `</html>` までコピーしてください。
 
-Now, move all the HTML theme assets (images, CSS, JS) into your theme folder. You can keep the existing theme folder structure, or change it.
+次に、すべての HTML テーマアセット（画像、 CSS 、JS ）をテーマフォルダに移してください。既存のテーマフォルダの構造をキープしても良いですし、変更してもかまいません。
 
-Create a `pages/01.home/home.md` empty file. Now point your browser to yoursite.com/home: it should show up the content, but the CSS, JS and images will not be loaded, probably because the theme has them hardcoded as `/img/*` or `/css/*` links.
+`pages/01.home/home.md` という空のファイルを作成してください。この時点で、 `yoursite.com/home` にはコンテンツが表示されますが、おそらく `/img/*` や `/css/*` などの link タグでハードコーディングされているので、 CSS や、 JS や、画像は読み込まれないでしょう。
 
-#### Adding the correct asset links
+<h4 id="adding-the-correct-asset-links">アセットリンクを正しく追加する</h4>
 
-In Grav the links are broken because they point to the home route, so instead of pointing to `/user/themes/mytheme/img`, they point to `/img` in the Grav root. Since it's best to keep all theme-related assets inside the theme, we need to point Grav to the correct location.
+Grav では、ホームへのルーティングを指しており、 Grav のルートフォルダで、 `/user/themes/mytheme/img` ではなく、 `/img` を指しているため、 link は壊れます。テーマに関係するアセットは、 theme フォルダ内に置くのがベストなので、 Grav を正しい場所へ指し示すようにしなければいけません。
 
-Search within the page for assets and change the images references from `img/*.*` to `<img src="{{ url('theme://img/*.*', true) }}" />`.
+テンプレートページ内でアセットを検索し、画像の参照先を `img/*.*` から `<img src="{{ url('theme://img/*.*', true) }}" />` へ変更します。
 
-Stylesheets require a bit more thought as there’s an asset pipeline we’ll want to enable at some point, so we move them to a stylesheets block within the `<head>` tag.
+スタイルシートは、もう少し考えるところがあります。利便性から有効化したいアセットパイプラインがあるためです。よって、 `<head>` タグ内のスタイルシートブロックにそれらを移動させます。
 
-Example:
+具体例：
+
 ```twig
 {% block stylesheets %}
     {% do assets.addCss('theme://css/styles.min.css', 100) %}
@@ -634,9 +635,10 @@ Example:
 {{ assets.css()|raw }}
 ```
 
-The same applies to JavaScript files, with the additional requirement that some JS is loaded in the footer.
+同じことを、 JavaScript ファイルにも適用します。フッターで読み込まれる JS も追加で必要です。
 
-Example:
+具体例：
+
 ```twig
 {% block javascripts %}
     {% do assets.addJs('theme://js/custom.js') %}
@@ -645,32 +647,32 @@ Example:
 {{ assets.js()|raw }}
 ```
 
-The page changes should now be shown in your Browser. If not, make sure that the pages cache and the twig cache are disabled in the Grav system configuration settings.
+この変更は、これでブラウザに反映されます。もしなっていなければ、ページキャッシュと twig キャッシュを Grav のシステム設定で無効にしてください。
 
-This is just the start. Now you might need to add more pages, and come up with better ways to present the content of your pages using the header FrontMatter, and custom Twig that processes usual building blocks need: the home page testimonials, reviews, the product features and so on.
+これは始まりに過ぎません。もっと多くのページを追加する必要があるかもしれませんし、ページの内容を表現するより良い方法を考える必要があるかもしれません。そのためには、ページのフロントマターを使ったり、典型的な構成要素（ホームページで言えば、推薦文や、レビュー、プロダクトの機能紹介など）を処理するカスタマイズされた Twig を使うことを考える必要があるかもしれません。
 
-#### Adding another page
+<h4 id="adding-another-page">他のページも追加する</h4>
 
-To add another page, the process is similar. For example, let's say you want to next create the blog page.
-Repeat the process to add a `templates/blog.html.twig` file, paste the HTML source, and create a `pages/02.blog/blog.md` page.
+他のページを追加する場合も、やり方は同じです。たとえば、次に blog ページを追加したいとしましょう。
+先ほどやったことの繰り返しで、 `templates/blog.html.twig` ファイルを追加し、 HTML ソースを貼り付け、そして `pages/02.blog/blog.md` ページを作成します。
 
-Now, while images links inside the pages still need to be migrated to Grav's assets syntax (or simply change the path), you don't want to repeat the same work you did above for CSS and JS assets. This should be reused across the site.
+次に、ページ内の画像リンクはまだ、 Grav のアセット構文に移行する（もしくは path を変更する）必要がありますが、 CSS と JS アセットについては、上記と同じことを繰り返したくありません。サイト全体で再利用されるべきです。
 
-#### Shared Elements
+<h4 id="shared-elements">要素の共有</h4>
 
-Identify the common parts of the pages (header and footer), and move them to the `templates/partials/base.html.twig` file.
+ページの共通パーツ（ヘッダーやフッター）を分け、それら共通部分を `templates/partials/base.html.twig` ファイルに移動させます。
 
-Each page template then needs to extend `partials/base.html.twig` (https://github.com/getgrav/grav-theme-antimatter/blob/develop/templates/default.html.twig#L1) and just add their unique content.
+それぞれのページテンプレートは、これにより、 `partials/base.html.twig` を拡張する必要があります (https://github.com/getgrav/grav-theme-antimatter/blob/develop/templates/default.html.twig#L1) 。それから、個々のコンテンツを追加するだけです。
 
-## Add an asset to a specific page
+<h2 id="add-an-asset-to-a-specific-page">特定のページにだけアセットを追加する</h2>
 
-#### Problem
+<h4 id="problem-4">問題：</h4>
 
-You need to add an asset to a specific template on your theme.
+テーマの特定のテンプレートに、アセットを追加する必要があります。
 
-#### Solution
+<h4 id="solution-4">解決策：</h4>
 
-Most of the time, your assets will be added inside a twig block in your base template like below.
+多くの場合、アセットファイルは、以下のようにしてベーステンプレートの twig ブロックに追加されているでしょう。
 
 ```twig
 {% block javascripts %}
@@ -679,9 +681,9 @@ Most of the time, your assets will be added inside a twig block in your base tem
 {{ assets.js()|raw }}
 ```
 
-In order to add your asset, you have to extend this block in your template and call `{{ parent() }}` which will get the assets already added in your base template.
-Let's say you want to add a "gallery.js" file on your "Portfolio Gallery" page.
-Edit your template and add your asset with the `{{ parent() }}`.
+アセットを追加するために、テンプレートのこのブロックを拡張しなければいけません。そのために、 `{{ parent() }}` を呼び出す必要があります。これにより、すでにベーステンプレートで追加しているアセットを取得できます。
+"ポートフォリオのギャラリー" ページに、 "gallery.js" ファイルを追加したいとしましょう。
+テンプレートを編集して、 `{{ parent() }}` とともにアセットを追加してください。
 
 ```twig
 {% block javascripts %}
@@ -690,42 +692,49 @@ Edit your template and add your asset with the `{{ parent() }}`.
 {% endblock %}
 ```
 
-## Reuse page or modular content on another page
+<h2 id="reuse-page-or-modular-content-on-another-page">ページやモジュラーコンテンツを他のページで再利用する</h2>
 
-#### Problem:
+<h4 id="problem-5">問題：</h4>
 
-You have many pages or modules and would like to share the same content block on more than one page without having to maintain multiple separate instances of the same text.
+多くのページやモジュラーがすでにあり、同じコンテンツブロックを1つ以上のページでシェアしたいです。同じテキストコンテンツを複数ファイル作り、それぞれをメンテナンスするようなことはやりたくないです。
 
-#### Solution:
+<h4 id="solution-5">解決策：</h4>
 
-This is a very simple straightforward method which does not require a plugin and can be used within the admin panel.
+以下は、プラグインや管理パネルを使わずにできる、とてもシンプルでストレートな方法です。
 
-**Note:** There is also plugin [Grav Page Inject Plugin](https://github.com/getgrav/grav-plugin-page-inject) for this functionality which may be suitable for more advanced scenarios.
+**注意：** より高度な場面に対しては、この機能にぴったりな [Grav Page Inject プラグイン](https://github.com/getgrav/grav-plugin-page-inject) もあります。
 
-First, create a new template file to act as a placeholder for the content - it can have any name, this one is named "modular_reuse" and will be in the stored in your theme's templates/modular_ folder for this example but can be stored anywhere in the templates folder.
+まず、コンテンツのプレースホルダとしての役割を持つ、新しいテンプレートファイルを作ります。 - どんな名前でも良いですが、ここでは `modular_reuse` としましょう。そして、今回の例では、それをテーマの `templates/modular` フォルダに置きます。ただし、テンプレートフォルダ内のどこに置いてもかまいません。
 
 
-`modular_reuse.html.twig` contains only one line:
+`modular_reuse.html.twig` のコンテンツは、たった1行です：
+
 ```twig
 {{ page.content|raw }}
 ```
-Next, create a new modular page in the admin panel where this content should be displayed using this new "modular reuse" template. The new page name can be anything you like as it will not be displayed - the original page title will be output.
 
-The content of the page is just one line:
-Page:
+次に、新しいモジュラーページを、管理パネルで作ります。この新しい `modular_reuse` テンプレートを使うコンテンツが表示されるべき場所に作ってください。新しいページ名は、表示されることは無いため、好きに付けてかまいません。 - オリジナルのページタイトルが出力されます。
+
+ページのコンテンツは、たった1行です：
+
+ページ：
+
 ```twig
 {% include 'modular_reuse.html.twig' with {'page': page.find('/test-page/amazing-offers')} %}
 ```
-Modular:
+
+モジュラー：
+
 ```twig
 {% include 'modular/modular_reuse.html.twig' with {'page': page.find('/test-page/_amazing-offers')} %}
 ```
 
-What comes after "include" is where the template from step one is stored, probably in the `templates` folder for pages in the `templates/modular` folder for modulars.
+`include` の後に書いてあることは、先ほどのステップ1で保存したテンプレートの場所で、おそらくページならば `templates` フォルダとなり、モジュラーなら `templates/modular` フォルダーとなるはずです。
 
-After page.find should come the actual link to the original content that you want to reuse. Modular content starts with an _ but pages do not. The easiest way to find the correct link is to open the page in the admin panel and copy the url after the word admin.
+page.find の後には、再利用したいオリジナルコンテンツへの実際のリンクが来ます。モジュラーコンテンツは `_` で始まりますが、ページはそうではありません。正しいリンク先を探す最も簡単な方法は、管理パネルでページを開いてみて、 url の `admin` というワードの後をコピーすることです。
 
-The final page should look like this:
+最終的なページは、次のようになります：
+
 ```twig
 ---
 title: 'Modular Reuse Example'
@@ -734,22 +743,22 @@ title: 'Modular Reuse Example'
 {% include 'modular/modular_reuse.html.twig' with {'page': page.find('/test-page/_amazing-offers')} %}
 ```
 
-Now "amazing offers" can be displayed in multiple places but only needs to be updated once.
+これで、 "amazing offers" が複数の場所で表示されるようになり、しかし更新は1箇所で済みます。
 
-## Make a custom anti-spam field for your contact form
+<h2 id="make-a-custom-anti-spam-field-for-your-contact-for">問い合わせフォームにカスタムのアンチ・スパムフィールドを作る</h2>
 
-#### Problem:
+<h4 id="problem-6">問題：</h4>
 
-Normal methods of spam-prevention, like the honeypot-field, is bypassed by certain spam-bots.
+honeypot フィールドのようなスパム対策の標準的な方法は、特定のスパムボットに通過されてしまう。
 
-#### Solution:
+<h4 id="solution-6">解決策：</h4>
 
-Make it harder for the bot to guess what it can and can't fill it in, when filling out the contact form. Put simply, ask a question the user won't fail to answer, but whose answers are hard for a bot to understand the significance of. In your Markdown-file with [Form-data](../../06.forms/02.forms/03.example-form/), add this field:
+問い合わせフォームに入力するとき、ボットがフィールドを入力するべきかどうかを判断しづらくします。簡単に言うと、ユーザーが間違えるはずのない、しかしボットにはその意味を理解するのが難しい問題を訊ねます。マークダウンファイルに、 [フォームデータ](../../06.forms/02.forms/03.example-form/) とともに、以下のフィールドを追加します：
 
 ```yaml
     - name: personality
       type: radio
-      label: What is five times eight?
+      label: "五 掛ける 八 は？"
       options:
         alaska: 32
         oklahoma: 40
@@ -760,29 +769,37 @@ Make it harder for the bot to guess what it can and can't fill it in, when filli
         message: Not quite, try that math again.
 ```
 
-The question should be something simple, but with multiple simple wrong answers accompanying it. What matters is the order of the answers. The right answer should never be the first one; aim for somewhere in the middle. It's important to randomize the values behind the answers (labels) yourself, so a database of associated values and answers won't help in answering.
+この問題は、シンプルなものでありつつ、しかし簡単な誤答が複数あるものが良いです。
+重要なのは、答えの順番です。正しい答えは、最初の選択肢であってはいけません；真ん中のどこかが良いです。答え（label）の前の値をランダムにすることは重要です。関係する値と答えのデータベースは、答えるときに役に立ちません。
 
-Bots get smarter all the time, but they tend to forego trying to answer the same question several times if the first attempt fails. Also, even the smartest of them rely on dictionaries of known data to guess at an answer. We ask a simple question, "What is five times eight?", and give three options, "32", "40", and "48". The right answer is obviously "40", but instead of checking the bot's math-skills, we're assigning the values "alaska", "oklahoma", and "california" to these numbers, respectively. Because bots look at the possible values, rather than their label, the answers bears no relation to the question. You could even add an answer "Pineapple" with the value "mississippi" and validate against that, and just tell your users to choose that as their answer. The point is to personalize the randomization of data.
+ボットは、ずっと賢くなってきていますが、最初の試行に失敗すると、同じ質問に何度か答えるのを見送る傾向があります。
+また、最も賢いボットでさえ、既知の辞書データをもとに答えを出します。
+単純な問題 "五 掛ける 八 は？" を尋ねて、3つの選択肢 "32", "40", "48" を与えます。
+正しい答えは明らかに "40" ですが、ボットの数学スキルをチェックするのではなく、3つの数字に  "alaska", "oklahoma", and "california" という値を割り当てています。
+なぜなら、ボットは、数字のラベルではなく、地名の値を見るからです。答えは問題に全く関連がありません。
+"mississippi" という値に "Pineapple" という答えを追加し、それに対してバリデーションをして、ユーザーに答えを選んでもらうことさえできます。
+ポイントは、データのランダム化を個人的に作ることです。
 
+<h2 id="display-different-robots-txt-contents-for-differen">異なる環境で異なる robots.txt コンテンツを表示する</h2>
 
-## Display different robots.txt contents for different environments
+<h4 id="problem-7">問題：</h4>
 
-#### Problem:
+あなたは、開発用サイトとして `dev.yourdomain.com` というサブドメインをセットアップしました。そのサイトは、 `yourdomain.com` への変更を公開する前に機能するかどうか確認するためのサイトで、検索エンジンなどのクローリングでインデックスされたくありません。本番サイトは、検索結果に表示されたままでいて欲しいです。
 
-You've setup a subdomain, `dev.yourdomain.com`, as a development site to preview what you're working on before publishing changes to `yourdomain.com`, and want to disallow search indexers from crawling it while keeping the production site visible in search results.
+<h4 id="solution-7">解決策：</h4>
 
-#### Solution:
+開発サイトは、プライベート状態にして、パスワード保護されるべきですが、ときには、シンプルに検索エンジンにインデックスを禁止し、サイトをクローリングさせないだけで十分であるし、より現実的な場面はあります。
+幸運なことに、 Grav では html フォーマットと同じように txt フォーマットでページを制御できるため、 [環境設定](../../08.advanced/04.environment-config/) と twig テンプレートを使ってこの問題を解決することができます。
 
-While you should password-protect your development site to really keep it private, sometimes it's sufficient, and just more practical, to simply disallow search engine indexers from crawling your site. Luckily, Grav can handle pages in txt format just as it does html, so we can use [environment configurations](../../08.advanced/04.environment-config/) and twig templates to complete the job.
-
-First, let's create a configuration file `site.yaml` that will tell our template that `dev.yourdomain.com` is a development environment.
+まず、 `site.yaml` 設定ファイルを作りましょう。 `dev.yourdomain.com` テンプレートファイルに、開発環境であることを伝えます。
 
 `/user/[dev.yourdomain.com]/config/site.yaml`:
 
-    environment: dev
+```yaml
+environment: dev
+```
 
-
-Then, create a `robots.txt.twig` page template that checks if Grav is currently running on our development site, and displays different contents if it is.
+それから、 `robots.txt.twig` ページテンプレートを作成します。これは、 Grav が開発サイトを運用中かどうかをチェックし、それ次第で異なるコンテンツを表示するものです。
 
 `/user/themes/[yourtheme]/templates/robots.txt.twig`:
 
@@ -798,7 +815,8 @@ Then, create a `robots.txt.twig` page template that checks if Grav is currently 
 {% endif %}
 ```
 
-Finally, create a page routed at `/robots.txt` with the default `robots.txt` rules in the page content, and our alternative development version rules in the page frontmatter. To render the page contents as raw text instead of html, we'll also disable markdown rendering.
+最後に、 `/robots.txt` にルーティングするページを作ります。
+デフォルトの `robots.txt` のルールは、ページコンテンツに、代替の開発環境バージョンのルールは、ページフロントマターに書きます。ページコンテンツを html ではなく、そのままレンダリングするため、マークダウンによるレンダリングを無効にします。
 
 `/user/pages/robots/robots.md`:
 
@@ -830,7 +848,7 @@ Allow: /user/plugins/*.css$
 Allow: /user/plugins/*.js$
 ```
 
-Now you should have a `robots.txt` file placed at your site's root with dynamic contents, also editable with the Admin plugin.
+これで、あなたのサイトのルートディレクトリに、動的なコンテンツを表示する `robots.txt` ファイルが設置されました。またこれは、管理パネルプラグインで編集可能です。
 
-Note: make sure your production site won't display `Disallow: /`, as that will completely obliterate your search engine visibility.
+注意： 本番サイトでは、 `Disallow: /` を表示しないようにしてください。検索エンジンの表示を完全に消し去ってしまいます。
 
