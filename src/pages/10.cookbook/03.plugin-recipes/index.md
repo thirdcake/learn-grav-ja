@@ -5,27 +5,29 @@ layout: ../../../layouts/Default.astro
 
 このページでは、Grav プラグインに関係する様々な問題とその解決策を紹介します。
 
-## Output some PHP code result in a Twig template
+<h2 id="output-some-php-code-result-in-a-twig-template">Twig テンプレートに PHP コードの結果を出力する</h2>
 
 #### Goal:
 
-You want to process some custom PHP code, and make the result available in a page.
+カスタム PHP コードを処理したい。そして、ページでその結果を利用したい。
 
 #### Solution:
 
-You create a new plugin that creates a Twig extension, and makes some PHP content available in your Twig templates.
+Twig 拡張機能を作成する新しいプラグインを作成し、 Twig テンプレートで利用できる PHP コンテンツを作成します。
 
-Create a new plugin folder in `user/plugins/example`, and add those files:
+`user/plugins/example` に、新しいプラグインフォルダを作ってください。そして、以下のファイルを追加してください：
 
-`user/plugins/example/example.php`
-`user/plugins/example/example.yaml`
-`user/plugins/example/twig/ExampleTwigExtension.php`
+```txt
+user/plugins/example/example.php
+user/plugins/example/example.yaml
+user/plugins/example/twig/ExampleTwigExtension.php
+```
 
-In `twig/ExampleTwigExtension.php` you'll do your custom processing, and return it as a string in `exampleFunction()`.
+`twig/ExampleTwigExtension.php` では、カスタム処理をします。そして `exampleFunction()` で文字列として結果を返します。
 
-Then in your Twig template file (or in a page Markdown file if you enabled Twig processing in Pages), render the output using: `{{ example() }}`.
+次に、 Twig テンプレートファイル（もしくは、ページで Twig 処理を有効化しているなら、ページのマークダウンファイル）で、 `{{ example() }}` を使って出力をレンダリングします。
 
-The overview is over, let's see the actual code:
+概要は以上です。具体的なコードを見ていきましょう：
 
 `example.php`:
 
@@ -81,25 +83,28 @@ class ExampleTwigExtension extends GravExtension
 enabled: true
 ```
 
-The plugin is now installed and enabled, and it should all just work.
+プラグインは、これでインストール・有効化され、機能します。
 
-## Filter taxonomies using the taxonomylist plugin
+<h2 id="filter-taxonomies-using-the-taxonomylist-plugin">taxonomylist プラグインでタクソノミーをフィルタリングする</h2>
 
 #### Goal:
 
-You want to use the [taxonomy list Grav plugin](https://github.com/getgrav/grav-plugin-taxonomylist) to list the tags that are used in your blog posts, but instead of listing all of them, you only want to list the most used items in a given taxonomy (such as the top five tags, for example).
+[taxonomy list Grav プラグイン](https://github.com/getgrav/grav-plugin-taxonomylist) を使って、ブログ投稿で使われているタグのリストを作りたい。ただし、それらすべてをリスト化するのではなく、最も良く使われているタグだけをリスト化したい。（たとえば、トップ5 のタグだけを表示するなど）
 
 #### Solution:
 
-This is an example where the flexibility of Grav plugins really come in handy. The first step is to make sure that you have the [taxonomy list Grav plugin](https://github.com/getgrav/grav-plugin-taxonomylist) installed within your Grav package. After this has been installed, make sure that you copy `/yoursite/user/plugins/taxonomylist/templates/partials/taxonomylist.html.twig` to `/yoursite/user/themes/yourtheme/templates/partials/taxonomylist.html.twig` as we will be making modifications to this file.
+これは、 Grav プラグインの柔軟性が本当に扱いやすいことを示す具体例です。
+最初のステップとして、 [taxonomy list Grav プラグイン](https://github.com/getgrav/grav-plugin-taxonomylist) を Grav にインストールしているか確認してください。
+インストールされていたら、 `/yoursite/user/plugins/taxonomylist/templates/partials/taxonomylist.html.twig` を `/yoursite/user/themes/yourtheme/templates/partials/taxonomylist.html.twig` へコピーしてください。このコピーしたファイルに修正を加えていきます。
 
-In order to make this work, we are going to introduce three new variables: `filter`, `filterstart` and `filterend` where
+この作業のために、新しい3つの変数を導入します： `filter`, `filterstart` そして `filterend` です。これらは、
 
- * **filter** is a Boolean, which will be set to `true` if we want to be able to list only the top several tags (or whatever other taxonomy you want to use).
- *  **filterstart** is an arbitrary integer, but should usually be set to zero. This is the index in the taxonomy array that you want to start at.
- * **filterend** is an arbitrary integer and is the index in the taxonomy array that you want to end at. Note that if you want to list the top five items in your taxonomy, you should set this to 5 as our loop will iterate until `filterend -1`.
+ * **filter** は、真偽値です。 `true` にすると、トップのいくつかのタグだけのリストが利用できます。（もしくは、あなたが使いたいと思っている他のタクソノミーなら何でも）
+ *  **filterstart** は、任意の整数です。通常はゼロを設定します。タクソノミーの配列の中で、始めのインデックスです。
+ * **filterend** も，任意の整数です。タクソノミーの配列で、そこで終わりとするインデックスです。注意してほしいのは、5つのタクソノミーのリストにしたい場合、5 を設定しなければいけません。ループは、 `filterend - 1` まで繰り返すからです。
 
-The next step will be to make a call to `taxonomylist.html.twig` within the template in which we wish to list the top items in our taxonomy. As usual, we will do this using `{% include %}` as seen in the following snippet example:
+次のステップは、タクソノミーのトップリストを表示したいテンプレートの中で、 `taxonomylist.html.twig` を呼び出すことです。
+通常は、以下のようなスニペット例に見られるように、 `{% include %}` を使います。
 
 ```twig
 {% if config.plugins.taxonomylist.enabled %}
@@ -109,9 +114,10 @@ The next step will be to make a call to `taxonomylist.html.twig` within the temp
 </div>
 {% endif %}
 ```
-In this example, we are going to list the top five tags.
 
-Now, let's turn our attention to `taxonomylist.html.twig`. For reference, here is the default code for this file when you initially install it:
+この例では、トップ5 のタグをリスト表示します。
+
+次に、 `taxonomylist.html.twig` に目を向けてみましょう。参考に、これは、最初にインストールしたときの、このファイルのデフォルトコードです：
 
 ```twig
 {% set taxlist = taxonomylist.get() %}
@@ -124,7 +130,8 @@ Now, let's turn our attention to `taxonomylist.html.twig`. For reference, here i
     </span>
 {% endif %}
 ```
-In order to make this work with our new variables (i.e. `filter`, `filterstart` and `filterend`), we will need to include them within this file like so:
+
+この機能を新しい変数（つまり `filter`, `filterstart` そして `filterend` ）で作るため、このファイルに、次のように変数を含める必要があります：
 
 ```twig
 {% set taxlist = taxonomylist.get %}
@@ -143,23 +150,28 @@ In order to make this work with our new variables (i.e. `filter`, `filterstart` 
     </span>
 {% endif %}
 ```
-Here, the file is gathering all the items in the taxonomy by default, in a variable called `taxlist_taxonomy`.
 
-If `filter` has been set, the taxonomy is making use of the `slice` Twig filter. This filter will, in our case, extract a subset of an array from the beginning index (in our case, `filterstart`) to the ending index (in our case, `filterend`).
+ここでは、デフォルトでタクソノミーのすべてのアイテムを、変数 `taxlist_taxonomy` に集めます。
 
-The `for` loop is ran just as it was in the original `taxonomylist.html.twig` with the content of `taxlist_taxonomy`, filtered or not.
+`filter` が設定されていれば、タクソノミーは Twig フィルターの `slice` が使用されます。
+このフィルターは、このケースでは、開始インデックス（このケースでは `filterstart` ）から、終了インデックス（このケースでは `filterend` ）までの配列の部分を取り出します。
 
-## Adding a search button to the SimpleSearch plugin
+オリジナルの `taxonomylist.html.twig` で、フィルターの有無に関わらず、 `taxlist_taxonomy` のコンテンツに対する処理とちょうど同じように `for` ループが実行されます。
+
+<h2 id="adding-a-search-button-to-the-simplesearch-plugin">SimpleSearch プラグインに検索ボタンを追加する</h2>
 
 #### Goal:
 
-You really like the [Grav SimpleSearch plugin](https://github.com/getgrav/grav-plugin-simplesearch), but you want to add a search button in addition to the text field. One reason to add this button is that it may not be readily apparent to the user that they need to hit their `Enter` key in order to initiate their search request.
+[Grav SimpleSearch プラグイン](https://github.com/getgrav/grav-plugin-simplesearch) は本当に便利ですが、 text フィールドに検索ボタンを追加したいです。
+このボタンを追加する理由のひとつは、検索リクエストを始めるために、 `エンター` キーを押さなければならないことが、ユーザーにわかりにくいかもしれないからです。
 
 #### Solution:
 
-First, make sure that you have installed the [Grav SimpleSearch plugin](https://github.com/getgrav/grav-plugin-simplesearch). Next, make sure that you copy `/yoursite/user/plugins/simplesearch/templates/partials/simplesearch-searchbox.html.twig` to `/yoursite/user/themes/yourtheme/templates/partials/simplesearch-searchbox.html.twig` as we will need to make modifications to this file.
+まず、 [Grav SimpleSearch プラグイン](https://github.com/getgrav/grav-plugin-simplesearch) がインストール済みであることを確認してください。
+次に、 `/yoursite/user/plugins/simplesearch/templates/partials/simplesearch-searchbox.html.twig` を `/yoursite/user/themes/yourtheme/templates/partials/simplesearch-searchbox.html.twig` にコピーしてください。このコピーファイル修正していきます。
 
-Before we go any further, let's review what this file does:
+先に進む前に、このファイルが何をするのか見てみましょう：
+
 ```twig
 <input type="text" placeholder="Search..." value="{{ query }}" data-search-input="{{ base_url }}{{ config.plugins.simplesearch.route}}/query" />
 <script>
@@ -174,21 +186,33 @@ jQuery(document).ready(function($){
 });
 </script>
 ```
-The first line simply embeds a text input field into your Twig template. The `data-search-input` attribute stores the base URL of the resulting query page. The default is `http://yoursite/search/query`.
 
-Let's now move onto the jQuery below that. Here, the tag containing the `data-search-input` attribute is assigned to a variable `input`. Next, the jQuery `.on()` method is applied to `input`. The `.on()` method applies event handlers to selected elements (in this case, the `<input>` text field). So, when the user presses (`keypress`) a key to initiate the search, the `if` statement checks that the following items are `true`:
+最初の行は単純に、 text 入力フィールドを Twig テンプレートに組み込んでいます。
+`data-search-input` 属性が、検索結果ページのベースとなる URL を保存します。
+デフォルトでは、 `http://yoursite/search/query` です。
 
-1. The `Enter` key has been pressed: `event.which == 13` where 13 is the numeric value of the `Enter` key on the keyboard.
-2. The number of characters entered into the searchbox in greater than three. You may want to adjust this to taste as your organization may have many acronyms that are three characters or less.
+その後の jQuery の行に移動しましょう。
+ここでは、 `data-search-input` 属性を持つタグが `input` 変数に代入されます。
+次に、 jQuery `.on()` メソッドが `input` に対して実行されます。
+`.on()` メソッドは、選択された要素（このケースでは、 `<input>` text フィールド）にイベントハンドラーを適用します。
+よって、ユーザーがキーを押し（ `keypress` ）て検索を始めたとき、 `if` 文で、以下の内容が `true` であるかチェックします：
 
-If they are true, then `event.preventDefault();` makes sure that the default browser action for the `Enter` key is ignored as this would prevent our search from occurring. Finally, the full URL of the search query is constructed. The default is `http://yoursite/search/query:yourquery`. From here, `/yoursite/user/plugins/simplesearch/simplesearch.php` performs the actual search and the other Twig files in the plugin list the results.
+1. `Enter` キーが押されたか： `event.which == 13` この 13 は、 `Enter` キーのキーボード上での数字の値です。
+2. 検索ボックスに入力されている文字数が、3文字より大きいか。これは調整しても良いかもしれません。あなたの所属に3文字以下の略語が多いかもしれないので。
 
-No back to our solution! If we wish to add a search button, we must:
+これらが true だったとき、 `event.preventDefault();` により、`Enter` キーが押されたときのブラウザのデフォルトアクションが無視されます。ブラウザのデフォルトアクションは、プラグインの検索機能を妨げてしまうためです。
+最後に、検索クエリーの完全な URL が構築されます。
+デフォルトでは、 `http://yoursite/search/query:yourquery` になります。
+ここから、 `/yoursite/user/plugins/simplesearch/simplesearch.php` が実際の検索を処理し、プラグインの Twig ファイルが結果をリスト表示します。
 
-1. Add the button
-2. Make sure to apply the `.on()` method to the button, but this time, using `click` instead of `keypress`
+わたしたちの解決策に戻ることはありません！ もし検索ボタンを追加したいなら、わたしたちのやるべきことは：
 
-This is achieved with the following code using the [Turret CSS Framework](http://bigfishtv.github.io/turret/docs/index.html). Code snippets for other frameworks will be listed at the end.
+1. ボタンを追加する
+2. そのボタンに `.on()` メソッドを適用する。ただし、今回は `keypress` ではなく `click` を使います。
+
+これは、 [Turret CSS フレームワーク](http://bigfishtv.github.io/turret/docs/index.html) を使って以下のようなコードで実現できます。
+他のフレームワーク向けのコードスニペットは、最後にリスト化します。
+
 ```html
 <div class="input-group input-group-search">
 	<input type="search" placeholder="Search" value="{{ query }}" data-search-input="{{ base_url }}{{ config.plugins.simplesearch.route}}/query" >
@@ -218,11 +242,14 @@ jQuery(document).ready(function($){
 });
 </script>
 ```
-The HTML and class attributes are specific to Turret, but the end result will be [something like this](http://bigfishtv.github.io/turret/docs/index.html#input-group). We can also see that the `.on()` method has also been assigned to the search button, but it only checks that the number of characters entered into the search box is greater than three before executing the code within the `if` statement.
 
-Here is the default HTML for the text field plus a search button for a few other frameworks:
+HTML と class 属性は、 Turret に特有のものですが、最後の結果は、 [このようになります](http://bigfishtv.github.io/turret/docs/index.html#input-group) 。
+また、 `.on()` メソッドが検索ボタンに適用されたこともわかりますが、 `if` 文の中では、3文字以上かどうかの文字数のチェックだけを行っています。
+
+ここで、他のいくつかのフレームワークでの、 text フィールドと検索ボタンについて、デフォルトの HTML を示します。
 
 [**Bootstrap**](http://getbootstrap.com/)
+
 ```html
 <div class="input-group">
     <input type="text" class="form-control" placeholder="Search for...">
@@ -233,6 +260,7 @@ Here is the default HTML for the text field plus a search button for a few other
 ```
 
 [**Materialize**](http://materializecss.com/)
+
 ```html
 <div class="input-field">
     <input id="search" type="search" required>
@@ -241,6 +269,7 @@ Here is the default HTML for the text field plus a search button for a few other
 ```
 
 [**Pure CSS**](http://purecss.io)
+
 ```html
 <form class="pure-form">
     <input type="text" class="pure-input-rounded">
@@ -249,6 +278,7 @@ Here is the default HTML for the text field plus a search button for a few other
 ```
 
 [**Semantic UI**](http://semantic-ui.com/)
+
 ```html
 <div class="ui action input">
   <input type="text" placeholder="Search...">
