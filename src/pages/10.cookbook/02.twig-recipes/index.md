@@ -3,17 +3,18 @@ title: "Twigレシピ"
 layout: ../../../layouts/Default.astro
 ---
 
-This page contains an assortment of problems and their respective solutions related to Twig templating.
+このページでは、 Twig テンプレートに関するさまざまな問題とその解決策を記載しています。
 
 <h2 id="list-the-last-5-recent-blog-posts">ブログ投稿で最近の5つのリスト</h2>
 
-##### Problem:
+<h5 id="problem">問題：</h5>
 
-You want to display the last 5 blog posts in a sidebar of your site so a reader can see recent blog activity.
+サイドバーに直近の5投稿のブログ記事を表示したい。
+これにより、読者が最近のブログ状況を知ることができるようにしたい。
 
-##### Solution:
+<h5 id="solution">解決策：</h5>
 
-Simply find the `/blog` page, obtain its children, order them by date in a descending order, and then get the first 5 to display in a list:
+`/blog` ページを見つけて、その子ページを取得し、日付降順で並び替え、最初の5つを取得し、リストに表示します：
 
 ```twig
 <ul>
@@ -25,7 +26,7 @@ Simply find the `/blog` page, obtain its children, order them by date in a desce
 </ul>
 ```
 
-when using within pages make sure you add following configuration to the page header:
+ページ内で使うときは、フロントマターに以下の設定を付け加えることを忘れないでください：
 
 ```yaml
 twig_first: true
@@ -36,11 +37,11 @@ process:
 
 <h2 id="add-non-modular-navigation-links">モジュラーページのモジュール以外のナビゲーションリンク</h2>
 
-##### Problem:
+<h5 id="problem-1">問題：</h5>
 
-You want to display navigation links from non modular pages.
+モジュラーページ以外のナビゲーションリンクを表示したい。
 
-##### Solution
+<h5 id="solution-1">解決策：</h5>
 
 ```twig
 <div class="desktop-nav__navigation">
@@ -57,13 +58,13 @@ You want to display navigation links from non modular pages.
 
 <h2 id="list-the-blog-posts-for-the-year">今年のブログ投稿のリスト</h2>
 
-##### Problem:
+<h5 id="problem-2">問題：</h5>
 
-You want to display all the blog posts that have occurred in this calendar year.
+今年のカレンダー上の1年に投稿したすべてのブログ記事を表示したい。
 
-##### Solution:
+<h5 id="solution-2">解決策：</h5>
 
-Simply find the `/blog` page, obtain it's children, filter by appropriate `dateRange()`, and order them by date in a descending order:
+`/blog` ページを探し、その子ページを取得し、適切な `dateRange()` メソッドでフィルタリングし、日付降順で並び替えます：
 
 ```twig
 <ul>
@@ -76,39 +77,39 @@ Simply find the `/blog` page, obtain it's children, filter by appropriate `dateR
 </ul>
 ```
 
-## Displaying a translated month
+<h2 id="displaying-a-translated-month">翻訳された月を表示する</h2>
 
-##### Problem:
+<h5 id="problem-3">問題：</h5>
 
-In some page templates, the Twig `date` filter is used, and it does not handle locales / multilanguage. So even if your page is in a language different than english, it could show the month in english, if the template chooses to show the month name.
+いくつかのページテンプレートでは、 Twig `date` フィルターが使われており、 それはロケールや多言語に対応していません。そのため、たとえ英語以外の言語ページであっても、テンプレートが月名を表示する選択になっていれば、英語で月が表示されてしまいます。
 
-##### Solution:
+<h5 id="solution-3">解決策：</h5>
 
-There are two solutions to this problem.
+この問題については、2つの解決策があります。
 
-###### First approach
+<h6 id="first-approach">最初のアプローチ</h6>
 
-The first involves the use of the Twig intl extension.
+最初の方法は、Twig intl 拡張機能を使用します。
 
-Install https://github.com/Perlkonig/grav-plugin-twig-extensions. Make sure you have the PHP intl extension installed.
+https://github.com/Perlkonig/grav-plugin-twig-extensions をインストールしてください。
 
-In your twig template, instead of for example (like in the Antimatter theme) `{{ page.date|date("M") }}` to `{{ page.date|localizeddate('long', 'none', 'it', 'Europe/Rome', 'MMM') }}` (add your language and timezone here)
+twig テンプレートで、たとえば（ Antimatter テーマのように） `{{ page.date|date("M") }}` のかわりに `{{ page.date|localizeddate('long', 'none', 'it', 'Europe/Rome', 'MMM') }}` にします（ここにタイムゾーンを追加してください）。
 
-###### Second approach
+<h6 id="second-approach">2つ目のアプローチ</h6>
 
-Let's assume you have some language translations setup in your `user/languages/` folder called `en.yaml` that contains the entry:
+たとえば、 `user/languages/` フォルダにある `en.yaml` ファイルに、いくつかの言語翻訳設定がされているとします：
 
 ```yaml
 MONTHS_OF_THE_YEAR: [January, February, March, April, May, June, July, August, September, October, November, December]
 ```
 
-And in `fr.yaml`:
+そして `fr.yaml` では：
 
 ```yaml
 MONTHS_OF_THE_YEAR: [Janvier, Février, Mars, Avril, Mai, Juin, Juillet, Août, Septembre, Octobre, Novembre, Décembre]
 ```
 
-Then you have your Twig:
+そして、 Twig では：
 
 ```html
 <li>
@@ -117,50 +118,49 @@ Then you have your Twig:
 </li>
 ```
 
-This makes use of the Grav custom Twig filter `|ta` that stands for **Translate Array**.  In the English version, the output might be something like:
+これは Grav のカスタム Twig フィルターで、 **Translate Array** の略である `|ta` を使っています。英語では、出力は次のようになります：
 
 ```txt
 An Example Post  July 2015
 ```
 
-And the French:
+そしてフランス語では：
 
 ```txt
 Un exemple d’article Juillet 2015
 ```
 
-## Displaying page content without summary
+<h2 id="displaying-page-content-without-summary">要約無しでページコンテンツを表示する</h2>
 
-##### Problem:
+<h5 id="problem-4">問題：</h5>
 
-You want to display the content of a page without the summary at top.
+上部に要約を掲載せずに、ページコンテンツを表示したい。
 
-##### Solution:
+<h5 id="solution-4">解決策：</h5>
 
-Use the  `slice` filter to remove the summary from the page content:
+`slice` フィルターを使って、ページコンテンツから要約部分を削除してください：
 
 ```twig
 {% set content = page.content|slice(page.summary|length) %}
 {{ content|raw }}
 ```
 
+<h2 id="hiding-the-email-to-spam-bots">スパムボットから Eメールを隠す</h2>
 
-## Hiding the email to spam bots
+<h5 id="problem-5">問題：</h5>
 
-##### Problem:
+スパムボットから Eメールを隠したい。
 
-You want to hide the email from spam bots
+<h5 id="solution-5">解決策：</h5>
 
-##### Solution:
-
-Enable Twig processing in the page header:
+ページのフロントマターで、 Twig 処理を有効化します：
 
 ```yaml
 process:
     twig: true
 ```
 
-Then use the `safe_email` Twig filter:
+次に、 `safe_email` Twig フィルターを使います：
 
 ```html
 <a href="mailto:{{'your.email@server.com'|safe_email}}">
@@ -168,27 +168,28 @@ Then use the `safe_email` Twig filter:
 </a>
 ```
 
-## Picking a random item from a translated array
+<h2 id="picking-a-random-item-from-a-translated-array">翻訳された配列からランダムにアイテムを取り上げる</h2>
 
-##### Problem:
+<h5 id="problem-6">問題：</h5>
 
-You want to pick a random item from an array translated in a particular language.  For this to work, it's assumed you have your [multi-language site setup and configured](../../02.content/11.multi-language/) as outlined in the documentation.
+特定の言語で翻訳された配列から、ランダムにアイテムを取り上げたい。この機能のため、 [多言語サイト設定](../../02.content/11.multi-language/) がドキュメントの大枠通り設定されていることを前提とします。
 
-##### Solution:
+<h5 id="solution-6">解決策：</h5>
 
-Let's also assume you have some language translations setup in your `user/languages/` folder called `en.yaml` that contains the entry:
+また、 `user/languages/` フォルダにいくつかの言語の翻訳設定があることを前提とします。
+`en.yaml` ファイルには、次のような内容が書かれています：
 
 ```txt
 FRUITS: [Banana, Cherry, Lemon, Lime, Strawberry, Raspberry]
 ```
 
-And in `fr.yaml`:
+そして、 `fr.yaml` には：
 
 ```txt
 FRUITS: [Banane, Cerise, Citron, Citron Vert, Fraise, Framboise]
 ```
 
-Then you have your Twig:
+そして、 Twig はこうなります：
 
 ```twig
 {% set langobj  = grav['language'] %}
@@ -197,25 +198,25 @@ Then you have your Twig:
 <span data-ticker="{{ fruits|join(',') }}">{{ random(fruits) }}</span>
 ```
 
-## Displaying an image uploaded in a file field
+<h2 id="displaying-an-image-uploaded-in-a-file-field">file フィールドでアップロードされた画像を表示する</h2>
 
-##### Problem
+<h5 id="problem-7">問題：</h5>
 
-You added a `file` field in your custom blueprint, and you want to display an image added in this field.
+カスタムブループリントに `file` フィールドを追加し、このフィールドで追加された画像を表示したい。
 
-##### Solution
+<h5 id="solution-7">解決策：</h5>
 
-As the `file` field allows for multiple images to be uploaded, it generates two nested objects in your frontmatter, the first object is the list of the uploaded images, the nested object within is a group of property/value for the given image.
+`file` フィールドでは、複数の画像がアップロードできるため、フロントマターに2つのネストされたオブジェクトが生成されます。1つ目のオブジェクトは、アップロード画像のリストで、その中にネストされたオブジェクトは、与えられた画像のプロパティ/値の集合です。
 
-_Note that in the case where you would want your user to only select a single image, it could be easier to use the `filepicker` field, that store a single object with the selected images properties._
+_注意点として、ユーザーに1つの画像のみ選択させたい場合は、 `filepicker` フィールドを使った方が簡単です。このフィールドは、選択された画像のプロパティとともに、1つのオブジェクトを保存します。_
 
-If you have a single image, you can display it in your template by using:
+画像が1つなら、次のようにしてテンプレートに表示できます：
 
 ```twig
 {{ page.media[header.yourfilefield|first.name] }}
 ```
 
-If you allowed your user to upload multiple images, your twig could look like this:
+複数画像のアップロードを許可するなら、 twig は次のようになります：
 
 ```twig
 {% for imagesuploaded in page.header.yourfilefield %}
@@ -223,15 +224,15 @@ If you allowed your user to upload multiple images, your twig could look like th
 {% endfor %}
 ```
 
-## Displaying an image picked in a mediapicker field
+<h2 id="displaying-an-image-picked-in-a-mediapicker-field">mediapicker フィールドで選択した画像を表示する</h2>
 
-##### Problem
+<h5 id="problem-8">問題：</h5>
 
-You added a `mediapicker` field in your custom blueprint, and you want to display the image selected.
+カスタムブループリントに `mediapicker` フィールドを追加し、選択画像を表示したい。
 
-##### Solution
+<h5 id="solution-8">解決策：</h5>
 
-A `mediapicker` field can be added to your blueprint like below:
+`mediapicker` フィールドをブループリントに追加するのは、次のようにします：
 
 ```yaml
 header.myimage:
@@ -241,12 +242,13 @@ header.myimage:
   preview_images: true
 ```
 
-The `mediapicker` field store the path to the image as a string such as `/home/background.jpg`
-In order to access this image with the page media functionality, you have to split this string and get:
- - the path to the page where this image is stored
- - the name of the image.
+`mediapicker` フィールドは `/home/background.jpg` のような文字列で画像への path を保存します。
+ページのメディア機能でこの画像にアクセスするには、この文字列を分割しなければいけません：
 
-You can do this via twig by using the snippet below:
+- 画像が保存されたページへの path
+- 画像の名前。
+
+以下のスニペットを使って、 twig 経由でこれを実行できます：
 
 ```twig
 {% set image_parts = pathinfo(header.myimage) %}
@@ -256,25 +258,32 @@ You can do this via twig by using the snippet below:
 {{ image_page.media[image_basename].html()|raw }}
 ```
 
-## Custom Twig Filter/Function
+<h2 id="custom-twig-filter-function">カスタム Twig フィルター/関数</h2>
 
-##### Problem
+<h5 id="problem-9">問題：</h5>
 
-Sometimes you need some logic in Twig that can only be done in PHP, so the best solution is to create a custom Twig Filter or Function.  A filter is usually appended to a string in the format: `"some string"|custom_filter` and a function can take a string, or any other variable type: `custom_function("some string")`, but essentially they are very similar.
+ときには、 PHP でしか実行できないようなロジックが Twig で必要となることもあります。
+そのような場合、最適な解決策は、カスタムの Twig フィルターや Twig 関数を作ることです。
+フィルターは通常、 `"some string"|custom_filter` というフォーマットで文字列に追加されます。
+関数は、文字列もしくは他のあらゆる型の変数を受け取り、 `custom_function("some string")` というフォーマットになります。
+しかし、本質ではどちらもとてもよく似ています。
 
-You can also pass extra parameters like: `"some string"|custom_filter('foo', 'bar')`, where the extra parameters can be used inside the filter. And the function variation would be: `custom_function("some string", 'foo', 'bar')`.
+フィルター内で追加のパラメータが使える場合、それを渡すこともできます。このように： `"some string"|custom_filter('foo', 'bar')` 
+関数の場合は、こうなります： `custom_function("some string", 'foo', 'bar')` 。
 
-For this example we'll create a simple Twig filter to count the takes a string and splits it into chunks separated by a delimiter. This is particular useful for things like credit card numbers, license keys etc.
+この例では、文字列を区切り文字で区切られたチャンクに分割し、その数を数えるシンプルな Twig フィルターを作成します。これは、クレジットカード番号やライセンスキーなどの情報を取得する際に、特に便利です。
 
-##### Solution
+<h5 id="solution-9">解決策：</h5>
 
-The best way to add this extra functionality is to add the logic in your custom plugin, although adding it in your theme's php file is also an option.  We'll use a plugin in this example for simplicity.  First you need to install the devtools plugin to make creating a plugin a simple wizard-based process:
+この機能を追加する最良の方法は、カスタムプラグインにロジックを追加することです。しかし、テーマの PHP ファイルに追加することもできます。
+この例では、簡単のためにプラグインを使います。
+まず、ウィザードから簡単な処理でプラグインを作成するために、 devtools プラグインをインストールする必要があります：
 
 ```bash
 bin/gpm install devtools
 ```
 
-Next you need to create your new custom plugin, then fill in your details when prompted.
+次に、新しいカスタムプラグインを作成し、プロンプトの表示ごとに詳細を入力してください。
 
 ```bash
 bin/plugin devtools new-plugin
@@ -290,7 +299,8 @@ SUCCESS plugin ACME Twig Filters -> Created Successfully
 Path: /Users/joe/grav/user/plugins/acme-twig-filters
 ```
 
-By default this skeleton framework for a new plugin will add some dummy test to your page via the `onPageContentRaw()` event.  You will first need to replace this functionality with code that listens to the `onTwigInitialized()` event:
+デフォルトでは、この新しいプラグイン用のスケルトンフレームワークは、 `onPageContentRaw()` イベントを介して、ページにダミーテストを追加します。
+まず、この機能を `onTwigInitialized()` イベントで発火するコードに書きかえる必要があります：
 
 ```php
     public function onPluginsInitialized()
@@ -315,7 +325,7 @@ By default this skeleton framework for a new plugin will add some dummy test to 
     }
 ```
 
-First we need to register the filter in the `onTwigInitialized()` method:
+まず、 `onTwigInitialized()` メソッドでフィルターを登録する必要があります：
 
 ```php
     /**
@@ -329,7 +339,8 @@ First we need to register the filter in the `onTwigInitialized()` method:
     }
 ```
 
-The first parameter to the method registers the `chunker` as the filter name, and the `chunkString` as the PHP method where the logic occurs.  So we need to create this next:
+メソッドの最初のパラメーターは、フィルター名として `chunker` を登録し、ロジックが実行される PHP メソッドとして `chunkString` を登録します。
+そのため、次のように作成する必要があります：
 
 ```php
     /**
@@ -341,31 +352,31 @@ The first parameter to the method registers the `chunker` as the filter name, an
     }
 ```
 
-Now you can try it out in your Twig templates like this:
+次のように、 Twig テンプレートで試すことができます：
 
 ```twig
 {{ "ER27XV3OCCDPRJK5IVSDME6D6OT6QHK5"|chunker }}
 ```
 
-Which would produce:
+結果は、次のようになります：
 
 ```txt
 ER27-XV3O-CCDP-RJK5-IVSD-ME6D-6OT6-QHK5
 ```
 
-or you can pass extra params:
+もしくは、追加のパラーめたーを渡せます：
 
 ```twig
 {{ "ER27XV3OCCDPRJK5IVSDME6D6OT6QHK5"|chunker(8, '|') }}
 ```
 
-which would produce:
+結果は次のようになります：
 
 ```txt
 ER27XV3O|CCDPRJK5|IVSDME6D|6OT6QHK5
 ```
 
-Lastly if you want this to be available via a function and not just a filter, you can simply register a Twig function with the same name in the `onTwigInitialized()` method:
+最後に、これをフィルターだけでなく関数経由でも利用できるようにするには、 `onTwigInitialized()` メソッドに同じ名前の Twig 関数を登録するだけです：
 
 ```php
     /**
@@ -382,24 +393,27 @@ Lastly if you want this to be available via a function and not just a filter, yo
     }
 ```
 
-And then you can use the function syntax:
+そして、関数の構文を利用できます：
 
 ```twig
 {{ chunker("ER27XV3OCCDPRJK5IVSDME6D6OT6QHK5", 8, '|') }}
 ```
 
-## Extend base template of inherited theme
+<h2 id="extend-base-template-of-inherited-theme">継承したテーマのベーステンプレートを拡張する</h2>
 
-##### Problem
+<h5 id="problem-10">問題：</h5>
 
-Sometimes you need to extend the base template itself. This might happen when there's no easy and obvious way to extend blocks already present in a template. Lets use Quark as an example for parent theme and you want to extend `themes/quark/templates/partials/base.html.twig` to your `myTheme` theme. 
+ベーステンプレートそれ自体を拡張する必要があることもあります。
+これは、テンプレート内にすでに存在する block を拡張するための簡単で分かりやすい方法が無いときに起こります。
+Quark を親テーマの例として使い、 `myTheme` テーマで `themes/quark/templates/partials/base.html.twig` を拡張してみましょう。
 
-##### Solution
+<h5 id="solution-10">解決策：</h5>
 
-You can add Quark as a Twig namespace by using the theme's `my-theme.php` to listen on the `onTwigLoader` event and adding the Quark theme template directory. The contents of the class should be something like this:
+テーマの Quark を Twig の名前空間として追加できます。テーマの `my-theme.php` で、 `onTwigLoader` イベントで発火するようにし、 Quark テーマテンプレートディレクトリを追加することで、追加できます。
+class の内容は、次のようになるでしょう：
 
-    <?php
 ```php
+<?php
     namespace Grav\Theme;
     
     use Grav\Common\Grav;
@@ -422,7 +436,7 @@ You can add Quark as a Twig namespace by using the theme's `my-theme.php` to lis
     }
 ```
 
-Now in `themes/my-theme/templates/partials/base.html.twig` you can extend Quarks base template like this:
+これで、 `themes/my-theme/templates/partials/base.html.twig` において、 Quark のベーステンプレートを次のように拡張できます：
 
 ```twig
     {% extends '@quark/partials/base.html.twig' %}

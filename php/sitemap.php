@@ -7,7 +7,7 @@ require_once __DIR__.'/common.php';
 
 $pages = getPages();  // $pages: Pages
 
-$xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><urlset></urlset>');
+$xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>');
 foreach($pages->toPageList() as $node) {
     $page = $node->page;
     if($page->redirect !== false) {
