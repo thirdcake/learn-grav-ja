@@ -7,11 +7,11 @@ layout: ../../../layouts/Default.astro
 
 <h2 id="output-some-php-code-result-in-a-twig-template">Twig テンプレートに PHP コードの結果を出力する</h2>
 
-#### Goal:
+<h4 id="goal">目標：</h4>
 
 カスタム PHP コードを処理したい。そして、ページでその結果を利用したい。
 
-#### Solution:
+<h4 id="solution">解決策：</h4>
 
 Twig 拡張機能を作成する新しいプラグインを作成し、 Twig テンプレートで利用できる PHP コンテンツを作成します。
 
@@ -87,11 +87,11 @@ enabled: true
 
 <h2 id="filter-taxonomies-using-the-taxonomylist-plugin">taxonomylist プラグインでタクソノミーをフィルタリングする</h2>
 
-#### Goal:
+<h4 id="goal-1">目標：</h4>
 
 [taxonomy list Grav プラグイン](https://github.com/getgrav/grav-plugin-taxonomylist) を使って、ブログ投稿で使われているタグのリストを作りたい。ただし、それらすべてをリスト化するのではなく、最も良く使われているタグだけをリスト化したい。（たとえば、トップ5 のタグだけを表示するなど）
 
-#### Solution:
+<h4 id="solution-1">解決策：</h4>
 
 これは、 Grav プラグインの柔軟性が本当に扱いやすいことを示す具体例です。
 最初のステップとして、 [taxonomy list Grav プラグイン](https://github.com/getgrav/grav-plugin-taxonomylist) を Grav にインストールしているか確認してください。
@@ -160,12 +160,12 @@ enabled: true
 
 <h2 id="adding-a-search-button-to-the-simplesearch-plugin">SimpleSearch プラグインに検索ボタンを追加する</h2>
 
-#### Goal:
+<h4 id="goal-2">目標：</h4>
 
 [Grav SimpleSearch プラグイン](https://github.com/getgrav/grav-plugin-simplesearch) は本当に便利ですが、 text フィールドに検索ボタンを追加したいです。
 このボタンを追加する理由のひとつは、検索リクエストを始めるために、 `エンター` キーを押さなければならないことが、ユーザーにわかりにくいかもしれないからです。
 
-#### Solution:
+<h4 id="solution-2">解決策：</h4>
 
 まず、 [Grav SimpleSearch プラグイン](https://github.com/getgrav/grav-plugin-simplesearch) がインストール済みであることを確認してください。
 次に、 `/yoursite/user/plugins/simplesearch/templates/partials/simplesearch-searchbox.html.twig` を `/yoursite/user/themes/yourtheme/templates/partials/simplesearch-searchbox.html.twig` にコピーしてください。このコピーファイル修正していきます。
@@ -286,17 +286,23 @@ HTML と class 属性は、 Turret に特有のものですが、最後の結果
 </div>
 ```
 
-## Iterating through pages and media
+<h2 id="iterating-through-pages-and-media">ページとメディアの繰り返し</h2>
 
-#### Goal:
+<h4 id="goal-3">目標：</h4>
 
-You want to access all pages and each page's associated media through PHP and/or Twig, so that they can be looped over or otherwise manipulated by the plugin.
+PHP や Twig を通して、全てのページとそれぞれのページに関連するメディアにアクセスし、プラグインでループしたり、その他の操作したりしたい。
 
-#### Solution:
+<h4 id="solution-3">解決策：</h4>
 
-Use Grav's collection-capabilities to construct a recursive index of all pages, and when indexing also gather up media-files for each page. The [DirectoryListing](https://github.com/OleVik/grav-plugin-directorylisting/blob/v2.0.0-rc.2/Utilities.php#L64-L105)-plugin does exactly this, and builds a HTML-list using the produced tree-structure. To do this, we'll create a recursive function - or method as may be the case within a plugin's class - that goes through each page and stores it in an array. The method is recursive, because it calls itself again for each page it finds that has children.
+Grav のコレクション機能を使って、再帰的に全てのページのインデックスを構築します。また、それぞれのページをインデックスする際に、メディアファイルも収集します。 
+[DirectoryListing](https://github.com/OleVik/grav-plugin-directorylisting/blob/v2.0.0-rc.2/Utilities.php#L64-L105) プラグインはまさにこれを行い、生成された木構造を使って HTML リストをビルドします。
+これを実行するには、再帰関数 - もしくはプラグインの class の中であれば再帰メソッド - を作成し、1つ1つのページを走査し、配列に保存します。
+メソッドは再帰しなければいけません。それぞれのページに子ページがあれば、メソッド内でメソッド自信を呼び出すからです。
 
-First things first, though, the method takes three parameters: The first is the `$route` to the page, which tells Grav where to find it; the second is the `$mode`, which tells the method whether to iterate over the page itself or its children; the third is the `$depth`, which keeps track of what level the page is on. The method initially instantiates the Page-object, then deals with depth and mode, and constructs the collection. By default, we order the pages by Date, Descending, but you could make this configurable. Then we construct an array, `$paths`, to hold each page. Since routes are unique in Grav, they are used as keys in this array to identify each page.
+まず最初に、メソッドには3つのパラメータが必要です：　最初がページの `$route` で、 Grav にそのページがどこにあるかを知らせます。2つ目が `$mode` で、メソッドにそのページ自信を繰り返すか、それとも子ページについてかを知らせます。3つ目が `$depth` で、ページがあるレベルを記録します。
+The method initially instantiates the Page-object, then deals with depth and mode, and constructs the collection.
+デフォルトでは、ページは日付降順で並べられますが、これは設定できます。
+それから、各ページを保持する `$paths` 配列を構築します。ルーティングは Grav で一意なので、各ページを識別するためにこの配列をキーとして使用されます。
 
 Now we iterate over the pages, adding depth, title, and route (also kept as a value for ease-of-access). Within the foreach-loop, we also try to retrieve child-pages, and add them if found. Also, we find all media associated with the page, and add them. Because the method is recursive, it will continue looking for pages and child-pages until no more can be found.
 
@@ -348,11 +354,11 @@ public function buildTree($route, $mode = false, $depth = 0)
 
 ## Custom Twig templates plugin
 
-#### Goal:
+<h4 id="goal-4">目標：</h4>
 
 Rather than using theme inheritance, it's possible to create a very simple plugin that allows you to use a custom location to provide customized Twig templates. 
 
-#### Solution:
+<h4 id="solution-4">解決策：</h4>
 
 The only thing you need in this plugin is an event to provide a location for your templates.  The simplest way to create the plugin is to use the `devtools` plugin.  So install that with:
 
@@ -416,11 +422,11 @@ This allows you to drop in a Twig template called `foo.html.twig` and then any p
 
 ## Using Cache in your own plugins
 
-#### Goal:
+<h4 id="goal-5">目標：</h4>
 
 When developing your own plugins, it's often useful to use Grav's cache to cache data to improve performance.  Luckily it's a very simple process to use cache in your own code.
 
-#### Solution:
+<h4 id="solution-5">解決策：</h4>
 
 This is some basic code that shows you how caching works:
 
