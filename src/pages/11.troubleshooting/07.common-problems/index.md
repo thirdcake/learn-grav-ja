@@ -7,16 +7,21 @@ layout: ../../../layouts/Default.astro
 
 <h2 id="cannot-connect-to-the-gpm">GPMにつながらない</h2>
 
-**問題：** The GPM cannot be reached, and you get this error in the Admin panel
+**問題：** GPM にたどり着かない、または管理パネルでそのエラーが出る
 
 **解決策：**
 
-First, make sure PHP has cURL and OpenSSL installed. You can check this in the Admin panel, in Configuration -> Info. You should see a "OpenSSL" section with `OpenSSL support: enabled`. Same for cURL, a section with `cURL support: enabled`.
+まず、 PHP に cURL と OpenSSL がインストールされていることを確認します。
+これは、管理パネルからでも Configuration -> Info でチェック可能です。
+"OpenSSL" セクションで、 `OpenSSL support: enabled` になっていることを確認します。
+cURL についても同様で、 `cURL support: enabled` になっていることを確認してください。
 
-If this is ok, make sure you're not behind a proxy. If so, [configure it](/basics/grav-configuration#system-configuration) in the Grav System configuration and [make sure there are no issues with the connection](/troubleshooting/proxy).
+これが OK であれば、プロキシサーバーを経由していないか確認します。
+もしそうなら、 Grav System 設定で [それを設定します](../../01.basics/05.grav-configuration/#system-configuration) 。そして、[接続に問題が無いか確認してください](../06.proxy/)
 
-Then, [check your permissions](/troubleshooting/permissions).
+次に、 [パーミッションをチェックしてください](../05.permissions/) 。
 
+上記をすべて実行したあとにも、まだ GPM との接続に問題がある場合は、
 If after all the above you are still getting issues connecting with GPM, we have noticed that on some servers (mostly local machines running Windows), there are issues verifying the SSL certificate of getgrav.org, even though it is [A Rating](https://www.ssllabs.com/ssltest/analyze.html?d=getgrav.org&hideResults=on).
 To work around this problem, we have added a new system config `system.gpm.verify_peer` that is enabled by default. Set it to false and try again.
 
@@ -26,34 +31,35 @@ Also, check the CLI command is working, by opening a SSH connection to the serve
 
 <h2 id="admin-interface-won-t-scroll">管理パネル画面がスクロールできない</h2>
 
-**問題：** When accessing the Admin-plugin's interface, the page will not scroll
+**問題：** 管理パネルのインターフェースにアクセスしたとき、ページがスクロールしない
 
-**解決策：** There are several reported causes of this, but the most common solutions are the following.
+**解決策：** いくつかの原因が報告されていますが、最も一般的な解決策は、以下のとおりです。
 
-- Hard-reload the page by clearing your browser's cache and then refreshing.
-- Make sure you are using the newest version of Grav, and switch to the default language - English. If this solves the scrolling issue, please report the faulty language [as an issue](https://github.com/getgrav/grav-plugin-admin/issues/).
-- If you are using CloudFlare for HTTPS or as a CDN, their JS-optimization - which is enabled by default - can block scripts from rendering. To disable this, log in to CloudFlare and select the relevant domain, then do one of the following:
-    1. To disable this optimization entirely, navigate to "Speed" and scroll down to "Rocket Loader".
-        - Set this to "Off" and CloudFlare will not block the script, but you will also not benefit from their optimization.
-    2. To only disable the optimization for Grav's Admin interface, navigate to "Page Rules" and click the "Create Page Rule"-button.
-        - For "If the URL matches" field, fill in your domain name, followed by `/admin`, for example: `example.com/admin`.
-        - Click "Add a Setting", and in the dropdown find "Rocket Loader". When selected, change the value in "Select Value" to **off**.
-        - Leave the "Order"-field as is, by default it is set to **First**.
-        - Finally, click the "Save and Deploy"-button
+- ページをハードリロードします。ブラウザーのキャッシュをクリアし、それから再読込みしてください。
+- 最新バージョンの Grav を使っていることを確認してください。そして、デフォルト言語を英語にしてください。これによってスクロール問題が解決する場合、問題の出た言語を [issue として](https://github.com/getgrav/grav-plugin-admin/issues/) 報告してください。
+- HTTPS や、 CDN として CloudFlare を利用している場合、当該サービスの JS-最適化（デフォルトで有効になっている機能）をレンダリングからブロックしてください。これを無効化するには、 CloudFlare にログインし、関係するドメインを選択し、以下のいずれかを実行します：
+    1. この最適化をすべて無効化するには、 "Speed" に移動し、 "Rocket Loader" へスクロールダウンしてください。
+        - これを "Off" に設定すると、 CloudFlare は script をブロックしませんが、当該サービスの最適化のメリットは得られなくなります。
+    2. Grav の管理パネルインターフェースのみ最適化を無効にするには、 "Page Rules" に移動し、 "Create Page Rule" ボタンをクリックします。
+        - "If the URL matches" フィールドに、ドメイン名に続けて `/admin` を入力します。たとえば： `example.com/admin`
+        - "Add a Setting" をクリックし、ドロップダウンで "Rocket Loader" を探します。選択したとき、 "Select Value" の値が **off** に変更されます。
+        - "Order" フィールドはそのままに残します。デフォルトでは、 **First** が設定されています。
+        - 最後に、 "Save ans Deploy" ボタンをクリックします
 
-If none of the above work, please check your browser's console for any reported JavaScript errors; In Chrome or Firefox either press F12 or Ctrl+Shift+I, then click the "Console"-tab. Report the errors [as an issue](https://github.com/getgrav/grav-plugin-admin/issues/).
+上記すべてで機能しない場合、ブラウザのコンソールに、何か JavaScript エラーが報告されていないかチェックしてください。Chrome や Firefox の場合、 F12 キーもしくは Ctrl+Shift+i を押した後、 "Console" タブをクリックすることで表示されます。エラーを [issue として](https://github.com/getgrav/grav-plugin-admin/issues/) 報告してください。
 
 <h2 id="fetch-failed">Fetch Faildというエラーが表示される</h2>
 
-Inside Admin sometimes a "Fetch Failed" red popup might appear. If it happens once in a while, do not worry as it might simply mean a connection issue.
+管理パネル内では、ときどき "Fetch Failed" という赤いポップアップが表示されるかもしれません。
+もしこれが表示されても、それほど気にしないでください。ただの接続問題を意味するものだからです。
 
-But if it shows up every time, an issue some users run into is `mod_security` blocking Grav's network requests.
+しかし、毎回表示される場合は、 `mod_security` が Grav のネットワークリクエストをブロックしているという問題に遭遇しているかもしれません。
 
-This can be solved by finding and disabling the rules that are raised, which depending on the configuration of mod_security, might be different from case to case.
+この問題は、それをあげているルールを探し、無効化することで解決できます。そのルールは、ケースごとに違うかもしれませんが、 `mod_security` の設定によります。
 
-If you are running your own server, a guide on how to do this can be found in [http://www.inmotionhosting.com/support/website/modsecurity/find-and-disable-specific-modsecurity-rules](http://www.inmotionhosting.com/support/website/modsecurity/find-and-disable-specific-modsecurity-rules), otherwise just contact your hosting provider and illustrate the problem.
+自サーバーで実行している場合、この方法へのガイドは、 [http://www.inmotionhosting.com/support/website/modsecurity/find-and-disable-specific-modsecurity-rules](http://www.inmotionhosting.com/support/website/modsecurity/find-and-disable-specific-modsecurity-rules) に見つかります。そうでない場合、ホスティング会社に連絡して、問題を説明してください。
 
-Related issue: [admin#951](https://github.com/getgrav/grav-plugin-admin/issues/951)
+類似の問題： [admin#951](https://github.com/getgrav/grav-plugin-admin/issues/951)
 
 <h2 id="zend-opcache-api-is-restricted">Zend OPcache API が制限されている</h2>
 
