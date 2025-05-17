@@ -3,17 +3,17 @@ title: "管理パネルレシピ"
 layout: ../../../layouts/Default.astro
 ---
 
-This page contains an assortment of problems and their respective solutions related to Grav Admin modifications.
+このページでは、 Grav 管理パネルの修正に関連するさまざまな問題とその解決策を紹介します。
 
-## Add a custom YAML file
+<h2 id="add-a-custom-yaml-file">カスタム YAML ファイルを追加する</h2>
 
-#### Problem:
+<h4 id="problem">問題：</h4>
 
-You want to provide a site-wide group of user-editable company fields akin to `system.yaml` or `site.yaml`, but in its own dedicated file.
+`system.yaml` や `site.yaml` のようなサイト全体でユーザーが編集できる company フィールドグループを、専用のファイルで提供したい。
 
-#### Solution:
+<h4 id="solution">解決策：</h4>
 
-As outlined in the [Basics / Configuration](../../01.basics/05.grav-configuration/#other-configuration-settings-and-files) section, the first step is to provide your new YAML data file, for example: `user/config/details.yaml`:
+[Basics / Configuration](../../01.basics/05.grav-configuration/#other-configuration-settings-and-files) セクションで概要を説明したとおり、最初のステップは、新しい YAML データファイルを提供することです。たとえば： `user/config/details.yaml` ：
 
 ```yaml
 name: 'ABC Company Limited'
@@ -26,9 +26,10 @@ phone:
   default: '555-123-1111'
 ```
 
-Now you need to provide the appropriate blueprint file to define the form.  The blueprint can be provided by a plugin, but the simplest approach is to simply put the blueprint in a file: `user/blueprints/config/details.yaml`
+次に、フォームを定義する適切なブループリントファイルを提供する必要があります。
+ブループリントは、プラグインから提供されますが、最もシンプルなアプローチは、単純に、次の場所にブループリントを書くことです：`user/blueprints/config/details.yaml`
 
-If you wanted to provide the blueprint via a plugin, you would first need to add this code to your plugin right after the class definition:
+プラグインからブループリントを提供したい場合は、まず、プラグインの class 定義の直後に、このコードを追加を追記する必要があります：
 
 ```twig
 class MyPlugin extends Plugin
@@ -40,7 +41,7 @@ class MyPlugin extends Plugin
     ...
 ```
 
-Then add this code to your `onPluginsInitialized()` method:
+それから、このコードを `onPluginsInitialized()` に追加します：
 
 ```twig
 if ($this->isAdmin()) {
@@ -53,9 +54,9 @@ if ($this->isAdmin()) {
 }
 ```
 
-Then create a file called `user/plugins/myplugin/blueprints/config/details.yaml`
+それから、 `user/plugins/myplugin/blueprints/config/details.yaml` というファイルを作成します。
 
-The actual blueprint file should contain a form definition that matches the configuration data:
+実際のブループリントファイルは、config 設定データに適合するフォーム定義が書かれているべきです：
 
 ```yaml
 title: Company Details
@@ -92,17 +93,19 @@ form:
             placeholder_value: Phone Number
 ```
 
-The use of the `array` field type will let you add arbitrary email and phone fields as you need them.
+`array` フィールドタイプを使うことで、必要なぶんだけ任意の email フィールドや phone フィールドが追加できます。
 
-## Add a custom page creation modal
+<h2 id="add-a-custom-page-creation-model">カスタムのページ作成モーダルを追加する</h2>
 
-#### Problem:
+<h4 id="problem-1">問題：</h4>
 
-You want to provide an easy way to create a new blog post or gallery image page. We will go with the blog post for this example. Assume you want to make a blog and easily create a blog post in the correct folder by clicking a button.
+新しいブログ投稿やギャラリー画像ページを作成する簡単な方法を提供したい。
+この例では、ブログ投稿について説明します。
+ブログを作成し、ブログ投稿を現在のフォルダで、ボタンクリックだけで簡単に作成したいとします。
 
-#### Solution:
+<h4 id="solution-1">解決策：</h4>
 
-First of all, create the form for our modal. Create a new file: `user/blueprints/admin/pages/new_post.yaml`.
+まずはじめに、モーダルで使うフォームを作成します。新しいファイルを作成してください： `user/blueprints/admin/pages/new_post.yaml`
 
 ```twig
 form:
@@ -138,11 +141,13 @@ form:
       type: blueprint
 ```
 
-This form mimics the default `Add Page` modal's form. For the **folder** as you can see we have a special value: `@slugify-title`. This means that the **folder** will default to the slugified version of the **title** form input. **route** is `/posts` so it will put it into the `/posts` folder.
+このフォームは、デフォルトの `Add Page` モーダルのフォームを真似しています。 **folder** フィールドには、見てのとおり特別な値： `@slugify-title` が設定されています。これは、 **folder** には、 **title** フォームに入力された値のスラッグ化されたテキストがデフォルトで入力されることを意味します。
+**route** が `/posts` なので、これは `/posts` フォルダ内に置かれます。
 
-**name** is `post` so it will use the `post` page blueprint.
+**name** は `post` なので、`post` のページブループリントを使います。
 
-Second step is to edit the configuration of the Admin plugin. To add custom code to the configuration file `admin.yaml` of the Admin Plugin, create the file `user/config/plugins/admin.yaml`and add this snippet:
+次のステップでは、管理パネルプラグインの設定を編集します。
+管理パネルプラグインの `admin.yaml` 設定ファイルにカスタムコードを追加するために、 `user/config/plugins/admin.yaml` ファイルを作成し、以下のスニペットを追加してください：
 
 ```twig
 add_modals:
@@ -152,27 +157,28 @@ add_modals:
     show_in: bar
 ```
 
-Configuration keys/values available for `add_modals`:
+`add_modals` には、キー/バリュー形式の設定が可能です：
 
-- `label` - text to be shown in the button
-- `show_in` (default: bar) (values: bar|dropdown) - whether to show the button in the **bar** or **dropdown**
-- `blueprint` - blueprint used by the template
-- `template` - template used by the modal (default: partials/blueprints-new.html.twig)
-- `with` - data which is passed to the template
-- `link_classes` - classes to add to the link element
-- `modal_classes` - classes to add to the modal element
+- `label` - ボタンに表示されるテキスト
+- `show_in` (default: bar) (values: bar|dropdown) - ボタンの表示を **bar** にするか **dropdown** にするか
+- `blueprint` - テンプレートによって使われるブループリント
+- `template` - モーダルによって使われるテンプレート（デフォルト： partials/blueprints-new.html.twig）
+- `with` - テンプレートに渡されるデータ
+- `link_classes` - link 要素に追加される class
+- `modal_classes` - modal 要素に追加される class
 
-## Add a custom select field
+<h2 id="add-a-custom-select-field">カスタムの select フィールドを追加する</h2>
 
-#### Problem:
+<h4 id="problem-2">問題：</h4>
 
-You want to add a select field with a large list of values. In this example, we will assume you want to display a list of countries.
+値の多いリストで select フィールドを追加したい。
+この例では、国のリストを表示したいものとします。
 
-#### Solution:
+<h4 id="solution-2">解決策：</h4>
 
-You can create a static function and call the array from within your blueprint. You can code this function either in your theme's php file, or in a custom plugin.
+静的な関数を作り、ブループリント内から配列を呼び出すことができます。この関数は、テーマの PHP ファイルにも、カスタムプラグインの PHP ファイルにも書くことができます。
 
-In this example, we will add the function to the Antimatter theme, we will thus edit the `antimatter.php` file which is in the `user/themes/antimatter` folder.
+この例では、Antimatter テーマに関数を追加します。よって、 `user/themes/antimatter` フォルダの `antimatter.php` ファイルを編集します。
 
 ```php
 <?php
@@ -217,11 +223,10 @@ class Antimatter extends Theme
 }
 ```
 
+> [!Note]  
+> 上記は、見やすくするために省略されたリストですが、 [umpirsky/count-list](https://github.com/umpirsky/country-list/blob/master/data/en_US/country.php) から、全ての国のリストをコピー/ペーストできます。
 
-
-! This is a trimmed-down list for easy viewing but you can copy/paste the full country list from [<i class="fa fa-github"></i>umpirsky/count-list](https://github.com/umpirsky/country-list/blob/master/data/en_US/country.php)
-
-Then, we call the function from a blueprint or a frontend form definition like this:
+次に、この関数をブループリントやフロントエンドのフォーム定義から呼び出します。このように：
 
 ```yaml
 country:
@@ -230,7 +235,7 @@ country:
   data-options@: '\Grav\Theme\Antimatter::countryCodes'
 ```
 
-Here is how it will look in the admin
+以下は、管理パネルでの見た目です。
 
 ![](countrylist.png)
 

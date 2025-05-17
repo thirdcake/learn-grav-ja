@@ -3,39 +3,42 @@ title: "パーミッション"
 layout: ../../../layouts/Default.astro
 ---
 
-Depending on your hosting environment, permissions may or may not be an issue you need to concern yourself with. The important thing to understand is that there is a potential issue if the user you use to edit your files on the file-system is different from the user that PHP runs under (usually the webserver), or at the very least, the two users don't have **Read/Write** access to these files.
+ホスティング環境次第で、パーミッションは、問題の種になったり、ならなかったりします。
+理解しておくべき重要な点は、ファイルシステムでファイルを編集するユーザーと、 PHP を実行するユーザー（通常、それは web サーバーアプリケーションです）が、異なる場合、潜在的な問題があるということです。また、少なくとも、この2つのユーザーに、ファイルへの **読み/書き** 権限がなければ、問題になります。
 
-First, find out which user Apache or Nginx runs with by running the following command
-For Apache:
+まず、どのユーザーが Apache や Nginx を実行しているのか、以下のコマンドで明らかにします。
+
+Apache に対しては：
 
 ```bash
 ps aux | grep -v root | grep apache | cut -d\  -f1 | sort | uniq
 ```
 
-For Nginx:
+Nginx に対しては：
 
 ```bash
 ps aux | grep -v root | grep nginx | cut -d\  -f1 | sort | uniq
 ```
 
-And find out which user owns the file in your grav directory by running
+そして、 Grav ディレクトリのファイルを所有しているユーザーを明らかにします。
+次を実行します：
 
 ```bash
 ls -l
 ```
 
-Being a file-based CMS, Grav needs to write to the file-system in order to create cache and log files. There are three main scenarios:
+Grav は、ファイルベースの CMS なので、キャッシュファイルやログファイルを作成するために、ファイルシステムへの書き込み権限が必要です。3つの主要なシナリオがあります：
 
-1. ##### PHP/Webserver runs with the same user that edits the files.  (Preferred)
-   This is the approach used by most **shared hosting** setups and also works well for local development. The blog post we wrote regarding [MacOS Yosemite, Apache, and PHP](https://getgrav.org/blog/mac-os-x-apache-setup-multiple-php-versions) outlines how to configure Apache to run as your personal user account. This approach is not considered secure enough to use on a dedicated web host, so the second or third option should be used.
+1. <h5 id="php-webserver-runs-with-the-same-user-that-edits-t">ファイルを編集するユーザーと同一のユーザーが PHP/Webserver を実行する（推奨）</h5>
+   これは、ほとんどの **レンタルサーバー** 設定で使われるアプローチで、ローカル環境でもよく機能します。 [MacOS Yosemite, Apache, and PHP](https://getgrav.org/blog/mac-os-x-apache-setup-multiple-php-versions) について書いたブログ記事で、 Apache をあなたのパーソナルなユーザーアカウントで動かす方法の概要を説明しています。このアプローチは、専用 web ホスティングで使う場合は、十分な安全性が考慮されていませんので、2つ目、3つ目のオプションを使ってください。
 
-2. ##### PHP/Webserver runs with different accounts but same Group
-   By using a shared Group between your user and PHP/Webserver account with `775` and `664` permissions you ensure that even though you have two different accounts, both will have **Read/Write** access to the files.  You should also probably set a `umask 0002` on the root so that new files are created with the proper permissions.
+2. <h5 id="php-webserver-runs-with-different-accounts-but-sam">PHP/Webserver を別ユーザーで実行するが、同じグループにする</h5>
+   あなたのユーザーと、PHP/Webserver アカウントの共有グループを `775` や `664` パーミッションで使うことで、異なるアカウントであっても、両方のアカウントがファイルに **読み/書き** できるようになります。おそらく、ルートフォルダに `umask 0002` も設定するべきです。それにより、新しいファイルが、適切なパーミッションで作成されます。
 
-3. ##### Different accounts, fix permissions manually
-   The last approach is to have completely different accounts and just update the ownership and permissions of the files after editing to ensure that the PHP/Webserver user can **Read/Write** appropriately.
+3. <h5 id="different-accounts-fix-permissions-manually">異なるアカウントで、パーミッションを手作業で修正する</h5>
+   最後のアプローチは、完全に異なるアカウントで、編集後に、ファイルの所有とパーミッションを PHP/Webserver ユーザーが適切に **読み/書き** できるように更新するというものです。
 
-A simple **permissions-fixing** shell script can be used to do this:
+シンプルな **パーミッション修正** シェルスクリプトは、次のように使われます：
 
 ```bash
 #!/bin/sh
@@ -46,46 +49,50 @@ find . -type d -exec chmod 775 {} \;
 find . -type d -exec chmod +s {} \;
 ```
 
-You can use this file and edit as needed for the appropriate user and group that works for your setup.  What this script basically does, is:
+このファイルを使って、あなたの設定に合う適切なユーザーとグループのための必要な編集をすることができます。
+このスクリプトが基本的にやっていることは：
 
-1. Changes the current directory, all files and subfolder to `joeblow` and `staff` ownership
-2. Finds all the files from the current directory down and sets the permissions to `664` so they are `RW` for User & Group and `R` for Others.
-3. Finds all the folders from the current directory down and sets the permissions to `775` so they are `RWX` for User & Group and `RX` for Others.
-4. Sets the **ownership** of all directories to ensure that User and Group changes are maintained
+1. 現在のディレクトリで、すべてのファイルとサブフォルダを `joeblow` の `staff` の所有権に変更します
+2. 現在のディレクトリからすべてのファイルを探し、パーミッションを `664` に設定します。これにより、ユーザーとグループに `RW` 権限があり、他は `R` 権限となります
+3. 現在のディレクトリからすべてのディレクトリを探し、パーミッションを `775` に設定します。これにより、ユーザーとグループに `RWX` 権限があり、ほかは `RX` 権限となります
+4. すべてのディレクトリの **所有権** を設定し、ユーザーとグループの変更が維持されるようにします
 
-### Image Cache folder permissions
+<h3 id="">画像キャッシュフォルダのパーミッション</h3>
 
-If image files in the cache folder are written with the wrong permissions, try setting in your `user/config/system.yaml` file,
+キャッシュフォルダの画像が間違ったパーミッションで書き込まれている場合、 `user/config/system.yaml` ファイルに以下を設定してみてください,
 
 ```yaml
 images:
   cache_perms: '0775'
 ```
 
-if the `images` property is already present, just add `cache_perms: '0775'` at the end of it.
+`画像` プロパティがすでに存在する場合、最後に `cache_perms: '0775'` を追加するだけです。
 
-If this does still not work, create a `setup.php` file in the root Grav folder (the one with `index.php`), and add
+これでもまだ機能しない場合は、 Grav のルートフォルダ（ `index.php` のあるフォルダ）に `setup.php` ファイルを作成してください。そしてそこに、以下を記入してください：
 
 ```php
 <?php
 umask(0002);
 ```
 
-into it.
+すでに `setup.php` ファイルがある場合は、単純に、この行を一番上に追記するだけです。
+この `setup.php` ファイルは、基本的にマルチサイト設定で使われるものですが、すべての Grav の呼び出しで呼ばれるもので、他の使い方のために使うこともできます。
 
-If you already have a `setup.php` file, just add this line to the top. This file is commonly used for multisite setup, but being called in every Grav call, you can also use it for other uses.
+<h3 id="co-hosting-with-a-wordpress-site">WordPress サイトと一緒にホスティングする</h3>
 
-### Co-hosting with a WordPress site
+一般的に、 Grav は WordPress サイトが存在するルートレベルのフォルダにインストールすることができ、2つの CMS はうまく共存できます（Grav フォルダの htaccess に Base Rewrite を設定するのを忘れないでください）。
+管理パネルや、 Grav のページを見ているときに、キャッシュファイルのパーミッションエラーが表示される場合は、 WP-Engine がその WordPress サイトにインストールされていないかチェックしてください。
+もしそうなら、 WP-Engine のサポートに連絡して、彼らのアグレッシブな分散キャッシュサービスから Grav フォルダの例外を作成してもらう必要があります。
 
-In general, Grav can be installed in a root level folder of an existing WordPress site and the two CMS will co-exist nicely.  (Remember to set Base Rewrite in the Grav folder's htaccess.)  If you are encountering permissions errors with cache files when accessing the Admin and/or viewing Grav pages, check to see if WP-Engine is installed for this WordPress site.  If it is, you will need to contact their support to create an exception for the Grav folder from their aggressive distributed cache service.
+<h3 id="selinux-specific-advice">SELinux に特有のアドバイス</h3>
 
-### SELinux-specific advice
+もし、以上の提案をしてもまだ動かない場合は、以下を Grav のルートフォルダで実行してください。
 
-If the above suggestions still do not work, run
+```txt
+chcon -Rv system_u:object_r:httpd_sys_rw_content_t:s0 ./
+```
 
-`chcon -Rv system_u:object_r:httpd_sys_rw_content_t:s0 ./` into the Grav root folder.
-
-References:
+参考：
 
 - [https://unix.stackexchange.com/questions/337704/selinux-is-preventing-nginx-from-writing-via-php-fpm](https://unix.stackexchange.com/questions/337704/selinux-is-preventing-nginx-from-writing-via-php-fpm)
 - [https://github.com/getgrav/grav/issues/912#issuecomment-227627196](https://github.com/getgrav/grav/issues/912#issuecomment-227627196)

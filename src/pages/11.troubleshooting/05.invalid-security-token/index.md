@@ -11,11 +11,11 @@ layout: ../../../layouts/Default.astro
 
 - ブラウザの session cookies をクリアしてみます。また、一度ログアウトして戻ってみます。
 
-- Ensure you are running under SSL and a HTTPS URL if you have `session.secure: true` set in Grav's `system.yaml`
+- Grav の `system.yaml` で `session.secure: true` となっている場合は、SSL 下で、 HTTPS URL にアクセスしているか確認します。
 
-- Check that PHP has the correct tmp path set up. This can be set in PHP directly, or by setting Grav's `system.yaml` `session.path` setting (it can also be set via Admin, in the System Configuration) [Reported issue](https://github.com/getgrav/grav-plugin-admin/issues/958)
+- PHP が、正しい tmp path に設定されているかチェックします。これは、 PHP で直接設定できるほか、 Grav の `system.yaml` ファイルの `session.path` 設定でもできます（これは、管理パネルの System 設定からも設定できます）。 [Reported issue](https://github.com/getgrav/grav-plugin-admin/issues/958)
 
-- Make sure your web server config is right and includes the query string [Reported issue](https://github.com/getgrav/grav-plugin-admin/issues/893)
+- web サーバーの設定が正しくクエリ文字列を含んでいるか確認します。 [Reported issue](https://github.com/getgrav/grav-plugin-admin/issues/893)
 
-- Make sure your hostname doesn't have underscores in it. It will cause the hostname to default to `unknown`, making the session invalid.
+- ホスト名にアンダースコアが含まれていないことを確認します。これは、ホスト名のデフォルトが `unknown` になり、セッションが無効になる原因となります。
 
