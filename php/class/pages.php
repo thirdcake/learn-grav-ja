@@ -18,7 +18,7 @@ class Page {
         $this->loc = 'https://thirdcake.github.io/learn-grav-ja/'.$this->pathname.'/';
         $this->priority = '1.0';
         $this->changefreq = 'yearly';
-        $this->lastmod = $this->set_lastmod($fileInfo->getMTime());
+        $this->lastmod = $this->set_lastmod($fileInfo->getRelativePathname());
         $frontmatter = YamlFrontMatter::parse(file_get_contents($fileInfo->getRealPath()));
         $this->title = $frontmatter->matter('title');
         $this->redirect = $frontmatter->matter('redirect') ?? false;
@@ -34,11 +34,10 @@ class Page {
     }
     
     // set $this->lastmod
-    private function set_lastmod(int|false $timestamp):string {
-        $dateString = ($timestamp === false) 
-            ? '2025-01-01'
-            : date('Y-m-d', $timestamp);
-        return $dateString;
+    private function set_lastmod(string $pathname): string {
+        $pathname = 'src/pages/'.$pathname;
+        $json = json_decode(file_get_contents(dirname(__DIR__, 2).'/php/sitemap.json'), true);
+        return $json[$pathname];
     }
 
 }
