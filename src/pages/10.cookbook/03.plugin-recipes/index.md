@@ -296,17 +296,21 @@ PHP や Twig を通して、全てのページとそれぞれのページに関�
 
 Grav のコレクション機能を使って、再帰的に全てのページのインデックスを構築します。また、それぞれのページをインデックスする際に、メディアファイルも収集します。 
 [DirectoryListing](https://github.com/OleVik/grav-plugin-directorylisting/blob/v2.0.0-rc.2/Utilities.php#L64-L105) プラグインはまさにこれを行い、生成された木構造を使って HTML リストをビルドします。
-これを実行するには、再帰関数 - もしくはプラグインの class の中であれば再帰メソッド - を作成し、1つ1つのページを走査し、配列に保存します。
-メソッドは再帰しなければいけません。それぞれのページに子ページがあれば、メソッド内でメソッド自信を呼び出すからです。
+これを実行するには、再帰関数（もしくはプラグインの class の中であれば再帰メソッド）を作成し、1つ1つのページを走査し、配列に保存します。
+メソッドは再帰しなければいけません。それぞれのページに子ページがあれば、メソッド内でメソッド自身を呼び出すからです。
 
-まず最初に、メソッドには3つのパラメータが必要です：　最初がページの `$route` で、 Grav にそのページがどこにあるかを知らせます。2つ目が `$mode` で、メソッドにそのページ自信を繰り返すか、それとも子ページについてかを知らせます。3つ目が `$depth` で、ページがあるレベルを記録します。
-The method initially instantiates the Page-object, then deals with depth and mode, and constructs the collection.
-デフォルトでは、ページは日付降順で並べられますが、これは設定できます。
-それから、各ページを保持する `$paths` 配列を構築します。ルーティングは Grav で一意なので、各ページを識別するためにこの配列をキーとして使用されます。
+まず最初に、メソッドには3つのパラメータが必要です：　最初がページの `$route` で、 Grav にそのページがどこにあるかを知らせます。2つ目が `$mode` で、メソッドにそのページ自身を繰り返すか、それとも子ページについてかを知らせます。3つ目が `$depth` で、ページがあるレベルを記録します。
+メソッドは、ページオブジェクトを最初にインスタンス化し、それから depth や mode を取り扱い、コレクションを構築します。
+デフォルトでは、ページは日付降順で並べられますが、これは設定変更できます。
+それから、各ページを保持する `$paths` 配列を構築します。ルーティングは Grav 内で一意なので、各ページを識別するためにこの配列をキーとして使用します。
 
-Now we iterate over the pages, adding depth, title, and route (also kept as a value for ease-of-access). Within the foreach-loop, we also try to retrieve child-pages, and add them if found. Also, we find all media associated with the page, and add them. Because the method is recursive, it will continue looking for pages and child-pages until no more can be found.
+次に、ページを繰り返しながら、depth や、タイトル、route を追加していきます（また、アクセスしやすいように値としても保持しておきます）。
+foreach ループの中で、子ページの取得も試み、見つかれば追加します。
+また、ページに関係するメディアを見つけたら、それらも追加します。
+メソッドは再帰するので、ページや子ページが見つからなくなるまで、それらを探し続けます。
 
-The returned data is a tree-structure, or multidimensional-array in PHP's parlance, containing all pages and their media. This can be passed into Twig, or used within the plugin itself. Note that with very large folder-structures PHP might time out or fail because of recursion-limits, eg. folders 100 or more levels deep.
+返り値のデータは、木構造または PHP での多次元配列で、すべてのページとそれぞれのメディアを含みます。
+これは Twig に渡すことができるほか、プラグイン自身の中で使うこともできます。とても大きなフォルダ構造の場合、 PHP は再帰制限によりタイムアウトや、失敗するかもしれないことに注意してください。たとえば、100以上の深さのあるフォルダーの場合などです。
 
 ```php
 /**
@@ -352,27 +356,28 @@ public function buildTree($route, $mode = false, $depth = 0)
 }
 ```
 
-## Custom Twig templates plugin
+<h2 id="custom-twig-templates-plugin">Twig テンプレートプラグインをカスタムする</h2>
 
 <h4 id="goal-4">目標：</h4>
 
-Rather than using theme inheritance, it's possible to create a very simple plugin that allows you to use a custom location to provide customized Twig templates. 
+テーマを継承するよりも、とてもシンプルなプラグインを作成して、カスタマイズされた Twig テンプレートを提供するためのカスタムの場所を作りたい。
 
 <h4 id="solution-4">解決策：</h4>
 
-The only thing you need in this plugin is an event to provide a location for your templates.  The simplest way to create the plugin is to use the `devtools` plugin.  So install that with:
+このプラグインで必要なことは、テンプレートに場所を提供するためのイベントだけです。プラグインを作成する最も簡単な方法は、 `devtools` プラグインを使うことです。そこで、まずは次のようにインストールしましょう：
 
 ```bash
 $ bin/gpm install devtools
 ```
 
-After that's installed, create a new plugin with the command:
+インストールが終わったら、このコマンドで新しいプラグインを作成します：
 
 ```bash
 $ bin/plugin devtools newplugin
 ```
 
-Fill in the details for the name, author, etc.  Say we call it `Custom Templates`, and the plugin will be created in `/user/plugins/custom-templates`.  All you need to do now is edit the `custom-templates.php` file and put this code:
+詳細を入力してください。プラグイン名や、作者、など。今回は、 `Custom Templates` としましょう。プラグインは、 `/user/plugins/custom-templates` に作成されます。
+次にやるべきは、 `custom-templates.php` ファイルの編集です。以下のコードを書いてください：
 
 ```php
 <?php
@@ -404,11 +409,12 @@ class CustomTemplatesPlugin extends Plugin
 }
 ```
 
-This plugin simple subscribes to the `onTwigTemplatePaths()` event, and then in that event method, it adds the `user/plugins/custom-templates/templates` folder to this of paths that Twig will check.
+このプラグインは、シンプルに `onTwigTemplatePaths()` イベントに登録し、そのイベントメソッドで、 Twig がチェックするパスに `user/plugins/custom-templates/templates` フォルダを追加します。
 
-This allows you to drop in a Twig template called `foo.html.twig` and then any page called `foo.md` will be able to use this template.
+これにより、 `foo.html.twig` という Twig テンプレートを追加でき、 `foo.md` というページはすべてこのテンプレートを利用して表示されます。
 
-! NOTE: This will add the plugin's custom template path to the **end** of the Twig template path array. This means the theme (which is always first), will have precedence over the plugin's templates of the same name.  To resolve this, simply put the plugin's template path in the front of the array by modifying the event method:
+> [!Note]  
+> これは、プラグインのカスタムテンプレートパスを、 Twig テンプレートパス配列の **最後** に追加します。これはつまり、テーマ（常に最初に呼ばれる）が、同じ名前のプラグインのテンプレートよりも優先されるということです。これを解決するには、単純にプラグインのテンプレートパスを配列の最初に置くだけです。イベントメソッドを修正することでできます：
 
 ```twig
     /**
@@ -420,15 +426,16 @@ This allows you to drop in a Twig template called `foo.html.twig` and then any p
     }
 ```
 
-## Using Cache in your own plugins
+<h2 id="using-cache-in-your-own-plugins">自身のプラグインでキャッシュを使う</h2>
 
 <h4 id="goal-5">目標：</h4>
 
-When developing your own plugins, it's often useful to use Grav's cache to cache data to improve performance.  Luckily it's a very simple process to use cache in your own code.
+プラグイン開発をしているときに、パフォーマンスを向上させるため、データをキャッシュするために Grav のキャッシュを利用するのは、とても便利です。
+幸運なことに、自身のコードでキャッシュを利用するのは、とても簡単な処理です。
 
 <h4 id="solution-5">解決策：</h4>
 
-This is some basic code that shows you how caching works:
+以下は、キャッシュが機能する方法について紹介する基本的なコードです：
 
 ```php
     $cache = Grav::instance()['cache'];
@@ -444,110 +451,96 @@ This is some basic code that shows you how caching works:
     }
 ```
 
-First, we get Grav's cache object, and we then try to see if our data already exists in the cache (`$data = $cache->fetch($id)`).  If `$data` exists, simply return it with no extra work needed.
+まず、 Grav のキャッシュオブジェクトを取得します。キャッシュにデータが存在するかを調べます（ `$data = $cache->fetch($id)` ） もし `$data` が存在すれば、単純にそれを返します。追加の作業は不要です。
 
-However, if the cache fetch returns null, meaning it's not cached, do some _work_ and get the data (`$data = $this->gatherData()`), and then simply save the data for next time (`$cache->save($hash, $data)`).
+しかし、 cache fetch が null を返したら、キャッシュが無いことを意味し、何か _作業_ が必要です。データ（ `$data = $this->gatherData()` ）を取得し、次回のためにデータを保存するだけです（ `$cache->save($hash, $data)` ）。
 
+<h2 id="learning-by-example">具体例に学ぶ</h2>
 
+現在利用可能なプラグインは豊富にあり、それらのソースコードにあなたの疑問の答えが見つかる可能性があります。
+ただ問題は、どのプラグインを見れば良いかです。
+このページでは、一般的なプラグインの問題を一覧化し、それに対処する方法を明らかにする特定のプラグインを一覧にします。
 
-## Learning by Example
+先へ進む前に、 [コアのドキュメント](../../04.plugins/) を学び、特に [Grav のライフサイクル](../../04.plugins/05.grav-lifecycle/) を知っておいてください！
 
-With the abundance of plugins currently available, chances are that you will find your answers somewhere in their source code. The problem is knowing which ones to look at. This page attempts to list common plugin issues and then lists specific plugins that demonstrate how to tackle them.
+<h3 id="how-do-i-read-from-and-write-data-to-the-file-syst">ファイルシステムへの読み書きはどうしたら良い？</h3>
 
-Before you proceed, be sure you've familiarized yourself with [the core documentation](../../04.plugins/), especially the [Grav Lifecycle](../../04.plugins/05.grav-lifecycle/)!
+Grav はフラットファイルかもしれませんが、しかしフラットファイルだから静的とは限りません！ ファイルシステムへの読み書き方法は、たくさんあります。
 
-### How do I read from and write data to the file system?
+- YAML データにアクセスして読み込むだけなら、 [Import plugin](https://github.com/Deester4x4jr/grav-plugin-import) をチェックしてください。
+- インターフェースを好む場合は、組み込みの [RocketTheme\Toolbox\File](https://learn.getgrav.org/api#class-RocketThemeToolboxFile) インターフェースが使えます。
+- あるいは、 [SQLite](https://sqlite.org/) の使用を止めるものはありません。
+- もっとも単純な具体例は、おそらく [Comments](https://github.com/getgrav/grav-plugin-comments) です。
+- 他には：
+  - [Table Importer](https://github.com/Perlkonig/grav-plugin-table-importer)
+  - [Thumb Ratings](https://github.com/iusvar/grav-plugin-thumb-ratings)
+  - [Webmention](https://github.com/Perlkonig/grav-plugin-webmention)
 
-Grav might be flat file, but flat file &#8800; static! There are numerous ways read and write data to the file system.
+<h3 id="how-do-i-make-data-from-a-plugin-available-to-twig">どうすれば Twig で使えるデータをプラグインから作成できる？</h3>
 
-  * If you just need read access to YAML data, check out the [Import plugin](https://github.com/Deester4x4jr/grav-plugin-import).
+ひとつの方法として、 `config.plugins.X` 名前空間による方法があります。以下の例に見られるように、シンプルに `$this->config->set()` するだけです：
 
-  * The preferred interface is via the built-in [RocketTheme\Toolbox\File](https://learn.getgrav.org/api#class-RocketThemeToolboxFile) interface.
+- [ipLocate](https://github.com/Perlkonig/grav-plugin-iplocate/blob/master/iplocate.php#L82)
+- [Count Views](https://github.com/Perlkonig/grav-plugin-count-views/blob/master/count-views.php#L88)
 
-  * There's nothing stopping you from using [SQLite](https://sqlite.org/) either.
+その後、 Twig テンプレートでアクセスするには、 `{{ config.plugins.X.whatever.variable }}` を使います。
 
-  * The simplest example is probably the [Comments](https://github.com/getgrav/grav-plugin-comments) plugin.
+もしくは、変数を `grav['twig']` により渡すことも可能です：
 
-  * Others include
+- [Blogroll](https://github.com/Perlkonig/grav-plugin-blogroll/blob/master/blogroll.php#L43), which you can then access directly [in your template](https://github.com/Perlkonig/grav-plugin-blogroll/blob/master/templates/partials/blogroll.html.twig#L32).
 
-    * [Table Importer](https://github.com/Perlkonig/grav-plugin-table-importer)
+最後の方法として、データを直接ページのフロントマターに挿入することもできます。 [the Import plugin](https://github.com/Deester4x4jr/grav-plugin-import) に見られます。
 
-    * [Thumb Ratings](https://github.com/iusvar/grav-plugin-thumb-ratings)
+<h3 id="how-do-i-inject-markdown-into-a-page">ページにマークダウンを注入する方法は？</h3>
 
-    * [Webmention](https://github.com/Perlkonig/grav-plugin-webmention)
+[Grav ライフサイクル](../../04.plugins/05.grav-lifecycle/) によると、生のマークダウンを注入する最後のイベントフックは、 `onPageContentRaw` です。最初のものは、おそらく `onPageInitialized` です。
+`$this->grav['page']->rawMarkdown()` で取得し、それをいじって、それから `$this->grav['page']->setRawContent()` で書き戻すことができます。
+以下のプラグインで、これを使っています：
 
-### How do I make data from a plugin available to Twig?
+- [Page Inject](https://github.com/getgrav/grav-plugin-page-inject)
+- [Table Importer](https://github.com/Perlkonig/grav-plugin-table-importer)
 
-One way is via the `config.plugins.X` namespace. Simply do a `$this->config->set()` as seen in the following examples:
+<h3 id="how-do-i-inject-html-into-the-final-output">最終出力に、 HTML を注入する方法は？</h3>
 
-  * [ipLocate](https://github.com/Perlkonig/grav-plugin-iplocate/blob/master/iplocate.php#L82)
-  * [Count Views](https://github.com/Perlkonig/grav-plugin-count-views/blob/master/count-views.php#L88)
+HTML を注入でき、しかもキャッシュ出力もできる最後のイベントは、 `onOutputGenerated` イベントです。 `$this->grav->output` を取得して修正するだけでできます。
 
-You can then access that in a Twig template via `{{ config.plugins.X.whatever.variable }}`.
+- 一般的なタスクの多くは、 [Shortcode Core](https://github.com/getgrav/grav-plugin-shortcode-core) を使うことでできます。
+- [Pubmed](https://github.com/Perlkonig/grav-plugin-pubmed) プラグインと [Tablesorter](https://github.com/Perlkonig/grav-plugin-tablesorter) プラグインでは、よりブルートフォースな方法を取っています。
 
-Alternatively, you can pass variables via `grav['twig']`:
+<h3 id="how-do-i-inject-assets-like-javascript-and-css-fil">JavaScript や CSS ファイルのようなアセットを注入する方法は？</h3>
 
-  * [Blogroll](https://github.com/Perlkonig/grav-plugin-blogroll/blob/master/blogroll.php#L43), which you can then access directly [in your template](https://github.com/Perlkonig/grav-plugin-blogroll/blob/master/templates/partials/blogroll.html.twig#L32).
+これは、 [Grav\Common\Assets](https://learn.getgrav.org/api#class-gravcommonassets) インターフェースによってできます。
 
-Finally, you can inject data directly into the page header, as seen in [the Import plugin](https://github.com/Deester4x4jr/grav-plugin-import).
+- [Google Analytics](https://github.com/escopecz/grav-ganalytics)
+- [Bootstrapper](https://github.com/getgrav/grav-plugin-bootstrapper)
+- [Gravstrap](https://github.com/giansi/gravstrap)
+- [Tablesorter](https://github.com/Perlkonig/grav-plugin-tablesorter)
 
-### How do I inject Markdown into a page?
+<h3 id="how-do-i-affect-the-response-headers-and-response-">レスポンスヘッダーやレスポンスコードを編集する方法は？</h3>
 
-According to the [Grav Lifecycle](../../04.plugins/05.grav-lifecycle/), the latest event hook where you can inject raw Markdown is `onPageContentRaw`. The earliest is probably `onPageInitialized`. You can just grab `$this->grav['page']->rawMarkdown()`, munge it, and then write it back out with `$this->grav['page']->setRawContent()`. The following plugins demonstrate this:
+PHP の `header()` コマンドを使って、レスポンスヘッダーを設定できます。最後にそれができるイベントは、 `onOutputGenerated` イベントです。その後に、実際に出力がクライアントに送信されます。
+レスポンスコード自体は、ページの YAML フロントマターで設定できるだけです（ `http_response_code` ）。
 
-  * [Page Inject](https://github.com/getgrav/grav-plugin-page-inject)
+- [Graveyard](https://github.com/Perlkonig/grav-plugin-graveyard) プラグインは、 YAML フロントマターにより `404 NOT FOUND` を `410 GONE` に置き換えてレスポンスします。
+- [Webmention](https://github.com/Perlkonig/grav-plugin-webmention) プラグインは、 `201 CREATED` レスポンス時に、`Location` ヘッダーを設定します。
 
-  * [Table Importer](https://github.com/Perlkonig/grav-plugin-table-importer)
+<h3 id="how-do-i-incorporate-third-party-libraries-into-my">サードパーティー製ライブラリをプラグインに組み込む方法は？</h3>
 
-### How do I inject HTML into the final output?
+通常、他のライブラリは、 `vendor` サブフォルダに組み込み、 プラグインの適切なところでその `autoload.php` を `require` します（ Git を使っているなら、 [subtrees](https://help.github.com/articles/about-git-subtree-merges/) を検討してください）。
 
-The latest you can inject HTML, and still have your output cached, is during the `onOutputGenerated` event. You can just grab and modify `$this->grav->output`.
+- [Shortcode Core](https://github.com/getgrav/grav-plugin-shortcode-core)
+- [Table Importer](https://github.com/Perlkonig/grav-plugin-table-importer)
 
-  * Many common tasks can be accomplished using the [Shortcode Core](https://github.com/getgrav/grav-plugin-shortcode-core) infrastructure.
+<h3 id="how-do-i-extend-twig">Twig を拡張する方法は？</h3>
 
-  * The [Pubmed](https://github.com/Perlkonig/grav-plugin-pubmed) and [Tablesorter](https://github.com/Perlkonig/grav-plugin-tablesorter) plugins take a more brute force approach.
+最も簡単な方法は、 **Twig レシピ** セクションにある  [Custom Twig Filter/Function](../../10.cookbook/02.twig-recipes/#custom-twig-filter-function) の具体例に従うことです。
 
-### How do I inject assets like JavaScript and CSS files?
+また、 [この Twig ドキュメントを読んでください](https://twig.symfony.com/) 。そして extension を開発してください。それから、[TwigPCRE](https://github.com/kesslernetworks/grav-plugin-twigpcre) プラグインを見て Grav への組み込み方を学んでください。
 
-This is done through the [Grav\Common\Assets](https://learn.getgrav.org/api#class-gravcommonassets) interface.
+<h3 id="how-do-i-interact-with-external-apis">外部 API とやりとりする方法は？</h3>
 
-  * [Google Analytics](https://github.com/escopecz/grav-ganalytics)
+Grav では、 [Grav\Common\GPM\Response](https://learn.getgrav.org/api#class-grav-common-gpm-response) オブジェクトを提供していますが、直接やりとりしたい場合は、それを阻害するものはありません。
 
-  * [Bootstrapper](https://github.com/getgrav/grav-plugin-bootstrapper)
-
-  * [Gravstrap](https://github.com/giansi/gravstrap)
-
-  * [Tablesorter](https://github.com/Perlkonig/grav-plugin-tablesorter)
-
-### How do I affect the response headers and response codes?
-
-You can use PHP's `header()` command to set response headers. The latest you can do this is during the `onOutputGenerated` event, after which output is actually sent to the client. The response code itself can only be set in the YAML header of the page in question (`http_response_code`).
-
-  * The [Graveyard](https://github.com/Perlkonig/grav-plugin-graveyard) plugin replaces `404 NOT FOUND` with `410 GONE` responses via the YAML header.
-
-  * The [Webmention](https://github.com/Perlkonig/grav-plugin-webmention) sets the `Location` header on a `201 CREATED` response.
-
-### How do I incorporate third-party libraries into my plugin?
-
-Usually, you'd incorporate other complete libraries into a `vendor` subfolder and `require` its `autoload.php` where appropriate in your plugin. (If you're using Git, consider using [subtrees](https://help.github.com/articles/about-git-subtree-merges/).)
-
-  * [Shortcode Core](https://github.com/getgrav/grav-plugin-shortcode-core)
-
-  * [Table Importer](https://github.com/Perlkonig/grav-plugin-table-importer)
-
-### How do I extend Twig?
-
-The simplest way is to follow the [Custom Twig Filter/Function](../../10.cookbook/02.twig-recipes/#custom-twig-filter-function) example in the **Twig Recipes** section.
-
-Also, [read the Twig docs](https://twig.symfony.com/) and develop your extension. Then look at the [TwigPCRE](https://github.com/kesslernetworks/grav-plugin-twigpcre) plugin to learn how to incorporate it into Grav.
-
-### How do I interact with external APIs?
-
-Grav provides the [Grav\Common\GPM\Response](https://learn.getgrav.org/api#class-grav-common-gpm-response) object, but there's nothing stopping you from doing it directly if you so wish.
-
-  * [ipLocate](https://github.com/Perlkonig/grav-plugin-iplocate)
-
-  * [Pubmed](https://github.com/Perlkonig/grav-plugin-pubmed)
-
-
+- [ipLocate](https://github.com/Perlkonig/grav-plugin-iplocate)
+- [Pubmed](https://github.com/Perlkonig/grav-plugin-pubmed)
 

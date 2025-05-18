@@ -13,11 +13,11 @@ layout: ../../../layouts/Default.astro
 > [!訳注]  
 > 「具体例は Apache サーバーのものです」と言った直後に、なぜいきなり IIS サーバーの話が始まるのか、謎です。
 
-### IIS use of .htaccess file
+<h3 id="iis-use-of-htaccess-file">IIS で .htaccess ファイルを使う</h3>
 
 Web Platform Installer を使って IIS サーバーに URL Rewrite を追加したあと、IIS サーバーを再起動します。IIS の管理インターフェースから URL Rewrite をダブルクリックし、Inbound Rules の下にある Import Rules をクリックし、Rules to Import の下にある Configuration ファイルを閲覧し、ルートにある .htaccess ファイルを選択し、それから Import をクリックします。IIS サーバーを再起動します。これで、Grav にアクセスできます。
 
-### Missing .htaccess File
+<h3 id="missing-htaccess-file">.htaccess ファイルが見つからない</h3>
 
 最初にチェックしてほしいのは、 Grav をインストールしたルートフォルダに、 `.htaccess` ファイルがっ提供されているかどうかです。 .htaccess ファイルは **隠し** ファイルであるため、エクスプローラーや windows のファインダーからは、普通は見えません。 Grav を展開し、ファイルを **選択** し、それから　**移動** もしくは **コピー** した場合、このとても重要なファイルが、前のフォルダに置き去りにされてしまうことがあります。
 
@@ -29,13 +29,15 @@ Grav が提供する `.htaccess` が設定する rewrite ルールで、ルー�
 
 `AllowOverride` の詳細と、options の設定については、 [Apache ドキュメント](http://httpd.apache.org/docs/2.4/mod/core.html#allowoverride) で探せます。
 
-### RewriteBase Issue
+<h3 id="rewritebase-issue">RewriteBase の問題</h3>
 
-If the homepage of your Grav site loads, but **any other page** displays this very rough _Apache-style_ error, then the most likely cause is that there is a problem with your `.htaccess` file.
+Grav サイトのホームページは読み込まれるのに、 **他のすべてのページ** が _Apache-style_  エラーを表示する場合、最もありうる原因は、 `.htaccess` ファイルに関する問題です。
 
-The default `.htaccess` that comes bundled with Grav works fine out-of-the-box in most cases.  However, there are certain setups involving virtual hosts where the file system does not match the virtual hosting setup directly.  In these cases you must configure the `RewriteBase` option in the `.htaccess` to point to the correct path.
+Grav に付属するデフォルトの `.htaccess` は、ほとんどの場合、すぐに使えます。
+しかし、仮想ホストの場合、特定の構成により、ファイルシステムが仮想ホストの設定と直接一致していない場合があります。
+これらのケースでは、 `.htaccess` ファイル中の `RewriteBase` オプションを正しい path に設定しなければいけません。
 
-There is a short explanation of this in the `.htaccess` file itself:
+`.htaccess` ファイル自身に、短い説明があります：
 
 ```txt
 ##
@@ -48,35 +50,36 @@ There is a short explanation of this in the `.htaccess` file itself:
 # RewriteBase /
 ```
 
-Simply remove the `#` before the `RewriteBase /` directive to uncomment it, and adjust the path to match your server environment.
+単純に、 `RewriteBase /` の前の `#` を、コメント解除するために削除してください。それから、サーバー環境に適合するように path を調整してください。
 
-We've included additional information to help you locate and troubleshoot your `.htaccess` file in our [htaccess guide](../htaccess).
+[htaccess ガイド](../07.htaccess/) では、 `.htaccess` ファイルの場所を特定したり、トラブルシューティングするのを助けるための追加情報を説明しています。
 
-### Missing Rewrite Modules
+<h3 id="">Rewrite モジュールが見つからない</h3>
 
-Some webserver packages (I'm looking at your EasyPHP and WAMP!) do not come with the Apache **rewrite** module enabled by default. They usually can be enabled from the configuration settings for Apache, or you can do so manually via the `httpd.conf` by uncommenting this line (or something similar) so they are loaded by Apache:
+いくつかの web サーバーパッケージ（わたしが見たことがあるのは、 EasyPHP と WAMP です！）では、Apache の **rewrite** モジュールがデフォルトで有効な状態とはなっていません。
+通常、それらは Apache の設定から有効化できるか、もしくは、 `httpd.conf` の以下の行（もしくはこれに類似する行）をコメントアウトし、 Apache が再読込することで可能です：
 
 ```txt
 #LoadModule rewrite_module modules/mod_rewrite.so
 ```
 
-Then restart your Apache server.
+その後、 Apache サーバーを再起動してください。
 
-### .htaccess Test Script
+<h3 id="htaccess-test-script">.htaccess をテストするスクリプト</h3>
 
-To help isolate `.htaccess` and **rewrite** issues, you can download this [htaccess_tester.php](https://gist.githubusercontent.com/rhukster/a727fb70d9341536d49980d1239bd97e/raw/a3078da16b894ba86f9d000bcfc4850e098199fc/htaccess_tester.php) file, and drop it in your Grav root directory.
+`.htaccess` の問題と **rewrite** の問題を切り分けるために、 [htaccess_tester.php](https://gist.githubusercontent.com/rhukster/a727fb70d9341536d49980d1239bd97e/raw/a3078da16b894ba86f9d000bcfc4850e098199fc/htaccess_tester.php) ファイルをダウンロードできます。これを Grav のルートディレクトリに置いてください。
 
-Then point your browser to `http://yoursite.com/htaccess_tester.php`.  You should get a successful message and a copy of the Grav `.htaccess` file displayed.
+それから、ブラウザで `http://yoursite.com/htaccess_tester.php` を表示してください。成功メッセージと、表示されている Grav の `.htaccess` ファイルのコピーが取得されます。
 
 ![](htaccess_tester.png)
 
-Next you can test if rewrites are working by backing up the existing .htaccess file:
+次に、既存の .htaccess ファイルをバックアップして、 rewrites が機能しているかテストできます：
 
 ```bash
 mv .htaccess .htaccess-backup
 ```
 
-And then try this simple `.htaccess` file:
+それから、以下のシンプルな `.htaccess` ファイルを試してください：
 
 ```txt
 <IfModule mod_rewrite.c>
@@ -85,28 +88,29 @@ And then try this simple `.htaccess` file:
 </IfModule>
 ```
 
-Then try this URL: `http://yoursite.com/test`.  Actually any path you use should display a success message telling you that `mod_rewrite` is working.
+その後、この URL を表示させてください： `http://yoursite.com/test` 。実質どの path でも、 `mod_rewrite` が機能していることを示す成功メッセージが表示されます。
 
-After you have finished testing, you should delete the test file and restore your `.htaccess` file:
+テストが終わったら、テストファイルを削除し、 `.htaccess` ファイルを戻してください：
 
 ```bash
 rm htaccess_tester.php
 mv .htaccess-backup .htaccess
 ```
 
-### Grav Error 404 Page
+<h3 id="grav-error-404-page">Grav の 404 ページ</h3>
 
 ![404 Not Found](error-404.png)
 
-If you receive a _Grav-style_ error saying **Error 404** then your `.htaccess` is functioning correctly, but you're trying to reach a page that Grav cannot find.
+_Grav スタイルで_ **Error 404** のエラーが表示された場合は、 `.htaccess` は正しく機能していますが、 Grav が探せないページを表示しようとしています。
 
-The most common cause of this is simply that the page has been moved or renamed. Another thing to check is if the page has a `slug` set in the page YAML headers. This overrides the explicit folder name that is used by default to construct the URL.
+この問題の最もよくある原因は、単に、ページが移動したか、名前を変更したことによるものです。もうひとつチェックするのは、ページの YAML フロントマターに `slug` が設定されているかどうかです。
+これは、デフォルトでは URL 構築に使われるフォルダ名を明示的に上書きします。
 
-Another cause could be your page is **not routable**. The routable option for a page can be set in the [page headers](../../content/headers).
+別の原因としては、ページが **not routable** である可能性です。ページの routale オプションは、ページの[フロントマター](../../02.content/01.headers/) で設定できます。
 
-### 404 Page Not Found on Nginx
+<h3 id="404-page-not-found-on-nginx">Nginx での 404 Page Not Found</h3>
 
-If your site is in a subfolder, make sure your nginx.conf location points to that subfolder. Grav's [sample nginx.conf](https://github.com/getgrav/grav/blob/master/webserver-configs/nginx.conf) has a comment in the code that explains how.
+サイトがサブフォルダーにある場合は、 nginx.conf の location をそのサブフォルダーへ確実に向けてください。 Grav の [nginx.conf サンプル](https://github.com/getgrav/grav/blob/master/webserver-configs/nginx.conf) では、コード内に方法を説明するコメントが含まれています。
 
- If your homepage works but other pages are not found, make sure your nginx.conf is configured according to sample nginx.conf.
+ホームページでは動くのに、他のページでは not found になる場合は、 nginx.conf が、サンプルの nginx.conf のとおりに設定されているか、確認してください。
 
