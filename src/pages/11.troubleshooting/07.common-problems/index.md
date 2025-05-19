@@ -21,13 +21,12 @@ cURL についても同様で、 `cURL support: enabled` になっているこ�
 
 次に、 [パーミッションをチェックしてください](../05.permissions/) 。
 
-上記をすべて実行したあとにも、まだ GPM との接続に問題がある場合は、
-If after all the above you are still getting issues connecting with GPM, we have noticed that on some servers (mostly local machines running Windows), there are issues verifying the SSL certificate of getgrav.org, even though it is [A Rating](https://www.ssllabs.com/ssltest/analyze.html?d=getgrav.org&hideResults=on).
-To work around this problem, we have added a new system config `system.gpm.verify_peer` that is enabled by default. Set it to false and try again.
+上記をすべて実行したあとにも、まだ GPM との接続に問題がある場合は、いくつかのサーバーで（ほとんどの場合、 Windows 上で実行されるローカルマシンで）、getgrav.org の SSL 証明書が [A レーティング](https://www.ssllabs.com/ssltest/analyze.html?d=getgrav.org&hideResults=on) であるにもかかわらず、検証に問題があることがわかっています。
+この問題に対処するには、新しい system config として `system.gpm.verify_peer` を追加します。このファイルは、デフォルトで有効化されます。これを false に設定し、もう一度試してみてください。
 
-If at this point it's still not working, get in touch, or report back if you were pointed here via chat/forum.
+この時点でも、まだ機能しない場合は、チャットやフォーラムから、連絡をとったり、報告を送ってください。
 
-Also, check the CLI command is working, by opening a SSH connection to the server and running `bin/gpm index` and check if it's just inside Admin that you get this error, or in the command line too.
+また、 CLI コマンドが機能するかもチェックしてください。サーバーに SSH 接続をして、 `bin/gmp index` を実行し、このエラーが管理パネル内だけの問題なのか、それともコマンドラインでも起こることなのかをチェックしてください。
 
 <h2 id="admin-interface-won-t-scroll">管理パネル画面がスクロールできない</h2>
 
@@ -63,29 +62,32 @@ Also, check the CLI command is working, by opening a SSH connection to the serve
 
 <h2 id="zend-opcache-api-is-restricted">Zend OPcache API が制限されている</h2>
 
-If you are running PHP with Zend OPache and you receive this error, then your current OPCache configuration is [limiting access to OPcache API function to scripts only from a specified string](https://php.net/manual/en/opcache.configuration.php). The simplest solution to this is to find the location of this directive either in your `php.ini` file or in a specialized `opcache.ini` file that is being pulled in to your overall `php.ini` file and set this value to nothing:
+PHP を Zend Opcache で実行していて、このエラーが表示されたら、あなたの現状の OPCache 設定は、 [OPcache API 関数へのアクセスが、特定の文字列のみのスクリプトに制限されています。](https://php.net/manual/en/opcache.configuration.php) 。
+これに対する最も簡単な解決策は、このディレクティブの場所を `php.ini` ファイルか、`php.ini` ファイルに追加される特別な `opcache.ini` ファイルから探して、以下の値になにも設定しないことです：
 
 ```txt
 opcache.restrict_api=
 ```
 
+これは、 [ServerPilot](https://serverpilot.io) マネージドホスティングで PHP 7.2 を有効にしたときに起こる問題です。
 This is an issue with any [ServerPilot](https://serverpilot.io) managed hosting with PHP 7.2 enabled.  A ticket has been submitted to resolve this on their end.
 
-## LinkedIn Sharing and Wayback Machine Indexing Not Working
+<h2 id="linkedin-sharing-and-wayback-machine-indexing-not-">LinkedIn シェアと Wayback Machine インデックスが機能しない</h2>
 
-**問題：** Sharing pages with LinkedIn and having the page's data propagate is not working. The Wayback Machine is not properly indexing my website's pages.
+**問題：** LinkedIn でページをシェアしても、ページデータが広がっていかない。Wayback Machine が適切にわたしの web サイトのページをインデックスしない。
 
-**解決策：** Enable WebServer Gzip or Gzip compression. Both may be used, but at least one needs to be active for these particular functions to work on some server cases.
+**解決策：** WebServer の Gzip もしくは Gzip compression を有効化してください。両方が使われますが、最低でも片方が有効化されていないと、それらの特定の関数は機能しません。
 
-This [issue](https://github.com/getgrav/grav/issues/1639) has popped up for users on specific server environments. In particular, with AWS cloud-based servers, users were experiencing issues sharing web pages from their Grav sites on LinkedIn or having them properly indexed by the Wayback Machine. This problem was resolved by turning on either WebServer Gzip or Gzip compression.
+この [問題](https://github.com/getgrav/grav/issues/1639) は、特定のサーバー環境のユーザーが取り上げています。特に、 AWS クラウドベースのサーバーでは、ユーザーは、 LinkedIn で Grav サイトがシェアされるときや、 Wayback Machine によって適切にインデックスされるときの問題を経験しています。
+この問題は、 WebServer の Gzip か Gzip compression をオンにすることで解決されます。
 
-## Cannot Scroll in Admin on CloudFlare
+<h2 id="cannot-scroll-in-admin-on-cloudflare">CloudFlare で管理パネルがスクロールできない</h2>
 
-For CloudFlare users, the ability to scroll in the Admin can be interrupted. There are solutions to this, as follows:
+CloudFlare ユーザーにとって、管理パネルでスクロールができなくなる可能性があります。これに対する解決策は、以下のとおりです：
 
-In CloudFlare's interface, go to **Speed** and disable **Rocket Loader** (or through a page-rule).
+CloudFlare のインターフェースで、 **Speed** に移動し、 **Rocket Loader** （もしくは page-rule） を無効化します。
 
-It can also be disabled in the (default) 'automatic' mode with a **data-attribute** on scripts: `<script data-cfasync="false" src="/javascript.js"></script>`.
+（デフォルトの） 'automatic' モードをスクリプトの **data-attribute** で無効化することもできます： `<script data-cfasync="false" src="/javascript.js"></script>`
 
-An example of a page-rule would be the URL match `example.com/staging/*/admin`, where the `*` is a wildcard indicating any folder-name. For settings, add `Rocket Loader` and select **Off**.
+page-rule の具体例は、 `example.com/staging/*/admin` にマッチする URL になるでしょう。この `*` は、ワイルドカードで、あらゆるフォルダ名を意味します。設定では、 `Rocket Loader` を追加し、 **Off** を選択してください。
 

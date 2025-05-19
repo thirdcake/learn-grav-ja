@@ -3,29 +3,29 @@ title: ".htaccess"
 layout: ../../../layouts/Default.astro
 ---
 
-Grav comes complete with its own `.htaccess` file. This file enables Grav to operate properly and should be kept in its root folder. You may encounter issues that can be resolved using the `.htaccess` file.
+Grav には、独自の `.htaccess` ファイルが付属しています。このファイルによって、 Grav は適切に操作できます。このファイルは、ルートフォルダにあり続けている必要があります。 `.htaccess` ファイルを使って解決できる問題に出会うかもしれません。
 
-Apache is one of the most popular server solutions available today. It's free, and widely available just about everywhere. Unfortunately, Apache isn't perfect, and sometimes the `.htaccess` file can give you a headache. Don't worry, it's almost always fixable.
+Apache サーバーは、現在利用できる、もっとも人気のあるサーバーのひとつです。無料であり、ほとんどどこでも幅広く使えます。不幸なことに、 Apache も完璧ではありません。ときどき、 `.htaccess` ファイルが頭痛の種になることがあります。気にすることはありません。それはほとんどいつも柔軟に対応できます。
 
-## How to Edit .htaccess in Windows and macOS
+<h2 id="how-to-edit-htaccess-in-windows-and-macos">Windows や maxOS で .htaccess の編集方法</h2>
 
-The .htaccess file is a hidden file, meaning that by default, users of macOS and Windows will be unable to see this file in the file manager (Finder) unless they enable hidden files to be viewed.
+.htaccess ファイルは、隠しファイルです。つまり、デフォルトでは macOS や Windows ユーザーには、ファイルマネージャー（ファインダー）で、このファイルが見えません。隠しファイルの表示を有効化しなければいけません。
 
-In **macOS**:
+**macOS** では：
 
-1. Open **Terminal**.
-2. Enter `defaults write com.apple.finder AppleShowAllFiles YES` into the **Terminal** and hit **return**.
-3. Enter `killall Finder` into the **Terminal** and hit **return**.
+1. **Terminal** を開いてください。
+2. **Terminal** に `defaults write com.apple.finder AppleShowAllFiles YES` と入力し、 **return** キーを押してください。
+3. **Terminal** に `killall Finder` を入力し、 **return** を押してください。
 
-You should now be able to see the `.htaccess` file in the root directory of the unzipped Grav folder. You can return your settings to their original hidden state by repeating the process and entering `NO` at the end of step 2 instead of `YES`.
+これで Grav を展開したフォルダの root ディレクトリに、 `.htaccess` ファイルが見えるようになったはずです。設定をもとの隠す状態に戻したいなら、この処理を繰り返し、 ステップ2 の `YES` になっているところを `NO` にして入力してください。
 
-In **Windows 10**:
+**Windows 10** では：
 
-1. Open **File Explorer**.
-2. Select the **View** tab.
-3. Check the box next to **Hidden Items**.
+1. **File Explorer** を開いてください。
+2. **View** タブを選択してください。
+3. **Hidden Items** のとなりのボックスにチェックを付けてください。
 
-Unchecking this box will hide these hidden files again, returning the **File Explorer** to its default state.
+このボックスのチェックをはずすと、隠しファイルが隠れる状態に戻ります。 **File Explorer** に戻ると、デフォルトの状態になっています。
 
 ## Testing .htaccess
 
