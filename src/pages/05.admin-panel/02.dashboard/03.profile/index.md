@@ -45,19 +45,19 @@ Gravatar に画像をアップロードしていなければ、もしくは、�
 
 | オプション | 説明 |
 | :-----     | :-----  |
-| **admin.super**                | Designates the user as a super admin, giving them the ability to see and configure all areas of the site.        |
-| **admin.login**                | Enables the user to log in to the admin. This must be set to **Yes** to enable the user to log in.               |
-| **admin.cache**                | Gives the user access to the cache reset buttons.                                                                |
-| **admin.configuration**        | Gives the user access to the **Configuration** area of the admin. This does not include any tabs or subsections. |
-| **admin.configuration_system** | Gives the user access to the **System** tab in the **Configuration** area of the admin.                          |
-| **admin.configuration_site**   | Gives the user access to the **Site** tab in the **Configuration** area of the admin.                            |
-| **admin.configuration_media**  | Gives the user access to the **Media** tab in the **Configuration** area of the admin.                           |
-| **admin.configuration_info**   | Gives the user access to the **Info** tab in the **Configuration** area of the admin.                            |
-| **admin.pages**                | Gives the user access to the **Pages** area of the admin.                                                        |
-| **admin.maintenance**          | Gives the user the ability to access the **Maintenance** area of the **Dashboard**.                              |
-| **admin.statistics**           | Gives the user the ability to access the **Statistics** area of the **Dashboard**.                               |
-| **admin.plugins**              | Gives the user access to the **Plugins** area of the admin.                                                      |
-| **admin.themes**               | Gives the user access to the **Themes** area of the admin.                                                       |
-| **admin.users**                | Enables the user to access and edit other users' profile information. This does not include permissions.         |
-| **site.login**                 | Enables the user to log in to the front end.                                                                     |
+| **admin.super** | そのユーザーをスーパー管理者として設計し、サイト内のすべてのエリアを閲覧でき、設定できるようにします |
+| **admin.login** | そのユーザーが管理パネルにログインできるようにします。ユーザーのログインを有効化するには、ここを **Yes** に設定しなければいけません。 |
+| **admin.cache** | ユーザーにキャッシュリセットボタンへのアクセス権を渡します |
+| **admin.configuration** | ユーザーに管理パネルの **Configuration** エリアへのアクセス権を渡します。これには、タブやサブセクションは含まれません。 |
+| **admin.configuration_system** | ユーザーに管理パネルの **Configration** エリアの **System** タブへのアクセス権を渡します。 |
+| **admin.configuration_site** | ユーザーに管理パネルの **Configration** エリアの **Site** タブへのアクセス権を渡します。 |
+| **admin.configuration_media** | ユーザーに管理パネルの **Configration** エリアの **Media** タブへのアクセス権を渡します。 |
+| **admin.configuration_info** | ユーザーに管理パネルの **Configration** エリアの **Info** タブへのアクセス権を渡します。 |
+| **admin.pages** | ユーザーに管理パネルの **Pages** エリアへのアクセス権を渡します。 |
+| **admin.maintenance** | ユーザーに **Dashboard** の　**Maintenance** エリアへのアクセス権を渡します。 |
+| **admin.statistics** | ユーザーに **Dashboard** の　**Statistics** エリアへのアクセス権を渡します。 |
+| **admin.plugins** | ユーザーに管理パネルの **Plugins** エリアへのアクセス権を渡します |
+| **admin.themes** | ユーザーに管理パネルの **Themes** エリアへのアクセス権を渡します |
+| **admin.users** | ユーザーが、他のユーザーのプロフィール情報へアクセスし、編集できるようにします。これはパーミッションを含みません。 |
+| **site.login** | ユーザーがフロントエンドでログインできるようにします。 |
 

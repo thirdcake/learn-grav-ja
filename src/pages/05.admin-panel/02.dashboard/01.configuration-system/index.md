@@ -98,90 +98,93 @@ Grav の統合されたキャッシュ機能のおかげで、Grav は最速の�
 
 ![Admin Configuration](configuration-system-twig.png)
 
-This section focuses on Grav's Twig templating feature. You can set Twig caching, debug, and change detection settings here.
+このセクションでは、 Grav の Twig テンプレートに焦点を当てます。 Twig のキャッシュや、デバッグ、変更があったときの検出の設定を行うことができます。
 
 | オプション | 説明 |
 | :----- | :----- |
-| **Twig Caching**         | Control the Twig caching mechanism. Leave this enabled for best performance.                  |
-| **Twig Debug**           | Allows the option of not loading the Twig Debugger extension.                                 |
-| **Detect Changes**       | Twig will automatically recompile the Twig cache if it detects any changes in Twig templates. |
-| **Autoescape Variables** | Autoescapes all variables. This will break your site most likely.                             |
+| **Twig Caching** | Twig のキャッシュメカニズムを制御します。ベストパフォーマンスのために、この設定を有効化しておいてください。 |
+| **Twig Debug** | Twig のデバッガー拡張を読み込まないオプションを提供します |
+| **Detect Changes**       | Twig は、 Twig テンプレートで変更が検出されたら、自動的に Twig キャッシュを再コンパイルします。 |
+| **Autoescape Variables** | 変数を自動でエスケープします。サイトが壊れやすくなる危ない設定です。 |
 
 ### Assets
 
 ![Admin Configuration](configuration-system-assets.png)
 
-This section deals with assets handling, including CSS and JavaScript assets.
+このセクションでは、 CSS や JavaScript などのアセット制御を扱います。
 
 | オプション | 説明 |
 | :----- | :----- |
-| **CSS Pipeline**                | The CSS pipeline is the unification of multiple CSS resources into one file.    |
-| **CSS Minify**                  | Minify the CSS during pipelining.                                               |
-| **CSS Minify Windows Override** | Minify Override for Windows platforms. False by default due to ThreadStackSize. |
-| **CSS Rewrite**                 | Rewrite any CSS relative URLs during pipelining.                                |
-| **JavaScript Pipeline**         | The JS pipeline is the unification of multiple JS resources into one file.      |
-| **JavaScript Minify**           | Minify the JS during pipelining.                                                |
-| **Enable Timestamps on Assets** | Enable asset timestamps.                                                        |
-| **Collections**                 | Add individual asset collections.                                               |
+| **CSS Pipeline** | CSS パイプラインとは、複数の CSS リソースを1つのファイルにまとめることです。 |
+| **CSS Minify** | パイプライン処理中に CSS をミニファイする |
+| **CSS Minify Windows Override** | Widnows プラットフォーム用のミニファイの上書きです。デフォルトでは ThreadStackSize のために false となっています。 |
+| **CSS Rewrite** | パイプライン処理中に CSS の相対 URL を書き換えます。 |
+| **JavaScript Pipeline** | JS パイプラインとは、複数の JS リソースを1つのファイルにまとめることです。 |
+| **JavaScript Minify** | パイプライン処理中に JS をミニファイする |
+| **Enable Timestamps on Assets** | アセットのタイムスタンプを有効化する |
+| **Collections** | 独立したアセットコレクションを追加する |
 
 ### Error Handler
 
 ![Admin Configuration](configuration-system-error.png)
 
-You can set how Grav handles error reporting and display here. This is a useful tool to have during site development.
+ここでは、 Grav がエラーレポートやエラー表示を制御する方法を設定できます。
+これはサイト開発中に便利な機能です。
 
 | オプション | 説明 |
 | :----- | :----- |
-| **Display Error** | Display full backtrace-style error page. |
-| **Log Errors**    | Log errors to /logs folder.              |
+| **Display Error** | 完全な backtrace スタイルのエラーページを表示します |
+| **Log Errors** | `/logs` フォルダにエラーログを書き込みます |
 
 ### Debugger
 
 ![Admin Configuration](configuration-system-debugger.png)
 
-Like error handling, Grav's integrated debugging tools give you the ability to locate and troubleshoot issues. This is especially useful during development.
+エラー制御のように、 Grav の統合デバッグツールによって、問題の場所を確定したり、トラブルシューティングできるようになります。これも開発中に、特に便利です。
 
 | オプション | 説明 |
 | :----- | :----- |
-| **Debugger**                  | Enable Grav debugger and following settings.                           |
-| **Debug Twig**                | Enable debugging of Twig templates.                                    |
-| **Shutdown Close Connection** | Close the connection before calling onShutdown(). false for debugging. |
+| **Debugger** | Grav デバッガーを有効化し、以下の設定ができるようにします |
+| **Debug Twig** | Twig テンプレートのデバッグを有効化します |
+| **Shutdown Close Connection** | `onShutdown()` が呼ばれる前にコネクションを閉じます。デバッグ中は false にします |
 
 ### Media
 
 ![Admin Configuration](configuration-system-media.png)
 
-This section determines how Grav handles media content. Image quality and other media handling options are configured here.
+このセクションでは、 Grav がメディアコンテンツをどう制御するかを決定します。画質やその他のメディアを制御するオプションが、ここで設定できます。
 
 | オプション | 説明 |
 | :----- | :----- |
-| **Default Image Quality**      | Default image quality to use when resampling or caching images (85%).                                     |
-| **Cache All Images**           | Run all images through Grav's cache system even if they have no media manipulations.                      |
-| **Image Debug Watermark**      | Show an overlay over images indicating the pixel depth of the image when working with Retina for example. |
-| **Enable Timestamps on Media** | Appends a timestamp based on last modified date to each media item.                                       |
+| **Default Image Quality** | resampling されるときや、キャッシュ画像のデフォルトの画質（85%） |
+| **Cache All Images** | メディア操作していないものも含めてすべての画像を、 Grav のキャッシュシステムで実行する |
+| **Image Debug Watermark** | たとえば Retina で作業する場合、画像のピクセル深度を示すオーバーレイを画像に表示する |
+| **Enable Timestamps on Media** | 各メディアアイテムに最終更新日のタイムスタンプを追加する |
 
-!! Caching images that have already been optimised (outside of Grav) could result in the output file being a much larger filesize than the original. This is due to a bug in the Gregwar image library and not directly related to Grav (see this [open issue](https://github.com/Gregwar/Image/issues/115) for more information). The alternative is to set "Cache All Images" to No
+> [!Info]  
+> すでに（ Grav の外で）最適化されている画像をキャッシュすると、オリジナルよりもファイルサイズがとても大きい出力ファイルとなることがあります。これは、 Gregwar image library のバグによるもので、 Grav と直接関係するものではありません（より詳しくは、 [オープンイシュー](https://github.com/Gregwar/Image/issues/115) を見てください）。別の方法として、 "Cache All Images" を No に設定できます。
+
 
 ### Session
 
 ![Admin Configuration](configuration-system-session.png)
 
-This section gives you the ability to enable session support, set timeout limits, and the name of the session cookie used to handle this information.
+このセクションでは、セッションのサポートを有効化したり、タイムアウト制限を設定したり、この情報の制御に使われるセッションクッキーの名前を設定したりできます。
 
 | オプション | 説明 |
 | :----- | :----- |
-| **Enable**  | Enable session support within Grav.                                                                                                          |
-| **Timeout** | Sets the session timeout in seconds.                                                                                                         |
-| **Name**    | An identifier used to form the name of the session cookie. Use alphanumeric, dashes or underscores only. Do not use dots in the session name |
+| **Enable**  | Grav 内でのセッションサポートを有効化する |
+| **Timeout** | セッションのタイムアウトを秒単位で設定する |
+| **Name**    | セッションクッキーの名前として使われる識別子。英数字とダッシュとアンダースコアのみを使ってください。セッション名にドットを使わないでください。 |
 
 ### Advanced
 
 ![Admin Configuration](configuration-system-advanced.png)
 
-This section contains advanced system options.
+このセクションには、システムの高度な設定を含みます。
 
 | オプション | 説明 |
 | :----- | :----- |
-| **Absolute URLs**       | Absolute or relative URLs for `base_url`.                                  |
-| **Parameter Separator** | Separater for passed parameters that can be changed for Apache on Windows. |
+| **Absolute URLs** | `base_url` の URL を絶対とするか相対とするか |
+| **Parameter Separator** | Windows の Apache で変更できるパラメータを渡すためのセパレータ |
 
