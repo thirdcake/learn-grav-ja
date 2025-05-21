@@ -1,31 +1,33 @@
 ---
-title: "連続リクエスト制限"
+title: "フラッドプロテクション"
 layout: ../../../../layouts/Default.astro
 ---
 
 ![](login.gif)
 
-ブルートフォース攻撃は、web サイトへの不正な侵入を目的とする、よくある攻撃です。
-Brute force attacks are a popular choice for website intruders. It could come in the form of someone you know trying to guess your password over and over until they are finally successful or a bot flooding your site with login attempts until eventually the password has been discovered.
+ブルートフォース攻撃は、web サイトへの不正な侵入者がよく使う攻撃です。
+最終的に成功するまで執拗にパスワードを試すあなたの知人だったり、やがてパスワードが発見されるまで洪水のようにログインを試行するボットの形で現れます。
 
-Grav's flood protection (also known as rate limiting) feature makes these kinds of attacks exceptionally difficult. It allows you to set a number of failed login attempts within a specific amount of time before the account gets temporarily locked out. Additionally, you can restrict the amount of password reset requests applied to accounts before locking this feature out.
+Grav のフラッドプロテクション（連続リクエスト制限とも呼ばれる）機能は、この主の攻撃を困難にするものです。指定した一定時間内に、指定した一定量のログインに失敗すると、アカウントを一時凍結する設定ができます。加えて、アカウントがパスワードリセットできる総回数を制限して、それを超えるとパスワードリセット機能が無効化するようにできます。
 
-## What You'll Need
+<h2 id="what-you-ll-need">必要な要件</h2>
 
-This feature is managed through the [**Login** plugin](https://github.com/getgrav/grav-plugin-login), which should already be installed and enabled if you're using Admin Panel.
+この機能は、 [**Login** プラグイン](https://github.com/getgrav/grav-plugin-login) により管理されており、管理パネルを使っていれば、すでにインストールされ、有効化されているはずです。
 
-## How to Set it Up
+<h2 id="how-to-set-it-up">セットアップ方法</h2>
 
 ![](2fa_3.jpeg)
 
-The settings for Grav's flood protection are found in the Login plugin. Simply navigate to **Admin > Plugins > Login** and select the **Security** tab.
+Grav のフラッドプロテクションの設定場所は、 Login プラグインの画面内にあります。
+単純に、 **Admin > Plugins > Login** と画面遷移し、 **Security** タブを選択してください。
 
-Here, you can set the following:
+ここで、以下の設定ができます：
 
-* Maximum number of password resets before lockout
-* Password reset maximum interval
-* Maximum failed logins before lockout
-* Maximum failed logins interval
+* 無効化されるまでのパスワードリセットの最大回数
+* パスワードリセットの最大インターバル
+* 凍結するまでのログインに失敗できる最大回数
+* ログイン失敗後の最大インターバル
 
-This will enable you to determine how many failed password resets or logins are allowed in a set amount of time before lockout occurs. This log out is temporary and lasts as long as your set interval.
+これにより、無効化するまでのパスワードリセットやログインの失敗回数を何回まで許容するかを決定できます。
+この無効化は、一時的なもので、設定されたインターバルの間続きます。
 

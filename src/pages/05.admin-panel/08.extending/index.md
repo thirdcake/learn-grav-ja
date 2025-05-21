@@ -7,9 +7,9 @@ layout: ../../../layouts/Default.astro
 
 <h3 id="understanding-admin-themes">管理パネルテーマを理解する</h3>
 
-普通の Grav テーマを拡張したり、修正したりするのとちょうど同じように、管理パネルの構造や見た目をテンプレートで上書きできます。つまり、デフォルトのテンプレートの代わりに、あなたのプラグインで定義したテンプレートで、管理パネルのテーマが映し出せます。たとえば、左側にあるサイドバーナビゲーションのアバターを変更したいと思ったら、 `nav-user-avatar.html.twig` を変更することで、できます。
+普通の Grav テーマを拡張したり、修正したりするのとちょうど同じように、管理パネルの構造や見た目をテンプレートで上書きできます。つまり、デフォルトのテンプレートの代わりに、あなたのプラグインで定義したテンプレートで、管理パネルのテーマを表示できます。たとえば、左側にあるサイドバーナビゲーションのアバターを変更したいと思ったら、 `nav-user-avatar.html.twig` を変更することで可能です。
 
-管理パネルプラグインでは、テンプレートへの path は：  `user/plugins/admin/themes/grav/templates` のフォルダ以下に、 *ADMIN_TEMPLATES* として参照されます。見つけたいファイルは、  `ADMIN_TEMPLATES/partials/nav-user-avatar.html.twig` にある、 `<img src="https://www.gravatar.com/avatar/{{ admin.user.email|md5 }}?s=47" />` です。
+管理パネルプラグインでは、テンプレートへの path は： `user/plugins/admin/themes/grav/templates` のフォルダ以下に、 *ADMIN_TEMPLATES* として参照されます。見つけたいファイルは、 `ADMIN_TEMPLATES/partials/nav-user-avatar.html.twig` にある、 `<img src="https://www.gravatar.com/avatar/{{ admin.user.email|md5 }}?s=47" />` です。
 
 あなたのプラグインの中では、テンプレートへの path は： `user/plugins/myadminplugin/admin/themes/grav/templates` のフォルダ以下に、 *PLUGIN_TEMPLATES* として参照されます。対応ファイルは、 `PLUGIN_TEMPLATES/partials/nav-user-avatar.html.twig` であり、 `<img src="{{ myadminplugin_avatar_image_path }}" />` のような内容になります。
 
@@ -31,14 +31,21 @@ public function onAdminTwigTemplatePaths($event): void
 }
 ```
 
-It is important to remember that the theme used in the Admin plugin is sensitive to the templates available. As a general rule, you should only modify templates with *low impact*, that is, make changes that will not break the interface for any user who installs your plugin. In this sense it is better to override `nav-user-avatar.html.twig` than `nav.html.twig`, as the latter contains much more functionality but uses `{% include 'partials/nav-user-details.html.twig' %}` to include the former.
+重要なことなので忘れないでほしいのですが、管理プラグインで使われるテーマは、利用可能なテンプレートに強く影響されます。一般論として、テンプレート修正は *インパクトの少ない* 変更に留めるべきで、あなたのプラグインをインストールしたユーザーのインターフェースを壊すことの無いようにしてください。
+この意味では、 `nav.html.twig` よりも `nav-user-avatar.html.twig` を上書きした方が良いでしょう。 `nav.html.twig` の方が機能が豊富ですが、 `{% include 'partials/nav-user-details.html.twig' %}` を使って、 `nav-user-avatar.html.twig` をインクルードしているからです。
 
-> [!Note]  
-> **TIP:** Admin template files have autoescaping turned on. You do not need to add `|e` filters to escape HTML content, but you do need to add `|raw` if your input is valid HTML.
+> [!訳注]  
+> `nav-user-avatar.html.twig` は、 `nav-user-details.html.twig` のタイポかな？ と思います。
+
+> [!Tip]  
+> 管理パネルのテンプレートファイルは、自動エスケープが有効になっています。HTML コンテンツのエスケープのために `|e` フィルターを追加する必要はありません。しかし、適正な HTML を入力するには `|raw` を追加する必要はあります。
 
 <h3 id="adding-a-custom-field">カスタムフィールドを追加</h3>
 
-To create a custom field, we will add it to `PLUGIN_TEMPLATES/forms/fields/myfield`. In the *myfield*-folder we need a Twig-template which declares how the field will operate. The easiest way to add a field is to find a similar field in `ADMIN_TEMPLATES/forms/fields` and copy that, to see how they are structured. For example, to add a HTML range-slider we create `PLUGIN_TEMPLATES/forms/fields/range/range.html.twig`. In this file, we add:
+カスタムフィールドを作成するために、 `PLUGIN_TEMPLATES/forms/fields/myfield` へ追加します。
+*myfield* フォルダには、その入力欄の処理方法を決める Twig テンプレートが必要です。
+フィールドを追加する最も簡単な方法は、 `ADMIN_TEMPLATES/forms/fields` から似ているフィールドを探し、それをコピーし、その構造を理解することです。
+たとえば、 HTML range スライダーを追加するには、 `PLUGIN_TEMPLATES/forms/fields/range/range.html.twig` を作成します。このファイルに、以下を記入します：
 
 ```twig
 {% extends "forms/field.html.twig" %}
@@ -52,7 +59,8 @@ To create a custom field, we will add it to `PLUGIN_TEMPLATES/forms/fields/myfie
 {% endblock %}
 ```
 
-This adds a field-type called "range", with the type *range*, that allows the user to select a value by [sliding a button](http://www.html5tutorial.info/html5-range.php). To use the new field in a blueprint, we would simply add this in [*blueprints.yaml*](../../04.plugins/03.plugin-tutorial/#required-items-to-function):
+ここでは、 "range" という名前のフィールドタイプを、 *range* の input type で追加しています。これにより、ユーザーは [ボタンをスライドすることで](http://www.html5tutorial.info/html5-range.php) 値を選択できます。
+ブループリントで新しいフィールドを使うには、 [*blueprints.yaml*](../../04.plugins/03.plugin-tutorial/#required-items-to-function) に以下を追加するだけです：
 
 ```yaml
 form:
@@ -68,9 +76,10 @@ form:
         step: 10
 ```
 
-Which gives us a slider with a default value of 100, where accepted values are between 0 and 100, and each value increments by 10 as we slide it.
+これにより、デフォルト値が100で、0から100の値を取りうる、ステップが10のスライダーが提供されます。
 
-We could extend this further by using the `prepend` or `append` blocks available, by for example adding a visual indicator of the selected value. We change `range.html.twig` to contain this:
+このフィールドは、 `prepend` や `append` ブロック利用して、さらに拡張できます。たとえば、選択した値について、視覚的に見えるインジケーターを追加することができます。
+次のように、 `range.html.twig` を変更します：
 
 ```twig
 {% extends "forms/field.html.twig" %}

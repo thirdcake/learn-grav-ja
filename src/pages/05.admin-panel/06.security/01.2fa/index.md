@@ -5,9 +5,9 @@ layout: ../../../../layouts/Default.astro
 
 ![Admin Profile](auth3.gif)
 
-2-factor authentication (2FA) is an excellent security measure that uses a rolling-clock style authentication method that generates six-digit codes you can use in addition to your username and password to access the Admin.
+2要素認証（2FA）は、すぐれたセキュリティ対策で、ユーザーは rolling-clock スタイルの（管理パネルにアクセスするために、ユーザー名とパスワードに加えて、生成された6桁のコードを使用する）認証方法を使います。
 
-To take advantage of this feature, you'll want to download a 2FA-supporting app such as [Authy](https://authy.com/) or [Google Authenticator](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en). This app will act as a virtual key ring for authentication codes.
+この機能を利用するため、2FA をサポートするアプリをダウンロードする必要があります。たとえば、 [Authy](https://authy.com/) や [Google Authenticator](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en) があります。このアプリは、認証コードのための仮想のキーリングです。
 
 <h2 id="how-to-set-it-up">セットアップ方法</h2>
 
@@ -29,13 +29,17 @@ QR コードが 2FA シークレットキーとともに現れるので、書き
 
 ![](2fa_5.png)
 
-A purple 2FA badge will now appear next to your name in the sidebar. This badge lets you know that 2FA is active on the account.
+紫色の 2FA バッジが、これによりサイドバーのあなたの名前の横に表示されました。
+このバッジは、そのアカウントで 2FA が有効化されていることを知らせるものです。
 
-You can now log out and log back in. You will be greeted with the same username and password fields, but once you enter this information, you will be asked to provide an additional six-digit code. This code is in your authenticator app. It resets every 30 seconds, so the code is only good during that short period. A new code will generate to replace it.
+それでは、ログアウトして、再ログインしてみましょう。
+これまでと同じユーザー名とパスワードの入力欄が表示されますが、この情報を入力後、追加の6桁コード入力を求められます。
+このコードは30秒ごとにリセットされ、この間のみ有効です。
+新しいコードが生成され、置き換えられます。
 
-That's it! You now have a more secure Grav site!
+これで終わりです！ あなたはこれでより安全な Grav サイトを手に入れました！
 
-Oh, and if you want to change your 2FA key, all you need to do is hit the big red **Regenerate** button.
+そうだ、もし 2FA キーを変更したいなら、赤い大きな **Regenerate** ボタンを押すだけです。
 
 <h2 id="frequently-asked-questions">よくある質問</h2>
 
@@ -43,16 +47,18 @@ Oh, and if you want to change your 2FA key, all you need to do is hit the big re
 
 ご心配なく！ すべてを失ったわけではありません。
 
-Your 2FA status and hashed key are stored in your site's file system on your user YAML file. For example, if your user account is `admin`, navigate to **ROOT/user/accounts/admin.yaml** and look for these two lines:
+あなたの 2FA ステータスとハッシュキーは、サイトのファイルシステム内にユーザー YAML ファイル上に保存されています。 たとえば、あなたのユーザーアカウント名が `admin` だったとき、 `ROOT/user/accounts/admin.yaml` ファイルに移動し、以下の2行を見てください：
 
 ```yaml
 twofa_enabled: true
 twofa_secret: RQX46XTTBK7QMMB6VR4RAUNWOYVXXTSR
 ```
 
-Simply set **twofa_enabled** to `false` and save. You should now be able to access your site using just your username and password. Alternatively, you can use the **twofa_secret** to register your account on your authenticator app of choice.
+**twofa_enabled** を `false` に設定し、保存するだけです。
+これで、ユーザー名とパスワードだけでサイトにログインできるようになります。
+または、 **twofa_secret** を使って、お好みの認証アプリにアカウントを登録することもできます。。
 
-#### What if my 2FA secret is compromised?
+<h4 id="what-if-my-2fa-secret-is-compromised">もし 2FA 情報が漏洩したら？</h4>
 
-If you believe your 2FA secret may be compromised, you can generate a new key and invalidate the old one by selecting the big red **Regenerate** button in your user profile settings from the Admin.
+2FA 情報が漏洩した可能性がある場合、管理パネルのユーザープロフィール設定にある赤く大きな **Regenerate** ボタンを選択することで、新しいキーを生成でき、古いものを無効にできます。
 
