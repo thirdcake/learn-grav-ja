@@ -1,8 +1,8 @@
 ---
-title: "500 Internal Server Error"
+title: '500 Internal Server Error'
 layout: ../../../layouts/Default.astro
+lastmod: '2025-05-13'
 ---
-
 > The server encountered an internal error or misconfiguration and was unable to complete your request.
 >
 > Please contact the server administrator at webmaster@localhost to inform them of the time this error occurred, and the actions you performed just before this error.

@@ -1,8 +1,8 @@
 ---
-title: "フォーム"
+title: フォーム
 layout: ../../layouts/Chapter.astro
+lastmod: '2025-05-04'
 ---
-
 ### 第6章
 
 # フォーム

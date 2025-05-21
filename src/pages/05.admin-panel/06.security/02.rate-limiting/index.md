@@ -1,8 +1,8 @@
 ---
-title: "フラッドプロテクション"
+title: フラッドプロテクション
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-05-21'
 ---
-
 ![](login.gif)
 
 ブルートフォース攻撃は、web サイトへの不正な侵入者がよく使う攻撃です。

@@ -1,8 +1,8 @@
 ---
-title: "WordPressからGravへの引っ越し"
+title: WordPressからGravへの引っ越し
 layout: ../../../layouts/Default.astro
+lastmod: '2025-04-28'
 ---
-
 <h2 id="requirements">要件</h2>
 
 * PHP v7.1 以上 composer の依存関係のため

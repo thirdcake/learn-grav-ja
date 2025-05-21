@@ -1,8 +1,8 @@
 ---
-title: "Arvixe"
+title: Arvixe
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-05-10'
 ---
-
 [Arvixe](http://www.arvixe.com) is an award winning hosting company that prides themselves on providing quality web hosting that is **affordable** and unmatched in **reliability**.  With great features, and a **developer-friendly** stance, Arvixe shared hosting is a great option for a Grav-based site.
 
 ![](arvixe.webp)

@@ -1,8 +1,8 @@
 ---
-title: "Drupal 7からGravへの引っ越し"
+title: 'Drupal 7からGravへの引っ越し'
 layout: ../../../layouts/Default.astro
+lastmod: '2025-04-28'
 ---
-
 <h2 id="requirements">要件</h2>
 
 * PHP v7.1 or above for the composer dependencies.

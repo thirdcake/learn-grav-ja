@@ -1,9 +1,8 @@
 ---
-title: "導入"
+title: 導入
 layout: ../../../../../layouts/Default.astro
+lastmod: '2025-05-10'
 ---
-
-
 このセクションでは、既存の **Flex ディレクトリ** をすぐに有効化し、 Grav 管理パネルに表示する方法について解説します。具体例としてデモ用に、 **Flex Objects プラグイン** に含まれる **Contacts** flex ディレクトリを使用します。
 
 <h2 id="enabling-a-directory">ディレクトリの有効化</h2>

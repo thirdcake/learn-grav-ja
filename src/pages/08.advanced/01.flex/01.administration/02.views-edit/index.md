@@ -1,8 +1,8 @@
 ---
-title: "コンテンツエディタ画面"
+title: コンテンツエディタ画面
 layout: ../../../../../layouts/Default.astro
+lastmod: '2025-05-10'
 ---
-
 ![Edit View](flex-objects-edit.png)
 
 **コンテンツ・エディタ** は、コンテンツタイプを作成し、更新できる **Flex オブジェクト** の強力な画面です。

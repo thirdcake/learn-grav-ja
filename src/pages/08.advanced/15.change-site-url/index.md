@@ -1,8 +1,8 @@
 ---
-title: "サイト URL の変更"
+title: 'サイト URL の変更'
 layout: ../../../layouts/Default.astro
+lastmod: '2025-05-08'
 ---
-
 system.yaml の `custom_base_url` を設定することで（もしくは、管理パネルの System 設定の Custom Base URL を設定することで）、フォルダ内の Grav をドメインルートにあるものとして実行できます。
 
 ## Scenario 1, run in the domain root folder

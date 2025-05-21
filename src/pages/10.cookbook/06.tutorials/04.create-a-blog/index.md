@@ -1,8 +1,8 @@
 ---
-title: "ブログを構築する"
+title: ブログを構築する
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-04-28'
 ---
-
 > [!Info]  
 > [https://getgrav.org/downloads/skeletons](https://getgrav.org/downloads/skeletons) からブログサイト用のスケルトンをダウンロードし、インストールするか、最低でも [https://github.com/getgrav/grav-skeleton-blog-site](https://github.com/getgrav/grav-skeleton-blog-site) リポジトリをチェックしておいてください。このサンプルサイトは、Antimatter テーマを使います。すでにブログ構造で機能している Grav サイトがあれば、行き詰まったときや、次に何をすれば良いかわからなくなったときに、助けになるでしょう。
 

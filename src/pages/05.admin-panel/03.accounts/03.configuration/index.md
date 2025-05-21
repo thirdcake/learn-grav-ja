@@ -1,8 +1,8 @@
 ---
-title: "config 設定"
+title: 'config 設定'
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-05-06'
 ---
-
 ![Compatibility Tab](accounts-configuration1.png)
 
 | オプション | 説明 |

@@ -1,8 +1,8 @@
 ---
-title: "Twigレシピ"
+title: Twigレシピ
 layout: ../../../layouts/Default.astro
+lastmod: '2025-05-15'
 ---
-
 このページでは、 Twig テンプレートに関するさまざまな問題とその解決策を記載しています。
 
 <h2 id="list-the-last-5-recent-blog-posts">ブログ投稿で最近の5つのリスト</h2>

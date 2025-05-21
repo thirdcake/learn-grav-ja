@@ -1,8 +1,8 @@
 ---
-title: "Twig入門"
+title: Twig入門
 layout: ../../../layouts/Default.astro
+lastmod: '2025-04-17'
 ---
-
 Twigは、高速で、最適化された、PHP用のテンプレートエンジンです。開発者にも、デザイナーにもかんたんにテンプレートが作れるように設計されています。
 
 かんたんに学べる構文と、率直な処理により、Smarty(PHP)や、Django(Python)、Jinja、Liquid(Ruby)、Stencil(Java)などに親しんでいる方なら誰にでも合います。

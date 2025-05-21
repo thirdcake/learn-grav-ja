@@ -1,8 +1,8 @@
 ---
-title: "レシピ集"
+title: レシピ集
 layout: ../../layouts/Chapter.astro
+lastmod: '2025-05-04'
 ---
-
 ### 第10章
 
 # レシピ集

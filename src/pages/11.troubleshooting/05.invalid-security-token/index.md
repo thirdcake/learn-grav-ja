@@ -1,8 +1,8 @@
 ---
-title: "Invalid Security Token"
+title: 'Invalid Security Token'
 layout: ../../../layouts/Default.astro
+lastmod: '2025-05-17'
 ---
-
 **問題：** 管理パネルにログインして、処理を実行中に、この Invalid Security Token エラーが表示されました。
 
 問題の原因はいくつか考えられますが、すべて session に関係します：

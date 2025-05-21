@@ -1,8 +1,8 @@
 ---
-title: "System 設定"
+title: 'System 設定'
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-05-20'
 ---
-
 ![Admin Configuration](configuration.png)
 
 **Configuration** ページでは、サイトの **System** 設定及び **Site** 設定にアクセスできます。加えて、PHP プロパティや、サーバー環境のプロパティ、その他のサイトの運営を決定づけるさまざまなコンポーネントのプロパティを閲覧できます。

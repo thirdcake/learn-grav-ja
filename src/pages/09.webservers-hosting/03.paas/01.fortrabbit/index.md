@@ -1,8 +1,8 @@
 ---
-title: "Fortrabbit - PHP hosting"
+title: 'Fortrabbit - PHP hosting'
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-05-11'
 ---
-
 [Fortrabbit](http://www.fortrabbit.com) — secure like fort knox, fast like a rabbit — is a managed cloud hosting service dedicated for PHP. It supports a modern PHP development with micro-service oriented hosting infrastructure — perfect for Grav. Fortrabbit is a Platform as a Service — thus a bit different than traditional hosting.
 
 ![Fortrabbit website](fortrabbit-website.png)

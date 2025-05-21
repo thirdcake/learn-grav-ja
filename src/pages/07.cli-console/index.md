@@ -1,8 +1,8 @@
 ---
-title: "CLIコンソール"
+title: CLIコンソール
 layout: ../../layouts/Chapter.astro
+lastmod: '2025-04-14'
 ---
-
 ### 第7章
 
 # CLIコンソール

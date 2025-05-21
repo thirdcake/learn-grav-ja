@@ -1,8 +1,8 @@
 ---
-title: "Rochen Web Hosting"
+title: 'Rochen Web Hosting'
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-05-10'
 ---
-
 [Rochen Web Hosting](http://www.rochen.com/?utm_source=RocketTheme&utm_medium=Showcase&utm_campaign=Promotions) is the long-time hosting partner for both **GetGrav.org** and **RocketTheme.com**.  Rochen now has a new premium shared hosting offering that uses **SSD drives**, **Litespeed** web servers with the latest **Intel XEON processors** ensures that Grav performs optimally.  They also offer the choice of US or UK-based servers, so you can pick the best option for your users.
 
 ![](rochen.webp)

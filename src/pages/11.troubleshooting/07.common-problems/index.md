@@ -1,8 +1,8 @@
 ---
-title: "一般的な問題"
+title: 一般的な問題
 layout: ../../../layouts/Default.astro
+lastmod: '2025-05-19'
 ---
-
 ここでは、 [Grav forum](https://getgrav.org/forum) や [Discord Chat server](https://chat.getgrav.org) であがった、よくある問題について情報提供します。問題をリスト化し、関係する解決策を1つの場所にまとめることで、時間の節約になります。
 
 <h2 id="cannot-connect-to-the-gpm">GPMにつながらない</h2>

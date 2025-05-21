@@ -1,8 +1,8 @@
 ---
-title: "Gravコマンド"
+title: Gravコマンド
 layout: ../../../layouts/Default.astro
+lastmod: '2025-05-09'
 ---
-
 Grav には、組み込みで `bin/grav` というコマンドラインインターフェース（CLI） があります。繰り返しのタスク実行時に、CLIはとても便利です。たとえば、**キャッシュをクリアする** ときや、**バックアップ** を取るときなどです。
 
 CLIにアクセスするのは、シンプルな作業ですが、**ターミナル** を使う必要があります。MacOS では、`Terminal` と呼ばれ、Windowsでは、`cmd` と呼ばれ、Linuxでは、単にシェルと呼ばれます。Windows の cmd では、UNIX スタイルのコマンドは、そのままでは使えません。Windows マシンに [msysgit](http://msysgit.github.io/) をインストールし、[Git](https://git-scm.com/) と Git BASH という代替のコマンドプロンプトを追加することで、UNIX コマンドが利用可能になります。リモートでサーバーにアクセスするとき、**SSH** を使うでしょう。[SSHの素晴らしいチュートリアル](http://code.tutsplus.com/tutorials/ssh-what-and-how--net-25138) をチェックしてください。

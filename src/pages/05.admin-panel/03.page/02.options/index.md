@@ -1,8 +1,8 @@
 ---
-title: "エディタ（Options タブ）"
+title: 'エディタ（Options タブ）'
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-05-06'
 ---
-
 ![Admin Page Editor](page-options.png)
 
 管理パネルの **Page Editor** は、パワフルなテキストエディタであり、ページ管理マネージャーです。ページのコンテンツ（やメディアファイル）を作成したり、公開設定やタクソノミー設定をしたり、その他設定、上書きをしたり、テーマ特有のオプションを設定できたりします。

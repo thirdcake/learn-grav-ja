@@ -1,8 +1,8 @@
 ---
-title: "一般的なレシピ"
+title: 一般的なレシピ
 layout: ../../../layouts/Default.astro
+lastmod: '2025-05-15'
 ---
-
 このページでは、一般的な Grav に関するさまざまな問題と、それぞれの解決策を紹介します。
 
 <h2 id="change-the-php-cli-version">PHP CLI のバージョンを変更</h2>

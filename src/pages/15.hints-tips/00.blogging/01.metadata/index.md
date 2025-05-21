@@ -1,8 +1,8 @@
 ---
-title: "Blog メタデータ"
+title: 'Blog メタデータ'
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-04-26'
 ---
-
 Grav をブログのプラットフォームとして使用する場合、Facebook や Twitter などのソーシャルメディアで投稿をシェアするときの説明や画像を入力するのに役立つメタデータを含めたいと思うでしょう。
 
 以下の情報を、Grav の[フロントマター](../../../02.content/02.headers/) に追記してください。

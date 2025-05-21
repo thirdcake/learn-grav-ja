@@ -1,8 +1,8 @@
 ---
-title: "コンテンツ"
+title: コンテンツ
 layout: ../../layouts/Chapter.astro
+lastmod: '2025-05-04'
 ---
-
 ### 第2章
 
 # コンテンツ

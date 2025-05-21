@@ -1,8 +1,8 @@
 ---
-title: "Proxy 問題"
+title: 'Proxy 問題'
 layout: ../../../layouts/Default.astro
+lastmod: '2025-05-09'
 ---
-
 プロキシーサーバー経由で GPM を実行すると、エラーになることがあります。
 
 cURL により、環境変数（ `http_proxy` や `https_proxy` ）としてプロキシーを設定できます。Grav に変更の必要はありません。

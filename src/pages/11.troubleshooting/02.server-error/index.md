@@ -1,8 +1,8 @@
 ---
-title: "Grav サーバーエラー"
+title: 'Grav サーバーエラー'
 layout: ../../../layouts/Default.astro
+lastmod: '2025-05-09'
 ---
-
 ![](grav-server-error.png)
 
 サーバーエラーは、ほとんどいつも Grav の設定ミスによって起こります。何か予期しないことが起こり、そのせいで Grav がリカバリーできず、ページを提供できません。

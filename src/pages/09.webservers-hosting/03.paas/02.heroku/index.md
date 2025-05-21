@@ -1,8 +1,8 @@
 ---
-title: "Heroku"
+title: Heroku
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-05-11'
 ---
-
 Heroku is a very well known hosting for web applications.
 It has a free plan useful for testing purposes, and paid options to deploy the website.
 

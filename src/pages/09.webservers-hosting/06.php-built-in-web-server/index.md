@@ -1,8 +1,8 @@
 ---
-title: "PHP ビルトインサーバー"
+title: 'PHP ビルトインサーバー'
 layout: ../../../layouts/Default.astro
+lastmod: '2025-04-29'
 ---
-
 <h2 id="test-hosting-with-the-php-built-in-web-server">PHPのビルトインサーバーでテストホスティング</h2>
 
 PHP コマンドライン（CLI SAPI） には、ビルトインでwebサーバーが付属しえおり、Grav サイトの簡易的なテストやデモにい便利です。これは、フルの web サーバー機能では **ありません** ので、公開されるネットワークでは使わないでください。

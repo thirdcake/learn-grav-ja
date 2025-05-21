@@ -1,8 +1,8 @@
 ---
-title: "拡張"
+title: 拡張
 layout: ../../../layouts/Default.astro
+lastmod: '2025-05-21'
 ---
-
 このページでは、管理パネルの拡張方法や、その際のベストプラクティスをガイドします。
 
 <h3 id="understanding-admin-themes">管理パネルテーマを理解する</h3>

@@ -1,8 +1,8 @@
 ---
-title: "アカウント"
+title: アカウント
 layout: ../../../layouts/Default.astro
+lastmod: '2025-05-04'
 ---
-
 アカウントマネージャーは、Grav 1.7 の管理パネルからの新しい機能です。ユーザーが、ユーザーアカウントとユーザーグループを管理できるようになります。
 
 ![Users](./01.users/accounts-user1.png)

@@ -1,8 +1,8 @@
 ---
-title: "alwaysdata"
+title: alwaysdata
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-05-10'
 ---
-
 [alwaysdata](https://www.alwaysdata.com) is a European hosting provider that offers different plans on shared platform or dedicated managed servers. They include lots of cool features such as automatic backups, free SSL certificates, SSH access, etc.
 
 A **free shared hosting plan** is available for sites below 100MB disk space. Otherwise, plans start at 8€/month.

@@ -1,8 +1,8 @@
 ---
-title: "Scriptによるアップデート"
+title: Scriptによるアップデート
 layout: ../../../layouts/Default.astro
+lastmod: '2025-05-09'
 ---
-
 もしくは： 複数の Grav を一度にアップグレードします
 
 このページは、[Deployer](https://deployer.org/) を使って、複数の Grav を簡単にアップグレードするためのガイドです。「複数」という意味は、別々の Grav がインストールされている状況であり、[複数サイトインストール](../../08.advanced/05.multisite-setup/) のことではありません。[Grav のCLI](../02.grav-cli/) を実行するため、各インストールの path を使いますが、それらの path を手打ちするようなことはしません。

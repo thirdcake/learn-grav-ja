@@ -1,8 +1,8 @@
 ---
-title: "多言語サイト"
+title: 多言語サイト
 layout: ../../../layouts/Default.astro
+lastmod: '2025-05-13'
 ---
-
 Gravの多言語対応は、このことを主題とした [コミュニティでの議論](https://github.com/getgrav/grav/issues/170) の成果です。これらを噛み砕き、Gravでの多言語サイトの作り方の例を示します。
 
 <h2 id="single-language-different-than-english">英語以外の1言語を使う</h2>

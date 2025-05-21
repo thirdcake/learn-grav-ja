@@ -1,8 +1,8 @@
 ---
-title: "サイトの引っ越し"
+title: サイトの引っ越し
 layout: ../../layouts/Chapter.astro
+lastmod: '2025-05-04'
 ---
-
 ### 第12章
 
 # サイトの引っ越し

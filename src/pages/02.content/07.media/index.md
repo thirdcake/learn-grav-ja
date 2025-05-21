@@ -1,8 +1,8 @@
 ---
-title: "メディア"
+title: メディア
 layout: ../../../layouts/Default.astro
+lastmod: '2025-05-03'
 ---
-
 > [!訳注]  
 > このページでは、ファイルの動的な処理をするため、静的サイトでは再現できない部分があります。また、動画などの容量が大きく、このGitHub Pages上では削除しています。メディア編集によるGravの機能については、[翻訳元](https://learn.getgrav.org/content/media) にてご確認ください。
 

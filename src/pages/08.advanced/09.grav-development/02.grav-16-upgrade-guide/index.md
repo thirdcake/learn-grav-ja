@@ -1,8 +1,8 @@
 ---
-title: "Grav 1.6 へのアップデート"
+title: 'Grav 1.6 へのアップデート'
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-04-25'
 ---
-
 Grav 1.6 is the largest update since the initial release of Grav. It introduces a few new features, improvements, bug fixes and provides many architectural changes which pave the road towards Grav 2.0.
 
 !!!! **IMPORTANT:** For most people, Grav 1.6 should be a simple upgrade without any issues, but like any upgrade, it is recommended to **take a backup** of your site and **test the upgrade in a testing environment** before upgrading your live site.

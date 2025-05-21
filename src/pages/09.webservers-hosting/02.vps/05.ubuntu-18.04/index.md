@@ -1,8 +1,8 @@
 ---
-title: "共通事項 ubuntu 18"
+title: '共通事項 ubuntu 18'
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-05-11'
 ---
-
 ### Update and Upgrade Packages
 
 At this point, you might want to either setup a local `/etc/hosts` entry to give the IP provided a nice friendly name such as `{{ page.header.localname }}`.  That way you can more easily SSH to your server with `ssh root@{{ page.header.localname }}{% if ssh_port %} -p{{ ssh_port }}{% endif %}`.

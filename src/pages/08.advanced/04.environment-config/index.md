@@ -1,8 +1,8 @@
 ---
-title: "環境設定"
+title: 環境設定
 layout: ../../../layouts/Default.astro
+lastmod: '2025-05-13'
 ---
-
 Grav では、 **開発環境** や、 **ステージング環境** 、 **本番環境** のような、異なる環境に異なる設定をサポートするため、 [強力な設定機能](../../01.basics/05.grav-configuration) を拡張できます。
 
 > [!Info]  

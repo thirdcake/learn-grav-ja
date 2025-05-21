@@ -1,8 +1,8 @@
 ---
-title: "Grav API"
+title: 'Grav API'
 layout: ../../layouts/Chapter.astro
+lastmod: '2025-04-14'
 ---
-
 ### 第14章
 
 # Grav API

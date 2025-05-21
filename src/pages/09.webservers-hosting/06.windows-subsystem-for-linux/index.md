@@ -1,8 +1,8 @@
 ---
-title: "WSL(Windows Subsystem for Linux)"
+title: 'WSL(Windows Subsystem for Linux)'
 layout: ../../../layouts/Default.astro
+lastmod: '2025-05-13'
 ---
-
 Windows Subsystem for Linux を使うと、開発者は、仮想マシンのオーバーヘッド無しで、直接 Windows から GNU/Linux 環境（ほとんどのコマンドラインツール、ユーティリティ、アプリケーションを含む）を実行できます。
 
 できること：

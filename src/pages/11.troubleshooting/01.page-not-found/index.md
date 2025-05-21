@@ -1,8 +1,8 @@
 ---
-title: "404 Not Found"
+title: '404 Not Found'
 layout: ../../../layouts/Default.astro
+lastmod: '2025-05-17'
 ---
-
 **Not Found** エラー（ページが見つかりませんというエラー）には、いくつかの理由があり、それぞれ、異なる原因によるものです。
 
 ![404 Not Found](404-not-found.png)

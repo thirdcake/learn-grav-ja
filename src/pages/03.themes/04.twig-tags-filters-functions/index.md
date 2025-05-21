@@ -1,8 +1,8 @@
 ---
-title: "Twigのタグ・フィルタ・関数"
+title: Twigのタグ・フィルタ・関数
 layout: ../../../layouts/Default.astro
+lastmod: '2025-04-18'
 ---
-
 Twigでもすでに、[フィルタ、関数、タグ](https://twig.symfony.com/doc/1.x/#reference) の幅広いリストを提供していますが、Gravでもテーマ処理を容易にする便利な追加機能を提供します。
 
 > [!Info]  

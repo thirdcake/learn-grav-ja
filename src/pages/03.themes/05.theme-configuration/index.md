@@ -1,8 +1,8 @@
 ---
-title: "テーマ設定"
+title: テーマ設定
 layout: ../../../layouts/Default.astro
+lastmod: '2025-04-19'
 ---
-
 Gravでは、TwigやPHPファイルから、テーマ設定やブループリント（設計図）情報へかんたんにアクセスできます。
 
 <h2 id="accessing-theme-blueprint-information">ブループリント情報へのアクセス</h2>

@@ -1,8 +1,8 @@
 ---
-title: "YAML構文"
+title: YAML構文
 layout: ../../../layouts/Default.astro
+lastmod: '2025-05-03'
 ---
-
 <h2 id="introduction">はじめに</h2>
 
 YAML は、 _"YAML Ain't Markup Language"（YAML はマークアップ言語じゃねーよ）_ の頭文字を取っており、Grav では config 設定ファイルや、ブループリント、ページの設定のおいても、幅広く使われています。

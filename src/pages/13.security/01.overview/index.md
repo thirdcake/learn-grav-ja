@@ -1,8 +1,8 @@
 ---
-title: "概要"
+title: 概要
 layout: ../../../layouts/Default.astro
+lastmod: '2025-05-14'
 ---
-
 もし Grav またはその拡張機能に関連するセキュリティ上の問題を発見されたら、コア・チームにメールしてください（[contact@getgrav.org](mailto:contact@getgrav.org)）。速やかに対応します。
 
 コア・チームがその問題を調査し、関係者に連絡して解決するまでは、その問題を公表すべきではありません。これは、 GitHub 上でも、 Discord 上でも、 Discourse フォーラム上でも、公表は待ってください。また、その問題が、 Grav ユーザーにとってセキュリティ上の脅威でない場合は、 GitHub の [issue](https://github.com/getgrav/grav/blob/develop/CONTRIBUTING.md#bug-reports) として送信していただくのが良いでしょう。判断がつかない場合は、ご連絡いただければ、どちらの問題に属するかの判断をお助けします。

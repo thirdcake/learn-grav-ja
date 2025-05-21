@@ -1,8 +1,8 @@
 ---
-title: "プラグインレシピ"
+title: プラグインレシピ
 layout: ../../../layouts/Default.astro
+lastmod: '2025-05-16'
 ---
-
 このページでは、Grav プラグインに関係する様々な問題とその解決策を紹介します。
 
 <h2 id="output-some-php-code-result-in-a-twig-template">Twig テンプレートに PHP コードの結果を出力する</h2>

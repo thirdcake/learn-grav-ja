@@ -1,8 +1,8 @@
 ---
 title: セキュリティ
 layout: ../../layouts/Chapter.astro
+lastmod: '2025-05-04'
 ---
-
 ### 第13章
 
 # セキュリティ・ポリシー

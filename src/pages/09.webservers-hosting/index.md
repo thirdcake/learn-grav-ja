@@ -1,8 +1,8 @@
 ---
-title: "Webサーバとホスティング"
+title: Webサーバとホスティング
 layout: ../../layouts/Chapter.astro
+lastmod: '2025-04-14'
 ---
-
 ### 第9章
 
 # Webサーバとホスティング

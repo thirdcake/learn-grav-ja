@@ -1,8 +1,8 @@
 ---
 title: カスタムフィルタ
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-04-18'
 ---
-
 > [!訳注]  
 > このページの内容は、Twigのフィルタを動的に実行している部分があり、静的サイトでは再現できません。実行結果は、[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)をご確認ください。
 

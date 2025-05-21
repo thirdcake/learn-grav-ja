@@ -1,8 +1,8 @@
 ---
-title: "Flex オブジェクト"
+title: 'Flex オブジェクト'
 layout: ../../../layouts/Default.astro
+lastmod: '2025-05-10'
 ---
-
 **Flex オブジェクト** は、Grav 1.7 で登場した新しい概念です。あなたのサイトに、カスタムのデータタイプを、簡単に追加します。 **Flex オブジェクト** は、[**Flex Objects** プラグイン](https://github.com/trilbymedia/grav-plugin-flex-objects) により提供され、 [管理パネルプラグイン](../../05.admin-panel/) で必要になるもので、 [**Grav コア + 管理パネルプラグイン**](https://getgrav.org/downloads) パッケージに含まれています。
 
 > [!Info]  

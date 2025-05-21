@@ -1,8 +1,8 @@
 ---
 title: カスタム関数
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-04-19'
 ---
-
 > [!訳注]  
 > このページの内容は、Twigの関数を動的に実行している部分があり、静的サイトでは再現できません。実行結果は、[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions)をご確認ください。
 

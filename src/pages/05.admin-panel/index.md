@@ -1,8 +1,8 @@
 ---
-title: "管理パネル"
+title: 管理パネル
 layout: ../../layouts/Chapter.astro
+lastmod: '2025-05-04'
 ---
-
 ### 第5章
 
 # 管理パネル

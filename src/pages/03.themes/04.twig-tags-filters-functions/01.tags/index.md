@@ -1,8 +1,8 @@
 ---
-title: "カスタムタグ"
+title: カスタムタグ
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-04-18'
 ---
-
 Twigにはすでに、優秀なタグがありますが、Gravではさらに、わたしたちが便利だと気づいたカスタムタグを、たくさん追加しています。
 
 ### `markdown`

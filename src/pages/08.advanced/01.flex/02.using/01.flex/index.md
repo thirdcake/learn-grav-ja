@@ -1,8 +1,8 @@
 ---
-title: "Flex"
+title: Flex
 layout: ../../../../../layouts/Default.astro
+lastmod: '2025-05-10'
 ---
-
 > [!Note]  
 > **TIP:** メソッドの完全な一覧は、 **Customizing Flex Objects** セクションで解説します。
 

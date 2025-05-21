@@ -1,8 +1,8 @@
 ---
-title: "ページ"
+title: ページ
 layout: ../../../layouts/Default.astro
+lastmod: '2025-05-06'
 ---
-
 ![Admin Pages](pages.png)
 
 **Pages** 画面からは、サイトのコンテンツをすばやく編集できます。ページの編集、削除、作成する場所であり、ひと目で見てわかるなら、ページを探すことができます。

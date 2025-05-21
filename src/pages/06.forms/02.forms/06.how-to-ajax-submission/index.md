@@ -1,8 +1,8 @@
 ---
-title: "ハウツー：Ajax送信"
+title: ハウツー：Ajax送信
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-05-02'
 ---
-
 <h2 id="submitting-forms-via-xhr-ajax">XGR/Ajax でフォームを送信</h2>
 
 フォーム処理のデフォルトのメカニズムは、 HTML 標準のフォーム送信によっており、 HTML フォームは、 `POST` または `GET` （デフォルトは `POST` ）でサーバーに送られます。送られたフォームは、 [バリデーション](../02.fields-available/) され、 [処理](../04.reference-form-actions/) された後に、結果がフォームに送り返され（もしくは、 [リダイレクトされたページへ遷移し](../04.reference-form-actions/#redirect) ）、メッセージが表示されたり、必要に応じて再送信するための編集ができたりします。

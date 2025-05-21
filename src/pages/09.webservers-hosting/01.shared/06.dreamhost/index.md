@@ -1,8 +1,8 @@
 ---
-title: "Dreamhost"
+title: Dreamhost
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-05-10'
 ---
-
 [Dreamhost](http://dreamhost.com) is a famous hosting provider that offers various levels of service ranging from SSD-powered shared hosting to dedicated servers.
 
 ![](dreamhost.webp)

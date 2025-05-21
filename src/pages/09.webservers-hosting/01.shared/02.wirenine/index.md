@@ -1,8 +1,8 @@
 ---
-title: "WireNine"
+title: WireNine
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-05-10'
 ---
-
 [WireNine](https://my.wirenine.com/aff.php?aff=023) is a fast, modern hosting provider that focuses on performance via their use of **100% SSD** storage, **Litespeed** web servers, the latest **Intel E5-based** processors with fast **DDR4 ram**. These features ensure their shared hosting offerings are a fantastic solution for Grav sites.
 
 ![](wirenine.webp)

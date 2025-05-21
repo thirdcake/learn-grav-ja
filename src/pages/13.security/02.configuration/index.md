@@ -1,8 +1,8 @@
 ---
-title: "推奨するセキュリティ設定"
+title: 推奨するセキュリティ設定
 layout: ../../../layouts/Default.astro
+lastmod: '2025-05-14'
 ---
-
 他のすべてのアプリケーションと同様、サイトを保護し、最適化するために config 設定をチェックするのは重要です。
 
 <h2 id="production-site">本番サイト</h2>

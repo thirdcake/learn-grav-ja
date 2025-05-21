@@ -1,8 +1,8 @@
 ---
-title: "リファレンス：ブループリントのform.fields"
+title: リファレンス：ブループリントのform.fields
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-05-01'
 ---
-
 <h2 id="available-form-fields-for-use-in-the-admin">管理プラグインで使えるform.fields</h2>
 
 管理パネルでは、さまざまな入力欄を作れます。このドキュメントでは、それぞれの入力欄のプロパティの完全なリファレンスと、使用例を提供します。

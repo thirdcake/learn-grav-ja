@@ -1,8 +1,8 @@
 ---
-title: "管理パネルレシピ"
+title: 管理パネルレシピ
 layout: ../../../layouts/Default.astro
+lastmod: '2025-05-17'
 ---
-
 このページでは、 Grav 管理パネルの修正に関連するさまざまな問題とその解決策を紹介します。
 
 <h2 id="add-a-custom-yaml-file">カスタム YAML ファイルを追加する</h2>

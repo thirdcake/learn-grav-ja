@@ -1,8 +1,8 @@
 ---
-title: "プラグインでFlexを使う"
+title: プラグインでFlexを使う
 layout: ../../../layouts/Default.astro
+lastmod: '2025-04-23'
 ---
-
 <h2 id="introduction">はじめに</h2>
 
 このページの目的は、twigやコード中の Flex objects の利用方法を解説することだけです。Flex のパワーや柔軟性を理解するために、ぜひ[Flexのドキュメント](../../08.advanced/01.flex/) を読んでください。

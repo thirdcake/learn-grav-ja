@@ -1,8 +1,8 @@
 ---
-title: "システム要件"
+title: システム要件
 layout: ../../../layouts/Default.astro
+lastmod: '2025-05-12'
 ---
-
 Grav は、意図的に少ない要件で設計されています。Grav は、あなたのローカルコンピュータや、99% の web ホスティングプロバイダでかんたんに動作します。手元にペンがあれば、以下のシステム要件を書き留めてください。
 
 1. Web サーバ（Apache, Nginx, LiteSpeed, Lightly, IIS など）

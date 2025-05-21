@@ -1,8 +1,8 @@
 ---
-title: "config 設定"
+title: 'config 設定'
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-05-06'
 ---
-
 > [!訳注]  
 > このページの内容は、 [`アカウント>config 設定`](../../03.accounts/03.configuration/) と同じで、画像もリンク切れしており、 管理パネルの Pages に configuration タブも無いので、コピペミスか何かだと思います。詳しい方がおられたら、教えてください。
 

@@ -1,8 +1,8 @@
 ---
-title: "Flex オブジェクトを使う"
+title: 'Flex オブジェクトを使う'
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-05-10'
 ---
-
 **Flex オブジェクト** は、使いやすく設計されています。ほとんど Twig テンプレートだけで、コレクションやグループをページへ表示できます。
 
 > [!Note]  

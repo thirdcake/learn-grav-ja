@@ -1,8 +1,8 @@
 ---
-title: "テーマ"
+title: テーマ
 layout: ../../../layouts/Default.astro
+lastmod: '2025-05-07'
 ---
-
 ![Admin Themes](themes.png)
 
 管理パネルの **Themes** では、サイトのテーマを追加したり管理したりできます。

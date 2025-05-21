@@ -1,8 +1,8 @@
 ---
-title: "コンテンツリスト画面"
+title: コンテンツリスト画面
 layout: ../../../../../layouts/Default.astro
+lastmod: '2025-05-10'
 ---
-
 ![List View](flex-objects-list.png)
 
 **コンテンツリスト** とは、通常、コンテンツのリストでページ分けされたものを指しますが、 **[Pages](../../../../05.admin-panel/03.page/) のような一部の flex ディレクトリでは、高度にカスタマイズされた見た目になっていることがあります。

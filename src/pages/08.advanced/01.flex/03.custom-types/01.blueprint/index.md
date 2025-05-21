@@ -1,8 +1,8 @@
 ---
-title: "ブループリント"
+title: ブループリント
 layout: ../../../../../layouts/Default.astro
+lastmod: '2025-05-11'
 ---
-
 **Flex ブループリント** の基本構造は、flex タイプを説明する `title` と、 `description` と、 `type` があり、 Flex タイプのそれぞれ異なる側面を説明する3つのセクション（ `config` と、 `blueprints` と `form` ）もあります。
 
 `contacts.yaml` の主要構造は、次のようになっています：

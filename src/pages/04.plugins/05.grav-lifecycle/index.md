@@ -1,8 +1,8 @@
 ---
-title: "Gravのライフサイクル"
+title: Gravのライフサイクル
 layout: ../../../layouts/Default.astro
+lastmod: '2025-04-22'
 ---
-
 > [!訳注]  
 > これをどうやって表現したら良いのか、考えます。
 

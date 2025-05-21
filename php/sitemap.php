@@ -7,17 +7,31 @@ require_once __DIR__.'/common.php';
 
 $pages = getPages();  // $pages: Pages
 
-$xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>');
+$dom = new DOMDocument('1.0', 'UTF-8');
+$dom->formatOutput = true;
+
+$urlset = $dom->createElement('urlset');
+$urlset->setAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
+$dom->appendChild($urlset);
+
 foreach($pages->toPageList() as $node) {
     $page = $node->page;
     if($page->redirect !== false) {
         continue;
     }
-    $url = $xml->addChild('url');
-    $url->addChild('loc', htmlspecialchars($page->loc));
-    $url->addChild('priority', htmlspecialchars($page->priority));
-    $url->addChild('changefreq', htmlspecialchars($page->changefreq));
-    $url->addChild('lastmod', htmlspecialchars($page->lastmod));
+    $url = $dom->createElement('url');
+    $loc = $dom->createElement('loc', $page->loc);
+    $priority = $dom->createElement('priority', $page->priority);
+    $changefreq = $dom->createElement('changefreq', $page->changefreq);
+    $lastmod = $dom->createElement('lastmod', $page->lastmod);
+
+    $url->appendChild($loc);
+    $url->appendChild($priority);
+    $url->appendChild($changefreq);
+    $url->appendChild($lastmod);
+
+    $urlset->appendChild($url);
 }
 
-file_put_contents(dirname(__DIR__).'/public/sitemap.xml', $xml->asXML());
+file_put_contents(dirname(__DIR__).'/public/sitemap.xml', $dom->saveXML());
+

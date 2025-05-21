@@ -1,8 +1,8 @@
 ---
-title: "Plugin コマンド"
+title: 'Plugin コマンド'
 layout: ../../../layouts/Default.astro
+lastmod: '2025-05-11'
 ---
-
 プラグインは、 Grav の CLI `bin/plugin` と統合でき、特定のタスクをターミナルから実行することで、プラグイン機能を強化します。
 
 [Grav CLI](../02.grav-cli/) セクションで説明したとおり、コマンドの実行には　**terminal** を使う必要があります。

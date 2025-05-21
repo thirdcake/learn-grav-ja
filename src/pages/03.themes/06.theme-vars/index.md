@@ -1,8 +1,8 @@
 ---
-title: "テーマ変数"
+title: テーマ変数
 layout: ../../../layouts/Default.astro
+lastmod: '2025-04-19'
 ---
-
 テーマをデザインするとき、Twigのテンプレート内のすべての種類のオブジェクトや変数が使えます。Twigテンプレートエンジンは、これらオブジェクトや変数を強力に読み取り、計算します。このことは、[Twigドキュメントに書かれています](https://twig.symfony.com/doc/1.x/templates.html) し、[私たちのドキュメントでも概要を説明しました](../03.twig-primer/)
 
 > [!Warning]  

@@ -1,8 +1,8 @@
 ---
-title: "ハウツー：モジュラーページ中のフォーム"
+title: ハウツー：モジュラーページ中のフォーム
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-04-30'
 ---
-
 <h2 id="using-forms-in-modular-pages">モジュラーページでのフォームの使用</h2>
 
 テーマに `templates/forms/form.html.twig` ファイルが提供されていないときは、フォームが利用できるようにセットアップされていませんが、心配無用です。 - Grav デフォルトテーマの Antimatter からテンプレートをコピーするだけです：

@@ -1,8 +1,8 @@
 ---
-title: "トラブルシューティング"
+title: トラブルシューティング
 layout: ../../layouts/Chapter.astro
+lastmod: '2025-05-04'
 ---
-
 ### 第11章
 
 # トラブルシューティング

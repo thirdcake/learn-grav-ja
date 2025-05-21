@@ -1,8 +1,8 @@
 ---
-title: "ddev によるローカル開発"
+title: 'ddev によるローカル開発'
 layout: ../../../layouts/Default.astro
+lastmod: '2025-04-30'
 ---
-
 [ddev](https://ddev.readthedocs.io) is an open-source, PHP development tool, built upon Docker.  It can easily create local hosting environments, and its server configurations can be version controlled.  Originally meant for Drupal development, ddev easily can host Drupal, WordPress, and GravCMS sites.  Since it is based on Docker, ddev is compatible with Windows, Mac, and Linux.
 
 

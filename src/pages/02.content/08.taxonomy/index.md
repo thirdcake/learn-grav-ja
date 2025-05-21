@@ -1,8 +1,8 @@
 ---
-title: "タクソノミー"
+title: タクソノミー
 layout: ../../../layouts/Default.astro
+lastmod: '2025-04-14'
 ---
-
 **Grav** では、**タクソノミー** を使って、ページをグループ化したり、タグ付けしたりできます。
 
 > **Taxonomy (general),** the practice and science (study) of classification of things or concepts, including the principles that underlie such classification.  

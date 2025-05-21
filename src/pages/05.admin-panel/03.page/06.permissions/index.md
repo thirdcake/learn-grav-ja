@@ -1,8 +1,8 @@
 ---
-title: "ページのパーミッション"
+title: ページのパーミッション
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-05-06'
 ---
-
 ```
 ![Pages Permissions](page-permissions.png?width=2030&classes=shadow)
 ```

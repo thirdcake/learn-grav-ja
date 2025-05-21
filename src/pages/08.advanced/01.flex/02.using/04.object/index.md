@@ -1,8 +1,8 @@
 ---
-title: "Flex オブジェクト"
+title: 'Flex オブジェクト'
 layout: ../../../../../layouts/Default.astro
+lastmod: '2025-05-08'
 ---
-
 # Render Object
 
 ## render()

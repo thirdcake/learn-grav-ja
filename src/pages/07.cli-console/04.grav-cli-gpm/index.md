@@ -1,8 +1,8 @@
 ---
-title: "GPMコマンド"
+title: GPMコマンド
 layout: ../../../layouts/Default.astro
+lastmod: '2025-05-11'
 ---
-
 バージョン **0.9.3** をリリース以降、Grav には _GPM_ （Grav パッケージマネージャ）が搭載されています。この GPM により、Gravリポジトリにあるテーマやプラグインすべてを、インストールしたり、更新したり、アンインストールしたり、一覧表示したりできます。また、Grav そのものを最新バージョンにアップグレードできます。
 
 [Grav CLI](../02.grav-cli/) と同様、 _GPM_ は、MacOSにおける **Terminal** のような、コマンドラインインターフェースを通じてコマンドを実行する、コマンドラインツールです。UNIXスタイルのコマンドは、Windows の cmd では、ネイティブには動きません。Windows マシンに [msysgit](http://msysgit.github.io/) をインストールし、[Git](https://git-scm.com/) と Git BASH という代替のコマンドプロンプトを追加することで、UNIX コマンドが利用可能になります。

@@ -1,8 +1,8 @@
 ---
-title: "RoseHosting"
+title: RoseHosting
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-05-11'
 ---
-
 Back in 2001, [RoseHosting](https://www.rosehosting.com) was the first and only company in the world to offer commercial Linux virtual servers.  Now they offer a wide range of Linux hosting packages, including **Linux VPS** powered by enterprise **SSD Storage**. All their hosting plans are **fully managed** and include **free 24/7 support**, so they can install and set up Grav for you for free.
 
 ![](rosehosting-home.webp)

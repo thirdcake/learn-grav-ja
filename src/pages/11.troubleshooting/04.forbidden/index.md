@@ -1,8 +1,8 @@
 ---
-title: "403 Forbidden"
+title: '403 Forbidden'
 layout: ../../../layouts/Default.astro
+lastmod: '2025-05-09'
 ---
-
 ![](forbidden-403.png)
 
 **Windows** の **Apache** で、403 forbidden エラーが発生するという、曖昧ですが根の深い問題があります。

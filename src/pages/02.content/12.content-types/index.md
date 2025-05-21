@@ -1,8 +1,8 @@
 ---
-title: "コンテンツタイプ"
+title: コンテンツタイプ
 layout: ../../../layouts/Default.astro
+lastmod: '2025-04-16'
 ---
-
 <h2 id="default-content-type">デフォルトのコンテンツタイプ</h2>
 
 ほとんどのウェブプラットフォームに特徴的なことですが、Gravのデフォルトのコンテンツタイプは **HTML** です。これはつまり、ユーザーがブラウザでルーティングをリクエストしたとき、たとえば `/blog/new-macbook-pros-soon` にアクセスしようとしたとき、このリクエストには拡張子がないので、HTMLページを要求しているのだとGravは判断します。リクエストされたページが `blog-item.md` によっていた場合、Gravは`blog-item.html.twig` というTwigテンプレートを探して、ページをレンダリングします。

@@ -1,8 +1,8 @@
 ---
-title: "Grav ビルトイン Web サーバ"
+title: 'Grav ビルトイン Web サーバ'
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-05-09'
 ---
-
 Grav を起動する最速の方法として、 PHP をインストールしていれば使える PHP のビルトインサーバーで、ターミナル / コマンドプロンプトから Grav を実行することができます。
 
 Grav をインストールしたディレクトリにターミナルもしくはコマンドプロンプトで移動し、 `bin/grav server` を実行するだけです。

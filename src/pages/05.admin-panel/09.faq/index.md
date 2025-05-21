@@ -1,8 +1,8 @@
 ---
-title: "FAQ"
+title: FAQ
 layout: ../../../layouts/Default.astro
+lastmod: '2025-05-03'
 ---
-
 このFAQでは、管理パネルを最大限に利用するために役立つ、便利なチュートリアルや、チップス、トリックを提供します。
 
 <h3 id="manual-installation-of-admin">管理プラグインを手動でインストールする</h3>

@@ -1,8 +1,8 @@
 ---
-title: "2要素認証"
+title: 2要素認証
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-05-21'
 ---
-
 ![Admin Profile](auth3.gif)
 
 2要素認証（2FA）は、すぐれたセキュリティ対策で、ユーザーは rolling-clock スタイルの（管理パネルにアクセスするために、ユーザー名とパスワードに加えて、生成された6桁のコードを使用する）認証方法を使います。

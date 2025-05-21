@@ -1,8 +1,8 @@
 ---
-title: "テーマの基本"
+title: テーマの基本
 layout: ../../../layouts/Default.astro
+lastmod: '2025-04-16'
 ---
-
 Gravのテーマは、非常にシンプルで、とても柔軟です。というのも、強力な [Twigテンプレートエンジン](https://twig.symfony.com/) を使っているからです。すべてのテーマは、テンプレートと呼ばれるtwigファイル（twigライクなPHPコードとHTMLを混ぜたもの）とCSSを合わせて作られます。わたしたちは、特に[Sass CSS拡張](http://sass-lang.com) をCSSファイルの生成に使っていますが、[Less](https://lesscss.org/) を使ってもかまいませんし、通常のCSSでも良いです。単に好みの問題です。
 
 <h2 id="content-pages-twig-templates">ページコンテンツとTwigテンプレート</h2>

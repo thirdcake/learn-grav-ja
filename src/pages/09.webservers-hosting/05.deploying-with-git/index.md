@@ -1,8 +1,8 @@
 ---
-title: "Gitによるデプロイ"
+title: Gitによるデプロイ
 layout: ../../../layouts/Default.astro
+lastmod: '2025-05-13'
 ---
-
 開発環境とサーバ環境で、バージョン管理システムの [Git](https://git-scm.com/) を使っているなら、ホスティング形式の Git サービスである [GitHub](https://github.com) や、[Gitlab](https://about.gitlab.com/) を使ったシンプルなワークフローを構築できます。 Git や、そのクライアントツールに親しんでいるなら、試してみてください。
 
 そのメリットは：

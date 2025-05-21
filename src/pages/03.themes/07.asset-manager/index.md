@@ -1,8 +1,8 @@
 ---
-title: "アセット管理"
+title: アセット管理
 layout: ../../../layouts/Default.astro
+lastmod: '2025-04-19'
 ---
-
 > [!訳注]  
 > このページの内容は、今のわたしには難しい内容のため、後回しになっています。とりあえず、[`script`](../04.twig-tags-filters-functions/01.tags/#script) と [`style`](../04.twig-tags-filters-functions/01.tags/#style) カスタムタグの使い方がわかっていれば、実務上は、ほとんど問題は無いと思います。Grav 1.7.28 以上では、`asset pipeline` を使いたい場合にのみ、このアセット管理が必要になり、それ以外の場合は、上記のカスタムタグで代替可能という認識です。
 

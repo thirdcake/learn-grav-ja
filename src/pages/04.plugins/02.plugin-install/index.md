@@ -1,8 +1,8 @@
 ---
-title: "プラグインのインストール"
+title: プラグインのインストール
 layout: ../../../layouts/Default.astro
+lastmod: '2025-04-21'
 ---
-
 <h2 id="installation">インストール</h2>
 
 プラグインのインストールには、3つの方法があります：

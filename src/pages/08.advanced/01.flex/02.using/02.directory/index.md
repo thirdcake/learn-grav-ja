@@ -1,8 +1,8 @@
 ---
-title: "Flex ディレクトリ"
+title: 'Flex ディレクトリ'
 layout: ../../../../../layouts/Default.astro
+lastmod: '2025-05-08'
 ---
-
 ## getTitle()
 
 `getTitle(): string` flex ディレクトリの名前を取得

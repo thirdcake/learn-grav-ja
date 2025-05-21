@@ -1,6 +1,7 @@
 ---
-title: "Microsoft Azure"
+title: 'Microsoft Azure'
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-05-11'
 ---
 [Microsoft Azure](https://azure.microsoft.com) is an enterprise-grade cloud computing platform that is open and flexible.  There are multiple ways to deploy Grav within Azure however this tutorial will walk through using Azure's Web App (PaaS).
 

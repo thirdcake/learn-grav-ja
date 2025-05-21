@@ -1,8 +1,8 @@
 ---
-title: "Grav 1.6 未満からのアップデート"
+title: 'Grav 1.6 未満からのアップデート'
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-04-25'
 ---
-
 !!! This guide has been tested for Grav v1.2.0 and all the later versions.
 
 !! **WARNING**: Upgrading Grav directly to the latest version works, but is not fully supported and will likely cause your site to break!

@@ -1,8 +1,8 @@
 ---
-title: "高度なブループリントの機能"
+title: 高度なブループリントの機能
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-05-02'
 ---
-
 ブループリントには、それらを拡張し、動的にフィールドを使える高度な機能があります。
 
 <h2 id="defining-validation-rules">バリデーションルールの定義</h2>

@@ -1,8 +1,8 @@
 ---
-title: "エディタ（Security タブ）"
+title: 'エディタ（Security タブ）'
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-05-06'
 ---
-
 ```
 ![Security Tab > Page Access](page-security.png)
 ```

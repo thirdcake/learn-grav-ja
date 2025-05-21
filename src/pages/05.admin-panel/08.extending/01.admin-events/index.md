@@ -1,8 +1,8 @@
 ---
-title: "管理パネルのイベントフック"
+title: 管理パネルのイベントフック
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-05-07'
 ---
-
 管理パネルプラグインには、複数のイベントフックがあり、 [Grav のライフサイクル](../../04.plugins/05.grav-lifecycle/) 中に利用できます。プラグインでイベントフックを使う方法は、[Plugins](../../04.plugins/) にある一般的なプラグインのドキュメントをご覧ください
 
 ## Available Admin Event Hooks

@@ -1,8 +1,8 @@
 ---
-title: "プラグイン"
+title: プラグイン
 layout: ../../layouts/Chapter.astro
+lastmod: '2025-05-04'
 ---
-
 ### 第4章
 
 # プラグイン

@@ -1,8 +1,8 @@
 ---
-title: "パーミッション"
+title: パーミッション
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-05-06'
 ---
-
 ![Accounts Permissions](accounts-permissions.png)
 
 アカウントに関連する情報を管理するための、ユーザーとグループのパーミッションは：

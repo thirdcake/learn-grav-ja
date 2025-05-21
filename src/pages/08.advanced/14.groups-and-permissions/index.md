@@ -1,8 +1,8 @@
 ---
-title: "グループとパーミッション"
+title: グループとパーミッション
 layout: ../../../layouts/Default.astro
+lastmod: '2025-05-05'
 ---
-
 > [!Info]  
 > ユーザー管理については、 [Grav Admin FAQ](../../05.admin-panel/09.faq/#adding-and-managing-users) をご覧ください。
 

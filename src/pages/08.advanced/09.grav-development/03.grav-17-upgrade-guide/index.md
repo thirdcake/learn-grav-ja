@@ -1,8 +1,8 @@
 ---
-title: "Grav 1.7 へのアップデート"
+title: 'Grav 1.7 へのアップデート'
 layout: ../../../../layouts/Default.astro
+lastmod: '2025-04-25'
 ---
-
 Grav 1.7 introduces a few new features, improvements, bug fixes and provides many architectural changes which pave the road towards Grav 2.0. Here are a few highlights:
 
 * **Flex Objects**: A new way to build your own data types.
