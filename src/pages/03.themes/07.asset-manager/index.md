@@ -1,25 +1,26 @@
 ---
-title: アセット管理
+title: アセットマネージャー
 layout: ../../../layouts/Default.astro
-lastmod: '2025-04-19'
+lastmod: '2025-05-25'
 ---
+
 > [!訳注]  
-> このページの内容は、今のわたしには難しい内容のため、後回しになっています。とりあえず、[`script`](../04.twig-tags-filters-functions/01.tags/#script) と [`style`](../04.twig-tags-filters-functions/01.tags/#style) カスタムタグの使い方がわかっていれば、実務上は、ほとんど問題は無いと思います。Grav 1.7.28 以上では、`asset pipeline` を使いたい場合にのみ、このアセット管理が必要になり、それ以外の場合は、上記のカスタムタグで代替可能という認識です。
+> このページの内容は、今のわたしには難しい内容のため、後回しになっています。とりあえず、 Twig カスタムタグの [`script`](../04.twig-tags-filters-functions/01.tags/#script) と [`style`](../04.twig-tags-filters-functions/01.tags/#style) の使い方がわかっていれば、実務上は、ほとんど問題は無いと思います。Grav 1.7.28 以上では、`アセットパイプライン` を使って、ミニファイや1つのファイルに結合したい場合にのみ、このアセットマネージャーが必要になり、それ以外の場合は、上記のカスタムタグで代替可能という認識です。
 
-Grav  1.6で、**アセット管理** が完全に書き直されました。テーマで、**CSS** や **JavaScript** のアセットをより柔軟なメカニズムで管理できるようになりました。アセット管理の主な目的は、テーマやプラグインでアセットを追加する処理をシンプルにし、優先順位などの強化された機能を提供することです。また、アセットを **ミニファイ** し、**圧縮** し、**インライン化** する **アセットパイプライン** を提供し、ブラウザのリクエストを減らし、アセットの全体サイズも小さくします。
+Grav  1.6で、**アセットマネージャー** が完全に書き直されました。テーマで、**CSS** や **JavaScript** のアセットをより柔軟なメカニズムで管理できるようになりました。アセットマネージャーの主な目的は、テーマやプラグインでアセットを追加する処理をシンプルにし、優先順位などの強化された機能を提供することです。また、アセットを **ミニファイ** し、**圧縮** し、**インライン化** する **アセットパイプライン** を提供し、ブラウザのリクエストを減らし、アセットの全体サイズも小さくします。
 
-以前よりも、より柔軟に、より信頼できるようになりました。さらに、コードもより 'クリーン' になり、読みやすくなりました。アセット管理は、Gravの処理中に利用可能で、プラグインのイベントフックでも利用でき、さらにTwigの呼び出しでテーマからダイレクトにも利用できます。
+以前よりも、より柔軟に、より信頼できるようになりました。さらに、コードもより 'クリーン' になり、読みやすくなりました。アセットマネージャーは、Gravの処理中に利用可能で、プラグインのイベントフックでも利用でき、さらにTwigの呼び出しでテーマから直接利用できます。
 
 > [!Note]  
-> **技術的詳細** ： The primary Assets class has been greatly simplified and reduced. Much of the logic has been broken out into 3 traits. A _testing trait_ which contains functions primarily used in our test suite, a _utils trait_ which contains methods that are shared between regular asset types (js, inline_js, css, inline_css) and the assets pipeline which can minify and compress, and lastly a _legacy trait_ which contains methods that are shortcuts or workarounds, and should generally not be used going forward.
+> **技術的詳細** ：主要なアセットの class は大幅にシンプルになり、小さくなりました。ロジックの多くは3つの trait に分割されました。 _testing trait_ は、主に test suite で使われる関数を含みます。 _utils trait_ は、通常のアセットタイプ（JS、インラインJS、CSS、インラインCSS）と、ミニファイや圧縮を行うアセットパイプラインで共有されるメソッドを含みます。最後に、 _legacy trait_ は、ショートカットや回避策のメソッドを含みますが、一般的には、今後は使わない方が良いです。
 
 > [!Tip]  
-> アセット管理は、Grav 1.6 以前のバージョンの構文と完全に下位互換がありますが、このドキュメントでは、これ以降、新しい `優先構文` を説明します。
+> アセットマネージャーは、Grav 1.6 以前のバージョンの構文と完全に下位互換がありますが、このドキュメントでは、これ以降、新しい `優先構文` を説明します。
 
 
 <h2 id="configuration">設定</h2>
 
-アセット管理には、シンプルな設定オプションがあります。デフォルト値は、systemフォルダの `system.yaml` ファイルにあります。 `user/config/system.yaml` ファイルで、上書きしてください。
+アセットマネージャーには、シンプルな設定オプションがあります。デフォルト値は、systemフォルダの `system.yaml` ファイルにあります。 `user/config/system.yaml` ファイルで、上書きしてください。
 
 ```yaml
 assets:                                        # Configuration for Assets Manager (JS, CSS)
@@ -127,7 +128,7 @@ CSS アセットを追加したい時、普通は、`assets.addCss()` や、`ass
 
 JS アセットも似ていて、`assets.addJs()` や、 `assets/addInlineJs()` を呼び出します。一般的な `assets.add()` メソッドもあり、アセットのタイプを推測しますが、特定のメソッドを呼び出すことをおすすめします。
 
-バージョン 1.7.27 から、アセット管理は、JS Modulesにも対応します。これらのアセットは、JSアセットと同じように機能しますが、`type="module"` となり、`assets.addJsModule()` や、 `assets.addInlineJsModule()` で呼び出します。`assets.add()` メソッドは、拡張子が `.mjs` のときのみ、JS Module と認識します。しかし、`.js` ファイルはすべて、普通のJSファイルとして扱います。
+バージョン 1.7.27 から、アセットマネージャーは、JS Modulesにも対応します。これらのアセットは、JSアセットと同じように機能しますが、`type="module"` となり、`assets.addJsModule()` や、 `assets.addInlineJsModule()` で呼び出します。`assets.add()` メソッドは、拡張子が `.mjs` のときのみ、JS Module と認識します。しかし、`.js` ファイルはすべて、普通のJSファイルとして扱います。
 
 > [!Note]  
 > JS Modulesについてもっと学びたいとき：
@@ -135,14 +136,14 @@ JS アセットも似ていて、`assets.addJs()` や、 `assets/addInlineJs()` 
 > * [https://v8.dev/features/modules](https://v8.dev/features/modules?target=_blank)
 > * [https://javascript.info/modules-intro](https://javascript.info/modules-intro?target=_blank)
 
-アセット管理は、次のようなものにも対応します：
+アセットマネージャーは、次のようなものにも対応します：
 
-* adding assets to named groups in order to render such groups at different places and/or with different sets of options,
-* configuring named asset collections, which can be added in a single `assets.add*()` call.
+* 名前付きグループを異なる場所や異なるオプション設定でレンダリングするために、そのグループにアセットを追加すること
+* `assets.add*()` 呼び出しで追加できる名前付きアセットのコレクションを設定すること
 
 <h3 id="example">具体例</h3>
 
-An example of how you can add CSS files in your theme can be found in the default **quark** theme that comes bundled with Grav. If you have a look at the [`templates/partials/base.html.twig`](https://github.com/getgrav/grav-theme-quark/blob/develop/templates/partials/base.html.twig) partial, you will see something similar to the following:
+テーマ内で CSS ファイルを追加できる方法の具体例は、 Grav に最初からバンドルされているデフォルトの **quark** テーマにあります。もし [`templates/partials/base.html.twig`](https://github.com/getgrav/grav-theme-quark/blob/develop/templates/partials/base.html.twig) 部分を見れば、次のようなことが書いてあるでしょう：
 
 ```twig
 <!DOCTYPE html>
@@ -180,43 +181,45 @@ An example of how you can add CSS files in your theme can be found in the defaul
 </html>
 ```
 
-The `block stylesheets` twig tag just defines a region that can be replaced or appended to in templates that extend the one. Within the block, you will see a number of `do assets.addCss()` calls.
+`block stylesheets` という twig タグは、これを extend するテンプレートで、入れ替えられたり、追加されたりする場所を定義しているだけです。ブロック内では、たくさんの `do assets.addCss()` が呼び出されていることがわかります。
 
-The `{% do %}` tag is actually [one built in to Twig](https://twig.symfony.com/doc/1.x/tags/do.html) itself, and it lets you manipulate variables without generating any output.
+この `{% do %}` タグは、それ自体が [Twig に組み込まれたタグ](https://twig.symfony.com/doc/1.x/tags/do.html) であり、これにより、出力を生成することなく、変数を操作できます。
 
-The `addCss()` method adds CSS assets to the Asset Manager. If you specify a second numeric parameter, that sets the priority of the stylesheet. If you do not specify a priority, the priority that the assets are added will dictate the order they are rendered.  You will notice the use of a **PHP stream wrapper** `theme://` to provide an easy way for Grav to determine the current theme's relative path.
+`addCss()` メソッドは、 CSS アセットを アセットマネージャーに追加するメソッドです。優先度を指定しない場合、アセットが追加される優先度は、それらがレンダリングされた順番になります。 Grav が現在のテーマの相対パスを決定しやすくするために **PHP ストリームラッパー** である `theme://` が使われていることにお気づきでしょう。
 
-!! The `assets.addJs('jquery', 101)` will include the `jquery` collection defined in the global Assets configuration. The optional param here of `101` sets the priority to be quite high to ensure it renderes first.  The default priority when not provided is a value of `10`. A more flexible way of writing this would be `assets.addJs('jquery', {priority: 101})`.  This allows you to add other parameters alongside the priority.
+> [!Info]  
+> `assets.addJs('jquery', 101)` は、グローバルのアセット設定で定義された `jquery` のコレクションを含みます。ここでの `101` というオプションのパラメータは、確実に最初にレンダリングされるように、極めて高い優先度を設定されています。パラメータが無かった場合のデフォルトの優先度は `10` です。より柔軟な書き方は、 `assets.addJs('jquery', {priority: 101})` です。これにより、優先順位とともに他のパラメータも追加できます。
 
-The `assets.css()|raw` call renders the CSS assets as HTML tags. As there is no parameter supplied to this method, the group is by default set to `head`. Note how this is wrapped in an `assets deferred` block.  This is a new feature in Grav 1.6 that allows you to add assets from other Twig templates that are included further down the page (or anywhere really), and still ensure that they can render in this `head` block if required.
+`assets.css()|raw` を呼び出すと、CSS アセットを HTML タグとしてレンダリングします。このメソッドにはパラメータが適用されていないので、このグループはデフォルトで `head` に設定されます。これがどのように `assets deferred` ブロックに囲まれているか、注意して見てください。これは Grav 1.6 の新しい機能で、ページの後から読み込まれた（もしくは、実際は後でなくても任意の場所で読み込まれた）他のテンプレートからアセットを追加できるようになります。そして、必要であればこの `head` にレンダリングされることが保証されます。
 
-The `bottom` block at the very end of your theme output, renders JavaScript that has been assigned to the `bottom` group.
+テーマ出力の最後にある `bottom` ブロックは、 `bottom` グループに配置された JavaScript をレンダリングします。
 
-## Adding Assets
+<h2 id="adding-assets">アセットを追加</h2>
 
 #### add(asset, [options])
 
-The add method does its best attempt to match an asset based on file extension.  It is a convenience method, it's better to call one of the direct methods for CSS, Link, JS and JS Module.  See the direct methods for details.
+add メソッドは、ファイル拡張子をもとにアセットにマッチするように最善を尽くします。これは便利なメソッドではありますが、CSS や、Link、JS や JS モジュールの直接的なメソッドを呼び出す方が良いでしょう。詳細は直接的なメソッドの説明をお読みください。
 
-!! The options array is the preferred approach for passing multiple options. However, as in the previous example with `jquery`, you can use a shortcut and pass in an integer for the **second argument** in the method if all you wish to set is the **priority**.
+> [!Info]  
+> 複数のオプションを渡す際には、オプションの配列を渡すのが望ましいです。しかし、先ほどの `jquery` の例のように、**優先度** だけ設定したい場合は、ショートカットを使い、 **第2引数** として整数を渡すことができます。
 
 #### addCss(asset, [options])
 
-This method will add assets to the list of CSS assets.  The priority defaults to 10 if not provided.  A higher number means it will display before lower priority assets.  The `pipeline` option controls whether this asset should be included in the combination/minify pipeline. If not pipelined, the `loading` option controls whether the asset should be rendered as a link to an external stylesheet or whether its contents should be inlined inside an inline style tag.
+このメソッドは、アセットを CSS アセットのリストに追加します。指定しなかった場合のデフォルトの優先度は、 10 です。優先度が大きい数字のアセットは、小さい数字のアセットよりも先に表示されます。 `pipeline` オプションは、このアセットが combination/minify パイプラインに含まれるべきかどうかを制御します。パイプラインに含まれないなら、 `loading` オプションは、そのアセットが外部のスタイルシートへのリンクと同様にレンダリングされるべきか、それともインラインのスタイルタグ内に直接書き込まれるべきコンテンツかをコントロールします。
 
 #### addLink($asset, [options])
 
-This method will add assets to the of Link assets, in the form of `<link>` tag. It is useful for adding link tags to the head from anywhere in your site that are not CSS files. The priority defaults to 10 if not provided.  A higher number means it will display before lower priority assets.
+このメソッドは、アセットを `<link>` タグ形式の Link アセットのリストに追加します。これは、CSS ファイルではない link タグをサイト内の任意の場所から head タグに追加するときに便利です。優先度は、指定されなければデフォルトで 10 です。優先度の大きい数字のアセットは、小さい数字のアセットよりも先に表示されます。
 
-Differently than the other methods for adding assets, `link()` does not support pipelining, nor does support `inline`.
+他のアセット追加メソッドとは異なり、 `link()` はパイプラインも `inline` もサポートしません。
 
 #### addInlineCss(css, [options])
 
-Lets you add a string of CSS inside an inline style tag. Useful for initialization or anything dynamic.  To inline a regular asset file's content, see the `{ 'loading': 'inline' }` option of the `addCss()` and `css()` methods.
+インラインの style タグ内に CSS 文字列を追加します。初期化や、動的処理の際に便利です。標準的なアセットファイルコンテンツをインライン化するには、 `addCss()` と `css()` メソッドの `{'loading': 'inline'}` オプションを参照してください。
 
 #### addJs(asset, [options])
 
-This method will add assets to the list of JavaScript assets.  The priority defaults to 10 if not provided.  A higher number means it will display before lower priority assets.  The `pipeline` option controls whether this asset should be included in the combination/minify pipeline. If not pipelined, the `loading` option controls whether the asset should be rendered as a link to an external script file or whether its contents should be inlined inside an inline script tag.
+このメソッドは、 JavaScript アセットのリストにアセットを追加します。優先度はデフォルトで 10 です。大きい数字のアセットが、小さい数字のアセットよりも先に読み込まれます。 `pipeline` オプションは、このアセットが 結合/ミニファイ するパイプラインに含まれるべきかどうかを制御します。パイプラインされない場合、 `loading` オプションで、アセットが外部のスクリプトファイルへのリンクとしてレンダリングされるべきか、インラインの script タグ内に書き込まれるべきコンテンツかを制御します。
 
 #### addInlineJs(javascript, [options])
 
@@ -235,43 +238,43 @@ Lets you add a string of JavaScript inside an inline module script tag.  To inli
 
 Allows you to register an array of CSS and JavaScript assets with a name for later use by the `add()` method. Particularly useful if you want to register a collection that may be used by multiple themes or plugins, such as jQuery or Bootstrap.
 
-## Options
+<h2 id="options">オプション</h2>
 
-Where appropriate, you can pass in an array of asset options. The core options are:
+必要に応じて、アセットオプションの配列を渡すことができます。コアのオプションは、次のとおりです：
 
-#### For CSS
+<h4 id="for-css">CSS 向け</h4>
 
-* **priority**: Integer value (default value is `10`)
+* **priority**: 整数値（デフォルト値は `10` ）
 
-* **position**: `pipeline` is default but can also be `before` or `after` the assets in `pipeline` position.
+* **position**: `pipeline` がデフォルトですが、アセットの `before` または `after` にすることが可能です。
 
-* **loading**: `inline` if this asset should be output inline rather (default: referenced via a link to the stylesheet). Should be used in conjunction with `position: before` or `position: after` as it will have no effect with `position: pipeline` (default).
+* **loading**: （デフォルトのスタイルシートへのリンクを通した参照ではなく）インラインで出力したい場合は、`inline` としてください。（デフォルトの） `position: pipeline` と一緒に使うと何も影響が無くなるので、 `position: before` や `position: after` といっしょに使ってください。
 
-* **group**: string to specify a unique group name for asset (default is `head`)
+* **group**: 識別可能なアセットのグループ名を指定する文字列（デフォルトは `head` ）
 
-#### For JS and JS Module
+<h4 id="for-js-and-js-module">JS および JS モジュール向け</h4>
 
-* **priority**: Integer value (default value is `10`)
+* **priority**: 整数値（デフォルト値は `10` ）
 
-* **position**: `pipeline` is default but can also be `before` or `after` the assets in `pipeline` position.
+* **position**: `pipeline` がデフォルトですが、アセットの `before` または `after` にすることが可能です。
 
-* **loading**: supports any loading type such as, `async`, `defer`, `async defer` or `inline`. Should be used in conjunction with `position: before` or `position: after` as it will have no effect with `position: pipeline` (default).
+* **loading**: あらゆる loading type （ `async`, `defer`, `async defer` or `inline` ）をサポートします。（デフォルトの） `position: pipeline` と一緒に使うと何も影響が無くなるので、 `position: before` や `position: after` といっしょに使ってください。
 
-* **group**: string to specify a unique group name for asset (default is `head`)
+* **group**: 識別可能なアセットのグループ名を指定する文字列（デフォルトは `head` ）
 
-#### Other Attributes
+<h4 id="other-attributes">その他の属性</h4>
 
 You can also pass anything else you like in the options array, and if they are not these standard types, they will simply be rendered as attributes such as `{id: 'custom-id'}` will render as `id="custom-id"` in the HTML tag. This can be also used to include structured data such as json-ld via `addInlineJs()` by using `{type: 'application/ld+json'}`.
 
-#### Examples
+<h4 id="examples">具体例</h4>
 
-For example:
+具体例：
 
 ```twig
 {% do assets.addCss('page://01.blog/assets-test/example.css?foo=bar', { priority: 20, loading: 'inline', position: 'before'}) %}
 ```
 
-Will render as:
+上記は、下記のようにレンダリングされます：
 
 ```html
 <style>
@@ -282,26 +285,26 @@ h1.blinking {
 <link.....
 ```
 
-Another example:
+具体例-2：
 
 ```twig
 {% do assets.addJs('page://01.blog/assets-test/example.js', {loading: 'async', id: 'custom-css'}) %}
 ```
 
-Will render as:
+上記は、下記のようにレンダリングされます：
 
 ```html
 <script src="/grav/user/pages/01.blog/assets-test/example.js" async id="custom-css"></script>
 ```
 
-A Link example:
+Link の具体例：
 
 ```twig
 {% do assets.addLink('theme://images/favicon.png', { rel: 'icon', type: 'image/png' }) %}
 {% do assets.addLink('plugin://grav-plugin/build/js/vendor.js', { rel: 'modulepreload' }) %}
 ```
 
-Wil render as:
+上記は、下記のようにレンダリングされます：
 
 ```html
 <link rel="icon" type="image/png" href="/user/themes/quark/images/favicon.png">
