@@ -1,11 +1,11 @@
 ---
 title: Scriptによるアップデート
 layout: ../../../layouts/Default.astro
-lastmod: '2025-05-09'
+lastmod: '2025-05-26'
 ---
 もしくは： 複数の Grav を一度にアップグレードします
 
-このページは、[Deployer](https://deployer.org/) を使って、複数の Grav を簡単にアップグレードするためのガイドです。「複数」という意味は、別々の Grav がインストールされている状況であり、[複数サイトインストール](../../08.advanced/05.multisite-setup/) のことではありません。[Grav のCLI](../02.grav-cli/) を実行するため、各インストールの path を使いますが、それらの path を手打ちするようなことはしません。
+このページは、[Deployer](https://deployer.org/) を使って、複数の Grav を簡単にアップグレードするためのガイドです。ここで「複数」という言葉は、別々の Grav がインストールされている状況を意味し、[マルチサイトがインストールされていること](../../08.advanced/05.multisite-setup/) ではありません。 [Grav のCLI](../02.grav-cli/) を実行するため、各インストールの path を使いますが、それらの path を手打ちするようなことはしません。
 
 Deployer のようなタスクランナーのメリットは、タスクの実行中、実行内容を正確に知らせてくれることです。コマンドが実行されているサーバーからの出力も表示されます。たとえば、次のような出力が Deployer からされます：
 
@@ -35,29 +35,28 @@ Cleared:  /home/username/public_html/deployer/grav/cache/compiled/*
 Touched: /home/username/public_html/deployer/grav/user/config/system.yaml
 ```
 
+これくらい簡単に、 Deployer が Grav にすべてのパッケージをアップグレードするよう指示し、それにより Email プラグインが新しいバージョンにアップグレードされました。
 
-And as simple as that, Deployer told Grav to upgrade all packages, which upgraded the Email-plugin to its newest version.
+<h2 id="prerequisites">前提条件</h2>
 
-## Prerequisites
+Grav と同様、 PHP **v7.3.6** 以上が必要です。この要件は、コマンドライン（CLI）にも適用されます。よって、複数のバージョンの PHP をインストールしている場合、正しいバージョンを使用してください。デフォルトのバージョンをチェックするには、 `php -v` が使えます。私のは **PHP 7.2.34** でした。
 
-Like with Grav, you need PHP **v7.3.6** or above. This also applies for the command line (CLI), so if you have multiple versions installed use the one which refers to the right version. Use the command `php -v` to check your default version, mine is **PHP 7.2.34**.
+共有サーバー環境では、 CLI でどのコマンドを使えばよいか、サーバー会社に確認してください。わたしのケースでは、 `php74` というコマンドで、 `-v` で実行すると **PHP 7.4.12** が帰ってきました。これはつまり、すべての path に次のように php74 を付ける必要があることを意味します： `php74 vendor/bin/dep list` 。
 
-On shared environments, check with your host which command to use for CLI. In my case, this is `php74` which with `-v` returns **PHP 7.4.12**. This also means prepending every path like this: `php74 vendor/bin/dep list`.
+いくつかのサーバー会社では、 CLI のデフォルトの PHP バージョンを選べるようです。どのようにするかは、サーバー会社に問い合わせてください。
 
-Some hosts also allow you to select your default PHP version to use for CLI, check with your host how to do this.
+<h2 id="setup">セットアップ</h2>
 
-## Setup
+あなたのサーバーの公開用ルートディレクトリ（ **public_html/** や、 **www/** ）に、 `deployer` という名前のフォルダを作り、そこに入ってください。このフォルダをベースにプロジェクトを進めていきます。このディレクトリはパスワード保護する必要があります（手動の方法については [DigitalOcean Guide](https://www.digitalocean.com/community/tutorials/how-to-set-up-password-authentication-with-apache-on-ubuntu-14-04) をご覧ください。もし利用可能であれば [CPanel](https://www.siteground.com/tutorials/cpanel/pass_protected_directories.htm) を使ってください）。
 
-In your servers public root (like **public_html** or **www**), create a folder named `deployer` and enter it. We'll use this as a basis for the project. You'll want to password-protect this directory (see [DigitalOcean Guide](https://www.digitalocean.com/community/tutorials/how-to-set-up-password-authentication-with-apache-on-ubuntu-14-04) for a manual approach, or use [CPanel](https://www.siteground.com/tutorials/cpanel/pass_protected_directories.htm) if available).
-
-You need to have a working installation of Grav, as well as [Composer](https://getcomposer.org/). Some hosts have Composer installed already, which you can check by running `composer -v`. If it is not installed you can install it through SSH -- from the root directory -- with the following:
+機能している Grav をインストールしておく必要があります。また、[Composer](https://getcomposer.org/) も必要です。サーバー会社によっては、 Composer がすでにインストールされていることもあります。その場合、 `composer -v` によりインストールされているかチェック可能です。インストールされていなければ、 SSH を使って（ルートディレクトリから）次のようにインストールできます：
 
 ```bash
 export COMPOSERDIR=~/bin;mkdir bin
 curl -sS https://getcomposer.org/installer | php -- --install-dir=$COMPOSERDIR --filename=composer
 ```
 
-Or, if you prefer a [local installation](https://getcomposer.org/download/), run the following in the `public_html/deployer/`-folder:
+もしくは、[ローカルへのインストール](https://getcomposer.org/download/) を望む場合、`public_html/deployer` フォルダで、以下のようなコマンドを実行してください：
 
 ```bash
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -65,13 +64,13 @@ php composer-setup.php
 php -r "unlink('composer-setup.php');"
 ```
 
-With a local installation, composer is ran through `composer.phar` rather than just `composer`. Now, while still in the `public_html/deployer/`-folder, run the following to install [Deployer](https://deployer.org/docs/installation):
+ローカルへのインストールでは、ただの `composer` ではなく、 `composer.phar` で実行します。それでは、 `public_html/deployer` フォルダにいる状態で、次のコマンドを実行して [Deployer](https://deployer.org/docs/installation) をインストールします：
 
 ```bash
 composer require deployer/deployer
 ```
 
-Now, still in the same folder, create a file named `deploy.php`. We'll use this to run each task with Deployer. Copy and paste the following into the file:
+次に、同じフォルダのままで、 `deploy.php` ファイルを作成してください。このファイルを利用して Deployer のそれぞれのタスクを実行します。そのファイルに、以下のコードをコピーアンドペーストしてください：
 
 ```php
 <?php
@@ -105,9 +104,9 @@ task('packages', function () {
 ?>
 ```
 
-## Configuration
+<h2 id="configuration">設定</h2>
 
-Because Deployer needs an explicit staging-environment, we set it to `production`. Further, to allow for specific php version we set a default executable to be used. This can be a named executable or the path to a specific version of PHP. Our configuration now looks like this:
+Deployer には、明示的にステージング環境が必要なので、 `production` に設定します。さらに、特定の PHP バージョンを利用可能にするため、デフォルトで実行可能な PHP を設定します。これは、実行可能な名前とできるほか、特定の PHP のバージョンを指定することもできます。今回の設定では、次のようにしています：
 
 ```php
 // Configuration
@@ -115,11 +114,11 @@ set('default_stage', 'production');
 set(php, 'php56');
 ```
 
-If your default PHP CLI version is **5.6\*** or higher, you change this to `set(php, 'php');`.
+デフォルトの PHP CLI バージョンが **5.6** 以上なら、これを `set(php, 'php');` に変更します。
 
-### Servers
+<h3 id="servers">サーバー</h3>
 
-We can set up as many servers/sites as needed, the script will be ran for each of them in order. They can be local installations or on external servers, but since this is a local setup we use `localServer` (see [Deployer/servers](https://deployer.org/docs/servers) for more configurations). Here's an example with multiple sites:
+必要な分だけ、いくつでもサーバー/サイトのセットアップができます。スクリプトは、それぞれ順番に実行されていきます。ローカルインストールでも可能ですし、外部サーバーでも可能ですが、これはローカルセットアップなので、ここでは `localServer` を使います（より詳しい設定は、 [Deployer/servers](https://deployer.org/docs/servers) をご覧ください）。以下が、複数サイトの場合の具体例です：
 
 ```php
 // Servers
@@ -137,17 +136,17 @@ localServer('site4')
 	->set('deploy_path', 'C:\caddy\grav2');
 ```
 
-Note that we use absolute paths to the installations, but they are relative to how the path is interpreted by SSH. This means that on the server, we want the full path because Deployer interprets this correctly, but we could also use the tilde-key if a HOMEDIR is set, like this: `~/public_html/deployer/grav1`.
+ここでは、インストール先の絶対パスを使用していることに注目してください。SSH での接続先でパスがどのように解釈されるかは、場合によりけりです。これはつまり、フルパスなら Deployer が正しく解釈してくれるので、サーバー上ではフルパスを利用するのが良いですが、 HOMEDIR が設定されていれば、チルダを使って次のように表現することもできます： `~/public_html/deployer/grav1`
 
-### Tasks
+<h3 id="tasks">タスク</h3>
 
-Three tasks are currently set up: `backup`, `core`, and `packages`. Running `php vendor/bin/dep backup` creates a backup of each installation, available in **deploy_path/backup/BACKUP.zip**, where `deploy_path` is the paths you configured for the servers.
+3つのタスクが現在設定されています： `backup`, `core`, そして `packages` です。 `php vendor/bin/dep backup` を実行すると、それぞれのサイトのバックアップが作成されます。それらは、 **deploy_path/backup/BACKUP.zip** で利用でき、この `deploy_path` は、サーバー用に設定したパスです。
 
-Running `php vendor/bin/dep core` upgrades Grav itself, and does this with the `--all-yes` option to skip all Yes/No questions asked. The same applies when running `php vendor/bin/dep packages`, which upgrades all plugins and themes.
+`php vendor/bin/dep core` を実行すると、 Grav 自身を `--all-yes` オプションで Yes/No の質問をすべてスキップしながらアップグレードします。`php vendor/bin/dep packages` の実行も同じで、すべてのプラグインとテーマをアップグレードします。
 
-## Conclusion
+<h2 id="conclusion">まとめ</h2>
 
-We can now upgrade all your defined sites easily by running the tasks in order. First we enter the `public_html/deployer/`-folder, and then we run each command as needed:
+これで、すべての定義したサイトを、順番にタスクを実行することで、簡単にアップグレードできるようになりました。最初に `public_html/deployer/` フォルダに入り、それから必要なコマンドを実行します：
 
 ```bash
 php vendor/bin/dep backup
@@ -155,5 +154,5 @@ php vendor/bin/dep core
 php vendor/bin/dep packages
 ```
 
-We will now have made a backup of each site, upgraded Grav itself, as well as upgraded all plugins and themes.
+これにより、それぞれのサイトのバックアップを作り、 Grav 自身のアップグレードをし、さらにプラグインとテーマのアップグレードもできます。
 
