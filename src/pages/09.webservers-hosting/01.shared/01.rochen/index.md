@@ -1,19 +1,22 @@
 ---
 title: 'Rochen Web Hosting'
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-05-10'
+lastmod: '2025-05-27'
 ---
-[Rochen Web Hosting](http://www.rochen.com/?utm_source=RocketTheme&utm_medium=Showcase&utm_campaign=Promotions) is the long-time hosting partner for both **GetGrav.org** and **RocketTheme.com**.  Rochen now has a new premium shared hosting offering that uses **SSD drives**, **Litespeed** web servers with the latest **Intel XEON processors** ensures that Grav performs optimally.  They also offer the choice of US or UK-based servers, so you can pick the best option for your users.
+
+[Rochen Web Hosting](http://www.rochen.com/?utm_source=RocketTheme&utm_medium=Showcase&utm_campaign=Promotions) は、 **GetGrav.org** と **RocketTheme.com** 両方の昔からのホスティングパートナーです。
+Rochen は現在、新しくプレミアムな共有ホスティングサービスを提供しており、 **SSD ドライブ** や **Litespeed** ウェブサーバーを使い、最新の **Intel XEON プロセッサ** によることで、 Grav の最適化されたパフォーマンスを保証します。
+また、アメリカもしくはイギリスのサーバーを選べるので、あなたのユーザーにとって最良の選択ができます。
 
 ![](rochen.webp)
 
-## Picking your Hosting Plan
+<h2 id="picking-your-hosting-plan">ホスティングプランを決める</h2>
 
 [Rochen Web Hosting](http://www.rochen.com/?utm_source=RocketTheme&utm_medium=Showcase&utm_campaign=Promotions) has two options when it comes to hosting: **Shared** and **Burst** hosting.  Rochen recommends the Burst option for busier and more demanding sites.  For the sake of this guide, we'll use the basic Shared option.
 
 Shared hosting ranges from $7.95/month $13.95/month depending on length of commitment.
 
-## Enabling SSH
+<h2 id="enabling-ssh">SSH を有効化</h2>
 
 First, you will have to open the **Toggle SSH Access** option in the **Security** section of cPanel. On this SSH Access page, you should click the **Enable SSH Access** button.
 

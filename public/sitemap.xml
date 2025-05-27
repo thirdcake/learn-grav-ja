@@ -724,7 +724,7 @@
     <loc>https://thirdcake.github.io/learn-grav-ja/09.webservers-hosting/00.servers/01.nginx/</loc>
     <priority>1.0</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-04-26</lastmod>
+    <lastmod>2025-05-27</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/09.webservers-hosting/00.servers/02.grav-built-in/</loc>
@@ -736,7 +736,7 @@
     <loc>https://thirdcake.github.io/learn-grav-ja/09.webservers-hosting/01.shared/01.rochen/</loc>
     <priority>1.0</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-05-10</lastmod>
+    <lastmod>2025-05-27</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/09.webservers-hosting/01.shared/02.wirenine/</loc>
@@ -838,7 +838,7 @@
     <loc>https://thirdcake.github.io/learn-grav-ja/09.webservers-hosting/04.local-development-with-ddev/</loc>
     <priority>1.0</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-04-30</lastmod>
+    <lastmod>2025-05-27</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/09.webservers-hosting/05.deploying-with-git/</loc>

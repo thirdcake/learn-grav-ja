@@ -1,35 +1,45 @@
 ---
 title: Nginx
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-04-26'
+lastmod: '2025-05-27'
 ---
-*Nginx* is a HTTP server software with focus on core web server and proxy features. It is very common because of its resource efficiency and responsiveness under load. Nginx spawns worker processes, each of which can handle thousands of connections. Each of the connections handled by the worker get placed within an event loop where they exist with other connections. Within the loop, events get processed asynchronously, allowing work to be handled in a non-blocking manner. When the connection closes, it gets removed from the loop. This style of connection processing allows Nginx to scale incredibly far with limited resources.
+
+*Nginx* とは、 HTTP サーバーソフトウェアで、 web サーバーのコア機能と、プロキシー機能に特化しています。
+資源効率が良く、負荷がかかる中での応答性の良さから、とても人気です。
+Nginx は、worker process を生成し、それぞれが大量の接続を処理することができます。
+worker によって処理されるそれぞれの接続は、他の接続とともに存在するイベントループ内に置かれます。
+ループ内では、イベントは非同期に処理され、ノン・ブロッキングで処理されます。接続が閉じたら、ループから削除されます。このような接続処理の方法により、 Nginx は限られた資源でも驚異的にスケールします。
 
 <!-- source: https://www.digitalocean.com/community/tutorials/apache-vs-nginx-practical-considerations -->
 
-## Requirements
+<h2 id="requirements">システム要件</h2>
 
-This page explains how to run Grav with *Nginx* as the HTTP server and *PHP-FPM* (FastCGI Process Manager) to process PHP scripts, so these packages need to be installed on your server:
+このページでは、HTTP サーバーとして *Nginx* を使い、 PHP スクリプトの実行に *PHP-FPM* （FastCGI Process Manager）を使って、 Grav を実行する方法を解説します。このため、これらのパッケージをあなたのサーバーにインストールしておいてください：
 
 * `nginx`
 * `php-fpm`
 
-## Configuration
+<h2 id="configuration">設定</h2>
 
-If you are new to Nginx and don't yet have a basic understanding of block directives/context, it is recommended to read the Nginx [Beginners's Guide](http://nginx.org/en/docs/beginners_guide.html), especially the sections [Configuration File’s Structure](http://nginx.org/en/docs/beginners_guide.html#conf_structure) and [Serving Static Content](http://nginx.org/en/docs/beginners_guide.html#static).
+もしあなたが Nginx の初心者で、block directives/context に関する基本的な理解がまだであれば、 Nginx の [ビギナーズガイド](http://nginx.org/en/docs/beginners_guide.html) を読むことをおすすめします。とくに、 [Configuration File’s Structure](http://nginx.org/en/docs/beginners_guide.html#conf_structure) と [Serving Static Content](http://nginx.org/en/docs/beginners_guide.html#static) のセクションが大事です。
 
-It is assumed that your Nginx configuration is located in `/etc/nginx/` and your Grav installation is stored in `/var/www/grav/`. The structure of the configuration is a `http` block that contains general directives relevant for all pages served by Nginx, as well as one or multiple `server` blocks for each page, containing site-specific directives. The main server configuration file is `nginx.conf` and stores the `http` block, while site-specific configurations (`server` blocks) are stored in `sites-available` and symlinked to `sites-enabled`.
+今回の例では、あなたの Nginx 設定は `/etc/nginx/` にあり、 Grav は `/var/www/grav/` にインストールされているものとします。
+設定の構造は、 `http` ブロックと、 1つもしくは複数の `server` ブロックからなります。 `http` ブロックは、 Nginx から提供されるすべてのページに関係する一般的なディレクティブを持ち、 `server` ブロックは、サイト特有のディレクティブを持ちます。
+メインのサーバー設定ファイルは、 `nginx.conf` で、 `http` ブロックに保存されます。サイトに特有の設定（ `server` ブロック）は、 `sites-available` とシムリンクされた `sites-enabled` に保存されます。
 
-### File Permissions
+<h3 id="file-permissions">ファイルのパーミッション</h3>
 
-The `/var/www` directory and all contained files and folders should be owned by `$USER:www-data` (or whatever you name the Nginx user/group). The section [Troubleshooting/Permissions](https://learn.getgrav.org/16/troubleshooting/permissions) explains how to setup file and directory permissions for Grav, in this case using a shared group. Basically what you want is `775` for directories and `664` for files in the Grav directory, so Grav is allowed to modify content and upgrade itself. You should add your user to the `www-data` group so you can access files that are created by Grav/Nginx.
+`/var/www` ディレクトリとそこに含まれるすべてのファイルやフォルダは、 `$USER:www-data` （もしくは Nginx の user/group 名）の所有になっているべきです。 [トラブルシューティングのパーミッション](../../../11.troubleshooting/05.permissions/) のセクションで、 Grav 向けのファイルとディレクトリのパーミッションのセットアップ方法を解説しています。このケースでは、 Group 共有を使っています。
+基本的に、ディレクトリには `775` が、 Grav ディレクトリ内のファイルには `664` が必要です。これにより、 Grav がコンテンツを修正したり、自身をアップグレードできたりします。
+あなたのユーザーを `www-data` グループに追加し、 Grav/Nginx によって作成されたファイルにアクセスできるようにしてください。
 
+<h3 id="example-nginx-conf">nginx.conf の例</h3>
 
-### Example nginx.conf
+以下に示す設定は、デフォルトの `/etc/nginx/nginx.conf` ファイルを改良したもので、主に [github.com/h5bp/server-configs-nginx](https://github.com/h5bp/server-configs-nginx) から改良しています。
+これらの設定についての解説は、彼らのリポジトリをご覧いただき、特定のディレクティブを探すには、 Nginx の [core module](http://nginx.org/en/docs/ngx_core_module.html) と [http module](http://nginx.org/en/docs/http/ngx_http_core_module.html) にあるドキュメントをご覧ください。
 
-The following configuration is an improved version of the default `/etc/nginx/nginx.conf` file, mainly with improvements from [github.com/h5bp/server-configs-nginx](https://github.com/h5bp/server-configs-nginx). See their repository for explanations on these settings or the Nginx [core module](http://nginx.org/en/docs/ngx_core_module.html) and [http module](http://nginx.org/en/docs/http/ngx_http_core_module.html) documentation to look up specific directives.
-
-!! It is recommended to use an updated MIME types definition file (`mime.types`) from [github.com/h5bp/server-configs-nginx](https://github.com/h5bp/server-configs-nginx). This will make sure that the types are correctly set for gzip compression.
+> [!Info]  
+> [github.com/h5bp/server-configs-nginx](https://github.com/h5bp/server-configs-nginx) から、MIME タイプの定義ファイル（ `mime.types` ）をアップデートすることをおすすめします。これは gzip 圧縮でタイプを正しく設定するようにしてくれます。
 
 **nginx.conf**:
 
@@ -120,15 +130,15 @@ http {
 }
 ```
 
-### Grav Site Configuration
+<h3 id="grav-site-configuration">Grav サイト設定</h3>
 
-Grav gets shipped with a configuration file for your site in the `webserver-configs` directory of your Grav installation. You can copy that file into your nginx config directory:
+ダウンロードした Grav には、Grav インストールの `webserver-configs` ディレクトリにサイト設定ファイルがあります。このファイルを nginx config ディレクトリにコピーできます：
 
 ```bash
 cp /var/www/grav/webserver-configs/nginx.conf /etc/nginx/sites-available/grav-site
 ```
 
-Open that file with an editor and replace "example.com" with your domain/IP (or "localhost" if you want to just run it locally), replace the "root" line with "root /var/www/grav/;" and then create a symbolic link of your site-config in `sites-enabled`:
+そのファイルをエディタで開き、 "example.com" をあなたのドメイン/IP（もしくはローカルで実行するなら "localhost"）に書き換えてください。さらに、 "root" 行を "root /var/www/grav/;" に書き換え、その後 `sites-enabled` にある site-config のシンボリックリンクを作成してください：
 
 ```bash
 ln -s /etc/nginx/sites-available/grav-site /etc/nginx/sites-enabled/grav-site
@@ -138,28 +148,35 @@ ln -s /etc/nginx/sites-available/grav-site /etc/nginx/sites-enabled/grav-site
 !! It is recommended to use the file `expires.conf` from [github.com/h5bp/server-configs-nginx](https://github.com/h5bp/server-configs-nginx) (in the directory `h5bp/location/`). It will set "Expires" headers for different file types, so the browser can cache them. Save the file somewhere in your `/etc/nginx/` directory and include it in your site config, e.g. before the first location directive in `/etc/nginx/sites-available/grav-site`.
 -->
 
-Finally let Nginx reload its configuration:
+最後に、 Nginx を新しい設定でリロードしてください：
 
 ```bash
 nginx -s reload
 ```
 
-### Fix against httpoxy vulnerability
+<h3 id="fix-against-httpoxy-vulnerability">httpoxy 脆弱性の修正</h3>
 
-> httpoxy is a set of vulnerabilities that affect application code running in CGI, or CGI-like environments.
-> (Source: [httpoxy.org](https://httpoxy.org))
+> httpoxy is a set of vulnerabilities that affect application code running in CGI, or CGI-like environments.  
+> (Source: [httpoxy.org](https://httpoxy.org))  
 
-In order to secure your site against this vulnerability you should block the `Proxy` header. This can be done by adding a FastCGI parameter to your config. Simply open the file `/etc/nginx/fastcgi.conf` and add this line at the end:
+（httpoxy とは、CGI や CGI に似た環境で実行されるアプリケーションコードに影響を与える脆弱性一式です。）
+
+この脆弱性からサイトを守るには、 `Proxy` ヘッダーをブロックするべきです。これは、 FastCGI パラメータを設定に追加することで可能です。
+`/etc/nginx/fastcgi.conf` ファイルを開き、末尾に次の行を追記するだけです：
 
 ```nginx
 fastcgi_param  HTTP_PROXY         "";
 ```
 
-### Using SSL (with an existing certificate)
+<h3 id="">（既存の証明書で） SSL を使う</h3>
 
-If you want to use an existing SSL certificate to encrypt your website traffic, this section provides the necessary steps to modify your Nginx configuration for that.
+既存の SSL 証明書で、web サイトのトラフィックを暗号化したい場合、そのための Nginx 設定の修正方法について、このセクションで必要な手順を解説します。
 
-First, create a file `/etc/nginx/ssl.conf` with the following content and adjust the paths to your certificate and key file. The last section is about OSCP stapling and requires you to provide a chain+root certificate. If you don't want this, you can comment or remove everything below the `OCSP Stapling` comment. If your website is SSL only (including subdomains), you can submit your domain for preloading in browsers at <https://hstspreload.appspot.com>. If that isn't the case, you can remove ` preload;` from the line that adds the "Strict-Transport-Security" header. Make sure to check if all of these options work for your setup.
+まず、 `/etc/nginx/ssl.conf` ファイルを作成してください。内容を以下に示すように書き、パスなどはあなたの証明書やキーファイルに調整してください。
+最後のセクションは、 OSCP stapling に関するもので、chain+root 証明書を提供する必要があります。
+もしそれを望まない場合、 `# OCSP stapling` 以下のすべてをコメントアウトするか、削除してください。
+もしサイトが（サブドメインも含めて） SSL のみであれば、ブラウザでのプレローディング用に <https://hstspreload.appspot.com> にあなたのサイトを送信できます。そうでない場合は、 "Strict-Transport-Security" を追加する行から、 `preload;` を削除できます。
+これらのオプションがすべてあなたのセットアップで機能するかどうか、確認してください。
 
 **ssl.conf**:
 
@@ -192,10 +209,10 @@ resolver 198.51.100.1 198.51.100.2 203.0.113.66 203.0.113.67 valid=60s;
 resolver_timeout 2s;
 ```
 
-Now change the content of your Grav-specific config `/etc/nginx/sites-available/grav-site` to redirect unencrypted HTTP requests to HTTPS, that means to a `server` block listening on port 443 and including your `ssl.conf` (replace "example.com" with your domain/IP). You can also change this to redirect from the non-www to the www version of your domain.
+次に、 Grav 特有の設定 `/etc/nginx/sites-available/grav-site` のコンテンツを変更します。これは暗号化されていない HTTP リクエストを HTTPS にリダイレクトするための変更で、 `server` ブロックが 443 ポートをリッスンし、（"example.com" をあなたのドメイン/IP に置き換えた） `ssl.conf` を含めることを意味します。
+同時に、あなたのドメインの www でないバージョンから、www へリダイレクトする変更もできます。
 
 **grav-site**:
-
 
 ```nginx
 # redirect http to non-www https
@@ -237,7 +254,7 @@ server {
 }
 ```
 
-Finally reload your Nginx configuration:
+最後に、 Nginx の設定をリロードします：
 
 ```bash
 nginx -s reload
@@ -245,10 +262,13 @@ nginx -s reload
 
 <!-- TODO: ### Using a Let's Encrypt SSL certificate -->
 
-# Nginx Cache headers for assets
+<h2 id="nginx-cache-headers-for-assets">アセット用の Nginx キャッシュヘッダー</h2>
 
-It is also recommended to enable those in production. These additions to the configuration file will handle them. 'expires' defines the expiration time for the cache, 30 days in this case. Please see the full documentation about http headers for nginx here http://nginx.org/en/docs/http/ngx_http_headers_module.html.
-
+本番環境では、キャッシュの有効化もおすすめします。
+以下の内容を設定ファイルに追加すると、キャッシュの制御ができるようになります。
+'expires' はキャッシュの有効期限を定義し、この例では 30 日です。
+Nginx の HTTP ヘッダーに関する完全なドキュメントをお読みください。
+[`https://nginx.org/en/docs/http/ngx_http_headers_module.html`](https://nginx.org/en/docs/http/ngx_http_headers_module.html)
 
 ```nginx
         location ~* ^/forms-basic-captcha-image.jpg$ {
@@ -277,3 +297,4 @@ It is also recommended to enable those in production. These additions to the con
                 open_file_cache_errors off;
         }
 ```
+
