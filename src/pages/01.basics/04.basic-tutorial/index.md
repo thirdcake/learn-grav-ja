@@ -1,11 +1,12 @@
 ---
 title: チュートリアル
 layout: ../../../layouts/Default.astro
-lastmod: '2025-05-12'
+lastmod: '2025-05-27'
 ---
-前の章で解説した手順で、 [Grav のインストール](../03.installation/) が成功したと思いますので、さらに Grav を快適にするために少し遊んでみましょう。
 
-Grav はデータベースを必要としないため、非常にかんたんに操作できますし、 Grav のインストール作業と他の重要なデータソース間で問題を引き起こす心配がありません。もし何かうまくいかない場合も、通常、とてもかんたんに解決できます。
+前の章の手順どおりに [Grav のインストール](../03.installation/) が完了していることを前提に、ここでは引き続き Grav を少し操作して、使い方に慣れていきましょう。
+
+Grav はデータベースを必要としないため、非常にかんたんに操作できますし、 Grav のインストール作業と他の重要なデータソース間で問題を引き起こす心配がありません。もし何かうまくいかない場合も、たいていの場合、とてもかんたんに解決できます。
 
 <h2 id="content-basics">コンテンツの基本</h2>
 
@@ -19,7 +20,10 @@ Grav はデータベースを必要としないため、非常にかんたんに
 
 <h2 id="home-page-configuration">ホームページの設定</h2>
 
-`user/config/system.yaml` ファイルには、その __ホームページ__ の場所を設定するオプションがあります。言い換えると、あなたのサイト `http://yoursite.com` のルートフォルダから、 Grav が指し示す場所を設定できます。
+> [!訳注]  
+> ここでの "ホームページ" とは、webサイトのページ一般を指すのではなく、ドメインの一番上のことで、たとえば `https://yoursite.com` にアクセスしたときに表示されるページのことです。
+
+`user/config/system.yaml` ファイルには、その **ホームページ** の場所を設定するオプションがあります。言い換えると、あなたのサイト `http://yoursite.com` のルートフォルダから、 Grav が指し示す場所を設定できます。
 
 インストールした環境でこの設定ファイルを確認すると、すでに `/home` の別名として指し示されていることが分かると思います。このドキュメントでは、このままにしておきます。
 
@@ -85,16 +89,14 @@ Congratulations! You have installed the **Base Grav Package** that provides a **
 
 1. pages フォルダ（ `user/pages/` ）に移動して、新しいフォルダを作ります。今回はたとえば、 [明示的なデフォルトの順序](../../02.content/01.content-pages/) を利用して、 `03.mypage` というフォルダにしましょう。
 2. テキストエディタを起動し、新しいファイルを作成します。そして次のようなサンプルコードを貼り付けます。
-
-```
----
-title: My New Page
----
-# My New Page!
-
-This is the body of **my new page** and I can easily use _Markdown_ syntax here.
-```
-
+   ```
+   ---
+   title: My New Page
+   ---
+   # My New Page!
+   
+   This is the body of **my new page** and I can easily use _Markdown_ syntax here.
+   ```
 3. このファイルを `user/pages/03.mypage/` に `default.md` として保存します。このことで、 **Grav** は、現在のテーマにある **default** テンプレート（ `user/themes/quark/templates/default.html.twig` ）を使って、ページを表示します。
 4. これで終わりです！　ブラウザをリロードして、ページ上部のメニューに新しいページがあることを確認してください。
 
