@@ -1,9 +1,10 @@
 ---
 title: 多言語サイト
 layout: ../../../layouts/Default.astro
-lastmod: '2025-05-13'
+lastmod: '2025-05-27'
 ---
-Gravの多言語対応は、このことを主題とした [コミュニティでの議論](https://github.com/getgrav/grav/issues/170) の成果です。これらを噛み砕き、Gravでの多言語サイトの作り方の例を示します。
+
+Grav の多言語対応は、このことを主題とした [コミュニティでの議論](https://github.com/getgrav/grav/issues/170) の成果です。これらを噛み砕き、 Grav での多言語サイトの作り方の例を示します。
 
 <h2 id="single-language-different-than-english">英語以外の1言語を使う</h2>
 
@@ -19,12 +20,12 @@ languages:
 
 ![Admin Translations Settings](translations-settings.png)
 
-これにより、Gravは正しい言語をフロントエンドで設定します。  
-また、テーマが対応していれば、HTMLタグに言語コードを追記します。
+これにより、 Grav は正しい言語をフロントエンドで設定します。  
+また、テーマが対応していれば、 HTML タグに言語コードを追記します。
 
 <h2 id="multi-language-basics">多言語化の基本</h2>
 
-Gravがフォルダ中のマークダウンファイルでサイト構造を決定したり、ページのオプションやコンテンツを設定したりしていることは、これまで説明してきましたので、そのメカニズムまでは入っていきません。しかし、ページを表現するのに、Gravは **ひとつの** `.md` ファイルを探すことに注目してください。この原則について不安なところがありましたら、これを読み進める前に、[基本のチュートリアル](../../01.basics/04.basic-tutorial) を参照してください。多言語サポートを有効化すると、Gravは、適切な言語ベースファイルを探します。たとえば、`default.en.md` や、`default.fr.md` のような。
+Grav がフォルダ中のマークダウンファイルでサイト構造を決定したり、ページのオプションやコンテンツを設定したりしていることは、これまで説明してきましたので、そのメカニズムまでは入っていきません。しかし、ページを表現するのに、 Grav は **ひとつの** `.md` ファイルを探すことに注目してください。この原則について不安なところがありましたら、これを読み進める前に、[基本のチュートリアル](../../01.basics/04.basic-tutorial) を参照してください。多言語サポートを有効化すると、 Grav は、適切な言語ベースファイルを探します。たとえば、`default.en.md` や、`default.fr.md` のような。
 
 <h3 id="language-configuration">言語設定</h3>
 
@@ -43,27 +44,35 @@ languages:
     fr: ['fr', 'en'] #  フランス語の場合は、必要な場合は英語にフォールバックする
 ```
 
-By providing a `languages` block with a list of `supported` languages, you have effectively enabled multi-language support within Grav.
+> [!訳注]  
+> 「フォールバック」とは、問題があったときに次善策を講じるような意味あいの言葉で、ここでは、ある言語のページが無かった場合に、別言語のページを代替表示することを指します。
 
-In this example you can see that two supported languages have been described (`en` and `fr`). These will allow you to support **English** and **French** languages.
+`languages` ブロックに `supported` 言語のリストを書くことで、効率よく Grav 内に多言語サポートを有効化できます。
 
-If no language is explicitly asked for (via the URL or by code), Grav will use the order of the languages provided to select the correct language.  So in the example above, the **default** language is `en` or English. If you had `fr` first, French would be the default language.
+上記の例では、2つのサポート言語が定義されている（ `en` と `fr` ）ことが分かります。これらによって、 **英語** と **フランス語** をサポートできます。
 
-By default, all languages fall back to default language. If you do not want to do that, you can override language fallbacks by using `content_fallback`, where key is the language and value is array of languages.
+（ URL やコードから）明示的に言語が指定されなかった場合、 Grav は言語が提供された順番に、適切な言語を選択します。このため、上記の例では、 **デフォルトの** 言語は `en` の英語です。もし `fr` の方を先に書いていれば、フランス語がデフォルトの言語になります。
+
+デフォルトでは、すべての言語はデフォルト言語にフォールバックします。そうしたくない場合は、 `content_fallback` にキーとしてその言語を指定し、値として言語の配列を渡すことで、フォールバック言語を上書きできます。
 
 > [!Info]  
-> You can of course provide as many languages as you like and you may even use locale type codes such as `en-GB`, `en-US` and `fr-FR`.  If you use this locale based naming, you will have to replace all the short language codes with the locale versions.
+> もちろん、好きなだけ多くの言語を提供できます。ロケールタイプのコードを使うこともできます。たとえば、 `en-GB`, `en-US` そして `fr-FR` などです。このようなロケールベースの名前を使う場合、短い言語コードをすべてロケール版に置き換えなければなりません。
+
+> [!訳注]  
+> 上記の `en-GB` はグレートブリテン（イギリス英語）、`en-US` はユナイテッドステイツ（アメリカ英語）です。 日本語の場合は、言語コードは `ja` で、ロケールは `ja-JP` しか使わないと思われます。
 
 <h3 id="multiple-language-pages">多言語ページ</h3>
 
-By default in Grav, each page is represented by a markdown file, for example `default.md`. When you enable multi-language support, Grav will look for the appropriately named markdown file.  For example as English is our default language, it will first look for `default.en.md`.
+Grav のデフォルトでは、各ページはマークダウンファイルで表現されます。たとえば、 `default.md` のように。多言語サポートを有効化すると、 Grav は適切な名前のマークダウンファイルを探そうとします。
+たとえば、英語がデフォルト言語のとき、最初に `default.en.md` を探します。
 
-If that file is not found, it will fall-back to the Grav default and look for `default.md` to provide information for the page.
+そのファイルが見つからない場合、 Grav のデフォルトにフォールバックし、ページの情報を提供するために `default.md` を探します。
 
 > [!Info]  
-> This default behavior has changed in **Grav 1.7**. In the past Grav displayed non-existing English page in French, now all languages fall back only to default language if not specified otherwise in `content_fallback`. So if the page cannot be found in any fallback languages, **404 Error Page** is displayed instead.
+> このデフォルトの挙動は、 **Grav 1.7** で変更されました。以前は、デフォルト言語である英語版のページが存在しない場合、デフォルト言語でないフランス語が表示されることもありました。しかし今は、 `contact_fallback` で別の方法を指定しない限り、すべての言語がデフォルト言語にのみフォールバックします。
+よって、フォールバックする言語でページが見つからない場合、替わりに **404 エラーページ** が表示されます。
 
-If we had the most basic of Grav sites, with a single `01.home/default.md` file, we could start by renaming `default.md` to `default.en.md`, and its contents might look like this:
+1つの `01.home/default.md` ファイルを持つ、最も基本的な Grav サイトでは、 `default.md` を `default.en.md` にファイル名変更するところから始めることができ、コンテンツは以下のようになります：
 
 ```markdown
 ---
@@ -73,7 +82,7 @@ title: Homepage
 This is my Grav-powered homepage!
 ```
 
-Then you could create a new page located in the same `01.home/` folder called `default.fr.md` with the contents:
+そして、 `default.fr.md` という新しいページを、同じ `01.home/` フォルダに作り、コンテンツは以下のようにできます：
 
 ```markdown
 ---
@@ -83,41 +92,41 @@ title: Page d'accueil
 Ceci est ma page d'accueil générée par Grav !
 ```
 
-Now you have defined two pages for your current homepage in multiple languages.
+これで、現在のホームページに対して、多言語で、2つのページが定義できました。
 
 > [!Note]  
-> If you are converting existing site to use multi-language, you can alternatively set `include_default_lang_file_extension: false` to keep on using the plain `.md` file extension for your primary language. [Read More...](#default-file-extension).
+> 既存サイトを多言語化する場合、替わりに `include_default_lang_file_extension: false` を設定することで、プレーンな `.md` 拡張子のファイルを主要言語用として使い続けることができます。[詳しくは...](#default-file-extension) 
 
 <h3 id="active-language-via-url">URLによる言語</h3>
 
-As English is the default language, if you were to point your browser without specifying a language you would get the content as described in the `default.en.md` file, but you could also explicitly request English by pointing your browser to
+英語がデフォルト言語のときに、ブラウザで言語を指定せずにページを表示すると、 `default.en.md` ファイルにかかれているコンテンツが表示されます。しかし、ブラウザで明示的に英語ページをリクエストすることもできます：
 
 ```txt
 http://yoursite.com/en
 ```
 
-To access the French version, you would of course, use
+フランス語版にアクセスするには、もちろん、こちらを使います：
 
 ```txt
 http://yoursite.com/fr
 ```
 
 > [!Note]  
-> If you prefer not to use language prefix for the default language, set `include_default_lang: false`. [Read More...](#default-language-prefix).
+> デフォルト言語のプレフィックスを使いたくない場合は、 `include_default_lang: false` を設定します。[詳しくは...](#default-language-prefix) 。
+
 
 <h3 id="active-language-via-browser">ブラウザでの言語設定</h3>
 
-Most browsers allow you to configure which languages you prefer to see content in. Grav has the ability to read this `http_accept_language` values and compare them to the current supported languages for the site, and if no specific language has been detected, show you content in your preferred language.
+ほとんどのブラウザでは、コンテンツを表示する言語を設定できます。Grav はこの `http_accept_language` の値を読み取り、現在のサポート対象言語と比べることができ、もし特定の言語が見つからなければ、お好みの言語でコンテンツを表示します。
 
-For this to function you must enable the option in your `user/system.yaml` file in the `languages:` section:
+これを機能させるには、 `user/system.yaml` ファイルの `languages:` セクションでオプションを有効化させなければいけません：
 
 ```yaml
 languages:
   http_accept_language: true
 ```
 
-
-<h3 id="session-based-active-language">セッションベースのアクティブ言語</h3>
+<h3 id="session-based-active-language">セッションベースの有効化言語</h3>
 
 If you wish to remember the active language independently from the URL, you can activate **session-based** storage of the active language.  To enable this, you must ensure you have `session: enabled: true` in [the system.yaml](../../01.basics/05.grav-configuration).  Then you need to enable the language setting:
 
@@ -128,7 +137,7 @@ languages:
 
 This will then store the active language in the session.
 
-<h3 id="set-locale-to-the-active-language">アクティブ言語にsetlocaleする</h3>
+<h3 id="set-locale-to-the-active-language">有効化言語に locale 設定する</h3>
 
 The boolean setting will set the PHP `setlocale()` method that controls things such as monetary values, dates, string comparisons, character classifications and other locale-specific settings to that of the active language.  This defaults to `false`, and then it will use the system locale, if you set this value to `true` it will override the locale with the current active language.
 
@@ -137,7 +146,7 @@ languages:
    override_locale: false
 ```
 
-### Default Language Prefix
+<h3 id="default-language-prefix">デフォルトの言語プレフィックス</h3>
 
 By default, the default language code is prefixed in all URLs.  For example if you have support for English and French (`en` and `fr`), and the default is English.  A page route might look like `/en/my-page` in English and `/fr/ma-page` in French. However it's often preferrable to have the default language without the prefix, so you can just set this option to `false` and the English page would appear as `/my-page`.
 
@@ -146,7 +155,7 @@ languages:
     include_default_lang: false
 ```
 
-### Default File Extension
+<h3 id="default-file-extension">デフォルトのファイル拡張子</h3>
 
 If you are converting existing site to use multi-language, it may be daunting task to convert all the existing pages to use the new `.en.md` language file extension (if using English). In this case, you may want to disable language extension on your original language.
 
