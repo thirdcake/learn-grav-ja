@@ -13,6 +13,7 @@ class Page {
     public string $lastmod;  // sitemap.xml の <lastmod>
     public string $title;  // ページのタイトル
     public string|bool $redirect;  // redirect があるかどうか、あれば対象ページ
+    public bool $isonlyja;  // 日本語限定か
     public function __construct(SplFileInfo $fileInfo) {
         $this->pathname = $this->set_pathname($fileInfo->getRelativePathname());
         $this->loc = 'https://thirdcake.github.io/learn-grav-ja/'.$this->pathname.'/';
@@ -22,6 +23,7 @@ class Page {
         $this->lastmod = $frontmatter->matter('lastmod');
         $this->title = $frontmatter->matter('title');
         $this->redirect = $frontmatter->matter('redirect') ?? false;
+        $this->isonlyja = $frontmatter->matter('isonlyja') ?? false;
     }
 
     // set $this->pathname
@@ -32,77 +34,25 @@ class Page {
         }
         return substr($pathname, 0, $lastSlashPos);
     }
-    
+
 }
 
-// Pages で tree を作るために必要
-class Node {
-    public Page|null $page;
-    public string|null $name;
-    public array $children;
-    public function __construct() {
-        $this->page = null;
-        $this->name = null;
-        $this->children = [];
-    }
-
-    public function searchChild(string $route): Node {
-        if($route==='') {
-            return $this;
-        }
-        foreach($this->children as $child) {
-            if($child->name === $route) {
-                return $child;
+// ページの順番を決めるヒープ
+class Pages extends \SplMinHeap {
+    // 比較関数
+    public function compare(mixed $page1, mixed $page2):int {
+        $path1 = explode('/', $page1->pathname);
+        $path2 = explode('/', $page2->pathname);
+        $count1 = count($path1);
+        $count2 = count($path2);
+        $countmin = min($count1, $count2);
+        for($i=0; $i<$countmin; $i++) {
+            if($path1[$i] === $path2[$i]) {
+                continue;
+            } else {
+                return strcmp($path2[$i], $path1[$i]);
             }
         }
-        $newNode = new Node();
-        $newNode->name = $route;
-        $this->children[] = $newNode;
-        return $newNode;
+        return $count2 - $count1;
     }
-
-    public function sortedChildren(): array {
-        // 子 Node を sort
-        usort($this->children, 
-            fn(Node $a, Node $b): int => strcmp($a->name, $b->name)
-        );
-        $list = [];
-        foreach($this->children as $child) {
-            $list[] = $child;
-            $list = array_merge($list, $child->sortedChildren());
-        }
-        return $list;
-    }
-
-}
-
-// sitemap などを作成するための Page の集まり。
-// list 形式と tree （ネスト）形式の2つが必要
-class Pages {
-    private array $list;
-    private Node $root;
-    public function __construct() {
-        $this->list = [];
-        $this->root = new Node();
-    }
-
-    public function addPage(SplFileInfo $fileInfo):void {
-        $page = new Page($fileInfo);
-        $routes = explode('/', trim($page->pathname, '/'));
-        $node = $this->root;
-        foreach($routes as $route) {
-            $node = $node->searchChild($route);
-        }
-        $node->page = $page;
-    }
-
-    public function toPageList():array {
-        $this->list = $this->root->sortedChildren();
-        return $this->list;
-    }
-
-    public function toPageTree():Node {
-        return $this->root;
-    }
-
 }
