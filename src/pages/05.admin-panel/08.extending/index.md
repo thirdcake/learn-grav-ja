@@ -1,7 +1,7 @@
 ---
 title: 拡張
 layout: ../../../layouts/Default.astro
-lastmod: '2025-05-21'
+lastmod: '2025-05-28'
 ---
 このページでは、管理パネルの拡張方法や、その際のベストプラクティスをガイドします。
 
@@ -108,20 +108,21 @@ form:
 {% endblock append %}
 ```
 
-Thus we append an `<output>`-tag which will hold the selected value, and add to it and the field itself simple styling to align them properly. We also add an `oninput`-attribute to the field, so that changing values automatically updates the `<output>`-tag with the value. This requires that each field using the range-slider has an unique `id`-property, like the `id: radius` we declared above, which should be something like `id: myadminplugin_radius` to avoid conflicts.
+このように、 `<output>` タグを追加し、選択した値を保持します。そしてこのタグとフィールド自体に、それらをきれいに並べるための、シンプルなスタイルを追加します。また、フィールドに `oninput` 属性を追加することで、値が変化すると自動で `<output>` タグ内の値が更新されるようになります。このためには、 range-slider を利用する各フィールドに、一意の `id` プロパティを持つ必要があります。上記の例で `id: radius` としたように。これは競合を避けるため、 `id: myadminplugin_radius` のようにすべきです。
 
 > [!Info]  
-> If this new template will be shared between frontend and Admin Panel (e.g. using `PLUGIN_TEMPLATES` folder), you need to escape all variables with `|e`. Alternatively you can just go to `Configuration` > `Twig Templating` > `Autoescape variables` and turn it to `Yes`.
+> この新しいテンプレートがフロントエンドと管理パネル（たとえば、 `PLUGIN_TEMPLATES` フォルダで利用）で共有される場合、すべての変数を `|e` でエスケープする必要があります。かわりに、 `Configuration` > `Twig Templating` > `Autoescape variables` で、 `Yes` にすることもできます。
 
-### Creating custom page templates
+<h3 id="creating-custom-page-templates">カスタムページテンプレートを作成</h3>
 
-As mentioned in [Theme Basics](../../03.themes/01.theme-basics/#content-pages-twig-templa), there is a direct relationship between **pages** in Grav and the **Twig template files** provided in a theme/ plugin.
-To create a custom page template, you will need a blueprint file to define the fields for the Admin plugin and a template file for rendering the content.
+[テーマの基本](../../03.themes/01.theme-basics/#content-pages-twig-templa) で言及したとおり、 Grav 内の **pages** 間には直接的な結びつきがあり、 **Twig テンプレートファイル** はテーマやプラグインで提供されます。
+カスタムページテンプレートを作成するには、管理パネルプラグイン用のフィールドを定義したブループリントファイルと、コンテンツをレンダリングするテンプレートファイルを用意する必要があります。
 
-#### Adding a custom page template to a theme/ plugin
+<h4 id="adding-a-custom-page-template-to-a-theme-plugin">テーマやプラグインにカスタムページテンプレートを追加</h4>
+
 In the root of the theme/ plugin folder, create a folder named `templates`.  Inside this folder, create a new mypage.html.twig file.  This will be the Twig template for the new page template "mypage".
 
-Example mypage.html.twig:
+mypage.html.twig の具体例:
 
 ```twig
 {% extends 'partials/base.html.twig' %}

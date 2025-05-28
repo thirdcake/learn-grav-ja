@@ -1,11 +1,12 @@
 ---
 title: 管理パネルのイベントフック
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-05-07'
+lastmod: '2025-05-28'
 ---
+
 管理パネルプラグインには、複数のイベントフックがあり、 [Grav のライフサイクル](../../04.plugins/05.grav-lifecycle/) 中に利用できます。プラグインでイベントフックを使う方法は、[Plugins](../../04.plugins/) にある一般的なプラグインのドキュメントをご覧ください
 
-## Available Admin Event Hooks
+<h2 id="available-admin-event-hooks">利用可能な管理パネルのイベントフック</h2>
 
 * [onAdminTaskExecute](#onadmintaskexecute)
 * [onAdminCreatePageFrontmatter](#onadmincreatepagefrontmatter)
@@ -17,42 +18,41 @@ lastmod: '2025-05-07'
 * [onAdminAfterDelMedia](#onadminafterdelmedia)
 
 
-## Enabling an Admin Event Hook
+<h2 id="enabling-an-admin-event-hook">管理パネルのイベントフックの有効化</h2>
 
-管理パネルのイベントフックは、コアのイベントフックの呼び出し方と [同じ方法](../../04.plugins/03.plugin-tutorial/#step-6-determine-if-the-plugin-should-run) で呼び出せます。
+管理パネルのイベントフックは、コアのイベントフックの呼び出し方と [同じ方法](../../../04.plugins/03.plugin-tutorial/#step-7-determine-if-the-plugin-should-run) で呼び出せます。
 
-
-* * *
+---
 
 ### onAdminTaskExecute
 
-The Admin plugin fires various tasks, depending on user interaction.  Tasks might include logout, login, save, 2faverify, etc.  After the task completes, this event hook fires.
+管理パネルプラグインは、ユーザーの操作をもとに、複数のタスクを発火させます。タスクの中身は、ログアウトや、ログイン、保存、2FA 検証 などです。タスクが完了したあとに、このイベントフックが発火します。
 
 ### onAdminCreatePageFrontmatter
 
-While creating a new page, this event is fired after the header data is initially set to allow plugins to programmatically manipulate the frontmatter.
+新しいページを作成中、ヘッダーデータが最初に設定された後に、このイベントが発火します。これにより、プラグインがプログラミングでフロントマターを操作できるようになります。
 
 ### onAdminSave
 
-Use admin event `onAdminSave()` to manipulate the page object data `$object` before it is saved to the filesystem.
+ページのオブジェクトデータである `$object` を、ファイルシステムに保存する前に操作するために使われるイベントです。
 
 ### onAdminAfterSave
 
-After saving the page in the administration panel, this event is fired.
+管理パネルでページが保存されたあとに、このイベントが発火します。
 
 ### onAdminAfterSaveAs
 
-When creating a folder via the panel, this event fires immediately after creating the new folder and performing a standard cache clear.
+管理パネルでフォルダを作成するとき、新規フォルダの作成直後にこのイベントが発火します。そして標準的なキャッシュクリアを実行します。
 
 ### onAdminAfterDelete
 
-Fires after a page or folder is deleted.  It is immediately followed by a standard cache clear.
+ページやフォルダが削除された後に発火します。標準的なキャッシュクリアが、すぐに続きます。
 
 ### onAdminAfterAddMedia
 
-Fires after an add media task completes, but before the confirmation message is displayed.
+メディア追加タスクが完了し、確認メッセージが表示される前に発火します。
 
 ### onAdminAfterDelMedia
 
-Fires after a delete media task completes, but before the confirmation message is displayed.
+メディア削除タスクの完了後で、確認メッセージが表示される前に発火します。
 
