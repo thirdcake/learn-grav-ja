@@ -128,18 +128,18 @@ languages:
 
 <h3 id="session-based-active-language">セッションベースの有効化言語</h3>
 
-If you wish to remember the active language independently from the URL, you can activate **session-based** storage of the active language.  To enable this, you must ensure you have `session: enabled: true` in [the system.yaml](../../01.basics/05.grav-configuration).  Then you need to enable the language setting:
+URL からすぐに有効な言語を記憶しておきたいなら、有効な言語を **セッションベースの** ストレージに保存する設定を有効化できます。この設定を有効化するには、[system.yaml](../../01.basics/05.grav-configuration/) の中で、 `session: enabled: true` となっていなければいけません。その後、言語設定を以下のようにする必要があります：
 
 ```yaml
 languages:
   session_store_active: true
 ```
 
-This will then store the active language in the session.
+これにより、有効な言語がセッションに保存されます。
 
-<h3 id="set-locale-to-the-active-language">有効化言語に locale 設定する</h3>
+<h3 id="set-locale-to-the-active-language">有効化言語にロケールを設定する</h3>
 
-The boolean setting will set the PHP `setlocale()` method that controls things such as monetary values, dates, string comparisons, character classifications and other locale-specific settings to that of the active language.  This defaults to `false`, and then it will use the system locale, if you set this value to `true` it will override the locale with the current active language.
+この真偽値を設定すると、 PHP の `setlocale()` 関数を設定します。このメソッドでは、金額や日付、文字列の比較、文字の分類、その他のロケール特有の設定を行います。これはデフォルトでは `false` で、その場合システムのロケールを使用します。この値を `true` にすると、現在有効な言語のロケールに上書きされます。
 
 ```yaml
 languages:
@@ -148,7 +148,7 @@ languages:
 
 <h3 id="default-language-prefix">デフォルトの言語プレフィックス</h3>
 
-By default, the default language code is prefixed in all URLs.  For example if you have support for English and French (`en` and `fr`), and the default is English.  A page route might look like `/en/my-page` in English and `/fr/ma-page` in French. However it's often preferrable to have the default language without the prefix, so you can just set this option to `false` and the English page would appear as `/my-page`.
+初期設定では、デフォルトの言語コードがすべての URL に接頭辞（プレフィックス）が付け加えられます。たとえば、英語とフランス語をサポートする場合（ `en` と `fr` ）で、デフォルト言語が英語の場合です。ページのルーティングは、英語で `/en/my-page` となり、フランス語では `/fr/ma-page` となります。しかし、デフォルト言語のときは接頭辞が無い方が良いときもあります。その場合、このオプションを `false` にするだけで、英語ページは `/my-page` で表示されます。
 
 ```yaml
 languages:
@@ -157,7 +157,7 @@ languages:
 
 <h3 id="default-file-extension">デフォルトのファイル拡張子</h3>
 
-If you are converting existing site to use multi-language, it may be daunting task to convert all the existing pages to use the new `.en.md` language file extension (if using English). In this case, you may want to disable language extension on your original language.
+既存サイトを多言語化しようとしているとき、すべての既存ページを新しく（英語を使うならば） `.en.md` ファイル拡張子に変更するのは、大変な作業になります。このような場合は、オリジナル言語のときに、言語の拡張子を無効化したいと思うかもしれません。
 
 ```yaml
 languages:
@@ -166,9 +166,9 @@ languages:
 
 <h3 id="multi-language-routing">多言語ルーティング</h3>
 
-Grav typically uses the names of the folders to produce a URL route for a particular page.  This allows for the site architecture to be easily understood and implemented as a nested set of folders.  However with a multi-language site you may wish to use a URL that makes more sense in that particular language.
+Grav では、ページのルーティングをするためにフォルダ名を利用します。これにより、サイト構造が分かりやすくなり、入れ子になったフォルダの組み合わせで実装されます。しかし、多言語サイトでは、特定の言語で、意味を持たせた URL を使いたいかもしれません。
 
-If we had the following folder structure:
+次のようなフォルダ構造を持っているとします：
 
 ```yaml
 - 01.animals
@@ -183,7 +183,7 @@ If we had the following folder structure:
   - 05.aquatic
 ```
 
-This would produce URLs such as `http://yoursite.com/animals/mammals/bears`.  This is great for an English site, but if you wished to have a French version you would prefer these to be translated appropriately. The easiest way to achieve this is to add a custom [slug](../02.headers/#slug) for each of the `fr.md` page files.  for example, the mammal page might look something like:
+上記により、 URL はたとえば、 `http://yoursite.com/animals/mammals/bears` となります。これは英語サイトではすばらしい URL ですが、フランス語サイトでは、適切に翻訳された URL が好ましいかもしれません。これを解決する最も簡単な方法は、カスタムの [スラッグ](../02.headers/#slug) を、各 `fr.md` ページファイルに追加することです。たとえば、mammal （英語で哺乳類）ページは、（フランス語で哺乳類は `Mammifères` なので）次のようになるでしょう：
 
 ```markdown
 ---
@@ -194,15 +194,15 @@ slug: mammiferes
 Les mammifères (classe des Mammalia) forment un taxon inclus dans les vertébrés, traditionnellement une classe, définie dès la classification de Linné. Ce taxon est considéré comme monophylétique...
 ```
 
-This combined with appropriate **slug-overrides** in the other files should result in a URL of `http://yoursite.com/animaux/mammiferes/ours` which is much more French looking!
+他のファイルとも、適切な **スラッグの上書き** を組み合わせることで、 `http://yoursite.com/animaux/mammiferes/ours` よりフランス語の見た目をした URL ができます。
 
-Another option is to make use of the [page-level routes](../02.headers/#routes) support and provide a full route alias for the page.
+別の選択肢としては、 [ページレベルのルーティング](../02.headers/#routes) を使うことで、完全なルーティングのエイリアスをページに提供できます。
 
 <h3 id="language-based-homepage">言語ベースのホームページ</h3>
 
-If you override the route/slug for the homepage, Grav won't be able to find the homepage as defined by your `home.alias` option in your `system.yaml`. It will be looking for `/homepage` and your French homepage might have a route of `/page-d-accueil`.
+ホームページに対するルーティング/スラッグを上書きしている場合、 Grav は `system.yaml` の `home.alias` で定義されたホームページを見つけることができません。`/homepage` を探そうとし、フランス語のホームページは `/page-d-accueil` のルーティングであってほしいです。
 
-In order to support multi-language homepages Grav has a new option that can be used instead of `home.alias` and that is simple `home.aliases` and it could look something like this:
+多言語サイトでのホームページをサポートするため、 Grav では新しいオプションにより、 `home.alias` ではなく、 `home.aliases` を使うことができます。これは、次のようになります：
 
 ```yaml
 home:
@@ -211,11 +211,13 @@ home:
     fr: /page-d-accueil
 ```
 
-This way Grav knows how to route your to the homepage if the active language is English or French.
+この方法で、 Grav は有効言語が 英語やフランス語だった場合のホームページへのルーティングを検知します。
 
-<h3 id="language-based-twig-templates">言語ベースのtwigテンプレート</h3>
+<h3 id="language-based-twig-templates">言語をもとにしたのtwigテンプレート</h3>
 
-By default, Grav uses the markdown filename to determine the Twig template to use to render.  This works with multi-language the same way.  For example, `default.fr.md` would look for a Twig file called `default.html.twig` in the appropriate Twig template paths of the current theme and any plugins that register Twig template paths.  With multi-language, Grav also adds the current active language to the path structure.  What this means is that if you need to have a language-specific Twig file, you can just put those into a root level language folder.  For example if your current theme is using a template located at `templates/default.html.twig` you can create an `templates/fr/` folder, and put your French-specific Twig file in there: `templates/fr/default.html.twig`.
+デフォルトでは、 Grav はマークダウンファイルを使って、それをレンダリングする Twig テンプレートを決定します。多言語サイトでも、同じ方法で機能します。
+たとえば、 `default.fr.md` ファイルがあれば、現在のテーマやプラグインにより Twig テンプレートのパスとして登録されている適切なパスから `default.html.twig` という Twig ファイルを探します。
+また Grav は、現在有効になっている言語をパス構造に追加します。これが意味するところは、言語固有の Twig ファイルが必要になったら、言語フォルダのルートレベルにそれらを置くだけで良いということです。たとえば、現在のテーマが `templates/default.html.twig` に置かれている場合、 `templates/fr/` フォルダを作成でき、フランス語固有の Twig ファイルは、ここに置けます： `templates/fr/default.html.twig`
 
 Another option which requires manual setup is to override the `template:` setting in the page headers. For example:
 
