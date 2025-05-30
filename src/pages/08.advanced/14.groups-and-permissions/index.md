@@ -1,8 +1,9 @@
 ---
 title: グループとパーミッション
 layout: ../../../layouts/Default.astro
-lastmod: '2025-05-05'
+lastmod: '2025-05-28'
 ---
+
 > [!Info]  
 > ユーザー管理については、 [Grav Admin FAQ](../../05.admin-panel/09.faq/#adding-and-managing-users) をご覧ください。
 
@@ -10,9 +11,9 @@ lastmod: '2025-05-05'
 
 デフォルトでは、Grav はグループを提供しません。これらを定義する必要があります。
 
-Groups are defined in the user/config/groups.yaml file. If that file does not exist yet, create it.
+グループは、 `user/config/groups.yaml` ファイルで定義されます。まだファイルが存在していなければ、作成してください。
 
-Here’s an example of a user groups definition:
+以下は、ユーザーグループの定義例です：
 
 ```yaml
 registered:
@@ -42,22 +43,22 @@ administrators:
       login: true
 ```
 
-Here we define 3 groups.
+ここでは、3つのグループを定義しています。
 
-## Assigning a user to a group
+<h2 id="assigning-a-user-to-a-group">ユーザーをグループに割り当てる</h2>
 
-Every user can be assigned to a group.
+すべてのユーザーは、グループに割り当てられます。
 
-Simply add
+簡単な追加方法：
 
 ```yaml
 groups:
   - paid
 ```
 
-to a user’s yaml file under `user/accounts`.
+上記を、 `user/accounts` 下のユーザーの yaml ファイルに追加してください。
 
-You can add multiple groups:
+複数のグループに追加することもできます：
 
 ```yaml
 groups:
@@ -65,11 +66,11 @@ groups:
   - another-group
 ```
 
-You can also edit a user’s group information through the Admin Plugin.
+管理パネルプラグインから、ユーザーのグループ情報を編集することもできます。
 
-## Permissions
+<h2 id="permissions">パーミッション</h2>
 
-Users assigned to a group inherit the group permissions. You can for example define a group that has permission `site.paid` by adding:
+グループに割り当てられたユーザーは、グループのパーミッションを継承します。たとえば、 `site.paid` パーミッションを持つグループを定義するには、次のように追加します：
 
 ```yaml
 access:
@@ -77,15 +78,15 @@ access:
     paid: true
 ```
 
-to the group definition in `user/config/groups.yaml`.
+上記を、 `user/config/groups.yaml` のグループ定義のところに追加してください。
 
-When a user is assigned to that group, it will inherit the site.paid: true permission.
+ユーザーがグループに割り当てられるとき、 `site.paid: true` パーミッションが継承されます。
 
-When a user belongs to multiple groups, it's enough that a group provides a permission, and it will be added to the user's permissions.
+ユーザーが複数のグループに所属する場合、グループは、あるパーミッションを提供すればそれだけで、ユーザーにそのパーミッションが追加されます。
 
-### Fine-tuning permissions on a user level
+<h3 id="fine-tuning-permissions-on-a-user-level">ユーザーレベルでの権限の微調整</h3>
 
-You can fine-tune the permissions on a user level too, as usual. With groups, you can define a global permission and deny it on a user level, by adding
+通常、パーミッションを、ユーザーレベルで微調整することもできます。グループによって、サイト全体のパーミッションを定義し、ユーザーレベルでそれを取り消せます。次のように：
 
 ```yaml
 access:
@@ -93,7 +94,8 @@ access:
     paid: false
 ```
 
-to a user’s yaml file.
+ユーザーの yaml ファイルに追加します。
 
-!! See the [Grav Admin FAQs](../../05.admin-panel/09.faq/#managing-acl) to learn more about available Permissions
+> [!Info]  
+> 利用可能なパーミッションについて、より詳しくは、 [Grav 管理パネルの FAQ](../../05.admin-panel/09.faq/#managing-acl) をお読みください。
 
