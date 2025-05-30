@@ -1,8 +1,9 @@
 ---
 title: 'config 設定'
 layout: ../../../layouts/Default.astro
-lastmod: '2025-05-12'
+lastmod: '2025-05-30'
 ---
+
 すべての Grav の設定ファイルは、 [YAML 構文](../../08.advanced/11.yaml/) で書かれており、拡張子は、 `.yaml` です。YAML は、非常に直感的なので、読み書きともにかんたんですが、利用可能な構文を完全に理解するには、 [高度な設定の章の YAML ページ](../../08.advanced/11.yaml/) をチェックしてください。
 
 > [!Tip]  
@@ -45,12 +46,12 @@ http_x_forwarded:
 
 | プロパティ | 説明 |
 | -------- | ----------- |
-| **absolute_urls:** | `base_url` の絶対もしくは相対 URL |
-| **timezone:** | 受け取れる値は、 [こちら](https://php.net/manual/en/timezones.php) |
+| **absolute_urls:** | `base_url` を絶対 URL にするか、相対 URL にするか|
+| **timezone:** | 受け取れる値は、 [こちら](https://www.php.net/manual/ja/timezones.php) |
 | **default_locale:** | デフォルトのロケール（システムにとってのデフォルト） |
 | **param_sep:** | Grav での URL のパラメータに使います。変更の影響が分からないうちは触らないでください。 Windows 上の Apache web サーバーでの運用中は、 Grav は自動的に `;` を設定します。 |
 | **wrapped_site:** | テーマやプラグインに、 Grav が他のプラットフォームに含まれているかを知らせます。 `true` もしくは `false` が使えます |
-| **reverse_proxy_setup:** |  Running in a reverse proxy scenario with different webserver ports than proxy. `true` または `false` の値 |
+| **reverse_proxy_setup:** |  リバースプロキシで運用している場合で、プロキシとは異なるポート番号の場合 `true` または `false` の値 |
 | **force_ssl:** | 有効化すると、 Grav は強制的に HTTPS でアクセスします（注意：理想的な解決策ではありません）。 `true` か `false` が使えます |
 | **force_lowercase_urls:** | 大文字/小文字に対応した URL をサポートしたい場合、これを `false` にしてください |
 | **custom_base_url:** | `base_url` を手作業で設定するならここでしてください |
@@ -86,11 +87,11 @@ languages:
 | **include_default_lang_file_extension:** | 有効化すると、ページを保存するときに、デフォルトの言語をファイル拡張子に追加します（例： `.en.md` ）デフォルト言語でも `.md` ファイル拡張子を使い続けたい場合は、無効化してください。 `true` または `false` の値 (**Grav 1.7.0+**) |
 | **pages_fallback_only:** | サポートされている言語からページコンテンツを探してフォールバックします。 `true` または `false` の値 |
 | **translations:** | デフォルトで翻訳を有効化します。 `true` または `false` の値 |
-| **translations_fallback:** |  Fallback through supported translations if active lang doesn't exist. `true` または `false` の値 |
-| **session_store_active:** | Store active language in session. `true` または `false` の値 |
-| **http_accept_language:** | Attempt to set the language based on http\_accept\_language header in the browser. `true` または `false` の値 |
-| **override_locale:** | Override the default or system locale with language specific one. `true` または `false` の値 |
-| **content_fallback:** | By default if the content isn't translated, Grav will display the content in the default language. Use this setting to override that behavior per language basis. (**Grav 1.7.0+**) |
+| **translations_fallback:** | 有効言語が存在しない場合に、サポートされた翻訳でフォールバックします `true` または `false` の値 |
+| **session_store_active:** | セッションに有効言語を保存します `true` または `false` の値 |
+| **http_accept_language:** |  ブラウザの http\_accept\_language ヘッダをもとに言語設定を試みます。 `true` または `false` の値 |
+| **override_locale:** | デフォルトのもしくはシステムのロケールを言語特有のものに上書きします。 `true` または `false` の値 |
+| **content_fallback:** | デフォルトでは、コンテンツが翻訳されていない場合、 Grav はデフォルト言語のコンテンツを表示します。言語ごとにこの挙動を上書きする設定です。(**Grav 1.7.0+**) |
 
 ### Home
 
@@ -169,38 +170,38 @@ pages:
 
 | プロパティ | 説明 |
 | -------- | ----------- |
-| **type:** | Experimental setting to enable **Flex Pages** in frontend. Use `flex` to enable, `regular` otherwise. This defaults to `regular` (**Grav 1.7+**) |
-| **theme:** | This is where you set the default theme. This defaults to `quark` |
+| **type:** | フロントエンドで、 **Flex Pages** を有効化するための実験的設定。 `flex` にすると有効化し、そうでない場合は `regular` とします。デフォルトでは `regular` です。(**Grav 1.7+**) |
+| **theme:** | ここでデフォルトテーマを設定します。デフォルトは `quark` です。 |
 | **order:** | |
-| ... **by:** | Order pages by `default`, `alpha` or `date` |
-| ... **dir:** | Default ordering direction, `asc` or `desc` |
+| ... **by:** | `default` のページ順です。 `alpha` （アルファベット）もしくは `date` （日付） |
+| ... **dir:** | デフォルトのページを並べる方向です。 `asc` （昇順）もしくは `desc` （降順） |
 | **list:** | |
-| ... **count:** | Default item count per page |
+| ... **count:** | ページあたりのデフォルトのアイテム数 |
 | **dateformat:** | |
-| ... **default:** | The default date format Grav expects in the `date: ` field |
-| ... **short:** | Short date format. Example: `'jS M Y'` |
-| ... **long:** | Long date format. Example: `'F jS \a\t g:ia'` |
-| **publish_dates:** | Automatically publish/unpublish based on dates. `true` または `false` の値 |
+| ... **default:** | Grav が `date:` フィールドで期待するデフォルトの日付フォーマット |
+| ... **short:** | 短い日付フォーマット。例： `'jS M Y'` |
+| ... **long:** | 長い日付フォーマット。例： `'F jS \a\t g:ia'` |
+| **publish_dates:** | 日付をもとに公開開始/公開終了を自動化する。 `true` または `false` の値 |
 | **process:** | |
-| ... **markdown:** | Enable or disable the processing of markdown on the front end. `true` または `false` の値 |
-| ... **twig:** | Enable or disable the processing of twig on the front end. `true` または `false` の値 |
-| **twig_first:** | Process Twig before markdown when processing both on a page. `true` または `false` の値 |
-| **never_cache_twig:** | Enabling this will allow you to add a processing logic that can change dynamically on each page load, rather than caching the results and storing it for each page load. This can be enabled/disabled site-wide in the **system.yaml**, or on a specific page. `true` または `false` の値 |
+| ... **markdown:** | フロントエンドでマークダウン処理を有効化もしくは無効化する。 `true` または `false` の値 |
+| ... **twig:** | フロントエンドで Twig 処理を有効化もしくは無効化する。 `true` または `false` の値 |
+| **twig_first:** | マークダウンと Twig の両方をページで処理するときに、マークダウン処理よりも前に Twig を処理する。 `true` または `false` の値 |
+| **never_cache_twig:** | これを有効化すると、結果をキャッシュ・保存せずに、ページの読み込みごとに動的に変化するロジック処理を追加できます。 **system.yaml** では、サイト全体での有効化/無効化ができます。特定のページ単位で設定する方法もあります。 `true` または `false` の値 |
 | **events:** | |
-| ... **page:** | Enable page-level events. `true` または `false` の値 |
-| ... **twig:** | Enable Twig-level events. `true` または `false` の値 |
+| ... **page:** | ページレベルのイベントの有効化 `true` または `false` の値 |
+| ... **twig:** | Twig レベルのイベントの有効化 `true` または `false` の値 |
 | **markdown:** | |
-| ... **extra:** | Enable support for Markdown Extra support (GitHub-flavored Markdown (GFM) by default). `true` または `false` の値 |
-| ... **auto_line_breaks:** | Enable automatic line breaks. `true` または `false` の値 |
-| ... **auto_url_links:** | Enable automatic HTML links. `true` または `false` の値 |
-| ... **escape_markup:** | Escape markup tags into entities. `true` または `false` の値 |
-| ... **special_chars:** | List of special characters to automatically convert to entities. Each character consumes a line below this variable. Example: `'>': 'gt'` |
-| ... **valid_link_attributes:** | Valid attributes to pass through via markdown links (**Grav 1.7+**) |
-| **types:** | List of valid page types. For example: `[txt,xml,html,htm,json,rss,atom]` |
-| **append_url_extension:** | Append page's extension in Page URLs (e.g. `.html` results in **/path/page.html**) |
-| **expires:** | Page expires time in seconds (604800 seconds = 7 days) (`no cache` is also possible) |
-| **cache_control:** | Can be blank for no setting, or a [valid](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control) `cache-control` text value |
-| **last_modified:** | Set the last modified date header based on file modification timestamp. `true` または `false` の値 |
+| ... **extra:** | Markdown Extra （デフォルトで GitHub-flavord Markdown(GFM)）のサポートの有効化 `true` または `false` の値 |
+| ... **auto_line_breaks:** | 自動的に改行を有効化（通常のマークダウンは、空白2個が必要） `true` または `false` の値 |
+| ... **auto_url_links:** | HTML を自動リンクする `true` または `false` の値 |
+| ... **escape_markup:** | マークアップタグをエンティティにエスケープする `true` または `false` の値 |
+| ... **special_chars:** | リストになった特殊文字を自動でエンティティに変換します。各文字を1行ごとにこの変数の下に追加します。例： `'>': 'gt'` |
+| ... **valid_link_attributes:** | 適切な属性をマークダウンリンクを通して渡します (**Grav 1.7+**) |
+| **types:** | 有効なページタイプのリストです。例： `[txt,xml,html,htm,json,rss,atom]` |
+| **append_url_extension:** | ページの拡張子をページ URL に追加します。（例： `.html` の場合 **/path/page.html** になります） |
+| **expires:** | ページの有効期限（秒） (604800 seconds = 7 days) (`no cache` も可能) |
+| **cache_control:** | 設定しない場合は空欄にできます。もしくは、 [有効な](https://developer.mozilla.org/ja/docs/Web/HTTP/Reference/Headers/Cache-Control) `cache-control` テキストの値です |
+| **last_modified:** | ファイルの修正タイムスタンプをもとに、最終更新日のヘッダを設定します。 `true` または `false` の値 |
 | **etag:** | Set the etag header tag. `true` または `false` の値 |
 | **vary_accept_encoding:** | Add `Vary: Accept-Encoding` header. `true` または `false` の値 |
 | **redirect_default_route:** | Automatically redirect to a page's default route. `true` または `false` の値 |
