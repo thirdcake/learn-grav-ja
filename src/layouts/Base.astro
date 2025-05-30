@@ -1,8 +1,9 @@
 ---
-import pagesCache from '../func/pageCache.ts';
 import Arrowlink from '../components/Arrowlink.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import Sidebar from '../components/Sidebar.astro';
+import pagelist from '../pageslist.json';
+import pagetree from '../pagestree.json';
 
 import { siteConfig } from '../config';
 const { sitetitle, description, baseurl, bloburl, learnurl, hosturl } = siteConfig;
@@ -12,35 +13,21 @@ const { frontmatter } = Astro.props;
 // 現在アクセスしているページのURL
 const currentpath = (new URL(Astro.url).pathname).replace(/\/$/, '');
 
-// ドキュメントページ全体を取得する
-const pages :any[] = pagesCache();
-
-// ページ左のサイドバーメニュー
-const sidebarPages = pages.filter(page => {
-  const pageArr = (page.url??'').split('/');
-  const isTopChapter = pageArr.length < 4; 
-  if(isTopChapter) {
-    return true;
-  }
-  const isSameChapter = currentpath.split('/')[2] === pageArr[2];
-  return isSameChapter;
-});
-
-// pages から redirect を除く
-const pagesWithoutRedirect = pages.filter(page => page.frontmatter.redirect === undefined);
+// pagelist から redirect を除く
+const pagesWithoutRedirect = pagelist.filter(page => page.redirect === false);
 // ページ右上の前・次リンク
-const currentIndex = pagesWithoutRedirect.findIndex(page => (page.url === currentpath));
-const prevurl = pagesWithoutRedirect[currentIndex+1]?.url ?? '#';
-const nexturl = pagesWithoutRedirect[currentIndex-1]?.url ?? '#';
+const currentIndex = pagesWithoutRedirect.findIndex(page => (`${baseurl}/${page.pathname}` === currentpath));
+const prevurl = (currentIndex+1 < pagesWithoutRedirect.length)? `${baseurl}/${pagesWithoutRedirect[currentIndex+1].pathname}` : '#';
+const nexturl = (currentIndex-1 >= 0)? `${baseurl}/${pagesWithoutRedirect[currentIndex-1].pathname}` : '#';
 
 // ページ右上の編集リンク
-const editPageUrl = `${bloburl}${currentpath.replace('/learn-grav-ja', '')}/index.md`;
+const editPageUrl = `${bloburl}${currentpath.replace(baseurl, '')}/index.md`;
 
 // ページ中央上のパンくずリスト
-const breadobj = pages.filter(page => (currentpath.startsWith(page.url??'###')));
+const breadobj = pagelist.filter(page => (currentpath.replace(baseurl+'/','').startsWith(page.pathname??'###')));
 
 // ページ下部の翻訳元記事リンク
-const learnFullUrl = `${learnurl}${currentpath.replace('/learn-grav-ja','').replace(/\/\d+\./g,'/')}`;
+const learnFullUrl = `${learnurl}${currentpath.replace(baseurl,'').replace(/\/\d+\./g,'/')}`;
 
 // 構造化データ
 const breadcrumbJsonLd = JSON.stringify({
@@ -49,8 +36,8 @@ const breadcrumbJsonLd = JSON.stringify({
   "itemListElement": breadobj.map((page, index) => ({
     "@type": "ListItem",
     "position": index + 1,
-    "name": page.frontmatter.title,
-    "item": hosturl + (page.url ?? ""),
+    "name": page.title,
+    "item": hosturl + baseurl + (page.pathname ?? ""),
   }))
 });
 
@@ -76,7 +63,7 @@ const breadcrumbJsonLd = JSON.stringify({
   <meta property="og:title" content={frontmatter.title} />
   <meta property="og:description" content={description} />
   <meta property="og:type" content="article" />
-  <meta property="og:url" content={baseurl + currentpath} />
+  <meta property="og:url" content={baseurl + currentpath + '/'} />
   <meta property="og:image" content={baseurl + '/assets/images/ogimage.jpg'} />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -112,7 +99,7 @@ const breadcrumbJsonLd = JSON.stringify({
           検索は<a href={ learnurl }>翻訳元</a>へ
         </p>
           <div class="mb-auto overflow-y-auto pb-5" style="height:100%">
-            <Sidebar pages={ sidebarPages } currentpath={ currentpath } level={ 0 } />
+            <Sidebar pages={ pagetree.children } currentpath={ currentpath.split('/')[2] } />
           </div>
       </div>
     </div>

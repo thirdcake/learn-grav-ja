@@ -1,45 +1,22 @@
 ---
 import Sidebarchild from '../components/Sidebar.astro';
 
-type Page = {
-    url: string;
-    title: string;
-    redirect: string|undefined;
-    children: any[];
-}
-
-const { pages } = Astro.props;
-const renderPages: Page[] = [];
-
-let prevUrl = '###';
-pages.forEach((page:any) => {
-    if(page.url.startsWith(prevUrl)) {
-        renderPages.at(-1)?.children.push(page);
-    } else {
-        renderPages.push({
-            url: page.url,
-            title: page.frontmatter.title,
-            redirect: page.frontmatter.redirect ?? undefined,
-            children: [],
-        });
-        prevUrl = page.url;
-    }
-});
+const { pages, currentpath } = Astro.props;
 ---
 
-    <ol>
-    { renderPages.map(( page: any ) => 
-        <li class="my-1">
-            {(page.redirect === undefined)
-                ? <a href={ page.url + '/' }>{ page.title }</a>
+<ol>
+    { pages.map( (page: any) => 
+        <li>
+            {(page.redirect === false)
+                ? <a href={ `/learn-grav-ja/${page.pathname}/` }>{ page.title }</a>
                 : page.title
             }
             
-            {(page.children.length > 0)
-                ? <Sidebarchild pages={ page.children }  />
+            {(page.children.length > 0 && page.pathname.startsWith(currentpath))
+                ? <Sidebarchild pages={ page.children } currentpath={ currentpath } />
                 : ''
             }
         </li>
-    ) }
-    </ol>
+    )}
+</ol>
 

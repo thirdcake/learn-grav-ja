@@ -10,21 +10,21 @@ const title = (rawTitle: string): string =>
             if (index === breadobj.length - 1) {
                 return (
                     <li class="breadcrumb-item">
-                        {title(page.frontmatter.title)}
+                        {title(page.title)}
                     </li>
                 );
-            } else if (page.frontmatter.redirect === undefined) {
+            } else if (page.redirect === false) {
                 return (
                     <li class="breadcrumb-item">
-                        <a href={page.url + "/"}>
-                            {title(page.frontmatter.title)}
+                        <a href={"/learn-grav-ja/"+page.pathname + "/"}>
+                            {title(page.title)}
                         </a>
                     </li>
                 );
             } else {
                 return (
                     <li class="breadcrumb-item">
-                        {title(page.frontmatter.title)}
+                        {title(page.title)}
                     </li>
                 );
             }

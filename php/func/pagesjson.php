@@ -3,19 +3,26 @@
 // tree 構造を作る
 function pagestree(array $pages):string {
     $arr = [];
+    $arr['children'] = [];
     foreach($pages as $page) {
         $paths = explode('/', $page->pathname);
+        $newpage = [
+            'pathname' => $page->pathname,
+            'title'    => $page->title,
+            'redirect' => $page->redirect,
+            'isonlyja' => $page->isonlyja,
+            'dirname'  => $paths[count($paths)-1],
+            'children' => [],
+        ];
         $current = &$arr;
-        foreach($paths as $path) {
-            if(!isset($current[$path])) {
-                $current[$path] = [];
+        foreach($paths as $depth => $path) {
+            foreach($current['children'] as $idx=>$child) {
+                if($child['dirname'] === $path) {
+                    $current = &$current['children'][$idx];
+                }
             }
-            $current = &$current[$path];
         }
-        $current['pathname'] = $page->pathname;
-        $current['title'] = $page->title;
-        $current['redirect'] = $page->redirect;
-        $current['isonlyja'] = $page->isonlyja;
+        $current['children'][] = $newpage;
     }
     return json_encode($arr, JSON_PRETTY_PRINT);
 }
@@ -24,12 +31,13 @@ function pagestree(array $pages):string {
 function pageslist(array $pages):string {
     $arr = [];
     foreach($pages as $page) {
-        $arr[] = [
+        $newpage = [
             'pathname' => $page->pathname,
-            'title'=> $page->title,
-            'redirect'=> $page->redirect,
-            'isonlyja'=> $page->isonlyja,
+            'title'    => $page->title,
+            'redirect' => $page->redirect,
+            'isonlyja' => $page->isonlyja,
         ];
+        $arr[] = $newpage;
     }
     return json_encode($arr, JSON_PRETTY_PRINT);
 }
