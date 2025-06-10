@@ -1,59 +1,59 @@
 ---
 title: コマンドラインの導入
 layout: ../../../layouts/Default.astro
-lastmod: '2025-04-27'
+lastmod: '2025-06-10'
 ---
-Gravが、コマンドラインを念頭に作られたことは、よく知られています。管理パネルプラグインは、たしかに、ターミナル（MacOS や Linux）やコマンドプロンプト（Windows）を開かなくても、いろいろなことを、かんたんにできるようにしてくれますが、コマンドラインでできることのスピードやレベルについては、書くべきことが、たくさんあります。
 
-このことは、自社サーバーや、コマンドラインでアクセス可能なリモートサーバーで運用している方に、特に当てはまります。コマンドラインから使えるツールの量は、信じられないほどあります。わずかなキーストロークで、サイトのホスティングから、Gravシステム、そのプラグインやテーマまで、実質的にすべての面をコントロール可能です。
+Gravが、コマンドラインを念頭に作られたことは、よく知られています。管理パネルプラグインは、たしかに、ターミナル（MacOS や Linux）やコマンドプロンプト（Windows）を開かなくても、いろいろなことを、かんたんにできるようにしてくれますが、コマンドラインでできることのスピードや水準については、特筆すべき点が、たくさんあります。
 
-結局は、すべては個人の好みに帰着します。このページでは、いくつかの素晴らしいリソースを取り上げます。それらは、コマンドラインに親しむのに役立ちます。
+このことは、自社サーバーや、コマンドラインでアクセス可能なリモートサーバーで運用している方に、特に当てはまります。コマンドラインから使えるツールの量は、信じられないほどあります。わずかなキーストロークで、サイトのホスティングも、Gravシステム自身も、そのプラグインやテーマも、実質的にすべての面をコントロールできます。
+
+結局は、管理パネルを使うか、コマンドラインを使うかは、個人の好みに帰着します。このページでは、いくつかの素晴らしいリソースを取り上げます。それらは、コマンドラインに慣れるのに役立ちます。
 
 > [!Info]  
-> すべてのOSで、コマンドの互換性があるわけではありません。MacOS と 多くのLinux のディストリビューションの間には、細かい違いがありますし、Windows のコマンドプロンプトと比べれば、大きな違いがあります。
+> すべてのOSで、コマンドの互換性があるわけではありません。MacOS と 多くのLinux のディストリビューションの間には、細かい違いがありますし、Windows のコマンドプロンプトとは、大きな違いがあります。
 
 ## MacOS
 
-MacOS is based on Unix and is POSIX standards compliant. This means that most of the commands you may be familiar with on other Unix or Linux-based operating systems will work exactly as expected in MacOS. There are some exceptions to the rule, and it's for that reason that we recommend researching Terminal commands for the specific operating system you're working with.
+MacOs は、 Unix ベースで、 POSIX 標準に準拠しています。これはつまり、他の Unix や Linux ベースのオペレーティング・システムで使い慣れたコマンドのほとんどが、 MacOS でも期待通りに動作するということです。ただし、例外もありますので、お使いのオペレーティング・システムの Terminal コマンドを調べることをおすすめします。
 
-Here are some great resources to help you become accustomed to using the Terminal in MacOS:
+以下は、 MacOS の Terminal 利用に慣れるための素晴らしいリソースです：
 
-* [Michael Hogg's MacOS Terminal Commands Guide](http://michael-hogg.co.uk/os_x_terminal.php) - A practical resource for MacOS-friendly Terminal commands, what they do, and how to use them.
-* [MacRumors Guide to Terminal](http://guides.macrumors.com/Terminal) - A useful resource for navigating and using the Terminal, including tips for using it with the GUI.
-* [Envato Tuts+ Terminal Tips and Tricks](http://computers.tutsplus.com/tutorials/40-terminal-tips-and-tricks-you-never-thought-you-needed--mac-51192) - 40 clever tips and tricks for mastering the Terminal. Includes commands you won't find in many basic introductions.
-* [Envato Tuts+ Taming the Terminal](http://computers.tutsplus.com/articles/new-mactuts-session-taming-the-terminal--mac-45471) - A multi-part, detailed course in using the Terminal. Includes videos, screenshots, and more.
-
+* [Michael Hogg's MacOS Terminal Commands Guide](http://michael-hogg.co.uk/os_x_terminal.php) - MacOS 向けの Terminal コマンドには何があり、どのように機能するかを解説する実践的なリソース。
+* [MacRumors Guide to Terminal](http://guides.macrumors.com/Terminal) - Terminal の使い方や、GUIから Terminal を使う tips を紹介する便利なリソース。
+* [Envato Tuts+ Terminal Tips and Tricks](http://computers.tutsplus.com/tutorials/40-terminal-tips-and-tricks-you-never-thought-you-needed--mac-51192) - Terminal をマスターするための 40 個の tips や tricks 。多くの基本的な入門書には書いていないコマンドも含まれます。
+* [Envato Tuts+ Taming the Terminal](http://computers.tutsplus.com/articles/new-mactuts-session-taming-the-terminal--mac-45471) - Terminal の使い方に関する複数回の詳細なレッスンコースです。動画やスクリーンショットもあります。
 
 ## Linux
 
 世の中の Linux（および Unix ）ディストリビューションの多くには、共通点があります：Bash コマンドラインインターフェース（ターミナル）です。Gnomeや、Unity、KDE、その他いずれの GUI で動かしていたとしても、デスクトップであれ、ノートPCであれ、コマンドラインを訪れたチャンスはあるでしょう。
 
-結局、CLIは、パワフルです。GUIでできることは、ほとんど何でも、直接コマンドラインで実現できます。Linux のターミナルに親しむための素晴らしいリソースは、次のようなものがあります：
+何にせよ、 CLI はパワフルです。 GUIでできることは、ほとんど何でも、直接コマンドラインで実現できます。Linux のターミナルを使いこなすための素晴らしいリソースは、次のようなものがあります：
 
-* [TechSpot's Beginner's Guide to the Linux Command Line](http://www.techspot.com/guides/835-linux-command-line-basics/) - An excellent beginner's guide to the command line.
-* [MakeUseOf's Quick Guide to Getting Started with the Linux Command Line](http://www.makeuseof.com/tag/a-quick-guide-to-get-started-with-the-linux-command-line/) - Another great resource for learning about the Terminal.
-* [O'Reilly Linux DevCenter Directory of Linux Commands](http://www.linuxdevcenter.com/cmd/) - An index of commands available in the Terminal.
-* [Ryan's Tutorials Linux Tutorial](http://ryanstutorials.net/linuxtutorial/) - An excellent all-in-one guide to Linux and the Bash command line interface (Terminal).
+* [TechSpot's Beginner's Guide to the Linux Command Line](http://www.techspot.com/guides/835-linux-command-line-basics/) - コマンドラインの素晴らしい入門書。
+* [MakeUseOf's Quick Guide to Getting Started with the Linux Command Line](http://www.makeuseof.com/tag/a-quick-guide-to-get-started-with-the-linux-command-line/) - Terminal を学ぶもうひとつの素晴らしいリソース。
+* [O'Reilly Linux DevCenter Directory of Linux Commands](http://www.linuxdevcenter.com/cmd/) - Terminal で利用可能なコマンドの索引。
+* [Ryan's Tutorials Linux Tutorial](http://ryanstutorials.net/linuxtutorial/) - Linux と Bash コマンドラインインターフェース（Terminal）に関する素晴らしいオールインワンガイド。
 
 ## Windows
 
-Windows sits apart from the pack for a number of reasons. Many of the commands in the command line for Windows are reminiscent of its DOS roots. Common commands such as `ls` for a directory listing doesn't work here. Instead, you would type `dir`. Here are a handful of resources to help you get the hang of the Windows Command Prompt:
+Windows は、いくつかの理由で他とは違っています。コマンドラインで使われるコマンドの多くは、そのルーツである DOS を彷彿とさせます。一般的なコマンド（たとえば、 `ls` でディレクトリの一覧表示）は、 Windows では機能しません。かわりに、 `dir` コマンドを使います。以下は、 Windows のコマンドプロンプトを使いこなすのに役立つ便利なリソースです：
 
-* [MakeUseOf's Beginner's Guide to the Windows Command Line](http://www.makeuseof.com/tag/a-beginners-guide-to-the-windows-command-line/) - A well-written introduction to the command line for Windows.
-* [DOSPrompt.info](http://dosprompt.info/) - An entire site devoted to familiarizing users with the Command Prompt.
+* [MakeUseOf's Beginner's Guide to the Windows Command Line](http://www.makeuseof.com/tag/a-beginners-guide-to-the-windows-command-line/) - Windows 向けコマンドラインの良い入門書。
+* [DOSPrompt.info](http://dosprompt.info/) - コマンドプロンプトを使いこなすためのサイト。
 
 > [!Info]  
-> All of Grav's CLI commands rely on PHP, but this is not immediately available in Windows. You can find out whether it is installed by opening a console and typing `php -v` to check. If `'php' is not recognized as an internal or external command ...` returns, it is not.
+> Grav の CLI コマンドはすべて、PHP を使っており、Windows ではすぐに利用できるものではありません。PHP がインストールされているかどうかは、コンソールを開いて、 `php -v` と入力することで確かめられます。 `'php' is not recognized as an internal or external command ...` という表示が返ってきたら、PHP がインストールされていません。
 
-If you want to add PHP to your Windows system, you need to find your "Environment Variables", either by searching for it in the Start-Menu or going to Control Panel -> Advanced System Settings -> Click the "Environment Variables"-button.
+Windows システムに PHP を追加したい場合、 "Environment Variables" を探す必要があります。スタートメニューで検索するか、もしくは、コントロールパネルから、 Advanced System Settings へ行き、 "Environment Variables" ボタンをクリックしてください。
 
-Under "System Variables", find "Path" and click edit. Copy the "variable value" into notepad, and add a semicolon at the end - to separate variables. Then find the path to your installation of PHP ([from scratch](http://windows.php.net/) or using a current installation that came with your development environment), and add it to the end of this long list of variables. You want the folder-path, not including `php.exe`.
+"System Variables" の下に、 "Path" を見つけ、編集をクリックしてください。メモ帳に "variable value" をコピーし、最後にセミコロンを追加します（変数の区切りです）。それから、インストールした PHP （ [スクラッチする](http://windows.php.net/) か、開発環境に付いてきたものを使えます。）へのパスを探し、変数の長いリストの最後にパスを追記します。これは、フォルダのパスです。 `php.exe` は含めないでください。
 
-When that is done, open a new console (or restart your current one) so the new path is applied. Then try `php -v` again, you should get an output like: `PHP 7.0.7 (cli) ...`. When you run Grav's commands, you will need to prepend `php` to them, for instance `php grav/gpm index`.
+ここまで終わったら、新しくコンソールを開いてください（もしくは現在のコンソールを再起動してください）。新しいパスが適用されています。もう一度、 `php -v` を試してみてください。 `PHP 7.0.7 (cli) ...` のような出力が得られるはずです。Grav のコマンドを実行するときは、 `php` をコマンドの最初に付ける必要があります。たとえば、 `php grav/gpm index` のように。
 
 <h2 id="grav-specific-commands">Grav 特有のコマンド</h2>
 
-Grav のクールなところの1つは、何でもできるパワフルなコマンドを持っていることです。追加のプラグインやテーマをインストールしたり、ユーザーを管理パネルに追加したりできます。このセクションでは、最も一般的なコマンドを挙げます。
+Grav がクールである理由の1つは、何でもできるパワフルなコマンドを持っていることです。追加のプラグインやテーマをインストールしたり、ユーザーを管理パネルに追加したりできます。このセクションでは、最も一般的なコマンドを挙げます。
 
 以下のコマンドはすべて、**どのOSにも** 対応しています。
 
@@ -85,9 +85,9 @@ Grav のクールなところの1つは、何でもできるパワフルなコ�
 
 以下のコマンドは、**mac もしくは unix 系システム** で使えます。
 
-| コマンド                 | 説明                                                                                                           |
-| :----------------                        | :--------------------------------------                                                                                   |
-|  `bin/gpm index \| grep '\| installed'`  | Lists all plugins and themes you currently have installed. |
+| コマンド | 説明 |
+| :--------------- | :------------ |
+|  `bin/gpm index \| grep '\| installed'`  | インストール済みのテーマとプラグインを一覧表示。 |
 
 <h2 id="symbolic-links">シンボリック・リンク</h2>
 
@@ -109,12 +109,11 @@ Grav では、シムリンクは複数のインスタンスに、プラグイン
 
 <h3 id="symbolic-links-in-windows">Windows でのシンボリックリンク</h3>
 
-The basic structure of the command in Windows is `mklink <type> <put virtual copies here> <original file, directory, or its contents>`. Unlike MacOS or Linux, you will need to set the argument for the type of file you're symbolically linking. The source and destination are also flipped in this case, where the new symbolic link comes before the file you're linking to. There are three arguments you can use here:
+Windows でのコマンドの基本構造は、 `mklink <type> <put virtual copies here> <original file, directory, or its contents>` です。 MacOS や、 Linux とは違い、シンボリックリンクの type を引数として設定する必要があります。リンク元とリンク先も、逆順です。新しいシンボリックリンクが、リンクされるファイルの前に来ます。ここでは、3つの引数が使えます：
 
-* `/j` - This is the most commonly used argument. It creates a symlink of a directory.
-* `/h` - This creates a symbolic link for a specific file.
-* `/d` - This creates a soft link, or a shortcut. It's not likely to be used for the purposes outlined here.
-
+* `/j` - これは最も一般的に使われる引数です。ディレクトリのシムリンクを作成します。
+* `/h` - 特定のファイルのシンボリックリンクを作成します。
+* `/d` - これは、soft link もしくはショートカットを作成します。今回説明しているような目的では使う場面は無いでしょう。
 
 <h3 id="example-commands">コマンドの例</h3>
 

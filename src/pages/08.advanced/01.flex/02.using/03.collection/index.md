@@ -1,30 +1,31 @@
 ---
 title: 'Flex コレクション'
 layout: ../../../../../layouts/Default.astro
-lastmod: '2025-05-08'
+lastmod: '2025-06-10'
 ---
+
 **Flex コレクション** とは、**flex オブジェクトの順序付きマップ** であり、リストのように使うこともできます。
 
 flex コレクションにより、いくつかの便利なメソッドが使えるようになります。出力をレンダリングするときに使われるメソッドや、オブジェクトを fetch するメソッド、並び替えるメソッド、などです。
 
-> [!Note]  
-> **TIP:** Flex コレクションは、 **[Doctrine Collections](https://www.doctrine-project.org/projects/doctrine-collections/en/1.6/index.html)** を拡張しています。
+> [!Tip]  
+> Flex コレクションは、 **[Doctrine Collections](https://www.doctrine-project.org/projects/doctrine-collections/en/1.6/index.html)** を拡張しています。
 
-# Render Collection
+<h2 id="render-collection">コレクションのレンダリング</h2>
 
-## render()
+### render()
 
 `render( [layout], [context] ): Block` コレクションをレンダリングする
 
 パラメータ：
 - **layout** レイアウト名 (`string`)
-- **context** Extra variables that can be used inside the Twig template file (`array`)
+- **context** Twig テンプレートファイル内で使うことができるその他の変数 ('array')
 
 返り値：
-- **Block** (`object`) HtmlBlock class containing the output
+- **Block** (`object`) 出力を含むHtmlBlock class
 
-> [!Info]  
-> **NOTE:** このメソッドを直接呼び出すのではなく、twig の `{% render %}` タグを使ってください。これにより、 flex コレクションの JS/CSS アセットが適切に機能します。
+> [!Note]  
+> このメソッドを直接呼び出すのではなく、twig の `{% render %}` タグを使ってください。これにより、 flex コレクションの JS/CSS アセットが適切に機能します。
 
 ```twig
 {% set contacts = grav.get('flex').collection('contacts') %}
@@ -58,22 +59,22 @@ if ($collection) {
 }
 ```
 
-# Collection Manipulation
+<h2 id="collection-manipulation">コレクションの操作</h2>
 
 これらのメソッドはすべて、 flex コレクションの **修正されたコピー** を返します。オリジナルの  flex コレクションは、変更されないままです。
 
-## sort()
+### sort()
 
-`sort( orderings ): Collection` Sort the collection by list of `property: direction` pairs.
+`sort( orderings ): Collection` コレクションを `property: direction` のペアでソートする。
 
 パラメータ：
-- **orderings** Pairs of `property: direction` where direction is either 'ASC' or 'DESC' (`array`)
+- **orderings** `property: direction` のペア。 direction のところは、 'ASC' もしくは 'DESC' です。 (`array`)
 
 返り値：
-- **[Collection](/advanced/flex/using/collection)** (`object`) New sorted instance of the collection
+- **[Collection](/advanced/flex/using/collection)** (`object`) 新しくソートされたコレクションのインスタンス。
 
-> [!Note]  
-> **TIP:** Default sort order can be set for the frontend in the **Flex Type** blueprints.
+> [!Tip]  
+> デフォルトのソート順は、 **Flex Type** ブループリント内でフロントエンド向けに設定できます。
 
 ```twig
 {% set contacts = grav.get('flex').collection('contacts') %}
@@ -98,16 +99,16 @@ if ($collection) {
 }
 ```
 
-## limit()
+### limit()
 
-`limit( start, limit ): Collection` Return subset of collection starting from `start` and including only `limit` number of objects.
+`limit( start, limit ): Collection` `start` から始まり、 `limit` 個までのオブジェクトを持つコレクションの一部分を返す。
 
 パラメータ：
-- **start** Start index starting from 0 (`int`)
-- **limit** Maximum number of objects (`int`)
+- **start** 0始まりの最初のインデックス (`int`)
+- **limit** オブジェクトの最大数 (`int`)
 
 返り値：
-- **[Collection](/advanced/flex/using/collection)** (`object`) New filtered instance of the collection
+- **[Collection](/advanced/flex/using/collection)** (`object`) フィルタリングされたコレクションの新しいインスタンス
 
 ```twig
 {% set contacts = grav.get('flex').collection('contacts') %}
@@ -138,17 +139,18 @@ if ($collection) {
 }
 ```
 
-## filterBy()
+### filterBy()
 
-`filterBy( filters ): Collection` Filter collection by list of `property: value` pairs.
+`filterBy( filters ): Collection` `property: value` のペアによりフィルタリングされたコレクション
 
 パラメータ：
-- **filters** Pairs of `property: value` which are used to filter he collection (`array`)
+- **filters** `property: value` のペア。コレクションのフィルタリングに使われます。 (`array`)
 
 返り値：
-- **[Collection](/advanced/flex/using/collection)** (`object`) New filtered instance of the collection
+- **[Collection](/advanced/flex/using/collection)** (`object`) フィルタリングされたコレクションの新しいインスタンス。
 
-! **TIP:** Default filtering can be set for the frontend in the **Flex Type** blueprints.
+> [!Tip]  
+> デフォルトのフィルタリングは、 **Flex Type** ブループリント内で、フロントエンド向けに設定できます。
 
 ```twig
 {% set contacts = grav.get('flex').collection('contacts') %}
@@ -176,14 +178,15 @@ if ($collection) {
 }
 ```
 
-## reverse()
+### reverse()
 
-`reverse(): Collection`  Reverse the order of the objects in the Collection.
+`reverse(): Collection` コレクションのオブジェクトを逆順にする。
 
 返り値：
-- **[Collection](/advanced/flex/using/collection)** (`object`) New reversed instance of the collection
+- **[Collection](/advanced/flex/using/collection)** (`object`) 逆順にしたコレクションの新しいインスタンス。
 
-! **TIP:** If you're using `sort()`, it is recommended to reverse the ordering in there as it saves an extra step.
+> [!Tip]  
+> `sort()` を使っている場合は、そこで逆順に設定することをおすすめします。余分なステップが省けます。
 
 ```twig
 {% set contacts = grav.get('flex').collection('contacts') %}
@@ -211,12 +214,12 @@ if ($collection) {
 }
 ```
 
-## shuffle()
+### shuffle()
 
-`shuffle(): Collection`  Shuffle objects to a random order.
+`shuffle(): Collection` ランダムな順番でオブジェクトをシャッフルする。
 
 返り値：
-- **[Collection](/advanced/flex/using/collection)** (`object`) New randomly ordered instance of the collection
+- **[Collection](/advanced/flex/using/collection)** (`object`) コレクションの、ランダムな順番になった新しいインスタンス
 
 ```twig
 {% set contacts = grav.get('flex').collection('contacts') %}
@@ -241,15 +244,15 @@ if ($collection) {
 }
 ```
 
-## select()
+### select()
 
-`select( keys ): Collection` Select objects (by their keys) from the collection.
+`select( keys ): Collection` コレクションから(keys によって)オブジェクトを選択する
 
 パラメータ：
-- **keys** List of object keys used to select the objects (`array`)
+- **keys** オブジェクトの選択に使われるキーのリスト (`array`)
 
 返り値：
-- **[Collection](/advanced/flex/using/collection)** (`object`) New instance of the collection
+- **[Collection](/advanced/flex/using/collection)** (`object`) コレクションの新しいインスタンス
 
 ```twig
 {% set contacts = grav.get('flex').collection('contacts') %}
@@ -277,15 +280,15 @@ if ($collection) {
 }
 ```
 
-## unselect()
+### unselect()
 
-`unselect( keys ): Collection` Remove objects (by their keys) from the collection.
+`unselect( keys ): Collection` コレクションから、(keys によって)オブジェクトを取り除く
 
 パラメータ：
-- **keys** List of object keys used to remove the objects (`array`)
+- **keys** オブジェクトを取り除くために使われるキーのリスト (`array`)
 
 返り値：
-- **[Collection](/advanced/flex/using/collection)** (`object`) New instance of the collection
+- **[Collection](/advanced/flex/using/collection)** (`object`) コレクションの新しいインスタンス
 
 ```twig
 {% set contacts = grav.get('flex').collection('contacts') %}
@@ -313,21 +316,21 @@ if ($collection) {
 }
 ```
 
-## search()
+### search()
 
-`search( string, [properties], [options] ): Collection` Search a string from the collection.
+`search( string, [properties], [options] ): Collection` コレクションで文字列を検索する。
 
 パラメータ：
-- **string** Search string (`string`)
-- **properties** Properties to search, if null (or not provided), use defaults (`array` or `null`)
-- **options** Extra options used while searching (`array`)
+- **string** 検索する文字列 (`string`)
+- **properties** 検索するプロパティ。もし null （もしくは何も渡されなかった）の場合は、デフォルトを使います。 (`array` or `null`)
+- **options** 検索時に使う追加オプション  (`array`)
   - starts_with: `bool`
   - ends_with: `bool`
   - contains: `bool`
   - case_sensitive: `bool`
 
 返り値：
-- **[Collection](/advanced/flex/using/collection)** (`object`) New filtered instance of the collection
+- **[Collection](/advanced/flex/using/collection)** (`object`) コレクションのフィルタリングされた新しいインスタンス
 
 ```twig
 {% set contacts = grav.get('flex').collection('contacts') %}
@@ -352,14 +355,15 @@ if ($collection) {
 }
 ```
 
-## copy()
+### copy()
 
-`copy(): Collection` Create a copy from the collection by cloning all the objects in the collection.
+`copy(): Collection` コレクション内のオブジェクトをすべて clone することで、コピーを作成する
 
 返り値：
-- **[Collection](/advanced/flex/using/collection)** (`object`) New instance of the collection, now with cloned objects
+- **[Collection](/advanced/flex/using/collection)** (`object`) clone されたオブジェクトを持つコレクションの新しいインスタンス
 
-!! **WARNING:** If you modify objects in your collection, you should always use copies!
+> [!Warning]  
+> コレクション内でオブジェクトを修正する場合は、常にコピーを使ってください！
 
 ```twig
 {% set contacts = grav.get('flex').collection('contacts') %}
@@ -390,9 +394,9 @@ if ($collection) {
 }
 ```
 
-# Iterate Through Collection
+<h2 id="iterate-through-collection">コレクションの繰り返し</h2>
 
-**Collections** can be iterated over.
+**Collections** は、繰り返し処理ができます。
 
 ```twig
 {% set contacts = grav.get('flex').collection('contacts') %}
@@ -422,13 +426,13 @@ if ($collection) {
 }
 ```
 
-## first()
+### first()
 
-`first(): Object | false` Sets the iterator to the first object in the collection and returns this object.
+`first(): Object | false` コレクションの最初のオブジェクトにイテレータを設定し、このオブジェクトを返します。
 
 返り値：
-- **[Object](/advanced/flex/using/object)** (`object`) First object
-- `false` No objects in the Collection
+- **[Object](/advanced/flex/using/object)** (`object`) 最初のオブジェクト
+- `false` コレクションにオブジェクトが無かった場合
 
 ```twig
 {% set contacts = grav.get('flex').collection('contacts') %}
@@ -459,13 +463,13 @@ if ($collection) {
 }
 ```
 
-## last()
+### last()
 
-`last(): Object | false` Sets the iterator to the last object in the collection and returns this object.
+`last(): Object | false` コレクションの最後のオブジェクトにイテレータを設定し、このオブジェクトを返します。
 
 返り値：
-- **[Object](/advanced/flex/using/object)** (`object`) Last object
-- `false` No objects in the Collection
+- **[Object](/advanced/flex/using/object)** (`object`) 最後のオブジェクト
+- `false` コレクションにオブジェクトが無かった場合
 
 ```twig
 {% set contacts = grav.get('flex').collection('contacts') %}
@@ -496,13 +500,13 @@ if ($collection) {
 }
 ```
 
-## next()
+### next()
 
-`next(): object | false` Moves the iterator position to the next object and returns this element.
+`next(): object | false` イテレータのポジションを次のオブジェクトに移し、この要素を返す。
 
 返り値：
-- **[Object](/advanced/flex/using/object)** (`object`) Next object
-- `false` No more objects in the Collection
+- **[Object](/advanced/flex/using/object)** (`object`) 次のオブジェクト
+- `false` コレクションに、これ以上のオブジェクトが無かった場合
 
 ```twig
 {% set contacts = grav.get('flex').collection('contacts') %}
@@ -534,13 +538,13 @@ if ($collection) {
 }
 ```
 
-## current()
+### current()
 
-`current(): object | false` Gets the object of the collection at the current iterator position.
+`current(): object | false` 現在のイテレータのポジションにあるオブジェクトを取得する。
 
 返り値：
-- **[Object](/advanced/flex/using/object)** (`object`) Current object
-- `false` No more objects in the Collection
+- **[Object](/advanced/flex/using/object)** (`object`) 現在のオブジェクト
+- `false` これ以上コレクションにオブジェクトが無い場合
 
 ```twig
 {% set contacts = grav.get('flex').collection('contacts') %}
@@ -574,13 +578,13 @@ if ($collection) {
 }
 ```
 
-## key()
+### key()
 
-`key(): key | null` Gets the key of the object at the current iterator position.
+`key(): key | null` 現在のイテレータのポジションがあるオブジェクトのキーを取得
 
 返り値：
-- **key** (`string`) Object key
-- `null` No more objects in the Collection
+- **key** (`string`) オブジェクトのキー
+- `null` コレクションにこれ以上オブジェクトが無い場合
 
 ```twig
 {% set contacts = grav.get('flex').collection('contacts') %}
@@ -611,13 +615,14 @@ if ($collection) {
 }
 ```
 
-# Get Object / Key
+<h2 id="get-object-key">オブジェクト / キーの取得</h2>
 
-## Array Access
+<h3 id="array-access">配列のようにアクセス</h3>
 
-**Collections** can be accessed just like associative arrays or maps.
+**Collections** は、連想配列型や map 型のようにアクセス可能です。
 
-!!! **NOTE:** `null` is being returned if object with given key is not in the collection.
+> [!Note]  
+> 与えられたキーのオブジェクトがコレクションに無かった場合、 `null` が返ります。
 
 ```twig
 {% set contacts = grav.get('flex').collection('contacts') %}
@@ -651,18 +656,18 @@ if ($collection) {
 }
 ```
 
-## get()
+### get()
 
-`get( key ): Object | null` Gets the object with the specified key.
+`get( key ): Object | null` 特定のキーでオブジェクトを取得する。
 
 パラメータ：
-- **key**  Object key (`string`)
+- **key**  オブジェクトのキー (`string`)
 
 返り値：
 - **Object** (`object`)
-- `null` Object with given key is not in the collection
+- `null` 与えられたキーのオブジェクトがコレクションに無かった場合
 
-Alternative to [Array Access](#array-access)
+かわりに、 [配列のようにアクセス](#array-access) する方法もあります。
 
 ```twig
 {% set contacts = grav.get('flex').collection('contacts') %}
@@ -696,14 +701,14 @@ if ($collection) {
 }
 ```
 
-# Collection as Array
+<h2 id="collection-as-array">配列のようなコレクション</h2>
 
-## getKeys()
+### getKeys()
 
-`getKeys(): array` Gets all keys of the collection.
+`getKeys(): array` コレクションのすべてのキーを取得
 
 返り値：
-- `array` List of keys
+- `array` キーのリスト
 
 ```twig
 {% set contacts = grav.get('flex').collection('contacts') %}
@@ -728,21 +733,21 @@ if ($collection) {
 }
 ```
 
-## GetObjectKeys()
+### GetObjectKeys()
 
-`GetObjectKeys(): array` Alias to the `getKeys()` method.
-
-返り値：
-- `array` List of keys
-
-## getValues()
-
-`getValues(): array` Gets all objects of the collection.
-
-Converts collection into an array. Keys are not preserved.
+`GetObjectKeys(): array` : `getKeys()` メソッドのエイリアス（別名）
 
 返り値：
-- List of **Objects** (`array`)
+- `array` キーのリスト
+
+### getValues()
+
+`getValues(): array` コレクションのすべてのオブジェクトを取得する
+
+コレクションを array 型に変換します。キーは保存されません。
+
+返り値：
+- **Objects** のリスト (`array`)
 
 ```twig
 {% set contacts = grav.get('flex').collection('contacts') %}
@@ -773,14 +778,14 @@ if ($collection) {
 }
 ```
 
-## toArray()
+### toArray()
 
-`toArray(): array` Gets a native PHP array representation of the collection.
+`toArray(): array` コレクションの、PHP ネイティブの array を取得します。
 
-Similar to `getValues()` but preserves the keys.
+`getValues()` に似ていますが、キーが保存されます。
 
 返り値：
-- `array` List of `key: Object` pairs
+- `array` : `key: Object` ペアのリスト
 
 ```twig
 {% set contacts = grav.get('flex').collection('contacts') %}
@@ -811,18 +816,19 @@ if ($collection) {
 }
 ```
 
-## slice()
+### slice()
 
-`slice( offset, length ): array` Extracts a slice of `length` elements starting at position `offset` from the Collection.
+`slice( offset, length ): array` コレクションから `offset` されたポジションから初めて、 `length` 個の要素をスライスしたものを抽出する。
 
 パラメータ：
-- **offset** Start offset starting from 0 (`int`)
-- **length** Maximum number of objects (`int`)
+- **offset** 0始まりのオフセットの最初 (`int`)
+- **length** オブジェクトの最大数 (`int`)
 
 返り値：
-- `array` List of `key: Object` pairs
+- `array` : `key: Object` ペアのリスト
 
-! **TIP:** This method can be used for pagination.
+> [!Tip]  
+> このメソッドは、ページネーションに使えます。
 
 ```twig
 {% set contacts = grav.get('flex').collection('contacts') %}
@@ -854,17 +860,18 @@ if ($collection) {
 }
 ```
 
-## chunk()
+### chunk()
 
-`chunk( size ): array` Split collection into chunks of `size` objects.
+`chunk( size ): array` コレクションを、 `size` 個のオブジェクトに分ける
 
 パラメータ：
-- **size** Size of the chunks (`int`)
+- **size** チャンクするサイズ (`int`)
 
 返り値：
-- `array` Two dimensional list of `key: Object` pairs
+- `array` : `key: Object` ペアの2次元リスト
 
-! **TIP:** This method can be used to split content into rows and columns.
+> [!Tip]  
+> このメソッドは、コンテンツを行と列に分けるときに利用できます。
 
 ```twig
 {% set contacts = grav.get('flex').collection('contacts') %}
@@ -908,13 +915,13 @@ if ($collection) {
 
 ## group()
 
-`group( property ): array` Group objects in the collection by a property and return them as associated array.
+`group( property ): array` プロパティでコレクション内のオブジェクトをグループ分けし、連想配列として返す。
 
 パラメータ：
-- **property** Property name which is used to group the objects (`string`)
+- **property** オブジェクトのグループ分けに使われるプロパティ名。 (`string`)
 
 返り値：
-- `array` Two dimensional list of `key: Object` pairs, where value of the property is the key of the first level
+- `array` 2次元の `key: Object` ペアのリスト。プロパティ値は最初のレベルのキーになります。
 
 ```twig
 {% set contacts = grav.get('flex').collection('contacts') %}
@@ -957,279 +964,284 @@ if ($collection) {
 }
 ```
 
-# Adding and Removing Objects
+<h2 id="adding-and-removing-objects">オブジェクトを追加・削除</h2>
 
-## add()
+### add()
 
-`add( Object )` Adds an Object at the end of the collection.
-
-パラメータ：
-- **[Object](/advanced/flex/using/object)** Object to be added (`object`)
-
-## remove()
-
-`remove( key ): Object | null` Removes the element at the specified index from the collection.
+`add( Object )` コレクションの最後にオブジェクトを追加する。
 
 パラメータ：
-- **key** Object key to be removed (`object`)
+- **[Object](/advanced/flex/using/object)** 追加するオブジェクト (`object`)
+
+### remove()
+
+`remove( key ): Object | null` コレクションから、特定のインデックスを持つ要素を削除する。
+
+パラメータ：
+- **key** 削除するオブジェクトのキー。 (`object`)
 
 返り値：
-- **[Object](/advanced/flex/using/object)** Removed object (`object`) or `null` if it was not found
+- **[Object](/advanced/flex/using/object)** 削除されたオブジェクト (`object`) もしくは、見つからなければ `null`
 
-## removeElement()
+### removeElement()
 
-`removeElement( Object ): bool` Removes the specified object from the collection, if it is found.
-
-パラメータ：
-- **[Object](/advanced/flex/using/object)** Object to be removed (`object`)
-
-返り値：
-- `true` if object was in the collection, `false` if not
-
-## clear()
-
-`clear()` Clears the collection, removing all elements.
-
-# Tests
-
-## containsKey()
-
-`containsKey( key ): bool` Checks whether the collection contains an object with the specified key.
+`removeElement( Object ): bool` 特定のオブジェクトについて、それがコレクション内に見つかった場合に削除する
 
 パラメータ：
-- **key** Key to be tested (`string`)
+- **[Object](/advanced/flex/using/object)** 削除するオブジェクト (`object`)
 
 返り値：
-- `true` if object is in the collection, `false` if not
+- `true` そのオブジェクトがコレクション内似合った場合。 `false` そうでない場合。
 
-## contains()
+### clear()
 
-`contains( object ): bool` Checks whether an element is contained in the collection.
+`clear()` コレクションをクリアし、すべての要素を削除する。
+
+<h2 id="tests">テスト</h2>
+
+### containsKey()
+
+`containsKey( key ): bool` 特定のキーを持つオブジェクトがコレクション内にあるかどうかチェックする。
 
 パラメータ：
-- **[Object](/advanced/flex/using/object)** Object to be tested (`object`)
+- **key** テストするキー (`string`)
 
 返り値：
-- `true` if object is in the collection, `false` if not
+- `true` コレクション内にオブジェクトがあった場合。  `false` そうでない場合。
 
-## indexOf()
+### contains()
 
-`indexOf( object ): string | false` Gets the index/key of a given object.
+`contains( object ): bool` コレクション内に要素があるかどうかチェックする。
 
 パラメータ：
-- **[Object](/advanced/flex/using/object)** Object to be tested (`object`)
+- **[Object](/advanced/flex/using/object)** テストするオブジェクト (`object`)
 
 返り値：
-- `string` index/key of the object, `false` if not object was not found
+- `true` コレクション内にオブジェクトがあった場合。  `false` そうでない場合。
 
-## isEmpty()
+### indexOf()
+
+`indexOf( object ): string | false` 与えられたオブジェクトの index/key を取得する
+
+パラメータ：
+- **[Object](/advanced/flex/using/object)** テストするオブジェクト (`object`)
+
+返り値：
+- `string` オブジェクトの index/key 。  `false` オブジェクトが見つからなかった場合。
+
+### isEmpty()
 
 `isEmpty(): bool` Checks whether the collection is empty (contains no objects).
 
 返り値：
 - `true` if collection is empty, `false` otherwise
 
-## count()
+### count()
 
 `count(): int`
 
 返り値：
 - `int` Number of objects in the collection
 
-# Bulk Actions for Objects
+<h2 id="bulk-actions-for-objects">オブジェクトへの一斉アクション</h2>
 
-## hasProperty()
+### hasProperty()
 
-`hasProperty( property ): array` Returns a list of `key: boolean` pairs whether object with key has property defined or not.
-
-パラメータ：
-- **property** Property name (`string`)
-
-返り値：
-- `array` of `key: bool` pairs, where `key` is the object key and `bool` is either true or false.
-
-## getProperty()
-
-`getProperty( property, default ): array` Returns a list of `key: value` for each object.
+`hasProperty( property ): array` オブジェクトのキーにプロパティが定義されているかどうかについて、 `key: boolean` ペアのリストを返す。
 
 パラメータ：
-- **property** Property name (`string`)
+- **property** プロパティ名 (`string`)
 
 返り値：
-- `array` of `key: value` pairs, where `key` is the object key and `value` is the value of the property.
+- `key: bool` ペアの配列。 `key` はオブジェクトのキー、 `bool` は true もしくは false。
 
-## setProperty()
+### getProperty()
 
-`setProperty( property, value ): Collection` Set new value to the property for every object in the collection.
+`getProperty( property, default ): array` 各オブジェクトについて、 `key: value` のリストを返す。
 
 パラメータ：
-- **property** Property name (`string`)
-- **value** New value (`mixed`)
+- **property** プロパティ名 (`string`)
 
 返り値：
-- **Collection** (`object`) The collection for chaining the method calls.
+- `key: value` ペアの配列。 `key` はオブジェクトのキー、 `value` はプロパティの値。
 
-!! **WARNING:** This method modifies the object instances shared between all the collections, if that is not intended, please  [copy()](#copy) collection before using this method.
+### setProperty()
 
-## defProperty()
-
-`defProperty( property, default ): Collection` Define default value to the property for every object in the collection.
+`setProperty( property, value ): Collection` コレクション内のすべてのオブジェクトで、プロパティに新しい値を設定する。
 
 パラメータ：
-- **property** Property name (`string`)
-- **default** Default value (`mixed`)
+- **property** プロパティ名 (`string`)
+- **value** 新しい値 (`mixed`)
 
 返り値：
-- **Collection** (`object`) The collection for chaining the method calls.
+- **Collection** (`object`) メソッド呼び出しを連鎖させるためのコレクション
 
-!! **WARNING:** This method modifies the object instances shared between all the collections, if that is not intended, please  [copy()](#copy) collection before using this method.
+> [!Warning]  
+> このメソッドは、すべてのコレクションで共有されているオブジェクトインスタンスを修正します。それを意図しない場合、このメソッドを使う前に、コレクションを [copy()](#copy) してください。
 
-## unsetProperty()
+### defProperty()
 
-`unsetProperty( property ): Collection` Remove value of the property for every object in the collection.
+`defProperty( property, default ): Collection` コレクション内のすべてのオブジェクトに、プロパティのデフォルト値を定義する。
 
 パラメータ：
-- **property** Property name (`string`)
+- **property** プロパティ名 (`string`)
+- **default** デフォルト値 (`mixed`)
 
 返り値：
-- **Collection** (`object`) The collection for chaining the method calls.
+- **Collection** (`object`) メソッド呼び出しを連鎖させるためのコレクション
 
-!! **WARNING:** This method modifies the object instances shared between all the collections, if that is not intended, please  [copy()](#copy) collection before using this method.
+> [!Warning]  
+> このメソッドは、すべてのコレクションで共有されているオブジェクトインスタンスを修正します。それを意図しない場合、このメソッドを使う前に、コレクションを [copy()](#copy) してください。
 
-## call()
+### unsetProperty()
 
-`call( method, arguments): array` Calls a method for every object in the collection. Return results of each call.
+`unsetProperty( property ): Collection` コレクション内のすべてのオブジェクトで、そのプロパティの値を削除する。
 
 パラメータ：
-- **method** Method name (`string`)
-- **arguments** List of arguments (`array`)
+- **property** プロパティ名 (`string`)
 
 返り値：
-- List of `key: result` pairs (`array`)
+- **Collection** (`object`) メソッド呼び出しを連鎖させるためのコレクション
 
-!! **WARNING:** If the method modifies the object, please  [copy()](#copy) collection before using this method.
+> [!Warning]  
+> このメソッドは、すべてのコレクションで共有されているオブジェクトインスタンスを修正します。それを意図しない場合、このメソッドを使う前に、コレクションを [copy()](#copy) してください。
 
-## getTimestamps()
+### call()
 
-`getTimestamps(): array`  Returns a list of `key: timestamp` for each object.
+`call( method, arguments): array` コレクション内のすべてのオブジェクトで、メソッドを呼び出します。各呼び出しの結果を返します。
+
+パラメータ：
+- **method** メソッド名 (`string`)
+- **arguments** 引数のリスト (`array`)
 
 返り値：
-- List of `key: timestamp` pairs, where timestamp is integer (`array`)
+- `key: result` ペアのリスト (`array`)
+
+> [!Warning]  
+> このメソッドがオブジェクトを修正する場合、このメソッドを使う前に、コレクションを [copy()](#copy) してください。
+
+### getTimestamps()
+
+`getTimestamps(): array` 各オブジェクトについて `key: timestamp` のリストを返します。
+
+返り値：
+- `key: timestamp` ペアのリスト。ここで、timestamp は整数値です。 (`array`)
 
 ## getStorageKeys()
 
-`getStorageKeys(): array`  Returns a list of `key: storage_key` for each object.
+`getStorageKeys(): array` 各オブジェクトについて、 `key: storage_key` のリストを返す。
 
 返り値：
-- List of `key: storage_key` pairs (`array`)
+- `key: storage_key` ペアのリスト (`array`)
 
-## getFlexKeys()
+### getFlexKeys()
 
-`getFlexKeys(): array`  Returns a list of `key: flex_key` for each object.
+`getFlexKeys(): array` 各オブジェクトについて、`key: flex_key` のリストを返します。
 
 返り値：
-- List of `key: flex_key` pairs (`array`)
+- `key: flex_key` ペアのリスト (`array`)
 
-## withKeyField()
+### withKeyField()
 
-`withKeyField( field ): Collection` Return new collection with a different key.
+`withKeyField( field ): Collection` 異なるキーの新しいコレクションを返します。
 
 パラメータ：
-- **field** Key field (`string`)
-  - 'key': Default key used by the directory
-  - 'storage_key': Storage layer key
-  - 'flex_key': Unique key which can be used without knowing the directory
+- **field** キーのフィールド (`string`)
+  - 'key': ディレクトリによって使われるデフォルトキー
+  - 'storage_key': ストレージ層のキー
+  - 'flex_key': ディレクトリを知らなくても使えるユニークなキー
 
 返り値：
-- **Collection** (`object`) The collection, but indexed with the new key.
+- **Collection** (`object`) そのコレクション。ただし、新しいキーでインデックスされています。
 
-# Closure Tests (PHP only)
+<h2 id="closure-tests-php-only">クロージャーによるテスト( PHP のみ)</h2>
 
-## exists()
+### exists()
 
-`exists( Closure ): bool` Tests for the existence of an object that satisfies the given predicate.
+`exists( Closure ): bool` 与えられたクロージャーを満足するオブジェクトが存在するかテストします。
 
 パラメータ：
-- **Closure** Method used to test each object.
+- **Closure** 各オブジェクトのテストに使われるメソッド。
 
 返り値：
-- `bool` True if your callback function returns true for any object.
+- `bool` コールバック関数が true を返すオブジェクトが1つでもある場合に true。
 
 ## forAll()
 
-`forAll( Closure ): bool` Tests whether the given predicate holds for all objects of this collection.
+`forAll( Closure ): bool` コレクション内のすべてのオブジェクトでクロージャーがtrueを返すかテストします。
 
 パラメータ：
-- **Closure** Method used to test each object.
+- **Closure** 各オブジェクトのテストに使われるメソッド。
 
 返り値：
-- `bool` True if your callback function returns true for all objects.
+- `bool` コールバック関数がすべｔねおオブジェクトで true を返す場合に true。
 
-# Closure Filtering (PHP only)
+<h2 id="closure-filtering-php-only">クロージャーによるフィルタリング（PHPのみ）</h2>
 
-## filter()
+### filter()
 
-`filter( Closure ): Collection` Returns all the objects of this collection that satisfy the predicate.
+`filter( Closure ): Collection` コレクション内で、クロージャーが true を返すオブジェクトをすべて返します。
 
-The order of the elements is preserved.
+要素の順序は保たれます。
 
 パラメータ：
-- **Closure** Method used to test a single object.
+- **Closure** ひとつのオブジェクトをテストするのに使われるメソッド。
 
 返り値：
-- **Collection** (`object`) New collection with all the objects for which your callback function returns `true`.
+- **Collection** (`object`) コールバック関数が `true` を返すすべてのオブジェクトを持つ新しいコレクション。
 
-## map()
+### map()
 
-`map( Closure ): Collection` Applies the given function to each object in the collection and returns a new collection with the objects returned by the function.
+`map( Closure ): Collection` 与えられた関数をコレクション内の各オブジェクトに適用し、その関数が返したオブジェクトからなる新しいコレクションを返します。
 
 パラメータ：
-- **Closure** Method used to test a single object.
+- **Closure** ひとつのオブジェクトをテストするのに使われるメソッド。
 
 返り値：
-- **Collection** (`object`) New collection with objects returned by the callback function.
+- **Collection** (`object`) コールバック関数の返り値であるオブジェクトからなる新しいコレクション。
 
+### collectionGroup()
 
-## collectionGroup()
-
-`collectionGroup( property ): Collection[]` Group objects in the collection by a field and return them as associated array of collections.
+`collectionGroup( property ): Collection[]` フィールドによってコレクション内のオブジェクトをグルーピングし、コレクションの連想配列として、それらを返します。
 
 パラメータ：
-- **property** (`string`) Property used to group the objects.
+- **property** (`string`) オブジェクトをグルーピングするために使われるプロパティ。
 
 返り値：
-- `array` Multiple collections in an array, key being the value of the property.
+- `array` 複数のコレクションの配列。キーはプロパティの値。
 
-## matching()
+### matching()
 
-`matching( Criteria ): Collection` Selects all objects that match the expression and returns a new collection containing these objects.
+`matching( Criteria ): Collection` Criteria 表現にマッチするすべてのオブジェクトを選択し、それらのオブジェクトからなる新しいコレクションを返します。
 
 パラメータ：
-- **[Criteria](https://www.doctrine-project.org/projects/doctrine-collections/en/1.6/expression-builder.html#expression-builder)** Expression
+- **[Criteria](https://www.doctrine-project.org/projects/doctrine-collections/en/1.6/expression-builder.html#expression-builder)** 表現
 
 返り値：
-- **Collection** (`object`) New collection with objects matching the criteria.
+- **Collection** (`object`) criteria にマッチするオブジェクトからなる新しいコレクション。
 
-! **TIP:** Check Doctrine documentation for **[Expression Builder](https://www.doctrine-project.org/projects/doctrine-collections/en/1.6/expression-builder.html#expression-builder)** and** [Expressions](https://www.doctrine-project.org/projects/doctrine-collections/en/1.6/expressions.html#expressions)**.
+> [!Tip]  
+> Doctrine ドキュメントの **[Expression Builder](https://www.doctrine-project.org/projects/doctrine-collections/en/1.6/expression-builder.html#expression-builder)** と、 ** [Expressions](https://www.doctrine-project.org/projects/doctrine-collections/en/1.6/expressions.html#expressions)** をチェックしてください。
 
-## orderBy()
+### orderBy()
 
-`orderBy( array ): Collection` Reorder collection by list of property/value pairs.
+`orderBy( array ): Collection` property/value ペアのリストによりコレクションを並べ直します。
 
 パラメータ：
 - `array`
 
 返り値：
-- **Collection** (`object`) New collection with the new ordering.
+- **Collection** (`object`) 新しい順番による新しいコレクション。
 
-## partition()
+### partition()
 
-`partition( Closure ): array` Partitions this collection in two collections according to a predicate.
+`partition( Closure ): array` Closure に従って、コレクションを2つのコレクションに分割します。
 
-Keys are preserved in the resulting collections.
+結果のコレクションでは、キーが保持されます。
 
 パラメータ：
-- **Closure** Method used to partition a single object. Returns true or false.
+- **Closure** ひとつのオブジェクトを分割するために使われるメソッド。true もしくは false を返します。
 
 返り値：
-- `array` Partitioned objects `[[a, b], [c, d, e]]`
+- `array` パーティションに分けられたオブジェクト `[[a, b], [c, d, e]]`
+

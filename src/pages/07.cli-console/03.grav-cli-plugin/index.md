@@ -1,8 +1,9 @@
 ---
 title: 'Plugin コマンド'
 layout: ../../../layouts/Default.astro
-lastmod: '2025-05-11'
+lastmod: '2025-06-10'
 ---
+
 プラグインは、 Grav の CLI `bin/plugin` と統合でき、特定のタスクをターミナルから実行することで、プラグイン機能を強化します。
 
 [Grav CLI](../02.grav-cli/) セクションで説明したとおり、コマンドの実行には　**terminal** を使う必要があります。
@@ -68,23 +69,23 @@ Repeat the password: *********
 Success! User joeuser created.
 ```
 
-<h2 id="developers-integrate-the-cli-in-plugin">開発者向け：プラグインでの CLI 統合</h2>
+<h2 id="developers-integrate-the-cli-in-plugin">開発者向け：プラグインに CLI を統合</h2>
 
 開発者の方は、管理パネルやユーザーが実行できる CLI コマンドを作りたくなるかもしれません。プラグインにそのような機能を追加するのは、とても簡単です。
 
-The first thing you want to do is to create a subfolder `cli/` at the root of your plugin. This folder will be processed by `bin/plugin` and scanned for commands classes.
+最初にやるのは、プラグインのルートディレクトリ下に `cli/` フォルダを作成することです。このフォルダは、 `bin/plugin` により処理され、コマンドクラスへスキャンされます。
 
-Grav's CLI is based on the great [Symfony Console Component](http://symfony.com/doc/current/components/console/introduction.html) and you can pretty much follow their documentation for a complete reference, there are just a few important things you should consider.
+Grav の CLI は、素晴らしい [Symfony Console コンポーネント](http://symfony.com/doc/current/components/console/introduction.html) をもとにしており、Symfony のドキュメントが完全に利用可能です。その際、考慮すべき重要事項がいくつかあります。
 
-1. The name of the class file is standard. It should start with a capital letter and end with **Command.php**.
-    * `Hello.php`: WRONG
-    * `helloworldCommand.php`: WRONG
-    * `HelloworldCommand.php`: CORRECT
-    * `HelloWorldCommand.php`: CORRECT
-2. You should always extend `ConsoleCommand`, this will offer you some Grav extras such as formatted colors, direct access to the Grav instance and other utilities ([more details](https://github.com/getgrav/grav/blob/develop/system/src/Grav/Console/ConsoleTrait.php)).
-3. Symfony Console requires an `execute` method. When extending **ConsoleCommand** this becomes `serve`.
+1. class のファイル名は、標準にしてください。大文字から始まり、 **Command.php** で終わります。
+    * `Hello.php`: 間違い
+    * `helloworldCommand.php`: 間違い
+    * `HelloworldCommand.php`: 正しい
+    * `HelloWorldCommand.php`: 正しい
+2. 常に `ConsoleCommand` を拡張すべきです。これにより、カラーフォーマットや、Grav インスタンスへの直接アクセス、及びその他のユーティリティなど、Grav の拡張機能が使えます。（[詳しくは](https://github.com/getgrav/grav/blob/develop/system/src/Grav/Console/ConsoleTrait.php)）
+3. Symfony Console は、 `execute` メソッドが必要です。 **ConsoleCommand** を拡張するときは、これは `serve` になります。
 
-Below is a simple example to get you started. You can test it, as is, by saving it as `HelloCommand.php` and by placing it under your plugin's root `cli/` folder (**user/plugins/my_plugin/cli/HelloCommand.php**).
+以下は、初めて作成するときのためのシンプルな具体例です。 `HelloCommand.php` として保存し、プラグインのルートディレクトリの `cli/` フォルダ（ **user/plugins/my_plugin/cli/HelloCommand.php** ）に置けば、そのまま試すことができます。
 
 ```php
 <?php
@@ -159,5 +160,5 @@ class HelloCommand extends ConsoleCommand
 ![](grav-plugin-hello.webp)
 
 > [!Note]  
-> Another good simple example can be found in the [Error Plugin (LogCommand.php)](https://github.com/getgrav/grav-plugin-error/blob/develop/cli/LogCommand.php), If you are looking for a more complex example, you should have a look at the [Login Plugin (NewUserCommand.php)](https://github.com/getgrav/grav-plugin-login/blob/develop/cli/NewUserCommand.php)
+> 別のシンプルで良い具体例としては、 [Error Plugin (LogCommand.php)](https://github.com/getgrav/grav-plugin-error/blob/develop/cli/LogCommand.php) があります。より複雑な例としては、 [Login Plugin (NewUserCommand.php)](https://github.com/getgrav/grav-plugin-login/blob/develop/cli/NewUserCommand.php) をご覧ください。
 
