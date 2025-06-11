@@ -213,30 +213,28 @@ home:
 
 この方法で、 Grav は有効言語が 英語やフランス語だった場合のホームページへのルーティングを検知します。
 
-<h3 id="language-based-twig-templates">言語をもとにしたのtwigテンプレート</h3>
+<h3 id="language-based-twig-templates">言語ベースの Twig テンプレート</h3>
 
 デフォルトでは、 Grav はマークダウンファイルを使って、それをレンダリングする Twig テンプレートを決定します。多言語サイトでも、同じ方法で機能します。
 たとえば、 `default.fr.md` ファイルがあれば、現在のテーマやプラグインにより Twig テンプレートのパスとして登録されている適切なパスから `default.html.twig` という Twig ファイルを探します。
 また Grav は、現在有効になっている言語をパス構造に追加します。これが意味するところは、言語固有の Twig ファイルが必要になったら、言語フォルダのルートレベルにそれらを置くだけで良いということです。たとえば、現在のテーマが `templates/default.html.twig` に置かれている場合、 `templates/fr/` フォルダを作成でき、フランス語固有の Twig ファイルは、ここに置けます： `templates/fr/default.html.twig`
 
-Another option which requires manual setup is to override the `template:` setting in the page headers. For example:
+もうひとつの選択肢は、ページのフロントマターにある `template:` 設定を手動で上書きする必要があります。具体的には：
 
 ```yaml
 template: default.fr
 ```
 
-This will look for a template located at `templates/default.fr.html.twig`
+この場合、`templates/default.fr.html.twig` にあるテンプレートを探します。
 
-This provides you with two options for providing language specific Twig overrides.
+これにより、言語固有の Twig テンプレートを上書きするための手段が2つ用意されています。
 
 > [!Info]  
-> If no language-specific Twig template is provided, the default one will be used.
+> 特定言語の Twig テンプレートが提供されない場合、デフォルトのテンプレートが使われます。
 
+<h3 id="translation-via-twig">Twig を使った翻訳</h3>
 
-
-<h3 id="translation-via-twig">twigを使った翻訳</h3>
-
-The simplest way to use these translation strings in your Twig templates is to use the `|t` Twig filter.  You can also use the `t()` Twig function, but frankly the filter is cleaner and does the same thing:
+Twig テンプレートで、翻訳文字列を使う最も簡単な方法は、 `|t` Twig フィルターを使うことです。もしくは、 `t()` Twig 関数を使うこともできます。ただし、率直に言うと、フィルターの方がクリーンで、同じことができます。
 
 ```twig
 <h1 id="site-name">{{ "SITE_NAME"|t|e }}</h1>
@@ -246,7 +244,7 @@ The simplest way to use these translation strings in your Twig templates is to u
 </section>
 ```
 
-Using the Twig function `t()` the solution is similar:
+Twig 関数の `t()` を使う方法も、同じようにできます：
 
 ```twig
 <h1 id="site-name">{{ t("SITE_NAME")|e }}</h1>
@@ -256,7 +254,7 @@ Using the Twig function `t()` the solution is similar:
 </section>
 ```
 
-Another new Twig filter/function allows you to translate from an array.  This is particularly useful if you have a list of values such as months of the year, or days of the week.  For example, say you have this translation:
+他の新しい Twig フィルターや関数により、配列から翻訳ができます。これは、1年の中の月や、1週間の中の曜日のような値のリストの場合に、特に便利です。たとえば、このような翻訳ができます：
 
 ```yaml
 en:
@@ -264,29 +262,29 @@ en:
     MONTHS_OF_THE_YEAR: [January, February, March, April, May, June, July, August, September, October, November, December]
 ```
 
-You could get the appropriate translation for a post's month with the following:
+以下のようにして、投稿した月の適切な翻訳が得られます：
 
 ```twig
 {{ 'GRAV.MONTHS_OF_THE_YEAR'|ta(post.date|date('n') - 1)|e }}
 ```
 
-You can also use this as a Twig function with `ta()`.
+Twig 関数の `ta()` を使うことも可能です。
 
 <h3 id="translations-with-variables">変数による翻訳</h3>
 
-You can also use variables in your Twig translations by using [PHP's sprintf](https://php.net/sprintf) syntax:
+[PHP の sprintf](https://www.php.net/manual/ja/function.sprintf.php) 関数を使うことで、 Twig 翻訳で変数を使うこともできます：
 
 ```yaml
 SIMPLE_TEXT: There are %d monkeys in the %s
 ```
 
-And then you can populate those variables with the Twig:
+それから、これらの変数を Twig に移動します：
 
 ```twig
 {{ "SIMPLE_TEXT"|t(12, "London Zoo")|e }}
 ```
 
-resulting in the translation:
+翻訳の結果はこのようになります：
 
 ```txt
 There are 12 monkeys in the London Zoo
@@ -294,42 +292,47 @@ There are 12 monkeys in the London Zoo
 
 <h3 id="complex-translations">複雑な翻訳</h3>
 
-Sometimes it's required to perform complex translations with replacement in specific languages.  You can utilize the full power of the Language objects `translate()` method with the `tl` filter/function.  For example:
+ときには、特定の言語で置き換えを伴う複雑な翻訳を処理する必要があることもあります。 `tl` フィルター・関数を使って、 Language オブジェクトの `translate()` メソッドをフル活用できます。
+たとえば：
 
 ```twig
 {{ ["SIMPLE_TEXT", 12, 'London Zoo']|tl(['fr'])|e }}
 ```
 
-Will translate the `SIMPLE_TEXT` string and replace the placeholders with `12` and `London Zoo` respectively.  Also there's an array passed with language translations to try in first-find-first-used order.  This will output the result in french:
-
+上記は、 `SIMPLE_TEXT` 文字列を翻訳し、プレースホルダーをそれぞれ `12` と `London Zoo` に置き換えます。
+また、翻訳言語を渡す配列があり、最初に見つかった言語から順に試されます。
+フランス語での結果は、こうなります：
 
 ```txt
 Il y a 12 singes dans le Zoo de Londres
 ```
 
+> [!訳注]  
+> この部分は、前提としてフランス語翻訳ファイルに `SIMPLE_TEXT: Il y a %d singes dans le %s` が定義されているところに、上記を実行したときの挙動を示していると思うのですが、もしそうだとすると、 `Il y a 12 singes dans le London Zoo` になるはずで、どうして London Zoo のところまで翻訳されるのか、よく分かりません。
+
 <h3 id="php-translations">PHPによる翻訳</h3>
 
-As well as the Twig filter and functions you can use the same approach within your Grav plugin:
+Twig フィルターや関数と同様、 Grav プラグイン内で同じアプローチが使えます：
 
 ```php
 $translation = $this->grav['language']->translate(['HEADER.MAIN_TEXT']);
 ```
 
-You can also specify a language:
+言語を指定することもできます：
 
 ```php
 $translation = $this->grav['language']->translate(['HEADER.MAIN_TEXT'], ['fr']);
 ```
 
-To translate a specific item in an array use:
+配列に入った特定のアイテムを翻訳するためには、次を使ってください：
 
 ```php
 $translation = $this->grav['language']->translateArray('GRAV.MONTHS_OF_THE_YEAR', 3);
 ```
 
-### Plugin and Theme Language Translations
+<h3 id="plugin-and-theme-language-translations">プラグインとテーマの言語翻訳</h3>
 
-You can also provide your own translations in plugins and themes.  This is done by creating a `languages.yaml` file in the root of your plugin or theme (e.g. `/user/plugins/error/languages.yaml`, or `user/themes/antimatter/languages.yaml`), and should contain all the supported languages prefixed by the language or locale code:
+プラグインやテーマで、独自の翻訳を提供することもできます。これは、プラグインやテーマのルートディレクトリに `languages.yaml` ファイルを作成することでできます（例： `/user/plugins/error/languages.yaml` もしくは `user/themes/antimatter/languages.yaml` ）。そして、すべてのサポート言語の接頭辞を、言語コードもしくはロケールコードで、含む必要があります：
 
 ```yaml
 en:
@@ -343,23 +346,22 @@ fr:
 ```
 
 > [!Note]  
-> The convention for plugins is to use PLUGIN_PLUGINNAME.* as a prefix for all language strings, to avoid any name conflict. Themes are less likely to introduce language strings conflicts, but it's a good idea to prefix strings added in themes with THEME_THEMENAME.*
+> プラグインの規約では、名前衝突を防ぐため、すべての言語文字列に `PLUGIN_PLUGINNAME.*` を接頭辞として使用します。テーマは、衝突の可能性は低いですが、 `THEME_THEMENAME.*` を接頭辞として追加するのは良い考えです。
 
-### Translation Overrides
+<h3 id="translation-overrides">翻訳の上書き</h3>
 
-If you wish to override a particular translation, simply put the modified key/value pair in an appropriate language file in your `user/languages/` folder.  For example a file called `user/languages/en.yaml` could contain:
+特定の翻訳を上書きしたい場合、単純に、修正した key/value ペアを `user/languages/` フォルダにある適切な言語ファイルに置くだけです。たとえば、 `user/languages/en.yaml` ファイルは、次のようになります：
 
 ```yaml
 PLUGIN_ERROR:
   TITLE: My Error Plugin
 ```
 
+こうすることで、プラグインやテーマ自体に手を加えることなく、すべての翻訳文字列を上書きできます。そしてまた、それらのアップデート持にカスタム翻訳が上書きされることもありません。
 
-This will ensure that you can always override a translation string without messing around with the plugins or themes themselves, and also will avoid overwriting a custom translation when updating them.
+<h2 id="advanced">上級編</h2>
 
-## Advanced
-
-### Environment-Based Language Handling
+<h3 id="environment-based-language-handling">環境ベースの言語制御</h3>
 
 You can take advantage of [Grav's Environment Configuration](../../08.advanced/04.environment-config) to automatically route users to the correct version of your site based on URL.  For example, if you had a URL such as `http://french.mysite.com` that was an alias for your standard `http://www.mysite.com`, you could setup an environment configuration:
 
@@ -435,7 +437,8 @@ languages:
   translations_fallback: true
 ```
 
-!!! Help Grav reach a wider community of users by providing translations in **your language**. We use the [Crowdin Translation Platform](https://crowdin.com/) to facilitate translating the [Grav Core](https://crowdin.com/project/grav-core) and [Grav Admin Plugin](https://crowdin.com/project/grav-admin). [Sign-up](https://crowdin.com/join) and get started translating today!
+> [!Tip]  
+> Help Grav reach a wider community of users by providing translations in **your language**. We use the [Crowdin Translation Platform](https://crowdin.com/) to facilitate translating the [Grav Core](https://crowdin.com/project/grav-core) and [Grav Admin Plugin](https://crowdin.com/project/grav-admin). [Sign-up](https://crowdin.com/join) and get started translating today!
 
 <h3 id="language-switcher">言語の変換</h3>
 

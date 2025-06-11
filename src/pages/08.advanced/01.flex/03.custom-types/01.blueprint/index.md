@@ -465,7 +465,7 @@ config:
 **Fields** contains the fields you want to display in the directory listing. Each field has a key, which is the name of the field. Value can be omitted or it can contain the following configuration options:
 
 | 名前 | 値 | 具体例 | 説明 |
-|------|-------|-------------|
+|------|----|--------|------|
 | width | `integer` | 8 | Width of the field in pixels |
 | alias | `string` | 'header.published' | Name of the form field to use. VueTable doesn't like dots in the names, so set alias for nested variables. |
 | field | `array` |  | Form field override. Written just like any form field, but just without a key. |
