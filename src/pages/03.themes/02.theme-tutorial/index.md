@@ -1,43 +1,44 @@
 ---
 title: テーマのチュートリアル
 layout: ../../../layouts/Default.astro
-lastmod: '2025-04-18'
+lastmod: '2025-06-12'
 ---
+
 新しいことを学ぶときに、具体例を使って、自分独自のものを作ってみることが最良の方法であるときがあります。テーマづくりについて、この方法を採用してみましょう。
 
 ## Quark
 
-Gravには、[Spectre.css フレームワーク](https://picturepan2.github.io/spectre/) を使った **Quark** という、クリーンでモダンなテーマが付属しています。
+Grav には、[Spectre.css フレームワーク](https://picturepan2.github.io/spectre/) を使った **Quark** という、クリーンでモダンなテーマが付属しています。
 
 Spectre.css は、迅速で拡張性高い開発のための、軽量で、レスポンシブで、モダンなCSSフレームワークです。
 
-Spectreは、基本的なタイポグラフィーや要素のスタイル、flexboxベースのレスポンシブ・レイアウト・システム、pure CSSコンポーネントとユーティリティを、ベストプラクティスのコーディングと一貫したデザイン言語とともに提供してくれます。
+Spectre は、基本的なタイポグラフィーや要素のスタイル、 flexbox ベースのレスポンシブ・レイアウト・システム、 pure CSS コンポーネントとユーティリティを、ベストプラクティスのコーディングと一貫したデザイン言語とともに提供してくれます。
 
 しかしながら、もう少しシンプルなものから始めたほうが、より良いこともあります。
 
 ## Pure.css
 
-このチュートリアルのために、Yahoo!が開発した、人気の[Pure.css フレームワーク](https://pure-css.github.io/) を使って、テーマを作っていきましょう。
+このチュートリアルのために、 Yahoo! が開発した、人気の[Pure.css フレームワーク](https://pure-css.github.io/) を使って、テーマを作っていきましょう。
 
-Pure は、小さく、速く、レスポンシブなCSSフレームワークで、[Bootstrap](https://getbootstrap.jp/) や、[Foundation](https://get.foundation/) のような大きなフレームワークのオーバーヘッドが無い状態でサイトの開発ができます。Pureにはいくつかのモジュールがあり、それぞれ独立して使えますが、すべて合わせても **minifyしてgzipすると4.0KB** しかありません。
+Pure は、小さく、速く、レスポンシブな CSS フレームワークで、 [Bootstrap](https://getbootstrap.jp/) や、 [Foundation](https://get.foundation/) のような大きなフレームワークのオーバーヘッドが無い状態でサイトの開発ができます。 Pure にはいくつかのモジュールがあり、それぞれ独立して使えますが、すべて合わせても **minify して gzip すると 4.0KB** しかありません。
 
-[Pure.css プロジェクトサイト](http://purecss.io/) では、Pureがもたらすすべての機能を読むことができます。
+[Pure.css プロジェクトサイト](http://purecss.io/) では、 Pure のすべての機能を読むことができます。
 
-また、[テーマの重要なアップデート](https://getgrav.org/blog/important-theme-updates) というブログ記事を読んでおいてください。この記事では、将来的なプラグインサポートをベストな状態にするために、Gravテーマの重要な変更の概要を説明しています。
+また、 [テーマの重要なアップデート](https://getgrav.org/blog/important-theme-updates) というブログ記事を読んでおいてください。この記事では、将来的なプラグインサポートをベストな状態にするために、 Grav テーマの重要な変更の概要を説明しています。
 
 > [!訳注]  
-> 上記のブログ記事は、Grav1.5, 1.6時代のものなので、これから始める方には、とくに関係なさそうでした。
+> 上記のブログ記事は、 Grav 1.5, 1.6 時代のものなので、これから始める方には、とくに関係なさそうでした。
 
-<h2 id="step-1-install-devtools-plugin">ステップ1: DevToolsプラグインのインストール</h2>
+<h2 id="step-1-install-devtools-plugin">ステップ1: DevTools プラグインのインストール</h2>
 
 > [!Info]  
-> 以前のバージョンのチュートリアルでは、あらかじめベーステーマを作る必要がありました。この手順はすべて、新しい **DevToolsプラグイン** のおかげで、やらなくて済むようになりました。
+> 以前のバージョンのチュートリアルでは、あらかじめベーステーマを作る必要がありました。この手順はすべて、新しい **DevTools プラグイン** のおかげで、やらなくて済むようになりました。
 
-新しいテーマを作る最初のステップは、**DevToolsプラグインをインストールする** ことです。2つの方法でインストールできます。
+新しいテーマを作る最初のステップは、**DevTools プラグインをインストールする** ことです。2つの方法でインストールできます。
 
 <h4 id="install-via-cli-gpm">CLI GPMによるインストール</h4>
 
-* コマンドラインを、Gravをインストールしたルートディレクトリへ移動させてください。
+* コマンドラインを、 Grav をインストールしたルートディレクトリへ移動させてください。
 
 ```bash
 bin/gpm install devtools
@@ -45,15 +46,15 @@ bin/gpm install devtools
 
 <h4 id="install-via-admin-plugin">管理パネルからのインストール</h4>
 
-* After logging in, simply navigate to the **Plugins** section from the sidebar.
-* Click the <i class="fa fa-plus"></i> **Add** button in the top right.
-* Find **DevTools** in the list and click the <i class="fa fa-plus"></i> **Install** button.
+* ログイン後、サイドバーから **Plugins** セクションへ移動します。
+* 右上の **+ Add** ボタンをクリックします。
+* リストから、 **DevTools** を探し、 **+ Install** ボタンをクリックします。
 
 <h2 id="step-2-create-base-theme">ステップ2: ベーステーマの作成</h2>
 
-このステップのために、[コマンドライン](../../07.cli-console/01.command-line-intro) を使う必要があります。というのも、DevToolsが提供するいくつかのCLIコマンドによって、新しいテーマづくりがかなりかんたんになるからです！
+このステップのために、 [コマンドライン](../../07.cli-console/01.command-line-intro) を使う必要があります。というのも、 DevTools が提供するいくつかの CLI コマンドによって、新しいテーマづくりがかなり簡単になるからです！
 
-Gravをインストールしたルートディレクトリから、次のようなコマンドを実行してください：
+Grav をインストールしたルートディレクトリから、次のようなコマンドを実行してください：
 
 ```bash
 bin/plugin devtools new-theme
@@ -62,7 +63,7 @@ bin/plugin devtools new-theme
 このプロセスでは、新しいテーマづくりに必要な、いくつかの質問を訊ねられます。
 
 > [!Note]  
-> これから新しいテーマを作るのに、**pure-blank** を利用したいと思っています。が、他のテーマを継承するシンプルな **inheritance** を作ってもかまいません。
+> これから新しいテーマを作るのに、 **pure-blank** を利用したいと思っています。が、他のテーマを継承するシンプルな **inheritance** を作ってもかまいません。
 
 ```bash
 bin/plugin devtools new-theme
@@ -82,9 +83,9 @@ SUCCESS theme mytheme -> Created Successfully
 Path: /www/user/themes/my-theme
 ```
 
-最後の行で、DevToolsコマンドが、どこに新しいテンプレートを作ったかを教えてくれます。ここで作られたテンプレートは、完全に機能しますが、とても単純でもあります。必要に応じて、修正したいと思うことでしょう。
+最後の行で、 DevTools コマンドが、どこに新しいテンプレートを作ったかを教えてくれます。ここで作られたテンプレートは、完全に機能しますが、とても単純でもあります。必要に応じて、修正したいと思うことでしょう。
 
-新しいテーマの動作を知るために、デフォルトテーマを `quark` から 上記で定義した `my-theme` に変える必要があります。`user/config/system.yaml` ファイルを編集し、以下のように変更してください：
+新しいテーマの動作を知るために、デフォルトテーマを `quark` から 上記で定義した `my-theme` に変える必要があります。 `user/config/system.yaml` ファイルを編集し、以下のように変更してください：
 
 ```yaml
 ...
@@ -141,17 +142,17 @@ pages:
 
 次のアイテムは、GMPを通してテーマをリリースしたい場合に必要なアイテムです。
 
-* **`CHANGELOG.md`** - A file that follows the [Grav Changelog Format](/advanced/grav-development#changelog-format) to show changes in releases.
-* **`LICENSE`** - a license file, should probably be MIT unless you have a specific need for something else.
-* **`README.md`** - A 'Readme' that should contain any documentation for the theme.  How to install it, configure it, and use it.
-* **`screenshot.jpg`** - 1009px x 1009px screenshot of the theme.
-* **`thumbnail.jpg`** - 300px x 300px screenshot of the theme.
+* **`CHANGELOG.md`** - リリースでの変更を表示するための [Grav Changelog フォーマット](../../08.advanced/09.grav-development/#changelog-format) に従ったファイル。
+* **`LICENSE`** - ライセンスファイル。特段の理由が無ければ、 MIT であるべきです。
+* **`README.md`** - 'Readme' ファイル。テーマに関するドキュメントを含むべきです。インストール方法、設定方法、使用方法など。
+* **`screenshot.jpg`** - 1009px x 1009px サイズのテーマのスクリーンショット。
+* **`thumbnail.jpg`** - 300px x 300px サイズのテーマのスクリーンショット。
 
 <h2 id="step-4-base-template">ステップ4: ベーステンプレート</h2>
 
-[前の章](../01.theme-basics) でみたとおり、Gravのコンテンツファイルは、特定のファイル名を持ちます。たとえば、`default.md` のように。これにより、Gravは `default.html.twig` というレンダリング用のTwigテンプレートを探します。1つのファイルごとに、表示したいものをすべて書いていくこともできますし、それでうまく機能します。しかし、もっと良い方法もあります。
+[前の章](../01.theme-basics) に見たとおり、 Grav のコンテンツファイルは、特定のファイル名を持ちます。たとえば、 `default.md` のように。これにより、 Grav は、 `default.html.twig` というレンダリング用の Twig テンプレートを探します。1つのファイルごとに、表示したいものをすべて書いていくこともできますし、それでうまく機能します。しかし、もっと良い方法もあります。
 
-Twigの[Extends](https://twig.symfony.com/doc/1.x/tags/extends.html) タグを使えば、好きな [blocks](https://twig.symfony.com/doc/1.x/tags/block.html) を含むベースレイアウトが作れます。これにより、どんなtwigテンプレートも、ベーステンプレートから **拡張** できるようになり、ベーステンプレートに書いたあらゆる **block** を定義できます。それでは、`templates/default.html.twig` ファイルを見てください。そのコンテンツを試してみましょう：
+Twig の [Extends](https://twig.symfony.com/doc/1.x/tags/extends.html) タグを使えば、好きな [blocks](https://twig.symfony.com/doc/1.x/tags/block.html) を含むベースレイアウトが作れます。これにより、どんな twig テンプレートも、ベーステンプレートから **拡張** できるようになり、ベーステンプレートに書いたあらゆる **block** を定義できます。それでは、`templates/default.html.twig` ファイルを見てください。そのコンテンツを試してみましょう：
 
 ```twig
 {% extends 'partials/base.html.twig' %}
@@ -166,14 +167,14 @@ Twigの[Extends](https://twig.symfony.com/doc/1.x/tags/extends.html) タグを�
 1つ目は、このテンプレートは、`partials/base.html.twig` にあるテンプレートを拡張しています。
 
 > [!Note]  
-> Twigテンプレート内で、`tenplates/` をパスに含める必要はありません。Twigはすでに `templates/` をテンプレートのルートディレクトリとしていているからです。
+> Twig テンプレート内で、`tenplates/` をパスに含める必要はありません。 Twig はすでに `templates/` をテンプレートのルートディレクトリとしていているからです。
 
 2つ目は、`content` ブロックがベーステンプレートから上書きされています。ページのコンテンツは、その場所に出力されます。
 
 > [!Info]  
-> 一貫性を保つために、`templates/partials` フォルダを使うのは良い方法です。このフォルダには、HTMLの小さな塊や、共有されるTwigテンプレートを保存します。同様に、`templates/modular` をモジュラーテンプレートのために、`templates/forms` をフォーム用に使えます。テンプレートを整理するために、いかなるサブフォルダを作っていただいてもかまいません。
+> 一貫性を保つために、`templates/partials` フォルダを使うのは良い方法です。このフォルダには、 HTML の小さな塊や、共有される Twig テンプレートを保存します。同様に、`templates/modular` をモジュラーテンプレートのために、`templates/forms` をフォーム用に使えます。テンプレートを整理するために、いかなるサブフォルダを作っていただいてもかまいません。
 
-`templates/partials/base.html.twig` ファイルを見ると、HTMLレイアウトの中身がわかります：
+`templates/partials/base.html.twig` ファイルを見ると、 HTML レイアウトの中身がわかります：
 
 ```twig
 {% set theme_config = attribute(config.themes, config.system.pages.theme) %}
@@ -249,28 +250,28 @@ Twigの[Extends](https://twig.symfony.com/doc/1.x/tags/extends.html) タグを�
 </body>
 ```
 
-> [!Note]  
-> **TIP:** 変数がレンダリングしても安全で、HTMLを含んでいる場合は、`autoescape` がtrueである状態で`|raw` フィルターを使ってください。
+> [!Tip]  
+> 変数がレンダリングしても安全で、 HTML を含んでいる場合は、`autoescape` が true である状態で `|raw` フィルターを使ってください。
 
 > [!Info]  
-> [システム設定](../../01.basics/05.grav-configuration/#twig) で、`autoescape` をtrueにするのか、それともすべての変数ひとつひとつに対して、[XSS攻撃](https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting) への対策して、忘れずにエスケープするのかは、とても重要な問題です。
+> [システム設定](../../01.basics/05.grav-configuration/#twig) で、`autoescape` を true にするのか、それともすべての変数ひとつひとつに対して、[XSS 攻撃](https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting) への対策して、忘れずにエスケープするのかは、とても重要な問題です。
 
 > [!訳注]  
-> ひとつひとつの変数をXSS対策するのは、のちのち本当に面倒なことになるので、`autoescape` は `true` でお願いします。
+> ひとつひとつの変数を XSS 対策するのは、のちのち本当に面倒なことになるので、`autoescape` は `true` でお願いします。
 
 <h2 id="step-5-breaking-it-down">ステップ5: 分解しながら理解する</h2>
 
 何が起こっているのか、より深く理解するために、`base.html.twig` ファイルのコードを読み通してください。いくつかの注目すべき重要な点があります：
 
-1. `theme_config` 変数が、テーマ設定からセットされています。Twigはダッシュマークをうまく使えないため、ダッシュのある変数（たとえば： `config.themes.my-theme` ）を取得するためには、`attribute()` 関数を使います。Twig関数は、動的に`config.thems` から `my-theme` データを取得します。
+1. `theme_config` 変数が、テーマ設定からセットされています。 Twig はダッシュマークをうまく使えないため、ダッシュのある変数（たとえば： `config.themes.my-theme` ）を取得するためには、`attribute()` 関数を使います。 Twig 関数は、動的に`config.thems` から `my-theme` データを取得します。
 
-1. `<html lang=...` のアイテムは、もし有効化されていればGravのアクティブ言語をもとに設定され、そうでなければ、`theme_config` 内の `default_lang` を設定します。
+1. `<html lang=...` のアイテムは、もし有効化されていれば Grav のアクティブ言語をもとに設定され、そうでなければ、 `theme_config` 内の `default_lang` を設定します。
 
-1. `{% block head %}{% endblock head %}` 構文は、ベーステンプレート内で、あるエリアを定義します。`{% endblock head %}` タグ内の `head` は、必須ではありませんが、読みやすくなるので使っていることに注意してください。このブロックには、HTMLの `<head>` タグで使われるものを置きます。
+1. `{% block head %}{% endblock head %}` 構文は、ベーステンプレート内で、あるエリアを定義します。`{% endblock head %}` タグ内の `head` は、必須ではありませんが、読みやすくなるので使っていることに注意してください。このブロックには、 HTML の `<head>` タグで使われるものを置きます。
 
 1. `<title>` タグは、そのページのフロントマターに書いた `title` 変数をもとに、動的に設定されます。`header.title` は、ショートカットメソッドですが、`page.header.title` と同じことです。
 
-1. 標準的なmeta タグをいくつか設定した後、`partials/metadata.html.twig` が参照され、呼び出されます（includeされます）。このファイルは、`systems/templates/partials` フォルダにあり、ページのメタデータをループします。これは実際には、`site.yaml` のメタデータとページで上書きしたデータを合わせた（mergeした）ものです。
+1. 標準的なmeta タグをいくつか設定した後、`partials/metadata.html.twig` が参照され、呼び出されます（include されます）。このファイルは、`systems/templates/partials` フォルダにあり、ページのメタデータをループします。これは実際には、`site.yaml` のメタデータとページで上書きしたデータを合わせた（merge した）ものです。
 
 1. `<link rel="icon"...` では、テーマ固有の画像を指し示します。このケースでは、テーマディレクトリ下の`images/logo.png` が使われます。このための構文は、`{{ url('theme://images/logo.png') }}` です。
 

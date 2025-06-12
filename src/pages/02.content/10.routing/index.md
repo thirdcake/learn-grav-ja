@@ -1,23 +1,24 @@
 ---
 title: ルーティング
 layout: ../../../layouts/Default.astro
-lastmod: '2025-04-15'
+lastmod: '2025-06-12'
 ---
-[ページ -> フォルダのセクション](../01.content-pages/#folders) の最初の方で説明したとおり、Gravの **ルーティング** は、主にサイトのコンテンツを作る際のフォルダ構造によって決まります。
 
-しかしもう少し柔軟性が欲しいときもあります。この点について、より便利になるように、Gravは多様なツールと設定オプションが用意されています。
+[ページ -> フォルダのセクション](../01.content-pages/#folders) の最初の方で説明したとおり、 Grav の **ルーティング** は、主にサイトのコンテンツを作る際のフォルダ構造から決まります。
 
-ここで、他のCMSからGravへサイト移転する状況を思い浮かべてください。新しいサイトを立ち上げるのに、いくつかの選択肢があります。
+しかしもう少し柔軟性が欲しいときもあります。この点について、より便利になるように、 Grav は多様なツールと設定オプションが用意されています。
 
-1. フォルダ構造を一致させることで、古いサイトと同じURLを複製する
-2. 新サイトは好きなように作成し、webサーバーの「リライト」機能で、古いURLから新しいURLへリダイレクトする 
-3. 新サイトは好きなように作成し、Gravの設定で、古いURLから新しいURLへリダイレクトする
+ここで、他の CMS から Grav へサイト移転する状況を思い浮かべてください。新しいサイトを立ち上げるのに、いくつかの選択肢があります。
 
-フォルダ構造とは違うURLに対応させたい状況は、ほかにもたくさんあるでしょう。Gravでは、その目的を達成するための以下のような機能があります。
+1. フォルダ構造を一致させることで、古いサイトと同じ URL を複製する
+2. 新サイトは好きなように作成し、 web サーバーの「リライト」機能で、古い URL から新しい URL へリダイレクトする 
+3. 新サイトは好きなように作成し、 Grav の設定で、古い URL から新しい URL へリダイレクトする
+
+フォルダ構造とは違う URL に対応させたい状況は、ほかにもたくさんあるでしょう。 Grav では、その目的を達成するための以下のような機能があります。
 
 <h2 id="page-level-route-and-redirect-overrides">ページレベルのルーティングとリダイレクト</h2>
 
-[ヘッダー -> Routesのセクション](../02.headers/#routes) で概要を示したとおり、**default ルーティング設定** や、**ルーティングのaliases** の配列により、 ルーティングのオプションを明示することができます。
+[ヘッダー -> Routesのセクション](../02.headers/#routes) で概要を示したとおり、**default ルーティング設定** や、**ルーティングの aliases** の配列により、 ルーティングのオプションを明示することができます。
 
 ```yaml
 routes:
@@ -28,9 +29,9 @@ routes:
     - '/can-be-any-valid-slug'
 ```
 
-これらは、ページごとに処理され、キャッシュされます。そしてこれらは、 **素のルーティング** と一緒に扱われます。素のルーティングとは、Gravがデフォルトで機能する、ページ階層をもとにした **スラッグ** を基礎とするルーティングのことです。よって、カスタムのルーティングを提供したとしても、**素のルーティング** はそのまま利用可能です。
+これらは、ページごとに処理され、キャッシュされます。そしてこれらは、 **素のルーティング** と一緒に扱われます。素のルーティングとは、 Grav がデフォルトで機能する、ページ階層をもとにした **スラッグ** を基礎とするルーティングのことです。よって、カスタムのルーティングを提供したとしても、**素のルーティング** はそのまま利用可能です。
 
-ページレベルのルーティングと似ていますが、Gravではページのフロントマターに対象ページを指定することで、ページレベルのリダイレクトに対応しています。より詳しくは、[ヘッダー -> Redirectのセクション](../02/headers/#redirect) をご覧ください。
+ページレベルのルーティングと似ていますが、 Grav ではページのフロントマターに対象ページを指定することで、ページレベルのリダイレクトに対応しています。より詳しくは、[ヘッダー -> Redirect のセクション](../02/headers/#redirect) をご覧ください。
 
 ```yaml
 redirect: '/some/custom/route[303]'
@@ -38,21 +39,21 @@ redirect: '/some/custom/route[303]'
 
 <h2 id="site-level-routes-and-redirects">サイトレベルのルーティングとリダイレクト</h2>
 
-Gravには、強力な正規表現ベースの **別名ルーティング** 機能と、あるページから別のページへの **リダイレクト** 機能が備わっています。この機能は、Gravへサイトを引っ越しするような場面で、古いURLを新サイトでも使わなくては行けない場合に、特に便利です。これはしばしば、webサーバの **rewrite rules** によって達成されることですが、ときには、Gravの制御でやってしまったほうが、便利で柔軟であることがあります。
+Grav には、強力な正規表現ベースの **別名ルーティング** 機能と、あるページから別のページへの **リダイレクト** 機能が備わっています。この機能は、 Grav へサイトを引っ越しするような場面で、古い URL を新サイトでも使わなくては行けない場合に、特に便利です。これはしばしば、 web サーバの **rewrite rules** によって達成されることですが、ときには、 Grav の制御でやってしまったほうが、便利で柔軟であることがあります。
 
-これらは、[サイト設定](../../01.basics/05.grav-configuration/#site-configuration) によって設定します。Gravは、サンプル設定として `system/config/site.yaml` を提供しますが、`user/config/site.yaml` を編集することで、これらを上書きし、独自の設定を付け加えることができます。
+これらは、[サイト設定](../../01.basics/05.grav-configuration/#site-configuration) によって設定します。 Grav は、サンプル設定として `system/config/site.yaml` を提供しますが、`user/config/site.yaml` を編集することで、これらを上書きし、独自の設定を付け加えることができます。
 
 > [!Info]  
 > （多言語サイトとする場合）すべてのリダイレクトするルールは、言語部分の後から始まるスラッグ部分に適用されます。
 
 > [!Warning]  
-> 特定の文字は、あらゆるルーティングにおいて、エスケープされなければいけません。このことは、サイトを引っ越すときに、古いサイトが伝統的なファイル拡張子を利用していた場合（たとえば`.php`）や、URLパラメータを利用していた場合（たとえば`?foo=bar`）に、とくに重要です。これらの例では、ピリオドやクエスチョンマークは、`/index\.php\?foo=bar: '/new/location'` というように、**エスケープしなければいけません** 。
+> 特定の文字は、あらゆるルーティングにおいて、エスケープされなければいけません。このことは、サイトを引っ越すときに、古いサイトが伝統的なファイル拡張子を利用していた場合（たとえば `.php` ）や、 URL パラメータを利用していた場合（たとえば `?foo=bar` ）に、とくに重要です。これらの例では、ピリオドやクエスチョンマークは、 `/index\.php\?foo=bar: '/new/location'` というように、**エスケープしなければいけません** 。
 
-<h3 id="route-aliases">ルーティングの別名</h3>
+<h3 id="route-aliases">ルーティングのエイリアス（別名）</h3>
 
-<h4 id="simple-aliases">シンプルな別名</h4>
+<h4 id="simple-aliases">シンプルなエイリアス</h4>
 
-最も基本的な別名の種類は、1対1になるように対応させるものです。`site.yaml` ファイルの `routes: ` セクションでは、別名と、実際に使われるルーティングを対応させたリストを作成できます。
+最も基本的な別名の種類は、1対1になるように対応させるものです。 `site.yaml` ファイルの `routes: ` セクションでは、別名と、実際に使われるルーティングを対応させたリストを作成できます。
 
 > [!Info]  
 > これらの別名は、そのルーティングファイルが見つからなかったときのみ利用されることに注意してください。
@@ -62,10 +63,10 @@ routes:
   /something/else: '/blog/focus-and-blur'
 ```
 
-もし、`http://mysite.com/something/else` にリクエストが来て、そしてそれにデフォルトで対応するページが無い場合に、このルーティングは、`/blog/focus-and-blur` にあるページに決定されます。これは実質的には閲覧者をこのページへ **リダイレクトした** のではありません。単に、別名のページを表示しただけです。
+もし、 `http://mysite.com/something/else` にリクエストが来て、そしてそれにデフォルトで対応するページが無い場合に、このルーティングは、 `/blog/focus-and-blur` にあるページに決定されます。これは実質的には閲覧者をこのページへ **リダイレクトした** のではありません。単に、別名のページを表示しただけです。
 
 > [!Info]  
-> The indentation is key here, without it the route redirect will not work. 
+> ここでのインデントは重要です。もし無ければ、ルーティングのリダイレクトは機能しません。
 
 <h4 id="regex-based-aliases">正規表現による別名</h4>
 
@@ -76,7 +77,7 @@ routes:
    /another/(.*): '/blog/$1'
 ```
 
-これは別名からワイルドカードでルーティングします。よって、`http://mysite.com/another/focus-and-blur` というリクエストのとき、実際は`/blog/focus-and-blur` にあるページが表示されます。これはひとつのURLの集合を別のところへ組み合わせるのに、パワフルな方法です。WordPressからGravへの移動にもとても良いでしょう:)
+これは別名からワイルドカードでルーティングします。よって、 `http://mysite.com/another/focus-and-blur` というリクエストのとき、実際は `/blog/focus-and-blur` にあるページが表示されます。これはひとつの URL の集合を別のところへ組み合わせるのに、パワフルな方法です。 WordPress から Grav への移動にもとても良いでしょう:)
 
 すべての別名を集めて、特定のルーティングに対応させることもできます：
 
@@ -85,9 +86,9 @@ routes:
   /one-ring/(.*): '/blog/sunshine-in-the-hills'
 ```
 
-上記の別名ルーティングでは、`/one-ring/to-rule-them-all` や `/one-ring/is-mine.html` のようなワイルドカードにマッチするすべてのURLについて、`/blog/sunshine-in-the-hills` のルーティングのページからコンテンツが表示されます。
+上記の別名ルーティングでは、 `/one-ring/to-rule-them-all` や `/one-ring/is-mine.html` のようなワイルドカードにマッチするすべての URL について、 `/blog/sunshine-in-the-hills` のルーティングのページからコンテンツが表示されます。
 
-よりクリエイティブに、複数対応させたりや、任意の正規表現の構文を使うこともできます。
+よりクリエイティブに、複数対応させたり、任意の正規表現の構文を使うこともできます。
 
 ```yaml
 routes:
@@ -101,11 +102,11 @@ routes:
 /complex/section/article-2.html  -> /blog/section/folder/article-2.html
 ```
 
-このルーティングは、`complex/category` や、`complex/section` で始まっていないものには適合しません。より詳しい情報は、[Regexr.com](https://regexr.com/) で、正規表現を学び、テストする素晴らしい方法を提供しています。
+このルーティングは、 `complex/category` や `complex/section` で始まっていないものには適合しません。より詳しい情報は、 [Regexr.com](https://regexr.com/) で、正規表現を学び、テストする素晴らしい方法を提供しています。
 
 <h3 id="redirects">リダイレクト</h3>
 
-**別名によるルーティング** の別系統の選択肢としては、**リダイレクト** によるものがあります。これらは似ていますが、URLがそのままでコンテンツのみ別名のページから持ってくるのではなく、ブラウザを対応したページへリダイレクトさせる点が違います。
+**別名によるルーティング** とは別系統の選択肢としては、**リダイレクト** による方法があります。これらは似ていますが、 URL がそのままでコンテンツのみ別名のページから持ってくるのではなく、ブラウザを対応したページへリダイレクトさせる点で違います。
 
 リダイレクトするため、システムレベルでは3つの設定オプションがあります：
 
@@ -116,13 +117,13 @@ pages:
   redirect_trailing_slash: true
 ```
 
-* `redirect_default_route` enables Grav to automatically redirect to the page's default route.
+* `redirect_default_route` Grav が自動的にページのデフォルトのルーティングへリダイレクトできるようにします。
 * `redirect_default_code` デフォルトのHTTPリダイレクトコードを指定できます：
-    * **301**: 恒久的なリダイレクトです。 Clients making subsequent requests for this resource should use the new URI. Clients should not follow the redirect automatically for POST/PUT/DELETE requests.
-    * **302**: Redirect for undefined reason. Clients making subsequent requests for this resource should not use the new URI. Clients should not follow the redirect automatically for POST/PUT/DELETE requests.
-    * **303**: Redirect for undefined reason. Typically, 'Operation has completed, continue elsewhere.' Clients making subsequent requests for this resource should not use the new URI. Clients should follow the redirect for POST/PUT/DELETE requests.
-    * **307**: 一時的なリダイレクトです。 Resource may return to this location at a later point. Clients making subsequent requests for this resource should use the old URI. Clients should not follow the redirect automatically for POST/PUT/DELETE requests.
-* `redirect_trailing_slash` option lets you redirect to a non-trailing slash version of the current URL
+    * **301**: 恒久的なリダイレクトです。このリソースに対してそれ以降リクエストを行うクライアントは、新しい URI を使うべきです。 POST/PUT/DELETE リクエストに対しては、自動リダイレクトを行うべきではありません。
+    * **302**: 未定義の理由によるリダイレクトです。このリソースに対してそれ以降リクエストを行うクライアントは、新しい URL を使うべきではありません。 POST/PUT/DELETE リクエストに対しては、自動リダイレクトを行うべきではありません。
+    * **303**: 未定義の理由によるリダイレクトです。通常、 '処理は完了したので、他の場所へ続けてください' という状況です。このリソースに対してそれ以降リクエストを行うクライアントは、新しい URL を使うべきではありません。クライアントは、 POST/PUT/DELETE リクエストのリダイレクトに従うべきです。
+    * **307**: 一時的なリダイレクトです。リソースは、あとでこの場所に戻ってくるかもしれません。その後にこのリソースにリクエストを行うクライアントは、古い URL を使うべきです。 POST/PUT/DELETE リクエストに対しては、自動リダイレクトを行うべきではありません。
+* `redirect_trailing_slash` 現在の URL から末尾スラッシュ無しの URL へリダイレクトするオプションです。
 
 たとえば：
 
@@ -138,9 +139,9 @@ redirects:
     /jungle: '/blog/the-urban-jungle[303]'
 ```
 
-If you were to point your browser to `http://mysite.com/jungle`, you would actually get redirected and end up on the page: `http://mysite.com/blog/the-urban-jungle`.
+もし、 `http://mysite.com/jungle` をブラウザで表示するとき、リダイレクトされ、次のページに行き着きます： `http://mysite.com/blog/the-urban-jungle` 。
 
-The same regular expression capabilities that exist for Route Aliases, also exist for Redirects.  For example:
+ルーティングエイリアスにあったものと同じ正規表現機能が、リダイレクトにもあります。たとえば：
 
 ```yaml
 redirects:
@@ -148,7 +149,7 @@ redirects:
     /complex/(category|section)/(.*): /blog/$1/folder/$2
 ```
 
-These look almost identical to the Route Alias version, but instead of transparently showing the new page, Grav actually redirects the browser and loads the new page specifically.
+これらは、ルーティングエイリアスとほとんど同じようですが、透過的に新しいページを表示するのではなく、 Grav は実際にブラウザをリダイレクトし、ページを新しく読み込みます。
 
 <h2 id="hiding-the-home-route">ホームへのルーティングを隠す</h2>
 
