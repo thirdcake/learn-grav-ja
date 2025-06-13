@@ -1,15 +1,15 @@
 ---
 title: アセットマネージャー
 layout: ../../../layouts/Default.astro
-lastmod: '2025-05-25'
+lastmod: '2025-06-13'
 ---
 
 > [!訳注]  
 > このページの内容は、今のわたしには難しい内容のため、後回しになっています。とりあえず、 Twig カスタムタグの [`script`](../04.twig-tags-filters-functions/01.tags/#script) と [`style`](../04.twig-tags-filters-functions/01.tags/#style) の使い方がわかっていれば、実務上は、ほとんど問題は無いと思います。Grav 1.7.28 以上では、`アセットパイプライン` を使って、ミニファイや1つのファイルに結合したい場合にのみ、このアセットマネージャーが必要になり、それ以外の場合は、上記のカスタムタグで代替可能という認識です。
 
-Grav  1.6で、**アセットマネージャー** が完全に書き直されました。テーマで、**CSS** や **JavaScript** のアセットをより柔軟なメカニズムで管理できるようになりました。アセットマネージャーの主な目的は、テーマやプラグインでアセットを追加する処理をシンプルにし、優先順位などの強化された機能を提供することです。また、アセットを **ミニファイ** し、**圧縮** し、**インライン化** する **アセットパイプライン** を提供し、ブラウザのリクエストを減らし、アセットの全体サイズも小さくします。
+Grav 1.6 で、**アセットマネージャー** が完全に書き直されました。テーマで、**CSS** や **JavaScript** のアセットをより柔軟なメカニズムで管理できるようになりました。アセットマネージャーの主な目的は、テーマやプラグインでアセットを追加する処理をシンプルにし、優先順位などの強化された機能を提供することです。また、アセットを **ミニファイ** し、**圧縮** し、**インライン化** する **アセットパイプライン** を提供し、ブラウザのリクエストを減らし、アセットの全体サイズも小さくします。
 
-以前よりも、より柔軟に、より信頼できるようになりました。さらに、コードもより 'クリーン' になり、読みやすくなりました。アセットマネージャーは、Gravの処理中に利用可能で、プラグインのイベントフックでも利用でき、さらにTwigの呼び出しでテーマから直接利用できます。
+以前よりも、より柔軟に、より信頼できるようになりました。さらに、コードもより 'クリーン' になり、読みやすくなりました。アセットマネージャーは、 Grav の処理中に利用可能で、プラグインのイベントフックでも利用でき、さらに Twig の呼び出しでテーマから直接利用できます。
 
 > [!Note]  
 > **技術的詳細** ：主要なアセットの class は大幅にシンプルになり、小さくなりました。ロジックの多くは3つの trait に分割されました。 _testing trait_ は、主に test suite で使われる関数を含みます。 _utils trait_ は、通常のアセットタイプ（JS、インラインJS、CSS、インラインCSS）と、ミニファイや圧縮を行うアセットパイプラインで共有されるメソッドを含みます。最後に、 _legacy trait_ は、ショートカットや回避策のメソッドを含みますが、一般的には、今後は使わない方が良いです。
@@ -17,10 +17,9 @@ Grav  1.6で、**アセットマネージャー** が完全に書き直されま
 > [!Tip]  
 > アセットマネージャーは、Grav 1.6 以前のバージョンの構文と完全に下位互換がありますが、このドキュメントでは、これ以降、新しい `優先構文` を説明します。
 
-
 <h2 id="configuration">設定</h2>
 
-アセットマネージャーには、シンプルな設定オプションがあります。デフォルト値は、systemフォルダの `system.yaml` ファイルにあります。 `user/config/system.yaml` ファイルで、上書きしてください。
+アセットマネージャーには、シンプルな設定オプションがあります。デフォルト値は、 system フォルダの `system.yaml` ファイルにあります。 `user/config/system.yaml` ファイルで、上書きしてください。
 
 ```yaml
 assets:                                        # Configuration for Assets Manager (JS, CSS)
@@ -132,9 +131,9 @@ JS アセットも似ていて、`assets.addJs()` や、 `assets/addInlineJs()` 
 
 > [!Note]  
 > JS Modulesについてもっと学びたいとき：
-> * [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules?target=_blank)
-> * [https://v8.dev/features/modules](https://v8.dev/features/modules?target=_blank)
-> * [https://javascript.info/modules-intro](https://javascript.info/modules-intro?target=_blank)
+> * [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
+> * [https://v8.dev/features/modules](https://v8.dev/features/modules)
+> * [https://javascript.info/modules-intro](https://javascript.info/modules-intro)
 
 アセットマネージャーは、次のようなものにも対応します：
 
@@ -223,20 +222,19 @@ add メソッドは、ファイル拡張子をもとにアセットにマッチ�
 
 #### addInlineJs(javascript, [options])
 
-Lets you add a string of JavaScript inside an inline script tag. Useful for initialization or anything dynamic.  To inline a regular asset file's content, see the `{ 'loading': 'inline' }` option of the `addJs()` and `js()` methods.
+インラインの script タグ内に、JavaScript 文字列を追加します。初期化や、あらゆる動的処理に便利です。標準的なアセットファイルのコンテンツに書き込むため、 `addJs()` メソッドや、 `js()` メソッドの `{ 'loading': 'inline' }` オプションを参照してください。
 
 #### addJsModule(asset, [options])
 
-This method will add assets to the list of JavaScript Modules assets.  The priority defaults to 10 if not provided.  A higher number means it will display before lower priority assets.  The `pipeline` option controls whether this asset should be included in the combination/minify pipeline. If not pipelined, the `loading` option controls whether the asset should be rendered as a link to an external script file or whether its contents should be inlined inside an inline script tag.
+このメソッドは、 JavaScript モジュールアセットのリストに、アセットを追加します。優先度はデフォルトで 10 です。大きい数字のアセットが、小さい数字のアセットよりも先に読み込まれます。 `pipeline` オプションは、このアセットが 結合/ミニファイ するパイプラインに含まれるべきかどうかを制御します。パイプラインされない場合、 `loading` オプションで、アセットが外部のスクリプトファイルへのリンクとしてレンダリングされるべきか、インラインの script タグ内に書き込まれるべきコンテンツかを制御します。
 
 #### addInlineJsModule(javascript, [options])
 
-Lets you add a string of JavaScript inside an inline module script tag.  To inline a regular asset file's content, see the `{ 'loading': 'inline' }` option of the `addJsModule()` and `js()` methods.
-
+インラインのモジュール script タグ内に、 JavaScript 文字列を追加します。標準的なアセットファイルのコンテンツをインライン化するために、 `addJsModule()` メソッドや、 `Js()` メソッドの `{ 'loading': 'inline' }` オプションを参照してください。
 
 #### registerCollection(name, array)
 
-Allows you to register an array of CSS and JavaScript assets with a name for later use by the `add()` method. Particularly useful if you want to register a collection that may be used by multiple themes or plugins, such as jQuery or Bootstrap.
+CSS と JavaScript アセットの配列を名前付きで登録でき、あとで `add()` メソッドにより使うことができます。 jQuery や Bootstrap のように、複数のテーマやプラグインで使われるコレクションを登録したい場合に、特に便利です。
 
 <h2 id="options">オプション</h2>
 
@@ -264,7 +262,7 @@ Allows you to register an array of CSS and JavaScript assets with a name for lat
 
 <h4 id="other-attributes">その他の属性</h4>
 
-You can also pass anything else you like in the options array, and if they are not these standard types, they will simply be rendered as attributes such as `{id: 'custom-id'}` will render as `id="custom-id"` in the HTML tag. This can be also used to include structured data such as json-ld via `addInlineJs()` by using `{type: 'application/ld+json'}`.
+オプションの配列には、他に好きなものを何でも渡すことができます。もしそれらが標準的な型でない場合は、たとえば `{id: 'custom-id'}` が HTML タグ中の `id="custom-id"` としてレンダリングされるように、属性としてレンダリングされます。このことは、 `{type: 'application/ld+json'}` を使って、 `addInlineJs()` を経由した json-ld のような構造化データを含んでも使われます。
 
 <h4 id="examples">具体例</h4>
 
@@ -311,13 +309,13 @@ Link の具体例：
 <link href="/user/plugins/grav-plugin/build/js/vendor.js" rel="modulepreload">
 ```
 
-## Rendering Assets
+<h2 id="rendering-assets">アセットをレンダリングする</h2>
 
-The following allow you to render the current state of the CSS and JavaScript assets.
+以下のようにすることで、 CSS や JavaScript アセットの現在の状態をレンダリングできます。
 
 #### css(group, [options], include_link = true)
 
-Renders CSS assets that have been added to an Asset Manager's group (default is `head`). Options are
+アセットマネージャーのグループ（デフォルトでは `head` ）に追加されている CSS アセットをレンダリングします。オプションは：
 
 * **loading**: `inline` if **all** assets in this group should be inlined (default: render each asset according to its `position` option)
 
