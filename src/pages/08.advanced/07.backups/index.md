@@ -1,22 +1,24 @@
 ---
 title: バックアップ
 layout: ../../../layouts/Default.astro
-lastmod: '2025-05-05'
+lastmod: '2025-06-18'
 ---
+
 Grav のバックアップシステムは、 Grav 1.6 で完全に書きかえられ、より多くの特長や機能が提供されました。改善点は、次のとおりです：
 
 * Grav の新しい [スケジューラ](../06.scheduler/) と統合されたことで、好きな時にオフラインバックアップが取れるようになりました
-Ability to create multiple backup **profiles** each with their own set of files, exclude path and file rules, and schedule configuration
-* New **auto-purge** options based on `number`, `space`, or `time`.
-* New dedicated backups page in the **Tools** section of the admin plugin.
+* 複数のバックアップ **プロファイル** が作成可能となり、各プロファイルごとのファイルセットや、除外パスとファイルルール、そしてスケジュール設定が含まれます
+* `number`, `space` もしくは `time` をもとにした新しい **auto-purge** オプション
+* 管理パネルプラグインの **Tools** セクション内に新しく専用のバックアップページを追加
 
 <h2 id="configuration">config 設定</h2>
 
-For backwards compatibility, the default configuration mimics the system prior to Grav 1.6, however, it does now have a 5GB limit by default for backup space.  You should copy the default configuration file (`system/config/backups.yaml`) to your `user/config/`
+後方互換性のため、デフォルトの config 設定は Grav 1.6 以前のシステムに似せていますが、デフォルトで 5GB のバックアップスペースの制限があります。デフォルトの config ファイル（ `system/config/backups.yaml` ）をあなたの `user/config/` フォルダへコピーしてください。
 
-!! If you use the **admin plugin**, and save the configuration, the `user/config/backups.yaml` file will be created automatically.
+> [!Info]  
+> **管理パネルプラグイン** を使っている場合で、config 設定を保存する場合は、 `user/config/backups.yaml` ファイルが自動で作成されます。
 
-The default configuration is as follows:
+デフォルトの config 設定は、以下のようになっています：
 
 ```yaml
 purge:
@@ -37,15 +39,15 @@ profiles:
 
 <h4 id="purge">パージ（バックアップの消去）</h4>
 
-* `space` - will purge older backups when you hit the space limit. Controlled by ``max_backups_space`` measured in `GB`
-* `time` - will purge older backups beyond a number of day. Controlled by ``max_backups_time``  measured in `days`
-* `number` - will purge older backups beyond a certain number of backups. Controlled by ``max_backups_count``.
+* `space` - は、容量制限に達したとき、古いバックアップをパージします。 ``max_backups_space`` により、 `GB` 単位で制御します。
+* `time` - は、日数を超えたときに古いバックアップをパージします。 ``max_backups_time`` により、 `days` 単位で制御します。
+* `number` - は、バックアップ数を超えたときに古いバックアップをパージします。``max_backups_count`` により制御します。
 
 <h4 id="profiles">プロファイル</h4>
 
-An array of profiles can be configured.  The `Default Site Backup` profile is configured similarly to the default Grav backup in previous versions.  By default, the backup is not automatically processed by the scheduler, but you can set `schedule: true` and configure the ``schedule_at:`` option with a preferred [cron expression](https://crontab.guru/).
+プロファイルの配列は、設定可能です。 `Default Site Backup` プロファイルは、以前のバージョンの Grav バックアップに似せて設定されます。デフォルトでは、バックアップはスケジューラで自動処理されませんが、 `schedule: true` を設定でき、``schedule_at:`` オプションをお好みの[cron 表現](https://crontab.guru/) により設定できます。
 
-An example of a more complex set of profiles could be:
+プロファイルのより複雑な設定例は、次の通りです：
 
 ```yaml
 profiles:
@@ -66,7 +68,7 @@ profiles:
 
 <h2 id="cli-command">CLI コマンド</h2>
 
-This is covered in more details in the [Cli Console -> Grav Command](../../07.cli-console/02.grav-cli/) section, but here's an example of running the backup manually:
+詳細は、 [Cli Console -> Grav Command](../../07.cli-console/02.grav-cli/) セクションで解説されていますが、ここでは、手動でバックアップを実行する例を示します：
 
 ```bash
 cd ~/workspace/portfolio

@@ -1,15 +1,16 @@
 ---
 title: スケジューラ
 layout: ../../../layouts/Default.astro
-lastmod: '2025-05-05'
+lastmod: '2025-06-18'
 ---
+
 Grav のスケジューラは、 Grav 1.6 で追加された新しい機能で、ジョブを定期的に実行します。基本的な処理は、サーバーの **cron** スケジューラに依存しますが、 cron サービスにエントリーを1つ追加すると、すべてのジョブと特定のスケジュールを Grav から設定できるようになります。
 
 スケジューラを使ってタスクを処理する主な利点のひとつは、ユーザーによる操作の必要なく、フロントエンドから独立してタスクを実行できることです。定期的なキャッシュクリア、バックアップ、同期、検索インデックス作成などのタスクは、いずれもスケジュールジョブの最適な候補です。
 
-## Installation
+<h2 id="installation">インストール</h2>
 
-The first step in getting the scheduler setup and ready for tasks, is to add the `bin/grav scheduler` command to the cron service.  The simplest approach is to utilize the CLI command itself to output the appropriate command to run for installation:
+スケジュールセットアップとタスク準備のための最初のステップは、 `bin/grav scheduler` コマンドに cron サービスを追加することです。最も簡単なアプローチは、 CLI コマンド自身を利用して、インストールのために実行する適切なコマンドを出力することです：
 
 ```bash
 $ bin/grav scheduler -i
@@ -24,16 +25,16 @@ Install Scheduler
  (crontab -l; echo "* * * * * cd /Users/andym/grav;/usr/local/bin/php bin/grav scheduler 1>> /dev/null 2>&1") | crontab -
 ```
 
-On my mac system, the full command required is displayed, so all you need to do is to copy and paste the entire then into your terminal and hit return.
+わたしの mac システム上では、必要なフルコマンドが表示されました。そこで、必要なことは、これら全体をターミナルへコピーアンドペーストし、リターンキーを押すことです。
 
 > [!Info]  
-> You need to be logged in to the shell with the same user as your webserver.  This is to ensure that the user that runs the schdeduler commands matches the webserver user that needs to interact with those files.  If you install the crontab entry with another user (e.g. `root`) any files created will be created as that `root` user and not the `webserver` user which can lead to problems.
+> ウェブサーバーと同じユーザーでシェルにログインしている必要があります。これは、スケジューラコマンドを実行するユーザーと、ファイル操作する必要のあるウェブサーバーユーザーが、同じであることを確定させるためです。もし別ユーザー（例えば `root` ユーザー）で crontab エントリーをインストールすると、作成されるファイルはすべて `root` ユーザーにより作成され、 `webserver` ユーザーが作成するものではないため、問題が発生する可能性があります。
 
 ```bash
 (crontab -l; echo "* * * * * cd /Users/andym/grav;/usr/local/bin/php bin/grav scheduler 1>> /dev/null 2>&1") | crontab -
 ```
 
- You won't get a response, but you should not get any errors either.  After that you can confirm things look good by re-running the `bin/grav scheduler -i` command:
+レスポンスは得られませんが、エラー表示もされないはずです。その後、 `bin/grav scheduler -i` コマンドを再実行すれば、うまくいっていることが確認できます：
 
 ```bash
 bin/grav scheduler -i
@@ -44,11 +45,11 @@ Install Scheduler
  [OK] All Ready! You have already set up Grav's Scheduler in your crontab
 ```
 
-You can also get the needed command from the admin plugin by simply navigating to **Tools** → **Scheduler**.
+必要なコマンドは、管理パネルプラグインからも得られます。単純に、 **Tools** -> **Scheduler** と移動するだけです。
 
-## Scheduling Basics
+<h2 id="scheduling-basics">スケジュールの基本</h2>
 
-In order to schedule a job the frequency is controlled by a flexible format.
+ジョブをスケジュールするため、その頻度を柔軟なフォーマットで制御します。
 
 ```txt
 * * * * * *
@@ -61,22 +62,20 @@ In order to schedule a job the frequency is controlled by a flexible format.
 +------------ Minute            (range: 0-59)
 ```
 
-Some examples:
+いくつか具体例を示します：
 
-`0 * * * *`	run once an hour (every hour at minute zero)
-`0 0 * * *`	run once a day (every day at midnight and minute zero)
-`0 0 1 * *`	run once a month (on the first day of every month at midnight and minute zero)
-`0 0 1 1 *`	run once a year (on the first day of the first month every year at midnight and minute zero)
+`0 * * * *`	1時間に1回実行 (毎時間の0分)
+`0 0 * * *`	1日に1回実行 (毎日の深夜0時0分)
+`0 0 1 * *`	1月に1回実行 (毎月の最初の日の深夜0時0分)
+`0 0 1 1 *`	1年に1回実行 (毎年の最初の月の最初の日の深夜0時0分)
 
-Advanced options:
+上級者向けオプション：
 
-`*/5 * * * *` run every 5 minutes
+`*/5 * * * *` 5分ごとに実行
 
+<h2 id="configuration-file">設定ファイル</h2>
 
-
-## Configuration File
-
-You can see which jobs are currently available to the Scheduler  by running the `bin/grav scheduler -j` command:
+スケジューラーの現在利用可能なジョブがどれか知るには、 `bin/grav scheduler -j` コマンドを実行します：
 
 ```bash
 bin/grav scheduler -j
@@ -97,9 +96,9 @@ Scheduler Jobs Listing
  ! [NOTE] For error details run "bin/grav scheduler -d"
 ```
 
-The Grav scheduler is controlled by a primary configuration file.  This is located in `user/config/scheduler.yaml` and is required to have any job `enabled` in order to run.
+Grav スケジューラは、主要な config 設定ファイルによって制御されます。これは、 `user/config/scheduler.yaml` にあり、ジョブを実行するためには `enabled` にする必要があります。
 
-Below the configruation shows the jobs that are available and if they are enabled to run or not.  Simply set an entry to `disabled` to stop it from running.
+以下の設定には、利用可能なジョブが表示され、それらが実行可能かどうかが表示されています。 `disabled` に設定するだけで、実行されなくなります。
 
 ```yaml
 status:
@@ -110,7 +109,7 @@ status:
   pages-backup: enabled
 ```
 
-To see more details about any potential **errors** or to see the next time the job will run you can use the `/bin/grav scheduler -d` command:
+ありうる **errors** の詳細や、次に実行されるジョブについては、 `/bin/grav scheduler -d` コマンドを使って確認できます：
 
 ```bash
 bin/grav scheduler -d
@@ -129,31 +128,31 @@ Job Details
 └─────────────────────┴──────────────────┴──────────────────┴────────┘
 ```
 
-## Manually Running Jobs
+<h2 id="manually-running-jobs">手動によるジョブ実行</h2>
 
-The CLI command provides an simple way to manually run any jobs.  In fact this is what the scheduler is doing when it runs periodically.
+CLI コマンドにより、すべてのジョブを手動実行する簡単な方法が提供されています。実際、これはスケジューラーが定期実行するときに行っていることです。
 
 ```bash
 bin/grav scheduler
 ```
 
-This will silently run the jobs, but you can also see details of what run using:
+これは、静かに（実行経過が表示されずに）実行されますが、実行内容の詳細を見ることもできます。次のようにしてください：
 
 ```bash
 bin/grav scheduler -v
 ```
 
-## Grav System Jobs
+<h2 id="grav-system-jobs">Grav システムジョブ</h2>
 
-The Grav core provides a few jobs out-of-the-box.  These include some useful maintenance type tasks:
+Grav コアは、最初からいくつかのジョブを提供しています。これらには、メンテナンスに便利なタスクを含みます：
 
-* `cache-purge` - This task is useful if you use Grav's `file` caching because it clears out old files that have expired.  This is a great task to schedule as otherwise it would require a user to manually clear the old caches.  If you don't keep up on this, and your file space is limited, you could run out of space and crash the server.
+* `cache-purge` - このタスクは、 Grav の `file` キャッシュを使っているときに便利です。期限切れの古いファイルをクリアするタスクだからです。このタスクが大事なのは、そうしないと、ユーザーが手動で古いキャッシュをクリアする必要があるからです。この作業を怠り、ファイルスペースが限られてきたとき、容量が足りなくなり、サーバーがクラッシュするかもしれません。
 
-* `cache-clear` - The cache clear is the job that works the same way as the `bin/grav clear` command that you would manually run.  You can configure if you want to use a `standard` cache clearing, or the `all` variant that deletes all the files and folders in the `cache/` folder for a more thorough cache clearing.
+* `cache-clear` - キャッシュクリアは、 `bin/grav clear` コマンドを手動実行するのと同じ方法で実行されるジョブです。`standard` なキャッシュクリアを使いたいか、 `all` バリエーションにより、 `cache/` フォルダ内のすべてのファイルとフォルダを完全に削除したいかを設定できます。
 
-* `default-site-backup` - The default backup job available via the new Grav Backup configuration.  You can create custom backup configurations, and these will also be available to run as a scheduled job.
+* `default-site-backup` - デフォルトのバックアップジョブは、新しい Grav のバックアップ config 設定から利用できます。カスタムのバックアップ設定を作成でき、これらの設定もスケジュールされたジョブとして実行可能です。
 
-## Custom Jobs
+<h2 id="custom-jobs">カスタムジョブ</h2>
 
 The Grav Scheduler can be manually configured with any number of custom jobs.  These can be setup in the same `scheduler.yaml` configuration file referenced above.  For example, the `ls-job` referenced above would be configured:
 
