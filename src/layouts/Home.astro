@@ -1,0 +1,66 @@
+---
+import Sidebar from '../components/Sidebar.astro';
+import pagetree from '../pagestree.json';
+import { siteConfig } from '../config';
+const { sitetitle, description, baseurl, bloburl, learnurl, hosturl } = siteConfig;
+
+const { frontmatter } = Astro.props;
+
+// 構造化データ
+const breadcrumbJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement":
+    [{"@type": "ListItem",
+    "position": 1,
+    "name": frontmatter.title,
+    "item": hosturl + baseurl,
+    }]
+});
+
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>{ frontmatter.title } | { sitetitle }</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content={frontmatter.description??description} />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href={hosturl + baseurl + '/'} />
+  <meta name="generator" content={Astro.generator} />
+  <link rel="icon" type="image/svg+xml" href={baseurl + '/favicon.svg'} />
+  <link rel="stylesheet" href={ baseurl + '/assets/css/bootstrap.min.css'} />
+  <link rel="stylesheet" href={ baseurl + '/assets/css/custom.css'} />
+  <script defer src={ baseurl + '/assets/js/bootstrap.min.js'} ></script>
+  <script defer src={ baseurl + '/assets/js/custom.js'} ></script>
+
+  <!-- OGP -->
+  <meta property="og:title" content={frontmatter.title} />
+  <meta property="og:description" content={frontmatter.description??description} />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content={hosturl + baseurl + '/'} />
+  <meta property="og:image" content={hosturl + baseurl + '/assets/images/ogimage.jpg'} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content={sitetitle} />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={frontmatter.title} />
+  <meta name="twitter:description" content={frontmatter.description??description} />
+  <meta name="twitter:image" content={hosturl + baseurl + '/assets/images/ogimage.jpg'} />
+
+  <!-- 構造化データ：パンくずリスト -->
+  <script type="application/ld+json" set:html={breadcrumbJsonLd}></script>
+</head>
+<body>
+  <main>
+    <h1>{ frontmatter.title }</h1>
+    <slot />
+    <h2>ページ一覧</h2>
+    <Sidebar pages={ pagetree.children } currentpath='' />
+  </main>
+</body>
+</html>

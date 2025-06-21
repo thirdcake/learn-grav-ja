@@ -29,11 +29,22 @@ const breadobj = pagelist.filter(page => (currentpath.replace(baseurl+'/','').st
 // ページ下部の翻訳元記事リンク
 const learnFullUrl = `${learnurl}${currentpath.replace(baseurl,'').replace(/\/\d+\./g,'/')}`;
 
+// sidebar のpagetree
+const sidebarPagetreeList = pagetree.children.reduce((p:any,c:any)=>{
+  const nc = {...c}
+  if(currentpath.split('/')[2] !== c.pathname) {
+    nc.children = [];
+  }
+  p.push(nc);
+  return p;
+}, []);
+
 // 構造化データ
+const breadobjJson = [{title:'Home', pathname:'/'}, ...breadobj];
 const breadcrumbJsonLd = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
-  "itemListElement": breadobj.map((page, index) => ({
+  "itemListElement": breadobjJson.map((page, index) => ({
     "@type": "ListItem",
     "position": index + 1,
     "name": page.title,
@@ -49,7 +60,7 @@ const breadcrumbJsonLd = JSON.stringify({
   <meta charset="UTF-8">
   <title>{ frontmatter.title } | { sitetitle }</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content={description} />
+  <meta name="description" content={frontmatter.description??description} />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href={hosturl + currentpath + '/'} />
   <meta name="generator" content={Astro.generator} />
@@ -61,10 +72,10 @@ const breadcrumbJsonLd = JSON.stringify({
 
   <!-- OGP -->
   <meta property="og:title" content={frontmatter.title} />
-  <meta property="og:description" content={description} />
+  <meta property="og:description" content={frontmatter.description??description} />
   <meta property="og:type" content="article" />
-  <meta property="og:url" content={baseurl + currentpath + '/'} />
-  <meta property="og:image" content={baseurl + '/assets/images/ogimage.jpg'} />
+  <meta property="og:url" content={hosturl + currentpath + '/'} />
+  <meta property="og:image" content={hosturl + baseurl + '/assets/images/ogimage.jpg'} />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:site_name" content={sitetitle} />
@@ -72,8 +83,8 @@ const breadcrumbJsonLd = JSON.stringify({
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={frontmatter.title} />
-  <meta name="twitter:description" content={description} />
-  <meta name="twitter:image" content={baseurl + '/assets/images/ogimage.jpg'} />
+  <meta name="twitter:description" content={frontmatter.description??description} />
+  <meta name="twitter:image" content={hosturl + baseurl + '/assets/images/ogimage.jpg'} />
 
   <!-- 構造化データ：パンくずリスト -->
   <script type="application/ld+json" set:html={breadcrumbJsonLd}></script>
@@ -98,9 +109,9 @@ const breadcrumbJsonLd = JSON.stringify({
         <p style="text-align:center;background-color:#fff;border:thin solid #777;">
           検索は<a href={ learnurl }>翻訳元</a>へ
         </p>
-          <div class="mb-auto overflow-y-auto pb-5" style="height:100%">
-            <Sidebar pages={ pagetree.children } currentpath={ currentpath.split('/')[2] } />
-          </div>
+        <div class="mb-auto overflow-y-auto pb-5" style="height:100%">
+          <Sidebar pages={ sidebarPagetreeList } />
+        </div>
       </div>
     </div>
 

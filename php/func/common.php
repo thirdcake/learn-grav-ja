@@ -20,6 +20,9 @@ function getPages():array {
     if ($finder->hasResults()) {
         foreach ($finder as $fileInfo) {
             $page = new Page($fileInfo);
+            if($page->pathname === 'index.md') {
+                continue;
+            }
             $pages->insert($page);
         }
     }

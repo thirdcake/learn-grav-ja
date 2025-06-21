@@ -5,13 +5,18 @@ const { baseurl } = siteConfig;
 const redirecturl = baseurl + frontmatter.redirect;
 ---
 
-<!doctype html>
-<title>Redirecting to: { redirecturl }</title>
-    <meta http-equiv="refresh" content={'2;url=' + redirecturl} />
-    <meta name="robots" content="noindex" />
-    <link rel="canonical" href={ redirecturl } />
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting to: { redirecturl }</title>
+  <meta http-equiv="refresh" content={'2;url=' + redirecturl} />
+  <meta name="robots" content="noindex" />
+  <link rel="canonical" href={ redirecturl } />
+</head>
 <body>
     <a href={ redirecturl } >
         Redirecting to <code>{ redirecturl }</code>
     </a>
 </body>
+</html>

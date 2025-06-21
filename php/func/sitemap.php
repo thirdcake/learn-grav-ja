@@ -1,5 +1,6 @@
 <?php
 
+use Spatie\YamlFrontMatter\YamlFrontMatter;
 // php ./php/func/sitemap.php
 
 function sitemapdom (array $pages):string {
@@ -9,6 +10,21 @@ function sitemapdom (array $pages):string {
     $urlset = $dom->createElement('urlset');
     $urlset->setAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
     $dom->appendChild($urlset);
+
+    // home page
+    $homeFrontmatter = YamlFrontMatter::parse(file_get_contents(dirname(__DIR__,2).'/src/pages/index.md'));
+    $url = $dom->createElement('url');
+    $loc = $dom->createElement('loc', 'https://thirdcake.github.io/learn-grav-ja/');
+    $priority = $dom->createElement('priority', '1.0');
+    $changefreq = $dom->createElement('changefreq', 'yearly');
+    $lastmod = $dom->createElement('lastmod', $homeFrontmatter->lastmod);
+
+    $url->appendChild($loc);
+    $url->appendChild($priority);
+    $url->appendChild($changefreq);
+    $url->appendChild($lastmod);
+
+    $urlset->appendChild($url);
 
     foreach($pages as $page) {
         if($page->redirect !== false) {

@@ -1,7 +1,7 @@
 ---
 import Sidebarchild from '../components/Sidebar.astro';
 
-const { pages, currentpath } = Astro.props;
+const { pages } = Astro.props;
 ---
 
 <ol>
@@ -12,8 +12,8 @@ const { pages, currentpath } = Astro.props;
                 : page.title
             }
             
-            {(page.children.length > 0 && page.pathname.startsWith(currentpath))
-                ? <Sidebarchild pages={ page.children } currentpath={ currentpath } />
+            {(page.children.length > 0)
+                ? <Sidebarchild pages={ page.children } />
                 : ''
             }
         </li>
