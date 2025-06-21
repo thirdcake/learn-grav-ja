@@ -1,8 +1,9 @@
 ---
 title: パフォーマンスとキャッシュ
 layout: ../../../layouts/Default.astro
-lastmod: '2025-05-05'
+lastmod: '2025-06-21'
 ---
+
 Grav を魅力的なものとしている中心機能のひとつは、その速さです。速さは、 Grav の本質的な設計において、常に重要な考慮事項です。主にキャッシュによるものですが、他のコンポーネントによる部分もあります。
 
 <h2 id="performance">パフォーマンス</h2>
@@ -84,7 +85,7 @@ cache:
 
 <h4 id="memcache-specific-options">Memcache に特有のオプション</h4>
 
-There are some extra configuration options that are required if you are connecting to a **memcache** server via the `memcache` driver option.  These options should go under the `cache:` group in your `user/config/system.yaml`:
+`memcache` ドライバオプション経由で **memcache** サーバーに接続する場合に必要な、追加の設定オプションがあります。これらのオプションは、 `user/config/system.yaml` ファイルの `cache:` グループ以下に記述します：
 
 ```yaml
 cache:
@@ -96,7 +97,7 @@ cache:
 
 <h4 id="memcached-specific-options">Memcached に特有のオプション</h4>
 
-Similar to memcache, memcached has some extra configuration options that are required if you are connecting to a **memcached** server via the `memcached` driver option.  These options should go under the `cache:` group in your `user/config/system.yaml`:
+memcache と同様、memcached にもいくつかの設定オプションがあり、 `memcached` ドライバオプション経由で **memcached** サーバーに接続する場合には必要となるオプションです。これらのオプションも、 `user/config/system.yaml` ファイルの `cache:` グループ以下に記述してください：
 
 ```yaml
 cache:
@@ -108,7 +109,7 @@ cache:
 
 <h4 id="redis-specific-options">Redis に特有のオプション</h4>
 
-There are some extra configuration options that are required if you are connecting to a **redis** server via the `redis` driver option.  These options should go under the `cache:` group in your `user/config/system.yaml`:
+`redis` ドライバオプション経由で **redis** に接続する場合に必要な、いくつかの追加設定オプションがあります。これらのオプションは、 `user/config/system.yaml` ファイルの `cache:` グループ以下に記述してください：
 
 ```yaml
 cache:
@@ -118,7 +119,7 @@ cache:
     port: 6379
 ```
 
-Alternatively, you can use a socket connection:
+もしくは、ソケット接続を利用することもできます：
 
 ```yaml
 cache:
@@ -127,7 +128,7 @@ cache:
     socket: '/tmp/redis.sock'
 ```
 
-If your redis server has a password or secret set you can also set that in this configuration:
+利用している redis サーバーがパスワードや secret が設定されている場合、次の設定をすることもできます：
 
 ```yaml
 cache:
@@ -136,7 +137,7 @@ cache:
     password: your-secret
 ```
 
-_you will also need the php-redis installed in your system_
+_システムに、 php-redis をインストールする必要もあるでしょう_
 
 <h4 id="twig-specific-options">Twig に特有のオプション</h4>
 

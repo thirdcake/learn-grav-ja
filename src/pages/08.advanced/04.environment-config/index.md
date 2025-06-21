@@ -1,8 +1,9 @@
 ---
 title: 環境設定
 layout: ../../../layouts/Default.astro
-lastmod: '2025-05-13'
+lastmod: '2025-06-21'
 ---
+
 Grav では、 **開発環境** や、 **ステージング環境** 、 **本番環境** のような、異なる環境に異なる設定をサポートするため、 [強力な設定機能](../../01.basics/05.grav-configuration) を拡張できます。
 
 > [!Info]  
@@ -10,30 +11,28 @@ Grav では、 **開発環境** や、 **ステージング環境** 、 **本番
 
 <h3 id="automatic-environment-configuration">自動的な環境設定</h3>
 
-
-What this means is that you can provide as little or as much configuration changes per environment as needed.  A good example of this is the [Debug Bar](../debugging).  By default, the new Debug Bar is disabled in the core `system/config/system.yaml` file, and also in the user override file:
+ここでの意味は、環境ごとに、必要な分だけ設定の変更を提供できるということです。この良い例として、[デバッグバー](../03.debugging/) があります。デフォルトでは、新しいデバッグバーは、コアの `system/config/system.yaml` ファイルでは無効化されており、ユーザーファイルでの上書きも同様です：
 
 ```bash
 user/config/system.yaml
 ```
 
-If you wanted to turn it on, you can easily enable it in your `user/config/system.yaml` file, however a better solution might be to have it _enabled_ for your development environment when accessing via **localhost**, but _disabled_ on your **production** server.
+もしこれを有効化したい場合は、 `user/config/system.yaml` ファイルで簡単に有効にすることができます。しかし、より良い解決策は、 **localhost** 経由でのアクセス時の開発環境で _有効_ となり、 **本番** サーバーでは _無効_ になることかもしれません。
 
-This can be easily accomplished by providing an override of that setting in the file:
+これは、簡単に実現可能です。次のファイルに、上書き設定をします：
 
 ```bash
 user/env/localhost/config/system.yaml
 ```
 
-where `localhost` is the hostname of the environment (this is what the host you enter in your browser, e.g. http://localhost/your-site) and your configuration file contains:
+`localhost` が環境のホスト名（ブラウザで入るホスト、たとえば `http://localhost/your-site`）であり、設定ファイルには次のように書いてください：
 
 ```yaml
 debugger:
   enabled: true
 ```
 
-Similarly, you may want to enable CSS, Link, JS and JS Module Asset Pipelining (combining + minification) for your production site only
-(`user/env/www.mysite.com/config/system.yaml`):
+同様に、 CSS や Link, JS と JS モジュールなどのアセットパイプライン（結合+ミニファイ）を本番サイトでのみ有効化したいと思うかもしれません： 
 
 ```yaml
 assets:
@@ -42,28 +41,31 @@ assets:
   js_module_pipeline: true
 ```
 
-If your production server was reachable via `http://www.mysite.com` then you could also provide configuration specific for that production site with a file located at
-`user/env/www.mysite.com/config/system.yaml`.
+本番サーバーが `http://www.mysite.com` でアクセスできる場合、 `user/env/www.mysite.com/config/system.yaml` にあるファイルで、本番サイト固有の設定を提供できます。
 
-Of course, you are not limited to changes to `system.yaml`, you can actually provide overrides for **any** Grav setting in the `site.yaml` or even in any [plugin configuration](../../04.plugins/01.plugin-basics/)!
+もちろん、`system.yaml` への変更に限ったものではありません。 `site.yaml` ファイルへの **あらゆる** Grav 設定も上書きできますし、あらゆる [プラグイン設定](../../04.plugins/01.plugin-basics/) さえ可能です！
 
-!! If you are using the Grav [Scheduler](../06.scheduler/), be aware of it using the `localhost` environment and therefore its configuration.
+> [!Info]  
+> Grav の [スケジューラー](../06.scheduler/) を利用している場合、 `localhost` 環境を使うため、その設定に注意してください。
 
-#### Plugin Overrides
+> [!訳注]  
+> スケジューラーは、ホスト名を持たないため、 `localhost` 環境として実行されるそうです。
 
-To override a plugin configuration YAML file is simply the same process as overriding a regular file.   If the standard configuration file is located in:
+<h4 id="plugin-overrides">プラグインの上書き</h4>
+
+プラグインの config 設定の YAML ファイルを上書きするには、通常ファイルを上書きするのと同じ処理です。標準的な設定ファイルが、次の場所に置かれている場合：
 
 ```bash
 user/config/plugins/email.yaml
 ```
 
-Then you can override this with a setting that only overrides specific options that you want to use for local testing:
+その時は、ローカルテストでのみ上書きする設定を、次の場所で上書きできます：
 
 ```bash
 user/env/localhost/config/plugins/email.yaml
 ```
 
-With the configuration:
+設定は、以下のようにします：
 
 ```yaml
 mailer:
@@ -76,27 +78,27 @@ mailer:
     password: 'a13e6e27bc7205'
 ```
 
-#### Theme Overrides
+<h4 id="theme-overrides">テーマの上書き</h4>
 
-You can override themes in much the same way:
+テーマについても、同じ方法で上書きできます：
 
 ```bash
 user/config/themes/antimatter.yaml
 ```
 
-Can be overridden for any environment, say some production site (`http://www.mysite.com`):
+あらゆる環境に対して上書き可能です。たとえば、本番サイトが `http://www.mysite.com` のとき：
 
 ```bash
 user/env/www.mysite.com/config/themes/antimatter.yaml
 ```
 
-### Server Based Environment Configuration
+<h3 id="server-based-environment-configuration">サーバーベースの環境設定</h3>
 
-Starting from Grav 1.7, it is possible to set the environment by using server configuration. In this use scenario, you set environment variables from the server or from a script that runs before Grav to select the environment to be used.
+Grav 1.7 以降、サーバーの設定を使って環境を設定することができるようになりました。想定される利用場面としては、サーバーから、もしくはスクリプトから環境変数を設定します。ここでのスクリプトというのは、 Grav よりも前に実行され、Grav が使う環境を選択するためのものです。
 
-The simplest way to set environment is by using `GRAV_ENVIRONMENT`. Value of `GRAV_ENVIRONMENT` has to be a valid server name with or without domain.
+環境を設定する最も簡単な方法は、 `GRAV_ENVIRONMENT` を使うことです。 `GRAV_ENVIRONMENT` の値は、ドメイン付きもしくはドメイン無しの適切なサーバー名でなければいけません。
 
-The following example selects **development** environment for the localhost:
+以下の例は、localhost 向けに **development** 環境を選択します：
 
 ```txt
 <VirtualHost 127.0.0.1:80>
@@ -133,7 +135,7 @@ web:
 define('GRAV_ENVIRONMENT', 'development');
 ```
 
-### Custom Environment Paths
+<h3 id="custom-environment-paths">カスタム環境パス</h3>
 
 Starting from Grav 1.7, you can also change the location of the environments. There are two possibilities: either you configure a common location for all the environments or you define them one by one.
 

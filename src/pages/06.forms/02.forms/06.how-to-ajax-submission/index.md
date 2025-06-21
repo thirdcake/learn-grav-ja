@@ -1,9 +1,10 @@
 ---
 title: ハウツー：Ajax送信
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-05-02'
+lastmod: '2025-06-21'
 ---
-<h2 id="submitting-forms-via-xhr-ajax">XGR/Ajax でフォームを送信</h2>
+
+<h2 id="submitting-forms-via-xhr-ajax">XHR/Ajax でフォームを送信</h2>
 
 フォーム処理のデフォルトのメカニズムは、 HTML 標準のフォーム送信によっており、 HTML フォームは、 `POST` または `GET` （デフォルトは `POST` ）でサーバーに送られます。送られたフォームは、 [バリデーション](../02.fields-available/) され、 [処理](../04.reference-form-actions/) された後に、結果がフォームに送り返され（もしくは、 [リダイレクトされたページへ遷移し](../04.reference-form-actions/#redirect) ）、メッセージが表示されたり、必要に応じて再送信するための編集ができたりします。
 
@@ -31,7 +32,7 @@ xhr_submit: true
 
 <h3 id="creating-the-form">フォームを作成する</h3>
 
-You can create any standard form you like, so for this example, we'll keep the form as simple as possible to focus on the Ajax handling parts. First, we'll create a form in a page called: `forms/ajax-test/` and create a form page called `form.md`:
+お好みで、標準的なフォームを作り、それを利用できます。今回の例では、Ajax 制御部分にフォーカスするため、できるだけシンプルなものにしています。まず、 `forms/ajax-test/` フォルダに、 `form.md` というページを作成します：
 
 ```yaml
 ---
@@ -57,16 +58,16 @@ form:
 ---
 ```
 
-As you can see this is a very basic form that simply asks for your name and provides a submit button.  The only thing that stands out is the `template: form-messages` part.  As outlined in the [Frontend Forms](../) section, you can provide a custom Twig template with which to display the result of the form processing.  This is a great way for us to process the form, and then simply return the messages via Ajax and inject them into the page.  There is already a `form-messages.html.twig` template provided with the forms plugin that does just this.
+ご覧の通り、これはとても基本的なフォームで、シンプルに名前を尋ねて、送信ボタンが提供されます。目立っているのは、 `template: form-messages` の部分だけです。 [フロントエンドのフォーム](../) セクションで解説したとおり、フォーム処理の結果を表示するためにカスタムの Twig テンプレートを提供できます。これは、フォームを処理し、 Ajax 経由でメッセージを返し、ページに注入するための素晴らしい方法です。フォームプラグインには、これを実現する `form-messages.html.twig` テンプレートがすでに用意されています。
 
-> [!Info]  
-> NOTE: We use a hard-coded `action: '/forms/ajax-test'` so the ajax has a consistent URL rather than letting the form set the action to the current page route. This resolves an issue with the Ajax request not handling redirects properly. This can otherwise cause issues on the 'home' page. It doesn't have to be the current form page, it just needs to be a consistent, reachable route.
+> [!Note]  
+> ここでは、 `action: '/forms/ajax-test'` をハードコーディングして使用しています。そのため、 Ajax は固定の URL を持ち、現在のページルーティングにアクションを設定するわけではありません。これは、 Ajax リクエストがリダイレクトを適切に制御しない問題を解決します。これをしておかないと、 'home' ページなどで、問題が起こりえます。ハードコーディングするのは、現在のフォームページである必要はなく、ただ固有で、到達可能なルーティングでありさえすれば良いです。
 
 ![](simple-form.png)
 
-### The page content
+<h3 id="the-page-content">ページコンテンツ</h3>
 
-In this same page, we need to put a little HTML and JavaScript:
+この同じページに、少しの HTML と、 JavaScript を追加する必要があります：
 
 
 ```twig
@@ -137,9 +138,9 @@ $(document).ready(function(){
 </script>
 ```
 
-First we define a div placeholder with the ID `#form-result` to use as a location to inject the form results.
+まず、 div タグのプレースホルダを定義します。 ID は`#form-result` で、フォームの結果を注入する場所として利用します。
 
-We are using JQuery syntax here for simplicity but obviously, you can use whatever JavaScript you like as long as it performs a similar function.  We first stop the default submit action of the form and make an Ajax call to the form's action with the form's data serialized.  The result of this call is then set back on that div we created earlier.
+ここでは、簡単のため jQuery 構文を使用していますが、同じような機能を実行するものならば、お好きな JavaScript を使うことができます。まず、フォームのデフォルトの submit アクションを止めて、 Ajax でフォームのデータをシリアライズしながらアクションを呼び出します。この呼び出しに対する結果は、先に作成した div タグに戻ります。
 
 ![](submitted-form.png)
 
