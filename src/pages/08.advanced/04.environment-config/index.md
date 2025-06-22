@@ -1,7 +1,7 @@
 ---
 title: 環境設定
 layout: ../../../layouts/Default.astro
-lastmod: '2025-06-21'
+lastmod: '2025-06-22'
 ---
 
 Grav では、 **開発環境** や、 **ステージング環境** 、 **本番環境** のような、異なる環境に異なる設定をサポートするため、 [強力な設定機能](../../01.basics/05.grav-configuration) を拡張できます。
@@ -100,6 +100,7 @@ Grav 1.7 以降、サーバーの設定を使って環境を設定すること�
 
 以下の例は、localhost 向けに **development** 環境を選択します：
 
+Apache2:
 ```txt
 <VirtualHost 127.0.0.1:80>
     ...
@@ -108,6 +109,7 @@ Grav 1.7 以降、サーバーの設定を使って環境を設定すること�
 </VirtualHost>
 ```
 
+NGINX php-fpm:
 ```nginx
 location / {
     ...
@@ -116,6 +118,7 @@ location / {
 }
 ```
 
+NGINX php-cgi:
 ```nginx
 location / {
    ...
@@ -124,12 +127,14 @@ location / {
 }
 ```
 
+Docker:
 ```yaml
 web:
   environment:
     - GRAV_ENVIRONMENT=development
 ```
 
+PHP:
 ```php
 // Set environment in setup.php or make sure it runs before Grav.
 define('GRAV_ENVIRONMENT', 'development');
@@ -137,16 +142,17 @@ define('GRAV_ENVIRONMENT', 'development');
 
 <h3 id="custom-environment-paths">カスタム環境パス</h3>
 
-Starting from Grav 1.7, you can also change the location of the environments. There are two possibilities: either you configure a common location for all the environments or you define them one by one.
+Grav 1.7 より、環境設定の保存場所を変更できるようにもなりました。2つの選択肢があります：すべての環境で共通の場所を設定する、もしくは、ひとつひとつ定義する。
 
-#### Custom location for all the environments
+<h4 id="custom-location-for-all-the-environments">すべての環境について設定の場所をカスタムする</h4>
 
-If for some reason you are not happy with the default `user/env` location for your environments, it can be changed by using `GRAV_ENVIRONMENTS_PATH` environment variable.
+何かの理由で、環境設定のデフォルトの保存場所 `user/env` を使いたくない場合、 `GRAV_ENVIRONMENTS_PATH` 環境変数を使うことで、変更ができます。
 
-Value of `GRAV_ENVIRONMENTS_PATH` has to be existing path under `GRAV_ROOT`. Do not use trailing slash.
+`GRAV_ENVIRONMENTS_PATH` の値は、 `GRAV_ROOT` 以下の存在するパスでなければいけません。最後にスラッシュは付けないでください。
 
-In the next example, all the environments will be located in `user/sites/GRAV_ENVIRONMENT`, where `GRAV_ENVIRONMENT` is either automatically detected or manually set in the server configuration:
+以下の例では、すべての環境について、 `user/sites/GRAV_ENVIRONMENT` に保存されます。 `GRAV_ENVIRONMENT` は、自動的に検出されるか、サーバー設定により手動で設定されます：
 
+Apache2:
 ```txt
 <VirtualHost 127.0.0.1:80>
 ...
@@ -155,6 +161,7 @@ In the next example, all the environments will be located in `user/sites/GRAV_EN
 </VirtualHost>
 ```
 
+NGINX php-fpm:
 ```nginx
 location / {
     ...
@@ -163,6 +170,7 @@ fastcgi_param GRAV_ENVIRONMENTS_PATH user://sites;
 }
 ```
 
+NGINX php-cgi:
 ```nginx
 location / {
 ...
@@ -171,27 +179,29 @@ location / {
 }
 ```
 
+Docker:
 ```yaml
 web:
   environment:
     - GRAV_ENVIRONMENTS_PATH=user://sites
 ```
 
+PHP:
 ```php
 // Set environments path in setup.php or make sure that the following code runs before Grav.
 define('GRAV_ENVIRONMENTS_PATH', 'user://sites');
 ```
 
-#### Custom location for the current environment
+<h4 id="custom-location-for-the-current-environment">現在の環境について設定の場所をカスタムする</h4>
 
-Sometimes it may be useful to have a custom location for your environment
+ときには、あなたの環境において設定場所をカスタムすることが便利な場合もあります。
 
-Value of `GRAV_ENVIRONMENT_PATH` has to be existing path under `GRAV_ROOT`. Do not use trailing slash.
+`GRAV_ENVIRONMENT_PATH` の値は、 `GRAV_ROOT` 以下の存在するパスでなければいけません。最後にスラッシュは付けないでください。
+`GRAV_ENVIRONMENT_PATH` の値は、
 
-In the next example, only the current environment will be located in `user/development`:
+次の例では、現在の環境でのみ、 `user/development` を使います：
 
-
-
+Apache2:
 ```txt
 <VirtualHost 127.0.0.1:80>
 ...
@@ -200,6 +210,7 @@ In the next example, only the current environment will be located in `user/devel
 </VirtualHost>
 ```
 
+NGINX php-fpm:
 ```nginx
 location / {
     ...
@@ -208,6 +219,7 @@ fastcgi_param GRAV_ENVIRONMENT_PATH user://development;
 }
 ```
 
+NGINX php-cgi:
 ```nginx
 location / {
 ...
@@ -216,25 +228,24 @@ location / {
 }
 ```
 
+Docker:
 ```yaml
 web:
   environment:
     - GRAV_ENVIRONMENT_PATH=user://development
 ```
 
+PHP:
 ```php
 // Set environment path in setup.php or make sure that the following code runs before Grav.
 define('GRAV_ENVIRONMENT_PATH', 'user://development');
 ```
 
+`GRAV_ENVIRONMENT_PATH` は、 `GRAV_ENVIRONMENT` とは違うことに気をつけてください。このため、現在のドメイン名にもとづいて自動的に環境名が設定されたくない場合は、環境名も明示的に設定する必要があります。
 
+<h3 id="further-customization">さらなるカスタマイズ</h3>
 
-Note that `GRAV_ENVIRONMENT_PATH` is separate from `GRAV_ENVIRONMENT`, so you may also want to set the environment name if you don't want it to be automatically set to match the current domain name.
+環境設定は、このページで解説したものよりも、さらにカスタマイズ可能です。
 
-### Further Customization
-
-Environments can be customized far further than described in this page.
-
-For more information, please continue to the next page: [Multisite Setup](../05.multisite-setup/).
-
+より詳しい情報は、続けて次のページをお読みください： [マルチサイト設定](../05.multisite-setup/).
 

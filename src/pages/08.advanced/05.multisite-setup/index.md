@@ -1,8 +1,9 @@
 ---
 title: マルチサイト設定
 layout: ../../../layouts/Default.astro
-lastmod: '2025-05-13'
+lastmod: '2025-06-22'
 ---
+
 > [!Info]  
 > Grav は暫定的にマルチサイトをサポートしています。 しかし、マルチサイト設定を完全にサポートするには、管理パネルプラグインに、さらなるアップデートが必要です。Grav の今後のリリースで、引き続き取り組んでいきます。
 
@@ -24,7 +25,7 @@ Grav で複数のサイトネットワーク運営するために最も重要な
 
 1つの同じインストールから、複数の web サイトを提供するのは、 Grav の root ディレクトリに置いた `setup.php` ファイルをベースとして行われるので、これは必須です。
 
-#### Quickstart (for Beginners)
+<h4 id="quickstart-for-beginners">クイックスタート（初心者向け）</h4>
 
 一度作成すれば、 `setup.php` は、ユーザーがページをリクエストするたびに呼ばれます。1つのインストールから複数の web サイトを提供するために、（大まかに言えば）このスクリプトは、 Grav に特定のサブサイトのためのファイル（設定ファイル、テーマファイル、プラグインファイル、ページファイル、その他のファイル）が、どこに置かれているのかを伝えなければいけません。
 
@@ -48,11 +49,15 @@ web サイトネットワーク構造にサブドメインを選んだ場合、 
 
 どちらの方法でも、あなたのベストなセットアップを選んでください。
 
+> [!訳注]  
+> レンタルサーバーでのサブドメイン運用において、ワイルドカードサブドメイン設定が必要かどうかは、そのレンタルサーバーの仕様によるようです。
+
 <h5 id="snippets">スニペット</h5>
 
-For subsites accessible via sub-domains copy the `setup_subdomain.php` file, otherwise for subsites accessible via sub-directories the `setup_subdirectory.php` file into your `setup.php`.
+サブドメイン経由でサブサイトへサクセスするため、 `setup.php` へ `setup_subdomain.php` ファイルをコピーしてください。サブディレクトリ経由でサブサイトへアクセスするには、 `setup_subdirectory.php` ファイルをコピーしてください。
 
-!!! The `setup.php` file must be put in the Grav root folder, the same folder where you can find `index.php`, `README.md` and the other Grav files.
+> [!Tip]  
+> `setup.php` ファイルは、 Grav のルートフォルダに置かなければいけません。 `index.php` や、 `README.md` ファイル、その他の Grav ファイルと同じフォルダです。
 
 **setup_subdomain.php**:
 
@@ -138,9 +143,9 @@ return [
 ];
 ```
 
-When using subdirectories to switch language contexts you might need to load different configs depending on the language.
-You can place your language specific configs in `config/<lang-context>/site.yaml` using the example for `setup_subdir_config_switch.php` below.
-This way `yoursite.com/de-AT/index.html` would load `config/de-AT/site.yaml`, `yoursite.com/de-CH/index.html` would load `config/de-CH/site.yaml` and so on.
+言語の文脈を切り替えるためにサブディレクトリを使う場合、言語によって異なる設定を読み込む必要があるかもしれません。
+以下の `setup_subdir_config_switch.php` の例を使って、 `config/<lang-context>/site.yaml` ファイルに言語固有の設定を置くことができます。
+このようにして、 `yoursite.com/de-AT/index.html` により `config/de-AT/site.yaml` が読み込まれ、 `yoursite.com/de-CH/index.html` により `config/de-CH/site.yaml` が読み込まれ、以下同様です。
 
 **setup_subdir_config_switch.php**:
 
@@ -191,19 +196,21 @@ if (in_array($name, $languageContexts)) {
 return [];
 ```
 
-##### GPM (Grav Package Manager) and multiple setups
+<h5 id="gpm-grav-package-manager-and-multiple-setups">GPM（Grav パッケージマネージャー）とマルチサイト設定</h5>
 
-Should you need to manage your subsites' plugins and themes with the [GPM](https://learn.getgrav.org/17/cli-console/grav-cli-gpm), 
-Keep both `user/themes` + `user/plugins`, so that the GPM fetches and updates them in a single location. Then symlink the needed items under `user/env/my.site.com/themes` or `user/env/my.site.com/plugins`. Then setup individual yaml configurations `user/env/my.site.com/config/plugins` for each subsites.
+もし [GPM](../../07.cli-console/04.grav-cli-gpm/) によりサブサイトのプラグインやテーマを管理したい場合は、 `user/themes` と `user/plugins`の両方をキープしてください。 GPM が1つの場所で取得や更新するためです。それから、必要なアイテムを `user/env/my.site.com/themes` もしくは `user/env/my.site.com/plugins` のフォルダ下にシムリンクしてください。そして、各サブサイトごとに個々の yaml 設定ファイル `user/env/my.site.com/config/plugins` をセットアップしてください。
 
-#### Advanced configuration (for Experts)
+<h4 id="advanced-configuration-for-experts">発展的な設定（上級者向け）</h4>
 
-Once created a `setup.php` have access to two important variables: (i) `$container`, which is the yet not properly initialized [Grav instance](https://github.com/getgrav/grav/blob/develop/system/src/Grav/Common/Grav.php) and (ii) `$self`, which is an instance of the [ConfigServiceProvider class](https://github.com/getgrav/grav/blob/develop/system/src/Grav/Common/Service/ConfigServiceProvider.php).
+一度 `setup.php` を作成すると、2つの重要な変数にアクセスします。
 
-Inside this script, you can do anything, but please be aware that the `setup.php` is called every time a user requests a page. This means that memory critical or time-consuming initializations operations lead to a slow-down of your whole system and should therefore be avoided.
+1. `$container`, これは、まだ適切に初期化されていない[Grav インスタンス](https://github.com/getgrav/grav/blob/develop/system/src/Grav/Common/Grav.php) です。
+2. `$self`, これは、 [ConfigServiceProvider class](https://github.com/getgrav/grav/blob/develop/system/src/Grav/Common/Service/ConfigServiceProvider.php) のインスタンスです。
 
-In the end, the `setup.php` has to return an associative array with the optional environment name **environment** and a stream collection **streams**
-(for more informations and in order to set them up correctly, see the section [Streams](#streams)):
+このスクリプト内では、何でもできます。ただし、気をつけてほしいのは、ページがリクエストされるたびに、常に `setup.php` が呼ばれるということです。つまり、メモリが必要だったり、時間のかかる初期化処理は、システム全体のスローダウンにつながるため、避けるべきです。
+
+最終的に、 `setup.php` は、オプショナルな環境名 **environment** と、 stream のコレクションである **streams** を持つ連想配列を返さなければいけません。
+（より詳細な情報と正しい設定方法については、 [ストリーム](#streams) セクションをお読みください）
 
 ```php
 return [
@@ -231,13 +238,14 @@ return [
 
 ```
 
-!!!! Please be aware that a this very early stage you neither have access to the configuration nor to the URI instance and thus any call to a non-initialized class might end in a freeze of the system, in unexpected errors or in (complete) data loss.
+> [!Warning]  
+> 非常に初期のステージでは、config 設定にも、 URI インスタンスにも、アクセスしていないことに注意してください。このため、初期化されていない class を呼び出すと、システムがフリーズしたり、予期しないエラーが出たり、データが（完全に）消えることが起こりえます。
 
-#### Streams
+<h4 id="streams">ストリーム</h4>
 
-Grav uses URI like streams to define all the file paths in Grav. Using streams makes it really easy to customize lookup paths for any file.
+Grav は、Grav 内のすべてのファイルパスを定義するため、 URI をストリームのように使います。ストリームを使うことにより、あらゆるファイルのパスのカスタマイズが簡単になります。
 
-By default, streams have been configured like this:
+デフォルトでは、ストリームは次のように設定されています：
 
 * `user://` - user folder. e.g. `user/`
 * `page://` - pages folder. e.g. `user://pages/`
@@ -258,7 +266,7 @@ By default, streams have been configured like this:
 * `backup://` - backup folder. e.g. `backups/`
 * `tmp://` - temporary folder. e.g. `tmp/`
 
-In multi-site setups, some of these default settings may not be what you want. Grav provides easy way to customize streams from the environment configuration using `config/streams.yaml`. Additionally you can create and use your own streams when needed.
+マルチサイト設定では、いくつかのデフォルト設定は期待通りになりません。 Grav は`config/streams.yaml` ファイルを使い、環境設定からストリームをカスタマイズする方法を提供します。加えて、必要な場合には、独自のストリームを作成したり使ったりすることもできます。
 
 Mapping physical directories to a logical device can be done by setting up `prefixes`. Here is an example where we separate pages, images, accounts, data, cache and logs from the rest of the sites, but make everything else to look up from the default locations:
 
@@ -308,7 +316,8 @@ This feature comes handy if you want to use for example docker containers and yo
 
 The following environment variables can be used to customize the default paths which Grav uses to setup the environment. After initialization the streams may point to different location.
 
-!!! **Note:** You can use either environment variables or PHP constants, but they need to be set before Grav runs.
+> [!Note]  
+> You can use either environment variables or PHP constants, but they need to be set before Grav runs.
 
 | Variable | Default | Description |
 | -------- | ------- | ----------- |
@@ -321,7 +330,8 @@ The following environment variables can be used to customize the default paths w
 
 In addition there are variables to customize the environments. Better documentation for these can be found in [Server Based Environment Configuration](../04.environment-config#server-based-environment-configuration).
 
-!!! **Note:** These work also from `setup.php` file. You can either make them constants by using `define()` or environment variables with `putenv()`. Constants are preferred over environment variables.
+> [!Note]  
+> These work also from `setup.php` file. You can either make them constants by using `define()` or environment variables with `putenv()`. Constants are preferred over environment variables.
 
 | Variable | Default | Description |
 | -------- | ------- | ----------- |
@@ -380,7 +390,8 @@ return [
 ];
 ```
 
-!! **WARNING:** `setup.php` is used to set initial configuration. If the plugin or your configuration later override these settings, the initial values get lost.
+> [!Warning]  
+> `setup.php` is used to set initial configuration. If the plugin or your configuration later override these settings, the initial values get lost.
 
 After defining the variables in `setup.php`, you can then set those in your server:
 
