@@ -1,7 +1,7 @@
 ---
 title: 多言語サイト
 layout: ../../../layouts/Default.astro
-lastmod: '2025-05-29'
+lastmod: '2025-06-23'
 ---
 
 Grav の多言語対応は、このことを主題とした [コミュニティでの議論](https://github.com/getgrav/grav/issues/170) の成果です。これらを噛み砕き、 Grav での多言語サイトの作り方の例を示します。
@@ -25,7 +25,8 @@ languages:
 
 <h2 id="multi-language-basics">多言語化の基本</h2>
 
-Grav がフォルダ中のマークダウンファイルでサイト構造を決定したり、ページのオプションやコンテンツを設定したりしていることは、これまで説明してきましたので、そのメカニズムまでは入っていきません。しかし、ページを表現するのに、 Grav は **ひとつの** `.md` ファイルを探すことに注目してください。この原則について不安なところがありましたら、これを読み進める前に、[基本のチュートリアル](../../01.basics/04.basic-tutorial) を参照してください。多言語サポートを有効化すると、 Grav は、適切な言語ベースファイルを探します。たとえば、`default.en.md` や、`default.fr.md` のような。
+Grav がフォルダ中のマークダウンファイルでサイト構造を決定したり、ページのオプションやコンテンツを設定したりしていることは、これまで説明してきましたので、そのメカニズムまでは深入りしません。
+ここでは、ページを表現するのに、 Grav は **ひとつの** `.md` ファイルを探すことに注目してください。この原則がまだあやふやな場合は、これを読み進める前に、[基本のチュートリアル](../../01.basics/04.basic-tutorial) を参照してください。多言語サポートを有効化すると、 Grav は、適切な言語ベースファイルを探します。たとえば、`default.en.md` や、`default.fr.md` のようなものです。
 
 <h3 id="language-configuration">言語設定</h3>
 
@@ -51,7 +52,7 @@ languages:
 
 上記の例では、2つのサポート言語が定義されている（ `en` と `fr` ）ことが分かります。これらによって、 **英語** と **フランス語** をサポートできます。
 
-（ URL やコードから）明示的に言語が指定されなかった場合、 Grav は言語が提供された順番に、適切な言語を選択します。このため、上記の例では、 **デフォルトの** 言語は `en` の英語です。もし `fr` の方を先に書いていれば、フランス語がデフォルトの言語になります。
+（ URL やコードから）明示的に言語が指定されなかった場合、 Grav はサポート言語の優先順に、適切な言語を選択します。このため、上記の例では、 **デフォルトの** 言語は `en` の英語です。もし `fr` の方を先に書いていれば、フランス語がデフォルトの言語になります。
 
 デフォルトでは、すべての言語はデフォルト言語にフォールバックします。そうしたくない場合は、 `content_fallback` にキーとしてその言語を指定し、値として言語の配列を渡すことで、フォールバック言語を上書きできます。
 
@@ -95,7 +96,7 @@ Ceci est ma page d'accueil générée par Grav !
 これで、現在のホームページに対して、多言語で、2つのページが定義できました。
 
 > [!Note]  
-> 既存サイトを多言語化する場合、替わりに `include_default_lang_file_extension: false` を設定することで、プレーンな `.md` 拡張子のファイルを主要言語用として使い続けることができます。[詳しくは...](#default-file-extension) 
+> 既存サイトを多言語化する場合、替わりに `include_default_lang_file_extension: false` を設定することで、プレーンな `.md` 拡張子のファイルを主要言語用として使い続けることができます。[詳しくはこちら](#default-file-extension) 
 
 <h3 id="active-language-via-url">URLによる言語</h3>
 
@@ -112,7 +113,7 @@ http://yoursite.com/fr
 ```
 
 > [!Note]  
-> デフォルト言語のプレフィックスを使いたくない場合は、 `include_default_lang: false` を設定します。[詳しくは...](#default-language-prefix) 。
+> デフォルト言語のプレフィックスを使いたくない場合は、 `include_default_lang: false` を設定します。[詳しくはこちら](#default-language-prefix) 。
 
 
 <h3 id="active-language-via-browser">ブラウザでの言語設定</h3>
@@ -363,7 +364,7 @@ PLUGIN_ERROR:
 
 <h3 id="environment-based-language-handling">環境ベースの言語制御</h3>
 
-You can take advantage of [Grav's Environment Configuration](../../08.advanced/04.environment-config) to automatically route users to the correct version of your site based on URL.  For example, if you had a URL such as `http://french.mysite.com` that was an alias for your standard `http://www.mysite.com`, you could setup an environment configuration:
+[Grav の環境設定](../../08.advanced/04.environment-config/) を利用して、 URL に基づいて自動的にユーザーを正しい言語バージョンへルーティングすることができます。たとえば、 `http://french.mysite.com` のような URL があったとき、そしてこれが標準的な `http://www.mysite.com` の別名である場合に、環境設定を次のように設定できます：
 
 `/user/french.mysite.com/config/system.yaml`
 
@@ -374,52 +375,52 @@ languages:
     - en
 ```
 
-This uses an **inverted language order** so the default language is now `fr` so the French language will show by default.
+ここで、 **言語の優先順位が逆順** になっているので、デフォルト言語は、 `fr` となり、フランス語がデフォルトで表示されます。
 
-### Language Alias Routes
+<h3 id="language-alias-routes">カスタムのルーティングを使っていたときの言語切り替え</h3>
 
-Because each page can have its own custom route, it would be hard to switch between different language versions of the same page.  However, there is a new **Page.rawRoute()** method on the Page object that will get the same raw route for any of the various language translations of a single page.  All you would need to do is to put the lang code in front to get the proper route to a specific language version of a page.
+各ページはカスタムのルーティングを設定できるので、同じページの異なる言語バージョン間を切り替えるのは難しいです。しかしながら、 Page オブジェクトに **Page.rawRoute()** メソッドという新しいメソッドがあり、このメソッドは、ある1つのページの多様な言語翻訳すべてについて、元の同じルーティングを取得します。必要なことは、言語コードを、特定の言語バージョンのページの先頭に付け加えるだけです。
 
-For example, say you are on a page in English with a custom route of:
+たとえば、英語バージョンで、次のようなカスタムルーティングのページがあるとします：
 
 ```txt
 /my-custom-english-page
 ```
 
-The French page has the custom route of:
+フランス語ページのカスタムルーティングは次のようになっています：
 
 ```txt
 /ma-page-francaise-personnalisee
 ```
 
-You could get the raw page of the English page and that might be:
+英語ページの元のページルーティングは、次のようになっているかもしれません：
 
 ```txt
 /blog/custom/my-page
 ```
 
-Then just add the language you want and that is your new URL;
+その場合、欲しい言語を追記するだけで、新しい URL になります：
 
 ```txt
 /fr/blog/custom/my-page
 ```
 
-This will retrieve the same page as `/ma-page-francaise-personnalisee`.
+これは、 `/ma-page-francaise-personnalisee` と同じページが表示されます。
 
-## Translation Support
+<h2 id="translation-support">翻訳サポート</h2>
 
-Grav provides a simple yet powerful mechanism for providing translations in Twig and also via PHP for use in themes and plugins. This is enabled by default, and will use `en` language if no languages are defined.  To manually enable or disable translations, there is a setting in your `system.yaml`:
+Grav はシンプルながらパワフルな翻訳機能を提供し、 Twig や PHP 経由で、テーマやプラグインで利用できます。これはデフォルトで有効化されており、言語が定義されていなければ `en` 言語が使われます。翻訳を手動で有効化・無効化するには、 `system.yaml` ファイルを設定します：
 
 ```yaml
 languages:
   translations: true
 ```
 
-The translations use the same list of languages as defined by the `languages: supported:` in your `system.yaml`.
+翻訳は、 `system.yaml` 内の `languages: supported:` で定義された言語のリストと同じものを利用します。
 
-The translation system works in a similar fashion to Grav configuration and there are several places and ways you can provide translations.
+翻訳システムは、 Grav の config 設定に似たやり方で機能します。翻訳を提供する場所ややり方は、いくつかあります。
 
-The first place Grav looks for translation files is in the `system/languages` folder. Files are expected to be created in the format: `en.yaml`, `fr.yaml`, etc.  Each yaml file should contain an array or nested arrays of key/values pairs:
+Grav が翻訳ファイルを探す最初の場所は、 `system/languages` フォルダです。ファイルは次のように作られていることが期待されます： `en.yaml`, `fr.yaml`, など。各 yaml ファイルは、キーと値がペアになった配列もしくは入れ子の配列を含まなければいけません：
 
 ```yaml
 SITE_NAME: My Blog Site
@@ -428,9 +429,9 @@ HEADER:
     SUB_TEXT: Check back daily for the latest news
 ```
 
-For ease of identification, Grav prefers the use of capitalized language strings as this helps to determine untranslated strings and also makes it clearer when used in Twig templates.
+識別を簡単にするため、大文字の利用が望ましいです。これは未翻訳の文字列を判断する助けとなり、 Twig テンプレートで使うときに明確になるからです。
 
-Grav has the ability to fall-back through the supported languages to find a translation if one for the active language is not found.  This is enabled by default but can be disabled via the `translations_fallback` option:
+Grav には、フォールバック機能があり、サポート言語について、有効な言語のひとつが見つからなかった場合に、翻訳を探すための機能です。これはデフォルトで有効化されていますが、 `translations_fallback` オプションで無効化できます：
 
 ```yaml
 languages:
@@ -438,33 +439,32 @@ languages:
 ```
 
 > [!Tip]  
-> Help Grav reach a wider community of users by providing translations in **your language**. We use the [Crowdin Translation Platform](https://crowdin.com/) to facilitate translating the [Grav Core](https://crowdin.com/project/grav-core) and [Grav Admin Plugin](https://crowdin.com/project/grav-admin). [Sign-up](https://crowdin.com/join) and get started translating today!
+> **あなたの言語** で翻訳することにより、 Grav のユーザーコミュニティが広がっていくことへ力を貸してください。わたしたちは、 [Grav コア](https://crowdin.com/project/grav-core) と [Grav 管理パネルプラグイン](https://crowdin.com/project/grav-admin) の翻訳を促進するため、 [Crowdin 翻訳プラットフォーム](https://crowdin.com/) を利用しています。 [登録](https://crowdin.com/join) して、今日から翻訳を始めましょう！
 
-<h3 id="language-switcher">言語の変換</h3>
+<h3 id="language-switcher">言語の切り替え</h3>
 
-You can download a simple **Language Switching** plugin via the Admin plugin, or through the GPM with:
+シンプルな **Language Switching** プラグインを、管理パネル経由もしくは GPM からダウンロード可能です：
 
 ```bash
 bin/gpm install langswitcher
 ```
 
-The [documentation for configuration and implementation can be found on GitHub](https://github.com/getgrav/grav-plugin-langswitcher).
+[GitHub に、設定と実装のドキュメントがあります](https://github.com/getgrav/grav-plugin-langswitcher) 。
 
 
 <h3 id="setup-with-language-specific-domains">特定のドメインでの設定</h3>
 
-Configure your site with [Environment-Based Language Handling](#environment-based-language-handling) to assign default languages (the first language) to domains.
+ドメインにデフォルト言語（第1言語）を割り当てるため、 [環境ベースの言語制御](#environment-based-language-handling) によりサイトを設定してみましょう。
 
-
-Make sure the option
+オプションを確認してください：
 
 ```yaml
 pages.redirect_default_route: true
 ```
 
-is set to `true` in your `system.yaml`.
+上記が、 `system.yaml` ファイルで `true` になっていることを確認してください。
 
-Add the following to your **.htaccess** file and adopt the language slugs and domain names to your needs:
+**.htaccess** ファイルに以下を追記してください。必要に応じて、言語スラッグやドメイン名を合わせてください：
 
 ```txt
 # http://www.cheat-sheets.org/saved-copy/mod_rewrite_cheat_sheet.pdf
@@ -481,9 +481,9 @@ RewriteCond %{REQUEST_URI} !(admin) [NC]
 RewriteRule ^de/(.*)$ "http://grav-site.de/$1" [R=302,L]
 ```
 
-If you know how to simplify the rewrite rules, please edit this page on GitHub by clicking the **Edit** link at the top of the page.
+rewrite rule の簡素化をご存知の方は、このページの上にある **Edit** リンクをクリックし、 GitHub のこのページを編集してください。
 
-Here's a simplified version of the rule set:
+以下は、このルールセットのシンプルバージョンです：
 
 ```txt
 # http://www.cheat-sheets.org/saved-copy/mod_rewrite_cheat_sheet.pdf
@@ -498,27 +498,27 @@ RewriteCond %{REQUEST_URI} !^/admin [NC]
 RewriteRule ^(en|de)/(.*)$ "http://grav-site.$1/$2" [R=302,L]
 ```
 
-This simplified version combines the rewrite rules for redirecting sub-pages for "en" and "de" into a single rule using grouping. Additionally, it consolidates the RewriteCond for the admin path to reduce duplication.
+このシンプルバージョンは、 "en" と "de" のサブページをリダイレクトする rewrite rule を、グルーピングによりひとつのルールに結合しています。加えて、重複を減らすため、管理パスの RewriteCond を結合しています。
 
 > [!Note]  
-> Make sure to add these rules before the default rules that come with Grav CMS.
+> これらのルールは、 Grav CMS に付属するデフォルトルールの前に追加してください。
 
 <h3 id="language-logic-in-twig-templates">twigテンプレート中の言語ロジック</h3>
 
-There is often a need to access Language state and logic from Twig templates.  For example if you need to access a certain image file that is different for a particular language and is named differently (`myimage.en.jpg` and `myimage.fr.jpg`).
+しばしば、 Twig テンプレートから言語の状態やロジックにアクセスする必要があります。たとえば、特定の画像ファイルにアクセスする必要があるときに、その画像が特定の言語では異なるもので、名前も違う場合（ `myimage.en.jpg` と `myimage.fr.jpg` ）です。
 
-To display the correct version of the image you would need to know the current active language.  This is possible in Grav by accessing the `Language` object via the `Grav` object, and calling the appropriate method. In the example above this could be achieved with the following Twig code:
+正しいバージョンの画像を表示するには、現在有効になっている言語を知る必要があります。これは、 Grav では、 `Grav` オブジェクト経由で `Language` オブジェクトにアクセスし、適切なメソッドを呼び出すことでできます。この例の場合、以下のような Twig コードで解決できます：
 
 ```twig
 {{ page.media.images['myimage.'~grav.language.getActive~'.jpg'].html()|raw }}
 ```
 
-The `getActive` call in the Twig is effectively calling `Language->getActive()` to return the current active language code.  A few useful Language methods include:
+`getActive` を Twig 内で呼び出すと、効率的に `Language->getActive()` メソッドを呼び出し、現在有効になっている言語の言語コードを返します。いくつかの便利な Language メソッドがあります：
 
-* `getLanguages()` - Returns an array of all supported languages
-* `getLanguage()` - Returns current active, else returns default language
-* `getActive()` - Returns current active language
-* `getDefault()` - Returns the default (first) language
+* `getLanguages()` - サポートしている言語すべての配列を返します
+* `getLanguage()` - 現在のアクティブになっている言語、あるいはデフォルト言語を返します
+* `getActive()` - 現在アクティブになっている言語を返します
+* `getDefault()` - デフォルトの（最初の）言語を返します
 
-For a complete list of available methods, you can look in the `<grav root>/system/src/Grav/Common/Language/Language.php` file.
+利用可能なメソッドのすべてについては、 `<grav root>/system/src/Grav/Common/Language/Language.php` ファイルをご覧ください。
 
