@@ -1,19 +1,21 @@
 ---
 import Sidebarchild from '../components/Sidebar.astro';
 
-const { pages } = Astro.props;
+const { pages, currentpath } = Astro.props;
 ---
 
 <ol>
     { pages.map( (page: any) => 
         <li>
-            {(page.redirect === false)
-                ? <a href={ `/learn-grav-ja/${page.pathname}/` }>{ page.title }</a>
-                : page.title
+            {(page.redirect !== false) 
+                ? page.title
+                : (`/learn-grav-ja/${page.pathname}/` === currentpath)
+                ? <span class="text-white bg-dark">{ page.title }</span>
+                : <a href={ `/learn-grav-ja/${page.pathname}/` }>{ page.title }</a>
             }
             
             {(page.children.length > 0)
-                ? <Sidebarchild pages={ page.children } />
+                ? <Sidebarchild pages={ page.children } currentpath={currentpath} />
                 : ''
             }
         </li>

@@ -110,7 +110,8 @@ const breadcrumbJsonLd = JSON.stringify({
           検索は<a href={ learnurl }>翻訳元</a>へ
         </p>
         <div class="mb-auto overflow-y-auto pb-5" style="height:100%">
-          <Sidebar pages={ sidebarPagetreeList } />
+          <Sidebar pages={ sidebarPagetreeList } currentpath={ currentpath+'/' } />
+          <div class="pt-3 pb-3"><ul><li><a href="/learn-grav-ja/">注記</a></li></ul></div>
         </div>
       </div>
     </div>
@@ -139,10 +140,16 @@ const breadcrumbJsonLd = JSON.stringify({
       <footer class="border-top position-relative">
         <p class="text-center p-3" style="max-width:100%;overflow:auto;">
           翻訳元ページ：
-          <a href={ learnFullUrl } >{ learnFullUrl }</a>
+          <a href={ learnFullUrl } id="source-page" >{ learnFullUrl }</a>
         </p>
       </footer>
     </div>
   </div>
+  <svg style="display: none;">
+    <symbol id="box-arrow-up-right" viewBox="0 0 16 16">
+      <path fill="currentColor" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"/>
+      <path fill="currentColor" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"/>
+    </symbol>
+  </svg>
 </body>
 </html>

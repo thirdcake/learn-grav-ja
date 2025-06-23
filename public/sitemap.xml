@@ -2,9 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/</loc>
-    <priority>1.0</priority>
+    <priority>0.7</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-06-21</lastmod>
+    <lastmod>2025-06-23</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/01.basics/</loc>

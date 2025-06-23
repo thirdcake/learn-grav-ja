@@ -15,7 +15,7 @@ function sitemapdom (array $pages):string {
     $homeFrontmatter = YamlFrontMatter::parse(file_get_contents(dirname(__DIR__,2).'/src/pages/index.md'));
     $url = $dom->createElement('url');
     $loc = $dom->createElement('loc', 'https://thirdcake.github.io/learn-grav-ja/');
-    $priority = $dom->createElement('priority', '1.0');
+    $priority = $dom->createElement('priority', '0.7');
     $changefreq = $dom->createElement('changefreq', 'yearly');
     $lastmod = $dom->createElement('lastmod', $homeFrontmatter->lastmod);
 

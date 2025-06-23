@@ -34,6 +34,19 @@ main {
     border-left: .25em solid var(--bs-gray);
 }
 
+.heading-external-link a {
+    padding-inline-start: .3rem;
+}
+
+.heading-external-link svg {
+    color: var(--bs-primary);
+    opacity: 0;
+}
+
+.heading-external-link:hover svg {
+    opacity: 1;
+}
+
 .breadcrumb {
     --bs-breadcrumb-margin-bottom: 0;
 }

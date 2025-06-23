@@ -11,7 +11,7 @@ function getPages():array {
 
     // find index.md files in the pages directory
     $dir = dirname(__DIR__, 2).'/src/pages/';
-    $finder->files()->in($dir)->name('index.md');
+    $finder->files()->in($dir)->depth('> 0')->name('index.md');
 
     // data array
     $pages = new Pages();
@@ -20,9 +20,6 @@ function getPages():array {
     if ($finder->hasResults()) {
         foreach ($finder as $fileInfo) {
             $page = new Page($fileInfo);
-            if($page->pathname === 'index.md') {
-                continue;
-            }
             $pages->insert($page);
         }
     }

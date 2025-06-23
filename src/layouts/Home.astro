@@ -56,10 +56,10 @@ const breadcrumbJsonLd = JSON.stringify({
   <script type="application/ld+json" set:html={breadcrumbJsonLd}></script>
 </head>
 <body>
-  <main>
+  <main class="container learn-grav-default pb-5">
     <h1>{ frontmatter.title }</h1>
     <slot />
-    <h2>ページ一覧</h2>
+    <h2>全ページ一覧</h2>
     <Sidebar pages={ pagetree.children } currentpath='' />
   </main>
 </body>

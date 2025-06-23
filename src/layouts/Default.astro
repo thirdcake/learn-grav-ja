@@ -6,7 +6,7 @@ const { frontmatter } = Astro.props;
     <Base frontmatter={frontmatter}>
       <main class="position-relative p-3 p-md-5 z-0">
         <h1 class="pt-5">{ frontmatter.title }</h1>
-        <div class="accordion" id="mokuji" style="max-width:400px;">
+        <div class="accordion" id="mokuji" style="max-width:400px; display:none;">
           <div class="accordion-item">
             <h2 class="accordion-header">
               <button class="accordion-button" type="button" 
@@ -18,12 +18,15 @@ const { frontmatter } = Astro.props;
             <div id="collapseOne" class="accordion-collapse collapse show" 
               data-bs-parent="#mokuji">
               <div class="accordion-body">
-                <ul id="mokuji-ul" class="list-group list-group-flush">
+                <ul class="list-group list-group-flush">
                 </ul>
               </div>
             </div>
           </div>
         </div>
+        <template id="list-item">
+          <li class="list-group-item overflow-x-hidden" style="white-space: nowrap; text-overflow: ellipsis;"><a></a></li>
+        </template>
         <div class="my-5 learn-grav-default"><slot /></div>
       </main>
     </Base>

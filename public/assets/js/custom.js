@@ -2,25 +2,27 @@
 // 目次を作る
 function create_mokuji() {
     const ul = document.querySelector('#mokuji ul');
+    const template = document.querySelector('template#list-item');
     if(!ul) {
         return;
     }
     const heads = document.querySelectorAll(
         '.learn-grav-default h2, .learn-grav-default h3'
     );
+    if(heads.length === 0) {
+        return;
+    } else {
+        mokuji.style.display = 'block';
+    }
     const frag = [...heads].reduce((frag, hx) => {
-        const text = hx.textContent;
-        const link = `#${hx.id}`;
-        const a = document.createElement('a');
-        a.textContent = text;
-        a.href = link;
-        const li = document.createElement('li');
-        li.appendChild(a);
-        li.classList.add('list-group-item');
+        const clone = template.content.cloneNode(true);
+        const a = clone.querySelector('a');
+        a.textContent = hx.textContent;
+        a.href = `#${hx.id}`;
         if(hx.tagName === 'H3') {
-            li.classList.add('ms-3');
+            a.classList.add('ms-3');
         }
-        frag.appendChild(li);
+        frag.appendChild(clone);
         return frag;
     }, document.createDocumentFragment());
     ul.appendChild(frag);
@@ -59,14 +61,33 @@ function add_blockquote_class () {
     });
 }
 
-// サイドバーのページナビゲーションで 今いるページを強調
-function activate_currenturl_in_sidebar () {
-    const current_url = new URL(window.location);
-
+// 見出しに翻訳元への外部リンクを追加
+function headings_external_link () {
+    const heads = [...document.querySelectorAll(
+        '.learn-grav-default h2, .learn-grav-default h3'
+    )];
+    heads.forEach(heading => {
+        heading.classList.add('heading-external-link');
+        const anc = document.createElement('a');
+        anc.target = '_blank';
+        anc.rel = 'noopener';
+        const href = new URL(document.getElementById('source-page').href);
+        href.hash = heading.id;
+        anc.href = href;
+        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.setAttribute("width", "16");
+        svg.setAttribute("height", "16");
+        svg.setAttribute("viewBox", "0 0 16 16");
+        const use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+        use.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", "#box-arrow-up-right");
+        svg.appendChild(use);
+        anc.appendChild(svg);
+        heading.appendChild(anc);
+    });
 }
 window.addEventListener('DOMContentLoaded', ()=>{
     create_mokuji();
     add_table_class();
     add_blockquote_class();
-    // activate_currenturl_in_sidebar();
+    headings_external_link();
 }, false);
