@@ -1,7 +1,7 @@
 ---
 title: マルチサイト設定
 layout: ../../../layouts/Default.astro
-lastmod: '2025-06-22'
+lastmod: '2025-06-24'
 ---
 
 > [!Info]  
@@ -266,9 +266,9 @@ Grav は、Grav 内のすべてのファイルパスを定義するため、 URI
 * `backup://` - backup folder. e.g. `backups/`
 * `tmp://` - temporary folder. e.g. `tmp/`
 
-マルチサイト設定では、いくつかのデフォルト設定は期待通りになりません。 Grav は`config/streams.yaml` ファイルを使い、環境設定からストリームをカスタマイズする方法を提供します。加えて、必要な場合には、独自のストリームを作成したり使ったりすることもできます。
+マルチサイト設定では、いくつかのデフォルト設定は期待通りになりません。 Grav は `config/streams.yaml` ファイルを使い、環境設定からストリームをカスタマイズする方法を提供します。加えて、必要な場合には、独自のストリームを作成したり使ったりすることもできます。
 
-Mapping physical directories to a logical device can be done by setting up `prefixes`. Here is an example where we separate pages, images, accounts, data, cache and logs from the rest of the sites, but make everything else to look up from the default locations:
+実際のディレクトリを論理デバイスにマッピングするには、 `prefixes` を設定します。ここでは、具体例として、 pages, images, accounts, data, cache そして logs をサイトから分離し、その他すべてをデフォルトの場所から見つけられるようにします：
 
 `user/env/domain.com/config/streams.yaml`:
 
@@ -301,51 +301,51 @@ schemes:
       '': ['logs/domain.com']
 ```
 
-In Grav streams are objects, mapping a set of physical directories of the system to a logical device. They are classified via their `type` attribute. For read-only streams that's the `ReadOnlyStream` type and for read-writeable streams that's the `Stream` type.
+Grav では、 stream はオブジェクトであり、システムの物理デバイス設定を論理デバイスにマッピングするものです。これらは、 `type` 属性により分類されます。読み取り専用の stream に対しては、 `ReadOnlyStream` タイプとなり、読み書き可能な stream に対しては、 `Stream` タイプとなります。
 
-For example, if you use `image://mountain.jpg` stream, Grav looks up `environment://images` (`user/env/domain.com/images`) and `system://images` (`system/images`). This means that streams can be used to define other streams.
+たとえば、 `image://mountain.jpg` という stream を使う場合、 Grav は `environment://images` （`user/env/domain.com/images`） と、 `system://images` （`system/images`） を探します。つまり、 stream は他の stream の定義に使えます。
 
+Prefixes により、いくつかの物理パス（実際のパス）をひとつの論理 stream にまとめることができます。 `cache` stream をよく見ると、少しだけ違うことに気づくでしょう。この場合、 `cache://` は `cache` を解決し、 `cache://images` は `images` を解決します。
 
-Prefixes allows you to combine several physical paths into one logical stream. If you look carefully at `cache` stream definition, it is a bit different. In this case `cache://` resolves to `cache`, but `cache://images` resolves to `images`.
+<h3 id="server-based-multi-site-configuration">サーバーを設定もとにしたマルチサイト設定</h3>
 
-### Server Based Multi-Site Configuration
+Grav 1.7 からは、サーバー設定から初期の環境変数をカスタマイズできるようになりました。
 
-Grav 1.7 adds support to customize initial environment from your server configuration.
+この機能は、 たとえば docker コンテナを利用したい場合に、使用するドメインから独立させたい場合に便利です。もしくは、設定に機密事項を保存したくない場合で、サーバー設定に保存したい場合に便利です。
 
-This feature comes handy if you want to use for example docker containers and you want to make them independent of the domain you happen to use. Or if do not want to store secrets in the configuration, but to store them in your server setup.
-
-The following environment variables can be used to customize the default paths which Grav uses to setup the environment. After initialization the streams may point to different location.
+以下の環境変数は、 Grav が環境設定に使用するデフォルトパスのカスタマイズに使えます。初期化後、 stream は異なる場所を指し示すかもしれません。
 
 > [!Note]  
-> You can use either environment variables or PHP constants, but they need to be set before Grav runs.
+> 環境変数もしくは PHP 定数を利用可能ですが、それらは Grav 実行される前に設定される必要があります。
 
-| Variable | Default | Description |
+| 変数 | デフォルト | 説明 |
 | -------- | ------- | ----------- |
-| **GRAV_SETUP_PATH** | AUTO DETECT | A custom path to `setup.php` file including the filename. By default Grav looks the file from `GRAV_ROOT/setup.php` and `GRAV_ROOT/GRAV_USER_PATH/setup.php`. |
-| **GRAV_USER_PATH** | `user` | A relative path for `user://` stream. |
-| **GRAV_CACHE_PATH** | `cache` | A relative path for `cache://` stream. |
-| **GRAV_LOG_PATH** | `logs` | A relative path for `log://` stream. |
-| **GRAV_TMP_PATH** | `tmp` | A relative path for `tmp://` stream. |
-| **GRAV_BACKUP_PATH** | `backup` | A relative path for `backup://` stream. |
+| **GRAV_SETUP_PATH** | AUTO DETECT | `setup.php` ファイルへのファイル名を含むカスタムパス。デフォルトでは、 Grav は `GRAV_ROOT/setup.php` 及び `GRAV_ROOT/GRAV_USER_PATH/setup.php` を探します。 |
+| **GRAV_USER_PATH** | `user` | `user://` stream への相対パス |
+| **GRAV_CACHE_PATH** | `cache` | `cache://` stream への相対パス |
+| **GRAV_LOG_PATH** | `logs` | `log://` stream への相対パス |
+| **GRAV_TMP_PATH** | `tmp` | `tmp://` stream への相対パス |
+| **GRAV_BACKUP_PATH** | `backup` | `backup://` stream への相対パス |
 
-In addition there are variables to customize the environments. Better documentation for these can be found in [Server Based Environment Configuration](../04.environment-config#server-based-environment-configuration).
+加えて、環境変数をカスタマイズする変数もあります。これらについて、より詳しいドキュメントは、 [サーバーベースの環境設定](../04.environment-config/#server-based-environment-configuration) にあります。
 
 > [!Note]  
+> これらは、 `setup.php` ファイルからも機能します。 `define()` 関数で定数にしたり、 `putenv()` 関数で環境変数にしたりできます。定数は、環境変数より望ましいです。
 > These work also from `setup.php` file. You can either make them constants by using `define()` or environment variables with `putenv()`. Constants are preferred over environment variables.
 
-| Variable | Default | Description |
+| 変数 | デフォルト | 説明 |
 | -------- | ------- | ----------- |
-| **GRAV_ENVIRONMENT** | DOMAIN NAME | Environment name. Can be used for example in docker containers to set a custom environment which does not rely domain name, such as `production` and `develop`. |
-| **GRAV_ENVIRONMENTS_PATH** | `user://env` | Lookup path for all environments if you do prefer something like `user://sites`. Can be either a stream or relative path from `GRAV_ROOT`. |
-| **GRAV_ENVIRONMENT_PATH** | `user://env/ENVIRONMENT` | Sometimes it may be useful to have a custom location for your environment. |
+| **GRAV_ENVIRONMENT** | DOMAIN NAME | 環境名。たとえば、 Docker コンテナでカスタム環境をドメイン名によらず設定するのに使います。たとえば、 `production` や `develop` など。 |
+| **GRAV_ENVIRONMENTS_PATH** | `user://env` | 全環境を探すパス。 `user://sites` のようにしたい場合に使います。 stream もしくは `GRAV_ROOT` からの相対パスが使えます。 |
+| **GRAV_ENVIRONMENT_PATH** | `user://env/ENVIRONMENT` | あなたの環境にカスタムロケーションを持たせたい場合にときどき便利かもしれません。 |
 
-#### Server Based Configuration Overrides
+<h4 id="server-based-configuration-overrides">サーバーベースの設定の上書き</h4>
 
-If you do not wish to store secret credentials inside the configuration, you can also provide them by using environment variables from your server.
+設定内に、秘密のクレデンシャル情報を保存したくない場合に、サーバーから環境変数を使って提供することもできます。
 
-As environmental variables have strict naming requirements (they can only contain A-Z, a-z, 0-9 and _), some tricks are needed to get the configuration overrides to work.
+環境変数には、厳密な命名要件（ `A-Z`, `a-z`, `0-9` そして `_` のみを使う）があるので、設定の上書きを機能させるには、いくつかのトリッキーなやり方が必要です。
 
-Here is an example of a simple configuration override using YAML format for presentation:
+以下は、 YAML フォーマットを使った、シンプルな設定上書きの例です：
 
 ```yaml
 GRAV_CONFIG: true                           # If false, the configuration here will be ignored.
@@ -356,9 +356,9 @@ GRAV_CONFIG__GITHUB__auth__method: api      # Override config.plugins.github.aut
 GRAV_CONFIG__GITHUB__auth__token: xxxxxxxx  # Override config.plugins.github.auth.token = xxxxxxxx
 ```
 
-In above example `__` (double underscore) represents nested variable, which in twig is represented with `.` (dot).
+上記の例で、 `__` （2つのアンダースコア） は、変数のネスト構造を表しており、 twig 内では `.` （ドット）で表されるものです。
 
-You can also use environment variables in `setup.php`. This allows you for example to store secrets outside the configuration:
+また、 `setup.php` 内でも環境変数を利用可能です。これにより、たとえば設定外に機密情報を保存できるようになります：
 
 `user/setup.php`:
 
@@ -391,9 +391,11 @@ return [
 ```
 
 > [!Warning]  
-> `setup.php` is used to set initial configuration. If the plugin or your configuration later override these settings, the initial values get lost.
+> `setup.php` は、最初の設定に使われます。プラグインや後の設定でこれらの設定を上書きする場合、初期の値は失われます。
 
-After defining the variables in `setup.php`, you can then set those in your server:
+変数を `setup.php` で定義後、サーバ0にそれらを設定できます：
+
+Apache2:
 
 ```txt
 <VirtualHost 127.0.0.1:80>
@@ -408,6 +410,8 @@ After defining the variables in `setup.php`, you can then set those in your serv
 </VirtualHost>
 ```
 
+NGINX php-fpm:
+
 ```nginx
 location / {
     ...
@@ -420,6 +424,8 @@ location / {
     fastcgi_param GOOGLE_MAPS_KEY         XWIozB2R2GmYInTqZ6jnKuUrdELounUb4BIxYmp;
 }
 ```
+
+NGINX php-cgi:
 
 ```nginx
 location / {
@@ -434,6 +440,8 @@ location / {
 }
 ```
 
+Docker:
+
 ```yaml
 web:
   environment:
@@ -445,6 +453,8 @@ web:
     - GOOGLE_MAPS_KEY=XWIozB2R2GmYInTqZ6jnKuUrdELounUb4BIxYmp
 ```
 
+PHP:
+
 ```php
 putenv('GRAV_SETUP_PATH', 'user/setup.php');
 putenv('GRAV_ENVIRONMENT', 'production');
@@ -454,5 +464,5 @@ putenv('DYNAMODB_SESSION_REGION', 'us-east-1');
 putenv('GOOGLE_MAPS_KEY', 'XWIozB2R2GmYInTqZ6jnKuUrdELounUb4BIxYmp');
 ```
 
-In this example, server will also use `production` environment stored in `user/env/production` folder.
+この例では、サーバーは `user/env/production` フォルダに保存された `production` 環境変数も使います。
 

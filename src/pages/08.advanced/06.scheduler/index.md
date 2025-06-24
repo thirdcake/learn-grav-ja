@@ -1,7 +1,7 @@
 ---
 title: スケジューラ
 layout: ../../../layouts/Default.astro
-lastmod: '2025-06-18'
+lastmod: '2025-06-24'
 ---
 
 Grav のスケジューラは、 Grav 1.6 で追加された新しい機能で、ジョブを定期的に実行します。基本的な処理は、サーバーの **cron** スケジューラに依存しますが、 cron サービスにエントリーを1つ追加すると、すべてのジョブと特定のスケジュールを Grav から設定できるようになります。
@@ -154,7 +154,7 @@ Grav コアは、最初からいくつかのジョブを提供しています。
 
 <h2 id="custom-jobs">カスタムジョブ</h2>
 
-The Grav Scheduler can be manually configured with any number of custom jobs.  These can be setup in the same `scheduler.yaml` configuration file referenced above.  For example, the `ls-job` referenced above would be configured:
+Grav スケジューラーは、任意の数のカスタムジョブを手動で設定できます。これらは、上記と同じ `scheduler.yaml` 設定ファイルで設定可能です。たとえば、上記の `ls-job` は、次のように設定されています：
 
 ```yaml
 custom_jobs:
@@ -167,13 +167,13 @@ custom_jobs:
     email: user@email.com
 ```
 
-The command should be any local script that can be run from the command line/terminal.  Only the `command` and the `at` attributes are required.
+command は、コマンドラインやターミナルで実行可能なローカルスクリプトであるべきです。 `command` 及び `at` 属性だけは、必要です。
 
-## Plugin-provided Jobs
+<h2 id="plugin-provided-jobs">プラグインから提供されるジョブ</h2>
 
-One of the most powerful feature of the Grav Scheduler, is the ability for 3rd party plugins to provide their own jobs.  A great example of this is provided by the `TNTSearch` plugin.  TNTSearch is a full-featured text search engine that requires content to be indexed before it can be searched.  This indexing job can be performed in a variety of ways, but the Grav Scheduler allows you to reindex your content periodically rather than having to do so manually.
+Grav スケジューラーの最もパワフルな機能のひとつは、サードパーティ製のプラグインが、独自のジョブを提供できることです。この素晴らしい具体例は、 `TNTSearch` プラグインによるものです。 TNTSearch プラグインは、完全な機能を持つテキストサーチエンジンで、検索する前に、コンテンツをインデックスする必要があります。このインデックスするジョブは、さまざまな方法で実行できますが、 Grav スケジューラーにより、手動ではなく、定期的にインデックス作成ができます。
 
-The first step is for your plugin to subscribe to the `onSchedulerInitialized()` event.  And then create a method in your plugin file that can add a custom job when called:
+最初のステップは、 `onSchedulerInitialized()` イベントにプラグインを登録することです。そして、プラグインファイルにメソッドを作成します。呼び出されたときに、カスタムジョブを追加するメソッドです：
 
 ```php
 public function onSchedulerInitialized(Event $e): void
@@ -192,6 +192,5 @@ public function onSchedulerInitialized(Event $e): void
 }
 ```
 
-Here, you can see how some relevant scheduler configuration is obtained from the TNTSearch plugin's configuration settings, and then a new `Job` is created with a **static** function called `indexJob()`.
-
+上記からわかる通り、 TNTSearch プラグインの config 設定から関連するスケジューラ設定を取得し、それから新しい `Job` を `indexJob()` という **静的** 関数で作成しています。
 
