@@ -2,6 +2,7 @@
 title: 'config 設定'
 layout: ../../../layouts/Default.astro
 lastmod: '2025-05-30'
+description: 'Grav の設定は YAML 形式で簡単に管理できます。 system.yaml を中心に各種設定ファイルを紹介します。'
 ---
 
 すべての Grav の設定ファイルは、 [YAML 構文](../../08.advanced/11.yaml/) で書かれており、拡張子は、 `.yaml` です。YAML は、非常に直感的なので、読み書きともにかんたんですが、利用可能な構文を完全に理解するには、 [高度な設定の章の YAML ページ](../../08.advanced/11.yaml/) をチェックしてください。

@@ -2,10 +2,12 @@
 title: システム要件
 layout: ../../../layouts/Default.astro
 lastmod: '2025-05-12'
+description: 'Grav は、PHP といくつかの拡張だけで簡単に実行できます。軽量で幅広い環境に対応します。'
 ---
+
 Grav は、意図的に少ない要件で設計されています。Grav は、あなたのローカルコンピュータや、99% の web ホスティングプロバイダでかんたんに動作します。手元にペンがあれば、以下のシステム要件を書き留めてください。
 
-1. Web サーバ（Apache, Nginx, LiteSpeed, Lightly, IIS など）
+1. Web サーバー（Apache, Nginx, LiteSpeed, Lightly, IIS など）
 2. PHP 7.3.6 以上
 3. ええと... これだけです、本当に！ （ただし、スムーズに動かすために [PHP要件](#php-requirements) をご覧ください）
 
@@ -14,7 +16,7 @@ Grav は、コンテンツをプレーンなテキストファイルから構築
 > [!Info]  
 > パフォーマンスを最適化するため、 APCu や、 Memcached 、 Redis のような PHP ユーザキャッシュの使用を強く推奨します。しかし心配はいりません。ホスティングサービスにすでにパッケージされていることがほとんどです！
 
-<h2 id="web-servers">Web サーバ</h2>
+<h2 id="web-servers">Web サーバー</h2>
 
 Grav は、とてもシンプルで汎用的なので、動かすだけなら web サーバーさえ不要です。直接、 PHP 7.3.6 以上のビルトイン・サーバで動かせます。
 
@@ -154,7 +156,7 @@ PhpStorm は、複雑な Grav プラグインを書く人を含む PHP 開発者
 
 1. [MacDown](https://macdown.uranusjr.com/) - MacOS - 無料で、シンプルで、軽量なオープンソースの Markdown エディタ。
 2. [LightPaper](https://getlightpaper.com/) - MacOS - $17.99 で、クリーンで、強力です。わたしたちが Mac 上で選択した markdown エディタです。 **ディスカウントコード（ GET_GRAV_25 ）で 25 % オフになります**
-3. [MarkDrop](https://culturezoo.com/markdrop/) - MacOS - $5 ですが、クリーンで Droplr サポートが組み込まれています。
+3. [MarkDrop](https://markdrop.app/) - MacOS - $5 ですが、クリーンで Droplr サポートが組み込まれています。
 4. [MarkdownPad](https://markdownpad.com/) - Windows - 無料で Pro バージョン。YAML フロントマターサポートまでも付いています。Windows ユーザーにとって素晴らしいソリューションです。
 5. [Mark Text](https://github.com/marktext/marktext) - 無料で、オープンソースの Markdown エディタです。 Windows / Linux / MacOS 対応。
 
@@ -166,7 +168,7 @@ PhpStorm は、複雑な Grav プラグインを書く人を含む PHP 開発者
 1. [Transmit](https://panic.com/transmit/) - MacOS - MacOS でデファクトの FTP/SFTP クライアントです。簡単に使えて、処理が速くて、フォルダ同期してくれて、必要なことすべてに素晴らしく適合します。
 2. [FileZilla](https://filezilla-project.org/) - MacOS/Windows/Linux - おそらく、 Windows ユーザーと Linux ユーザーには最適な選択肢です。無料でとてもパワフルです（が、 Mac 上では見にくいです！）
 3. [Cyberduck](https://cyberduck.io/) - MacOS/Windows - MacOS ユーザーと Windows ユーザー両方に適した無料の選択肢。他のものほど機能は充実していません。
-4. [ForkLift](https://www.binarynights.com/forklift/) - MacOS - Transmit の堅実な代替品で、しかも若干安いです。
+4. [ForkLift](https://binarynights.com/) - MacOS - Transmit の堅実な代替品で、しかも若干安いです。
 
 ### Git
 

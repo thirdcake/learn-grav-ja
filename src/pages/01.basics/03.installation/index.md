@@ -2,12 +2,14 @@
 title: インストール
 layout: ../../../layouts/Default.astro
 lastmod: '2025-05-12'
+description: 'Grav のインストールは簡単です。ZIP を展開するだけで使えます。 Composer や GitHub にも対応しています。'
 ---
-Grav のインストールはかんたんです。実際、本当の意味でのインストールはありません。Grav をインストールする方法はいくつかあります。まず、最もかんたんな方法は、 **zip** アーカイブファイルをダウンロードして、それを展開することです。2つ目の方法は、 **Composer** によってインストールする方法です。3つ目の方法は、 **GitHub** から直接ソースのプロジェクトをクローンし、そこに含まれるスクリプトコマンドを実行し、必要な依存関係をインストールすることです。バンドルされたスクリプトを実行する [さらなる方法](#further-options) もあります。
+
+Grav のインストールは簡単です。実のところ、本当の意味でのインストールはありません。 Grav をインストールする方法はいくつかあります。まず、最も簡単な方法は、 **zip** アーカイブファイルをダウンロードして、それを展開することです。2つ目の方法は、 **Composer** によってインストールする方法です。3つ目の方法は、 **GitHub** から直接ソースのプロジェクトをクローンし、そこに含まれるスクリプトコマンドを実行し、必要な依存関係をインストールすることです。バンドルされたスクリプトを実行する [さらなる方法](#further-options) もあります。
 
 <h2 id="check-for-php-version">PHP のバージョンを確認</h2>
 
-Grav は、驚くほどかんたんに構築して動かすことができます。少なくとも、 PHP のバージョンが 7.3.6 以上であることを確認してください。ターミナルで、 `php -v` とタイプすることでわかります。
+Grav は、驚くほど簡単に構築して動かすことができます。少なくとも、 PHP のバージョンが 7.3.6 以上であることを確認してください。ターミナルで、 `php -v` とタイプすることでわかります。
 
 
 ```bash
@@ -43,7 +45,7 @@ getgrav.org のサイトから、 [タグ付きリリース](https://github.com/
 
 <h2 id="option-2-install-with-composer">選択肢2: composer でインストール</h2>
 
-次の方法は、 [composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx) を使って、 Grav をインストールする方法です:
+次の方法は、 [composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos) を使って、 Grav をインストールする方法です:
 
 ```bash
 composer create-project getgrav/grav ~/webroot/grav
@@ -66,7 +68,7 @@ cd ~/webroot
 git clone -b master https://github.com/getgrav/grav.git
 ```
 
-2. [composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx) を利用して、 **ベンダーの依存関係** をインストールをしてください：
+2. [composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos) を利用して、 **ベンダーの依存関係** をインストールをしてください：
 
 ```bash
 cd ~/webroot/grav

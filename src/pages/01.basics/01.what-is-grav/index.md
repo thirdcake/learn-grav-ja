@@ -2,7 +2,9 @@
 title: 'Gravとは何か?'
 layout: ../../../layouts/Default.astro
 lastmod: '2025-05-12'
+description: 'Grav とは、データベース不要のフラットファイル CMS です。高速で、シンプルかつ柔軟にサイトを構築できます。'
 ---
+
 Grav とは、 **高速で** 、 **シンプルで** 、 **柔軟な** ファイルベースの web プラットフォームです。必要なインストールは **ありません** 。ただ、 ZIP アーカイブを展開するだけで、すぐにご利用いただけます。Grav は、類似のフラットファイル CMS プラットフォームと同様の原則に従っていますが、それらプラットフォームとは異なる設計思想を持っています。
 
 **Grav** という名前は、ただ **Gravity** （重力）という単語を短縮したものです。私たちのプラットフォームと、サンドラ・ブロック主演映画の名前空間が共有されているのは、まったくの偶然です！ さらに重要なことは、重力は、物（オブジェクト）どうしを引き合わせる力を記述する物理学の根本原理でもあるということです。実はこの名前は、プロジェクトの一時的な「コードネーム」として選ばれ、そのまま定着しました。
@@ -10,10 +12,10 @@ Grav とは、 **高速で** 、 **シンプルで** 、 **柔軟な** ファイ
 Grav の基礎となるアーキテクチャは、十分に洗練され、その種の中では最高の技術で構築されています。これにより、 Grav は使いやすく、拡張しやすくなります。これらの主要な技術とは、以下のものです： 
 
 * [Twig Templating](https://twig.symfony.com/): ユーザ・インターフェースを強力に制御します
-* [Markdown](https://en.wikipedia.org/wiki/Markdown): コンテンツ制作をかんたんにします
+* [Markdown](https://ja.wikipedia.org/wiki/Markdown): コンテンツ制作をかんたんにします
 * [YAML](https://yaml.org): 設定をシンプルにします
 * [Parsedown](https://parsedown.org/): Markdown を高速にパースし、 Markdown Extra をサポートします
-* [Doctrine Cache](https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/caching.html): パフォーマンスを向上します
+* [Doctrine Cache](https://www.doctrine-project.org/projects/doctrine-orm/en/latest/reference/caching.html): パフォーマンスを向上します
 * [Pimple Dependency Injection Container](https://github.com/silexphp/Pimple): 拡張性と保守性を向上します
 * [Symfony Event Dispatcher](https://symfony.com/doc/current/components/event_dispatcher.html): プラグインのイベントを制御します
 * [Symfony Console](https://symfony.com/doc/current/components/console.html): CLI インターフェースが利用できます
@@ -33,7 +35,7 @@ Grav は、この問題に、異なる方法で取り組んでいます。主に
 
 基本的なサイトの立ち上げと運営であれば、最小限の web 開発経験で十分です。もしもう少し深く掘り下げたなら、 Grav に達成できないことはほとんど無いことに気づくでしょう。
 
-### Grav のロゴ及びプレス情報
+<h3 id="grav-logos-and-press-information">Grav のロゴ及びプレス情報</h3>
 
 Grav のロゴやプレス情報を含む概要は、 [メディアページ](https://getgrav.org/media) をご覧ください。
 
