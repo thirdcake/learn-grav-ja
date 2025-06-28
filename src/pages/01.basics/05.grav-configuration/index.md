@@ -1,7 +1,7 @@
 ---
 title: 'config 設定'
 layout: ../../../layouts/Default.astro
-lastmod: '2025-06-26'
+lastmod: '2025-06-28'
 description: 'Grav の設定は YAML 形式で簡単に管理できます。 system.yaml を中心に各種設定ファイルを紹介します。'
 ---
 
@@ -21,7 +21,7 @@ Grav には、賢明な初期設定のオプションが用意されており、
 このファイルに、同じ構造で、同じ名前の設定をすれば、すべて初期設定から上書きされます。
 
 > [!Warning]  
-> 一般的に、 `system/` フォルダ内のどんなことでも **決して** 変更するべきではありません。ユーザーがすること（コンテンツを作る、プラグインをインストールする、設定を編集するなど）は、 `user/` フォルダ内で行ってください。こうすることで、アップグレードが簡単になりますし、バックアップや同期のために、変更内容をひとつの場所にまとめておくことができるようになります。 
+> 一般的に、 `system/` フォルダ内のどんな内容も、 **決して** 変更するべきではありません。ユーザーがすること（コンテンツを作る、プラグインをインストールする、設定を編集するなど）は、 `user/` フォルダ内で行ってください。こうすることで、アップグレードが簡単になりますし、バックアップや同期のために、変更内容をひとつの場所にまとめておくことができるようになります。 
 
 デフォルトの `system/config/system.yaml` ファイルにある変数は次のとおりです：
 
@@ -58,10 +58,10 @@ http_x_forwarded:
 | **wrapped_site:** | テーマやプラグインに、 Grav が他のプラットフォームに含まれているかを知らせます。 `true` もしくは `false` が使えます |
 | **reverse_proxy_setup:** |  リバースプロキシで運用している場合で、プロキシとは異なるポート番号の場合。 `true` または `false` の値 |
 | **force_ssl:** | 有効化すると、 Grav は強制的に HTTPS でアクセスします（注意：理想的な解決策ではありません）。 `true` か `false` が使えます |
-| **force_lowercase_urls:** | 大文字/小文字に対応した URL をサポートしたい場合、これを `false` にしてください |
-| **custom_base_url:** | `base_url` を手作業で設定するならここでしてください |
-| **username_regex:** | 上記の例は小文字、数字、ダッシュ、アンダースコアで、 3-16 文字 |
-| **pwd_regex:** | 上記の例は1つ以上の数字、1つ以上の大文字と小文字で、8文字以上 |
+| **force_lowercase_urls:** | 大文字/小文字を区別した URL をサポートしたい場合、これを `false` にしてください |
+| **custom_base_url:** | `base_url` を手動で設定するならここでしてください |
+| **username_regex:** | ユーザー名として使える文字列の制限。上記の例は小文字、数字、ダッシュ、アンダースコアで、 3-16 文字 |
+| **pwd_regex:** | パスワードとして使える文字列の制限。上記の例は1つ以上の数字、1つ以上の大文字と小文字で、8文字以上 |
 | **intl_enabled:** | PHP の国際化用拡張モジュールの特別なロジック（ `mod_intl` ） |
 | **http_x_forwarded:** | 多様な `HTTP_X_FORWARD` ヘッダのための設定オプション（ **Grav 1.7.0 以上** ） |
 
@@ -87,16 +87,16 @@ languages:
 | プロパティ | 説明 |
 | -------- | ----------- |
 | **supported:** | サポート対象言語のリスト。例： `[en, fr, de]` |
-| **default_lang:** | デフォルトは、上記の supported 言語で最初に書いた言語。 supported 言語の中から選ばなければいけません |
+| **default_lang:** | デフォルトは、上記の supported に最初に書いた言語。サポート対象言語のリスト中から選ばなければいけません |
 | **include_default_lang:** | URL すべてに、default lang の接頭辞を追加する。 `true` もしくは `false` |
-| **include_default_lang_file_extension:** | 有効化すると、ページを保存するときに、デフォルトの言語をファイル拡張子に追加します（例： `.en.md` ）デフォルト言語でも `.md` ファイル拡張子を使い続けたい場合は、無効化してください。 `true` または `false` の値 (**Grav 1.7.0+**) |
+| **include_default_lang_file_extension:** | 有効化すると、ページを保存するときに、デフォルトの言語をファイル拡張子に追加します（例： `.en.md` ）デフォルト言語でも `.md` ファイル拡張子を使い続けたい場合は、無効化してください。 `true` または `false` の値 (**Grav 1.7.0 以上**) |
 | **pages_fallback_only:** | サポートされている言語からページコンテンツを探してフォールバックします。 `true` または `false` の値 |
 | **translations:** | デフォルトで翻訳を有効化します。 `true` または `false` の値 |
 | **translations_fallback:** | 有効言語が存在しない場合に、サポートされた翻訳でフォールバックします `true` または `false` の値 |
 | **session_store_active:** | セッションに有効言語を保存します `true` または `false` の値 |
 | **http_accept_language:** |  ブラウザの http\_accept\_language ヘッダをもとに言語設定を試みます。 `true` または `false` の値 |
 | **override_locale:** | デフォルトのもしくはシステムのロケールを言語特有のものに上書きします。 `true` または `false` の値 |
-| **content_fallback:** | デフォルトでは、コンテンツが翻訳されていない場合、 Grav はデフォルト言語のコンテンツを表示します。言語ごとにこの挙動を上書きする設定です。(**Grav 1.7.0+**) |
+| **content_fallback:** | デフォルトでは、コンテンツが翻訳されていない場合、 Grav はデフォルト言語のコンテンツを表示します。言語ごとにこの挙動を上書きする設定です。(**Grav 1.7.0 以上**) |
 
 ### Home
 
@@ -207,19 +207,19 @@ pages:
 | **expires:** | ページの有効期限（秒） (604800 seconds = 7 days) (`no cache` も可能) |
 | **cache_control:** | 設定しない場合は空欄にできます。もしくは、 [有効な](https://developer.mozilla.org/ja/docs/Web/HTTP/Reference/Headers/Cache-Control) `cache-control` テキストの値です |
 | **last_modified:** | ファイルの修正タイムスタンプをもとに、最終更新日のヘッダを設定します。 `true` または `false` の値 |
-| **etag:** | Set the etag header tag. `true` または `false` の値 |
-| **vary_accept_encoding:** | Add `Vary: Accept-Encoding` header. `true` または `false` の値 |
-| **redirect_default_route:** | Automatically redirect to a page's default route. `true` または `false` の値 |
-| **redirect_default_code:** | Default code to use for redirects. For example: `302` |
-| **redirect_trailing_slash:** | Handle automatically or 302 redirect a trailing / URL |
-| **ignore_files:** | Files to ignore in Pages. Example: `[.DS_Store] ` |
-| **ignore_folders:** | Folders to ignore in Pages. Example: `[.git, .idea]` |
-| **ignore_hidden:** | Ignore all Hidden files and folders. `true` または `false` の値 |
-| **hide_empty_folders:** | If folder has no .md file, should it be hidden. `true` または `false` の値 |
-| **url_taxonomy_filters:** | Enable auto-magic URL-based taxonomy filters for page collections. `true` または `false` の値 |
+| **etag:** | HTTP レスポンスヘッダの etag を設定。 `true` または `false` の値 |
+| **vary_accept_encoding:** | HTTP レスポンスヘッダに `Vary: Accept-Encoding` を追加。 `true` または `false` の値 |
+| **redirect_default_route:** | 自動的に、ページのデフォルトのルーティングへリダイレクトします。 `true` または `false` の値 |
+| **redirect_default_code:** | リダイレクトするときのデフォルトの HTTP ステータスコード。たとえば： `302` |
+| **redirect_trailing_slash:** | URL の末尾にスラッシュが無い場合に、そのまま処理するか、末尾にスラッシュが付いたものへ302リダイレクトするかを制御します。 |
+| **ignore_files:** | pages 内で無視するファイル。 具体例： `[.DS_Store] ` |
+| **ignore_folders:** | pages 内で無視するフォルダ。具体例： `[.git, .idea]` |
+| **ignore_hidden:** | 隠しファイルや隠しフォルダを無視します。 `true` または `false` の値 |
+| **hide_empty_folders:** | フォルダに .md ファイルが無い場合、それを隠します。 `true` または `false` の値 |
+| **url_taxonomy_filters:** | ページコレクションにおいて、 URL をもとにタクソノミーフィルターを自動で有効化します。 `true` または `false` の値 |
 | **frontmatter:** | |
-| ... **process_twig:** | Should the frontmatter be processed to replace Twig variables? `true` または `false` の値 |
-| ... **ignore_fields:** | Fields that might contain Twig variables and should not be processed. Example: `['form','forms']` |
+| ... **process_twig:** | フロントマターで Twig 変数を置き換える処理がされるべきかどうか？ `true` または `false` の値 |
+| ... **ignore_fields:** | Twig 変数を含みうるフィールドにおいて処理されないようにします。具体例： `['form','forms']` |
 
 ### Cache
 
@@ -248,23 +248,23 @@ cache:
 
 | プロパティ | 説明 |
 | -------- | ----------- |
-| **enabled:** | Set to `true` to enable caching. `true` または `false` の値 |
+| **enabled:** | `true` にするとキャッシュを有効化します。 `true` または `false` の値 |
 | **check:** | |
-| ... **method:** | Method to check for updates in pages. Options: `file`, `folder`, `hash` and `none`. [more details](../../08.advanced/02.performance-and-caching#grav-core-caching) |
-| **driver:** | Select a cache driver. Options are: `auto`, `file`, `apcu`, `redis`, `memcache`, and `wincache` |
-| **prefix:** | Cache prefix string (prevents cache conflicts). Example: `g` |
-| **purge_at:** | Scheduler: How often to purge old cache using cron `at` syntax |
-| **clear_at:** | Scheduler: How often to clear the cache using cron `at` syntax |
-| **clear_job_type:** | Type to clear when processing the scheduled clear job. Options: `standard` \| `all` |
-| **clear_images_by_default:** | By default grav does not include processed images when cache clears, this can be enabled by setting this to `true` |
+| ... **method:** | pages 内で、アップデートをチェックする方法。 オプション： `file`, `folder`, `hash` そして `none` 。 [より詳しくはこちら](../../08.advanced/02.performance-and-caching#grav-core-caching) |
+| **driver:** | キャッシュドライバーの選択。オプション： `auto`, `file`, `apcu`, `redis`, `memcache`, そして `wincache` |
+| **prefix:** | （キャッシュのコンフリクトを防ぐために）キャッシュの接頭辞として利用する文字列。 具体例： `g` |
+| **purge_at:** | スケジューラー： cron の `at` 構文を使って、古いキャッシュのパージ（全削除）頻度を設定します。 |
+| **clear_at:** | スケジューラー： cron の `at` 構文を使って、古いキャッシュのクリア頻度を設定します。 |
+| **clear_job_type:** | スケジュールされたキャッシュクリアジョブの処理中にクリアするタイプ。オプション： `standard` \| `all` |
+| **clear_images_by_default:** | デフォルトでは、キャッシュクリア時に処理画像はクリア対象に含まれません。デフォルトでクリアする場合はこれを `true` にしてください。 |
 | **cli_compatibility:** | Ensures only non-volatile drivers are used (file, redis, memcache, etc.) |
-| **lifetime:** | Lifetime of cached data in seconds (`0` = infinite). `604800` is 7 days |
-| **gzip:** | GZip compress the page output. `true` または `false` の値 |
+| **lifetime:** | キャッシュデータの寿命（秒数）。 (`0` = 無限 ). `604800` の場合、7日間 |
+| **gzip:** | ページの出力に GZip 圧縮します。 `true` または `false` の値 |
 | **allow_webserver_gzip:** | This option will change the header to `Content-Encoding: identity` allowing gzip to be more reliably set by the webserver although this usually breaks the out-of-process `onShutDown()` capability.  The event will still run, but it won't be out of process, and may hold up the page until the event is complete |
 | **redis:** | |
-| **... socket:** | The path to the redis socket file |
-| **... password:** | Optional password |
-| **... database:** | Optional database ID |
+| **... socket:** | redis のソケットファイルへのパス |
+| **... password:** | オプションのパスワード |
+| **... database:** | オプションのデータベース ID |
 
 ### Twig
 
@@ -283,13 +283,13 @@ twig:
 
 | プロパティ | 説明 |
 | -------- | ----------- |
-| **cache:** | Set to `true` to enable Twig caching. `true` または `false` の値 |
-| **debug:** | Enable Twig debug. `true` または `false` の値 |
-| **auto_reload:** | Refresh cache on changes. `true` または `false` の値 |
-| **autoescape:** | Autoescape Twig vars. `true` または `false` の値 |
-| **undefined_functions:** | Allow undefined functions. `true` または `false` の値 |
-| **undefined_filters:** | Allow undefined filters. `true` または `false` の値 |
-| **umask_fix:** | By default Twig creates cached files as 755, fix switches this to 775. `true` または `false` の値 |
+| **cache:** | `true` にすると Twig キャッシュを有効化します。 `true` または `false` の値 |
+| **debug:** | Twig デバッグの有効化。 `true` または `false` の値 |
+| **auto_reload:** | 変更時キャッシュをリフレッシュ。 `true` または `false` の値 |
+| **autoescape:** | Twig 変数をオートエスケープ。 `true` または `false` の値 |
+| **undefined_functions:** | 未定義の関数を許容します。 `true` または `false` の値 |
+| **undefined_filters:** | 未定義のフィルタを許容します。 `true` または `false` の値 |
+| **umask_fix:** | デフォルトでは、 Twig はキャッシュファイルを 755 パーミッションで作成します。これを 775 に変更します。 `true` または `false` の値 |
 
 ### Assets
 
@@ -318,10 +318,10 @@ assets:
 
 | プロパティ | 説明 |
 | -------- | ----------- |
-| **css_pipeline:** | The CSS pipeline is the unification of multiple CSS resources into one file. `true` または `false` の値 |
-| **css_pipeline_include_externals:** | Include external URLs in the pipeline by default. `true` または `false` の値 |
+| **css_pipeline:** | CSS pipeline とは、複数の CSS リソースを1つのファイルにまとめることです。 `true` または `false` の値 |
+| **css_pipeline_include_externals:** | 外部 URL の CSS をパイプラインにデフォルトで含めます。 `true` または `false` の値 |
 | **css_pipeline_before_excludes:** | Render the pipeline before any excluded files. `true` または `false` の値 |
-| **css_minify:** | Minify the CSS during pipelining. `true` または `false` の値 |
+| **css_minify:** | パイプライン中に CSS をミニファイします。 `true` または `false` の値 |
 | **css_minify_windows:** | Minify Override for Windows platforms. `false` by default due to ThreadStackSize. `true` または `false` の値 |
 | **css_rewrite:** | Rewrite any CSS relative URLs during pipelining. `true` または `false` の値 |
 | **js_pipeline:** | The JS pipeline is the unification of multiple JS resources into one file. `true` または `false` の値 |
