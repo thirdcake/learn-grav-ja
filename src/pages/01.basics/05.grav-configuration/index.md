@@ -1,7 +1,7 @@
 ---
 title: 'config 設定'
 layout: ../../../layouts/Default.astro
-lastmod: '2025-06-28'
+lastmod: '2025-06-30'
 description: 'Grav の設定は YAML 形式で簡単に管理できます。 system.yaml を中心に各種設定ファイルを紹介します。'
 ---
 
@@ -320,20 +320,20 @@ assets:
 | -------- | ----------- |
 | **css_pipeline:** | CSS pipeline とは、複数の CSS リソースを1つのファイルにまとめることです。 `true` または `false` の値 |
 | **css_pipeline_include_externals:** | 外部 URL の CSS をパイプラインにデフォルトで含めます。 `true` または `false` の値 |
-| **css_pipeline_before_excludes:** | Render the pipeline before any excluded files. `true` または `false` の値 |
+| **css_pipeline_before_excludes:** | 除外するファイルよりも先にパイプラインをレンダリングします。 `true` または `false` の値 |
 | **css_minify:** | パイプライン中に CSS をミニファイします。 `true` または `false` の値 |
-| **css_minify_windows:** | Minify Override for Windows platforms. `false` by default due to ThreadStackSize. `true` または `false` の値 |
-| **css_rewrite:** | Rewrite any CSS relative URLs during pipelining. `true` または `false` の値 |
-| **js_pipeline:** | The JS pipeline is the unification of multiple JS resources into one file. `true` または `false` の値 |
-| **js_pipeline_include_externals:** | Include external URLs in the pipeline by default. `true` または `false` の値 |
-| **js_pipeline_before_excludes:** | Render the pipeline before any excluded files. `true` または `false` の値 |
-| **js_module_pipeline** | The JS Module pipeline is the unification of multiple JS Module resources into one file. `true` または `false` の値 |
-| **js_module_pipeline_include_externals** | Include external URLs in the pipeline by default. `true` または `false` の値 |
-| **js_module_pipeline_before_excludes** | Render the pipeline before any excluded files. `true` または `false` の値 |
-| **js_minify:** | Minify the JS during pipelining. `true` または `false` の値 |
-| **enable_asset_timestamp:** | Enable asset timestamps. `true` または `false` の値 |
-| **enable_asset_sri:** | Enable asset SRI. `true` または `false` の値 |
-| **collections:** | This contains collections, designated as sub-items. For example: `jquery: system://assets/jquery/jquery-3.x.min.js`. [Read more about this](../../03.themes/07.asset-manager/#collections-and-attributes) |
+| **css_minify_windows:** | Windows 用にミニファイを上書きします。 ThreadStackSize のため、デフォルトで `false` です。 `true` または `false` の値 |
+| **css_rewrite:** | パイプライン中のすべての CSS 相対 URL を書き換えます。 `true` または `false` の値 |
+| **js_pipeline:** | JS pipeline とは、複数の JS リソースを1つのファイルにまとめることです。 `true` または `false` の値 |
+| **js_pipeline_include_externals:** | 外部 URL の JS をパイプラインにデフォルトで含めます。 `true` または `false` の値 |
+| **js_pipeline_before_excludes:** | 除外するファイルより先にパイプラインをレンダリングします。 `true` または `false` の値 |
+| **js_module_pipeline** | JS Module pipeline とは、複数の JS モジュールのリソースを1つのファイルにまとめることです。 `true` または `false` の値 |
+| **js_module_pipeline_include_externals** | 外部 URL の JS モジュールをパイプラインにデフォルトで含めます。 `true` または `false` の値 |
+| **js_module_pipeline_before_excludes** | 除外するファイルより先にパイプラインをレンダリングします。 `true` または `false` の値 |
+| **js_minify:** | パイプライン中に JS をミニファイします。 `true` または `false` の値 |
+| **enable_asset_timestamp:** | アセットのタイムスタンプを有効化。 `true` または `false` の値 |
+| **enable_asset_sri:** | アセットの SRI を有効化。 `true` または `false` の値 |
+| **collections:** | サブアイテムとして設計されたコレクションを含めます。 例えば： `jquery: system://assets/jquery/jquery-3.x.min.js` 。 [より詳しくは、こちらを参照](../../03.themes/07.asset-manager/#named-assets-and-collections) |
 
 ### Errors
 
@@ -347,8 +347,8 @@ errors:
 
 | プロパティ | 説明 |
 | -------- | ----------- |
-| **display:** | Determines how errors are displayed. Enter either `1` for the full backtrace, `0` for Simple Error, or `-1` for System Error |
-| **log:** | Log errors to `/logs` folder. `true` または `false` の値 |
+| **display:** | エラーの表示方法を決定します。完全にバックトレースする場合 `1` 、シンプルなエラー表示は `0` 、システムエラーは `-1` 。 |
+| **log:** | `/logs` フォルダにエラーログを残します `true` または `false` の値 |
 
 ### Log
 
@@ -363,7 +363,7 @@ log:
 
 | プロパティ | 説明 |
 | -------- | ----------- |
-| **handler:** | Log handler. Currently supported: `file` \| `syslog` |
+| **handler:** | ログハンドラー。現在、以下をサポートします： `file` \| `syslog` |
 | **syslog:** | |
 | ... **facility:** | Syslog facilities output |
 
@@ -382,11 +382,11 @@ debugger:
 
 | プロパティ | 説明 |
 | -------- | ----------- |
-| **enabled:** | Enable Grav debugger and following settings. `true` または `false` の値 |
-| **provider:** | Debugger provider: Can be set to `debugbar` or `clockwork` (**Grav 1.7+**) |
-| **censored:** | Censor potentially sensitive information (POST parameters, cookies, files, configuration and most array/object data in log messages). `true` または `false` の値 (**Grav 1.7+**) |
+| **enabled:** | Grav のデバッガーを有効化し、以下を設定します。 `true` または `false` の値 |
+| **provider:** | デバッガーのプロバイダ： `debugbar` もしくは `clockwork` を設定します (**Grav 1.7 以上**) |
+| **censored:** | 潜在的にセンシティブな情報を検閲します。 (POST パラメータ, cookies, ファイル, config 設定 そしてログメッセージ中の多くの array/object データ). `true` または `false` の値 (**Grav 1.7 以上**) |
 | **shutdown:** | |
-| ... **close_connection:** | Close the connection before calling `onShutdown()`. `false` for debugging |
+| ... **close_connection:** | `onShutdown()` が呼ばれる前に接続を閉じます。 `false` for debugging |
 
 ### Images
 
@@ -410,10 +410,10 @@ images:
 
 | プロパティ | 説明 |
 | -------- | ----------- |
-| **default_image_quality:** | Default image quality to use when resampling images. For example: `85` = 85% |
-| **cache_all:** | Cache all images by default. `true` または `false` の値 |
-| **cache_perms:** | **Must be in quotes!** Default cache folder perms. Usually `'0755'` or `'0775'` |
-| **debug:** | Show an overlay over images indicating the pixel depth of the image when working with retina, for example. `true` または `false` の値 |
+| **default_image_quality:** | 画像の再サンプリング時に使うデフォルト画質。例えば： `85` = 85% |
+| **cache_all:** | デフォルトで全画像をキャッシュします。 `true` または `false` の値 |
+| **cache_perms:** | **クオート( `'` )で囲ってください！** キャッシュフォルダのデフォルトのパーミッション。通常は： `'0755'` もしくは `'0775'` |
+| **debug:** | 画像のピクセル深度を示すオーバーレイを表示します（たとえば、retina を扱う場合） `true` または `false` の値 |
 | **auto_fix_orientation:** | Try to automatically fix images uploaded with non-standard rotation |
 | **seofriendly:** | SEO-friendly processed image names |
 | **cls:** | Cumulative Layout Shift. [More details](https://web.dev/optimize-cls/) |
