@@ -1,23 +1,28 @@
 ---
 title: 'Grav 1.6 へのアップデート'
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-04-25'
+lastmod: '2025-07-01'
 ---
-Grav 1.6 is the largest update since the initial release of Grav. It introduces a few new features, improvements, bug fixes and provides many architectural changes which pave the road towards Grav 2.0.
 
-!!!! **IMPORTANT:** For most people, Grav 1.6 should be a simple upgrade without any issues, but like any upgrade, it is recommended to **take a backup** of your site and **test the upgrade in a testing environment** before upgrading your live site.
+Grav 1.6 は、Grav の最初のリリース以来、最大のアップデートでした。いくつかの新機能追加、改善、バグ修正がなされ、そして Grav 2.0 への道を開くたくさんのアーキテクチャの変更が提供されています。
 
-Whether you are a developer or administrator of your site, your test site should have [Debug Bar](../../03.debugging/#debug-bar) enabled. This is because of Debug Bar has some useful tools which help you to ensure your site will be better prepared to run on later versions of Grav.
+> [!Warning]  
+> **重要：** 多くの人にとって、 Grav 1.6 は何の問題もなく簡単にアップグレードできるものです。しかし、あらゆるアップグレードがそうであるように、サイトのアップグレード前には、サイトの **バックアップを取り** 、**テスト環境でアップグレードのテストをしてください** 。
 
-!!! **TIP:** For more information how to enable the feature, please see [Debugging & Logging](https://learn.getgrav.org/16/advanced/debugging) section in the documentation.
+あなたが開発者もしくはサイト管理者であれば、テストサイトでは [デバッグバー](../../03.debugging/#debug-bar) を有効化してください。なぜなら、デバッグバーには、いくつかの便利なツールがあり、それらによって、 Grav のそれ以降のバージョンで動作する準備を確実にしてくれるからです。
 
-## Deprecated Debug Bar Tab
+> [!TIP]  
+> 機能を有効化する方法に関するより詳しい情報は、このドキュメントの [デバッグとログ](../../03.debugging/) セクションを参照してください。
 
-For our purposes, we are looking **Deprecated** tab in the Debug Bar, which allows you to identify deprecated issues and fix or report them before upgrading to later Grav versions. Fixing the issues found in the **Deprecated** tab will help you to make your site faster and save you time when it is time to during future upgrades.
+<h2 id="deprecated-debug-bar-tab">デバッグバーの deprecated タブ</h2>
+
+デバッグバーの **Deprecated （非推奨）** タブを見てください。
+このタブは、非推奨の問題を特定し、 Grav を新しいバージョンへアップグレードする前に、それらを修正したり、レポートしたりしてくれます。 **Deprecated** タブ内にある問題を修正ことで、サイトは速くなり、将来アップグレードする時間を削減してくれます。
 
 ![Deprecated Tab](deprecated-tab.png)
 
-! **NOTE:** that **Deprecated** tab shows up only if deprecated calls are detected in the page
+> [!Note]  
+> **Deprecated** タブに表示されるのは、そのページで非推奨のコールが検出されたときだけです。
 
 To make sure that you catch all the issues, you should either clear the cache and run Grav with caching disabled to maximize the chance you will catch all the errors. Even by following these steps, you may notice that some of the YAML/Twig errors appear only after clearing the cache.
 

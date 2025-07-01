@@ -1,7 +1,7 @@
 ---
 title: 'Grav の開発'
 layout: ../../../layouts/Default.astro
-lastmod: '2025-06-25'
+lastmod: '2025-07-01'
 ---
 
 Grav を使った開発では、通常の Grav ユーザーに必要なセットアップよりも洗練されたセットアップを使うことで、メリットが得られます。これには、次のようなあらゆるタイプの開発が含まれます：**Grav Core** 、**Grav プラグイン** 、 **Grav スケルトン** そして **Grav テーマ** 。
@@ -152,17 +152,17 @@ GetGrav.org サイトでは、カスタムの変更ログフォーマットを�
 
 <h2 id="github-setup">GitHub 設定</h2>
 
-As is the way of things these days, GitHub is going to be your best friend when it comes to developing for Grav.  We have created some tools to make this as easy as possible, but there are some development patterns that you should follow to make the process simpler.
+最近の傾向として、 GitHub は、 Grav 開発における最良の友人です。 Grav チームは、できる限り簡単に開発できるようにするためのツールを開発してきましたが、処理をシンプルにするために、参考にした方が良い、いくつかの開発パターンがあります。
 
-Clone all the repositories you plan to work with into a single `Projects` or `Development` folder on your computer. This will allow our provided tools to find the repositories they need.
+コンピュータ上の1つのフォルダ（ `Projects` フォルダや `Development` フォルダ）内に、作業しようとしているすべてのリポジトリをクローンしてください。これにより、提供ツールが、それぞれ必要なリポジトリを探せるようになります。
 
 > [!Info]  
-> We use the [GitFlow](http://nvie.com/posts/a-successful-git-branching-model/) branching model for all our Grav development.  The core concept of the GitFlow methodology is that development happens in the `develop` branch, but new features and functionality are created in separate `feature` branches that are merged into `develop` when complete.  Releases merge `develop` into `master`, and you can apply `hotfix` branches as needed during the release process. Most modern git clients support this. However, we recommend [Atlassian SourceTree](https://www.atlassian.com/software/sourcetree/overview) as it's free, cross-platform, and easy to use.
+> Grav 開発では、 [GitFlow](http://nvie.com/posts/a-successful-git-branching-model/) ブランチモデルが使われています。 GitFlow メソッドの中心的なアイディアは、開発は `develop` ブランチで行われ、新機能はそれとは別の `feature` ブランチで作成され、機能が完成したときに `develop` ブランチにマージされる、ということです。リリース時に、 `develop` が `master` にマージされ、リリース処理中に必要に応じて `hotfix` ブランチを適用できます。多くのモダンな Git クライアントは、これをサポートしています。特に [Atlassian SourceTree](https://www.atlassian.com/software/sourcetree/overview) をおすすめします。無料で、クロスプラットフォームで、使いやすいからです。
 
-Grav also has some dependencies (dictated by the `.dependencies` file) which include the **Error** and **Problems** plugins, as well as the **Antimatter** theme.  You can follow these instructions to clone these bits on your own computer.
+Grav にはまた、依存性がいくつかあります（ `.dependencies` ファイルによって決定されます）。 **Error** プラグインや、 **Problems** プラグインの他、 **Antimatter** テーマなどです。これらをあなたのコンピュータにクローンするには、次の手順に従ってください。
 
 > [!Warning]  
-> If you wish to make additions or changes to any of the `getgrav` repositories, you will need to **fork** the appropriate repository and then clone **your fork's url** rather than the `getgrav` repository directly. The example below is using the direct `getgrav` repositories for example only.
+> `getgrav` リポジトリ内にあるものに追加したり、変更したりしたい場合、適切なリポジトリを **フォーク** する必要があります。そして、 `getgrav` リポジトリを直接クローンするのではなく、 **フォークした URL** をクローンしてください。以下の例では、直接 `getgrav` リポジトリを使用していますが、これは例だからです。
 
 ```bash
 cd
@@ -176,11 +176,11 @@ git clone https://github.com/getgrav/grav-plugin-problems.git
 git clone https://github.com/getgrav/grav-theme-antimatter.git
 ```
 
-This will clone **all 4 repositories** into your `~/Projects/Grav` folder.
+これにより、 **全部で4つのリポジトリ** が、 `~/Projects/Grav` フォルダにクローンされます。
 
-Usually, the normal procedure for setting up a test site for Grav is to use the `bin/grav new-project` command.  This is true for development, except for one important difference.  Because we want to to be able to develop from your web root, but have any changes show up in your cloned code, we need to **symbolically link** the relevant parts.  We do this by passing a `-s` flag to the `bin/grav new-project` command.
+通常、 Grav のテストサイトを作成する普通の方法は、 `bin/grav new-project` コマンドを実行することです。これは開発においても正しい方法ですが、ひとつ重要な違いがあります。web root から開発したいが、変更はクローンされたコードで行われるので、関係する部分を **シンボリックリンク** する必要があります。これを行うには、 `bin/grav new-project` コマンドに、 `-s` フラグを渡してください。
 
-There is one extra step required. You must tell the command where it can find your repositories. So, follow these steps to create a configuration file in a new `.grav/` folder which you will need to create in the **root of your home directory**:
+もうひとつ、必要な手順があります。コマンドに、どこにリポジトリがあるかを伝えなくてはいけません。よって、以下の手順により、 config 設定ファイルを新しい `.grav/` フォルダに作成してください。 `.grav/` フォルダは、 **ホームディレクトリのルート** に作成する必要があります：
 
 ```bash
 cd
@@ -188,20 +188,20 @@ mkdir .grav
 vi .grav/config
 ```
 
-In this file: provide a simple mapping of where the relevant files are located:
+このファイルで、関係ファイルの場所を簡単に示すマップを提供します：
 
 ```
 github_repos: /Users/your_user/Projects/Grav/
 ```
 
-Make sure you **save** this file and that it's readable. You can now set up your **symbolically linked** site where `~/www` is your webroot and `~/www/grav` is the location where your new grav test site will be created:
+このファイルは、確実に読み取りできるように **保存** してください。これにより、 **シンボリックリンクされた** サイトが設定できます。そこでは `~/www` がウェブルートであり、 `~/www/grav` に新しい Grav サイトが作成されます：
 
 ```bash
 cd ~/Projects/Grav/grav
 bin/grav new-project -s ~/www/grav
 ```
 
-You should see quite a bit of output like this:
+以下のような出力が見られるでしょう：
 
 ```txt
 rhukster@gibblets:~/Projects/Grav/grav(develop○) » bin/grav new-project -s ~/www/grav
@@ -248,33 +248,30 @@ SUCCESS symlinked grav-plugin-error -> user/plugins/error
 SUCCESS symlinked grav-theme-antimatter -> user/themes/antimatter
 ```
 
-As you can see, a number of default directories were created, and an initial `pages` folder was also created. After the base has been set up, the other dependencies are symbolically linked in.
+上記の通り、たくさんのデフォルトディレクトリが作成されました。また、初期の `pages` フォルダも作成されました。ベースがセットアップされた後で、その他の依存関係がシンボリックリンクされます。
 
-You should be able to point your browser to `http://localhost/grav` and see the test site you just set up. Now, any changes you make in your `~/www/grav` folder will show up ready to commit and push in your cloned repositories.
+ブラウザで `http://localhost/grav` を表示すると、たった今作成したテストサイトが表示されます。これで、 `~/www/grav` フォルダ内の変更のすべてが、クローンされたリポジトリにコミットし、プッシュできます。
 
-## Abandoned Resource Protocol
+<h2 id="abandoned-resource-protocol">放棄されたリソースのプロトコル</h2>
 
-People move on, and user-generated content like plugins and themes may become abandoned. If you wish to take over the maintenance of an existing theme or plugin, you must follow this protocol:
+ひとびとの移り変わりにより、ユーザー作成のプラグインやテーマなどのコンテンツは放棄されるかもしれません。既存のテーマやプラグインのメンテナンスを引き継ぎたい場合は、以下のプロトコルに従ってください：
 
-1. Submit a well-formed, tested pull request to the original repository.
+1. 整えられ、テストされたプルリクエストを、オリジナルのリポジトリに送ってください。
 
-2. If the maintainer does not respond *at all* after 30 days, or if the maintainer states that they are abandoning the resource and are not willing to grant someone else write access, then proceed to the next step.
+2. メンテナから、30日間、 **まったく** 反応が無かった場合、もしくは、メンテナがリソースを放棄し、他の誰かに書き込み権限を与えるつもりがないことを表明している場合、次のステップに進みます。
 
-3. [Submit a new issue to Grav's GitHub repository](https://github.com/getgrav/grav/issues/new?title=%5Bchange-resource%5D%20Take%20over%20Plugin%2FTheme&body=I%20would%20like%20to%20take%20over%20an%20existing%20plugin%2Ftheme.%0AHere%20are%20the%20project%20details%3A%20%2A%2Auser%2Frepository%2A%2A) with the following details:
+3. 以下の詳細を添えて、 [Grav の GitHub リポジトリに、新しいイシューを送ってください](https://github.com/getgrav/grav/issues/new?title=%5Bchange-resource%5D%20Take%20over%20Plugin%2FTheme&body=I%20would%20like%20to%20take%20over%20an%20existing%20plugin%2Ftheme.%0AHere%20are%20the%20project%20details%3A%20%2A%2Auser%2Frepository%2A%2A) 。
+    * タイトル： `[change-resource] Take over plugin/theme`
+    * プラグイン名と、オリジナルのリポジトリを提供。
+    * 反応の無かったプルリクエストのリンクもしくは、メンテナがリソースを放棄した会話へのリンク。
 
-  * Title: `[change-resource] Take over plugin/theme`
+4. Grav のメンテナは、その事態をレビューし、引き継ぎが承認されるかを知らせます。引き継ぎできる場合、次のステップに進みます。
 
-  * Provide the name of the plugin and link to the original repository.
+5. 新しいリリースに向けて、フォークされたリポジトリを準備してください。
 
-  * Link to your pull request that went unanswered or a link to the conversation in which the maintainer has abandoned the resource.
+6. README ファイルに、このリポジトリは、新しいマスターであることと、古いリポジトリへのリンクを貼ってください。
 
-4. The Grav maintainers will review the case and let you know if the takeover is approved. If approval is granted, proceed to the next step.
+7. イシューに、メンテナにプラグインの新しい URL が与えられたことを返信してください。
 
-5. Prepare your forked repository with a new release.
-
-6. Add a note to the README that this repository is the new master and link back to the old repository.
-
-7. Reply to the issue, giving the maintainers the new URL for the plugin.
-
-8. The maintainers will update GPM and new and updated installs will now come from your forked repository.
+8. メンテナは、 GPM をアップデートします。新しくアップデートされたインストールが、あなたのフォークされたリポジトリから配信されます。
 

@@ -1,9 +1,10 @@
 ---
 title: 'Grav 1.7 へのアップデート'
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-04-25'
+lastmod: '2025-07-01'
 ---
-Grav 1.7 introduces a few new features, improvements, bug fixes and provides many architectural changes which pave the road towards Grav 2.0. Here are a few highlights:
+
+Grav 1.7 では、いくつかの新機能追加、改善、バグ修正がなされ、そして Grav 2.0 への道を開くたくさんのアーキテクチャの変更が提供されています。以下は、そのうちの重要部分です：
 
 * **Flex Objects**: A new way to build your own data types.
 * **Symfony Server**: Run Grav without needing to install web server.
@@ -15,7 +16,8 @@ Grav 1.7 introduces a few new features, improvements, bug fixes and provides man
 * **XSS Detection in Forms**: Forms will not submit if potential XSS is detected in them. Check the [documentation](../../../06.forms/02.forms/01.form-options/#xss-checks) on how to disable the checks.
 * **Better Debugging Tools**: [Clockwork](https://underground.works/clockwork/) integration, Twig profiling and support for [Tideways XHProf](https://github.com/tideways/php-xhprof-extension) PHP Extension for performance profiling.
 
-!!!! **IMPORTANT:** For most people, Grav 1.7 should be a simple upgrade without any issues, but like any upgrade, it is recommended to **take a backup** of your site and **test the upgrade in a testing environment** before upgrading your live site.
+> [!Warning]  
+> **重要：** 多くの人にとって、 Grav 1.7 は何の問題もなく簡単にアップグレードできるものです。しかし、あらゆるアップグレードがそうであるように、サイトのアップグレードの前には、サイトの **バックアップを取り** 、 **テスト環境でアップグレードのテストをしてください** 。
 
 ### Most Common Issues
 
