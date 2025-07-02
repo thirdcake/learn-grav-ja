@@ -1,7 +1,7 @@
 ---
 title: 'Grav 1.6 へのアップデート'
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-07-01'
+lastmod: '2025-07-02'
 ---
 
 Grav 1.6 は、Grav の最初のリリース以来、最大のアップデートでした。いくつかの新機能追加、改善、バグ修正がなされ、そして Grav 2.0 への道を開くたくさんのアーキテクチャの変更が提供されています。
@@ -24,84 +24,88 @@ Grav 1.6 は、Grav の最初のリリース以来、最大のアップデート
 > [!Note]  
 > **Deprecated** タブに表示されるのは、そのページで非推奨のコールが検出されたときだけです。
 
-To make sure that you catch all the issues, you should either clear the cache and run Grav with caching disabled to maximize the chance you will catch all the errors. Even by following these steps, you may notice that some of the YAML/Twig errors appear only after clearing the cache.
+すべての問題を確実に捕まえるために、キャッシュをクリアし、キャッシュを無効化して Grav を実行すべきです。そうすることで、すべてのエラーを捕まえる可能性が最大化されます。以下の手順を進める際でさえ、キャッシュのクリア後にのみ YAML/Twig エラーのいくつかが現れることに気がつくかもしれません。
 
-The **Deprecated** tab contains a list of deprecated features which were found. Every issue is clickable and opens up deprecation message, which has a short explanation from the issue as well as trace back, which allows you to locate and fix the code. In the right side you can see type of the deprecated error and in lower right corner you can filter the displayed types by clicking on the badges.
+**Deprecated** タブには、見つかった非推奨機能のリストが掲載されます。すべての問題について、クリックして非推奨に関するメッセージを開くことができます。このメッセージは、問題と問題の所在をさかのぼる簡単な説明文で、このメッセージのおかげで、コードの場所が分かり、修正できるようになります。右側には、非推奨エラーのタイプが表示されます。右下のバッジをクリックすることにより、表示されたタイプをフィルタリングできます。
 
-When you open up the deprecation message, the content may first feel overwhelming. But in most cases you can ignore most of the content and just read the first few lines: message, file and line (if available).
+非推奨メッセージを開いたとき、最初のうちはその内容に圧倒されるかもしれません。しかし多くの場合、必要なのは最初の数行で、（メッセージと、ファイルと、もしあれば行数）で、ほとんどの内容は無視できます。
 
-There are a few types of deprecation issues:
+非推奨の問題は、いくつかのタイプに分けられます：
 
-* `yaml`: YAML or Markdown file uses deprecated YAML syntax.
-* `twig`: Twig file contains deprecated Twig syntax or there was another Twig related issue.
-* `grav`: Something is calling deprecated Grav method or using deprecated property.
-* `vendor`: Something is using deprecated 3rd party library code.
-* `unknown`: Unknown deprecated message.
+* `yaml`: YAML もしくはマークダウンファイルで、非推奨の YAML 構文を使っている。
+* `twig`: Twig ファイルに、非推奨の Twig 構文を含んでいるか、もしくはそれ以外の Twig 関係の問題。
+* `grav`: Grav の非推奨のメソッドもしくはプロパティが使われている。
+* `vendor`: 非推奨のサードパーティ製ライブラリコードが使われている。
+* `unknown`: 上記以外の非推奨メッセージ。
 
-## YAML Parsing
+<h2 id="yaml-parsing">YAML のパース</h2>
 
-! **NOTE:** In Grav 1.6 YAML has stricter parsing with a fallback for backwards compatibility
+> [!Note]  
+> Grav 1.6 では、 YAML は後方互換性のフォールバックにより厳密にパースされます。
 
-Grav 1.6 uses a **Symfony 4.2 YAML parser**, which follows the [YAML standard specification](https://yaml.org/spec?target=_blank) much more closely than the previously parser from Symfony **3.4**. This means that YAML files which previously worked just fine, may cause errors resulting from being invalid YAML. However, if the file fails to load with the new **4.2** version of the parser, Grav will by default still fall back to the older **3.4** version of the parser to keep your site up and running. However this will decrease the performance of the site and you should catch and fix the issues to ensure optimal performance.
+Grav 1.6 では、 **Symfony 4.2 YAML parser** が使われます。これは、以前の Symfony **3.4** のパーサーよりも、より厳密に [YAML 標準仕様](https://yaml.org/spec) に従っています。これはつまり、以前機能していた YAML ファイルであっても、妥当でない YAML であればエラーを起こしうるということです。しかし、ファイルが **4.2** バージョンのパーサーで読み込み失敗したとしても、 Grav はデフォルトで古い **3.4** バージョンのパーサーで読み込み、サイトを運用し続けます。とはいえ、このことはサイトパフォーマンスを悪化させるので、問題を見つけ、修正し、パフォーマンスを最適化すべきです。
 
-! **NOTE:** This backwards compatibility fallback mechanism will be removed in Grav 2.0
+> [!Note]  
+> このフォールバック機構は、 Grav 2.0 で削除予定です。
 
-**Grav 1.6.7** and all later versions have a new CLI command to detect YAML parsing issues, please run `bin/grav yamllinter` to find and fix any YAML parsing errors in your site. It is recommended to run this command right after upgrading to Grav 1.6 or later version.
+**Grav 1.6.7** 以降では、 YAML パース時の問題を検出する CLI コマンドが新しく追加されました。 `bin/grav yamllinter` を実行し、サイト内の YAML パースエラーを見つけ、修正してください。 Grav 1.6 以上にアップグレードした直後に、このコマンドを実行することをおすすめします。
 
-**Admin 1.9.3** and all later versions have **YAML Linter** integrated to **Tools** > **Reports**, if you prefer using it instead of the CLI command.
+**管理パネルプラグイン 1.9.3** 以降では、 **YAML Linter** を **Tools** > **Reports** に統合していますので、 CLI コマンドのかわりにこちらを利用することもできます。
 
-##### Look for these YAML errors:
+<h5 id="look-for-these-yaml-errors">YAML エラーの探し方</h5>
 
-- Do not use `@`, `\`, `|`, `%` and `>` at the beginning of an unquoted string: do not use `@data-options: []`, use `data-options@: []` instead.
-- Always add whitespace after a colon `:` for the keys: do not use `key:value`, use `key: value` instead.
-- Always quote `null`, `true`, `false`, `2.0` (floats) in keys; keys can only be either integers or strings.
-- Also quote `null`, `true`, `false`, `2` and `2.0` in values if they are meant to be strings.
-- When surrounding strings with double-quotes, you must now escape `\` characters.
+- クオテーションマークで囲んでいない文字列の最初を `@`, `\`, `|`, `%` そして `>` で始めないでください。 `@data-options: []` を使わないでください。代わりに、 `data-options@: []` を使ってください。
+- すべてのキーについて、コロン `:` の後はホワイトスペースを入れてください。 `key:value` ではなく、 `key: value` を使用してください。
+- すべてのキーについて、 `null`, `true`, `false`, `2.0` (実数値) は、クオテーションマークで囲んでください。キーは、整数もしくは文字列のみです。
+- 同様に、値の `null`, `true`, `false`, `2` そして `2.0` は、それが文字列を意味するのであれば、クオテーションマークで囲んでください。
+- 文字列をダブルクオテーションで囲む場合は、 `\` 文字でエスケープしなければいけません。
 
-Also the Debug Bar can be used to spot any deprecated YAML. Just open the Debug Bar and look at the **Deprecated** tab. If the tab cannot be found, no issues were detected.
+また、デバッグバーで、非推奨の YAML を見つけることができます。デバッグバーを開き、 **Deprecation** タブを見るだけです。タブが見当たらない場合は、問題は検出されていません。
 
-!!! **TIP:** You can filter any **YAML** issues by looking at the **badges in the bottom-right corner** of the Debug Bar. Simply filter to only show **YAML** issues by clicking the other buttons to disable them.
+> [!Tip]  
+> デバッグバーの **右下隅のバッジ** で、 **YAML** 問題をフィルタリングできます。 YAML 以外のボタンをクリックすることで、それらを無効化するだけで、簡単に **YAML** 問題だけをフィルタリングして表示できます。
 
-! **NOTE:** YAML errors require you to clear cache the errors will only be picked up when the YAML files are decoded.
+> [!Note]  
+> YAML エラーは、キャッシュクリアを必要とします。エラーは、 YAML ファイルが読み取られるときにだけ検出されます。
 
-### YAML Compatibility Mode
+<h3 id="yaml-compatibility-mode">YAML 互換モード</h3>
 
-By default, YAML Compatibility Mode has been turned on in Grav 1.6. This will allow older sites to keep on working after upgrade, but it is not ideal to be used in new sites or if you have already fixed and tested your site against all YAML parsing errors.
+デフォルトでは、 YAML 互換モードは、 Grav 1.6 で有効化されています。これにより、アップグレード後も、古いサイトを動かし続けることができますが、この状態は、新しいサイトでは理想的とは言えません。YAML パースのエラーについて、修正し、テストをしてください。
 
-You can change this setting in `user/config/system.yaml`:
+この設定は、 `user/config/system.yaml` で変更できます：
 
 ```yaml
 strict_mode:
   yaml_compat: false
 ```
 
-Our recommendation is not to touch this setting on existing sites just yet, rather you should create test sites with compatibility mode **false**. Also any new site made with Grav 1.6 or later should have compatibility mode turned off during development as it allows you to save a lot of time when it is time to upgrade to Grav 2.0.
+既存サイトでは、この設定を触らないことをおすすめします。むしろ、互換モードを **false** にして、テストサイトを作成してください。Grav 1.6 以上で作成された新しいサイトは、すべて互換モードが無効化しておいてください。これにより、 Grav 2.0 にアップグレードする際には、多くの時間が削減できます。
 
 ## Twig
 
-### Deferred Blocks
+<h3 id="deferred-blocks">遅延ブロック</h3>
 
-You should update your theme to version that add support for deferred asset blocks to provide full Grav 1.6 support. Alternatively, if you have a custom modified theme or developed your own, you should update it yourself in order to ensure that it keeps working with the new features and later versions of Grav and its plugins by following the guide in the [Important Theme Updates](https://getgrav.org/blog/important-theme-updates) blog post.
+あなたのテーマをアップデートして、 Grav 1.6 で提供された遅延アセットブロックがサポートされるようにしてください。もしくは、テーマを修正してカスタムテーマにしていたり、独自のテーマを開発している場合は、ご自身でこの新しい機能と、Grav とそのプラグインの新しいバージョンが使えるようにしてください。以下のブログ投稿が参考になります： [Important Theme Updates](https://getgrav.org/blog/important-theme-updates)
 
-### Deprecated Twig
+<h3 id="deprecated-twig">Twig における非推奨</h3>
 
-Grav 2.0 will be using **Twig 2** instead of Twig 1 that is currently used in the Grav 1.x releases. There are a few deprecated features which have been removed in Twig 2, which is why you should make sure that you catch and fix all of those issues before upgrading to Grav 2.0 down the road.
+Grav 1系で、現在使われている Twig 1系の代わりに、Grav 2.0 では、 **Twig 2系** を使う予定です。Twig 2 では、いくつかの非推奨機能があります。このため、 Grav 2.0 へアップグレードする前に、これらの問題をすべて見つけ出し、修正しておくと良いでしょう。
 
-The Debug Bar can be used to spot any deprecated Twig issues. Just open the Debug Bar and click on the **Deprecated** tab.
+デバッグバーでは、 Twig の非推奨問題を見つけることができます。デバッグバーを開き、 **Deprecated** タブをクリックしてください。
 
-##### Look for these Twig issues:
+<h5 id="look-for-these-twig-issues">Twig 問題の探し方</h5>
 
-- Macros imported in a file will not be available in child templates anymore (via an include call for instance). You need to import macros explicitly in each file where you are using them.
-- Filter `|replace()` will only work with associated array as the parameter: `{ "I like this and that."|replace({'this': 'foo', 'that': 'bar'}) }}`.
-- Test `sameas()` should now be written as `same as()`.
+- ファイルでインポートしたマクロは、（include 呼び出し経由の）子テンプレートでは利用できない。これらで利用する場合は、各ファイルで明示的にマクロをインポートする必要。
+- `|replace()` フィルタは、パラメータとして連想配列が渡されたときのみ機能する：`{ "I like this and that."|replace({'this': 'foo', 'that': 'bar'}) }}`.
+- `sameas()` によるテストは、 `same as()` と書かれるべき。
 
-More information of what has been deprecated [can be found here](https://twig.symfony.com/doc/1.x/deprecated.html?target=_blank).
+非推奨に関するより詳しい情報は、 [このページで見つかります](https://twig.symfony.com/doc/1.x/deprecated.html) 。
 
-### Auto-Escaping
+<h3 id="auto-escaping">オートエスケープ</h3>
 
-Grav has been rather safe from vulnerabilities, except from XSS attacks, which can be triggered without much effort on any code which does not properly escape untrusted input from a user. Twig is an easy way to write template files, but at the same time it is too easy to forget that most of the variables which are used in the template files are not sanitized before being used. Even if they are filtered and safe, they may contain special characters which should be escaped to make the HTML code valid.
+Grav は、 XSS 攻撃を除けば、脆弱性からは安全です。XSS 攻撃は、ユーザーからの信頼できない入力を適切にエスケープしていないコードがあれば、大した労力もなく発生してしまう脆弱性です。Twig は、テンプレートファイルを簡単に作成できますが、同時に、テンプレートファイル内で使われる多くの変数について、それらをサニタイズすることも忘れられがちです。たとえ入力がフィルタリングされ、安全であったとしても、本来エスケープされるべき特殊文字が含まれていて、適切な HTML コードが作成されない可能性があります。
 
-For example you may have a Twig template like this:
+たとえば、以下のような Twig テンプレートがあったとします：
 
 ```twig
 {% set my_string = '<script>echo("hello there!");<script>' %}
