@@ -1,7 +1,7 @@
 ---
 title: 'Grav 1.6 へのアップデート'
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-07-02'
+lastmod: '2025-07-03'
 ---
 
 Grav 1.6 は、Grav の最初のリリース以来、最大のアップデートでした。いくつかの新機能追加、改善、バグ修正がなされ、そして Grav 2.0 への道を開くたくさんのアーキテクチャの変更が提供されています。
@@ -114,9 +114,9 @@ Grav は、 XSS 攻撃を除けば、脆弱性からは安全です。XSS 攻撃
 </p>
 ```
 
-By default Grav has **Twig auto-escaping turned off** for simplicity and clarity of templates, but unfortunately this was a poor decision because nobody, including us, remembers to always escape variables which either may contain special characters or are coming from an untrusted source. To make the things worse, it is usually not known if the variable is HTML-safe or not. To make sure that a site is protected from most XSS vulnerabilities, you should enable auto-escaping in your configuration. Unfortunately themes and plugins that utilize Twig templates tend to not work with the setting turned on -- and templates written without explicit escaping are most likely vulnerable to malicious content.
+デフォルトでは、 Grav は **Twig オートエスケープを無効化して** 、テンプレートのシンプル化、クリア化してきましたが、不幸なことに、これは良くない決定でした。特殊文字が含まれるかもしれない、もしくは信頼できないソースからの変数に、常にエスケープし続けることを覚えていられる人など、私たちも含め、誰もいなかったからです。より悪いことに、その変数が HTML 安全かどうかも、通常は分からないものです。ほとんどの XSS 脆弱性からサイトを守るには、 config 設定でオートエスケープを有効化すべきです。不幸なことに、 Twig テンプレートを使うテーマやプラグインは、この設定が有効化されていると機能しない傾向があります。 -- そして、明示的にエスケープされていないテンプレートは、悪意のあるコンテンツに対して脆弱である場合が多いです。
 
-With the example above, as auto-escaping is disabled, the output will render as pure HTML, and an alert box with `"hello there!"` will popup.  However, this should be escaped using the `|e` Twig escape filter (or `|e('html')`:
+上記の例では、オートエスケープが無効化されているので、出力はピュアな HTML としてレンダリングされるでしょう。そして、アラートボックスが `"hello there!"` とポップアップされます。しかし、 Twig エスケープフィルタの `|e` もしくは `e|('html')` を使って、この部分をエスケープするべきです：
 
 ```twig
 {% set my_string = '<script>echo("hello there!");<script>' %}
@@ -125,7 +125,7 @@ With the example above, as auto-escaping is disabled, the output will render as 
 </p>
 ```
 
-Because of most people tend to forget to escape the variables in Twig and because using `|e` everywhere can make the template files harder to read, there is a new setting in `user/config/system.yaml`:
+多くの人は、 Twig 内の変数をエスケープし忘れる傾向にあり、すべての場所に `|e` を使うのはテンプレートファイルの可読性を落とすため、 `user/config/system.yaml` に新しい設定が用意されました：
 
 
 ```yaml
@@ -133,9 +133,9 @@ strict_mode:
   twig_compat: false
 ```
 
-This setting forces `auto-escaping` to be turned on in all Twig template files and disables the old setting to turn it on and off. The side effect of the setting is that your site will likely contain a few escaped pieces of content, which you will need to fix by using `|raw` filter for all the content which needs to contain HTML and HTML only. Many templates and plugins have not yet been updated to work with escaping forced on, so please report of any bugs in those to allow them to be fixed in a timely manner.
+この設定は、すべての Twig テンプレートファイル内で、 `オートエスケープ` を有効化することに特化しています。そして、オートエスケープの有効化・無効化の古い設定を破棄します。この設定の副作用として、サイトには、いくつかのコンテンツのかけらが残されます。それらは、コンテンツが無理にエスケープされたもので、 `|raw` フィルタを使って HTML を、 HTML のみを含むように修正されなければいけません。多くのテンプレートとプラグインは、強制エスケープに対応したアップデートをしていません。そのため、これらの修正が必要なバグについて、速やかに報告をお願いします。
 
-The transition to use auto-escaping will not be easy. During the transition all the template files should either contain both `|e` and `|raw` filters on every variable to make sure that the template file is safe to be used in both modes, or you can surround all the template code with `{% autoescape %}` Twig tags.
+オートエスケープを使うための変更については、簡単なものではありません。変更中に、すべてのテンプレートファイルには、 `|e` と、 `|raw` の両方のフィルタが存在し、テンプレートファイルがどちらのモードでも安全になるようにしなければなりません。もしくは、 Twig タグの `{% autoescape %}` を使うこともできます。
 
-See [Twig Manual](https://twig.symfony.com/doc/1.x/tags/autoescape.html) for more information.
+より詳しい情報は、 [Twig マニュアル](https://twig.symfony.com/doc/1.x/tags/autoescape.html) をご覧ください。
 

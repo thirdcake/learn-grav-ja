@@ -1,76 +1,71 @@
 ---
 title: 'Grav 1.7 へのアップデート'
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-07-01'
+lastmod: '2025-07-03'
 ---
 
 Grav 1.7 では、いくつかの新機能追加、改善、バグ修正がなされ、そして Grav 2.0 への道を開くたくさんのアーキテクチャの変更が提供されています。以下は、そのうちの重要部分です：
 
-* **Flex Objects**: A new way to build your own data types.
-* **Symfony Server**: Run Grav without needing to install web server.
-* **Improved Multi-Language**: Better language fallbacks, improved admin support.
-* **Improved Multi-Site**: Admin has improved multi-site support.
-* **Improved Admin ACL**: Full CRUD support for users and pages.
-* **Improved Media Support**: Support `webp` image format, lazy loading and more.
-* **Improved Caching**: New `{% cache %}` tag and improved performance especially in admin.
-* **XSS Detection in Forms**: Forms will not submit if potential XSS is detected in them. Check the [documentation](../../../06.forms/02.forms/01.form-options/#xss-checks) on how to disable the checks.
-* **Better Debugging Tools**: [Clockwork](https://underground.works/clockwork/) integration, Twig profiling and support for [Tideways XHProf](https://github.com/tideways/php-xhprof-extension) PHP Extension for performance profiling.
+* **Flex Objects**: 独自のデータタイプを作成する新しい方法
+* **Symfony Server**: web サーバーをインストールせずに Grav を実行
+* **Improved Multi-Language**: 言語フォールバックの改良、管理パネルサポートの改善
+* **Improved Multi-Site**: マルチサイトサポートに向けた管理パネル改善
+* **Improved Admin ACL**: ユーザーとページに対して完全な CRUD をサポート
+* **Improved Media Support**: `webp` 画像フォーマットのサポート、遅延読み込み、その他
+* **Improved Caching**: 新しい `{% cache %}` タグ、及び特に管理パネルにおけるパフォーマンス改善
+* **XSS Detection in Forms**: XSS が疑われる場合、フォームは送信されません。チェックを無効化する方法は [フォームオプションのドキュメント](../../../06.forms/02.forms/01.form-options/#xss-checks) をご覧ください。
+* **Better Debugging Tools**: [Clockwork](https://underground.works/clockwork/) の統合、 Twig プロファイル、そしてパフォーマンスプロファイルのための [Tideways XHProf](https://github.com/tideways/php-xhprof-extension) PHP 拡張のサポート
 
 > [!Warning]  
 > **重要：** 多くの人にとって、 Grav 1.7 は何の問題もなく簡単にアップグレードできるものです。しかし、あらゆるアップグレードがそうであるように、サイトのアップグレードの前には、サイトの **バックアップを取り** 、 **テスト環境でアップグレードのテストをしてください** 。
 
-### Most Common Issues
+<h3 id="most-common-issues">最もよくある問題</h3>
 
-1.  ###### HTML is displayed as **code** on your site rather than being **rendered** as HTML as intended.
-    This behavior is a result of the new default of **auto-escaping** being true in Grav 1.7.  This is a security enhancement, and if you are upgrading from a version prior to 1.7, we automatically enable **Twig Compatibility** setting in the system configuration to ensure your old Twig code will continue to function.  If you manually update to 1.7 or upgrade in any way that does not go through the GPM self upgrade process, you should set this setting yourself.
+1.  ###### HTML が、意図した通り **レンダリングされた** HTML としてではなく、 **コード** として表示されてしまう
+    この振る舞いは、 Grav 1.7 で **オートエスケープ** がデフォルトで有効となった結果です。これはセキュリティ強化策であり、 1.7 以前のバージョンからアップグレードした場合、 system config 設定の **Twig 互換** 設定が自動的に有効化します。古い Twig コードが機能し続けるためのものです。もし手動で 1.7 にアップデートしたり、 GPM のセルフアップグレード処理ではない方法でアップグレードした場合、この設定はあなた自身で行う必要があります。  
+    このガイドの [Twig セクション](#twig) に完全な詳細があります。確認してください。
 
-    Check out the [Twig section](#twig) of this guide for full details...
+2.  ###### invalid(妥当でない) YAML エラーが出現する
+    Symfony フレームワークのバージョンを上げたため、 YAML パーサーが 1.7 以前のものよりも厳密になりました。これを制御するため、 **YAML 互換** 設定を有効化したときに利用するための古いバージョンのパーサーが用意されています。Grav 1.7 に GPM でアップグレードした場合、これは自動的に制御されますが、手動でアップグレードした場合は、あなた自身で設定を行う必要があります。  
+    このガイドの [YAML セクション](#yaml) に完全な詳細があります。確認してください。
 
-2.  ###### Getting errors about invalid YAML.
-    As we have upgraded to a newer version of Symfony framework, the YAML parser is stricter than it was in versions prior to 1.7.  To handle this we have included an older version of the parser that is available when enabling **Yaml Compatibility**.  This is automatically handled for you if you upgrade to Grav 1.7 via GPM, but if you have upgraded manually, you will need to set this value yourself.
+3. ###### 管理パネルに翻訳されない文字列が表示される
+    管理パネルのインターフェースに翻訳されていない文字列が表示される場合、最もあり得る理由は、以前 **言語翻訳** を無効化していたからです。これは、以前のバージョンの Grav にあったバグで、これを無効化しても、管理画面上では、翻訳が実質的には無効になっていませんでした。これは、 Grav 1.7 で **修正され** 、この設定は、意図した通りに機能します。翻訳文字列そのものではなく、翻訳コードが大文字で表示されます。  
+    修正のため、 [トラブルシューティング](#troubleshooting-issues) セクションを確認してください。
 
-    Check out the [YAML section](#yaml) of this guide for full details...
+4. ###### 管理パネルで保存時エラーもしくは保存ができない
+    Grav 1.7 では、 **Flex Pages** が導入され、新しいデフォルトのページ管理 UI となりました。また、パフォーマンス最適化のため、毎回の管理パネル呼び出しごとにページを初期化することをやめました。通常の **Grav Pages** に戻すことにより、一時的にこの問題を解決することができます。 **FlexObjects** プラグインを編集し、 **Pages (Admin)** を無効化することにより、これが完了します。  
+    問題を適切に指し示すため、カスタムプラグインは `PageInterface` を使って、  **Grav Pages** と **Flex Pages** の両方をサポートスべきです。そして、必要な場合は、 Pages を明示すべきです。  
+    このガイドの [Pages セクション](#pages-1) と [Admin セクション](#admin) に完全な詳細があります。確認してください。  
+    また、プラグイン特有の既知の問題もあります。プラグインに特有の問題については、このページの [トラブルシューティング](#troubleshooting-issues) を確認してください。
 
-3. ###### Admin showing up with untranslated strings
+5. ###### ページブループリントの機能が止まるもしくはループに関するエラーが出る
+    **Grav 1.7.8** で、テーマ内の **ブループリント** を定義するためのサポートが追加されました。これはつまり、もし `blueprints/pages/` フォルダ内のページのブループリントがあった場合に、標準的なブループリントの場所が、プラグインと同じように使われるということです。残念ながら、古いテーマは、場合によって `blueprints/` フォルダと、 `blueprints/pages/` フォルダでファイルが混同していることがあり、その場合は検出されず、ページを編集するときに管理パネルの入力フィールドが見えなくなったり、 `Loop detected while extending blueprint file` という致命的エラーが発生します。  
+    もしいずれかのエラーが発生した場合は、 [トラブルシューティング](#troubleshooting-issues) セクションを確認して修正してください。
 
-   If your admin is displaying with untranslated strings in the interface, it's most likely because you have previously disabled **Language Translations**.  This was buggy in previous versions of Grav and disabling it, didn't actually disable translations throughout the admin as intended.  This is **fixed** in Grav 1.7 and this setting is doing what it is intended to do, show the translation codes in uppercase rather than the translated strings themselves.
+<h3 id="quick-update-guide">アップデートのクイックガイド</h3>
 
-   Check out the [Troubleshooting](#troubleshooting-issues) section for the fix.
-
-4. ###### Errors on Saving or Non-functioning Admin plugins
-   In Grav 1.7 we introduced **Flex Pages** as the new default page management UI.  Also, to optimize performance, we stopped initializing pages on every admin call.  Switching back to regular **Grav Pages** might temporarily resolve your issue.  This is done by editing the **FlexObjects** plugin and disabling **Pages (Admin)**.
-
-   To properly address the issue, custom plugins should be updated to support both **Grav Pages** and **Flex Pages** by using `PageInterface` and also should explicitly Pages when required.
-
-   Check out the [Pages section](#pages-1) and [Admin Section](#admin) of this guide for full details...
-
-    There have also been some specific plugin issues that have already been discovered. Check out the [Troubleshooting](#troubleshooting-issues) section of this page for specific issues with plugins.
-
-5. ###### Page blueprints stop working or give error about a loop
-   **Grav 1.7.8** adds support for defining any **blueprint** in your theme. This means that if you have page blueprints in `blueprints/pages/` folder, standard blueprint locations are used, just like in plugins. Unfortunately some older themes may have a mix of files in `blueprints/` and `blueprint/pages`, which breaks the detection and causes either missing fields in admin when editing the pages or a fatal error: `Loop detected while extending blueprint file`.
-
-   If either of these errors happen, check out the [Troubleshooting](#troubleshooting-issues) section for the fix.
-
-### Quick Update Guide
-
-!! **Grav 1.7** requires **PHP 7.3.6** or later version. The recommended version is the latest **PHP 7.4** release.
+> [!Info]  
+> **Grav 1.7** では、 **PHP 7.3.6** 以上が必要です。推奨バージョンは、最新リリースの **PHP 7.4** です。
 
 ### YAML
 
-!!!! **IMPORTANT:** Grav 1.7 YAML parser is more strict and your site may break if you have syntax errors in your configuration files or page headers. However, if you update your existing site using `bin/gpm` or `Admin Plugin` upgrade process keeps most of the broken YAML syntax working.
+> [!Warning]  
+> **重要：** Grav 1.7 YAML パーサーは、より厳格になり、config ファイルやページヘッダーに構文エラーがある場合、サイトが壊れるかもしれません。しかし、 `bin/gpm` や `管理パネルプラグイン` を使って既存のサイトをアップデートした場合、壊れた YAML 構文が機能し続けるようにアップグレード処理されます。
 
-To revert to the old behavior you need to make sure you have following setting in `user/config/system.yaml`:
+古い動作に戻すには、 `user/config/system.yaml` ファイルの以下の設定を確認する必要があります：
 
 ```yaml
 strict_mode:
   yaml_compat: true
 ```
 
-or in Admin under **Configuration** → **Advanced** -> **YAML Compatibility**
+もしくは、管理パネルプラグインで、 **Configuration** -> **Advanced** -> **YAML Compatibility** を確認してください。
 
 ![Yaml Compatibility](yaml-compat.png)
 
-!!! **TIP:** **Grav 1.6 Upgrade Guide** has a dedicated **[YAML Parsing](/advanced/grav-development/grav-16-upgrade-guide#yaml-parsing)** section to help you to fix these issues.
+> [!Tip]  
+> **Grav 1.6 アップグレードガイド** には、専用の **[YAML パース](../02.grav-16-upgrade-guide/#yaml-parsing)** セクションがあり、これらの問題を修正するのに役立ちます。
 
 By default, Grav 1.7 uses a **Symfony 4.4 YAML parser**, which follows the [YAML standard specification](https://yaml.org/spec?target=_blank) more closely than the older versions of Grav. This means that YAML files which previously worked just fine, may cause errors resulting from being invalid YAML. However, Grav will by default still fall back to the older 3.4 version of the parser to keep your site up and running.
 
