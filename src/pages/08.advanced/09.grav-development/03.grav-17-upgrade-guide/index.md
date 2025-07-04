@@ -1,7 +1,7 @@
 ---
 title: 'Grav 1.7 へのアップデート'
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-07-03'
+lastmod: '2025-07-04'
 ---
 
 Grav 1.7 では、いくつかの新機能追加、改善、バグ修正がなされ、そして Grav 2.0 への道を開くたくさんのアーキテクチャの変更が提供されています。以下は、そのうちの重要部分です：
@@ -67,15 +67,17 @@ strict_mode:
 > [!Tip]  
 > **Grav 1.6 アップグレードガイド** には、専用の **[YAML パース](../02.grav-16-upgrade-guide/#yaml-parsing)** セクションがあり、これらの問題を修正するのに役立ちます。
 
-By default, Grav 1.7 uses a **Symfony 4.4 YAML parser**, which follows the [YAML standard specification](https://yaml.org/spec?target=_blank) more closely than the older versions of Grav. This means that YAML files which previously worked just fine, may cause errors resulting from being invalid YAML. However, Grav will by default still fall back to the older 3.4 version of the parser to keep your site up and running.
+デフォルトでは、 Grav 1.7 は **Symfony 4.4 YAML パーサー** を使います。これは、古い Grav のバージョンよりも [YAML 標準仕様](https://yaml.org/spec) に準拠しています。これはつまり、以前は正しく機能していた YAML ファイルが、妥当でない YAML によりエラーを引き起こす可能性があるということです。しかし、 Grav はデフォルトで、古い 3.4 バージョンのパーサーへフォールバックし、サイトを運用し続けます。
 
-!!! **TIP:** You should run **CLI command** `bin/grav yamllinter` or visit in **Admin** > **Tools** > **Reports** before and after upgrade and fix all the YAML related warnings and errors.
+> [!Tip]  
+> アップグレードの前後に、 **CLI コマンドで** `bin/grav yamllinter` を実行するか、もしくは管理パネルで **Admin** > **Tools** > **Reports** を表示してください。warning もしくは error になっている YAML がすべて修正されます。
 
 ### Twig
 
-!!!! **IMPORTANT:** Grav 1.7 enables **Twig Auto-Escaping** by default. However, if you update your existing site using `bin/gpm` or `Admin Plugin` upgrade process keeps the existing auto-escape settings.
+> [!Warning]  
+> **重要：** Grav 1.7 は、 **Twig オートエスケープ** をデフォルトで有効化します。しかし、既存サイトを `bin/gpm` もしくは `管理パネルプラグイン` でアップデートした場合は、アップグレードの処理中に既存のオートエスケープ設定を残します。
 
-To revert to the old behavior you need to make sure you have following settings in `user/config/system.yaml`:
+古いやり方に戻すためには、 `user/config/system.yaml` ファイル中で、以下の設定を確認してください：
 
 ```yaml
 twig:
@@ -84,36 +86,38 @@ strict_mode:
   twig_compat: true
 ```
 
-or in Admin under **Configuration** → **Advanced** -> **Twig Compatibility**
+もしくは、管理パネルプラグインで、 **Configuration** -> **Advanced** -> **Twig Compatibility** を表示してください。
 
-And please remember to clear cache after doing this!
+そして、これを実行後は、忘れずにキャッシュをクリアしてください！
 
 ![Twig Compatibility](twig-compat.png)
 
-!!! **TIP:** **Grav 1.6 Upgrade Guide** has a dedicated **[Twig](/advanced/grav-development/grav-16-upgrade-guide#twig)** section. It is very important to read it first!
+> [!Tip]  
+> **Grav 1.6 アップグレードガイド** には、専用の **[Twig](../02.grav-16-upgrade-guide/#twig)** セクションがあります。先にここを読んでおくことがとても重要です！
 
-Twig template engine has been updated to version 1.43, but it also supports Twig 2.13. In order to support this newer version of Twig, you need to update any old syntax in your Twig templates. **Grav 1.6 Upgrade Guide** helps you to do this.
+Twig テンプレートエンジンは、 1.43 にアップデートされましたが、 Twig 2.13 もサポートされます。この新しいバージョンの Twig をサポートするため、既存サイトの Twig テンプレートにある古い構文をアップデートする必要があります。 **Grav 1.6 アップグレードガイド** は、これを行う際に役立ちます。
 
-Additional changes in templating are:
+テンプレートに関する他の変更は：
 
-* Added a new `{% cache %}` Twig tag eliminating need for `twigcache` extension.
-* Added `array_diff()` twig function
-* Added `template_from_string()` twig function
-* Added a new `svg_image()` twig function to make it easier to 'include' SVG source in Twig
-* Improved `url()` twig function to take third parameter (`true`) to return URL on non-existing file instead of returning false
-* Improved `|array` twig filter to work with iterators and objects with `toArray()` method
-* Improved `authorize()` twig function to work better with nested rule parameters
-* Improved `|yaml_serialize` twig filter: added support for `JsonSerializable` objects and other array-like objects
-* Added default templates for `external.html.twig`, `default.html.twig`, and `modular.html.twig`
-* **BACKWARDS COMPATIBILITY BREAK**: Use `{% script 'file.js' at 'bottom' %}` instead of `in 'bottom'` which is broken
+* `{% cache %}` Twig タグが新しく追加され、 `twigcache` 拡張が不要になりました。
+* `array_diff()` twig 関数が追加されました
+* `template_from_string()` twig 関数が追加されました。
+* 新しく `svg_image()` twig 関数が追加され、 Twig 内で SVG の 'include' が簡単になりました。
+* `url()` twig 関数が改善され、3つ目の引数 (`true`) により、false を返す代わりに存在しないファイルの URL を返します。
+* `|array` twig フィルタが改善され、イテレータ及び `toArray()` メソッドを持つオブジェクトに対して機能するようになりました。
+* `authorize()` twig 関数が改善され、ネストされたルールパラメータでうまく機能するようになりました。
+* `|yaml_serialize` twig フィルタが改善されました。 `JsonSerializable` オブジェクトと、その他の配列に似たオブジェクトをサポートします。
+* `external.html.twig`, `default.html.twig`, そして `modular.html.twig` について、デフォルトのテンプレートが追加されました。
+* **後方互換性の効かない事例** : `{% script 'file.js' in 'bottom' %}` では動かなくなるため、 `in` ではなく、 `{% script 'file.js' at 'bottom' %}` のように使ってください。
 
 ## Forms
 
-!!!! **IMPORTANT:** Grav 1.7 changes the behavior of **Strict Validation**. However, if you update your existing site using `bin/gpm` or `Admin Plugin` upgrade process keeps the existing strict mode behaviour.
+> [!Warning]  
+> **重要：** Grav 1.7 では、 **Strict Validation** （厳密なバリデーション）のふるまいに変更があります。しかし、既存サイトを `bin/gpm` や `管理パネルプラグイン` でアップデートした場合、アップグレードプロセスにより、既存の strict モードの振る舞いが使い続けられます。
 
-**Strict mode Improvements**: Inside forms, declaring `validation: strict` was not as strict as we hoped because of a bug. The strict mode should prevent forms from sending any extra fields and this was fixed into Grav 1.7. Unfortunately many of the old forms declared to be strict even if they had extra data in them.
+**Strict モードの改善** : form 内で、 `validation: strict` を定義しても、バグにより望んだような厳密さになっていませんでした。strict モードでは、フォームから余分なフィールドを送信しないようにするべきで、 Grav 1.7 から修正されました。残念ながら、古いフォームの多くは、余分なデータが入っていても、厳密だと宣言していました。
 
-To revert to the old behavior you need to make sure you have following setting in `user/config/system.yaml`:
+古いやり方に戻すためには、 `user/config/system.yaml` ファイル内の以下の設定を確認してください：
 
 ```yaml
 strict_mode:
@@ -124,11 +128,13 @@ strict_mode:
 
 Because of this, we added new configuration option `system.strict_mode.blueprint_compat: true` to maintain old `validation: strict` behavior. It is recommended to turn off this setting to improve site security, but before doing that, please search through all your forms if you were using `validation: strict` feature. If you were, either remove the line or test if the form still works.
 
-! **NOTE:** This backwards compatibility fallback mechanism will be removed in Grav 2.0
+> [!Note]  
+> This backwards compatibility fallback mechanism will be removed in Grav 2.0
 
 ### Environments and Multi-Site
 
-!!!! **Important:** Grav 1.7 moves [environments](../../04.environment-config/) into `user://env` folder. The old location still works, but it is better to move environments into a single location future features may rely on it.
+> [!Warning]  
+> **重要：** Grav 1.7 moves [environments](../../04.environment-config/) into `user://env` folder. The old location still works, but it is better to move environments into a single location future features may rely on it.
 
 Grav 1.7 also adds support for [Server Based Environment Configuration](../../04.environment-config/#server-based-environment-configuration) and [Server Based Multi-Site Configuration](../../05.multisite-setup/#server-based-multi-site-configuration). This feature comes handy if you want to use for example docker containers and you want to make them independent of the domain you happen to use. Or if do not want to store secrets in the configuration, but to store them in your server setup.
 
@@ -141,7 +147,8 @@ Admin has now new [Accounts Administration](../../../05.admin-panel/03.accounts/
 * [User Accounts Manager](../../../05.admin-panel/03.accounts/01.users/)
 * [User Groups Manager](../../../05.admin-panel/03.accounts/02.groups/)
 
-!!! **NOTE:** Flex Users feature is not yet used in the frontend of your site.
+> [!Note]  
+> Flex Users feature is not yet used in the frontend of your site.
 
 ### Pages
 
@@ -153,7 +160,8 @@ The existing [Pages Administration](../../../05.admin-panel/03.page/) has been g
 
 !! **BACKWARDS COMPATIBILITY BREAK**: We fixed 404 error page when you go to non-routable page with routable, visible child pages under it. Now you get redirected to the first routable, visible child page instead. This is probably what you wanted in the first place.
 
-!!! **NOTE:** Flex Pages feature is not yet used in the frontend of your site.
+> [!Note]  
+> Flex Pages feature is not yet used in the frontend of your site.
 
 ### Multi-language
 
