@@ -124,117 +124,119 @@ strict_mode:
   blueprint_compat: true
 ```
 
-**XSS Injection Detection** is now enabled in all the frontend forms by default. Check the [documentation](../../../06.forms/02.forms/01.form-options/#xss-checks) on how to disable or customize the checks per form and per field.
+**XSS インジェクション検出** が、すべてのフロントエンドフォームでデフォルトで有効化されました。フォームごと・フィールドごとに無効化やカスタマイズする方法については、 [ドキュメント](../../../06.forms/02.forms/01.form-options/#xss-checks) を参照してください。
 
-Because of this, we added new configuration option `system.strict_mode.blueprint_compat: true` to maintain old `validation: strict` behavior. It is recommended to turn off this setting to improve site security, but before doing that, please search through all your forms if you were using `validation: strict` feature. If you were, either remove the line or test if the form still works.
+このため、古い `validation: strict` のやり方をメンテナンスするために、新しく `system.strict_mode.blueprint_compat: true` という config オプションを追加しました。この設定は、 `validation: strict` 機能を利用する際には、 無効化しておくことを推奨します。もしこの機能を利用する場合、行を削除するか、フォームが機能するかテストしてください。
 
 > [!Note]  
-> This backwards compatibility fallback mechanism will be removed in Grav 2.0
+> この後方互換のメカニズムは、 Grav 2.0 で削除予定です。
 
-### Environments and Multi-Site
+<h3 id="environments-and-multi-site">環境変数とマルチサイト</h3>
 
 > [!Warning]  
-> **重要：** Grav 1.7 moves [environments](../../04.environment-config/) into `user://env` folder. The old location still works, but it is better to move environments into a single location future features may rely on it.
+> **重要：** Grav 1.7 では、 [環境変数](../../04.environment-config/) を `user/env/` フォルダに移しました。古いフォルダでも動きますが、将来的に機能が新しいフォルダを利用する可能性があるので、環境変数をひとつのフォルダに移動しておくことをおすすめします。
 
-Grav 1.7 also adds support for [Server Based Environment Configuration](../../04.environment-config/#server-based-environment-configuration) and [Server Based Multi-Site Configuration](../../05.multisite-setup/#server-based-multi-site-configuration). This feature comes handy if you want to use for example docker containers and you want to make them independent of the domain you happen to use. Or if do not want to store secrets in the configuration, but to store them in your server setup.
+Grav 1.7 では、 [サーバー設定をもとにした環境設定](../../04.environment-config/#server-based-environment-configuration) や、 [サーバー設定をもとにしたマルチサイト設定](../../05.multisite-setup/#server-based-multi-site-configuration) もサポート対象に追加しました。この機能は、たとえば Docker コンテナを利用する場合や、それらを独立させておきたい場合に便利です。もしくは、config 設定内に機密情報を保存しておきたくない場合に、サーバーの設定に保存したい場合に便利です。
 
-In addition `setup.php` file can now be in either `GRAV_ROOT/setup.php` or `GRAV_ROOT/GRAV_USER_PATH/setup.php`. The second location makes it easier to use environments with git repositories containing only user folder.
+`setup.php` ファイルに加えて、 `GRAV_ROOT/setup.php` や、 `GRAV_ROOT/GRAV_USER_PATH/setup.php` も利用可能です。2つ目の例は、 Git リポジトリで user フォルダのみを含めたい環境での利用のときに便利です。
 
-### User Accounts
+<h3 id="user-accounts">ユーザーアカウント</h3>
 
-Admin has now new [Accounts Administration](../../../05.admin-panel/03.accounts/) using **Flex Users**:
+管理パネルプラグインは、新たに **Flex Users** を使用して [アカウントを管理](../../../05.admin-panel/03.accounts/) するようになりました：
 
-* [User Accounts Manager](../../../05.admin-panel/03.accounts/01.users/)
-* [User Groups Manager](../../../05.admin-panel/03.accounts/02.groups/)
-
-> [!Note]  
-> Flex Users feature is not yet used in the frontend of your site.
-
-### Pages
-
-The existing [Pages Administration](../../../05.admin-panel/03.page/) has been greatly improved with **Flex Pages**:
-
-* Reworked list view: Far better support for large sites
-* Better access control: [CRUD ACL](../../../05.admin-panel/03.page/06.permissions/) support with page owners
-* Better multi-language support
-
-!! **BACKWARDS COMPATIBILITY BREAK**: We fixed 404 error page when you go to non-routable page with routable, visible child pages under it. Now you get redirected to the first routable, visible child page instead. This is probably what you wanted in the first place.
+* [ユーザーアカウントマネージャー](../../../05.admin-panel/03.accounts/01.users/)
+* [ユーザーグループマネージャー](../../../05.admin-panel/03.accounts/02.groups/)
 
 > [!Note]  
-> Flex Pages feature is not yet used in the frontend of your site.
+> Flex Users 機能は、サイトのフロントエンドでは、まだ使われていません。
 
-### Multi-language
+<h3 id="pages">ページ</h3>
 
-Grav 1.7 changed the behavior of how the multi-language fallbacks work for the pages.
+既存の [ページ管理](../../../05.admin-panel/03.page/) が、 **Flex Pages** により大幅に改善しました：
 
-Previously if the page did not exist with the requested language, the old implementation looked up the next supported language. This meant that the untranslated page was always displayed, but the page could be using some unknown language to the reader.
+* ページ一覧リストを再構築：ページ数のよりずっと多いサイトでも対応できるようになりました
+* アクセス制御の改善： [CRUD ACL](../../../05.admin-panel/03.page/06.permissions/) がページ所有者をサポートします
+* 多言語サポートの改善
 
-The new behavior is to fall back only to the default language of the site. This default behavior can be overridden by setting fallback languages per language by using `system.languages.content_fallback` configuration option.
+> [!Info]  
+> **後方互換性はありません** ： ルーティング可能かつ公開されている子ページを持つ、ルーティングできないページを訪れた時の 404 エラーページの取り扱いを修正しました。新しい取り扱いは、最初のルーティング可能で公開されている子ページへリダイレクトされます。これはおそらく、もっとも望ましいページでしょう。
 
-If the page does not exist in any of the fallback languages, **404 Not Found** will be displayed instead.
+> [!Note]  
+> Flex Pages 機能は、サイトのフロントエンドでは、まだ使われていません。
 
-!! **BACKWARDS COMPATIBILITY BREAK**: Please add correct fallback languages for the page content in `system.yaml` or admin: **Configuration** > **System** > **Languages** > **Content Language Fallback**.
+<h3 id="multi-language">多言語</h3>
 
-### Media
+Grav 1.7 では、多言語サイトでのページのフォールバック機能のふるまい方が変更されました。
 
-Media handling has been greatly improved in Grav 1.7. Some highlights are:
+以前は、リクエストされた言語のページが存在しない場合、次にサポートされている言語を探す実装となっていました。これはつまり、翻訳されていないページが常に表示されることになり、読み手にとって知らない言語を使ったページである可能性がありました。
 
-* Support for `webp` image format
-* Markdown: Added support for native `loading=lazy` attributes on images.  Can be set in `system.images.defaults` or per md image with `?loading=lazy`
-* Added ability to `noprocess` specific items only in Link/Image Excerpts, e.g. `http://foo.com/page?id=foo&target=_blank&noprocess=id`
+新しいふるまいでは、サイトのデフォルト言語にのみフォールバックします。このデフォルトのふるまいは、 `system.languages.content_fallback` 設定オプションを使うことで、言語ごとにフォールバック言語の設定を上書きできます。
+
+フォールバック言語のいずれも、ページが存在しない場合、 **404 Not Found** エラーが代わりに表示されます。
+
+> [!Info]  
+> **後方互換性がありません** ： `system.yaml` ファイルもしくは管理パネルプラグイン（ **Configuration** > **System** > **Languages** > Content Language Fallback** ）で、ページコンテンツの現在のフォールバック言語を追加してください。
+
+<h3 id="media">メディア</h3>
+
+メディア制御は、 Grav 1.7 で大幅に改善されました。特筆すべき点としては：
+
+* `webp` 画像フォーマットをサポート
+* マークダウン： 画像にネイティブの `loading=lazy` 属性をサポート。 `system.images.defaults` もしくは、画像のマークダウン記述ごとに `?loading=lazy` を付けることで設定できます。
+* `noprocess` 機能を追加し、リンクや画像の抜粋において、特定のアイテムについて処理をしないことができます。例： `http://foo.com/page?id=foo&target=_blank&noprocess=id`
 
 ### CLI
 
-Some highlights are:
+いくつかの特筆すべき点は：
 
-* All CLI commands now accept `--env` and `--lang` parameters to set the environment and the used language respectively (`-e` does not work anymore)
-* Added new `bin/grav server` CLI command to easily run Symfony or PHP built-in web servers
-* Improved `Scheduler` cron command check and more useful CLI information
-* Added new `-r <job-id>` option for Scheduler CLI command to force-run a job
-* Improved `bin/grav yamllinter` CLI command by adding an option to find YAML Linting issues from the whole site or custom folder
-* CLI/GPM command failures now return non-zero code (allowing error detection if command fails)
+* すべての CLI コマンドで `--env` と `--lang` パラメータを受け付けます。環境変数を設定したり、利用言語を設定できるようになりました。（`-e` は、現在機能しません）
+* `bin/grav server` CLI コマンドが追加され、簡単に Symfony もしくは PHP ビルトインサーバーが実行できるようになりました
+* `Scheduler` cron コマンドチェックが改善され、より便利な CLI 情報も改善されました
+* `-r <job-id>` オプションが新しく追加され、 Scheduler CLI コマンドで job の強制実行ができるようになりました
+* `bin/grav yamllinter` CLI コマンドが改善され、サイト全体や特定のフォルダのみについか YAML リントの問題を探すオプションが追加されました
+* CLI/GPM コマンドが失敗したとき、非ゼロコードを返します（コマンドが失敗するときエラーが検出されます）
 
-### Configuration
+<h3 id="configuration">config 設定</h3>
 
-Added new configuration option to keep default language in `.md` files if set to `false`
-  * system.yaml: `languages.include_default_lang_file_extension`: **true**|false
-  * Admin: **Configuration** > **System** > **Languages** > **Include default language in file extension**
+新しく config オプションが追加され、 `false` を設定するとデフォルト言語が `.md` ファイルのままにできるようになりました
+* system.yaml ファイル： `languages.include_default_lang_file_extension`: **true**|false
+* 管理パネルプラグイン： **Configuration** > **System** > **Languages** > **Include default language in file extension**
 
-Added new configuration option to set fallback content languages individually for every language
-  * system.yaml: `languages.content_fallback`: See [Language Configuration](../../../02.content/11.multi-language/#language-configuration)
-  * Admin: **Configuration** > **System** > **Languages** > **Content Language Fallback**
+新しく config オプションが追加され、すべての言語に対して、個別にコンテンツが無かった場合のフォールバック言語を設定できるようになりました
+* system.yaml ファイル： `languages.content_fallback` ： [言語設定](../../../02.content/11.multi-language/#language-configuration) を参照してください
+* 管理パネルプラグイン： **Configuration** > **System** > **Languages** > **Content Language Fallback**
 
-Added new configuration option to choose between debugbar and clockwork
-  * system.yaml: `debugger.provider`: **clockwork**|debugbar
-  * Admin: **Configuration** > **System** > **Debugger** > **Debugger Provider**
+新しく config オプションが追加され、デバッガと clockwork が選べるようになりました
+* system.yaml ファイル： `debugger.provider`: **clockwork**|debugbar
+* 管理パネルプラグイン： **Configuration** > **System** > **Debugger** > **Debugger Provider**
 
-Added new configuration option to hide potentially sensitive information
-  * system.yaml: `debugger.censored`: **false**|true
-  * Admin: **Configuration** > **System** > **Debugger** > **Censor Sensitive Data**
+新しく config オプションが追加され、潜在的なセンシティブ情報をかくせるようになりました
+* system.yaml ファイル： `debugger.censored`: **false**|true
+* 管理パネルプラグイン： **Configuration** > **System** > **Debugger** > **Censor Sensitive Data**
 
-Added new configuration option to maintain old `validation: strict` behavior
-  * system.yaml: `strict_mode.blueprint_compat`: **true**|false
-  * Admin: **Configuration** > **System** > **Advanced** > **Blueprint Compatibility**
+新しく config オプションが追加され、 `validation: strict` のふるまいをメンテナンス（過去のままに）できるようになりました
+* system.yaml ファイル： `strict_mode.blueprint_compat`: **true**|false
+* 管理パネルプラグイン： **Configuration** > **System** > **Advanced** > **Blueprint Compatibility**
 
-Added system configuration support for `HTTP_X_FORWARDED` headers (host disabled by default)
-  * system.yaml: `http_x_forwarded.protocol`: **true**|false
-  * Admin: **Configuration** > **System** > **Advanced** > **HTTP_X_FORWARDED_PROTO Enabled**
-  * system.yaml: `http_x_forwarded.host`: true|**false**
-  * Admin: **Configuration** > **System** > **Advanced** > **HTTP_X_FORWARDED_HOST Enabled**
-  * system.yaml: `http_x_forwarded.port`: **true**|false
-  * Admin: **Configuration** > **System** > **Advanced** > **HTTP_X_FORWARDED_PORT Enabled**
-  * system.yaml: `http_x_forwarded.ip`: true|**false**
-  * Admin: **Configuration** > **System** > **Advanced** > **HTTP_X_FORWARDED IP Enabled**
+新しく config オプションが追加され、 `HTTP_X_FORWARDED` ヘッダーをサポートしました（デフォルトで無効です）
+* system.yaml ファイル： `http_x_forwarded.protocol`: **true**|false
+* 管理パネルプラグイン： **Configuration** > **System** > **Advanced** > **HTTP_X_FORWARDED_PROTO Enabled**
+* system.yaml ファイル： `http_x_forwarded.host`: true|**false**
+* 管理パネルプラグイン： **Configuration** > **System** > **Advanced** > **HTTP_X_FORWARDED_HOST Enabled**
+* system.yaml ファイル： `http_x_forwarded.port`: **true**|false
+* 管理パネルプラグイン： **Configuration** > **System** > **Advanced** > **HTTP_X_FORWARDED_PORT Enabled**
+* system.yaml ファイル： `http_x_forwarded.ip`: true|**false**
+* 管理パネルプラグイン： **Configuration** > **System** > **Advanced** > **HTTP_X_FORWARDED IP Enabled**
 
-Added new configuration option `security.sanitize_svg` to remove potentially dangerous code from SVG files
-  * security.yaml: `sanitize_svg`: **true**|false
-  * Admin: **Configuration** > **Security** > **Sanitize SVG**
+新しく config オプションが追加され、 `security.sanitize_svg` により SVG ファイルから潜在的に危険なコードを削除できるようになりました
+* security.yaml ファイル： `sanitize_svg`: **true**|false
+* 管理パネルプラグイン： **Configuration** > **Security** > **Sanitize SVG**
 
-## DEVELOPERS
+<h2 id="developers">開発者向け</h2>
 
-### Debugging
+<h3 id="debugging">デバッグ</h3>
 
-* Added support for [Clockwork](https://underground.works/clockwork) developer tools (now default debugger)
+* [Clockwork](https://underground.works/clockwork) ディベロッパーツールをサポートしました（現在のデフォルトのデバッガです）
 * Added support for [Tideways XHProf](https://github.com/tideways/php-xhprof-extension) PHP Extension for profiling method calls
 * Added Twig profiling for Clockwork debugger
 

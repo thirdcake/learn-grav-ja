@@ -307,7 +307,7 @@ Grav では、 stream はオブジェクトであり、システムの物理デ�
 
 Prefixes により、いくつかの物理パス（実際のパス）をひとつの論理 stream にまとめることができます。 `cache` stream をよく見ると、少しだけ違うことに気づくでしょう。この場合、 `cache://` は `cache` を解決し、 `cache://images` は `images` を解決します。
 
-<h3 id="server-based-multi-site-configuration">サーバーを設定もとにしたマルチサイト設定</h3>
+<h3 id="server-based-multi-site-configuration">サーバー設定をもとにしたマルチサイト設定</h3>
 
 Grav 1.7 からは、サーバー設定から初期の環境変数をカスタマイズできるようになりました。
 
@@ -327,7 +327,7 @@ Grav 1.7 からは、サーバー設定から初期の環境変数をカスタ�
 | **GRAV_TMP_PATH** | `tmp` | `tmp://` stream への相対パス |
 | **GRAV_BACKUP_PATH** | `backup` | `backup://` stream への相対パス |
 
-加えて、環境変数をカスタマイズする変数もあります。これらについて、より詳しいドキュメントは、 [サーバーベースの環境設定](../04.environment-config/#server-based-environment-configuration) にあります。
+加えて、環境変数をカスタマイズする変数もあります。これらについて、より詳しいドキュメントは、 [サーバー設定をもとにした環境設定](../04.environment-config/#server-based-environment-configuration) にあります。
 
 > [!Note]  
 > これらは、 `setup.php` ファイルからも機能します。 `define()` 関数で定数にしたり、 `putenv()` 関数で環境変数にしたりできます。定数は、環境変数より望ましいです。
@@ -339,7 +339,7 @@ Grav 1.7 からは、サーバー設定から初期の環境変数をカスタ�
 | **GRAV_ENVIRONMENTS_PATH** | `user://env` | 全環境を探すパス。 `user://sites` のようにしたい場合に使います。 stream もしくは `GRAV_ROOT` からの相対パスが使えます。 |
 | **GRAV_ENVIRONMENT_PATH** | `user://env/ENVIRONMENT` | あなたの環境にカスタムロケーションを持たせたい場合にときどき便利かもしれません。 |
 
-<h4 id="server-based-configuration-overrides">サーバーベースの設定の上書き</h4>
+<h4 id="server-based-configuration-overrides">サーバー設定をもとにした config 設定の上書き</h4>
 
 設定内に、秘密のクレデンシャル情報を保存したくない場合に、サーバーから環境変数を使って提供することもできます。
 

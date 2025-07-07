@@ -86,5 +86,5 @@ bin/gpm update
 > プラグインが壊れていなければ、この時点で、管理パネルとサイトは完全に機能します。
 
 > [!Warning]  
-> **[Upgrading to Grav 1.7](/advanced/grav-development/grav-17-upgrade-guide)** を読む前に、Grav や管理パネルプラグインをこれ以上アップグレードすることは避けてください。サイトと管理パネルの両方が壊れる結果になるかもしれません。
+> **[Upgrading to Grav 1.7](../03.grav-17-upgrade-guide/)** を読む前に、Grav や管理パネルプラグインをこれ以上アップグレードすることは避けてください。サイトと管理パネルの両方が壊れる結果になるかもしれません。
 

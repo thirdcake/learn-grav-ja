@@ -92,7 +92,7 @@ user/config/themes/antimatter.yaml
 user/env/www.mysite.com/config/themes/antimatter.yaml
 ```
 
-<h3 id="server-based-environment-configuration">サーバーベースの環境設定</h3>
+<h3 id="server-based-environment-configuration">サーバー設定をもとにした環境設定</h3>
 
 Grav 1.7 以降、サーバーの設定を使って環境を設定することができるようになりました。想定される利用場面としては、サーバーから、もしくはスクリプトから環境変数を設定します。ここでのスクリプトというのは、 Grav よりも前に実行され、Grav が使う環境を選択するためのものです。
 
