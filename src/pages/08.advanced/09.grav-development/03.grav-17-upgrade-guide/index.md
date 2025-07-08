@@ -1,7 +1,7 @@
 ---
 title: 'Grav 1.7 へのアップデート'
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-07-04'
+lastmod: '2025-07-08'
 ---
 
 Grav 1.7 では、いくつかの新機能追加、改善、バグ修正がなされ、そして Grav 2.0 への道を開くたくさんのアーキテクチャの変更が提供されています。以下は、そのうちの重要部分です：
@@ -108,7 +108,7 @@ Twig テンプレートエンジンは、 1.43 にアップデートされまし
 * `authorize()` twig 関数が改善され、ネストされたルールパラメータでうまく機能するようになりました。
 * `|yaml_serialize` twig フィルタが改善されました。 `JsonSerializable` オブジェクトと、その他の配列に似たオブジェクトをサポートします。
 * `external.html.twig`, `default.html.twig`, そして `modular.html.twig` について、デフォルトのテンプレートが追加されました。
-* **後方互換性の効かない事例** : `{% script 'file.js' in 'bottom' %}` では動かなくなるため、 `in` ではなく、 `{% script 'file.js' at 'bottom' %}` のように使ってください。
+* **後方互換性の破壊** : `{% script 'file.js' in 'bottom' %}` では動かなくなるため、 `in` ではなく、 `{% script 'file.js' at 'bottom' %}` のように使ってください。
 
 ## Forms
 
@@ -159,7 +159,7 @@ Grav 1.7 では、 [サーバー設定をもとにした環境設定](../../04.e
 * 多言語サポートの改善
 
 > [!Info]  
-> **後方互換性はありません** ： ルーティング可能かつ公開されている子ページを持つ、ルーティングできないページを訪れた時の 404 エラーページの取り扱いを修正しました。新しい取り扱いは、最初のルーティング可能で公開されている子ページへリダイレクトされます。これはおそらく、もっとも望ましいページでしょう。
+> **後方互換性の破壊** ： ルーティング可能かつ公開されている子ページを持つ、ルーティングできないページを訪れた時の 404 エラーページの取り扱いを修正しました。新しい取り扱いは、最初のルーティング可能で公開されている子ページへリダイレクトされます。これはおそらく、もっとも望ましいページでしょう。
 
 > [!Note]  
 > Flex Pages 機能は、サイトのフロントエンドでは、まだ使われていません。
@@ -175,7 +175,7 @@ Grav 1.7 では、多言語サイトでのページのフォールバック機�
 フォールバック言語のいずれも、ページが存在しない場合、 **404 Not Found** エラーが代わりに表示されます。
 
 > [!Info]  
-> **後方互換性がありません** ： `system.yaml` ファイルもしくは管理パネルプラグイン（ **Configuration** > **System** > **Languages** > Content Language Fallback** ）で、ページコンテンツの現在のフォールバック言語を追加してください。
+> **後方互換性の破壊** ： `system.yaml` ファイルもしくは管理パネルプラグイン（ **Configuration** > **System** > **Languages** > Content Language Fallback** ）で、ページコンテンツの現在のフォールバック言語を追加してください。
 
 <h3 id="media">メディア</h3>
 
@@ -237,14 +237,13 @@ Grav 1.7 では、多言語サイトでのページのフォールバック機�
 <h3 id="debugging">デバッグ</h3>
 
 * [Clockwork](https://underground.works/clockwork) ディベロッパーツールをサポートしました（現在のデフォルトのデバッガです）
-* Added support for [Tideways XHProf](https://github.com/tideways/php-xhprof-extension) PHP Extension for profiling method calls
-* Added Twig profiling for Clockwork debugger
+* [Tideways XHProf](https://github.com/tideways/php-xhprof-extension) PHP 拡張をサポートし、メソッド呼び出しのプロファイリングができるようになりました
+* Clockwork デバッガのため Twig プロファイリングを追加しました
 
-### Use composer autoloader
+<h3 id="use-composer-autoloader">composer オートローダーを使う</h3>
 
-* Upgraded `bin/composer.phar` to `2.0.2` which is all new and much faster
-* Please add `composer.json` file to your plugin and run `composer update --no-dev` (and remember to keep it updated):
-
+* `bin/composer.phar` を `2.0.2` にアップグレードし、新しく、処理が速くなりました
+* `composer.json` ファイルをプラグインに追加してください。そして `composer update --no-dev` を実行してください（そして、アップデートを忘れずに続けてください）：
     composer.json
     ```json
     {
@@ -285,11 +284,8 @@ Grav 1.7 では、多言語サイトでのページのフォールバック機�
         }
     }
     ```
-
-  See [Composer schema](https://getcomposer.org/doc/04-schema.md)
-
-* Please use autoloader instead of `require` in the code:
-
+    [Composer スキーマ](https://getcomposer.org/doc/04-schema.md) を参照してください
+* コード内で、 `require` ではなく、オートローダーを使ってください：
     example.php
     ```php
       /**
@@ -304,7 +300,7 @@ Grav 1.7 では、多言語サイトでのページのフォールバック機�
               ]
           ];
       }
-
+    
       /**
        * Composer autoload.
        *
@@ -315,80 +311,77 @@ Grav 1.7 では、多言語サイトでのページのフォールバック機�
           return require __DIR__ . '/vendor/autoload.php';
       }
     ```
+* プラグインとテーマ： オブジェクトが初期化される際に、 `$plugin->autoload()` と `$theme->autoload()` が自動で呼び出されます
+* カスタムコードで、 class を読み込む際に `require` や `include` を使わないように気をつけてください
 
-* Plugins & Themes: Call `$plugin->autoload()` and `$theme->autoload()` automatically when object gets initialized
-* Make sure your code does not use `require` or `include` for loading classes
+<h3 id="plugin-theme-blueprints-blueprints-yaml">プラグイン・テーマのブループリント(`blueprints.yaml`)</h3>
 
-### Plugin/Theme Blueprints (`blueprints.yaml`)
-
-* Please add:
+* 以下を追記して下さい：
     ```yaml
     slug: folder-name
     type: plugin|theme
     ```
-* Make sure you update your dependencies. I recommend setting Grav to either 1.6 or 1.7 and update your code/vendor to PHP 7.1
+* 依存関係のアップデートを行ってください。 Grav を 1.6 か 1.7 に設定し、code/vendor を PHP 7.1 にアップデートすることを推奨します
     ```yaml
     dependencies:
         - { name: grav, version: '>=1.6.0' }
     ```
+* `themes` をキャッシュされたブループリント設定と、 config 設定に追加してください
+* **Grav 1.7.8** では、テーマのあらゆる **ブループリント** がサポートされました。 `blueprints/` フォルダ内のすべてのファイルとフォルダを、 `blueprints/pages/` へ移動し、テーマの互換性を維持してください。また、依存する Grav のバージョンを `1.7.8` 以上に忘れずにアップデートしてください。
 
-* Added `themes` to cached blueprints and configuration
-* **Grav 1.7.8** adds support for defining any **blueprint** in your theme. Move all files and folders in `blueprints/` into `blueprints/pages/` to keep your theme forward compatible. Also remember to update minimum Grav dependency to `>=1.7.8`.
+<h3 id="sessions">セッション</h3>
 
-### Sessions
-
-* Session ID now changes on login to prevent session fixation issues
-* Added `Session::regenerateId()` method to properly prevent session fixation issues
+* セッション ID は、セッション固定化攻撃への対策としてログイン時に変更されます
+* `Session::regenerateId()` メソッドが追加され、適切にセッション固定化攻撃から守ります
 
 ### ACL
 
-* `user.authorize()` now requires user to be authorized (passed 2FA check), unless the rule contains `login` in its name.
-* Added support for more advanced ACL (CRUD)
+* `user.authorize()` メソッドは、ルールに `login` の名前が含まれていない限り、ユーザーに認証（2FA 検証の通過）を要求します。
+* より高度な ACL (CRUD) をサポートしました
 
-* **BC BREAK** `user.authorize()` and Flex `object.isAuthorized()` now have two deny states: `false` and `null`.
+* **後方互換性の破壊** `user.authorize()` メソッドと Flex の `object.isAuthorized()` メソッドは、2つの否定状態を持ちます： `false` と `null` です。
 
-    Make sure you do not have strict checks against false: `$user->authorize($action) === false` (PHP)  or `user.authorize(action) is same as(false)` (Twig).
+    false に対して厳密なチェックをしないように気をつけてください： `$user->authorize($action) === false` もしくは、 `user.authorize(action) is same as(false)` (Twig) 。
 
-    For the negative checks you should be using `!user->authorize($action)` (PHP) or `not user.authorize(action)` (Twig).
+    否定チェックについては、 `!user->authorize($action)` (PHP) もしくは `not user.authorize(action)` (Twig) を使用してください。
 
-    The change has been done to allow strong deny rules by chaining the actions if previous ones do not match: `user.authorize(action1) ?? user.authorize(action2) ?? user.authorize(action3)`.
+    この変更は、前の評価がマッチしなかった場合に、連続して評価するための強い否定ルールを実現するためになされました： `user.authorize(action1) ?? user.authorize(action2) ?? user.authorize(action3)`
 
-    Note that Twig function `authorize()` will still **keeps** the old behavior!
+    Twig 関数の `authorize()` は、まだ古いふるまいを **残している** ので注意してください！
+
+> [!訳注]  
+> null 合体演算子 `??` では、 `true === null ?? true` ですが、 `false === false ?? true` になるために、 false の否定と、 null の否定を分けた、ということのようです。
 
 ### Pages
 
-* Added default templates for `external.html.twig`, `default.html.twig`, and `modular.html.twig`
-* Admin uses `Flex Pages` by default (can be disabled from `Flex-Objects` plugin)
-
-  ![Disable Flex Pages](disable-flex-pages.png)
-
-* Added page specific admin permissions support for `Flex Pages`
-* Added root page support for `Flex Pages`
-* Fixed wrong `Pages::dispatch()` calls (with redirect) when we really meant to call `Pages::find()`
-* Added `Pages::getCollection()` method
-* Moved `collection()` and `evaluate()` logic from `Page` class into `Pages` class
-
-* **DEPRECATED** `$page->modular()` in favor of `$page->isModule()`
-* **DEPRECATED** `PageCollectionInterface::nonModular()` in favor of `PageCollectionInterface::pages()`
-* **DEPRECATED** `PageCollectionInterface::modular()` in favor of `PageCollectionInterface::modules()`
-
-* **BC BREAK** Fixed `Page::modular()` and `Page::modularTwig()` returning `null` for folders and other non-initialized pages. Should not affect your code unless you were checking against `false` or `null`.
-* **BC BREAK** Always use `\Grav\Common\Page\Interfaces\PageInterface` instead of `\Grav\Common\Page\Page` in method signatures
-* Admin now uses `Flex Pages` by default, collection will behave in slightly different way
-* **BC BREAK** `$page->topParent()` may return page itself instead of null
-* **BC BREAK** `$page->header()` may now `\Grav\Common\Page\Header` return object instead of `stdClass`, you need to handle both (Flex vs regular)
+* デフォルトテンプレートとして  `external.html.twig` と `default.html.twig` と `modular.html.twig` が追加されました
+* 管理パネルプラグインは、デフォルトで `Flex Pages` を使います（ `Flex-Objects` プラグインで無効化できます）
+    ![Disable Flex Pages](disable-flex-pages.png)
+* `Flex Pages` についてページ固有の管理パネルパーミッションがサポートされました
+* `Flex Pages` についてルートページがサポートされました
+* 本当は `Pages::find()` を呼び出したい場合に、間違って `Pages::dispatch()` が（リダイレクトを伴って）呼び出される問題が修正されました
+* `Pages::getCollection()` メソッドが追加されました
+* `collection()` と `evaluate()` ロジックが、 `Page` クラスから `Pages` クラスへ移動しました
+* **非推奨** `$page->modular()` を廃止し `$page->isModule()` を使用してください
+* **非推奨** `PageCollectionInterface::nonModular()` を廃止し `PageCollectionInterface::pages()` を使用してください
+* **非推奨** `PageCollectionInterface::modular()` を廃止し `PageCollectionInterface::modules()` を使用してください
+* **後方互換性の破壊** `Page::modular()` と `Page::modularTwig()` がフォルダや初期化されていないページに対して `null` を返す問題を修正しました。 `false` や `null` をチェックするのでない限り、コードに影響は無いはずです
+* **後方互換性の破壊** 関数シグネチャにおいて、常に `\Grav\Common\Page\Interfaces\PageInterface` を使ってください。 `\Grav\Common\Page\Page` は使わないでください
+* 管理パネルプラグインは、デフォルトで `Flex Pages` を使います。 collection は、少し違ったふるまいになります
+* **後方互換性の破壊** `$page->topParent()` メソッドは、null ではなく、ページ自身を返すかもしれません
+* **後方互換性の破壊** `$page->header()` は、 `stdClass` ではなく、 `\Grav\Common\Page\Header` オブジェクトを返すかもしれません。 Flex ページと標準ページ両方を制御する必要があります
 
 ### Media
 
-* Added `MediaTrait::freeMedia()` method to free media (and memory)
-* Added support for uploading and deleting images directly in `Media` by using PSR-7
-* Adjusted asset types to enable extension of assets in class
-* **BC BREAK** Media no longer extends `Getters`, accessing `$media->$filename` no longer works, use `$media[$filename]` instead!
+* `MediaTrait::freeMedia()` メソッドが追加され、メディア（とメモリ）を解放できるようになりました
+* PSR-7 を使って `Media` 内に直接画像をアップロードや削除できるようになりました
+* アセットタイプを調整し、クラスでアセットを拡張できるようになりました
+* **後方互換性の破壊** Media は、もはや `Getters` を拡張していません。 `$media->$filename` にアクセスしても動かないので、 `$media[$filename]` を代わりに使ってください！
 
 ### Markdown
 
-* **BC BREAK** Upgraded Parsedown to 1.7 for Parsedown-Extra 0.8. Plugins that extend Parsedown may need a fix to render as HTML
-* Added new `Excerpts::processLinkHtml()` method
+* **後方互換性の破壊** Parsedown-Extra 0.8 へ Parsedown をアップグレードしました。 Parsedown を拡張したプラグインは、HTML としてレンダリングするために修正が必要かもしれません
+* 新しく `Excerpts::processLinkHtml()` メソッドが追加されました
 
 ### Users
 
@@ -397,8 +390,8 @@ Grav 1.7 では、多言語サイトでのページのフォールバック機�
 * Improved `Flex Users`: obey blueprints and allow Flex to be used in admin only
 * Improved `Flex Users`: user and group ACL now supports deny permissions
 * Changed `UserInterface::authorize()` to return `null` having the same meaning as `false` if access is denied because of no matching rule
-* **DEPRECATED** `\Grav\Common\User\Group` in favor of `$grav['user_groups']`, which contains Flex UserGroup collection
-* **BC BREAK** Always use `\Grav\Common\User\Interfaces\UserInterface` instead of `\Grav\Common\User\User` in method signatures
+* **非推奨** `\Grav\Common\User\Group` in favor of `$grav['user_groups']`, which contains Flex UserGroup collection
+* **後方互換性の破壊** Always use `\Grav\Common\User\Interfaces\UserInterface` instead of `\Grav\Common\User\User` in method signatures
 
 ### Flex
 
@@ -416,11 +409,11 @@ Grav 1.7 では、多言語サイトでのページのフォールバック機�
 * Renamed `PageCollectionInterface::modular()` into `PageCollectionInterface::modules()` and deprecated the old method
 * `FlexDirectory::getObject()` can now be called without any parameters to create a new object
 * Implemented customizable configuration per flex directory type
-* **DEPRECATED** `FlexDirectory::update()` and `FlexDirectory::remove()`
-* **BC BREAK** Moved all Flex type classes under `Grav\Common\Flex`
-* **BC BREAK** `FlexStorageInterface::getStoragePath()` and `getMediaPath()` can now return null
-* **BC BREAK** Flex objects no longer return temporary key if they do not have one; empty key is returned instead
-* **BC BREAK** Added reload argument to `FlexStorageInterface::getMetaData()`
+* **非推奨** `FlexDirectory::update()` and `FlexDirectory::remove()`
+* **後方互換性の破壊** Moved all Flex type classes under `Grav\Common\Flex`
+* **後方互換性の破壊** `FlexStorageInterface::getStoragePath()` and `getMediaPath()` can now return null
+* **後方互換性の破壊** Flex objects no longer return temporary key if they do not have one; empty key is returned instead
+* **後方互換性の破壊** Added reload argument to `FlexStorageInterface::getMetaData()`
 * You can add `edit_list.html.twig` file to a form field in order to customize look in the listing view
 
 ### Multi-language
@@ -428,7 +421,7 @@ Grav 1.7 では、多言語サイトでのページのフォールバック機�
 * Improved language support for `Route` class
 * Translations: rename MODULAR to MODULE everywhere
 * Added `Language::getPageExtensions()` to get full list of supported page language extensions
-* **BC BREAK** Fixed `Language::getFallbackPageExtensions()` to fall back only to default language instead of going through all languages
+* **後方互換性の破壊** Fixed `Language::getFallbackPageExtensions()` to fall back only to default language instead of going through all languages
 
 ### Multi-site
 
@@ -500,14 +493,14 @@ Grav 1.7 では、多言語サイトでのページのフォールバック機�
 * Added `Folder::countChildren()` method to determine if a folder has child folders
 * Support symlinks when saving `File`
 * Added `Route::getBase()` method
-* **BC BREAK** Make `Route` objects immutable. This means that you need to do: `{% set route = route.withExtension('.html') %}` (for all `withX` methods) to keep the updated version.
+* **後方互換性の破壊** Make `Route` objects immutable. This means that you need to do: `{% set route = route.withExtension('.html') %}` (for all `withX` methods) to keep the updated version.
 * Better `Content-Encoding` handling in Apache when content compression is disabled
 * Added a `Uri::getAllHeaders()` compatibility function
 * Allow `JsonFormatter` options to be passed as a string
 
 ### CLI
 
-* **BC BREAK** Many plugins initialize Grav in a wrong way, it is not safe to initialize plugins and theme by yourself
+* **後方互換性の破壊** Many plugins initialize Grav in a wrong way, it is not safe to initialize plugins and theme by yourself
     * Following calls require Grav 1.6.21 or later, so it is recommended to set Grav dependency to that version
     * Inside `serve()` method:
     * Call `$this->setLanguage($langCode);` before doing anything else if you want to set the language (or use default)
@@ -521,7 +514,7 @@ Grav 1.7 では、多言語サイトでのページのフォールバック機�
 ### Used Libraries
 
 * Updated Symfony Components to 4.4, please update any deprecated features in your code
-* **BC BREAK** Please run `bin/grav yamllinter` to find any YAML parsing errors in your site (including your plugins and themes).
+* **後方互換性の破壊** Please run `bin/grav yamllinter` to find any YAML parsing errors in your site (including your plugins and themes).
 
 ## PLUGINS
 
@@ -529,7 +522,7 @@ Grav 1.7 では、多言語サイトでのページのフォールバック機�
 
 * Added `Content Editor` option to user account blueprint
 
-* **BC BREAK** Admin will not initialize frontend pages anymore, this has been done to greatly speed up Admin plugin.
+* **後方互換性の破壊** Admin will not initialize frontend pages anymore, this has been done to greatly speed up Admin plugin.
 
     Please call `$grav['admin']->enablePages()` or `{% do admin.enablePages() %}` if you need to access frontend pages. This call can be safely made multiple times.
 
@@ -541,7 +534,7 @@ Grav 1.7 では、多言語サイトでのページのフォールバック機�
 
 ### Shortcode Core
 
-* **DEPRECATED** Every shortcode needs to have `init()` method, classes without it will stop working in the future.
+* **非推奨** Every shortcode needs to have `init()` method, classes without it will stop working in the future.
 
 ## Troubleshooting Issues
 
