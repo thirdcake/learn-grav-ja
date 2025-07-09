@@ -1,7 +1,7 @@
 ---
 title: 'Grav 1.7 へのアップデート'
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-07-08'
+lastmod: '2025-07-09'
 ---
 
 Grav 1.7 では、いくつかの新機能追加、改善、バグ修正がなされ、そして Grav 2.0 への道を開くたくさんのアーキテクチャの変更が提供されています。以下は、そのうちの重要部分です：
@@ -352,7 +352,7 @@ Grav 1.7 では、多言語サイトでのページのフォールバック機�
 > [!訳注]  
 > null 合体演算子 `??` では、 `true === null ?? true` ですが、 `false === false ?? true` になるために、 false の否定と、 null の否定を分けた、ということのようです。
 
-### Pages
+<h3 id="pages-1">ページ</h3>
 
 * デフォルトテンプレートとして  `external.html.twig` と `default.html.twig` と `modular.html.twig` が追加されました
 * 管理パネルプラグインは、デフォルトで `Flex Pages` を使います（ `Flex-Objects` プラグインで無効化できます）
@@ -371,7 +371,7 @@ Grav 1.7 では、多言語サイトでのページのフォールバック機�
 * **後方互換性の破壊** `$page->topParent()` メソッドは、null ではなく、ページ自身を返すかもしれません
 * **後方互換性の破壊** `$page->header()` は、 `stdClass` ではなく、 `\Grav\Common\Page\Header` オブジェクトを返すかもしれません。 Flex ページと標準ページ両方を制御する必要があります
 
-### Media
+<h3 id="media-1">メディア</h3>
 
 * `MediaTrait::freeMedia()` メソッドが追加され、メディア（とメモリ）を解放できるようになりました
 * PSR-7 を使って `Media` 内に直接画像をアップロードや削除できるようになりました
@@ -385,59 +385,58 @@ Grav 1.7 では、多言語サイトでのページのフォールバック機�
 
 ### Users
 
-* Added experimental support for `Flex Users` in the frontend (not recommended to use yet)
-* Admin uses `Flex Users` by default (can be disabled from `Flex-Objects` plugin)
-* Improved `Flex Users`: obey blueprints and allow Flex to be used in admin only
-* Improved `Flex Users`: user and group ACL now supports deny permissions
-* Changed `UserInterface::authorize()` to return `null` having the same meaning as `false` if access is denied because of no matching rule
-* **非推奨** `\Grav\Common\User\Group` in favor of `$grav['user_groups']`, which contains Flex UserGroup collection
-* **後方互換性の破壊** Always use `\Grav\Common\User\Interfaces\UserInterface` instead of `\Grav\Common\User\User` in method signatures
+* フロントエンドでの `Flex Users` のサポートを実験的に追加（まだ使用は推奨されません）
+* 管理パネルプラグインで、デフォルトで `Flex Users` を使用（ `Flex-Objects` プラグインで無効化できます）
+* `Flex Users` の改善： ブループリントに従い、管理パネルでのみ Flex を利用可能にします
+* `Flex Users` の改善： ユーザー・グループ ACL で拒否のパーミッションをサポートしました
+* `UserInterface::authorize()` メソッドを変更し、マッチするルールが無いためにアクセスが拒否される場合に、 `false` と同じ意味で `null` を返します
+* **非推奨** `\Grav\Common\User\Group` を廃止し、 `$grav['user_groups']` を使用してください。 Flex UserGroup コレクションは、ここに含まれます
+* **後方互換性の破壊** 関数シグネチャにおいて常に `\Grav\Common\User\Interfaces\UserInterface` を使ってください。 `\Grav\Common\User\User` は使用しないでください
 
 ### Flex
 
-* Do not use `Framework` Flex classes directly, it's better to use or extend classes under `Grav\Common\Flex\Types\Generic` namespace
-* Added `$grav['flex']` to access all registered Flex Directories
-  * Added `FlexRegisterEvent` which triggers when `$grav['flex']` is being accessed the first time
-* Added `hasFlexFeature()` method to test if `FlexObject` or `FlexCollection` implements a given feature
-* Added `getFlexFeatures()` method to return all features that `FlexObject` or `FlexCollection` implements
-* Added `FlexObject::refresh()` method to make sure object is up to date
-* Added `FlexStorage::getMetaData()` to get updated object meta information for listed keys
-* Added `FlexDirectoryInterface` interface
-* Added search option `same_as` to Flex Objects
-* `Flex Pages` method `$page->header()` returns `\Grav\Common\Page\Header` object, old `Page` class still returns `stdClass`
-* Renamed `PageCollectionInterface::nonModular()` into `PageCollectionInterface::pages()` and deprecated the old method
-* Renamed `PageCollectionInterface::modular()` into `PageCollectionInterface::modules()` and deprecated the old method
-* `FlexDirectory::getObject()` can now be called without any parameters to create a new object
-* Implemented customizable configuration per flex directory type
-* **非推奨** `FlexDirectory::update()` and `FlexDirectory::remove()`
-* **後方互換性の破壊** Moved all Flex type classes under `Grav\Common\Flex`
-* **後方互換性の破壊** `FlexStorageInterface::getStoragePath()` and `getMediaPath()` can now return null
-* **後方互換性の破壊** Flex objects no longer return temporary key if they do not have one; empty key is returned instead
-* **後方互換性の破壊** Added reload argument to `FlexStorageInterface::getMetaData()`
-* You can add `edit_list.html.twig` file to a form field in order to customize look in the listing view
+* `Framework` Flex クラスは直接使用しないでください。 `Grav\Common\Flex\Types\Generic` 名前空間内のクラスを使用するか拡張することを推奨します
+* 登録されたすべての Flex Directories にアクセスする `$grav['flex']` を追加しました
+    * `$grav['flex']` が最初にアクセスされたときに発火する `FlexRegisterEvent` を追加しました
+* `hasFlexFeature()` メソッドを追加し、 `FlexObject` や `FlexCollection` が渡された機能を実装しているかテストできるようになりました
+* `getFlexFeatures()` メソッドを追加し、 `FlexObject` や `FlexCollection` が実装しているすべての機能を返すようになりました
+* `FlexObject::refresh()` メソッドを追加し、オブジェクトを確実に最新にできるようになりました
+* `FlexStorage::getMetaData()` メソッドを追加し、オブジェクトの最新のメタ情報をリストキーで取得できるようになりました
+* `FlexDirectoryInterface` インターフェースが追加されました
+* Flex Objects に `same_as` 検索オプションが追加されました
+* `Flex Pages` のメソッド `$page->header()` は `\Grav\Common\Page\Header` オブジェクトを返します。古い `Page` クラスは、まだ `stdClass` を返します
+* `PageCollectionInterface::nonModular()` から `PageCollectionInterface::pages()` に名前が変更され、古いメソッドは非推奨となりました
+* `PageCollectionInterface::modular()` から `PageCollectionInterface::modules()` に名前が変更され、古いメソッドは非推奨となりました
+* `FlexDirectory::getObject()` を新しいオブジェクトを作成するためにパラメータを何も渡さずに呼び出せるようになりました
+* flex directory タイプごとにカスタマイズ可能な config 設定を実装しました
+* **非推奨** `FlexDirectory::update()` 及び `FlexDirectory::remove()`
+* **後方互換性の破壊** `Grav\Common\Flex` の下にすべての Flex タイプクラスを移動しました
+* **後方互換性の破壊** `FlexStorageInterface::getStoragePath()` 及び `getMediaPath()` は null を返せるようになりました
+* **後方互換性の破壊** Flex オブジェクトは、キーを持たない場合に一時的なキーを返しません。代わりに空のキーが返されます
+* **後方互換性の破壊** `FlexStorageInterface::getMetaData()` に reload 引数が追加されました
+* リスト表示で見た目をカスタマイズするためにフォームフィールドに `edit_list.html.twig` ファイルを追加できるようになりました
 
-### Multi-language
+<h3 id="multi-language-1">多言語</h3>
 
-* Improved language support for `Route` class
-* Translations: rename MODULAR to MODULE everywhere
-* Added `Language::getPageExtensions()` to get full list of supported page language extensions
-* **後方互換性の破壊** Fixed `Language::getFallbackPageExtensions()` to fall back only to default language instead of going through all languages
+* `Route` クラスの言語サポートが改善されました
+* 翻訳： すべての場所で MODULAR を MODULE に名前を変更しました
+* `Language::getPageExtensions()` メソッドを追加し、サポートされているページの言語拡張子の全リストを取得します
+* **後方互換性の破壊** `Language::getFallbackPageExtensions()` を修正し、すべての言語ではなくデフォルトの言語にのみフォールバックするようになりました
 
-### Multi-site
+<h3 id="multi-site">マルチサイト</h3>
 
-* Added support for having all sites / environments under `user/env` folder
+* `user/env` フォルダ下にすべてのサイト・環境変数を置くようになりました
 
-### Serialization
+<h3 id="serialization">シリアル化</h3>
 
-* All classes now use PHP 7.4 serialization. The old `Serializable` methods are now final and cannot be overridden.
+* すべてのクラスで PHP 7.4 のシリアル化を使用します。古い `Serializable` メソッドは final になり、オーバーライドできなくなります。
 
-### Blueprints
+<h3 id="blueprints">ブループリント</h3>
 
-* Added `flatten_array` filter to form field validation
-* Added support for `security@: or: [admin.super, admin.pages]` in blueprints (nested AND/OR mode support)
-* Blueprint validation: Added `validate: value_type: bool|int|float|string|trim` to `array` to filter all the values inside the array
-* If your plugins has blueprints folder, initializing it in the event will be too late. Do this instead:
-
+* フォームフィールドのバリデーションに `flatten_array` フィルタが追加されました
+* `security@: or: [admin.super, admin.pages]` のサポートがブループリントに追加されました（ネストされた AND/OR モードをサポートします）
+* ブループリントのバリデーション： `validate: value_type: bool|int|float|string|trim` が `array` に追加され、配列内のすべての値にフィルターできるようになりました
+* プラグインに blueprints フォルダがある場合に、イベントで初期化するととても遅くなります。代わりに、次のようにしてください：
     ```php
     class MyPlugin extends Plugin
     {
@@ -448,17 +447,16 @@ Grav 1.7 では、多言語サイトでのページのフォールバック機�
     }
     ```
 
-### Events
+<h3 id="events">イベント</h3>
 
-* Use `Symfony EventDispatcher` directly instead of `rockettheme/toolbox` wrapper.
-* Added `$grav->dispatchEvent()` method for PSR-14 events
-* Added `PluginsLoadedEvent` which triggers after plugins have been loaded but not yet initialized
-* Added `SessionStartEvent` which triggers when session is started
-* Added `FlexRegisterEvent` which triggers when `$grav['flex']` is being accessed the first time
-* Added `PermissionsRegisterEvent` which triggers when `$grav['permissions']` is being accessed the first time
-* Added `onAfterCacheClear` event
-* Check `onAdminTwigTemplatePaths` event, it should NOT be:
-
+* `rockettheme/toolbox` ラッパーではなく、 `Symfony EventDispatcher` を直接使います。
+* PSR-14 イベントへ `$grav->dispatchEvent()` メソッドを追加しました
+* `PluginsLoadedEvent` を追加しました。このイベントはプラグインが読み込まれたあと、初期化される前に発火します
+* `SessionStartEvent` を追加かしました。このイベントはセッションがスタートするときに発火します
+* `FlexRegisterEvent` を追加しました。このイベントは、 `$grav['flex']` に最初にアクセスされたときに発火します
+* `PermissionsRegisterEvent` を追加しました。このイベントは、 `$grav['permissions']` に最初にアクセスされたときに発火します
+* `onAfterCacheClear` イベントが追加されました
+* `onAdminTwigTemplatePaths` イベントの確認をしてください。次のようにはしないでください：
     ```php
     public function onAdminTwigTemplatePaths($event)
     {
@@ -466,7 +464,7 @@ Grav 1.7 では、多言語サイトでのページのフォールバック機�
         $event['paths'] = [__DIR__ . '/admin/themes/grav/templates'];
     }
     ```
-    but:
+    次のようにしてください：
     ```php
     public function onAdminTwigTemplatePaths($event)
     {
@@ -479,92 +477,90 @@ Grav 1.7 では、多言語サイトでのページのフォールバック機�
 
 ### JavaScript
 
-* Updated bundled JQuery to latest version `3.5.1`
+* バンドルしている JQuery を最新のバージョン `3.5.1` にアップデートしています
 
 ### Misc
 
-* Added `Utils::functionExists()`: PHP 8 compatible `function_exists()`
-* Added `Utils::isAssoc()` and `Utils::isNegative()` helper methods
-* Added `Utils::simpleTemplate()` method for very simple variable templating
-* Added `Utils::fullPath()` to get the full path to a file be it stream, relative, etc.
-* Support customizable null character replacement in `CSVFormatter::decode()`
-* Added new `Security::sanitizeSVG()` function
-* Added `$grav->close()` method to properly terminate the request with a response
-* Added `Folder::countChildren()` method to determine if a folder has child folders
-* Support symlinks when saving `File`
-* Added `Route::getBase()` method
-* **後方互換性の破壊** Make `Route` objects immutable. This means that you need to do: `{% set route = route.withExtension('.html') %}` (for all `withX` methods) to keep the updated version.
-* Better `Content-Encoding` handling in Apache when content compression is disabled
-* Added a `Uri::getAllHeaders()` compatibility function
-* Allow `JsonFormatter` options to be passed as a string
+* `Utils::functionExists()` を追加しました： PHP 8 の `function_exists()` 互換
+* ヘルパーメソッドとして `Utils::isAssoc()` と `Utils::isNegative()` を追加しました
+* とてもシンプルな変数テンプレート用に `Utils::simpleTemplate()` メソッドを追加しました
+* `Utils::fullPath()` を追加し、ストリーム内や相対パスなどのファイルへのフルパスを取得できるようになりました
+* `CSVFormatter::decode()` で、null 文字置換のカスタマイズをサポートしました
+* `Security::sanitizeSVG()` 関数を新規追加しました
+* `$grav->close()` メソッドを追加し、レスポンスを伴う適切なリクエストの終了をできるようになりました
+* `Folder::countChildren()` メソッドを追加し、フォルダに子フォルダがある場合に検出できるようになりました
+* `File` 保存時にシムリンクをサポートしました
+* `Route::getBase()` メソッドを追加しました
+* **後方互換性の破壊** `Route` オブジェクトをイミュータブルにしました。つまり、アップデートバージョンで（すべての `withX` メソッドに対して）次のようにする必要があります： `{% set route = route.withExtension('.html') %}` 
+* コンテンツ圧縮が無効の場合に Apache サーバーでの `Content-Encoding` 制御がより良くなりました
+* `Uri::getAllHeaders()` 互換関数を追加しました
+* `JsonFormatter` オプションを文字列として渡せるようになりました
 
 ### CLI
 
-* **後方互換性の破壊** Many plugins initialize Grav in a wrong way, it is not safe to initialize plugins and theme by yourself
-    * Following calls require Grav 1.6.21 or later, so it is recommended to set Grav dependency to that version
-    * Inside `serve()` method:
-    * Call `$this->setLanguage($langCode);` before doing anything else if you want to set the language (or use default)
-    * Call one of following:
-        * `$this->initializeGrav();` Already called if you're in `bin/plugin`, otherwise you may need to call this one
-        * `$this->initializePlugins();` This initializes grav, plugins (up to `onPluginsInitialized`)
-        * `$this->initializeThemes();` This initializes grav, plugins and theme
-        * `$this->initializePages();` This initializes grav, plugins, theme and everything needed by pages
-* It is a good idea to prefix your CLI command classes with your plugin name, otherwise there may be naming conflicts (we already have some!)
+* **後方互換性の破壊** 多くのプラグインで Grav の初期化を間違えています。プラグインとテーマの初期化処理を自身で行うのは安全ではありません
+    * Grav 1.6.21 以上では、以下の呼び出しが必要です。 Grav のバージョンへの依存関係を設定しておくことをおすすめします
+    * 内部の `serve()` メソッド：
+    * 言語設定をしたい場合は、他の何よりも先に `$this->setLanguage($langCode);` を呼び出してください。（もしくは、デフォルトを利用してください）
+    * 以下のうちのひとつを呼び出してください：
+        * `$this->initializeGrav();` `bin/plugin` にいる場合は、すでに呼び出しています。そうでなければ、これを呼び出す必要があります
+        * `$this->initializePlugins();` これは Grav とプラグインを（`onPluginsInitialized` に）初期化します
+        * `$this->initializeThemes();` これは Grav, プラグイン そして テーマを初期化します
+        * `$this->initializePages();` これは Grav, プラグイン, テーマ そしてページに必要なすべてを初期化します
+* プラグイン名を CLI コマンドのクラスのプレフィックスにしておくのは良いアイディアです。そうでなければ、名前衝突を起こすかもしれません（私たちもやったことがあります！）
 
-### Used Libraries
+<h3 id="used-libraries">ライブラリの利用</h3>
 
-* Updated Symfony Components to 4.4, please update any deprecated features in your code
-* **後方互換性の破壊** Please run `bin/grav yamllinter` to find any YAML parsing errors in your site (including your plugins and themes).
+* Symfony Components 4.0 にアップデートしました。あなたのカスタムコード内の非推奨機能をアップデートしておいてください
+* **後方互換性の破壊** `bin/grav yamllinter` を実行してください。（プラグインやテーマを含めた）サイト内の YAML パースエラーが見つかります。
 
-## PLUGINS
+<h2 id="plugins">プラグイン</h2>
 
-### Admin
+<h3 id="admin">管理パネルプラグイン</h3>
 
-* Added `Content Editor` option to user account blueprint
+* ユーザーアカウントブループリントに `Content Editor` オプションを追加しました
 
-* **後方互換性の破壊** Admin will not initialize frontend pages anymore, this has been done to greatly speed up Admin plugin.
+* **後方互換性の破壊** 管理パネルプラグインはフロントエンドのページをこれ以上初期化しません。これにより管理プラグインを著しくスピードアップさせます。  
+    フロントエンドページにアクセスする必要がある場合、 `$grav['admin']->enablePages()` もしくは `{% do admin.enablePages() %}` を呼び出してください。この呼び出しは複数回行われても安全です  
+    `Flex Pages` を利用している場合は、 `$grav['admin']` の代わりに Flex ディレクトリを使ってください。コードをとても速くできます。
 
-    Please call `$grav['admin']->enablePages()` or `{% do admin.enablePages() %}` if you need to access frontend pages. This call can be safely made multiple times.
+* 管理パネルプラグインは、 `Accounts` や `Pages` を編集する際に Flex を利用するようになりました。これらいずれかにプラグインからフックする場合、それらが機能し続けるように確認してください。
 
-    If you're using `Flex Pages`, please use Flex Directory instead, it will make your code so much faster.
-
-* Admin now uses Flex for editing `Accounts` and `Pages`. If your plugin hooks into either of those, please make sure they still work.
-
-* Admin cache is enabled by default, make sure your plugin clears cache when needed. Please avoid clearing all cache!
+* 管理パネルのキャッシュは、デフォルトで有効化されています。必要な場合は、プラグインが確実にキャッシュクリアするようにしてください。ただし、すべてのキャッシュをクリアするのはやめてください！
 
 ### Shortcode Core
 
-* **非推奨** Every shortcode needs to have `init()` method, classes without it will stop working in the future.
+* **非推奨** すべてのショートコードには `init()` メソッドが必要です。これが無いクラスは、将来的に機能が停止します。
 
-## Troubleshooting Issues
+<h2 id=tTroubleshooting-issues">問題のトラブルシューティング</h2>
 
 #### `ERROR: flex-objects.html.twig template not found for page`
 
-If you get this error after upgrading to Grav 1.7, it might be related to a plugin called `content-edit`.  If you disable this plugin, the error should resolve itself. [Grav Issue #3169](https://github.com/getgrav/grav/issues/3169)
+Grav 1.7 にアップグレード後にこのエラーが表示された場合、プラグインが `content-edit` を呼び出していることに関係しているかもしれません。このプラグインを無効化すると、エラーが解決するでしょう。 [Grav Issue #3169](https://github.com/getgrav/grav/issues/3169)
 
-#### Untranslated Admin
+<h4 id="untranslated-admin">管理パネルが翻訳されない</h4>
 
-If your admin plugin looks like this:
+もし管理パネルが次のような見た目になっていた場合：
 
 ![Untranslated Admin](untranslated.png)
 
-The fix is very easy, and can be done even when not fully translated. Simply navigate to `PLUGIN_ADMIN.CONFIGURATION` and then in `PLUGIN_ADMIN.LANGUAGES`, set `PLUGIN_ADMIN.LANGUAGE_TRANLATIONS` to `PLUGIN_ADMIN.YES`:
+修正はとても簡単ですし、完全に翻訳されていなくても修正できます。 `PLUGIN_ADMIN.CONFIGURATION` に移動し、 `PLUGIN_ADMIN.LANGUAGES` 内で `PLUGIN_ADMIN.LANGUAGE_TRANLATIONS` を `PLUGIN_ADMIN.YES` に設定してください：
 
 ![Fix translations](fix-translations.png)
 
-#### Page blueprints stop working in Admin
+<h4 id="page-blueprints-stop-working-in-admin">ページブループリントが管理パネル内で機能しない</h4>
 
-If you cannot see your custom fields when editing the page, your theme is using two conflicting locations for page blueprints.
+ページを編集中にカスタムフィールドが表示されない場合、テーマがページブループリントとして2つの衝突した場所を利用しています。
 
-If the theme was not created by you, please report a bug to the theme author.
+テーマをあなた自身で作成していない場合は、テーマの作者にバグ報告をしてください。
 
-To fix the bug, you need to move all files and folders in your theme from `blueprints/` to `blueprints/pages/` (requires **Grav 1.7.8+**). Alternatively if the theme must support older versions of Grav, do the opposite.
+バグ修正には、テーマ内のすべてのファイルとフォルダを `blueprints/` から `blueprints/pages/` へ移動させる必要があります（ **Grav 1.7.8 以上** で必要です）。もしくは、テーマが古いバージョンの Grav をサポートしなければならない場合は、逆のことをしてください。
 
 #### Error: Loop detected while extending blueprint file
 
-The easiest fix for loop error is to move the files into their proper location, please see the above issue.
+ループエラーを修正する最も簡単な方法は、ファイルを適切な場所に移動させることです。上記の問題を見てください。
 
-Alternatively you can fix the issue by changing the broken page blueprint from:
+もしくは、壊れたページのブループリントを変更することで修正できます：
 
 ```yaml
 extends@:
@@ -572,21 +568,22 @@ extends@:
     context: 'blueprints://pages'
 ```
 
-where `[NAME]` is the filename (without the file extension) of the blueprint itself, to:
+`[NAME] の場所は、ブループリントのファイル名（ファイル拡張子は除く）です。
+上記を、以下のように変更してください：`
 
 ```yaml
 extends@: self@
 ```
 
-#### Missing CSS Styling in Admin
+<h4 id="missing-css-styling-in-admin">管理パネル内で CSS スタイルが消える</h4>
 
-It has been reported that after upgrading to latest Grav 1.7 and Admin 1.10, some admin pages appear broken and not fully styled.  THis could be related to the `imagecreate` plugin.  Disabling this plugin is not enough, you must **completely remove** the plugin, and then the error should resolve  itself.  [Admin Issue #2035](https://github.com/getgrav/grav-plugin-admin/issues/2035)
+これは、最新の Grav 1.7 及び 管理パネルプラグイン 1.10 にアップグレードした後に報告された問題です。管理パネルのページが、壊れて表示され、完全なスタイルが当たらなくなります。これは、 `imagecreate` プラグインに関係しています。このプラグインを無効化するだけでは不十分で、プラグインを **完全に削除** することで解決します。 [Admin Issue #2035](https://github.com/getgrav/grav-plugin-admin/issues/2035)
 
-## Reverting back to latest Grav 1.6
+<h2 id="reverting-back-to-latest-grav-1-6">Grav 1.6 の最新バージョンへ戻す</h2>
 
-While we recommend resolving any issues you may have to ensure that Grav 1.7 and future updates will be an easy upgrade, there are going to be scenarios where you have custom plugin functionality, or don't have the developer resources handy, and just need to get back to Grav 1.6 quickly.
+Grav 1.7 以上のアップグレードが簡単に行えるように、問題を解決することをおすすめしますが、カスタムプラグインを機能させ続ける必要があったり、開発者のリソースが不十分だったり、今すぐに Grav 1.6 に戻さなければならない理由がある場合もありえます。
 
-If you have CLI access to the site, this can be done by running these commands from the **root of your Grav 1.7** site:
+サイトへの CLI アクセスがあるなら、 **Grav 1.7 のルートディレクトリ** から以下のコマンドを実行することで、戻すことができます：
 
 ```bash
 wget -q https://getgrav.org/download/core/grav-update/1.6.31 -O tmp/grav-update-v1.6.31.zip
@@ -597,7 +594,7 @@ cp -rf tmp/getgrav-grav-plugin-admin-5d86394/* user/plugins/admin/
 cp -rf tmp/grav-update/* ./
 ```
 
-Basically it does a **direct-install** of the latest version of Grav 1.6 and Admin 1.9 on top of your current installation.  It doesn't touch the `user/` folder so your content and plugins are not impacted.
+基本的に、 Grav 1.6 と管理パネルプラグイン 1.9 の **ダイレクトインストール** を現在のインストール環境のトップで行います。 `user/` フォルダには触らないので、コンテンツとプラグインには影響がありません。
 
-For those who do not have CLI access, download [grav-update-v1.6.31.zip](https://github.com/getgrav/grav/releases/download/1.6.31/grav-update-v1.6.31.zip) and [grav-plugin-admin-1.9.19.zip](https://github.com/getgrav/grav-plugin-admin/archive/1.9.19.zip) files using the links given here. Unzip the files into your filesystem. Then use your favorite FTP/SFTP client to copy all the Grav files to your `WEBROOT` and Admin files into `WEBROOT/user/plugins/admin`.
+CLI アクセスができない方は、 [grav-update-v1.6.31.zip](https://github.com/getgrav/grav/releases/download/1.6.31/grav-update-v1.6.31.zip) と [grav-plugin-admin-1.9.19.zip](https://github.com/getgrav/grav-plugin-admin/archive/1.9.19.zip) ファイルをここのリンクからダウンロードしてください。これらの zip ファイルをファイルシステムに展開してください。そして、お好みの FTP/SFTP クライアントで Grav ファイルを `WEBROOT` へコピーし、 管理パネルプラグインのファイルを `WEBROOT/user/plugins/admin` へコピーしてください。
 
