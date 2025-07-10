@@ -1,7 +1,7 @@
 ---
 title: 'Rochen Web Hosting'
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-05-27'
+lastmod: '2025-07-10'
 ---
 
 [Rochen Web Hosting](http://www.rochen.com/?utm_source=RocketTheme&utm_medium=Showcase&utm_campaign=Promotions) は、 **GetGrav.org** と **RocketTheme.com** 両方の昔からのホスティングパートナーです。
@@ -12,81 +12,86 @@ Rochen は現在、新しくプレミアムな共有ホスティングサービ�
 
 <h2 id="picking-your-hosting-plan">ホスティングプランを決める</h2>
 
-[Rochen Web Hosting](http://www.rochen.com/?utm_source=RocketTheme&utm_medium=Showcase&utm_campaign=Promotions) has two options when it comes to hosting: **Shared** and **Burst** hosting.  Rochen recommends the Burst option for busier and more demanding sites.  For the sake of this guide, we'll use the basic Shared option.
+[Rochen Web Hosting](http://www.rochen.com/?utm_source=RocketTheme&utm_medium=Showcase&utm_campaign=Promotions) には、 **Shared** と **Burst** の2つのホスティングのオプションがあります。Rochen は、より忙しく、要求のより高いサイトには Burst オプションを推奨しています。このガイドでは、基本的な Shared オプションを使用します。
 
-Shared hosting ranges from $7.95/month $13.95/month depending on length of commitment.
+Shared ホスティングは、コミットメントの長さによって、月額 $7.95 から $13.95 の間の料金です。
 
 <h2 id="enabling-ssh">SSH を有効化</h2>
 
-First, you will have to open the **Toggle SSH Access** option in the **Security** section of cPanel. On this SSH Access page, you should click the **Enable SSH Access** button.
+まず、 cPanel の **Security** セクションで、 **Toggle SSH Access** オプションを開かなければいけません。この SSH アクセスページで、 **SSH アクセスを有効化** するボタンをクリックしてください。
 
-Then from the **Security Section** again, click the **Manage SSH Keys** option.
+それから、 **Security Section** で再度、 **SSH キー管理** オプションをクリックします。
 
 ![](manage-ssh-keys.png)
 
-There are two options at this point.  **Generate a New Key**, or **Import Key**. It's simpler to create your public/private key pair locally on your computer and then just import the DSA Public Key.
+この時、2つの選択肢があります。 **新しい鍵を生成** するか **鍵をインポート** するかです。公開・秘密鍵のペアをローカルコンピュータで作成し、 DSA パブリックキーをインポートするだけの方が簡単です。
 
-!! Windows users will first need to install [Cygwin](https://www.cygwin.com/) to provide many useful GNU and open source tools that are available on Mac and Linux platforms. When prompted to choose packages, ensure you check the SSH option. After installation, launch the `Cygwin Terminal`
+> [!Info]  
+> Windows ユーザーは、多くの便利な GNU と Mac や Linux プラットフォームで使える便利なツールを提供するため、まず [Cygwin](https://www.cygwin.com/) のインストールが必要です。パッケージ選択プロンプトでは、 SSH オプションに確実にチェックを入れてください。インストール後、 `Cygwin Terminal` を立ち上げてください。
 
-Fire up a terminal window and type:
+ターミナルウインドウを立ち上げ、次のようにタイプしてください：
 
 ```bash
 ssh-keygen -t dsa
 ```
 
-This key generation script will prompt you to fill in some values, or you can just hit `[return]` to accept the default values.  This will create an `id_dsa` (private key), and an `id_dsa.pub` (public key) in a folder called `.ssh/` in your home directory. It is important to ensure you **NEVER** give out your private key, nor upload it anywhere, **only your public key**.
+この鍵の生成スクリプトは、いくつかの値を入力させるプロンプトを表示します。デフォルト値を許容できる場合は、 `[return]` キーを押すだけでも良いです。このスクリプトは、ホームディレクトリの `.ssh/` というフォルダに、 `id_dsa` （秘密鍵）と、 `id_dsa.pub` （公開鍵）を作成します。プライベートキーを与えたり、どこかにアップロードするようなことは **決してしないでください** 。してよいのは、 **公開鍵だけです** 。
 
-Once generate you can paste the contents of your `id_dsa.pub` public key into the `Public Key` field in the **Import SSH key** section of the **SSH Access** page:
+> [!訳注]  
+> キー生成に関しては、 [このページ](https://kaityo256.github.io/github/ssh/index.html) が参考になりました。特に、パスフレーズを聞かれるプロンプトでは、何か入力したほうが良い（デフォルトにしない方が良い）ようです。
+
+鍵を生成できたら、 **SSH Access** ページの **Import SSH key** セクションで、 `Public Key` 入力欄に `id_dsa.pub` パブリックキーの中身を貼り付けできます：
 
 ![](ssh-public-key.png)
 
-After uploading, you should see the key listed at the **Public Keys** section of the Manage SSH Keys page.  You then need to click **Manage** to ensure the key is authorized:
+アップロード後、 SSH 鍵管理ページの **Public Keys** セクションで鍵のリストを確認してください。それから、 **Manage** をクリックする必要があります。そのキーが認証されたことが確認されます：
 
 ![](authorized-keys.png)
 
-To **enable SSH** access for your account, simply navigate to the **Managed Services** section on the **my.rochen.com** portal, and click on your **Shared Hosting** account information.  Next to the **SSH** option, click the **Disabled** link, and confirm that you wish to enable SSH.
+あなたのアカウントで **SSH アクセスを有効化** するためには、 **my.rochen.com** ポータルの **Managed Services** セクションに移動し、 **Shared Hosting** アカウント情報をクリックするだけです。 **SSH** オプションの隣に、 **無効化** リンクをクリックし、SSH を有効化することを確定してください。
 
-This means you are ready to test ssh'ing to your server.
+これで、サーバーに SSH テストする準備ができました。
 
 ```bash
 ssh rochen_username@rochen_servername
 ```
 
-Obviously, you will need to put in your Rochen-provided username for `rochen_username`, and the rochen-provided servername for `rochen_servername`.
+言うまでもなく、 `rochen_username` には Rochen から提供されているユーザー名を、 `rochen_servername` には Rochen から提供されているサーバー名を入力する必要があります。
 
-## Configuring PHP & Caching
+<h2 id="configuring-php-caching">PHP とキャッシュの設定</h2>
 
-Rochen uses PHP **5.4** by default, but you do have the option to use a newer **5.5** or **5.6** version which is required for Grav.
+Rochen は、デフォルトで PHP **5.4** を使用します。しかし、 Grav に必要な、より新しい **5.5** や **5.6** を使うためのオプションがあります。
 
-The first thing to do is to change the default version of PHP your site runs with. So click the **Select PHP Version** link in the **Software and Services** Section.
+最初にやるべきことは、サイトが実行される PHP のデフォルトバージョンを変更することです。**Software and Services** セクションの **Select PHP Version** リンクをクリックしてください。
 
-You will see a page that shows the current version of PHP.  Below is a dropdown that let's you pick alternative versions.  Choose **5.6** and click `Set as current` button.
+現在の PHP バージョンが表示されたページになるでしょう。以下の画像は、代替バージョンを選択しうるドロップダウンです。
+**5.6** を選択し、 `Set as current` ボタンをクリックしてください。
 
 ![](php-settings.png)
 
-Rochen is a rare breed in the world of hosting providers, in that they provide some sophisticated caching extensions for PHP.  To take advantage of these, enable the `apcu` caching extension, and also the Zend `opcache` extension.  Then, click `Save` at the bottom of these options.
+Rochen は、ホスティングプロバイダ業界では珍しく、 PHP の高度なキャッシュ拡張機能を提供しています。これらを利用するには、 `apcu` キャッシュ拡張と Zend `opcache` 拡張の両方を有効化してください。それから、これらのオプションの下にある `Save` をクリックしてください。
 
-One optimization that you should make is to **disable** the `xdebug` extension which is enabled by default, but not needed in a production environment, in fact it only slows things down.
+最適化のひとつとして、 `xdebug` を **無効化** することができます。これは、デフォルトでは有効になっており、しかし本番環境では処理を遅くし、不要なものです。
 
-To test that you have the **correct version of PHP**, **Zend OPcache**, and **APCu** running, you can create a temporary file: `public_html/info.php` and put this in the contents:
+**現在の PHP バージョン** と **Zend OPcache** と **APCu** が実行されているかテストするために、一時ファイル： `public_html/info.php` を作成し、以下のコンテンツを書き込んでください：
 
 ```php
 <?php phpinfo();
 ```
 
-Save the file and point your browser to this info.php file on your site, and you should be greeted with PHP information reflecting the version you selected earlier:
+ファイルを保存し、ブラウザでサイト内のこの info.php ファイルを開いてください。先ほど選択したバージョンが反映された PHP 情報が表示されます：
 
 ![](php-info1.webp)
 
-You should also be able to scroll down and see **Zend OPcache** listed in the **zend engine** block, and an **APCu** section below it:
+また、下へスクロールして **zend engine** ブロックの **Zend OPcache** 一覧と、その下の **APCu** セクションを確認できます：
 
 ![](php-info2.png)
 
-## Install and Test Grav
+<h2 id="install-and-test-grav">Grav のインストールとテスト</h2>
 
-Using your new found SSH capabilities, let's SSH to your Rochen server (if you are not already there) and download the latest version of Grav, unzip it and test it out!
+この SSH 機能を使って、（もしまだ接続したことがなければ） Rochen サーバーに接続し、最新バージョンの Grav をダウンロードし、 zip 展開し、テストしてみましょう！
 
-We will extract Grav into a `/grav` subfolder, but you could unzip directly into the root of your `~/www/` folder to ensure Grav is accessible directly.
+`/grav` サブフォルダに Grav を展開します。 Grav に直接アクセスできるように、 web ルートである `~/www/` フォルダに直接 unzip することもできます。
 
 ```bash
 cd ~/www
@@ -94,9 +99,9 @@ wget https://getgrav.org/download/core/grav/latest
 unzip grav-v{{ grav_version }}.zip
 ```
 
-You should now be able to point your browser to `http://myrochenserver.com/grav` using the appropriate URL of course.
+ブラウザで、 `http://myrochenserver.com/grav` などが表示できるはずです。もちろん、適切な URL に修正して使ってください。
 
-Because you have followed these instructions diligently, you will also be able to use the [Grav CLI](../../advanced/grav-cli) and [Grav GPM](../../advanced/grav-gpm) commands such as:
+ここまでの解説の通りに進めていただきましたので、 [Grav CLI](../../../07.cli-console/02.grav-cli/) や [Grav GPM](../../../07.cli-console/04.grav-cli-gpm/) も利用可能となります：
 
 ```bash
 cd ~/public_html/grav

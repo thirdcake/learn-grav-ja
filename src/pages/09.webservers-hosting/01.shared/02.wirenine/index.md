@@ -1,55 +1,62 @@
 ---
 title: WireNine
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-05-10'
+lastmod: '2025-07-10'
 ---
-[WireNine](https://my.wirenine.com/aff.php?aff=023) is a fast, modern hosting provider that focuses on performance via their use of **100% SSD** storage, **Litespeed** web servers, the latest **Intel E5-based** processors with fast **DDR4 ram**. These features ensure their shared hosting offerings are a fantastic solution for Grav sites.
+
+[WireNine](https://my.wirenine.com/aff.php?aff=023) は処理が速く、モダンなホスティングプロバイダです。同社は、パフォーマンスに焦点を当て、 **100% SSD** ストレージと、 **Litespeed** ウェブサーバー、高速な **DDR4 ram** とともに最新の **Intel E5-based** プロセッサを利用しています。
+これらの機能は、彼らのレンタルサーバーが Grav サイトの素晴らしい解決策となってくれることを保証しています。
 
 ![](wirenine.webp)
 
-In this guide, we will cover the essentials for configuring a middle of the road shared hosting account to work optimally with Grav.
+このガイドでは、 Grav で最適に動作するために、中間のレンタルサーバーアカウントを設定するために必要な知識を解説します。
 
-## Picking your Hosting Plan
+<h2 id="picking-your-hosting-plan">ホスティングプランを決める</h2>
 
-[WireNine](https://my.wirenine.com/aff.php?aff=023) has three shared hosting plans that range from $9/month for a basic plan, to $18/month for their heavy traffic option.  Configuration for all of these plans are the same, but we recommend the middle **Plus** plan at $14/month because it provides a good compromise with 1 CPU and 1GB of memory.
+[WireNine](https://my.wirenine.com/aff.php?aff=023) には、3つのレンタルサーバープランがあります。最安は月額 $9 のベーシックプランから、月額 $18 のヘビーな通信量オプションのあるプランまであります。これらすべての設定は同じですが、私たちは中間の **Plus** プラン（月額 $14 ）をおすすめしています。なぜなら、 1 CPU 及び 1GB のメモリーが付き、妥当な提供プランだからです。
 
-## Enabling SSH
+<h2 id="enabling-ssh">SSH を有効化</h2>
 
-First, you will have to open the **SSH Access** option in the **Security** section of cPanel. On this SSH Access page, you should click the **Manage SSH Keys** button.
+まず、 cPanel の **Security** セクションで、 **Toggle SSH Access** オプションを開かなければいけません。この SSH アクセスページで、 **SSH アクセスを有効化** するボタンをクリックしてください。
 
 ![](manage-ssh-keys.png)
 
-There are two options at this point.  **Generate a New Key**, or **Import Key**. It's simpler to create your public/private key pair locally on your computer and then just import the DSA Public Key.
+この時、2つの選択肢があります。 **新しい鍵を生成** するか **鍵をインポート** するかです。公開・秘密鍵のペアをローカルコンピュータで作成し、 DSA パブリックキーをインポートするだけの方が簡単です。
 
-!! Windows users will first need to install [Cygwin](https://www.cygwin.com/) to provide many useful GNU and open source tools that are available on Mac and Linux platforms. When prompted to choose packages, ensure you check the SSH option. After installation, launch the `Cygwin Terminal`
+> [!Info]  
+> Windows ユーザーは、多くの便利な GNU と Mac や Linux プラットフォームで使える便利なツールを提供するため、まず [Cygwin](https://www.cygwin.com/) のインストールが必要です。パッケージ選択プロンプトでは、 SSH オプションに確実にチェックを入れてください。インストール後、 `Cygwin Terminal` を立ち上げてください。
 
-Fire up a terminal window and type:
+ターミナルウインドウを立ち上げ、次のようにタイプしてください：
 
 ```bash
 ssh-keygen -t dsa
 ```
 
-This key generation script will prompt you to fill in some values, or you can just hit `[return]` to accept the default values.  This will create an `id_dsa` (private key), and an `id_dsa.pub` (public key) in a folder called `.ssh/` in your home directory. It is important to ensure you **NEVER** give out your private key, nor upload it anywhere, **only your public key**.
+この鍵の生成スクリプトは、いくつかの値を入力させるプロンプトを表示します。デフォルト値を許容できる場合は、 `[return]` キーを押すだけでも良いです。このスクリプトは、ホームディレクトリの `.ssh/` というフォルダに、 `id_dsa` （秘密鍵）と、 `id_dsa.pub` （公開鍵）を作成します。プライベートキーを与えたり、どこかにアップロードするようなことは **決してしないでください** 。してよいのは、 **公開鍵だけです** 。
 
-Once generate you can paste the contents of your `id_dsa.pub` public key into the `Public Key` field in the **Import SSH key** section of the **SSH Access** page:
+> [!訳注]  
+> キー生成に関しては、 [このページ](https://kaityo256.github.io/github/ssh/index.html) が参考になりました。特に、パスフレーズを聞かれるプロンプトでは、何か入力したほうが良い（デフォルトにしない方が良い）ようです。
+
+鍵を生成できたら、 **SSH Access** ページの **Import SSH key** セクションで、 `Public Key` 入力欄に `id_dsa.pub` パブリックキーの中身を貼り付けできます：
 
 ![](ssh-public-key.png)
 
-After uploading, you should see the key listed at the **Public Keys** section of the Manage SSH Keys page.  You then need to click **Manage** to ensure the key is authorized:
+アップロード後、 SSH 鍵管理ページの **Public Keys** セクションで鍵のリストを確認してください。それから、 **Manage** をクリックする必要があります。そのキーが認証されたことが確認されます：
 
 ![](authorized-keys.png)
 
-!! WireNine does not seem to enable **Shell Access** on their accounts by default.  You will need to open a support ticket, and request shell access to be enabled for your account.
+> [!Info]  
+> WireNine は、デフォルトでは **Shell Access** を有効化していないようです。サポートチケットを開き、あなたのアカウントに対してシェルアクセスを有効化するようリクエストする必要があるでしょう。
 
-This means you are ready to test ssh'ing to your server.
+これで、サーバーに SSH テストする準備ができました。
 
 ```bash
 ssh wirenine_username@wirenine_servername -p2200
 ```
 
-Obviously, you will need to put in your WireNine-provided username for `wirenine_username`, and the WireNine-provided servername for `wirenine_servername`.  The `-p2200` is important as this is the non-standard port that WireNine runs SSH on.
+言うまでもなく、 `wirenine_username` には WireNine から提供されているユーザー名を、 `wirenine_servername` には WireNine から提供されているサーバー名を入力する必要があります。 `-p2200` は、WireNine が SSH を標準とは違うポート番号で実行しているため、必要なものです。
 
-## 403 Forbidden Errors
+<h2 id="403-forbidden-errors">403 Forbidden エラー</h2>
 
 It seems in some WireNine setups the default permissions on user created files are incorrect and will cause **403 Forbidden** errors due to security flags being triggered.  The issue is that the default **umask is incorrect** and files are created with `775` for folders and `664` for files.  These files need to be `755` and `644` respectively to work correctly.
 
