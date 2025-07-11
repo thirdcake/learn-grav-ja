@@ -1,8 +1,11 @@
 ---
 title: WireNine
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-07-10'
+lastmod: '2025-07-11'
 ---
+
+> [!注釈]  
+> このページは、内容的に日本のサービスではないので、日本の方で、このページを読む人はほとんどいないと思いますが、以下の内容は PHP バージョンの話などから類推するにかなり古い内容であり、もし読む必要がある場合でも、適宜読み替えながら読んでください。
 
 [WireNine](https://my.wirenine.com/aff.php?aff=023) は処理が速く、モダンなホスティングプロバイダです。同社は、パフォーマンスに焦点を当て、 **100% SSD** ストレージと、 **Litespeed** ウェブサーバー、高速な **DDR4 ram** とともに最新の **Intel E5-based** プロセッサを利用しています。
 これらの機能は、彼らのレンタルサーバーが Grav サイトの素晴らしい解決策となってくれることを保証しています。
@@ -58,51 +61,51 @@ ssh wirenine_username@wirenine_servername -p2200
 
 <h2 id="403-forbidden-errors">403 Forbidden エラー</h2>
 
-It seems in some WireNine setups the default permissions on user created files are incorrect and will cause **403 Forbidden** errors due to security flags being triggered.  The issue is that the default **umask is incorrect** and files are created with `775` for folders and `664` for files.  These files need to be `755` and `644` respectively to work correctly.
+WireNine のセットアップにおいて、ユーザー作成ファイルのデフォルトのパーミッションが正しくなく、セキュリティフラグが発火して **403 Forbidden** エラーが起きるようです。この問題は、デフォルトの **umask が不正** であることで、作成されたフォルダが `775` 、 ファイルが `664` となってしまいます。これらのファイルは、正しくは `755` 及び `644` のときにそれぞれ機能します。
 
-This should be setup automatically but is not currently.  However, the fix is easy.  Just edit your `.bash_profile` file and add this line to the bottom of it.
+これは、自動的にセットアップされるべきですが、正しくありません。しかし、修正は容易です。 `.bash_profile` ファイルを編集し、以下の行を最後に追記するだけです。
 
 ```txt
 umask 022
 ```
 
-You will need to re-login to your terminal to get this change picked up.
+ターミナルに再度ログインすれば、変更が反映されます。
 
-## Configuring PHP & Caching
+<h2 id="configuring-php-caching">PHP とキャッシュの設定</h2>
 
-WireNine uses PHP **5.4** by default, but you do have the option to use the newer **5.5**, **5.6**, or **7.0** versions. Grav requires at least PHP 5.5.9 to operate.
+WireNine は、 PHP **5.4** をデフォルトで使用しますが、より新しい **5.5**, **5.6**, もしくは **7.0** バージョンを使用するオプションがあります。 Grav は最低でも PHP 5.5.9 が必要です。
 
-WireNine provides a very full-featured **cPanel** control panel. This is directly accessible via the **My Accounts** tab.
+WireNine は、コントロールパネルにフル機能の **cPanel** を提供しています。 **My Accounts** タブから直接アクセスできます。
 
-The first thing to do is to change the default version of PHP your site runs with. So click the **Select PHP Version** link in the **Software** Section.
+最初にやることは、サイトで実行される PHP のデフォルトバージョンの変更です。そのため、 **Software** セクションの **Select PHP Version** リンクをクリックしてください。
 
-You will see a page that shows the current version of PHP.  Below is a dropdown that let's you pick alternative versions.  Choose **5.6** and click `Set as current` button.
+現在の PHP バージョンが表示されます。以下は、代わりに使えるバージョンのドロップダウンです。 **5.6** を選択し、 `Set as current` ボタンをクリックしてください。
 
 ![](php-settings.png)
 
-You will first need to enable `mbstring` and `zip` extension.
+次に、 `mbstring` と `zip` 拡張を有効化してください。
 
-WireNine is a rare bread in the world of hosting providers, in that they provide some sophisticated caching extensions for PHP.  To take advantage of these, enable the `apcu` caching extension, and also the Zend `opcache` extension.  Then, click `Save` at the bottom of these options.
+WireNine は、ホスティングプロバイダ業界では珍しく、 PHP の高度なキャッシュ拡張機能を提供しています。これらを利用するには、 `apcu` キャッシュ拡張と Zend `opcache` 拡張の両方を有効化してください。それから、これらのオプションの下にある `Save` をクリックしてください。
 
-To test that you have the **correct version of PHP**, **Zend OPcache**, and **APCu** running, you can create a temporary file: `public_html/info.php` and put this in the contents:
+**正しい PHP バージョンになったか** と、 **Zend OPcache** 及び **APCu** が実行されているかを確認するため、 `public_html/info.php` という一時ファイルを作成できます。以下の内容をこの一時ファイルに書き込んでください：
 
 ```php
 <?php phpinfo();
 ```
 
-Save the file and point your browser to this info.php file on your site, and you should be greeted with PHP information reflecting the version you selected earlier:
+ファイルを保存し、ブラウザでサイト内のこの info.php ファイルを表示させてください。先ほど選択したバージョンを反映した PHP 情報が表示されるはずです：
 
 ![](php-info1.webp)
 
-You should also be able to scroll down and see **Zend OPcache** listed in the **zend engine** block, and an **APCu** section below it:
+また、下へスクロールして **zend engine** ブロックの **Zend OPcache** 一覧と、その下の **APCu** セクションを確認できます：
 
 ![](php-info2.png)
 
-## Install and Test Grav
+<h2 id="install-and-test-grav">Grav のインストールとテスト</h2>
 
-Using your new found SSH capabilities, let's SSH to your WireNine server (if you are not already there) and download the latest version of Grav, unzip it and test it out!
+この SSH 機能を使って（もしまだ接続したことがなければ）、 WireNine サーバーに接続詞、最新バージョンの Grav をダウンロードし、 zip 展開し、テストしてみましょう！
 
-We will extract Grav into a `/grav` subfolder, but you could unzip directly into the root of your `~/public_html/` folder to ensure Grav is accessible directly.
+`/grav` サブフォルダに Grav を展開します。 Grav に直接アクセスできるように、 web ルートである `~/public_html/` フォルダに直接 unzip することもできます。
 
 ```bash
 cd ~/public_html
@@ -110,9 +113,9 @@ wget https://getgrav.org/download/core/grav/latest
 unzip grav-v{{ grav_version }}.zip
 ```
 
-You should now be able to point your browser to `http://mywirenineserver.com/grav` using the appropriate URL of course.
+この時点で、ブラウザで `http://mywirenineserver.com/grav` などが表示できるはずです。もちろん、適切な URL に修正してください。
 
-Because you have followed these instructions diligently, you will also be able to use the [Grav CLI](../../advanced/grav-cli) and [Grav GPM](../../advanced/grav-gpm) commands such as:
+ここまでの解説のとおりに進めていただきましたので、 [Grav CLI](../../../07.cli-console/02.grav-cli/) や [Grav GPM](../../../07.cli-console/04.grav-cli-gpm/) コマンドも、利用可能です。次のように：
 
 ```bash
 cd ~/public_html/grav
@@ -130,27 +133,28 @@ Cleared:  assets/*
 Touched: /home/your_user/public_html/grav/user/config/system.yaml
 ```
 
-## Alternate Install Method: Softaculous
+<h2 id="alternate-install-method-softaculous">替わりのインストールメソッド： Softaculous</h2>
 
-Selecting this category will take you to a page where you can find the Grav CMS.
+このカテゴリーを選択すると、 Grav CMS が掲載されているページになります。
 
 ![](soft_1.png)
 
-Available in Cpanel, Softaculous is a quick-and-easy installation method for Grav. You will find it at the bottom of your Cpanel dashboard in the **Portals/CMS** category. Once you have selected that category, you can scroll down and find the Grav entry.
+cPanel で利用可能な Softaculous は、速くて簡単な Grav のインストール手段のひとつです。 cPanel ダッシュボードの下の方にある **Portals/CMS** カテゴリーにこれが見つかります。カテゴリーを選択したら、下へスクロールすると Grav が見つかります。
 
-Selecting the download icon will take you to the product page for Grav.
+ダウンロードアイコンを選択すると、 Grav のプロダクトページが表示されます。
 
 ![](soft_2.png)
 
-At this point, you can select the **Download** icon to progress to the main product page for Grav. This page includes additional information, as well as the link where you can install Grav directly to your server.
+この時点で、 **Download** アイコンを選択肢、 Grav のメインのプロダクトページに進むことができます。このページには、追加情報と、 Grav をサーバーに直接インストールするリンクが含まれています。
 
-Selecting the download icon will take you to the installation page for Grav.
+
+ダウンロードアイコンを選択すすと、 Grav のインストールページが表示されます。
 
 ![](soft_3.png)
 
-Once there, you can select the blue **Install** button in the upper-left area of the page to begin the installation process. This will take you to a configuration page enabling you to set up your Grav install, including the directory you wish to install it to, and an Admin account so you can hit the ground running in the Grav Admin.
+そこで、ページの左上のエリアにある、青い **Install** ボタンを選択し、インストール処理を開始できます。設定ページに遷移し、 Grav のインストールや、インストール先のディレクトリの設定、管理アカウントなどの設定ができるようになります。そのため、 Grav の管理パネルですぐに始められます。
 
 ![](soft_4.png)
 
-Once you have configured this page as you would like, you're good to go!
+このページを好みの通りに設定したら、準備は完了です！
 

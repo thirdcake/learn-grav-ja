@@ -1,82 +1,93 @@
 ---
 title: 'Crucial Web Hosting'
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-05-10'
+lastmod: '2025-07-11'
 ---
-[Crucial Web Hosting](http://www.crucialwebhost.com/promo/1421086/) is another of the new bread of modern web hosting platforms that focuses on both speed and support.  The use of **SSD drives** and **Litespeed** web servers with the latest **Intel XEON processors** ensures that Grav performs fantastically. Crucial also now provides PHP all the way up to the latest PHP 7.0 releases.
+
+> [!注釈]  
+> このページは、内容的に日本のサービスではないので、日本の方で、このページを読む人はほとんどいないと思いますが、以下の内容は PHP バージョンの話などから類推するにかなり古い内容であり、もし読む必要がある場合でも、適宜読み替えながら読んでください。
+
+[Crucial Web Hosting](http://www.crucialwebhost.com/promo/1421086/) は、新しい種類の現代的な web ホスティングプラットフォームで、スピードとサポートに力を入れています。 **SSD ドライブ** と **Litespeed** web サーバーを最新の **Intel XEON プロセッサ** で使用することで、 Grav のパフォーマンスは素晴らしいものになります。 Crucial は、最新リリースの PHP 7.0 を提供しています。
 
 ![](crucial.webp)
 
-In this guide, we will cover the essentials for configuring the **Tier-1 Split-Shared** hosting package to work optimally with Grav.
+このガイドでは、 **Tier-1 Split-Shared** ホスティングパッケージを設定しながら、 Grav を最適化して動かすための概要を解説します。
 
-## Picking your Hosting Plan
+<h2 id="picking-your-hosting-plan">ホスティングプランを決める</h2>
 
-[Crucial Web Hosting](http://www.crucialwebhost.com/promo/1421086/) has two primary options when it comes to hosting: **Spit-Shared** and **Split-Dedicated** hosting.  According to Crucial, these cloud-based options are superior to traditional hosting setups as they provide better isolation and performance.
+[Crucial Web Hosting](http://www.crucialwebhost.com/promo/1421086/) には、2つの主要なオプションがあります。 **Spit-Shared** と、 **Split-Dedicated** ホスティングです。Crucial によれば、これらのクラウドベースのオプションは、これまでのホスティングセットアップよりも優れており、より独立した、より良いパフォーマンスを提供します。
 
-Split-Shared hosting ranges from $10/month to $100/month depending on memory and SSD space.  Split Dedicated ranges from $150/month to $650/month depending on number of cores, memory, SSD space and bandwidth.  We'll just be using the baseline $10/month option that comes with 256MB of memory and 10GB of SSD space.
+Split-Shared ホスティングは、月額 $10 から $100 で、メモリーと SSD 容量で決まります。 Split Dedicated は、月額 $150 から $650 で、コアの数、メモリー、SSD 容量、そして帯域幅により決まります。今回は、ベースラインの月額 $10 オプションを使って、メモリー 266MB 及び SSD 容量 10GB とします。
 
-## Enabling SSH
+<h2 id="enabling-ssh">SSHを有効化</h2>
 
-First, you will have to open the **Toggle SSH Access** option in the **Security** section of cPanel. On this SSH Access page, you should click the **Enable SSH Access** button.
+まず、 cPanel の **Security** セクションにある **Toggle SSH Access** オプションを開いてください。この SSH アクセスページで、 **Enable SSH Access** ボタンをクリックします。
 
-Then from the **Security Section** again, click the **Manage SSH Keys** option.
+それから、 **Security Section** に戻り、 **Manage SSH Keys** オプションをクリックします。
 
 ![](manage-ssh-keys.png)
 
-There are two options at this point.  **Generate a New Key**, or **Import Key**. It's simpler to create your public/private key pair locally on your computer and then just import the DSA Public Key.
+ここで、2つの選択肢があります。 **新しい鍵を生成するか** もしくは **鍵をインポートするか** です。公開・秘密鍵のペアをローカルコンピュータで作成し、 DSA パブリックキーをインポートする方が簡単です。
 
-!! Windows users will first need to install [Cygwin](https://www.cygwin.com/) to provide many useful GNU and open source tools that are available on Mac and Linux platforms. When prompted to choose packages, ensure you check the SSH option. After installation, launch the `Cygwin Terminal`
+> [!Info]  
+> Windows ユーザーは、多くの便利な GNU と Mac や Linux プラットフォームで使える便利なツールを提供するため、まず [Cygwin](https://www.cygwin.com/) のインストールが必要です。パッケージ選択プロンプトでは、 SSH オプションに確実にチェックを入れてください。インストール後、 `Cygwin Terminal` を立ち上げてください。
 
-Fire up a terminal window and type:
+ターミナルウインドウを立ち上げ、次のようにタイプしてください：
 
 ```bash
 ssh-keygen -t dsa
 ```
 
-This key generation script will prompt you to fill in some values, or you can just hit `[return]` to accept the default values.  This will create an `id_dsa` (private key), and an `id_dsa.pub` (public key) in a folder called `.ssh/` in your home directory. It is important to ensure you **NEVER** give out your private key, nor upload it anywhere, **only your public key**.
+この鍵の生成スクリプトは、いくつかの値を入力させるプロンプトを表示します。デフォルト値を許容できる場合は、 `[return]` キーを押すだけでも良いです。このスクリプトは、ホームディレクトリの `.ssh/` というフォルダに、 `id_dsa` （秘密鍵）と、 `id_dsa.pub` （公開鍵）を作成します。プライベートキーを与えたり、どこかにアップロードするようなことは **決してしないでください** 。してよいのは、 **公開鍵だけです** 。
 
-Once generate you can paste the contents of your `id_dsa.pub` public key into the `Public Key` field in the **Import SSH key** section of the **SSH Access** page:
+> [!訳注]  
+> キー生成に関しては、 [このページ](https://kaityo256.github.io/github/ssh/index.html) が参考になりました。特に、パスフレーズを聞かれるプロンプトでは、何か入力したほうが良い（デフォルトにしない方が良い）ようです。
+
+
+鍵を生成できたら、 **SSH Access** ページの **Import SSH key** セクションで、 `Public Key` 入力欄に `id_dsa.pub` パブリックキーの中身を貼り付けできます：
 
 ![](ssh-public-key.png)
 
-After uploading, you should see the key listed at the **Public Keys** section of the Manage SSH Keys page.  You then need to click **Manage** to ensure the key is authorized:
+アップロード後、 SSH 鍵管理ページの **Public Keys** セクションで鍵のリストを確認してください。それから、 **Manage** をクリックする必要があります。そのキーが認証されたことが確認されます：
 
 ![](authorized-keys.png)
 
-This means you are ready to test ssh'ing to your server.
+これで、サーバーに SSH テストする準備ができました。
 
 ```bash
 ssh crucial_username@crucial_servername
 ```
 
-Obviously, you will need to put in your Crucial-provided username for `crucial_username`, and the crucial-provided servername for `crucial_servername`.
+言うまでもなく、 `crucial_username` には Crucial から提供されているユーザー名を、 `crucial_servername` には Crucial から提供されているサーバー名を入力する必要があります。
 
-## Configuring PHP
+<h2 id="configuring-php">PHP の設定</h2>
 
-Currently Crucial Web Hosting defaults to **PHP 5.3**, which is not up to the minimum requirements for Grav. Luckily Crucial supports PHP all the way up to the latest **PHP 7.0** so we change the PHP version to something more current.
+現在の Crucial Web Hosting のデフォルトは **PHP 5.3** で、Grav の最低要件を満たしていません。幸運なことに、 Crucial では、最新の **PHP 7.0** までサポートしています。より新しいものに PHP バージョンを上げましょう。
 
-To do this, we have to add a special handler call in the `.htaccess` file in the web root.  So create the `~/www/.htaccess` file and put the following:
+これを行うには、 web ルートにある `.htaccess` ファイルに特別なハンドラの呼び出しを追記する必要があります。 `~/www/.htaccess` ファイルを作成し、以下を入力してください：
 
 ```bash
 AddHandler application/x-httpd-php70 .php
 ```
 
-Save the file. To test that you have the **correct version of PHP**, you can create a temporary file: `~/www/info.php` and put this in the contents:
+ファイルを保存してください。 **現在の PHP バージョン** を確認するために、一時ファイルの `~/www/info.php` ファイルを作成し、次の内容を入力してください：
 
 ```php
 <?php phpinfo();
 ```
 
-Save the file and point your browser to this info.php file on your site, and you should be greeted with PHP information reflecting the version you selected earlier:
+ファイルを保存し、ブラウザでサイト内のこの info.php ファイルを表示してください。すると、先ほど選択したバージョンが反映さｓれた PHP 情報が表示されるはずです：
 
 ![](php-info.webp)
 
 
-!! If you are installing Grav at the root of your hosting account, you will need to add the **AddHandler** method to the top of the `.htaccess` file that is provided with Grav
+> [!Info]  
+> If you are installing Grav at the root of your hosting account, you will need to add the **AddHandler** method to the top of the `.htaccess` file that is provided with Grav
 
-!!! You can choose another version of php to run Grav under using such as PHP 5.6 with `x-httpd-php56` for example
+> [!Tip]  
+> You can choose another version of php to run Grav under using such as PHP 5.6 with `x-httpd-php56` for example
 
-## Setup CLI PHP
+<h2 id="setup-cli-php">CLI PHP のセットアップ</h2>
 
 At the time of this writing, Crucial's default PHP version is **5.3**.  Because Grav requires PHP **5.5+**, we need to ensure that Grav is using a newer version of PHP on the command line (CLI).  To accomplish this, you should use SSH to access your server and create a new symbolic link to a newer PHP version in your user's `bin/` folder:
 

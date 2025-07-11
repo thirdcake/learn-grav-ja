@@ -1,8 +1,11 @@
 ---
 title: 'Rochen Web Hosting'
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-07-10'
+lastmod: '2025-07-11'
 ---
+
+> [!注釈]  
+> このページは、内容的に日本のサービスではないので、日本の方で、このページを読む人はほとんどいないと思いますが、以下の内容は PHP バージョンの話などから類推するにかなり古い内容であり、もし読む必要がある場合でも、適宜読み替えながら読んでください。
 
 [Rochen Web Hosting](http://www.rochen.com/?utm_source=RocketTheme&utm_medium=Showcase&utm_campaign=Promotions) は、 **GetGrav.org** と **RocketTheme.com** 両方の昔からのホスティングパートナーです。
 Rochen は現在、新しくプレミアムな共有ホスティングサービスを提供しており、 **SSD ドライブ** や **Litespeed** ウェブサーバーを使い、最新の **Intel XEON プロセッサ** によることで、 Grav の最適化されたパフォーマンスを保証します。
