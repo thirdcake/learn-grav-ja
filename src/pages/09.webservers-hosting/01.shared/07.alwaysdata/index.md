@@ -1,27 +1,31 @@
 ---
 title: alwaysdata
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-05-10'
+lastmod: '2025-07-13'
 ---
-[alwaysdata](https://www.alwaysdata.com) is a European hosting provider that offers different plans on shared platform or dedicated managed servers. They include lots of cool features such as automatic backups, free SSL certificates, SSH access, etc.
 
-A **free shared hosting plan** is available for sites below 100MB disk space. Otherwise, plans start at 8€/month.
+> [!訳注]  
+> このページは、内容的に日本のサービスではないので、日本の方で、このページを読む人はほとんどいないと思いますが、以下の内容は PHP バージョンの話などから類推するにかなり古い内容であり、もし読む必要がある場合でも、適宜読み替えながら読んでください。
 
-## Install Grav from Marketplace
+[alwaysdata](https://www.alwaysdata.com) は、ヨーロッパのレンタルサーバー会社で、レンタルサーバーや専用管理サーバーで異なるプランを提供しています。自動バックアップや、無料 SSL 認証、 SSH アクセスなど、たくさんのクールな機能が含まれます。
 
-A public [Marketplace](https://www.alwaysdata.com/en/marketplace/) provides a lot of applications, including Grav. By providing very few information, your instance will be **instantly available** (HTTPS), on the **free plan**, with **included backups**.
+**無料レンタルサーバープラン** は、100MB 以下のディスク容量で利用可能です。そうでなければ、月額 8ユーロからのプランがあります。
+
+<h2 id="install-grav-from-marketplace">マーケットプレイスから Grav をインストール</h2>
+
+パブリックの [マーケットプレイス](https://www.alwaysdata.com/en/marketplace/) で Grav を含むたくさんのアプリケーションが提供されています。わずかな情報を提供するだけで、 **無料プラン** で、 **バックアップ込み** の (HTTPS) を**即座に利用可能** となります。
 
 ![](alwaysdata_marketplace_grav.png)
 
-## Customizing PHP
+<h2 id="customizing-php">PHP のカスタマイズ</h2>
 
-To configure PHP, the site instance can be personalized. Adjust the PHP version and *php.ini* on the custom panel provided by alwaysdata.
+PHP を設定するため、サイトインスタンスをパーソナルにできます。 alwaysdata が提供するカスタムパネルで PHP バージョンと *php.ini* を調整してください。
 
 ![](alwaysdata_php_configuration.png)
 
-As seen on their documentation about [PHP extensions](https://help.alwaysdata.com/en/languages/php/extensions/), OPCache is enabled by default.
+[PHP 拡張](https://help.alwaysdata.com/en/languages/php/extensions/) に関する alwaysdata 社のドキュメントを読む限り、OPCache はデフォルトで有効です。
 
-## Configure SSH access
+<h2 id="configure-ssh-access">SSH アクセスの設定</h2>
 
-To go further and access your space, you just need to [enable SSH access](https://help.alwaysdata.com/en/remote-access/ssh/) since it is disabled by default. Once again, action takes place on the panel.
+SSH はデフォルトでは無効化されているので、より深くアクセスするには、 [SSH アクセスを有効化](https://help.alwaysdata.com/en/remote-access/ssh/) する必要があります。もう一度、パネルで実行してください。
 

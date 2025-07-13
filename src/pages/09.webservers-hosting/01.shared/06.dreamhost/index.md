@@ -1,54 +1,58 @@
 ---
 title: Dreamhost
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-05-10'
+lastmod: '2025-07-13'
 ---
-[Dreamhost](http://dreamhost.com) is a famous hosting provider that offers various levels of service ranging from SSD-powered shared hosting to dedicated servers.
+
+> [!訳注]  
+> このページは、内容的に日本のサービスではないので、日本の方で、このページを読む人はほとんどいないと思いますが、以下の内容は PHP バージョンの話などから類推するにかなり古い内容であり、もし読む必要がある場合でも、適宜読み替えながら読んでください。
+
+[Dreamhost](http://dreamhost.com) は、有名なホスティングプロバイダで、 SSD によるレンタルサーバー事業から、専用サーバーまで、幅広いサービスを提供しています。
 
 ![](dreamhost.webp)
 
-Let’s focus on the lower end offer, shared hosting. It comes with a great admin panel, not the usual cPanel but a custom panel you can use to configure anything ranging from managing SSH users to choose the PHP version you run.
+レンタルサーバーの低いサービスに注目しましょう。素晴らしい管理パネルが付いていますが、一般的な cPanel ではありません。しかし利用可能なカスタムパネルは、 SSH ユーザーの管理から実行 PHP のバージョンまであらゆる設定が可能です。
 
-## Configuring PHP
+<h2 id="configuring-php">PHP の設定</h2>
 
-You can set every (sub)domain to have its own PHP version. At the time of writing, the default PHP version for new sites is 7.4. You can choose to use a later version (8.0 available), and we recommend doing so as PHP 7.3.6+ is required for Grav.
+すべての（サブ）ドメインごとに PHP バージョンを設定可能です。このドキュメントを書いている時点では、デフォルトの PHP バージョンは 7.4 です。新しいバージョンを選択することも可能です（8.0 が利用可能）。そして、 Grav のシステム要件である 7.3.6 以上にすることをおすすめします。
 
 ![](php-version.png)
 
-## Enabling SSH
+<h2 id="enabling-ssh">SSH を有効化</h2>
 
-Open the Users panel. Every Dreamhost user can have different access levels. Set your user to Shell User.
+Users パネルを開いてください。 Dreamhost ユーザーはすべて、異なるアクセスレベルを持つことができます。あなたのユーザーアカウントに、 Shell User を設定してください。
 
-At the time of writing the default PHP CLI version is 8.0.8, so you don’t need to do anything to make the Grav CLI tools work properly.
+このドキュメントを書いている時点で、デフォルトの PHP CLI バージョンは 8.0.8 です。よって、 Grav の CLI ツールが適切に動かすためにすることは特にありません。
 
-## Install and Test Grav
+<h2 id="install-and-test-grav">Grav のインストールとテスト</h2>
 
-When you add a new domain, Dreamhost creates a folder for it under your account folder.
+新しいドメインを追加したときは、 Dreamhost では、あなたのアカウントのフォルダの下に、それ用のフォルダが作成されます。
 
-Access the server using SSH and go into that folder, then download Grav into it:
+SSH を使ってサーバーにアクセスし、そのフォルダに移動してください。そこで、 Grav をダウンロードします：
 
 ```bash
 wget https://github.com/getgrav/grav/releases/download/{{ grav_version }}/grav-v{{ grav_version}}.zip
 ```
 
-(Please check on [](https://github.com/getgrav/grav/releases/) the latest version available)
+（最新バージョンが利用可能か [チェックしてください](https://github.com/getgrav/grav/releases/) ）
 
-Unzip with `unzip grav-v{{ grav_version }}.zip`. This will create a `grav` folder, so we need to move the files up to the current folder.
+unzip してください： `unzip grav-v{{ grav_version }}.zip` 。これにより、 `grav` フォルダが作成されるので、現在のフォルダにファイルを移動する必要があります。次のように：
 Just type:
 
 ```bash
 mv grav/* grav/.htaccess ./; rmdir grav
 ```
 
-You can now also delete the zip file:
+ここで、 zip ファイルは削除可能です：
 
 ```bash
 rm grav-v{{ grav_version }}.zip
 ```
 
-Grav has now been successfully installed. Try accessing the site from the browser, you should see a Grav welcome message.
+Grav はインストール成功しました。ブラウザからアクセスしてみてください。Grav のウェルカムページが表示されるはずです。
 
-You can now install plugins and themes, for example type this to install the Grav Admin plugin:
+プラグインやテーマも、インストール可能になっています。たとえば、次のようにして Grav の管理パネルプラグインをインストールできます：
 
 ```bash
 bin/gpm install admin
@@ -56,19 +60,19 @@ bin/gpm install admin
 
 ![](install-plugin.png)
 
-## Enable OPCache
+<h2 id="enable-opcache">OPCache を有効化</h2>
 
-### On Dreamhost Shared Hosting Plans
+<h3 id="on-dreamhost-shared-hosting-plans">Dreamhost レンタルサーバーのプランの場合</h3>
 
-OPCache is enabled by default.
+OPCache はデフォルトで有効です。
 
-### On Dreamhost VPS Plans
+<h3 id="on-dreamhost-vps-plans">Dreamhost VPS プランの場合</h3>
 
-OPCache is supported but not enabled by default. You need to manually activate it by creating a phprc file under your user folder, under `.php/7.4/phprc` (change the number according to your PHP version). In this file, put the following code:
+OPCache はサポートされていますが、デフォルトでは有効になっていません。手動で有効化する必要があります。 phprc ファイルをユーザーフォルダの下の `.php/7.4/phprc` に作成してください（数字は、お使いの PHP バージョンに合わせてください）。このファイルで、以下のコードを書き込んでください：
 
 ```txt
 zend_extension=opcache.so
 ```
 
-You can further customize OPCache in that file according to your needs.
+必要に応じて、このファイルで OPCache のさらなるカスタマイズが可能です。
 

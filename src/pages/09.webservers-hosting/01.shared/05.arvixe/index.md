@@ -1,73 +1,82 @@
 ---
 title: Arvixe
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-05-10'
+lastmod: '2025-07-13'
 ---
-[Arvixe](http://www.arvixe.com) is an award winning hosting company that prides themselves on providing quality web hosting that is **affordable** and unmatched in **reliability**.  With great features, and a **developer-friendly** stance, Arvixe shared hosting is a great option for a Grav-based site.
+
+> [!訳注]  
+> このページは、内容的に日本のサービスではないので、日本の方で、このページを読む人はほとんどいないと思いますが、以下の内容は PHP バージョンの話などから類推するにかなり古い内容であり、もし読む必要がある場合でも、適宜読み替えながら読んでください。
+
+[Arvixe](http://www.arvixe.com) は、受賞歴のあるホスティング会社で、高品質な web ホスティングを **手頃に** かつ **高い信頼性で** 提供していることに誇りを持っています。高いな機能性と **開発者に親切な** スタンスのため、 Arvixe レンタルサーバーは、 Grav ベースのサイトにとって素晴らしい選択肢です。
 
 ![](arvixe.webp)
 
-In this guide: We will cover the essentials for configuring a pretty bog-standard Arvixe shared hosting account to work optimally with Grav.
+このガイドでは： Arvixe レンタルサーバーの標準的なアカウントで Grav を最適化して動かす方法の概要を解説します。
 
-## Picking your Hosting Plan
+<h2 id="picking-your-hosting-plan">ホスティングプランを決める</h2>
 
-At the time of writing, Arvixe offers [two Linux-based shared hosting options](http://www.arvixe.com/linux_web_hosting) that cost $4.00/month for the **PersonalClass**, and $7.00 for the **PersonalClass Pro** plan. Both plans are almost identical, but the Pro plan offers unlimited concurrent domains. Either one will work well with Grav.
+このドキュメントを書いている時点では、 Arvixe には [2つの Linux ベースのホスティングオプション](http://www.arvixe.com/linux_web_hosting) があり、コストは月額 $4.00 の **PersonalClass** と、月額 $7.00 の **PersonalClass Pro** プランがあります。どちらのプランも、ほとんど同じですが、 Pro プランの場合ドメイン制限がありません。どちらでも Grav は良く機能します。
 
-## Configuring PHP
+<h2 id="configuring-php">PHP 設定</h2>
 
-Arvixe provides a very full featured **cPanel** control panel. The URL for this is provided with your welcome email.
+Arvixe では、コントロールパネルとして **cPanel** のフル機能を提供しています。その URL は、 welcom email に掲載されています。
 
-Because Arvixe's default PHP version is **5.3**, The first thing to do is to change the default version of PHP your site runs with.
+Arvixe のデフォルト PHP バージョンは **5.3** なので、最初にやるべきは、サイトで実行されるデフォルトの PHP バージョンを変更することです。
 
-On the main cPanel Home page, there is a section called **Software/Services**.  Here you will find the **ntPHPSelector**. When you click this, you will be confronted with a folder tree where you can set a specific folder, or set the version site-wide by clicking `public_html`. When you choose a folder, you can select the version of PHP, just select **5.5**, and click submit.
+cPanel のメインホームページ上で、 **Software/Services** というセクションがあります。ここに **ntPHPSelector** が見つかるでしょう。これをクリックすると、フォルダツリーが表示されます。そこでは、特定のフォルダを設定するか、 `public_html` をクリックすることでサイト全体のバージョンを設定できます。フォルダを選択すると、 PHP のバージョンを選択できるので、 **5.5** を選択し、送信をクリックしてください。
 
 ![](php-selector.png)
 
-Click **Save** for this to take effect.
+反映させるため、 **Save** をクリックしてください。
 
-You should be able to reach your site via your website URL with `phpinfo.php` appended to the end.  For example: `http://myarvixe.com/phpinfo.php`
+あなたの web サイト URL の最後に `phpinfo.php` を付けてサイトにアクセスしてください。たとえば： `http://myarvixe.com/phpinfo.php`
 
 ![](phpinfo.png)
 
-You can ensure you are running the correct version of PHP.
+正しい PHP バージョンで実行しているか確認できます。
 
-!! Arvixe's PHP 5.5 already includes Zend OPcache enabled, so there is no extra step required to getting this setup.
+> [!Info]  
+> Arvixe の PHP 5.5 ではすでに Zend OPcache が有効化されています。よってこのセットアップで必要な手順はここまでです。
 
-## Enabling SSH
+<h2 id="enabling-ssh">SSH を有効化</h2>
 
-First, you will have to open the **SSH/Shell Access** option in the **Security** section of cPanel. On this SSH Access page, you should click the **Manage SSH Keys** button.
+まず、 cPanel の **Security** セクションにある **SSH/Shell Access** オプションを開いてください。この SSH アクセスページで、 **Manage SSH Keys** ボタンをクリックします。
 
-There are two options at this point.  **Generate a New Key**, or **Import Key**. It's simpler to create your public/private key pair locally on your computer and then just import the DSA Public Key.
+この時、2つの選択肢があります。 **新しい鍵を生成** するか **鍵をインポート** するかです。公開・秘密鍵のペアをローカルコンピュータで作成し、 DSA パブリックキーをインポートするだけの方が簡単です。
 
-!! Windows users will first need to install [Cygwin](https://www.cygwin.com/) to provide many useful GNU and open source tools that are available on Mac and Linux platforms. When prompted to choose packages, ensure you check the SSH option. After installation, launch the `Cygwin Terminal`
+> [!Info]  
+> Windows ユーザーは、多くの便利な GNU と Mac や Linux プラットフォームで使える便利なツールを提供するため、まず [Cygwin](https://www.cygwin.com/) のインストールが必要です。パッケージ選択プロンプトでは、 SSH オプションに確実にチェックを入れてください。インストール後、 `Cygwin Terminal` を立ち上げてください。
 
-Fire up a terminal window and type:
+ターミナルウインドウを立ち上げ、次のようにタイプしてください：
 
 ```bash
 $ ssh-keygen -t dsa
 ```
 
-This key generation script will prompt you to fill in some values, or you can just hit `[return]` to accept the default values.  This will create an `id_dsa` (private key), and an `id_dsa.pub` (public key) in a folder called `.ssh/` in your home directory. It is important to ensure you **NEVER** give out your private key, nor upload it anywhere, **only your public key**.
+この鍵の生成スクリプトは、いくつかの値を入力させるプロンプトを表示します。デフォルト値を許容できる場合は、 `[return]` キーを押すだけでも良いです。このスクリプトは、ホームディレクトリの `.ssh/` というフォルダに、 `id_dsa` （秘密鍵）と、 `id_dsa.pub` （公開鍵）を作成します。プライベートキーを与えたり、どこかにアップロードするようなことは **決してしないでください** 。してよいのは、 **公開鍵だけです** 。
 
-Once generate you can paste the contents of your `id_dsa.pub` public key into the `Public Key` field in the **Import SSH key** section of the **SSH Access** page:
+> [!訳注]  
+> dsa でのキー生成は、2025年現在では、安全とは言えないような気もします。安全なキー生成の方法を調べてください。
+
+鍵を生成できたら、 **SSH Access** ページの **Import SSH key** セクションで、 `Public Key` 入力欄に `id_dsa.pub` パブリックキーの中身を貼り付けできます：
 
 ![](ssh-public-key.png)
 
-After uploading, you should see the key listed at the **Public Keys** section of the Manage SSH Keys page.  You then need to clikc **Manage** to ensure the key is authorized:
+アップロード後、 SSH キー管理ページの **Public Keys** セクションにあるキー一覧を確認してください。鍵が認証されていることを確認するため、 **Manage** をクリックする必要があります：
 
 ![](authorized-keys.png)
 
-This means you are ready to test ssh'ing to your server.
+これで、サーバーに SSH テストする準備ができました。
 
 ```bash
 $ ssh arvixe_username@arvixe_servername
 ```
 
-Obviously, you will need to put in your Arvixe-provided username for `arvixe_username`, and the Arvixe-provided servername for `arvixe_servername`.
+言うまでもなく、 `arvixe_username` には Arvixe から提供されているユーザー名を、 `arvixe_servername` には Arvixe から提供されているサーバー名を入力する必要があります。
 
-## Setup CLI PHP
+<h2 id="setup-cli-php">CLI の PHP を設定</h2>
 
-At the time of this writing, Arvixe's default PHP version is **5.3**.  Because Grav requires PHP **5.5+**, we need to ensure that Grav is using a newer version of PHP on the command line (CLI).  To accomplish this, you should use SSH to access your server and edit your `.bash_profile` file and change the path so that it references the appropriate PHP path before the regular path:
+このドキュメントを書いている時点では、 Arvixe のデフォルト PHP バージョンは **5.3** です。 Grav は **5.5+** が必要なので、 Grav がコマンドライン(CLI)でも PHP の新しいバージョンを使えるようにしなければいけません。これを実現するには、サーバーに SSH 接続し、 `.bash_profile` ファイルを編集して、標準のパスよりも前に適切な PHP パスを参照するように変更してください：
 
 ```bash
 # .bash_profile
@@ -84,7 +93,7 @@ PATH=/opt/ntphp/php55/bin:$PATH:$HOME/bin
 export PATH
 ```
 
-You will need _source_ the profile: `$ source ~/.bash_profile` or re-login to your terminal for you path change to take effect, but after doing so you should be able to type `php -v` and see:
+プロファイル _source_ が必要です： `$ source ~/.bash_profile` もしくは、ターミナルに再ログインし、パスの変更が反映されるようにします。それが終わったら、 `php -v` を入力し、確認してください：
 
 ```bash
 $ php -v
@@ -94,11 +103,11 @@ Zend Engine v2.5.0, Copyright (c) 1998-2014 Zend Technologies
     with Zend OPcache v7.0.4-dev, Copyright (c) 1999-2014, by Zend Technologies
 ```
 
-## Install and Test Grav
+<h2 id="install-and-test-grav">Grav のインストールとテスト</h2>
 
-Using your new found SSH capabilities, let's SSH to your Arvixe server (if you are not already there) and download the latest version of Grav, unzip it and test it out!
+SSH 機能が使えるようになったので、もし未接続であれば Arvixe サーバーに SSH 接続し、最新バージョンの Grav をダウンロードし、 unzip し、テストしてみましょう！
 
-We will extract Grav into a `/grav` subfolder, but you could unzip directly into the root of your `~/public_html/` folder to ensure Grav is accessible directly.
+サブフォルダの `/grav` に Grav を展開しますが、 Grav が直接アクセスできるようにするには、 `~/public_html/` フォルダのうr−とに直接 unzip することもできます。
 
 ```bash
 $ cd ~/public_html
@@ -106,9 +115,9 @@ $ cd ~/public_html
 [~/public_html]$ unzip grav-v{{ grav_version}}.zip
 ```
 
-You should now be able to point your browser to `http://myarvixe.com/grav` using the appropriate URL of course.
+これで、ブラウザで `http://mywirenineserver.com/grav` などが表示できるはずです。もちろん、適切な URL にしてください。
 
-Because you have followed these instructions diligently, you will also be able to use the [Grav CLI](../../advanced/grav-cli) and [Grav GPM](../../advanced/grav-gpm) commands such as:
+ここまでの解説のとおりに進めていただきましたので、 [Grav CLI](../../../07.cli-console/02.grav-cli/) や [Grav GPM](../../../07.cli-console/04.grav-cli-gpm/) コマンドも、利用可能です。次のように：
 
 ```bash
 $ cd ~/public_html/grav

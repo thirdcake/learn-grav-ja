@@ -1,9 +1,10 @@
 ---
 title: DigitalOcean
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-05-11'
+lastmod: '2025-07-13'
 ---
-Perhaps the most popular and most widely used of all the VPS providers out there, [DigitalOcean](https://www.digitalocean.com/) provides a range of VPS options.  Starting at **$5/mo for a 1 CPU, 1024MB system** up to $960/mo for a 32 CPU, 192GB setup, [DigitalOcean](https://www.digitalocean.com/) has solutions that can scale with you.  All their servers are built with **RAID SSD drives**, **modern hexa-core hardware**, **KVM Virtualization**, and reliable **Tier-1 bandwidth** to ensure maximum performance.  They are a fantastic option for hosting your Grav-based site.
+
+もしかすると、すべての VPS プロバイダで最も人気で、最も幅広く使われているであろう [DigitalOcean](https://www.digitalocean.com/) は、 VPS オプションを提供しています。 **月額 $5 で 1CPU, 1024MB システム** から、 月額 $960 で 32 CPU, 192 GB のセットアップまであり、 [DigitalOcean](https://www.digitalocean.com/) はあなたとともにスケールするソリューションを持っています。すべてのサーバーは **RAID SSD ドライブ**, **モダンな 6-core ハードウェア**, **KVM 仮想化**, そして信頼できる **Tier-1 帯域幅** でビルドされており、最大限のパフォーマンスを約束します。 Grav ベースのサイトをホスティングするには、すばらしいオプションです。
 
 ![](digitalocean.png)
 

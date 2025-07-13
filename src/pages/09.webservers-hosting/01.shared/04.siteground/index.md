@@ -1,79 +1,88 @@
 ---
 title: SiteGround
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-05-10'
+lastmod: '2025-07-12'
 ---
-[SiteGround](http://www.siteground.com/)'s tag line is **Web Hosting Crafted With Care**, and it is for this reason it has proven a popular hosting solution for people in the Joomla and WordPress communities. It also makes a good option for hosting a Grav-based web site.
+
+> [!訳注]  
+> このページは、内容的に日本のサービスではないので、日本の方で、このページを読む人はほとんどいないと思いますが、以下の内容は PHP バージョンの話などから類推するにかなり古い内容であり、もし読む必要がある場合でも、適宜読み替えながら読んでください。
+
+[SiteGround](http://www.siteground.com/) のキャッチコピーは、 **Web Hosting Crafted With Care(ケアのあるウェブホスティング)** です。Joomla や WordPress コミュニティの人々から人気のあるレンタルサーバーであることが保証されています。 Grav ベースの web サイトをホスティングするのにも良い選択肢です。
 
 ![](siteground.webp)
 
-In this guide we will cover the essentials for configuring a pretty bog-standard SiteGround shared hosting account to work optimally with Grav.
+このガイドでは、標準的な SiteGround シェアホスティングアカウントでの Grav の最適化方法の概要を解説します。
 
-## Picking your Hosting Plan
+<h2 id="picking-your-hosting-plan">ホスティングプランを決める</h2>
 
-At the time of writing, SiteGround offers [three shared hosting options](http://www.siteground.com/web-hosting.htm) ranging from low-end $3.95/month to $14.95/month for what they call the **GoGeek** plan. We strongly suggest going with the higher-end but still very cheap **GoGeek** plan. This provides better server hardware and less _user crowding_ on the server.
+このドキュメントを書いている時点では、 SiteGround には [3つのホスティングオプション](http://www.siteground.com/web-hosting.htm) があり、ローエンドで月額 $3.95 から $14.95 の **GoGeek** プランまであります。ハイエンドなのに十分に安い **GoGeek** プランが特におすすめです。このプランはより良いサーバーハードウェアを提供し、サーバーでの _ユーザーの混雑_ を減らします。
 
-## Configuring
+<h2 id="configuring">設定</h2>
 
-SiteGround provides a very full-featured **cPanel** control panel. This is directly accessible via the **My Accounts** tab.
+SiteGround では、コントロールパネルとして **cPanel** のフル機能を提供しています。これは、 **My Accounts** タブから直接アクセス可能です。
 
-## Enabling SSH
+<h2 id="enabling-ssh">SSH を有効化</h2>
 
-First, you will have to open the **SSH/Shell Access** option in the **ADVANCED** section of cPanel.
+まず、 cPanel の **ADVANCED** セクションにある **SSH/Shell Access** オプションを開きます。
 
-SiteGround provides a very thorough [tutorial for using SSH](http://www.siteground.com/tutorials/ssh/), however it's simpler to create your public/private key pair locally on your computer, and then just upload the DSA Public Key.
+SiteGround では、 [SSH の使い方チュートリアル](http://www.siteground.com/tutorials/ssh/) が提供されていますが、公開・秘密鍵をあなたのローカルコンピュータで作成し、 DSA 公開鍵をアップロードする方が簡単です。
 
-!! Windows users will first need to install [Cygwin](https://www.cygwin.com/) to provide many useful GNU and open source tools that are available on Mac and Linux platforms. When prompted to choose packages, ensure you check the SSH option. After installation, launch the `Cygwin Terminal`.
+> [!Info]  
+> Windows ユーザーは、多くの便利な GNU と Mac や Linux プラットフォームで使える便利なツールを提供するため、まず [Cygwin](https://www.cygwin.com/) のインストールが必要です。パッケージ選択プロンプトでは、 SSH オプションに確実にチェックを入れてください。インストール後、 `Cygwin Terminal` を立ち上げてください。
 
-Fire up a terminal window and type:
+ターミナルウインドウを立ち上げ、次のようにタイプしてください：
 
 ```bash
 $ ssh-keygen -t dsa
 ```
 
-This key generation script will prompt you to fill in some values, or you can just hit `[return]` to accept the default values.  This will create an `id_dsa` (private key), and an `id_dsa.pub` (public key) in a folder called `.ssh/` in your home directory. It is important to ensure you **NEVER** give out your private key, nor upload it anywhere, **only your public key**.
+この鍵の生成スクリプトは、いくつかの値を入力させるプロンプトを表示します。デフォルト値を許容できる場合は、 `[return]` キーを押すだけでも良いです。このスクリプトは、ホームディレクトリの `.ssh/` というフォルダに、 `id_dsa` （秘密鍵）と、 `id_dsa.pub` （公開鍵）を作成します。秘密鍵を与えたり、どこかにアップロードするようなことは **決してしないでください** 。してよいのは、 **公開鍵だけです** 。
 
-Once generate you can paste the contents of your `id_dsa.pub` public key into the `Public Key` field in the **Upload SSH key** section of the **SSH/Shell Access** page:
+> [!訳注]  
+> dsa でのキー生成は、2025年現在では、安全とは言えないような気もします。安全なキー生成の方法を調べてください。
+
+一度生成されたら、 `id_dsa.pub` 公開鍵のコンテンツを **SSH/Shell Access** ページの **Upload SSH key** セクションにある `Public Key` 入力欄にペーストできます：
 
 ![](ssh-public-key.png)
 
-After uploading, you should see the key listed at the bottom of this page. This means you are ready to test SSH'ing to your server.
+アップロード後、このページの下にあるキー一覧を確認してください。これによりサーバーに SSH 接続する準備ができました。
 
 ```bash
 $ ssh siteground_username@siteground_servername -p18765
 ```
 
-Obviously, you will need to put in your SiteGround-provided username for `siteground_username`, and the SiteGround-provided servername for `siteground_servername`.  The `-p18765` is important as this is the non-standard port that SiteGround runs SSH on.
+言うまでもなく、 `siteground_username` には SiteGround から提供されているユーザー名を、 `siteground_servername` には SiteGround から提供されているサーバー名を入力する必要があります。 `-p18765` は、 SiteGround の SSH 実行ポートが非標準なので、必要です。
 
-## Enabling PHP OPcache
+<h2 id="enabling-php-opcache">PHP OPcache を有効化</h2>
 
-!!! Update [2016-03]: Siteground Support advised that OPCache is available from PHP7 and not 5.5. This then had OPCache enabled by default, and so no further configuration was required in this stage of the setup, so some of the below instructions may no longer be required.
+> [!Tip]  
+> アップデート [2016-03]: SiteGround サポートによると、 OPCache は PHP 7 から利用可能であり、5.5 ではできないようです。 OPCache はデフォルトで有効化され、それ以上の設定はセットアップ時に不要です。よって、以下の解説の一部は、もはや不要となりました。
 
-By default, SiteGround hosting comes with **support** for **Zend OPcache**, but it is **not enabled**.  You must manually enable it by creating a `php.ini` file in your `public_html/` folder with the contents:
+デフォルトでは、 SiteGroud では **Zend OPcache** を **サポート** しますが、 **有効化はされていません** 。手動で有効化する必要があります。 `php.ini` ファイルを `public_html/` フォルダに作成し、以下のコンテンツを入力してください：
 
 ```txt
 zend_extension=opcache.so
 ```
 
-To test you have the correct version of PHP and the Zend OPcache running, you can create a temporary file: `public_html/info.php` and put this in the contents:
+現在の PHP バージョンを確認し、 Zend OPcache が実行されているかをテストするため、一時ファイルを作ります： `public_html/info.php` そして次のコンテンツを入力してください：
 
 ```php
 <?php phpinfo();
 ```
 
-Save the file and point your browser to this info.php file on your site and you should be greeted with a PHP information reflecting the version you selected earlier:
+ファイルを保存し、ブラウザでサイト上のこの info.php を表示させると、先ほど選択したバージョンを反映した PHP 情報が表示されます：
 
 ![](phpinfo-1.png)
 
-You should also be able to scroll down and see a section called **Zend OPcache**:
+下へスクロールして、 **Zend OPcache** セクションを確認してください：
 
 ![](phpinfo-2.png)
 
-## Install and Test Grav
+<h2 id="install-and-test-grav">Grav のインストールとテスト</h2>
 
-Using your new found SSH capabilities, let's SSH to your SiteGround server (if you are not already there) and download the latest version of Grav, unzip it and test it out!
+新しい SSH 機能で、（もし未接続であれば） SiteGround サーバーに SSH 接続し、最新バージョンの Grav をダウンロードし、 unzip し、テストしてみましょう！
 
-We will extract Grav into a `/grav` subfolder, but you could unzip directly into the root of your `~/public_html/` folder to ensure Grav is accessible directly.
+ここでは `/grav` サブフォルダに Grav を展開します。 Grav に直接アクセスするには `~/public_html/` フォルダのルートに直接 unzip することもができます。
 
 ```bash
 $ cd ~/public_html
@@ -81,11 +90,13 @@ $ cd ~/public_html
 [~/public_html]$ unzip grav-v{{ grav_version}}.zip
 ```
 
-You should now be able to point your browser to `http://mysiteground.com/grav` using the appropriate URL of course.
+これで、 `http://mysiteground.com/grav` をブラウザ表示できます。もちろん、適切な URL に修正してください。
 
-!!! Update [2016-03]: The path to the CLI for PHP 7 on Siteground shared hosting at this time appears to be: `/usr/local/php70/bin/php-cli`, and so for command line use of gpm/grav you could make an alias and then reference the php-cli directly via terminal, e.g. `alias php-cli="/usr/local/php70/bin/php-cli"`. Then you can use it as: `$php-cli bin/grav list`
+> [!Tip]  
+> アップデート [2016-03]: SiteGround レンタルサーバーの PHP 7 への CLI パスは、現時点で `/usr/local/php70/bin/php-cli` であり、 gpm/grav をコマンドラインから使うためには、エイリアスを作成し、それをたーいなるから直接 php-cli を参照するようにできます。たとえば： `alias php-cli="/usr/local/php70/bin/php-cli"` 。その後、次のように使えます： `$php-cli bin/grav list`
 
-Because you have followed these instructions diligently, you will also be able to use the [Grav CLI](../../advanced/grav-cli) and [Grav GPM](../../advanced/grav-gpm) commands such as:
+
+ここまでの解説の通りに進めていただきましたので、 [Grav CLI](../../../07.cli-console/02.grav-cli/) や [Grav GPM](../../../07.cli-console/04.grav-cli-gpm/) も利用可能となります：
 
 ```bash
 $ cd ~/public_html/grav
