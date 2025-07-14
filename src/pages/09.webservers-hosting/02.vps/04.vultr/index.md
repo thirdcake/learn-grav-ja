@@ -1,27 +1,31 @@
 ---
 title: Vultr
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-05-11'
+lastmod: '2025-07-14'
 ---
-[Vultr](https://www.vultr.com) is another entry in the **SSD-Powered VPS** market and offers similar features and functionality as the other VPS providers, but for slightly less money. You get **100% SSD Storage**, **Ultra fast Intel CPUs** and **14 low latency locations**.
+
+> [!訳注]  
+> このページは、内容的に日本のサービスではないので、日本の方で、このページを読む人はほとんどいないと思いますが、以下の内容は Ubuntu バージョンの話などから類推するにかなり古い内容であり、もし読む必要がある場合でも、適宜読み替えながら読んでください。
+
+[Vultr](https://www.vultr.com) は、 **SSD による VPS** 市場に参入し、他の VPS プロバイダと似たような構成と機能を提供しますが、少し安いです。 **100% SSD ストレージ** と、 **ウルトラ速い Intel CPU** そして **14 の低レイテンシロケーション** が得られます。
 
 ![](vultr.webp)
 
-After creating an account and navigating to the **Vultr Control Manager**, click on the **Deploy** tab.  Leave the server type on **Compute Instances** and choose a location:
+アカウントを作成し、 **Vultr コントロールマネージャ** に移動したら、 **Deploy** タブをクリックしてください。サーバタイプを **Compute Instances** のままロケーションを選択してください：
 
 ![](deploy.png)
 
-Next select the **Operating System** from the list available.  We have selected **Ubuntu 18.04 LTS** to be consistent with the other guides and because it's the latests, very popular, reliable, and well supported distribution.
+次に利用可能なリストから **Operating System** を選択してください。他のガイドとの一貫性から **Ubuntu 18.04 LTS** を選びました。というのも、それは最新で、とても人気で、信頼でき、そしてサポートが手厚いディストリビューションだからです。
 
-For the **Server Size** you can pick a size that is appropriate for you but Grav will run great on any of them.  For the sake of this guide, we'll use the 1 CPU, 1GB memory option that is currently priced at $8/month.
+**Server Size** で、適切なサイズを選べます。Grav は、どれを選んでもうまく実行できます。このガイドでは、 1 CPU, 1GB メモリオプションを使いましょう。現在、このプランは月額 $8 です。
 
 ![](os-and-server.webp)
 
-You can choose any optional features you would like, and then provide a simple **Server Label** to identify the VPS instance.  We'll use `Grav`.  Then click **Place Order** to create and install the server.
+お好みの追加機能を選ぶこともできます。それから VPS インスタンスを識別するシンプルな **Server Label** を入力してください。ここでは `Grav` とします。 **Place Order** をクリックして、サーバを作成し、インストールします。
 
 ![](manage-server.png)
 
-After a minute or so, your server should be ready and you can click the **manage** link next to your server in the list to get the server details.  On this page you will be shown a control panel for the server that lets you control the state, along with the initial root username and password.  You can can SSH via the command provided in this tab using the password you entered when you created the distribution instance. Public key authentication is recommended, and Vultur has [SSH public key authentication documentation](https://www.vultr.com/docs/using-your-ssh-key-to-login-to-non-root-users) that walks you through the steps required.
+1分程度待つと、サーバの準備ができます。サーバ詳細リスト内の、あなたのサーバのとなりに **manage** リンクがあり、それをクリックできるようになります。このページは、初期のルートユーザーとパスワードで、サーバの状態を制御できるコントロールパネルです。ディストリビューションインスタンスを作成したときのパスワードを使って、このタブで提供されるコマンドを経由して SSH 接続できます。公開鍵認証が推奨されます。Vultur では、[SSH 公開鍵認証のドキュメント](https://www.vultr.com/docs/using-your-ssh-key-to-login-to-non-root-users) があるので、必要な手順を踏んでください。
 
 ---
 

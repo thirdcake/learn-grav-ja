@@ -1,61 +1,68 @@
 ---
 title: '共通事項 ubuntu 18'
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-05-11'
+lastmod: '2025-07-14'
 ---
-### Update and Upgrade Packages
 
-At this point, you might want to either setup a local `/etc/hosts` entry to give the IP provided a nice friendly name such as `{{ page.header.localname }}`.  That way you can more easily SSH to your server with `ssh root@{{ page.header.localname }}{% if ssh_port %} -p{{ ssh_port }}{% endif %}`.
+> [!訳注]  
+> このページは、他の VPS のページの一部として動的に挿入される [モジュールページ](../../../02.content/09.modular/#modules) です。 Ubuntu 18.04 LTS に関する共通事項ですが、古い情報だと思われるので、もし読む必要がある場合は、適宜読み替えてください。
 
-!!! The `-p{{ ssh_port}}` configuration option is required in order to be able to the non-standard SSH port
+<h3 id="update-and-upgrade-packages">パッケージのアップデートとアップグレード</h3>
 
-After successfully SSH'ing to your server as **root**, the first thing you will want to do is update and upgrade all the installed packages.  This will ensure you are running the _latest-and-greatest_:
+この時点で、ローカルの `/etc/hosts` エントリーを設定し、提供された IP にナイスでフレンドリーな名前（たとえば `（VPS業者ごとのローカル名）` ）を付けたくなるかもしれません。そうすれば、より簡単にサーバーに SSH 接続できます。 `ssh root@（ローカル名） -p（ポート番号）` のように。
+
+> [!訳注]  
+> `.ssh/config` を使うことが多いと思います。
+
+> [!Tip]  
+> `-p` 設定オプションは、非標準の SSH ポート番号を使うばために必要です。
+
+サーバに **root** 権限で SSH 接続成功したら、最初にやりたいのは、パッケージのアップデートとアップグレードでしょう。これにより、実行が _最新で最上位_ になります：
 
 ```bash
 # apt update
 # apt upgrade
 ```
 
-Just answer `Y` if prompted.
+もしプロンプトで尋ねられたら、 `Y` と答えます。
 
-Before we go any further, let's remove **Apache2** which we will replace with **Nginx**:
+先に進む前に、 **Apache2** を削除します。 **Nginx** に置き換え予定です：
 
 ```bash
 # apt remove apache2*
 # apt autoremove
 ```
 
-!! NOTE: You might not have this installed.  But better safe than sorry!
+> [!Note]  
+> Apache2 がインストールされていないかもしれません。しかし、やっておいたほうが安全です！
 
-Next you will want to install some essential packages:
+次に、必要なパッケージをいくつかインストールします：
 
 ```bash
 # apt install vim zip unzip nginx git php-fpm php-cli php-gd php-curl php-mbstring php-xml php-zip php-apcu
 ```
 
-This will install the complete VIM editor (rather than the mini version that ships with Ubuntu), Nginx web server, GIT commands, and **PHP 7.2**.
+ここで、完全な VIM エディタをインストールします（Ubuntu に入っているミニバージョンではありません）。また、 Nginx web サーバ、 GIT コマンド、そして **PHP 7.2** をインストールしています。
 
-### Configure PHP7.2 FPM
-Once php-fpm is installed, there is a slight configuration change that needs to take place for a more secure setup.
+<h3 id="configure-php7-2-fpm">PHP7.2 FPM の設定</h3>
 
+php-fpm がインストールされると、より安全なセットアップに必要な設定変更が少し生じます。
 
 ```bash
 # vim /etc/php/7.2/fpm/php.ini
 ```
 
-Search for `cgi.fix_pathinfo`. This will be commented out by default and set to '1'.
+`cgi.fix_pathinfo` を検索してください。デフォルトではコメントアウトされており、 '1' が設定されています。
 
-This is an extremely insecure setting because it tells PHP to attempt to execute the closest file it can find if the requested PHP file cannot be found. This basically would allow users to craft PHP requests in a way that would allow them to execute scripts that they shouldn't be allowed to execute.
+これはとても安全でない設定です。というのも、要求された PHP ファイルが見つからなかったときに、 PHP に一番近いファイルの実行を試させる設定だからです。この設定により、実行されるべきでないスクリプトを実行されてしまうかもしれません。
 
-Uncomment this line and change '1' to '0' so it looks like this
-
+この行のコメントを外し、'1' を '0' に変えてください。次のように：
 
 ```bash
 cgi.fix_pathinfo=0
 ```
 
-Save and close the file, and then restart the service.
-
+ファイルを保存し、閉じてください。それからサーバーをリスタートさせてください。
 
 ```bash
 # systemctl restart php7.2-fpm 
