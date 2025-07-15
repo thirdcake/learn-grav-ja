@@ -1,32 +1,30 @@
 ---
 title: 'Fortrabbit - PHP hosting'
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-05-11'
+lastmod: '2025-07-15'
 ---
-[Fortrabbit](http://www.fortrabbit.com) — secure like fort knox, fast like a rabbit — is a managed cloud hosting service dedicated for PHP. It supports a modern PHP development with micro-service oriented hosting infrastructure — perfect for Grav. Fortrabbit is a Platform as a Service — thus a bit different than traditional hosting.
+
+[Fortrabbit](http://www.fortrabbit.com) - fort knox(アメリカ軍基地) のように安全で、うさぎのように速い - は、 PHP 専用のマネージドクラウドホスティングサービスです。ホスティングインフラ指向のマイクロサービスでモダンな PHP 開発をサポートし、 Grav にとってパーフェクトです。Fortrabbit は、 Platform as a Service(PaaS）で、伝統的なホスティングサービスとは少し異なります。
 
 ![Fortrabbit website](fortrabbit-website.png)
 
+<h2 id="sign-up">登録</h2>
 
-## Sign up
+Fortrabbit への登録は、正しく email アドレスを入力し、パスワードを設定するだけです。
 
-To sign up to Fortrabbit you only need to verify your email address and set up password.
+<h2 id="spin-up-an-app">アプリの立ち上げ</h2>
 
-## Spin up an App
+プリセットされたものを使うか、コンポーネントを自分でスケーリングさせる設定をするか、選びます。Grav は、（プラグインを使わないなら）大量の RAM は不要です。 Grav は、 MySQL データベースも不要です。選択を解除してください。最小プランで始めて、必要ならスケールアップさせましょう。
 
-Choose a preset or configure single Component scalings on your own. Grav — without plugins — doesn't require huge amounts of RAM. Grav doesn't need a MySQL database — so deselected it. Start with the smallest plan and scale up when needed.
+**フリートライアル** もあります。これは、機能はすべて使えますが、時間に制限があります。あなたのアプリは、アプリが終了すると同時に破棄されます。それから、また新しく始められます。トライアルを延長することもできます。
 
-There is also **free trial** — which is feature complete but limited in time. Your App will be destroyed when the App is over. Then you can start a new trial. You can also ask to extend a trial.
+<h2 id="install-locally">ローカルにインストール</h2>
 
+まず、最新の Grav をローカルに [ダウンロード](https://getgrav.org/downloads) し、展開してください。サブフォルダの `grav` に展開します。ローカルで Grav サイトを提供するのに、 localhost を設定するかもしれません。
 
-## Install locally
+<h2 id="deploy-to-fortrabbit">Fortrabbit にデプロイ</h2>
 
-First [download](https://getgrav.org/downloads) and unpack the latest Grav locally. It unpacks in the subfolder `grav`. You might configure your localhost to serve the grav site locally now.
-
-
-## Deploy to Fortrabbit
-
-Now you can push it. Change into the project folder and set it up with your Git remote on Fortrabbit:
+ここで、プッシュできます。プロジェクトフォルダに移動し、 Fortrabbit に Git remote を設定します：
 
 ```bash
 $ cd grav
@@ -34,7 +32,7 @@ $ git init .
 $ git remote add fortrabbit git@deploy.eu2.frbit.com:your-app.git
 ```
 
-Before committing anything, you should exclude the `vendor/` and the `cache/` folder. Create the file `.gitignore` with the following contents:
+何かをコミットする前に、 `vendor/` フォルダと `cache/` フォルダを除外してください。 `.gitignore` ファイルを作成し、以下を入力してください：
 
 ```txt
 vendor
@@ -42,7 +40,7 @@ cache/*
 !cache/.gitkeep
 ```
 
-Now you can add everything and push everything to your App:
+あとは、あなたのアプリに何でも add, push してください：
 
 ```bash
 $ git add -A
@@ -50,11 +48,11 @@ $ git commit -m 'Initial'
 $ git push -u fortrabbit master
 ```
 
-Done: The first deployment triggers a Composer install on remote which can take a few minutes. You can watch it build in the Git output stream. Now, your Grav site is online. Each App comes with an App URL (your-app.frb.io) which you can visit in the browser. 
+完了：最初のデプロイでは、リモート環境での Composer install を伴い、数分かかります。Git の出力ストリームでビルドを見ることができます。これで、サイトがオンラインになりました。各アプリは、ブラウザでアクセス可能な App URL （your-app.frb.io）を持ちます。
 
-Repeat: Craft your theme and contents locally and just push it to the Fortrabbit master branch to deploy. The second deploy will only take a few seconds.
+2回目以降：テーマやコンテンツをローカルで作成し、 Fortrabbit のマスターブランチにプッシュするだけでデプロイされます。2回目以降のデプロイは数秒です。
 
-### Further reading
+<h3 id="further-reading">詳しい読み物</h3>
 
-That is just the basics visit the [Fortrabbit Grav install and tuning guide](http://help.fortrabbit.com/install-grav) to learn about themes, plugins and quirks.
+これは基本的なところだけです。 [Fortrabbit Grav インストール・チューニングガイド](http://help.fortrabbit.com/install-grav) を訪れて、テーマやプラグイン、特色について学んでください。
 

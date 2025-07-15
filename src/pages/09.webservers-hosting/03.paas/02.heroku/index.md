@@ -1,30 +1,29 @@
 ---
 title: Heroku
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-05-11'
+lastmod: '2025-07-15'
 ---
-Heroku is a very well known hosting for web applications.
-It has a free plan useful for testing purposes, and paid options to deploy the website.
 
-It offers a wide variety of addons and it's one of the most flexible PAAS around.
+Heroku は、 web アプリケーションのための、大変よく知られたホスティングサービスです。
+テスト目的の便利なフリープランがあり、ウェブサイトをデプロイする有料オプションがあります。
 
-They are PHP friendly, and they have a great "Getting Started with PHP on Heroku" guide at [https://devcenter.heroku.com/articles/getting-started-with-php#introduction](https://devcenter.heroku.com/articles/getting-started-with-php#introduction), and it will be the base of the instruction set.
+幅広い種類のアドオンが提供されており、最も柔軟な PaaS のひとつです。
 
-Let's see how to install Grav on Heroku.
+Heroku は、 PHP に親切です。素晴らしい "Heroku で PHP を開始するための" ガイドが [https://devcenter.heroku.com/articles/getting-started-with-php#introduction](https://devcenter.heroku.com/articles/getting-started-with-php#introduction) にあります。これは基本的な解説です。
 
-First, sign up for Heroku.
+Heroku に Grav をインストールする方法を見ていきましょう。
 
-Download the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli), which is a command-line utility needed to deploy create and deploy your site.
+まず、 Heroku に登録します。
 
-Once installed, type
+[Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) をダウンロードしてください。これは、作成物やサイトをデプロイするのに必要なコマンドラインのユーティリティです。
 
+インストールできたら、次を入力します：
 
 ```bash
 heroku login
 ```
 
-
-Enter your credentials.
+クレデンシャルを入力してください。
 
 Now checkout the PHP "Getting Started" example they provide in your local web root, so you can test locally the site prior to deploying it.
 

@@ -1,7 +1,7 @@
 ---
 title: '共通事項 ubuntu 18'
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-07-14'
+lastmod: '2025-07-15'
 ---
 
 > [!訳注]  
@@ -12,7 +12,7 @@ lastmod: '2025-07-14'
 この時点で、ローカルの `/etc/hosts` エントリーを設定し、提供された IP にナイスでフレンドリーな名前（たとえば `（VPS業者ごとのローカル名）` ）を付けたくなるかもしれません。そうすれば、より簡単にサーバーに SSH 接続できます。 `ssh root@（ローカル名） -p（ポート番号）` のように。
 
 > [!訳注]  
-> `.ssh/config` を使うことが多いと思います。
+> `.ssh/config` を使うことも多いと思います。
 
 > [!Tip]  
 > `-p` 設定オプションは、非標準の SSH ポート番号を使うばために必要です。
@@ -68,12 +68,11 @@ cgi.fix_pathinfo=0
 # systemctl restart php7.2-fpm 
 ```
 
-### Configure Nginx Connection Pool
+<h3 id="configure-nginx-connection-pool">Nginx の接続プールの設定</h3>
 
-Nginx has already been installed, but you should configure is so that it uses a user-specific PHP connection pool.  This will ensure you are secure and avoid any potential file permissions when working on the files as your user account, and via the web server.
+Nginx は先ほどインストール済みですが、設定をすることで、ユーザ固有の PHP 接続プールが使えます。これにより、安全になり、ユーザアカウントとして、そして web サーバ経由でファイルを操作する際のパーミッションの問題が起こるのを避けられます。
 
-Navigate to the pool directory and create a new `grav` configuration:
-
+プールのディレクトリに移動し、新しく `grav` 設定を作成してください：
 
 ```bash
 # cd /etc/php/7.2/fpm/pool.d
@@ -81,7 +80,7 @@ Navigate to the pool directory and create a new `grav` configuration:
 # vim grav.conf
 ```
 
-In Vim, you can paste the following pool configuration:
+Vim で、以下のプール設定を貼り付けてください：
 
 ```apache
 [grav]
@@ -103,15 +102,15 @@ pm.max_spare_servers = 3
 chdir = /
 ```
 
-The key things here are the `user` and `group` being set to a user called `grav`, and the listen socket having a unique name from the standard socket.  Save and exit this file.
+ここでの重要ポイントは、 `user` と `group` を `grav` というユーザに設定することと、標準的なソケットではなくユニークな名前を持つ listen socket を設定することです。このファイルを保存して閉じてください。
 
-We need to create the dedicated `grav` user now:
+ここで、専用の `grav` ユーザーを作成する必要があります：
 
 ```bash
 # adduser grav
 ```
 
-Provide a strong password, and leave the other values as default. We need to next create an appropriate location for Nginx to serve files from, so let's switch user and create those folder, and create a couple of test files:
+強いパスワードを提供してください。そして、他の値はデフォルト値で残してください。次に作成しなければならないのは、ファイルを提供する Nginx の適切な場所です。そこで、ユーザを変更し、これらのフォルダを作成し、いくつかのテストファイルを作成します：
 
 ```bash
 # su - grav
@@ -119,19 +118,19 @@ $ mkdir -p www/html
 $ cd www/html
 ```
 
-Create a simple `index.html` with the contents of:
+次のようなコンテンツを持つシンプルな `index.html` を作成してください：
 
 ```html
  <h1>Working!</h1>
 ```
 
-..and a file called `info.php` with the contents of:
+..そして、次のようなコンテンツを持つ `info.php` ファイルを作成してください：
 
 ```php
 <?php phpinfo();
 ```
 
-Now we can exit out of this user and return to root in order to setup the Nginx server configuration:
+これで、このユーザを終了し、 Nginx サーバ設定のセットアップのため、ルートユーザに戻ります：
 
 ```bash
 $ exit
@@ -139,7 +138,7 @@ $ exit
 # vim grav
 ```
 
-Then simply paste in this configuration:
+それから、この設定を貼り付けてください：
 
 ```nginx
 server {
@@ -187,7 +186,12 @@ server {
 }
 ```
 
-This is the stock `nginx.conf` file that comes with Grav with 2 changes. 1) the `root` has been adapted to our user/folder we just created and the `fastcgi_pass` option has been set to the socket we defined in our `grav` pool. Now we just need to link this file appropriately so that it's **enabled**:
+これは、 Grav に入っているデフォルトの `nginx.conf` ファイルに2つの変更を加えたものです。
+
+1. `root` を、先ほど作成した user/folder に適合させました
+1. `fastcgi_pass` オプションを、 `grav` プールで定義したソケットに設定しました
+
+**有効化** のため、このファイルを適切にリンクする必要があります：
 
 ```bash
 # cd ../sites-enabled
@@ -195,27 +199,27 @@ This is the stock `nginx.conf` file that comes with Grav with 2 changes. 1) the 
 # rm default
 ```
 
-You can test the configuration with the command `nginx -t`. It should return the following.
+この設定を `nginx -t` コマンドでテストできます。以下のように返ってくるはずです。
 
 ```bash
 nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
 nginx: configuration file /etc/nginx/nginx.conf test is successful
 ```
 
-Now all we have to do is restart Nginx and the php7-fpm process and test to ensure we have configured Nginx and the PHP connection pool correctly:
+あとは、 Nginx と php7-fpm プロセスを再起動し、 Nginx と PHP 接続プールが正しく設定されたことを確認するテストをしてください：
 
 ```bash
 # systemctl restart nginx 
 # systemctl restart php7.2-fpm
 ```
 
-Now point your browser at your server: `http://{{ page.header.localname }}` and you should see the text: **Working!**
+サーバで、次の URL をブラウザ表示してください： `http://{{ page.header.localname }}` 。そして **Working!** というテキストを確認してください：
 
-You can also test to ensure that PHP is installed and working correctly by pointing your browser to: `http://{{ page.header.localname }}/info.php`.  You should see a standard PHP info page with APCu, Opcache, etc listed.
+ブラウザで `http://{{ page.header.localname }}/info.php` を表示することで、次のこともテストできます。 PHP がインストールされ、正しく機能していることを。標準的な PHP info ページ（APCu, Opcache, その他の一覧）が表示されるはずです。
 
-### Installing Grav
+<h3 id="installing-grav">Grav のインストール</h3>
 
-This is the easy part!  First we need to jump back over to the Grav user, so either SSH as `grav@{{ page.header.localname }}` or `su - grav` from the root login. then follow these steps:
+ここからは簡単なパートです！ まず、 Grav ユーザに戻ってください。 SSH 接続で `grav@{{ page.header.localname }}` とするか、ルート権限でログインした状態から `su - grav` とします。それから、次のステップに進みます：
 
 ```bash
 $ cd ~/www
@@ -225,9 +229,9 @@ $ rm -Rf html
 $ mv grav html
 ```
 
-Now That's done you can confirm Grav is installed by pointing your browser to `http://{{ page.header.localname }}` and you should be greeted with the **Grav is Running!** page.
+完了です。ブラウザで `http://{{ page.header.localname }}` を表示すれば、 Grav がインストールされていることが確認できます。 **Grav is Running!** ページが表示されるでしょう。
 
-Because you have followed these instructions diligently, you will also be able to use the [Grav CLI](../../07.advanced/02.grav-cli/) and [Grav GPM](../../07.advanced/04.grav-gpm/) commands such as:
+ここまで進めていただければ、 [Grav CLI](../../../07.advanced/02.grav-cli/) や [Grav GPM](../../../07.advanced/04.grav-gpm/) コマンドも利用可能になっています。次のように：
 
 ```bash
 $ cd ~/www/html
@@ -241,7 +245,7 @@ Cleared:  cache/compiled/*
 Touched: /home/grav/www/html/user/config/system.yaml
 ```
 
-and GPM commands:
+GPM コマンドは：
 
 ```bash
 $ bin/gpm index
