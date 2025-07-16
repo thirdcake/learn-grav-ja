@@ -1,42 +1,42 @@
 ---
 title: 'Cloudways - Managed Cloud for PHP Hosting'
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-05-11'
+lastmod: '2025-07-16'
 ---
-[Cloudways](http://www.cloudways.com) is a Managed Cloud Platform for PHP-based web apps. On Cloudways, you can choose your server from four cloud providers: DigitalOcean, Vultr, Google Cloud Engine (GCE) and Amazon Web Services (AWS) to run your PHP work on it. It allows user to launch cloud servers with minutes for PHP app development. Cloud server management is the job of Cloudways; you're only responsible for your Grav CMS application. 
 
-Recently, Cloudways interviewed one of the [lead developer of Grav CMS Andy Miller](https://www.cloudways.com/blog/interview-andy-miller/).
+[Cloudways](http://www.cloudways.com) は、 PHP ベースの web アプリ向けのマネージドクラウドプラットフォームです。 Cloudways では、4つのクラウドプロバイダから PHP を実行するサーバを選択できます： DigitalOcean, Vultr, Google Coud Engine (GCE) そして Amazon Web Services (AWS) です。ユーザは、 PHP アプリ開発のためのクラウドサービスを数分でローンチできます。クラウドサーバの管理は、 Cloudways がやってくれます。あなたは、 Grav CMS アプリケーションにのみ責任を持てば良いです。
+
+最近、 Cloudways は [Grav CMS の開発リーダーのひとりである Andy Miller](https://www.cloudways.com/blog/interview-andy-miller/) にインタビューをしました。
 
 ![Cloudways](cw-logo.png)
 
-## Signing Up On Cloudways
+<h2 id="signing-up-on-cloudways">Cloudways に登録</h2>
 
-First [sign up for an account](https://platform.cloudways.com/signup) on Cloudways by using your GitHub account. If you do not want to use your Grav CMS credentials, you can create an account using a email address. After signing up on Cloudways and launching a PHP Stack application, follow these steps to install and run Grav CMS on your cloud server: 
+まず GitHub アカウントを使って Cloudway に [アカウントを登録します](https://platform.cloudways.com/signup) 。 Grav CMS クレデンシャルを使いたくない場合は、email アドレスでアカウントを作成できます。 Cloudways に登録し、 PHP スタックのアプリケーションをローンチ後、サーバに Grav CMS をインストールし、実行する以下の手順を進めてください：
 
-## Installing And Running Grav On Cloudways
+<h2 id="installing-and-running-grav-on-cloudways">Cloudways での Grav のインストールと実行</h2>
 
-Login in SSH Terminal and move to your application public_html folder.
-
+SSH ターミナルでログインし、アプリケーションの `public_html` フォルダに移動します。
 
 ```bash
 cd applications/<foldername>/public_html/
 ```
 
-Go [Grav CMS download](https://getgrav.org/downloads) page and copy the download link. Now, go to the terminal and download it there by using the following command
+[Grav CMS ダウンロード](https://getgrav.org/downloads) ページから、ダウンロードリンクをコピーします。ターミナルで、以下のコマンドを使ってダウンロードします
 
 ```bash
 wget https://github.com/getgrav/grav/releases/download/{{ grav_version }}/grav-admin-v{{ grav_version }}.zip
 ```
 
-After downloading it, unzip the file.
+ダウンロード後、 zip ファイルを展開します。
 
 ```bash
 unzip grav-admin-v{{ grav_version }}.zip
 ```
 
-That’s it! Grav CMS is ready for your use on Cloudways PHP Hosting Platform. Head to your Application Staging URL and add /grav-admin at the end of the URL.
+以上です！ Grav CMS は Cloudways PHP ホスティングプラットフォーム上で実行できます。アプリケーションのステージング URL で、 URL の最後に、 `/grav-admin` を追加してください。
 
-## Maintenance & Updating Grav on Cloudways
+<h2 id="maintenance-updating-grav-on-cloudways">Cloudways 上の Grav のメンテナンスとアップデート</h2>
 
-From time to time you may stumble across issues with Grav on Cloudways due to their unusual permissions structure. To reset your file permissions, login to your Cloudways account, navigate to your application, go to Application Settings and click on [Reset Permission](https://support.cloudways.com/using-the-reset-permissions-button-to-solve-permissions-denied-issues/). This may resolve any issues with File Permissions related to caching, loggin, updates or backups.
+ときどき、 Cloudways 上で、その通常のパーミッション構造による Grav の問題に出会うかもしれません。ファイルパーミッションをリセットするために、 Cloudways アカウントにログインし、アプリケーションに移動し、アプリケーション設定で、 [Reset Permission](https://support.cloudways.com/using-the-reset-permissions-button-to-solve-permissions-denied-issues/) をクリックしてください。これによりキャッシュやログイン、アップデートやバックアップに関係するファイルパーミッションのあらゆる問題が解決するかもしれません。
 

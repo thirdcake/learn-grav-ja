@@ -1,57 +1,60 @@
 ---
 title: 'Microsoft Azure'
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-05-11'
+lastmod: '2025-07-16'
 ---
-[Microsoft Azure](https://azure.microsoft.com) is an enterprise-grade cloud computing platform that is open and flexible.  There are multiple ways to deploy Grav within Azure however this tutorial will walk through using Azure's Web App (PaaS).
 
-## Things you'll need
+[Microsoft Azure](https://azure.microsoft.com) は、エンタープライズレベルのクラウドコンピューティングプラットフォームで、オープンであり柔軟です。 Azure で Grav をデプロイする方法は複数ありますが、このチュートリアルでは、 Azure の Web App (Paas) を使います。
 
-* An Azure Account
-* Github Account
-* A copy of Grav
+<h2 id="things-you-ll-need">必要事項</h2>
+
+* Azure のアカウント
+* GitHub のアカウント
+* Grav のコピー
 
 ![Azure Logo](Azure.png)
 
-## Signing Up On Azure
-First [sign up for an account](https://azure.microsoft.com/en-gb/free/) on Azure, you will receive access to free services plus £150 (UK) in credit to use for the first 30 days. 
+<h2 id="signing-up-on-azure">Azure に登録</h2>
 
-## Signing Up on GitHub
-If you do not have a GitHub account set [please sign up for one](https://github.com/join?source=header-home), the free plan is sufficient. 
+まず Azure に [アカウントを登録](https://azure.microsoft.com/en-gb/free/) します。最初の 30 日間使える £150 (UK) のクレジットと無料サービスへのアクセス権を得ます。
 
-## Clone Grav Source Code
-You need a copy of Grav in order to follow this tutorial, I would suggest downloading the basic Grav and Admin Plugin files, and creating a Github repository with those files 
+<h2 id="signing-up-on-github">GitHub に登録</h2>
 
-You should now have all the necessary components to deploy a working copy of Grav within Azure. 
+GitHub アカウントを持っていなければ、 [それにも登録してください](https://github.com/join?source=header-home) 。無料プランで十分です。
 
-## Web.Config File
+<h2 id="clone-grav-source-code">Grav のソースコードを複製</h2>
 
-In addition to the Grav code you need a web.config file.  The web.config file is an XML file that sits in the root folder of the Web App and generally contains the main settings and configuration for Web App.  
+このチュートリアルを進めるため、 Grav のコピーが必要です。ベースとなる Grav と、管理パネルプラグインファイルのセットをダウンロードし、これらのファイルによる GitHub リポジトリを作っておくことをおすすめします。
 
-An example web.config file is available [here](https://github.com/getgrav/grav-learn/blob/develop/pages/09.webservers-hosting/03.paas/04.azure/web.config).  This web.config file, covers off what the Web App should do with file formats such as *.woff* and *.woff2*, which are now part of the latest [Font Awesome packs](https://fontawesome.com).
+これで、 Azure 内で Grav のコピーをデプロイするのに必要なものをすべて手に入れました。
 
-Grav have also included examples of the web.config files in their source files, you can find them located in the *webserver-configs* folder. 
+<h2 id="web-config-file">web.config ファイル</h2>
 
-Once you have your web.config setup, you should upload this to your Grav GitHub repository, it needs to be at the root level. 
+Grav コードに加えて、 web.config ファイルも必要です。web.config ファイルとは、 XML ファイルで、Web アプリのルートフォルダに置かれ、一般的に Web アプリの主要設定や構成を含むファイルのことです。
 
-## Installing And Running Grav On Azure
+web.config ファイルの具体例は、 [ここで](https://github.com/getgrav/grav-learn/blob/develop/pages/09.webservers-hosting/03.paas/04.azure/web.config) 手に入ります。この web.config ファイルは、その Web アプリが何をすべきかを網羅し、最新の [Font Awesome パック](https://fontawesome.com) の一部にあるような *.woff* フォーマットや *.woff2* フォーマットのようなファイルフォーマットをしています。
 
-### Setting Up Your Web App
+Grav には、そのソースファイルに web.config ファイルの具体例を備えています。 *webserver-configs* フォルダに見つかります。
 
-+ The first step is to [login to the Azure Portal](https://portal.azure.com), click on *Create a Resource* on the left hand side menu. 
+web.config をセットアップしたら、 Grav の GitHub リポジトリにこれをアップロードします。それはルートディレクトリのレベルである必要があります。
+
+<h2 id="installing-and-running-grav-on-azure">Azure で Grav をインストールし実行</h2>
+
+<h3 id="setting-up-your-web-app">Web アプリをセットアップ</h3>
+
++ 最初の手順は、 [Azure ポータルにログイン](https://portal.azure.com) し、左側のサイドメニューにある *Create a Resource* をクリックします。
 
 ![Step 1](step1.png)
 
-+ Search for *web app* and select the service
++ *web app* を検索し、サービスを選択します。
 
 ![Step 2](step2.png)
 
-+ A new blade will open, describing the Web App service.  At the bottom of the page you will find a *create* button, when you initiate that another blade will open.  You will be asked several questions. 
-
-    - The App Name will form part of the public URL your website will have when first created, 
-    - The subscription is the plan your web app will be hosted within and where the payment for the service will come from
-    - A resource group within Azure is a way of logically grouping your services, the name of this group is private and only you will see this
-    - An Azure Web App can run on a Windows, Linux or Docker platform.  For Grav select Windows
++ web アプリサービスの概要を説明する新しいブレードが開きます。ページの下部に *create* ボタンがありますので、これをクリックすると別のブレードが開きます。いくつかの質問が尋ねられます。
+    - アプリ名は、あなたのウェブサイトが最初に作成されるときの公開 URL の一部となります
+    - サブスクリプションは、web アプリがホスティングされるプランであり、サービスの支払いがここから行われます
+    - Azure 内のリソースグループは、サービスを論理的なグループに分ける方法で、グループ名は公開されず、あなただけが見られるものです
+    - Azure Web アプリは Windows, Linux もしくは Docker プラットフォームで実行できます。 Grav 向けに Windows を選択します。
     - The App Service Plan/Location determines which data centre your web app will reside in within Azure and the cost of it
     - Application Insights is the service on Azure that can help monitor your web app for issues and understand how your end users are interacting with it.  
 

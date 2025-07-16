@@ -1,7 +1,7 @@
 ---
 title: Heroku
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-07-15'
+lastmod: '2025-07-16'
 ---
 
 Heroku は、 web アプリケーションのための、大変よく知られたホスティングサービスです。
@@ -25,7 +25,7 @@ heroku login
 
 クレデンシャルを入力してください。
 
-Now checkout the PHP "Getting Started" example they provide in your local web root, so you can test locally the site prior to deploying it.
+それでは、 PHP の "入門編" として提供されている具体例をローカルの web ルートディレクトリでチェックしてください。デプロイ前にローカルでテストできます。
 
 ```bash
 git clone https://github.com/heroku/php-getting-started.git your-folder
@@ -35,52 +35,51 @@ git clone https://github.com/heroku/php-getting-started.git your-folder
 cd your-folder
 ```
 
-Now deploy your app with
+デプロイは、次のようにします
 
 ```bash
 heroku create
 ```
 
-and
+そして、
 
 ```bash
 git push heroku master
 ```
 
-Ensure that at least one instance of the app is running:
+最低でも1つ以上のインスタンスが実行されていることを確認してください：
 
 ```bash
 heroku ps:scale web=1
 ```
 
-and open the site in the browser:
-
+そしてブラウザでサイトを開いてください：
 
 ```bash
 heroku open
 ```
 
+サンプルの PHP プロジェクトが表示されるはずです。すべては設定されているので、サンプルサイトの代わりに Grav を実行する準備ができています。
 
+まず、現在のサイトフォルダで `web/` フォルダを削除してください。
 
-You should now see the sample PHP project. Now that all is set, you're ready to go on and run Grav instead of the sample site.
+Grav サイトのファイルをここにコピーします。 `.htaccess` 隠しファイルもコピーするのを忘れないでください。存在するすべてのファイルを上書きしてください。
 
-First, delete the web/ folder in your current site folder.
-
-Copy your Grav site files there, making sure you're also copying the `.htaccess` hidden file. Overwrite all the files that were existing.
-
-Now open the `Procfile` file. This is a Heroku-specific file. Change the line to
+`Profile` ファイルを開きます。これは Heroku 特有のファイルです。次の行を変更します
 
 ```txt
 web: vendor/bin/heroku-php-apache2 ./
 ```
 
-You should make sure the site works locally, prior to uploading it to Heroku, just to ensure the are no errors.
+ローカルでサイトが機能するか確認してください。 Heroku へアップロード前に、エラーが出てないかだけ確認します。
 
-Now commit to the repository with
+それから、リポジトリをコミットします
 
-`git add . ; git commit -am 'Added Grav'`
+```bash
+git add . ; git commit -am 'Added Grav'
+```
 
-Then edit `composer.json` and add post deploy command to the `scripts` section as in
+それから、 `composer.json` を編集し `scripts` セクションを次のようにデプロイコマンドを追記します。、
 
 ```json
 "scripts": {
@@ -91,21 +90,21 @@ Then edit `composer.json` and add post deploy command to the `scripts` section a
 }
 ```
 
-and commit that to the repository with 
+そして、リポジトリをコミットします
 
 ```bash
 git add . ; git commit -am 'Add post deploy bin/grav install'
 ```
 
-Then run
+それから、実行します
 
 ```bash
 git push heroku master
 ```
 
-and the site should be good to go!
+そうすれば、サイトがうまく動きます！
 
-Due to the ephemeral nature of Heroku's filesystem, all needed plugins or themes must be added to `composer.json` just like above and kept there so they are installed every time the site is pushed to Heroku. For example, if you need the `admin` plugin and a theme, add them in composer like in
+Heroku のファイルシステムはもともと一時的なものなので、必要なプラグインやテーマすべてについて、上記のように `composer.json` に追記し、サイトが Heroku へ push されるたびにそれらがインストールされるようにし続ける必要があります。たとえば、 `admin` プラグインとテーマが必要な場合、 composer に次のように追記します
 
 ```json
 "scripts": {
