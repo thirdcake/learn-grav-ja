@@ -1,7 +1,7 @@
 ---
 title: 'Microsoft Azure'
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-07-16'
+lastmod: '2025-07-17'
 ---
 
 [Microsoft Azure](https://azure.microsoft.com) は、エンタープライズレベルのクラウドコンピューティングプラットフォームで、オープンであり柔軟です。 Azure で Grav をデプロイする方法は複数ありますが、このチュートリアルでは、 Azure の Web App (Paas) を使います。
@@ -55,55 +55,54 @@ web.config をセットアップしたら、 Grav の GitHub リポジトリに�
     - サブスクリプションは、web アプリがホスティングされるプランであり、サービスの支払いがここから行われます
     - Azure 内のリソースグループは、サービスを論理的なグループに分ける方法で、グループ名は公開されず、あなただけが見られるものです
     - Azure Web アプリは Windows, Linux もしくは Docker プラットフォームで実行できます。 Grav 向けに Windows を選択します。
-    - The App Service Plan/Location determines which data centre your web app will reside in within Azure and the cost of it
-    - Application Insights is the service on Azure that can help monitor your web app for issues and understand how your end users are interacting with it.  
+    - アプリサービスのプランとロケーションは、web アプリが Azure 内のどのデータセンターに置かれるかと、そのコストを決定します。
+    - アプリケーションインサイトは、 Azure のサービスで、 web アプリの問題を監視し、エンドユーザがどのように web アプリとやりとりしているのかを理解するのに役立ちます。
 
-My recommendation regarding the App Service Plan would be to select the Dev/Test F1 plan for testing purposes.  The plan has some limitations but it will give you the ability to deploy your first Grav site on Azure without incurring any costs.  In terms of the location I would select one that is close to your location.  Also in this example I would avoid deploying Application Insights as it needs coded in order to integrate with Grav. 
+アプリサービスのプランに関する私のおすすめは、テスト目的のために Dev/Test F1 プランを選択することです。このプランにはいくつか制限がありますが、コストの発生がなく Azure に最初の Grav サイトをデプロイできます。ロケーションについては、あなたの場所に近いところを選択します。またこの例では、アプリケーションインサイトのデプロイは避けます。 Grav との統合のためにコードが必要になるからです。
 
 ![Step 3](step3.png)
 
-Your Web App should deploy within a few minutes. 
+web アプリは、数分でデプロイできます。
 
-### Install Composer
+<h3 id="install-composer">Composer のインストール</h3>
 
-Composer is a dependency manager for PHP. Composer will manage the dependencies you require on a project by project basis, meaning Composer will pull in all the required libraries, dependencies and for your application.  As Grav is a PHP application we need to ensure the Composer is installed on the Web App for Grav to run properly. 
+Composer は、 PHP の依存関係を管理します。 Composer はプロジェクトを基準にプロジェクトに必要な依存関係を管理します。つまり、 Composer は必要なライブラリ、依存関係、そしてアプリケーションをすべてインストールします。 Grav は、 PHP アプリケーションなので、 Grav が適切に実行されるには、 Composer がその web アプリにインストールされていることを確認する必要があります。
 
-In order to do this follow these steps:
+これを行うために、以下の手順を踏みます：
 
-    - Open up your Web App
-    - Click on the Extensions setting
-    - Click on Add
-    - Select Composer
-    - Click OK
+    - Web アプリを開く
+    - Extensions 設定をクリック
+    - Add をクリック
+    - Composer を選択
+    - OK をクリック
 
-Once Composer has installed on your Web App you are now ready to deploy your code. 
+Composer が web アプリにインストールされたら、次にコードをデプロイします。
 
-### Deploying Your Code
+<h3 id="deploying-your-code">あなたのコードをデプロイ</h3>
 
-Now that your Web App is up and running and you have the code, it is time to deploy it.  To do that open up the Web App within the Azure Portal. 
+web アプリは、起動され実行中です。そしてコードがあります。いよいよデプロイの時間です。これを行うため、 Azure ポータル内の web アプリを開いてください。
 
-+ Navigate to the *Deployment Options* blade 
++ *Deployment Options* ブレードに移動
 
 ![Step 4](step4.png)
 
-+ Select GitHub as your source
++ ソースとして GitHub を選択
 
-+ You will be asked for credentials to your GitHub account and then presented with options about which repository and branch to pull from, select the options relevant for you
++ GitHub アカウントへのクレデンシャルを尋ねられます。それから、 pull するリポジトリとブランチに関する選択肢が現れます。関係する選択肢を選んでください
 
-+ *Azure will now start to pull your code from GitHub, within a few minutes your site should be live*
++ *Azure は GitHub からコードを pull し始め、数分以内にサイトが動きます*
 
+<h2 id="additional-information">追加情報</h2>
 
-## Additional Information 
+<h3 id="custom-domain">カスタムドメイン</h3>
 
-### Custom Domain
-
-If you wish to use your own website URL, please follow the [official documentation](https://docs.microsoft.com/en-gb/azure/app-service/app-service-web-tutorial-custom-domain).
+独自の web サイト URL を使いたいなら、 [公式ドキュメント](https://docs.microsoft.com/en-gb/azure/app-service/app-service-web-tutorial-custom-domain) に従ってください。
 
 ### Always On
 
-By default all Azure Web Apps are unloaded if they are idle for some period of time.  This is to help conserve resources. If you have selected a Basic or Standard plan you can enable the *Always On* mode, which will keep the app loaded all the time.  The Always On setting can be found within the *Application Settings* blade in your Web App. 
+デフォルトでは、すべての Azure web アプリは、一定の時間でアイドル状態になると、読み込まれなくなります。リソースの節約のためです。 Basic もしくは Standard プランを選択していれば、 *Always On* モードを有効化できます。アプリがいつでも読み込まれるようにするモードです。 Always On 設定は、 Web アプリの *Application Settings* ブレード内にあります。
 
 ### Quotas
 
-If you have selected one of the Free or Shared Web App Plans for your deployment you will be restricted in regards of storage space and compute resources you can use.  To monitor these settings you should monitor the *Quotas* blade. 
+デプロイ用に Free もしくは Shared プランを選択した場合、利用可能なストレージ容量と計算リソースが制限されます。これらの設定を監視するには、 *Quotas* ブレードを監視してください。
 

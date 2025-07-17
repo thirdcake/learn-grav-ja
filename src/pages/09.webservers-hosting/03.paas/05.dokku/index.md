@@ -1,55 +1,56 @@
 ---
 title: Dokku
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-05-11'
+lastmod: '2025-07-17'
 ---
-Dokku is a Docker-based, self-hosted "mini-Heroku" that you can run out of any Virtual Machine (VM), local or remote. The main advantages of using it would be:
 
-* Ability to use Heroku buildpacks, [Procfiles](https://devcenter.heroku.com/articles/procfile) and other architectural elements
-* Ability to use Docker compose-files
-* Self-hosted, so you can control the cost of the VMs or run locally at no cost
-* Use Git as the deploy mechanism
-* Free SSL certificates via the integrated Let's Encrypt mechanism
-* Run multiple Grav sites in one VM with Dokku
+> [!訳注]  
+> このページの内容は、最後のノートにもある通り、 Heroku のガイドをもとにして作成されており、一部の文章は Heroku の記述が混在していると思われます。しかし私の能力ではその部分の補完ができませんので、とりあえず元の文章通りに訳しています。 `Heroku` を `Dokku` に読み替えるだけで良いのか、それとも何か追加の手続きが必要なのかは、 [Dokku のドキュメント](https://github.com/dokku/dokku/) などを参考にしてください。
 
-The first step is to install it inside a fresh VM, running one of these Operating System distributions:
+Dokku は、 Docker ベースで、セルフホスティングの "ミニ Heroku" です。そこでは、仮想マシン (VM) をローカルやリモートで実行できます。これを利用する主なメリットは：
+
+* Heroku のビルドパックや [Procfiles](https://devcenter.heroku.com/articles/procfile) や、その他のアーキテクチャエレメントが利用可能
+* Docker compose-file が使える
+* セルフホスティングである。よって VM のコストを抑えたり、ローカルならコストなしで実行できる
+* デプロイ機構として Git を使える
+* Let's Encrypt を利用した無料の SSL 認証が使える
+* Dokku と 1つの VM で、複数の Grav サイトを実行できる
+
+最初のステップは、新規の VM 内に、以下のオペレーティング・システムのディストリビューションのうちのひとつを動かすことです：
 
 * Ubuntu x64 - Any currently supported release
 * Debian 8.2+ x64
 * CentOS 7 x64 (experimental)
 * Arch Linux x64 (experimental)
 
-To install the latest stable release, connect via Secure Shell (SSH) to your VM and run the following commands as a user who has access to root (sudo):
+最新の安定版リリースをインストールするため、セキュアシェル (SSH) で VM に接続し、以下のコマンドをルート権限 (sudo) で実行してください：
 
 ```bash
 wget https://raw.githubusercontent.com/dokku/dokku/v0.17.9/bootstrap.sh
 sudo DOKKU_TAG=v0.17.9 bash bootstrap.sh
 ```
 
-After the installation-script ends, you need to visit your VMs IP-address or domain-name in a web browser to complete the installation. The screen will prompt you for:
+インストールスクリプトが完了したら、ブラウザで VM の IP アドレスもしくはドメイン名に移動し、インストールを完了させます。スクリーンには以下のプロンプトが表示されます：
 
-* A public SSH key - This is used as the authentication token for deploys (same as Github or Gitlab does)
+* 公開 SSH 鍵 - デプロイ用の認証トークンとして使われます（ GitHub や Gitlab と同じです）  
+    _プロのテクニック： もし **Vultr** か **Digital Ocean** を利用していれば、ダッシュボードから VM に SSH 鍵を追加できます。あとは Dokku が自動でやってくれます_
+* ホスト名 - VM のホスト名と同じでなければいけません
+* アプリに仮想ホスト名を使うか、サブフォルダを使うかを選択する  
+    _仮想ホスト名がおすすめですが、どちらでも使えます_
 
-_Pro trick: If you are using **Vultr** or **Digital Ocean**, you can add the SSH key to the VM from the dashboard and it would be auto-added by Dokku._
+仮想ホスト名のパスにする場合、 **Cloudflare** のようなドメイン名サービス (DNS) プロバイダを経由して VM にドメインやサブドメインを追加し、それから、そのドメインやサブドメインにワイルドカードサブドメインを追加する必要があります。
 
-* Hostname - must match the VM's hostname
-* Slect between the option to use virtualhost-naming or sub-folders for apps
+シンプルにするなら、サブフォルダ構造を使用し、 VM の IP アドレスをホスト名として使用可能です。
 
-_Virtual host naming is typically preferred, but you could use either._
-
-If you go down the virtualhost-naming path, you need to add a domain or subdomain to your VM, via a Domain Name Service provider like **Cloudflare** and also add a wildcard sub-domain of that domain or subdomain.
-
-For simplicity, you can use the sub-folder structure and the VM's IP-address as hostname
-
-Once the installation is complete, in your VM's terminal, create a new app for your Grav web site:
+インストールが完了したら、 VM のターミナルで、 Grav サイト用の新しいアプリを作成してください：
 
 ```bash
 dokku apps:create my-grav-site
 ```
 
-Let's go back to your local computer now.
+ここで、ローカルコンピュータに戻ります。
 
-Checkout the PHP "Getting Started" example Heroku provides with Git, in your local machine's web root, so you can test the site locally prior to deploying it.
+Heroku が提供している PHP "Getting Started" の例を、 Git を使ってローカルマシンの web ルートでクローンしてください。デプロイ前にローカルでサイトをテストできるようになります。
 
 ```bash
 git clone https://github.com/heroku/php-getting-started.git your-folder
@@ -59,19 +60,19 @@ git clone https://github.com/heroku/php-getting-started.git your-folder
 cd your-folder
 ```
 
-Add a Git remote to your Dokku server by doing the following:
+以下のようにして、 Git remote を Dokku サーバに追加します:
 
 ```bash
 git remote add dokku dokku@your-vm-hostname-or-ip:my-grav-site
 ```
 
-and
+そして、
 
 ```bash
 git push dokku master
 ```
 
-After deploying you should see an output similar to this one (this is from a Rails app so it's a bit different but works as an example):
+デプロイ後、以下のような出力が表示されるはずです（これは Rails アプリのものなので、実際は少し違うでしょう。しかし例としては機能します）：
 
 ```bash
 Counting objects: 231, done.
@@ -98,25 +99,25 @@ Total 231 (delta 93), reused 147 (delta 53)
        http://ruby-getting-started.dokku.me
 ```
 
-At the end of the deploy output you will see the URL to your new app. Go ahead and visit it.
+デプロイの出力の最後に、新しいアプリの URL が表示されます。そこを見てください。
 
-You should now see the sample PHP project. Now that all is set, you're ready to go on and run Grav instead of the sample site.
+ここで、サンプル PHP プロジェクトが見られます。すべてが設定され、準備が整いました。サンプルサイトの代わりに Grav を実行できます。
 
-First, delete the web/ folder in your current site folder.
+まず、現在のサイトフォルダから `web/` フォルダを削除してください。
 
-Copy your Grav site files there, making sure you're also copying the `.htaccess` hidden file. Overwrite all the files that were there already.
+そこに Grav サイトのファイルをコピーしてください。 `.htaccess` のような隠しファイルのコピーも忘れずにしてください。すでにあるファイルすべてを上書きします。
 
-Now open the `Procfile`. This is a Heroku-specific file. Change the line to
+`Procfile` を開いてください。これは Heroku 特有のファイルです。次の行を変更します
 
 ```txt
 web: vendor/bin/heroku-php-apache2 ./
 ```
 
-You should make sure the site works locally, prior to uploading it to Heroku, just to ensure the are no errors.
+ローカルでサイトが機能するか確認してください。 Heroku にアップロードする前に、エラーが何も出ないことを確認してください。
 
-Now commit to the repository with: `git add . ; git commit -am 'Added Grav'`
+リポジトリにコミットします： `git add . ; git commit -am 'Added Grav'`
 
-Then edit `composer.json` and add a post deploy command to the `scripts` section:
+それから、 `composer.json` を編集します。 `scripts` セクションにデプロイ後のコマンドを追記します：
 
 ```json
 "scripts": {
@@ -127,21 +128,21 @@ Then edit `composer.json` and add a post deploy command to the `scripts` section
 }
 ```
 
-and commit that to the repository with:
+それから、リポジトリにコミットします：
 
 ```bash
 git add . ; git commit -am 'Add post deploy bin/grav install'
 ```
 
-Then run
+そして、実行します
 
 ```bash
 git push dokku master
 ```
 
-and the site should be good to go!
+これで、サイトが正常に動いているでしょう！
 
-Due to the ephemeral nature of Dokku's filesystem, all needed plugins or themes must be added to `composer.json` just like above and kept there so they are installed every time the site is pushed to Heroku. You can make the Heroku-instance persistent, but it's not a good idea for scaling the app in the future. For example, if you need the Admin-plugin and a theme, add them in composer:
+Dokku のファイルシステムは一時的なものなので、必要なプラグインやテーマはすべて、上記のように `composer.json` に追記し、サイトが Heroku に push されるたびにそれらがインストールされるようにし続ける必要があります。 Heroku のインスタンスを恒久的にすることもできますが、将来的なアプリのスケールアップの点で、良いアイディアとは言えません。たとえば、管理パネルプラグインとテーマが必要な場合、composer に次のように追記します：
 
 ```json
 "scripts": {
@@ -153,5 +154,6 @@ Due to the ephemeral nature of Dokku's filesystem, all needed plugins or themes 
 }
 ```
 
-**Note:** Special thanks to the author of the Heroku guide, as it was used as a base for this one due to the similarities of Dokku and Heroku.
+> [!Note]  
+> Heroku ガイドの著者に感謝します。Dokku と Heroku の類似性により、このガイドをベースとして使うことができました。
 
