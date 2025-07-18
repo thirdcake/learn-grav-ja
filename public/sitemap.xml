@@ -4,7 +4,7 @@
     <loc>https://thirdcake.github.io/learn-grav-ja/</loc>
     <priority>0.7</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-06-23</lastmod>
+    <lastmod>2025-07-18</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/01.basics/</loc>
@@ -16,7 +16,7 @@
     <loc>https://thirdcake.github.io/learn-grav-ja/01.basics/01.what-is-grav/</loc>
     <priority>1.0</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-06-26</lastmod>
+    <lastmod>2025-07-18</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/01.basics/02.requirements/</loc>
@@ -40,7 +40,7 @@
     <loc>https://thirdcake.github.io/learn-grav-ja/01.basics/05.grav-configuration/</loc>
     <priority>1.0</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-06-30</lastmod>
+    <lastmod>2025-07-18</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/01.basics/06.folder-structure/</loc>
@@ -58,7 +58,7 @@
     <loc>https://thirdcake.github.io/learn-grav-ja/01.basics/08.updates/</loc>
     <priority>1.0</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-04-14</lastmod>
+    <lastmod>2025-07-18</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/02.content/</loc>
@@ -76,7 +76,7 @@
     <loc>https://thirdcake.github.io/learn-grav-ja/02.content/02.headers/</loc>
     <priority>1.0</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-04-12</lastmod>
+    <lastmod>2025-07-18</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/02.content/03.collections/</loc>

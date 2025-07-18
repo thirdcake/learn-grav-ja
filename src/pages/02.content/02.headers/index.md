@@ -1,12 +1,16 @@
 ---
 title: 'ヘッダー / フロントマター'
 layout: ../../../layouts/Default.astro
-lastmod: '2025-04-12'
+lastmod: '2025-07-18'
+description: 'ページのフロントマターにより、Grav でページに機能を持たせます。 Grav であらかじめ用意しているヘッダーオプションを紹介し、カスタム方法にも触れます。'
 ---
-ページの上部にある、ページのヘッダー（フロントマターとして知られているもの）は、完全に付随的なものです。Gravでページを表示するときに、無かったとしても全く問題のないものです。Gravには、3つの主要なページタイプがあります（**標準**、**一覧**、そして**モジュラー** ）が、それぞれはヘッダーと関係しています。
+
+マークダウンの上部にある、ページのヘッダー（フロントマターとして知られているもの）は、完全に付属的なものです。  
+Grav でページを表示するときに、無かったとしても、全く問題ありません。  
+Grav には、3つの主要なページタイプがあります（ **標準** 、 **一覧** 、そして **モジュラー** ）が、それぞれはヘッダーと関係しています。
 
 > [!Note]  
-> ヘッダは、**ページのフロントマター(Frontmatter)** とも呼ばれ、HTTPヘッダと混同されないように、そちらで呼ばれることがよくあります。
+> ヘッダは、 **ページのフロントマター(Frontmatter)** とも呼ばれ、 HTTP ヘッダと混同されないように、そちらで呼ばれることがよくあります。
 
 <h2 id="basic-page-headers">基本的なページヘッダー</h2>
 
@@ -18,9 +22,11 @@ lastmod: '2025-04-12'
 cache_enable: false
 ```
 
-デフォルトでは、Gravは、できるだけ速く動作するため、ページファイルのコンテンツをキャッシュ（一時保存）します。ページをキャッシュしたくない場合の、発展的な場面があります。
+デフォルトでは、 Grav は、できるだけ速く動作するため、ページファイルのコンテンツをキャッシュ（一時保存）します。  
+一方で、ページをキャッシュしたくないような、上級向けの場面もあるでしょう。
 
-この例では、コンテンツの中で、動的なTwig変数を使っています。`cache_enable` 変数は、このふるまいを上書きします。Twigのコンテンツ変数については、後ほどの章で解説予定です。この設定では、`true` もしくは `false` を指定します。
+たとえば、コンテンツの中で、動的な Twig 変数を使うような場面です。 `cache_enable` 変数は、デフォルトの動作を上書きします。 Twig のコンテンツ変数については、後ほどの章で解説予定です。  
+この設定の妥当な値は、`true` もしくは `false` です。
 
 ### Date
 
@@ -28,7 +34,9 @@ cache_enable: false
 date: 01/01/2020 3:14pm
 ```
 
-`date` 変数は、このページに関連する特定の日付を設定します。これは、しばしばそのポストが作られた日であり、表示予定日や表示順序を決める目的に使われます。設定しなければ、そのページを最後に **修正した時間** がデフォルトで使われます。
+`date` 変数は、このページに関連する特定の日付を設定します。  
+これは、しばしばその投稿の作成日であり、表示予定日や、表示順序を決める目的で使われます。  
+設定しなければ、そのページを最後に **修正した時間** がデフォルトで使われます。
 
 > [!Note]  
 > `月/日/年` もしくは `日-月-年` による日付表記は、要素間のセパレータを見ることではっきりさせることができます：もしセパレータがスラッシュ（`/`）だった場合、**アメリカ式** で `月/日/年` が推定され、セパレータがダッシュ（`-`）やドット（`.`）だった場合、**ヨーロッパ式** で `日.月.年` が推定されます。
@@ -39,7 +47,8 @@ date: 01/01/2020 3:14pm
 menu: My Page
 ```
 
-`menu` 変数は、ナビゲーションで使われるテキストを設定します。メニューにはいくつかの代替措置があるので、`menu` 変数を設定しそこねたとしても、Gravは代わりに、 `title` 変数を利用します。
+`menu` 変数は、ナビゲーションで使われるテキストを設定します。  
+メニューにはいくつかの代替措置があるので、 `menu` 変数を設定し忘れたとしても、 Grav は代わりに、 `title` 変数を利用します。
 
 ### Published
 
@@ -47,7 +56,9 @@ menu: My Page
 published: true
 ```
 
-デフォルトでは、ページは **表示されます（publishされます）** 。意図的に `published: false` を設定したり、`publish_date` を未来に設定したり、`unpublish_date` を過去に設定しない限りは。この変数の有効な値は、`true` もしくは `false` です。
+デフォルトでは、ページは **公開されます** 。  
+しかし、意図的に `published: false` を設定したり、 `publish_date` を未来の日付に設定したり、 `unpublish_date` を過去の日付に設定した場合は、この限りではありません。  
+この設定の妥当な値は、`true` もしくは `false` です。
 
 ### Slug
 
@@ -55,9 +66,12 @@ published: true
 slug: my-page-slug
 ```
 
-`slug` 変数は、ページURLの一部として設定します。たとえば：上記のような`slug` を設定した場合、`http://yoursite.com/my-page-slug` がURLになるでしょう。もし `slug` がページに設定されなかったら、Gravは（先頭の数字を除いた）フォルダ名を代わりにURLとして使います。
+`slug` 変数は、ページ URL の一部として設定します。  
+たとえば：上記のような `slug` を設定した場合、 `http://yoursite.com/my-page-slug` が URL になるでしょう。  
+もし `slug` がページに設定されなかったら、 Gravは（先頭の数字を除いた）フォルダ名を代わりに URL として使います。
 
-[スラッグ](http://en.wikipedia.org/wiki/Semantic_URL#Slug) は、一般的にすべて小文字で、アクセント文字は英語のアルファベットに置き換えられ、ホワイトスペース（半角の空白）文字はダッシュ（`-`）やアンダースコア（`_`）に置き換えられます。将来的には、Gravは、スラッグ中の `spaces` に対応予定ですが、空白や大文字は推奨しません。
+[スラッグ](http://en.wikipedia.org/wiki/Semantic_URL#Slug) は、一般的にすべて小文字で、アクセント文字は英語のアルファベットに置き換えられ、ホワイトスペース（半角の空白）文字はダッシュ（`-`）やアンダースコア（`_`）に置き換えられます。  
+将来的には、 Grav は、スラッグ中の空白に（ `%20` などによって）対応するかもしれませんが、現時点では、空白や大文字は推奨していません。
 
 たとえば：ブログ投稿のタイトルが `Blog Post Example` だったとき、おすすめのスラッグは、`blog-post-example` です。
 
@@ -69,23 +83,28 @@ taxonomy:
     tag: [sample, demo, grav]
 ```
 
-とても便利なヘッダー変数である `taxonomy` は、[サイト設定](../../01.basics/05.grav-configuration/#site-configuration) ファイルで決めた **タクソノミー（タグやカテゴリーのこと）** に、値を設定できます。
+とても便利なヘッダー変数である `taxonomy` は、 [サイト設定](../../01.basics/05.grav-configuration/#site-configuration) ファイルで決めた **タクソノミー（タグやカテゴリーのこと）** に、値を設定できます。
 
-もしタクソノミーを設定ファイルで決めていなかった場合、この設定は無視されます。この例では、このページは`blog` カテゴリーの記事であり、`sample`、`demo`、`grav` というタグを持っています。これらタクソノミーは、他のページや、プラグイン、テーマから、そのページを探してもらうために使われます。[タクソノミー](../08.taxonomy) の章では、より詳しい概念を説明予定です。
+もしタクソノミーを設定ファイルで決めていなかった場合、この設定は無視されます。  
+上記の例では、このページは `blog` カテゴリーの記事であり、`sample`、`demo`、`grav` というタグを持っています。  
+これらタクソノミーは、他のページや、プラグイン、テーマから、そのページを探してもらうために使われます。  
+[タクソノミー](../08.taxonomy/) の章では、より詳しい概念を説明予定です。
 
 ### Title
 
-ヘッダーがまったく無い場合、ブラウザや検索エンジンで表示されるページタイトルを設定することはできません。そのため、_最低でも_ `title` 変数だけは、ページのヘッダに設定しておくことをおすすめします。
+ヘッダーがまったく無い場合、ブラウザや検索エンジンで表示されるページタイトルを設定することはできません。  
+そのため、 _最低でも_ `title` 変数だけは、ページのヘッダに設定しておくことをおすすめします。
 
 ```yaml
 title: Title of my Page
 ```
 
-`title` 変数が設定されていない場合、Gravは、`slug` 変数を代わりに使おうとします。
+`title` 変数が設定されていない場合、 Grav は、 `slug` 変数を代わりに使おうとします。
 
 <h2 id="advanced-headers">応用的なヘッダ</h2>
 
-次のものは、重要ながらあまり一般的ではない使い方です。より応用的な機能をそのページに提供してくれます。
+次のものは、重要ながら、あまり一般的ではない使い方です。  
+より応用的な機能をそのページに提供してくれます。
 
 ### Append URL extension
 
@@ -93,7 +112,8 @@ title: Title of my Page
 append_url_extension: '.json'
 ```
 
-ページがデフォルトの拡張子を上書きし、プログラム的に設定します。同時に、適切なヘッダ属性をレスポンスに付与します。
+ページがデフォルトの拡張子を上書きし、プログラムが自動的に、その拡張子に設定します。  
+同時に、適切なヘッダ属性をレスポンスに付与します。
 
 ### Cache-Control
 
@@ -101,10 +121,10 @@ append_url_extension: '.json'
 cache_control: max-age=604800
 ```
 
-この変数を入力するときは、[適切な](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control) `cache-control` テキストを設定してください。
+この変数を入力するときは、 [適切な](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control) `cache-control` テキストを設定してください。
 
 > [!Note]  
-> ページのコンテンツ情報が、ユーザーごとに変わる場合は、`no-cache` を使うことを確認してください。そうでなければ、他のユーザーにコンテンツ情報が漏洩するかもしれません。[Expires](#expires) の設定は、`expires: 0` と同じ影響があります。
+> ページのコンテンツ情報が、ユーザーごとに変わる場合は、 `no-cache` を使うようしてください。そうでなければ、他のユーザーにコンテンツ情報が漏洩するかもしれません。 [Expires](#expires) の設定は、`expires: 0` と同じ影響があります。
 
 ### Date Format
 
@@ -112,11 +132,16 @@ cache_control: max-age=604800
 dateformat: 'Y-m-d H:i:s'
 ```
 
-Gravの日付のデフォルト設定を上書きし、ページ単位で設定できます。[PHPのdate書式](https://www.php.net/manual/en/function.date.php) が使えます。
+Grav の日付のデフォルト設定を上書きし、ページ単位で設定できます。  
+[PHP の date 書式](https://www.php.net/manual/en/function.date.php) が使えます。
 
 ### Debugger
 
-`system.yaml` 設定ファイルでデバッガを有効にしていた場合、デバッガはすべてのページで表示されます。これが好ましくない場合や、出力と不整合を起こすこともあります。そのような例には、Ajax呼び出しに、レンダリングされたHTMLを返すようなページがあります。このようなときは、結果のデータに、デバッガが差し込まれていてほしくないでしょう。このページだけデバッガを無効にしたいようなときに、`debugger` ページヘッダを使ってください。
+`system.yaml` 設定ファイルでデバッガを有効にしていた場合、デバッガはすべてのページで表示されます。  
+これが好ましくない場合や、出力と不整合を起こすこともあります。  
+そのような例として、たとえば、 Ajax 呼び出しに、レンダリングされた HTML を返すようなページがあります。
+このようなときは、結果のデータに、デバッガが差し込まれたくないでしょう。  
+このページだけデバッガを無効にしたいようなときに、 `debugger` ページヘッダを使ってください。
 
 ```yaml
 debugger: false
@@ -128,7 +153,8 @@ debugger: false
 etag: true
 ```
 
-ページ単位で、ETag（キャッシュを制御するHTTPヘッダ）をユニークな値で表示するかどうかを、有効化したり無効化したりできます。`system.yaml` で、上書きしない限り、デフォルトでは `false` です。
+ページ単位で、 ETag（キャッシュを制御するHTTPヘッダ） をユニークな値で表示するかどうかを、有効化したり無効化したりできます。  
+`system.yaml` で、上書きしない限り、デフォルトでは `false` です。
 
 ### Expires
 
@@ -139,7 +165,7 @@ expires: 604800
 ページの有効期限は、604800秒（=7日間）です。
 
 > [!Note]  
-> ユーザごとにページのコンテンツ情報が変わるときは、`expires: 0` になっていることを確認してください。そうでなければ、他のユーザに漏洩する可能性があります。[Cache-Control](#cache-control)設定も、あわせて確認してください。
+> ユーザごとにページのコンテンツ情報が変わるときは、 `expires: 0` になっていることを確認してください。そうでなければ、他のユーザに漏洩する可能性があります。 [Cache-Control](#cache-control) 設定も、あわせて確認してください。
 
 ### External Url
 
@@ -147,7 +173,7 @@ expires: 604800
 external_url: https://www.mysite.com/foo/bar
 ```
 
-動的に生成されたURLに上書きできます。
+動的に生成された URL に上書きできます。
 
 ### HTTP Response Code
 
@@ -171,7 +197,8 @@ language: fr
 last_modified: true
 ```
 
-ページ単位で、HTTPのLast-Modifiedヘッダを編集日により表示するかどうかを、有効化したり無効化したりできます。`system.yaml` で上書きしていなければ、デフォルトで `false` です。
+ページ単位で、 HTTP の Last-Modified ヘッダを、修正した日で表示にするかどうかを、有効化したり無効化したりできます。  
+`system.yaml` で上書きしていなければ、デフォルトで `false` です。
 
 ### Lightbox
 
@@ -179,7 +206,12 @@ last_modified: true
 lightbox: true
 ```
 
-厳密に言えば、これはページヘッダとしては標準的ではないのですが、ページに標準のライトボックスのJavaScriptとCSSを読み込みを有効化する一般的な方法です。デフォルトでは、コアの`antimatter` テーマはライトボックスのライブラリを読み込みません。GPMから利用できる **Featherlight** のような、ライトボックスプラグインをインストールしてください。
+厳密に言えば、これはページヘッダとしては標準的ではないのですが、ページに標準のライトボックスの JavaScript と CSS を読み込む一般的な方法です。  
+デフォルトでは、コアの `antimatter` テーマは、ライトボックスのライブラリを読み込みません。  
+GPMから利用できる **Featherlight** のような、ライトボックスプラグインをインストールしてください。
+
+> [!訳注]  
+> `antimatter` テーマは、過去のデフォルトテーマであり、今の Grav コアには同梱されていません。また、 `Featherlight` プラグインについても、すでに開発が止まっているので、この設定値が今も生きているのかどうか、よく分かりません。
 
 ### Login Redirect Here
 
@@ -187,11 +219,14 @@ lightbox: true
 login_redirect_here: false
 ```
 
-`login_redirect_here` 設定は、ユーザが[Gravのログイン・プラグイン](https://github.com/getgrav/grav-plugin-login) でログインしたあとに、そのページがまた表示されるかどうかを設定します。この設定が`false` だった場合、その人は、ログインに成功したあと、より優先的なページへ遷移します。
+`login_redirect_here` 設定は、ユーザが [Grav のログイン・プラグイン](https://github.com/getgrav/grav-plugin-login) でログインしたあとに、そのページがまた表示されるかどうかを設定します。  
+この設定が `false` だった場合、その人は、ログインに成功したあと、より優先的なページへ遷移します。
 
-`true` 設定にすると、その人はログイン後もそのページにいられます。もしこの設定をページのフロントマターに書いていなければ、これがデフォルトの設定です。
+`true` 設定にすると、その人はログイン後もそのページにいられます。  
+もしこの設定をページのフロントマターに書いていなければ、 `true` がデフォルト値です。
 
-このデフォルト設定は、上書きできます。ログインプラグインの設定YAMLに、標準的な場所を指定することができます。
+このデフォルト設定は、上書きできます。  
+ログインプラグインの設定 YAML に、標準的な場所を指定することができます。
 
 ```yaml
 redirect_after_login: '/profile'
@@ -214,13 +249,14 @@ redirect_after_login: '/profile'
 
 | プロパティ | 設定 |
 | -------- | ----------- |
-| **extra:** | Markdown Extraサポートを有効化 (GFM by default) |
+| **extra:** | Markdown Extra サポートを有効化 (GFM by default) |
 | **auto_line_breaks:** | 自動改行を有効化 |
 | **auto_url_links:** | HTMLを自動的にリンク（`<a>`タグ）にすることを有効化 |
 | **escape_markup:** | マークアップタグをエスケープする |
-| **special_chars:** | special characters を自動的に変換するリスト |
+| **special_chars:** | 特殊文字を自動的に変換するリスト |
 
-`user/config/system.yaml` 設定ファイルにより、サイト全体で有効化することもできます。また、 _ページごとに_ この `markdown` ヘッダオプションにより、全体設定を上書きできます。
+`user/config/system.yaml` 設定ファイルにより、サイト全体で有効化することもできます。  
+また、 _ページごとに_ この `markdown` ヘッダオプションにより、全体設定を上書きできます。
 
 ### Never Cache Twig
 
@@ -228,9 +264,15 @@ redirect_after_login: '/profile'
 never_cache_twig: true
 ```
 
-この設定を有効化すると、（Twig処理後の）最終結果をキャッシュして保存するのではなく、ページが読み込まれるごとに動的に変化するプロセスロジックを追加できます。サイト全体では **system.yaml** で有効化・無効化できます。`true`もしくは`false` で設定してください。
+この設定を有効化すると、（Twig 処理後の）最終結果をキャッシュして保存するのではなく、ページが読み込まれるごとに動的に変化するプロセスロジックを追加できます。  
+サイト全体では **system.yaml** で有効化・無効化できます。  
+妥当な値は、 `true`もしくは`false` です。
 
-これは些細な変更ではありますが、特にモジュラページでは便利な変更です。これにより作業中に何度もキャッシュを無効にする必要がなくなります。ページはキャッシュされますが、Twigはキャッシュされません。Twigは、キャッシュされたコンテンツを取得したあとに処理されます。モジュラのフォームでは、モジュラページのキャッシュを無効にしなくても、この設定だけで機能するようになりました。
+これは些細な変更ではありますが、特にモジュラページでは便利な変更です。  
+これにより作業中に何度もキャッシュを無効にする必要がなくなります。  
+ページはキャッシュされますが、Twigはキャッシュされません。  
+Twigは、キャッシュされたコンテンツを取得したあとに処理されます。  
+モジュラのフォームでは、モジュラページのキャッシュを無効にしなくても、この設定だけで機能するようになりました。
 
 > [!Info]  
 > この設定は、`twig_first: true` とは互換性がありません。なぜなら、すべての処理は、一度のTwig呼び出しで起こるからです。
@@ -243,11 +285,18 @@ process:
 	twig: true
 ```
 
-ページのプロセスは、また別の高度な機能です。デフォルトでは、Gravは、`markdown` を処理（パース）しますが、ページ内の `twig` は **処理しません** 。このようにTwigをデフォルトで処理しない理由は、純粋にパフォーマンス上の理由です。一般的には必要とされない機能です。 `process` 変数で、このふるまいを上書きできます。
+ページのプロセスは、また別の高度な機能です。  
+デフォルトでは、 Grav は、 `markdown` を処理（パース）しますが、ページ内の `twig` は **処理しません** 。  
+このように Twig をデフォルトで処理しない理由は、純粋にパフォーマンス上の理由です。  
+一般的には必要とされない機能です。  
+`process` 変数で、この動作を上書きできます。
 
-ある特定のページでは、`markdown` を無効にしたいことがあるかもしれません。100%HTMLで書き、マークダウンの処理を全く必要としないようなときです。または、プラグインが、まったく別の方法でコンテンツを処理することもあります。この値は、`true` もしくは `false` としてください。
+ある特定のページでは、`markdown` を無効にしたいことがあるかもしれません。  
+100% HTML で書き、マークダウンの処理を全く必要としないようなときです。  
+または、プラグインが、まったく別の方法でコンテンツを処理することもあります。  
+妥当な値は、 `true` もしくは `false` です。
 
-Twigテンプレートの機能をコンテンツの中で使いたいようなシチュエーションでは、`twig` 変数をtrueにしてください。
+Twig テンプレートの機能をコンテンツの中で使いたいようなシチュエーションでは、 `twig` 変数を true にしてください。
 
 ### Process Twig First
 
@@ -255,7 +304,9 @@ Twigテンプレートの機能をコンテンツの中で使いたいような�
 twig_first: false
 ```
 
-`true` に設定すると、Twigプロセスが、マークダウンプロセスより先に行われます。これは、Twigでマークダウン処理が必要なテキストを生成するようなときに便利です。注意点として、`cache_enable: false` と **した上で** `twig_first: true` とすると、ページキャッシュは機能しません。
+`true` に設定すると、 Twig 処理が、マークダウンの処理より先に行われます。  
+これは、 Twig でマークダウン処理が必要なテキストを生成するようなときに便利です。  
+注意点として、 `cache_enable: false` **とした上で** `twig_first: true` とすると、ページキャッシュは機能しません。
 
 ### Publish Date
 
@@ -263,7 +314,8 @@ twig_first: false
 publish_date: 01/23/2020 13:00
 ```
 
-オプション設定ですが、自動的に公開する日を設定できます。使える文字列は、 [PHPのstrtotime関数](https://php.net/manual/en/function.strtotime.php) がサポートする日付の値です。
+オプション設定ですが、自動的に公開する日を設定できます。  
+使える文字列は、 [PHP の strtotime 関数](https://php.net/manual/en/function.strtotime.php) がサポートする日付の値です。
 
 ### Redirect
 
@@ -271,15 +323,17 @@ publish_date: 01/23/2020 13:00
 redirect: '/some/custom/route'
 ```
 
-or
+もしくは
 
 ```yaml
 redirect: 'http://someexternalsite.com'
 ```
 
-ページヘッダから、サイト内の別ページもしくはサイト外ページへリダイレクトできます。もちろん、そのページは表示されません。しかし、そのページはGrav内にページとしてあるため、collectionや、メニュー、その他にあり続けます。
+ページヘッダから、サイト内の別ページもしくはサイト外ページへリダイレクトできます。  
+もちろん、そのページは表示されません。  
+しかし、そのページは Grav 内にページとしてあるため、 collection や、メニュー、その他には表示され続けます。
 
-リダイレクトコードを、角括弧を利用して、URLの最後に付け足すこともできます。
+リダイレクトコードを、角括弧を利用して、 URL の最後に付け足すこともできます。
 
 ```yaml
 redirect: '/some/custom/route[303]'
@@ -296,15 +350,15 @@ routes:
     - '/can-be-any-valid-slug'
 ```
 
-フォルダ構造で決められた標準的なURL構造を上書きする **デフォルトURL** を使うことができます。
+フォルダ構造で決められた標準的な URL 構造を上書きする **デフォルトURL** を使うことができます。
 
-**canonicalのURL** を使うこともできます。これは、テーマで canonicalのリンクタグを出力するのに使われます。
+**canonical の URL** を使うこともできます。これは、テーマで canonical のリンクタグを出力するのに使われます。
 
 ```html
 <link rel="canonical" href="https://yoursite/dresses/green-dresses-are-awesome" />
 ```
 
-最後に、あるページの代替ルートとして使える **別名のURL** の配列を指定できます。
+最後に、あるページの代替ルートとして使える **別名の URL** の配列を指定できます。
 
 ### Routable
 
@@ -312,9 +366,15 @@ routes:
 routable: false
 ```
 
-デフォルトでは、すべてのページは **アクセス可能** です。つまり、ブラウザからそのページのURLを指し示せば、そのページにたどり着くということです。しかしながら、特定のコンテンツを持つページは作りたいが、プラグインや他のコンテンツ、もしくはそれら同士だけで呼び出せれば良いということもあります。このわかりやすい例として、 `404 エラー` ページがあります。
+デフォルトでは、すべてのページは **アクセス可能** です。  
+つまり、ブラウザからそのページの URL を指し示せば、そのページにたどり着くということです。  
+しかしながら、特定のコンテンツを持つページは作りたいが、プラグインや他のコンテンツ、もしくはそれら同士だけで呼び出せれば良いということもあります。  
+このわかりやすい例として、 `404 エラー` ページがあります。
 
-Gravは、なにかのページが見つからないときに、`/error` ページを自動的に探します。Grav内に存在するページなので、どのように見えるかを完全に制御できます。しかし、ブラウザからこのページへ直接アクセスされることは望まないでしょうから、このページは一般的に `routable` 変数がfalseに設定されます。`true` もしくは `false` で設定します。
+Grav は、なにかのページが見つからないときに、 `/error` ページを自動的に探します。  
+Grav 内に存在するページなので、どのように見えるかを完全に制御できます。  
+しかし、ブラウザからこのページへ直接アクセスされることは望まないでしょうから、このページは一般的に `routable` 変数が false に設定されます。
+妥当な値は、 `true` もしくは `false` です。
 
 ### SSL
 
@@ -322,7 +382,9 @@ Gravは、なにかのページが見つからないときに、`/error` ペー�
 ssl: true
 ```
 
-特定のページで、SSLの強制を **on** にするか **off**にするかを決められます。`system.yaml` 設定で、`absolute_urls: true` を **選択したときのみ機能します** 。なぜなら、ページのSSLか非SSLかを変更するためには、プロトコルやホストも含めたURL全体が必要だからです。
+特定のページで、 SSL の強制を **on** にするか **off** にするかを決められます。  
+`system.yaml` 設定で、 `absolute_urls: true` を **選択したときのみ機能します**  。  
+なぜなら、ページの SSL か非 SSL かを変更するためには、プロトコルやホストも含めた URL 全体が必要だからです。
 
 ### Summary
 
@@ -333,24 +395,26 @@ summary:
   size: int
 ```
 
-**要約** オプションは、`page.summary()` メソッドの返り値を設定します。これは、しばしばブログ一覧のタイプを作るシナリオで使われますが、ページのコンテンツを要約したいときはいつでも使ってください。利用場面は、次の通りです。
+**要約** オプションは、`page.summary()` メソッドの返り値を設定します。  
+これは、しばしばブログ一覧のタイプを作るシナリオで使われますが、ページのコンテンツを要約したいときはいつでも使ってください。  
+利用場面は、次の通りです。
 
 | プロパティ | 説明 |
-| -------- | ----------- |
-| **enabled:** | Switch off page summary (the summary returns the same as the page content) |
-| **format:** | <ul><li>`long` = Any summary delimiter of the content will be ignored<li>`short` = Detect and truncate content up to summary delimiter position</ul> |
+| -------- | ------ |
+| **enabled:** | ページの要約をスイッチオフする (要約として、ページコンテンツと同じものが返ります) |
+| **format:** | <ul><li>`long` = コンテンツの要約区切りは無視されます<li>`short` = 要約区切りまでのコンテンツを検出し、切り捨てます</ul> |
 
 `size` 属性は、`short` と `long` の設定によって意味が異なります。
 
 | Short サイズ | 説明 |
-| -------- | ----------- |
-| **size: 0** | If no summary delimiter is found, the summary equals the page content, otherwise the content will be truncated up to summary delimiter position |
-| **size:** `int` | Always truncate the content after **int** chars. If a summary delimiter was found, then truncate content up to summary delimiter position |
+| -------- | -------- |
+| **size: 0** | 要約区切りが見つからなかった場合は、ページコンテンツそのものが要約として扱われます。そうでなければ、コンテンツは要約区切りの位置までで切り捨てられます |
+| **size:** `int` | 常に文字 **数** でコンテンツが切り捨てられます。もし要約区切りが見つかった場合、その区切り位置までで切り捨てられます |
 
 | Long サイズ | 説明 |
 | -------- | ----------- |
-| **size: 0** | Summary equals the entire page content |
-| **size:** `int` | The content will be truncated after **int** chars, independent of summary delimiter position |
+| **size: 0** | 要約は、ページコンテンツ全体と同じになります |
+| **size:** `int` | 文字 **数** でコンテンツが切り捨てられます。要約区切りの位置とは独立します |
 
 ### Template
 
@@ -360,9 +424,12 @@ template: custom
 
 [前の章](../01.content-pages) で解説したとおり、ページをレンダリングするテーマのテンプレートは、`.md` ファイルのファイル名を基準にします。
 
-このため、`default.md` ファイルは、有効化されているテーマの `default` テンプレートを使います。もちろん、この設定も上書きできます。単に、ヘッダに `template` 変数を異なるテンプレートに設定するだけです。
+このため、 `default.md` ファイルは、有効化されているテーマの `default` テンプレートを使います。  
+もちろん、この設定も上書きできます。  
+単に、ヘッダに `template` 変数を異なるテンプレートに設定するだけです。
 
-上の例では、そのページは `custom` テンプレートが使われます。この変数は、プラグインのプログラムからページのテンプレートを変える必要があるときのために用意されています。
+上の例では、そのページは `custom` テンプレートが使われます。  
+この変数は、プラグインのプログラムからページのテンプレートを変える必要があるときのために用意されています。
 
 ### Template Format
 
@@ -370,9 +437,12 @@ template: custom
 template_format: xml
 ```
 
-伝統的に、あるページを特定のフォーマット（たとえば、xml、json、その他）で出力したいとき、URLにそのフォーマットを付け足す必要がありました。たとえば、`http://example.com/sitemap.xml` にアクセスすると、ブラウザは、`.xml.twig` で終わる `xml` のtwigテンプレートを使ったコンテンツをレンダリングします。これはとても良いことです。なぜならGravでかんたんにできるからです。
+伝統的に、あるページを特定のフォーマット（たとえば、xml、json、その他）で出力したいとき、 URL にそのフォーマットを付け足す必要がありました。  
+たとえば、 `http://example.com/sitemap.xml` にアクセスすると、ブラウザは、 `.xml.twig` で終わる `xml` の twig テンプレートを使ったコンテンツをレンダリングします。  
+これはとても良いことです。なぜなら Grav でかんたんにできるからです。
 
-`template_format` ページヘッダを使えば、URLに拡張子を使うことなく、ブラウザにどのようにレンダリングするかを伝えることができます。`sitemap` ページに、`template_format: xml` を入力することで、`http://example.com/sitemap` が `.xml` を最後につけなくても機能するようになります。
+`template_format` ページヘッダを使えば、 URL に拡張子を使うことなく、ブラウザにどのようにレンダリングするかを伝えることができます。  
+`sitemap` ページに、 `template_format: xml` を入力することで、 `http://example.com/sitemap` が `.xml` を最後につけなくても機能するようになります。
 
 [Grav サイトマップ・プラグイン](https://github.com/getgrav/grav-plugin-sitemap) では、[このメソッドを使っています。](https://github.com/getgrav/grav-plugin-sitemap/commit/00c23738bdbfe9683627bf0f99bda12eab9505d5#diff-190081f40350c0272970d9171f3437a2) 。 
 
@@ -382,7 +452,8 @@ template_format: xml
 unpublish_date: 05/17/2020 00:32
 ```
 
-オプション設定ですが、自動的に非公開にする日を設定できます。使える文字列は、 [PHPのstrtotime関数](https://php.net/manual/en/function.strtotime.php) がサポートする日付の値です。
+オプション設定ですが、自動的に非公開にする日を設定できます。  
+使える文字列は、 [PHP の strtotime 関数](https://php.net/manual/en/function.strtotime.php) がサポートする日付の値です。
 
 ### Visible
 
@@ -390,11 +461,16 @@ unpublish_date: 05/17/2020 00:32
 visible: false
 ```
 
-デフォルトでは、**ナビゲーション** 内でページは **表示されます** 。フォルダが番号で始まるとき（例 `/01.home`）は表示される一方で、`/error` のようなときは **表示されません** 。このふるまいはヘッダに `visible` 変数を設定することで上書きできます。`true` もしくは `false` で設定してください。
+デフォルトでは、**ナビゲーション** 内でページは **表示されます** 。  
+フォルダが番号で始まるとき（例 `/01.home`）は表示される一方で、 `/error` のような（フォルダが番号で始まっていない）ときは **表示されません**  。  
+この動作は、ヘッダに `visible` 変数を設定することで上書きできます。
+妥当な値は、 `true` もしくは `false` です。
 
 <h2 id="custom-page-headers">カスタム・ページ・ヘッダ</h2>
 
-もちろん、適切なYAML構文を使うことで、独自にカスタムしたページヘッダを作り出せます。これらはそのページに特有のものであり、プラグインやテーマから利用可能です。わかりやすい例として、次のようなサイトマッププラグインで使える変数が設定できます。
+もちろん、適切な YAML 構文を使うことで、独自にカスタムしたページヘッダを作り出せます。  
+これらは、そのページに特有のものであり、プラグインやテーマから利用可能です。  
+わかりやすい例として、次のようなサイトマッププラグインで使える変数が設定できます。
 
 ```yaml
 sitemap:
@@ -402,13 +478,18 @@ sitemap:
     priority: 1.03
 ```
 
-これらのヘッダの重要な点は、Gravはデフォルトでは利用しないことです。**サイトマップ・プラグイン** でのみ読まれます。そして、このページがどれくらいの頻度で修正され、優先度がどの程度なのかを、そのプラグインは決定します。
+これらのヘッダの重要な点は、 Grav は、デフォルトでは利用しないことです。  
+**サイトマップ・プラグイン** でのみ読まれます。  
+そして、このページがどれくらいの頻度で修正され、優先度がどの程度なのかを、そのプラグインは決定します。
 
-このようにあらゆるページのヘッダはドキュメント化されます。そして通常は、ページがヘッダを定義していない場合に備えて、デフォルトの値が用意されています。
+このようにあらゆるページのヘッダはドキュメント化されます。  
+そして通常は、ページがヘッダを定義していない場合に備えて、デフォルトの値が用意されています。
 
-次の例では、ページ特有のデータが保存されています。そしてTwigがそのページコンテンツに使えるようになっています。
+次の例では、ページ特有のデータが保存されています。  
+そして Twig が、そのページコンテンツに使えるようになっています。
 
-たとえば、著者参照を紐付けたいと思うかもしれません。次のようなYAML設定をページヘッダに付け加えると：
+たとえば、著者参照を紐付けたいと思うかもしれません。  
+次のような YAML 設定をページヘッダに付け加えると：
 
 ```yaml
 author:
@@ -417,7 +498,7 @@ author:
     bio: Sandy is a freelance journalist and author of several publications on open source CMS platforms.
 ```
 
-Twigで、これらのアクセスできます：
+Twig で、これらのアクセスできます：
 
 ```twig
 <section id="author-details">
@@ -428,18 +509,17 @@ Twigで、これらのアクセスできます：
 ```
 
 
-もし変数名に、[dashのような特殊文字を使いたいときは](https://github.com/getgrav/grav/issues/1957#issuecomment-723236844) 、[Twigのattribute関数](https://twig.symfony.com/doc/1.x/functions/attribute.html) を使ってください:
+もし変数名に、[dash のような特殊文字を使いたいときは](https://github.com/getgrav/grav/issues/1957#issuecomment-723236844) 、[Twig の attribute 関数](https://twig.symfony.com/doc/1.x/functions/attribute.html) を使ってください:
 
 ```twig
 attribute(page.header, 'plugin-name').active
 ```
 
-
 ## Meta Page Headers
 
-メタ・ヘッダにより、それぞれのページに [標準的なHTMLの**<meta>タグ**](http://www.w3schools.com/tags/tag_meta.asp) を設定できます。同様に、[OpenGraph](http://ogp.me/), [Facebook](https://developers.facebook.com/docs/sharing/best-practices) や、 [Twitter](https://dev.twitter.com/cards/overview) も設定できます。
+メタ・ヘッダにより、それぞれのページに [標準的な HTML の**<meta> タグ**](http://www.w3schools.com/tags/tag_meta.asp) を設定できます。同様に、[OpenGraph](http://ogp.me/), [Facebook](https://developers.facebook.com/docs/sharing/best-practices) や、 [Twitter](https://dev.twitter.com/cards/overview) も設定できます。
 
-<h4 id="standard-metatag-examples">標準的なmetaタグの例</h4>
+<h4 id="standard-metatag-examples">標準的な meta タグの例</h4>
 
 ```yaml
 metadata:
@@ -452,7 +532,7 @@ metadata:
     my_key: 'my_value'
 ```
 
-上記の例は、以下のようなHTMLになります：
+上記の例は、以下のような HTML になります：
 
 ```twig
 <meta name="generator" content="Grav" />
@@ -464,7 +544,7 @@ metadata:
 <meta name="my_key" content="my_value" />
 ```
 
-すべてのHTML5のmetaタグがサポートされています。
+すべての HTML5 の meta タグがサポートされています。
 
 #### OpenGraph Metatag examples
 
@@ -476,7 +556,7 @@ metadata:
     'og:image': http://ia.media-imdb.com/images/rock.jpg
 ```
 
-上記は、次のようなHTMLに変換されます：
+上記は、次のような HTML に変換されます：
 
 ```html
 <meta name="og:title" property="og:title" content="The Rock" />
@@ -485,7 +565,7 @@ metadata:
 <meta name="og:image" property="og:image" content="http://ia.media-imdb.com/images/rock.jpg" />
 ```
 
-OpenGraphのメタタグの全体的な概要については、[公式ドキュメント](http://ogp.me/) を調べてください。
+OpenGraph のメタタグの全体的な概要については、[公式ドキュメント](http://ogp.me/) を調べてください。
 
 #### Facebook Metatag examples
 
@@ -494,13 +574,13 @@ metadata:
     'fb:app_id': your_facebook_app_id
 ```
 
-This will produce the HTML:
+上記は、次のような HTML を作成します：
 
 ```html
 <meta name="fb:app_id" property="fb:app_id" content="your_facebook_app_id" />
 ```
 
-Facebook mostly uses OpenGraph metatags, but there are some Facebook-specific tags and these are supported automatically by Grav.
+Facebook は、ほとんど OpenGraph メタタグを使いますが、 Facebook 特有のタグがあり、これらは Grav で自動的にサポートしています。
 
 #### Twitter Metatag examples
 
@@ -513,7 +593,7 @@ metadata:
     'twitter:image' : https://farm6.staticflickr.com/5510/14338202952_93595258ff_z.jpg
 ```
 
-This will produce the HTML:
+上記は、次のような HTML を作成します：
 
 ```twig
 <meta name="twitter:card" property="twitter:card" content="summary" />
@@ -523,15 +603,18 @@ This will produce the HTML:
 <meta name="twitter:image" property="twitter:image" content="https://farm6.staticflickr.com/5510/14338202952_93595258ff_z.jpg" />
 ```
 
-For a full outline of all Twitter metatags that can be used, please consult the [official documentation](https://dev.twitter.com/cards/overview).
+使用可能なすべての Twitter メタタグに関するアウトライン全般については、 [公式ドキュメント](https://dev.twitter.com/cards/overview) を参照してください。
 
-This really provides a lot of flexibility and power.
+このメタタグが提供するものは、本当に柔軟で強力です。
 
 ## Frontmatter.yaml
 
-一部のヘビーユーザにとって、便利で高度な機能として、ページフォルダにある`frontmatter.yaml` ファイルを通して、共通のfrontmatter値を使用する機能があります。これは、特に多言語サイトで作業するときに便利です。あるページのすべての言語バージョン間で、フロントマターを共有したい場合があります。
+一部のヘビーユーザにとって、便利で高度な機能として、ページフォルダにある `frontmatter.yaml` ファイルを通して、共通の frontmatter 値を使用する機能があります。  
+これは、特に多言語サイトで作業するときに便利です。  
+あるページのすべての言語バージョン間で、フロントマターを共有したい場合があります。
 
-これを利用するためには、ページの`.md` ファイル と一緒に`frontmatter.yaml` ファイルを作り、有効なfrontmatterの値を追加するだけです。たとえば：
+これを利用するためには、ページの `.md` ファイルと一緒に `frontmatter.yaml` ファイルを作り、有効な frontmatter の値を追加するだけです。  
+たとえば：
 
 ```yaml
 metadata:
@@ -540,10 +623,10 @@ metadata:
 ```
 
 > [!Note]  
-> frontmatter.yamlと、ページのフロントマターの両方でヘッダが決められている場合、frontmatter.yamlの値が上書きされます。
+> frontmatter.yaml と、ページのフロントマターの両方でヘッダが決められている場合、 frontmatter.yaml の値が上書きされます。
 
 > [!Warning]  
-> frontmatter.yaml の利用は、ファイル側の機能であり、管理プラグインでは **サポートされません** 。
+> frontmatter.yaml の利用は、ファイルシステム側の機能であり、管理プラグインでは **サポートされません** 。
 
 
 

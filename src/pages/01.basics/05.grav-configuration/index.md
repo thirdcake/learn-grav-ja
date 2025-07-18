@@ -1,7 +1,7 @@
 ---
 title: 'config 設定'
 layout: ../../../layouts/Default.astro
-lastmod: '2025-06-30'
+lastmod: '2025-07-18'
 description: 'Grav の設定は YAML 形式で簡単に管理できます。 system.yaml を中心に各種設定ファイルを紹介します。'
 ---
 
@@ -409,15 +409,15 @@ images:
 **Images** セクションでは、画像の再サンプリングのデフォルト画質を設定したり、画像のキャッシュやデバッグ機能を制御したりできます。
 
 | プロパティ | 説明 |
-| -------- | ----------- |
+| -------- | ------ |
 | **default_image_quality:** | 画像の再サンプリング時に使うデフォルト画質。例えば： `85` = 85% |
 | **cache_all:** | デフォルトで全画像をキャッシュします。 `true` または `false` の値 |
 | **cache_perms:** | **クオート( `'` )で囲ってください！** キャッシュフォルダのデフォルトのパーミッション。通常は： `'0755'` もしくは `'0775'` |
 | **debug:** | 画像のピクセル深度を示すオーバーレイを表示します（たとえば、retina を扱う場合） `true` または `false` の値 |
 | **auto_fix_orientation:** | Try to automatically fix images uploaded with non-standard rotation |
-| **seofriendly:** | SEO-friendly processed image names |
+| **seofriendly:** | SEO に親和的に処理された画像名 |
 | **cls:** | Cumulative Layout Shift. [More details](https://web.dev/optimize-cls/) |
-| **... auto_sizes:** | Automatically add height/width to image |
+| **... auto_sizes:** | 画像に自動的に height/width を追加します |
 | **... aspect_ratio:** | Reserve space with aspect ratio style |
 | **... retina_scale:** | Scale to adjust auto-sizes for better handling of HiDPI resolutions |
 | **defaults:** | (**Grav 1.7+**) |

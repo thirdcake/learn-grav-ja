@@ -1,13 +1,13 @@
 ---
 title: Gravとプラグインのアップデート
 layout: ../../../layouts/Default.astro
-lastmod: '2025-04-14'
+lastmod: '2025-07-18'
 description: 'Grav は、 CLI や管理画面から簡単にアップデート可能です。専用のパッケージマネージャーを使って本体やプラグインを更新できます。'
 ---
 
-Grav と、プラグイン、テーマを最新に保つより良い方法は、**Grav パッケージ・マネージャー(GPM)** を使うことです。すべての情報は、[Grav GPM ドキュメント](../../07.cli-console/04.grav-cli-gpm)にあります。
+Grav と、プラグイン、テーマを最新に保つより良い方法は、 **Grav パッケージ・マネージャー(GPM)** を使うことです。すべての情報は、[Grav GPM ドキュメント](../../07.cli-console/04.grav-cli-gpm/)にあります。
 
-また、**GPM** は、[管理パネル](../../05.admin-panel)プラグインに統合されており、あらゆるアップデートをチェックし、プロンプトを表示し、自動的にインストールします。
+また、**GPM** は、[管理パネル](../../05.admin-panel/) プラグインに統合されており、あらゆるアップデートをチェックし、プロンプトを表示し、自動的にインストールします。
 
 <h3 id="which-version-do-i-have">バージョンの確認方法</h3>
 
@@ -15,21 +15,21 @@ Grav と、プラグイン、テーマを最新に保つより良い方法は、
 
 * **管理パネル** ：Gravのバージョンは、ページのフッターに表示されています。プラグインとテーマのバージョンは、それぞれのセクションに表示されています。
 * **CLI** ：`bin/gpm version grav` コマンドを実行してください。テーマとプラグインのバージョンリストがそれらの名前とともに表示されます。
-* **ファイルシステム** ：バージョンを確認する最もかんたんな方法は、Gravをインストールしたルートディレクトリの`CHANGELOG.md` ファイルを見ることです。プラグインとテーマについても同じで、通常`user/plugins` と、`user/themes` フォルダ内に、それぞれ見つかります。
+* **ファイルシステム** ：ファイルシステムでバージョンを確認する最も簡単な方法は、Gravをインストールしたルートディレクトリの `CHANGELOG.md` ファイルを見ることです。プラグインとテーマについても同様に、通常 `user/plugins` と、 `user/themes` フォルダ内に、それぞれ見つかります。
 
 <h3 id="upgrading-from-grav-1-5-or-older-version">Grav1.5以前のバージョンからのアップグレード</h3>
 
-Updating an older version of Grav may need some extra preparations and work because of the increased minimum requirements and potential incompatibilities.
+Grav の古いバージョンをアップデートするには、いくつかの追加の準備と作業が必要になるかもしれません。最低限のシステム要件が上昇し、互換性の崩れている可能性があるためです。
 
-The basic workflow is following:
+基本的なワークフローは、次の通りです：
 
-- Copy the site to a server with **PHP 7.3** and **CLI** support
-- Upgrade manually **to Grav 1.6.31**
-- Upgrade to the latest version
+- **PHP 7.3** 及び **CLI** のサポートされたサーバにサイトをコピーする
+- 手動で、 **Grav 1.6.31** にアップグレードする
+- 最新バージョンにアップグレードする
 
-A detailed guide **[Upgrading from Grav <1.6](../../08.advanced/09.grav-development/01.grav-15-upgrade-guide)** should help you in the process.
+詳しいガイドは、 **[Grav 1.6 未満からのアップグレード](../../08.advanced/09.grav-development/01.grav-15-upgrade-guide)**  にあります。処理の助けになるでしょう。
 
-### 次のバージョンへのアップグレード
+<h3 id="upgrading-to-the-next-version">次のバージョンへのアップグレード</h3>
 
 次のバージョンにアップデートについては、アップグレード後もすべてが機能することを確認するための特別なガイドがあります。
 
@@ -37,26 +37,26 @@ A detailed guide **[Upgrading from Grav <1.6](../../08.advanced/09.grav-developm
 - **[Grav1.6にアップグレード](../../08.advanced/09.grav-development/02.grav-16-upgrade-guide)**
 
 > [!Note]  
-> Gravの次のバージョンをインストールする前に、このアップグレードガイドを読むことをおすすめします。
+> Grav の次のバージョンをインストールする前に、このアップグレードガイドを読むことをおすすめします。
 
 <h3 id="grav-cms-updates">Grav CMSのアップデート</h3>
 
-Gravをアップデートするより良い方法は、**Gravパッケージ・マネージャ(GPM)** を使うことです。やるべきことは、Gravサイトのルートフォルダに移動し、次のように入力することだけです：
+Grav をアップデートするより良い方法は、**Grav パッケージ・マネージャ(GPM)** を使うことです。やるべきことは、Grav サイトのルートフォルダに移動し、次のように入力することだけです：
 
 ```bash
 bin/gpm selfupgrade -f
 ```
 
 > [!Tip]  
-> コマンドの詳しい情報は、[GPM コマンド > 自身をアップグレード](../../07.cli-console/04.grav-cli-gp/m#self-upgrade) にあります。
+> コマンドの詳しい情報は、 [GPM コマンド > 自身をアップグレード](../../07.cli-console/04.grav-cli-gpm/#self-upgrade) にあります。
 
-### Plugin and Theme Updates
+<h3 id="plugin-and-theme-updates">プラグインとテーマのアップデート</h3>
 
-プラグインとテーマは、Gravサイトのルートフォルダで、次のようにコマンドを実行することでアップデートできます：
+プラグインとテーマは、 Grav サイトのルートフォルダで、次のようにコマンドを実行することでアップデートできます：
 
 ```bash
 bin/gpm update
 ```
 > [!Tip]  
-> コマンドの詳しい情報は、[GPM コマンド > 自身をアップグレード](../../07.cli-console/04.grav-cli-gp/m#self-upgrade) にあります。
+> コマンドの詳しい情報は、[GPM コマンド > 自身をアップグレード](../../07.cli-console/04.grav-cli-gpm/#self-upgrade) にあります。
 
