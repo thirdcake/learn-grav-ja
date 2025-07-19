@@ -1,7 +1,7 @@
 ---
 title: 'config 設定'
 layout: ../../../layouts/Default.astro
-lastmod: '2025-07-18'
+lastmod: '2025-07-19'
 description: 'Grav の設定は YAML 形式で簡単に管理できます。 system.yaml を中心に各種設定ファイルを紹介します。'
 ---
 
@@ -438,7 +438,7 @@ media:
 
 | プロパティ | 説明 |
 | -------- | ----------- |
-| **enable_media_timestamp:** | Enable media timetsamps |
+| **enable_media_timestamp:** | メディアのタイムスタンプを有効化 |
 | **unsupported_inline_types:** | Array of supported media types to try to display inline. These file types are placed within `[]` brackets |
 | **allowed_fallback_types:** | Array of allowed media types of files found if accessed via Page route. These file types are placed within `[]` brackets |
 | **auto_metadata_exif:** | Automatically create metadata files from Exif data where possible |
@@ -466,12 +466,12 @@ session:
 | -------- | ----------- |
 | **enabled:** | Enable Session support. `true` または `false` の値 |
 | **initialize:** | Initialize session from Grav (if `false`, plugin needs to start the session) |
-| **timeout:** | Timeout in seconds. For example: `1800` |
-| **name:** | Name prefix of the session cookie. Use alphanumeric, dashes or underscores only. Do not use dots in the session name. For example: `grav-site` |
-| **uniqueness:** | Should sessions be `path` based or `security.salt` based |
-| **secure:** | Set session secure. If `true`, indicates that communication for this cookie must be over an encrypted transmission. Enable this only on sites that run exclusively on HTTPS. `true` または `false` の値 |
-| **httponly:** | Set session HTTP only. If `true`, indicates that cookies should be used only over HTTP, and JavaScript modification is not allowed. `true` または `false` の値 |
-| **samesite:** | Set session SameSite. Possible values are Lax, Strict and None. See [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite) |
+| **timeout:** | タイムアウトの秒数 例えば： `1800` |
+| **name:** | セッション cookie のプレフィックス名。アルファベット、ダッシュ、アンダースコアのみ使えます。セッション名内にドットは使えません。例えば： `grav-site` |
+| **uniqueness:** | セッションを `path` ベースとするか `security.salt` ベースとするか |
+| **secure:** | セッションを安全に設定。 `true` のとき、暗号化された通信上でのみやりとりされる。この設定は、 HTTPS で実行されているサイトでのみ有効化してください。 `true` または `false` の値 |
+| **httponly:** | セッションを HTTP only に設定。 `true` のとき、クッキーは HTTP のときのみ利用でき、 JavaScript による修正は許可しません。 `true` または `false` の値 |
+| **samesite:** | セッションを SameSite に設定。設定可能な値は、 Lax, Strict 及び None 。  [こちら](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite) を参照してください |
 | **domain:** | The session domain to be used in the responses. Use only if you you rewrite the site domain for example in a Docker Container. |
 | **path:** | The session path to be used in the responses. Use only if you you rewrite the site subfolder for example in a Docker Container. |
 
@@ -486,10 +486,12 @@ gpm:
   official_gpm_only: true
 ```
 
-**GPM** セクションの選択肢は、GravのGPM（Grav パッケージ・マネージャー）を制御します。たとえば、GPMが公式のソースを使用するように制限したり、パッケージを取得する方法を選択したりできます。また、安定版リリースやテストリリースを選択したり、プロキシURLの設定もできます。
+**GPM** セクションの選択肢は、 Grav の GPM （Grav パッケージ・マネージャー）を制御します。  
+たとえば、 GPM が公式のソースを使用するように制限したり、パッケージを取得する方法を選択したりできます。  
+また、安定版リリースやテストリリースを選択したり、プロキシ URL の設定もできます。
 
 | プロパティ | 説明 |
-| -------- | ----------- |
+| -------- | ------ |
 | **releases:** | Set to either `stable` or `testing` to determine if you want to update to the latest stable or testing build |
 | **proxy_url:** | Configure a manual proxy URL for GPM. For example: `127.0.0.1:3128` |
 | **method:** | Either `'curl'`, `'fopen'` or `'auto'`. `'auto'` will try fopen first and if not available cURL |
@@ -504,12 +506,13 @@ accounts:
   storage: file
 ```
 
-Accounts設定は、Flex Usersの新しい体験ができます。基本的に、ユーザは、より力強くパフォーマンスの良いFlex objectsとして保存されます。
+Accounts 設定は、 Flex Users の新しい体験ができます。  
+基本的に、ユーザは、より力強くパフォーマンスの良い Flex objects として保存されます。
 
 | プロパティ | 説明 |
-| -------- | ----------- |
-| **type:** | Account type: `regular` or `flex` |
-| **storage:** | Flex storage type: `file` or `folder` |
+| -------- | ------ |
+| **type:** | アカウントタイプ： `regular` もしくは `flex` |
+| **storage:** | Flex ストレージタイプ： `file` もしくは `folder` |
 
 ### Flex
 
@@ -527,10 +530,11 @@ flex:
       lifetime: 600
 ```
 
-Flex Objectsのcacheは、**Grav 1.7** で新しく追加されました。これは、すべてのFlex typesのためのデフォルト設定ですが、それぞれの`Flex Directory` で上書き可能です。
+Flex Objects の cache は、**Grav 1.7** で新しく追加されました。  
+これは、すべての Flex types のためのデフォルト設定ですが、それぞれの `Flex Directory` で上書き可能です。
 
 | プロパティ | 説明 |
-| -------- | ----------- |
+| -------- | ------ |
 | **cache:** | (**Grav 1.7+**) |
 | **... index:** | (**Grav 1.7+**) |
 | **... ... enabled:** | Set to true to enable Flex index caching. Is used to cache timestamps in files (**Grav 1.7+**) |
@@ -551,10 +555,11 @@ strict_mode:
   blueprint_compat: false
 ```
 
-Strictモードは、新しいバージョンのYAMLとTwigプロセッサに移行することで、将来のバージョンのGravへの移行がより簡単になります。これらは、すべてのサードパーティ製拡張機能と互換性があるとは限りません。
+Strict モードは、新しいバージョンの YAML と Twig プロセッサに移行することで、将来のバージョンの Grav への移行がより簡単になります。  
+これらは、すべてのサードパーティ製拡張機能と互換性があるとは限りません。
 
 | プロパティ | 説明 |
-| -------- | ----------- |
+| -------- | ------ |
 | **yaml_compat:** | Enables YAML backwards compatibility |
 | **twig_compat:** | Enables deprecated Twig autoescape setting |
 | **blueprint_compat:** | Enables backward compatible strict support for blueprints |
@@ -564,9 +569,12 @@ Strictモードは、新しいバージョンのYAMLとTwigプロセッサに移
 
 <h2 id="site-configuration">サイト設定</h2>
 
-`system.yaml` と同様に、Gravには、デフォルトの `site.yaml` という設定ファイルも提供されています。それは、フロントエンドの特定の設定、たとえば著者名、著者メールアドレスや、タグ設定なども設定されています。system.yamlと同じように、 `user/config/site.yaml` に独自の設定ファイルを作ることで、上書きできます。このファイルを使って、コンテンツやテンプレートで参照したい任意の設定オプションが使えます。
+`system.yaml` と同様に、 Grav には、デフォルトの `site.yaml` という設定ファイルも提供されています。  
+これは、フロントエンドの特定の設定、たとえば著者名、著者メールアドレスや、タグ設定なども設定されています。  
+system.yaml と同じように、 `user/config/site.yaml` に独自の設定ファイルを作ることで、上書きできます。  
+このファイルを使って、コンテンツやテンプレートで参照したい任意の設定オプションが使えます。
 
-Gravが提供するデフォルトの `system/config/site.yaml` ファイルは、次のようなものです：
+Grav が提供するデフォルトの `system/config/site.yaml` ファイルは、次のようなものです：
 
 ```yaml
 title: Grav                                 # Name of the site
@@ -609,11 +617,11 @@ blog:
 このサンプルファイルの要素を詳しく見ていきましょう：
 
 | プロパティ | 説明 |
-| -------- | ----------- |
-| **title:** | The title is a simple string variable that can be referenced whenever you want to display the name of this site |
+| -------- | ------ |
+| **title:** | タイトルとは、シンプルな文字列の変数で、サイト名を表示したいときにいつでも参照されるものです |
 | **author:** | |
-| ... **name:** | The name of the author of the site, that can be referenced whenever you need it |
-| ... **email:** | A default email for use in your site |
+| ... **name:** | サイトの著者名です。必要な場合にいつでも参照できます |
+| ... **email:** | サイトで利用するデフォルトの email |
 | **taxonomies:** | An arbitrary list of high-level types that you can use to organize your content.  You can assign content to specific taxonomy types, for example, categories or tags. Feel free to edit, or add your own |
 | **metadata:** | Set default metadata for all your pages, see the [content page headers](../../02.content/02.headers) section for more details |
 | **summary:** | |
@@ -626,7 +634,8 @@ blog:
 
 <h2 id="security">セキュリティ</h2>
 
-セキュリティを強化するために、 `system/config/security.yaml` ファイルがあります。これは、いくつかの安全側のデフォルト設定がしてあり、コンテンツを **保存** したり、**ツール** の新しい **Reports** セクションに、Adminプラグインで使われます。
+セキュリティを強化するために、 `system/config/security.yaml` ファイルがあります。  
+これは、いくつかのデフォルト設定が安全側でしてあり、コンテンツを **保存** したり、**ツール** の新しい **Reports** セクションに、管理パネルプラグインで使われます。
 
 デフォルトの設定は、次のとおりです：
 
@@ -676,43 +685,47 @@ sanitize_svg: true
 
 <h2 id="other-configuration-settings-and-files">その他の設定とファイル設定</h2>
 
-ユーザー設定は、完全に任意です。デフォルトの設定を、好きなように上書きできます。この上書きは、サイト上のシステム、サイト、そしていかなるプラグインにも適用されます。
+ユーザー設定は、完全に任意です。  
+デフォルトの設定を、好きなように上書きできます。  
+この上書きは、サイト上のシステム、サイト、そしていかなるプラグインにも適用されます。
 
-また、上記で解説した `user/config/system.yaml` や、`user/config/site.yaml` ファイルにも制限はありません。ほかの `.yaml` 設定ファイルを `user/config/` フォルダに作成できますし、Gravでは、自動的にそれらを読み込まれます。
+また、上記で解説した `user/config/system.yaml` や、`user/config/site.yaml` ファイルにも制限はありません。  
+ほかの `.yaml` 設定ファイルを `user/config/` フォルダに作成できますし、 Grav では、自動的にそれらが読み込まれます。
 
-たとえば、`user/config/data.yaml` という新しい設定ファイルがあったとして、このファイルのyaml変数でcountを呼び出すとします：
+たとえば、`user/config/data.yaml` という新しい設定ファイルがあったとして、このファイルの yaml 変数で count を呼び出すとします：
 
 ```
 count: 39
 ```
 
-この変数は、Twigテンプレートで、次のような構文を使ってアクセスできます：
+この変数は、 Twig テンプレートで、次のような構文を使ってアクセスできます：
 
 ```
 {{ config.data.count }}
 ```
 
-また、プラグインからは、PHPによって、次のようなコードでアクセスできます：
+また、プラグインからは、 PHP によって、次のようなコードでアクセスできます：
 
 ```
 $count_var = Grav::instance()['config']->get('data.count');
 ```
 
 > [!Note]  
-> また、カスタムファイルを管理プラグインで編集できるようにするために、カスタムのブループリントファイルを提供することもできます。関連する[Admin クックブックセクションのレシピ](../../10.cookbook/04.admin-recipes#add-a-custom-yaml-file)を確認してください。
+> また、カスタムファイルを管理プラグインで編集できるようにするために、カスタムのブループリントファイルを提供することもできます。関連する[管理パネルプラグイン クックブックセクションのレシピ](../../10.cookbook/04.admin-recipes/#add-a-custom-yaml-file) を確認してください。
 
 <h3 id="config-variable-namespacing">設定変数の名前空間</h3>
 
 設定ファイルへのパスは、設定オプションの **名前空間（namespace）** として使われます。
 
-かわりに、すべてのオプションをひとつのファイルに詰めて、YAML構造を使い、設定オプションの階層を指定することもできます。この名前空間は、**パス + ファイル名 + オプション名** の組み合わせで作られます。
+かわりに、すべてのオプションをひとつのファイルに詰めて、 YAML 構造を使い、設定オプションの階層を指定することもできます。この名前空間は、**パス + ファイル名 + オプション名** の組み合わせで作られます。
 
-たとえば：あるオプション `author: "フランク スミス"` が、`plugins/myplugin.yaml` にあったとして、これは次のようにアクセスできます： `plugins.myplugin.author` 。しかしながら、`plugins.yaml` というファイルもあった場合で、そのファイルに `myplugin: author: "フランク スミス"` という名前のオプションがあった場合に、同じ `plugins.myplugin.author` によりたどりつけます。
+たとえば：あるオプション `author: "フランク スミス"` が、 `plugins/myplugin.yaml` にあったとして、これは次のようにアクセスできます： `plugins.myplugin.author` 。  
+しかしながら、 `plugins.yaml` というファイルもあった場合で、そのファイルに `myplugin: author: "フランク スミス"` という名前のオプションがあった場合に、同じ `plugins.myplugin.author` によりたどりつけます。
 
 設定ファイルの構造を、いくつか例示します：
 
 | ファイル名 | 説明 |
-| -------- | ----------- |
+| -------- | ------ |
 | **user/config/system.yaml**           | グローバルなシステム設定ファイル |
 | **user/config/site.yaml**             | サイト固有の設定ファイル |
 | **user/config/plugins/myplugin.yaml** | 「myplugin」プラグインの個別設定ファイル |
@@ -723,7 +736,9 @@ $count_var = Grav::instance()['config']->get('data.count');
 
 <h3 id="plugins-configuration">プラグインの設定</h3>
 
-ほとんどの **プラグイン** は、それぞれ独自のYAML設定ファイルを持ちます。このファイルを直接編集するよりは、 `user/config/plugins/` ディレクトリにコピーすることを推奨します。これにより、プラグインのアップデートにより、設定が上書きされないことを確認できますし、設定変更可能なオプションをひとつの便利な場所に留めることができます。
+ほとんどの **プラグイン** は、それぞれ独自の YAML 設定ファイルを持ちます。  
+このファイルを直接編集するよりは、 `user/config/plugins/` ディレクトリにコピーすることを推奨します。  
+これにより、プラグインのアップデートにより、設定が上書きされないことを確認できますし、設定変更可能なオプションをひとつの便利な場所に留めることができます。
 
 もし、`user/plugins/myplugin` というプラグインがあり、設定ファイルが `user/plugins/myplugin/myplugin.yaml` にあるとき、このファイルをコピーして、 `user/config/plugins/myplugin.yaml` そのファイルをそこで編集できます。
 
@@ -731,5 +746,6 @@ $count_var = Grav::instance()['config']->get('data.count');
 
 <h3 id="themes-configuration">テーマの設定</h3>
 
-**テーマ** においても、プラグインと同じルールが適用されます。このため、 `user/themes/mytheme` というファイルに、`user/themes/mytheme/mytheme.yaml` という設定ファイルがあった場合、このファイルを `user/config/themes/mytheme.yaml` にコピーし、そこで編集できます。
+**テーマ** においても、プラグインと同じルールが適用されます。  
+このため、 `user/themes/mytheme` というファイルに、 `user/themes/mytheme/mytheme.yaml` という設定ファイルがあった場合、このファイルを `user/config/themes/mytheme.yaml` にコピーし、そこで編集できます。
 
