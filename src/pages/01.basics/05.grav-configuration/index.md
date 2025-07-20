@@ -51,8 +51,8 @@ http_x_forwarded:
 
 | プロパティ | 説明 |
 | -------- | ------ |
-| **absolute_urls:** | `base_url` を絶対 URL にするか、相対 URL にするか|
-| **timezone:** | 受け取れる値は、 [こちら](https://www.php.net/manual/ja/timezones.php) |
+| **absolute_urls:** | [テーマ変数](../../03.themes/06.theme-vars/#base-url-variable) の `base_url` を絶対 URL にするか、相対 URL にするか|
+| **timezone:** | 受け取れる値は、 [こちら](https://www.php.net/manual/ja/timezones.php) （日本の場合は `Asia/Tokyo` ） |
 | **default_locale:** | デフォルトのロケール（システムにとってのデフォルト） |
 | **param_sep:** | Grav での URL のパラメータに使います。変更の影響が分からないうちは触らないでください。 Windows 上の Apache web サーバーでの運用中は、 Grav は自動的に `;` を設定します。 |
 | **wrapped_site:** | テーマやプラグインに、 Grav が他のプラットフォームに含まれているかを知らせます。 `true` もしくは `false` が使えます |
@@ -87,10 +87,10 @@ languages:
 | プロパティ | 説明 |
 | -------- | ----------- |
 | **supported:** | サポート対象言語のリスト。例： `[en, fr, de]` |
-| **default_lang:** | デフォルトは、上記の supported に最初に書いた言語。サポート対象言語のリスト中から選ばなければいけません |
+| **default_lang:** | 入力がない場合、上記の supported に最初に書いた言語になります。サポート対象言語のリスト中から選ばなければいけません |
 | **include_default_lang:** | URL すべてに、default lang の接頭辞を追加する。 `true` もしくは `false` |
-| **include_default_lang_file_extension:** | 有効化すると、ページを保存するときに、デフォルトの言語をファイル拡張子に追加します（例： `.en.md` ）デフォルト言語でも `.md` ファイル拡張子を使い続けたい場合は、無効化してください。 `true` または `false` の値 (**Grav 1.7.0 以上**) |
-| **pages_fallback_only:** | サポートされている言語からページコンテンツを探してフォールバックします。 `true` または `false` の値 |
+| **include_default_lang_file_extension:** | 有効化すると、ページを保存するときに、デフォルトの言語をファイル拡張子に追加します（例： `.en.md` ）デフォルト言語で `.md` ファイル拡張子を使い続けたい場合は、無効化してください。 `true` または `false` の値 (**Grav 1.7.0 以上**) |
+| **pages_fallback_only:** | サポートされている言語からのみページコンテンツを探してフォールバックします。 `true` または `false` の値 |
 | **translations:** | デフォルトで翻訳を有効化します。 `true` または `false` の値 |
 | **translations_fallback:** | 有効言語が存在しない場合に、サポートされた翻訳でフォールバックします `true` または `false` の値 |
 | **session_store_active:** | セッションに有効言語を保存します `true` または `false` の値 |
