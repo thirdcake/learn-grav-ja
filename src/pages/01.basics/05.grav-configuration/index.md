@@ -1,7 +1,7 @@
 ---
 title: 'config 設定'
 layout: ../../../layouts/Default.astro
-lastmod: '2025-07-19'
+lastmod: '2025-07-21'
 description: 'Grav の設定は YAML 形式で簡単に管理できます。 system.yaml を中心に各種設定ファイルを紹介します。'
 ---
 
@@ -9,12 +9,12 @@ description: 'Grav の設定は YAML 形式で簡単に管理できます。 sys
 YAML は、非常に直感的なので、読み書きともに簡単ですが、利用可能な構文を完全に理解するには、 [高度な設定の章の YAML ページ](../../08.advanced/11.yaml/) をチェックしてください。
 
 > [!Tip]  
-> 本番サイトを、安全かつ最適化するクイックガイドとして、 [セキュリティ > 設定](../../13.security/02.configuration/) の章を参照してください。
+> 本番サイトを、安全に最適化するクイックガイドとして、 [セキュリティ > 設定](../../13.security/02.configuration/) の章を参照してください。
 
 <h2 id="system-configuration">システム設定</h2>
 
-Grav は、ユーザにとって可能な限り簡単にすることにフォーカスしており、設定においても同様です。  
-Grav には、賢明な初期設定のオプションが用意されており、これらは `system/config/system.yaml` ファイルに含まれています。
+Grav は、ユーザーができるだけ簡単に扱えることを念頭に置いており、 config の設定も簡単です。  
+Grav には、ベターなオプションが初期設定されており、これらは `system/config/system.yaml` ファイルに含まれています。
 
 しかしながら、 **絶対にこのファイルを変更しないでください** 。  
 かわりに、あらゆる設定変更は、 `user/config/system.yaml` というファイルに保存してください。  
@@ -82,7 +82,9 @@ languages:
   content_fallback: {}
 ```
 
-**Languages** 部分は、サイトの言語を設定します。サポート対象とする言語の種類、 URL のデフォルトの言語の指定、翻訳の設定などが含まれます。 **Languages** 部分の内訳は、以下の通りです：
+**Languages** エリアは、サイトの言語を設定します。  
+サポート対象とする言語の種類、 URL のデフォルトの言語の指定、翻訳の設定などが含まれます。  
+**Languages** エリアの内訳は、以下の通りです：
 
 | プロパティ | 説明 |
 | -------- | ----------- |
@@ -111,7 +113,7 @@ home:
 | プロパティ | 説明 |
 | -------- | ----------- |
 | **alias:** | home ページへのデフォルト path 。例： `/home` or `/` |
-| **hide_in_urls:** | URL で home ページへのルーティングを隠す。 `true` または `false` の値 |
+| **hide_in_urls:** | [home ページへのルーティングを隠す](../../02.content/10.routing/#hiding-the-home-route) 。 `true` または `false` の値 |
 
 ### Pages
 
@@ -171,15 +173,17 @@ pages:
     ignore_fields: ['form','forms']
 ```
 
-`system/config/system.yaml` ファイルの **Pages** セクションでは、多くのテーマに関係した設定を行います。たとえば、サイトを表示する際に使うテーマを設定したり、ページの表示順や、twig、マークダウンプロセスのデフォルト設定、などです。ページの表示に影響を与える決定の多くが、この場所です。
+`system/config/system.yaml` ファイルの **Pages** セクションでは、多くの主要なテーマに関係した設定を行います。  
+たとえば、サイトをレンダリングするテーマを設定したり、ページの表示順や、 twig 、マークダウンプロセスのデフォルト設定、などです。  
+このセクションには、ページの表示に影響を与える決定がたくさんあります。
 
 | プロパティ | 説明 |
-| -------- | ----------- |
+| -------- | ------ |
 | **type:** | フロントエンドで、 **Flex Pages** を有効化するための実験的設定。 `flex` にすると有効化し、そうでない場合は `regular` とします。デフォルトでは `regular` です。(**Grav 1.7+**) |
 | **theme:** | ここでデフォルトテーマを設定します。デフォルトは `quark` です。 |
 | **order:** | |
-| ... **by:** | `default` のページ順です。 `alpha` （アルファベット）もしくは `date` （日付） |
-| ... **dir:** | デフォルトのページを並べる方向です。 `asc` （昇順）もしくは `desc` （降順） |
+| ... **by:** | ページ順。 `default` （`01.` `02.` の順）, `alpha` （アルファベット）もしくは `date` （日付） |
+| ... **dir:** | デフォルトのページを並べる方向。 `asc` （昇順）もしくは `desc` （降順） |
 | **list:** | |
 | ... **count:** | ページあたりのデフォルトのアイテム数 |
 | **dateformat:** | |
@@ -191,7 +195,7 @@ pages:
 | ... **markdown:** | フロントエンドでマークダウン処理を有効化もしくは無効化する。 `true` または `false` の値 |
 | ... **twig:** | フロントエンドで Twig 処理を有効化もしくは無効化する。 `true` または `false` の値 |
 | **twig_first:** | マークダウンと Twig の両方をページで処理するときに、マークダウン処理よりも前に Twig を処理する。 `true` または `false` の値 |
-| **never_cache_twig:** | これを有効化すると、結果をキャッシュ・保存せずに、ページの読み込みごとに動的に変化するロジック処理を追加できます。 **system.yaml** では、サイト全体での有効化/無効化ができます。特定のページ単位で設定する方法もあります。 `true` または `false` の値 |
+| **never_cache_twig:** | これを有効化すると、結果をキャッシュ・保存せずに、ページの読み込みごとに動的に変化するロジック処理を追加できます。 **system.yaml** では、サイト全体での有効化/無効化ができます。 [特定のページ単位で設定する方法](../../02.content/02.headers/#never-cache-twig) もあります。 `true` または `false` の値 |
 | **events:** | |
 | ... **page:** | ページレベルのイベントの有効化 `true` または `false` の値 |
 | ... **twig:** | Twig レベルのイベントの有効化 `true` または `false` の値 |
@@ -204,7 +208,7 @@ pages:
 | ... **valid_link_attributes:** | 適切な属性をマークダウンリンクを通して渡します (**Grav 1.7+**) |
 | **types:** | 有効なページタイプのリストです。例： `[txt,xml,html,htm,json,rss,atom]` |
 | **append_url_extension:** | ページの拡張子をページ URL に追加します。（例： `.html` の場合 **/path/page.html** になります） |
-| **expires:** | ページの有効期限（秒） (604800 seconds = 7 days) (`no cache` も可能) |
+| **expires:** | ページの有効期限（秒） (604800 秒 = 7 日間) (`no cache` も可能) |
 | **cache_control:** | 設定しない場合は空欄にできます。もしくは、 [有効な](https://developer.mozilla.org/ja/docs/Web/HTTP/Reference/Headers/Cache-Control) `cache-control` テキストの値です |
 | **last_modified:** | ファイルの修正タイムスタンプをもとに、最終更新日のヘッダを設定します。 `true` または `false` の値 |
 | **etag:** | HTTP レスポンスヘッダの etag を設定。 `true` または `false` の値 |
@@ -244,7 +248,8 @@ cache:
     database:
 ```
 
-**キャッシュ** セクションでは、サイトのキャッシュを設定できます。メソッドを有効化したり、無効化したり、選んだりできます。
+**キャッシュ** セクションでは、サイトのキャッシュを設定できます。  
+メソッドを有効化したり、無効化したり、選んだりできます。
 
 | プロパティ | 説明 |
 | -------- | ----------- |
@@ -464,16 +469,16 @@ session:
 
 | プロパティ | 説明 |
 | -------- | ----------- |
-| **enabled:** | Enable Session support. `true` または `false` の値 |
-| **initialize:** | Initialize session from Grav (if `false`, plugin needs to start the session) |
+| **enabled:** | セッションを有効化 `true` または `false` の値 |
+| **initialize:** | Grav からセッションを初期化（ `false` の場合、プラグインがセッションをスタートさせる必要があります） |
 | **timeout:** | タイムアウトの秒数 例えば： `1800` |
 | **name:** | セッション cookie のプレフィックス名。アルファベット、ダッシュ、アンダースコアのみ使えます。セッション名内にドットは使えません。例えば： `grav-site` |
 | **uniqueness:** | セッションを `path` ベースとするか `security.salt` ベースとするか |
 | **secure:** | セッションを安全に設定。 `true` のとき、暗号化された通信上でのみやりとりされる。この設定は、 HTTPS で実行されているサイトでのみ有効化してください。 `true` または `false` の値 |
 | **httponly:** | セッションを HTTP only に設定。 `true` のとき、クッキーは HTTP のときのみ利用でき、 JavaScript による修正は許可しません。 `true` または `false` の値 |
 | **samesite:** | セッションを SameSite に設定。設定可能な値は、 Lax, Strict 及び None 。  [こちら](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite) を参照してください |
-| **domain:** | The session domain to be used in the responses. Use only if you you rewrite the site domain for example in a Docker Container. |
-| **path:** | The session path to be used in the responses. Use only if you you rewrite the site subfolder for example in a Docker Container. |
+| **domain:** | レスポンスにセッション cookie の domain 属性を明記する。 Docker コンテナのように、サイトドメインを書き換えている場合にのみ利用してください。 |
+| **path:** | レスポンスにセッション cookie の path 属性を明記する。Docker コンテナのようにサイトのサブフォルダを書き換えている場合のみ利用してください。 |
 
 ### GPM
 
