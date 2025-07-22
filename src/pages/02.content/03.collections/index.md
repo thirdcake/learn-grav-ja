@@ -1,13 +1,21 @@
 ---
 title: ページ・コレクション
 layout: ../../../layouts/Default.astro
-lastmod: '2025-04-13'
+lastmod: '2025-07-22'
+description: 'Grav では、さまざまな方法でページのコレクションを定義できます。コレクションは、ページに並べて表示したり、繰り返し処理したりできます。'
 ---
-Gravで最も一般的なコレクションは、ページを集めたリストです。それらはページのフロントマターか、もしくはtwigで定義されるもので、ページのフロントマターで定義される方がより一般的です。コレクションを定義することで、Twigで好きなように使えます。ページコレクションメソッドを使用したり、各[ページのオブジェクト](../../03.themes/06.theme-vars/#page-object)をループで繰り返しながら、ページメソッドやプロパティを使用することで、パワフルな使い方ができます。よくある例としては、ブログ記事のリストを表示したり、複雑なページデザインをレンダリングするためにモジュラーのサブページを表示したりすることができます。
+
+Grav で最も一般的なコレクションは、ページを集めたリストです。それらは、ページのフロントマターか、もしくは twig で定義されます。  
+より一般的なのは、ページのフロントマターで定義される方です。  
+コレクションを定義すると、 Twig で自由に利用できます。  
+ページコレクションのメソッドを使用したり、各 [ページのオブジェクト](../../03.themes/06.theme-vars/#page-object) をループで繰り返しながら、ページのメソッドやプロパティを使用することで、パワフルな使い方ができます。  
+よくある利用例としては、ブログ記事のリストを表示したり、複雑なページデザインをレンダリングするためにモジュラーのサブページを表示したりすることができます。
 
 <h2 id="collection-object">コレクション・オブジェクト</h2>
 
-ページのフロントマターでコレクションを定義すると、Twigで利用できる [Grav コレクション](https://github.com/getgrav/grav/blob/develop/system/src/Grav/Common/Page/Collection.php) が作られます。コレクション・オブジェクトは、 **iterable（反復可能）** であり、**array（配列）** のように扱えます。たとえば、次のように：
+ページのフロントマターでコレクションを定義すると、 Twig で利用できる [Grav コレクション](https://github.com/getgrav/grav/blob/develop/system/src/Grav/Common/Page/Collection.php) が作られます。  
+コレクション・オブジェクトは、 **iterable（反復可能）** であり、**array（配列）** のように扱えます。  
+たとえば、次のように：
 
 ```twig
 {{ dump(page.collection[page.path]) }}
@@ -15,7 +23,7 @@ Gravで最も一般的なコレクションは、ページを集めたリスト�
 
 <h2 id="example-collection-definition">コレクションの定義例</h2>
 
-ページフロントマターで定義されたコレクションの例：
+ページのフロントマターで定義されたコレクションの例：
 
 ```yaml
 content:
@@ -27,15 +35,16 @@ content:
     pagination: true
 ```
 
-`content.items` の値から、Gravはアイテムを収集します。ここに定義される情報から、コレクションをどのように構成するかが決まります。
+`content.items` の値から、 Grav はアイテムを収集します。  
+ここに定義される情報から、コレクションをどのように構成するかが決まります。
 
-上記の定義の場合、すべての **子ページ** を持ち、**date（日付）** の **desc（降順）** で、**10** ページごとの **pagenation（ページ割り）をする** コレクションを作ります。
+上記の定義の場合、すべての **子ページ** を要素として持ち、 **date（日付）** の **desc（降順）** で、 **10** ページごとの **pagenation（ページ割り）をする** コレクションを作ります。
 
 ページネーションのリンクは、[Pagination plugin](https://github.com/getgrav/grav-plugin-pagination) がインストールされ、有効化されているときのみ利用できます。
 
 <h2 id="accessing-collections-in-twig">Twigでコレクションにアクセス</h2>
 
-フロントマターでコレクションが定義されると、twigのテンプレートで利用できる **page.collection** というコレクションが作られます：
+フロントマターでコレクションが定義されると、 twig のテンプレートで利用できる **page.collection** というコレクションが作られます：
 
 ```twig
 {% for p in page.collection %}
@@ -57,37 +66,37 @@ content:
 
 <h2 id="collection-headers">コレクションヘッダ</h2>
 
-Gravに、特定のページはリストページで、子ページを持っていることを知らせるため、以下のような、たくさんの変数が用意されています：
+Grav に、特定のページはリストページで、子ページを持っていることを知らせるため、以下のような、たくさんの変数が用意されています：
 
 <h3 id="summary-of-collection-options">コレクションの設定値の概要</h3>
 
 | 文字列 | 結果 |
-|-----------------------------------------------|-----------------------------------------------------------|
-| `'@root.pages'`                               | Get the top level pages                                   |
-| `'@root.descendants'`                         | Get all the pages of the site                             |
-| `'@root.all'`                                 | Get all the pages and modules of the site                 |
-|                                               |                                                           |
-| `'@self.page'`                                | Get a collection with only the current page               |
-| `'@self.parent'`                              | Get a collection with only the parent of the current page |
-| `'@self.siblings'`                            | Get siblings of the current page                          |
-| `'@self.children'`                            | Get children of the current page                          |
-| `'@self.modules'`                             | Get modules of the current page                           |
-| `'@self.all'`                                 | Get both children and modules of the current page         |
-| `'@self.descendants'`                         | Recurse through all the children of the current page      |
-|                                               |                                                           |
-| `'@page.page': '/fruit'`                      | Get a collection with only the page `/fruit`              |
-| `'@page.parent': '/fruit'`                    | Get a collection with only the parent of the page `/fruit`|
-| `'@page.siblings': '/fruit'`                  | Get siblings of the page `/fruit`                         |
-| `'@page.children': '/fruit'`                  | Get children of the page `/fruit`                         |
-| `'@page.modules': '/fruit'`                   | Get modules of the page `/fruit`                          |
-| `'@page.all': '/fruit'`                       | Get both children and modules of the page `/fruit`        |
-| `'@page.descendants': '/fruit'`               | Get and recurse through all the children of page `/fruit` |
-|                                               |                                                           |
-| `'@taxonomy.tag': photography`                | taxonomy with tag=`photography`                           |
-| `'@taxonomy': {tag: birds, category: blog}`   | taxonomy with tag=`birds` && category=`blog`              |
+| ------ | ---- |
+| `'@root.pages'`  | トップレベルにあるページを取得する |
+| `'@root.descendants'`  | サイトのすべてのページを取得する |
+| `'@root.all'` | サイトのすべてのページとモジュールを取得する |
+| | |
+| `'@self.page'`  | 現在のページのみのコレクションを取得する |
+| `'@self.parent'` | 現在ページの親ページのみのコレクションを取得する |
+| `'@self.siblings'` | 現在ページの兄弟ページを取得する |
+| `'@self.children'` | 現在ページの子ページを取得する |
+| `'@self.modules'`  | 現在ページのモジュールを取得する |
+| `'@self.all'`  | 現在ページの子ページとモジュールページ両方を取得する |
+| `'@self.descendants'` | 現在ページの子ページ以下を再帰的にすべて取得する |
+|  |  |
+| `'@page.page': '/fruit'`  | `/fruit` ページのみのコレクションを取得する |
+| `'@page.parent': '/fruit'`  | `/fruit` ページの親ページのみのコレクションを取得する |
+| `'@page.siblings': '/fruit'`  | `/fruit` ページの兄弟ページを取得する |
+| `'@page.children': '/fruit'`  | `/fruit` ページの子ページを取得する |
+| `'@page.modules': '/fruit'`  | `/fruit` ページのモジュールを取得する |
+| `'@page.all': '/fruit'`  | `/fruit` ページの子ページとモジュールページ両方を取得する |
+| `'@page.descendants': '/fruit'`  | `/fruit` ページの子ページ以下を再帰的にすべて取得する |
+|  |  |
+| `'@taxonomy.tag': photography`  | タクソノミーが、タグ=`photography` であるもの |
+| `'@taxonomy': {tag: birds, category: blog}`   | タクソノミーが、 タグ=`birds` かつ カテゴリー=`blog` であるもの |
 
 > [!Note]  
-> このドキュメントでは、`@page`や、`@taxonomy.category` などを使いますが、よりYAML安全な書き方は、`page@`や、`taxonomy@.category` です。すべての`@` コマンドは、前か後に置く必要があります。
+> このドキュメントでは、`@page`や、`@taxonomy.category` などを使いますが、より YAML 安全な書き方は、`page@`や、`taxonomy@.category` です。すべての`@` コマンドは、前か後に置く必要があります。
 
 > [!Info]  
 > コレクションの設定は、**Grav 1.6** から進化し、変わっています。古いバージョンもまだ動くかもしれませんが、非推奨です。
@@ -98,18 +107,21 @@ Gravに、特定のページはリストページで、子ページを持って�
 
 <h5 id="atroot-pages-top-level-pages">@root.pages トップレベルのページ</h5>
 
-これは、サイトのトップ（root）レベルの **公開ページ** を取得します。特に、主要な（グローバル）ナビゲーションを作成するようなときに便利です：
+これは、サイトのトップ（root）レベルの **公開ページ** を取得します。  
+特に、メインのナビゲーションメニューを作成するようなときに便利です：
 
 ```yaml
 content:
     items: '@root.pages'
 ```
 
-エイリアス（別名）で、`@root.children` も有効です。`@root` の使用は、将来的に意味が変わる可能性があり、非推奨となりました。
+エイリアス（別名）で、`@root.children` も有効です。  
+`@root` の使用は、将来的に意味が変わる可能性があり、非推奨となりました。
 
 <h5 id="atroot-descendants-all-the-pages">@root.descendants すべてのページ</h5>
 
-これは、すべてのページを取得します。再帰的に、トップページ以下、すべてのサブページ、さらにそのサブページへたどり、サイト上の **すべての** **公開ページ** のコレクションを作ります：
+これは、すべてのページを取得します。  
+再帰的に、トップページ以下、すべてのサブページ、さらにそのサブページへたどり、サイト上の **すべての** **公開ページ** のコレクションを作ります：
 
 ```yaml
 content:
@@ -117,7 +129,6 @@ content:
 ```
 
 <h5 id="atroot-all-all-the-pages-and-modules">@root.all すべてのページとモジュール</h5>
-##### @root.all - All the pages and modules
 
 これもまた、上と同じ動きをしますが、サイト上の **すべての** **公開ページ 及び モジュール** を含みます。
 
@@ -128,7 +139,6 @@ content:
 
 <h2 id="self-collections">Self コレクション</h2>
 
-##### @self.page - Current page only
 <h5 id="atself-page-current-page-only">@self.page 現在のページのみ</h5>
 
 これは、現在のページのみを持つコレクションを返します。
@@ -138,14 +148,15 @@ content:
     items: '@self.page'
 ```
 
-別名の`@self.self` もまた、有効です。
+エイリアスの `@self.self` もまた、有効です。
 
 > [!Note]  
 > そのページが公開されていない場合、空のコレクションとなります。
 
 <h5 id="atself-parent-the-parent-page-of-the-current-page">@self.parent 現在のページの親ページ</h5>
 
-これは、特別なケースのコレクションです。常に、現在ページの **親ページ** のみを返すからです。
+これは、特別なケースのコレクションです。  
+常に、現在ページの **親ページ** のみを返すからです。
 
 ```yaml
 content:
@@ -174,7 +185,8 @@ content:
     items: '@self.children'
 ```
 
-別名で、`@self.pages` も有効です。`@self` を使うことは、将来的に意味が変わりうるため、非推奨となりました。
+エイリアスで、`@self.pages` も有効です。  
+`@self` を使うことは、将来的に意味が変わりうるため、非推奨となりました。
 
 <h5 id="atself-modules-modules-of-the-current-page">@self.modules 現在ページのモジュール</h5>
 
@@ -185,7 +197,7 @@ content:
     items: '@self.modules'
 ```
 
-別名の `@self.modular` は非推奨です。
+エイリアスの `@self.modular` は非推奨です。
 
 <h5 id="atself-all-children-and-modules-of-the-current-pag">@self.all 現在ページの子ページ及びモジュール</h5>
 
@@ -255,7 +267,8 @@ content:
       '@page.children': '/blog'
 ```
 
-別名の`'@page.pages': '/blog'` も、有効です。`'@page': '/blog'` は、将来的に意味が変わる可能性があり、非推奨となりました。
+エイリアスの `'@page.pages': '/blog'` も、有効です。  
+`'@page': '/blog'` は、将来的に意味が変わる可能性があり、非推奨となりました。
 
 <h5 id="atpage-modules-modules-of-a-specific-page">@page.modules そのページのモジュール</h5>
 
@@ -267,7 +280,7 @@ content:
       '@page.modules': '/blog'
 ```
 
-別名の `'@page.modular': '/blog'` は非推奨です。
+エイリアスの `'@page.modular': '/blog'` は非推奨です。
 
 <h5 id="atpage-all-children-and-modules-of-a-specific-page">@page.all そのページの子ページ及びモジュール</h5>
 
@@ -298,9 +311,11 @@ content:
       '@taxonomy.tag': foo
 ```
 
-`@taxonomy` オプションを使うと、Gravの強力なタクソノミー機能を利用できます。ここで、[サイト設定](../../01.basics/05.grav-configuration/#site-configuration) での`@taxonomy` 設定が登場します。Gravが、適切にそのページ参照を解釈するためには、この設定ファイルで、タクソノミーが定義 **されていなければなりません** 。
+`@taxonomy` オプションを使うと、 Grav の強力なタクソノミー機能を利用できます。  
+ここで、 [サイト設定](../../01.basics/05.grav-configuration/#site-configuration) での `@taxonomy` 設定が登場します。  
+Grav が、適切にそのページ参照を解釈するためには、この設定ファイルで、タクソノミーが定義 **されていなければなりません** 。
 
-`@taxonomy.tag: foo` という設定によって、Gravは、`/user/pages` フォルダ内にあり、そのタクソノミー変数が `tag: foo` となっているすべての **公開ページ** を探しにいけます。
+`@taxonomy.tag: foo` という設定によって、 Grav は、 `/user/pages` フォルダ内にあり、そのタクソノミー変数が `tag: foo` となっているすべての **公開ページ** を探しにいけます。
 
 ```yaml
 content:
@@ -308,12 +323,14 @@ content:
        '@taxonomy.tag': [foo, bar]
 ```
 
-`content.items` 変数は、複数のタクソノミーの配列を取得でき、すべてを満たすページを集めます。`foo` **及び** `bar` タグ **両方**を持つ公開ページのコレクションとなります。[タクソノミー](../08.taxonomy) の章では、より詳しくその概念を解説します。
+`content.items` 変数は、複数のタクソノミーの配列を取得でき、すべてを満たすページを集めます。  
+`foo` **及び** `bar` タグ **両方**を持つ公開ページのコレクションとなります。  
+[タクソノミー](../08.taxonomy) の章では、より詳しくその概念を解説します。
 
 > [!Info]  
-> もし複数の変数を一行で取得したい場合は、サブの変数を `{}` 波カッコで区切らなければいけません。その後、それぞれの変数は、コンマで区切ります。たとえば：`'@taxonomy': {category: [blog, featured], tag: [foo, bar]}` この例では、`category` と `tag` というサブ変数が、`@taxonomy` の中にあります。それぞれは、`[]` 角カッコのリストを持ちます。これら **すべて** の条件を満たすページを探します。
+> もし複数の変数を一行で取得したい場合は、サブの変数を `{}` 波カッコで区切らなければいけません。その後、それぞれの変数は、コンマで区切ります。たとえば： `'@taxonomy': {category: [blog, featured], tag: [foo, bar]}` この例では、 `category` と `tag` というサブ変数が、 `@taxonomy` の中にあります。それぞれは、 `[]` 角カッコのリストを持ちます。これら **すべて** の条件を満たすページを探します。
 
-もし、複数の変数で探すとき、一行で書くのではなく、より標準的な書き方を推奨します。次のように：
+もし、複数の変数で探すなら、一行で書くのではなく、次のような、より標準的な書き方を推奨します：
 
 ```yaml
 content:
@@ -323,13 +340,18 @@ content:
       tag: [foo, bar]
 ```
 
-ヒエラルキーのそれぞれの階層には、2つの空白が頭につけられています。YAMLは、いくつのスペースで階層分けをしてもよいのですが、2つというのが標準的なやり方です。上記の例では、`カテゴリー` と `タグ` 変数が、`@taxonomy` 変数の下に吊り下がっています。
+ヒエラルキーのそれぞれの階層には、2つの空白が頭につけられています。  
+YAML は、いくつのスペースで階層分けをしてもよいのですが、2つというのが標準的なやり方です。  
+上記の例では、`カテゴリー` と `タグ` 変数が、 `@taxonomy` 変数の下に吊り下がっています。
 
-ページコレクションは、タクソノミーが設定されると、（/archive/category:news のような）URLによって、自動的にフィルタリングされます。これにより、ひとつのブログを立ち上げるだけで、URLを使って動的にフィルタリングすることができます。もしタクソノミーを無視して欲しい場合は、`url_taxonomy_filters:false` というフラグを使うと、この機能は無効になります。
+ページコレクションは、タクソノミーが設定されると、（ `/archive/category:news` のような） URL によって、自動的にフィルタリングされます。  
+これにより、ひとつのブログを立ち上げるだけで、 URL を使って動的にフィルタリングすることができます。  
+もしタクソノミーを無視して欲しい場合は、 `url_taxonomy_filters:false` というフラグを使うと、この機能は無効になります。
 
 <h3 id="complex-collections">複雑なコレクション</h3>
 
-複数の、複雑なコレクションを定義することもできます。結果的に、それらのコレクションの合計となるコレクションが得られます。たとえば：
+複数の、複雑なコレクションを定義することもできます。  
+結果的に、それらのコレクションの合計となるコレクションが得られます。たとえば：
 
 ```yaml
 content:
@@ -339,7 +361,12 @@ content:
          category: [blog, featured]
 ```
 
-Additionally, you can filter the collection by using `filter: type: value`. The type can be any of the following: `published`, `visible`, `page`, `module`, `routable`. These correspond to the [Collection-specific methods](#collection-object-methods), and you can use several to filter your collection. They are all either `true` or `false`. Additionally, there is `type` which takes a single template-name, `types` which takes an array of template-names, and `access` which takes an array of access-levels. For example:
+これに加えて、 `filter: page_type: value` を使って、コレクションをフィルタリングできます。  
+`page_type` には、次のいずれかが使えます： `published`, `visible`, `page`, `module`, `routable` 。  
+これらは、 [コレクション特有のメソッド](#collection-object-methods) に対応し、いくつかのフィルターをコレクションに適用できます。  
+これらはすべて、 `true` もしくは `false` の値を取ります。  
+さらに加えて、テンプレート名でフィルタリングできる `type` や、複数のテンプレート名を要素に持つ配列でフィルタリングできる `types` 、そして、アクセスレベルの配列でフィルタリングできる `acccess` もあります。
+具体例：
 
 ```yaml
  content:
@@ -350,7 +377,7 @@ Additionally, you can filter the collection by using `filter: type: value`. The 
     access: ['site.login']
 ```
 
-The type can also be negative: `non-published`, `non-visible`, `non-page` (=module), `non-module` (=page) and `non-routable`, but it preferred if you use the positive version with the value `false`.
+`page_type` には、否定形の `non-published`, `non-visible`, `non-page` (=module), `non-module` (=page) and `non-routable`, も可能ですが、通常バージョンにして、値を `false` にした方がわかりやすいでしょう。
 
 ```yaml
  content:
@@ -359,7 +386,8 @@ The type can also be negative: `non-published`, `non-visible`, `non-page` (=modu
     published: false
 ```
 
-!! Collection filters have been simplified since **Grav 1.6**. The old `modular` and `non-modular` variants will still work, but are not recommended to use. Use `module` and `page` instead.
+> [!Info]  
+> コレクションのフィルタ機能は、 **Grav 1.6** からシンプルになりました。以前の `modular` や `non-modular` 変数は、まだ機能するものの、使わないことをおすすめします。代わりに、 `module` や `page` を使ってください。
 
 <h2 id="ordering-options">表示順の設定</h2>
 
@@ -372,23 +400,25 @@ content:
     pagination: true
 ```
 
-サブページの表示順は、フォルダの表示順のルールに従います。利用できる選択肢は、次の通りです：
+サブページの表示順は、フォルダの表示順のルールに従います。  
+利用できる選択肢は、次の通りです：
 
-| 順序     | 詳細                                                                                                                                            |
-| :----------  | :----------                                                                                                                                        |
-| `default`    | The order is based on the file system, i.e. `01.home` before `02.advark`                                                                              |
-| `title`      | The order is based on the title as defined in each page                                                                                            |
-| `basename`   | The order is based on the alphabetic folder name after it has been processed by the `basename()` PHP function                                      |
-| `date`       | The order is based on the date as defined in each page                                                                                                |
-| `modified`   | The order is based on the modified timestamp of the page                                                                                              |
-| `folder`     | The order is based on the folder name with any numerical prefix, i.e. `01.`, removed                                                                  |
-| `header.x`   | The order is based on any page header field. i.e. `header.taxonomy.year`. Also a default can be added via a pipe. i.e. `header.taxonomy.year|2015`    |
-| `random`     | The order is randomized                                                                                                                            |
-| `custom`     | The order is based on the `content.order.custom` variable                                                                                                                             |
-| `manual`     | The order is based on the `order_manual` variable. **DEPRECATED**                                                                                                    |
-| `sort_flags` | Allow to override sorting flags for page header-based or default ordering. If the `intl` PHP extension is loaded, only [these flags](https://secure.php.net/manual/en/collator.asort.php) are available. Otherwise, you can use the PHP [standard sorting flags](https://secure.php.net/manual/en/array.constants.php). |
+| 順序 | 詳細 |
+| :--- | :--- |
+| `default` | ファイルシステムの順。例： `01.home` の後に `02.advark` |
+| `title`      | 各ページで定義されたページタイトルの順 |
+| `basename`   | PHP 関数の `basename()` で処理された後のフォルダ名のアルファベット順 |
+| `date`       | 各ページで定義された日付順 |
+| `modified`   | ページの最新修正日順 |
+| `folder`     | 数字の接頭辞（例えば `01.` ）が取り除かれた後のフォルダ名順 |
+| `header.x`   | ページで定義されたヘッダーフィールド（例えば `header.taxonomy.year` ）順。また、パイプによって追加できます（例： `header.taxonomy.year\|2015` |
+| `random`     | ランダム順 |
+| `custom`     | `content.order.custom` 変数順（下記の例参照） |
+| `manual`     | `order_manual` 変数順。 **非推奨** |
+| `sort_flags` | ページヘッダーベースの、もしくはデフォルト順序のソートフラグを上書きできます。もし `intl` PHP 拡張が読み込まれていれば、 [これらのフラグ](https://www.php.net/manual/ja/collator.asort.php) のみ使えます。そうでない場合、 [標準的なソートフラグ](https://www.php.net/manual/ja/array.constants.php) が使えます。 |
 
-`content.order.dir` 変数は、表示の方向を設定します。`desc` （降順）か `asc` （昇順） を設定してください。
+`content.order.dir` 変数は、表示の方向を設定します。  
+`desc` （降順）か `asc` （昇順） を設定してください。
 
 ```yaml
 content:
@@ -403,11 +433,14 @@ content:
     pagination: true
 ```
 
-上記の設定では、`content.order.custom` 設定により、**カスタムで手動の順番** を定義できます。これにより、**showcase** が最初に、**highlights** が次に、といった順番が作れます。もしこのリストからページが漏れていた場合、Gravは、その漏れたページを `content.order.by` による順番で代替します。
+上記の設定では、 `content.order.custom` 設定により、 **カスタムで手動の順番** を定義できます。  
+これにより、 **showcase** が最初に、 **highlights** が次に、といった順番が作れます。  
+もしこのリストからページが漏れていた場合、 Grav は、その漏れたページを `content.order.by` による順番で代替します。
 
 ページにカスタムのスラッグがある場合、`content.order.custom` リストでは、スラッグを使わなければいけません。
 
-`content.pagenation` は、trueかfalseの設定で、プラグインなどに **ページネーション** が初期化されるべきかどうかを知らせます。`content.limit` は、1ページごとにいくつのアイテムを表示させるかを示します。
+`content.pagenation` は、 true か false の設定で、プラグインなどに **ページネーション** が初期化されるべきかどうかを知らせます。  
+`content.limit` は、1ページごとにいくつのアイテムを表示させるかを示します。
 
 <h3 id="date-range">日付の範囲</h3>
 
@@ -421,11 +454,17 @@ content:
         end: 1/1/2015
 ```
 
-[PHPのstrtotime関数](https://php.net/manual/en/function.strtotime.php) で使えるフォーマットであれば、どんな文字列でも使えます。たとえば、`-6 weeks` や、`last Monday` などの書式が、伝統的な日付である `01/23/2014` や `23 January 2014` と同じように使えます。content.dateRangeは、その範囲外の日付を持つページを省きます。**start** と **end** はどちらも、オプショナルです。しかしどちらか一方は、定義されていなければいけません。
+[PHP の strtotime 関数](https://php.net/manual/en/function.strtotime.php) で使えるフォーマットであれば、どんな文字列でも使えます。  
+たとえば、 `-6 weeks` や、 `last Monday` などの書式が、伝統的な日付である `01/23/2014` や `23 January 2014` と同じように使えます。  
+content.dateRange は、その範囲外の日付を持つページを省きます。  
+**start** と **end** は、どちらもオプションです。  
+しかしどちらか一方は、定義されていなければいけません。
 
 <h3 id="multiple-collections">複数のコレクション</h3>
 
-`content: items:` によってコレクションを作った場合、いくつかの条件のもと、1つのコレクションを作ったということです。しかし、Gravでは、ページごとに、任意の数のコレクションを作れます。ただ、次のものを作るだけで良いのです：
+`content: items:` によってコレクションを作った場合、いくつかの条件のもと、1つのコレクションを作ったということです。  
+しかし、 Grav では、ページごとに、任意の数のコレクションを作れます。  
+ただ、次のものを作るだけで良いのです：
 
 ```yaml
 content:
@@ -441,7 +480,9 @@ fruit:
        '@taxonomy.tag': [fruit]
 ```
 
-上記の例では、**2つのコレクション** を作成しています。1つ目は、通常の `content` コレクションですが、2つ目は、タクソノミーベースのコレクションで、`fruit` と名付けられています。Twigから、これら2つのコレクションにアクセスするには、次のような構文を使います：
+上記の例では、 **2つのコレクション** を作成しています。  
+1つ目は、通常の `content` コレクションですが、2つ目は、タクソノミーベースのコレクションで、 `fruit` と名付けられています。  
+Twig から、これら2つのコレクションにアクセスするには、次のような構文を使います：
 
 ```yaml
 {% set default_collection = page.collection %}
@@ -450,52 +491,53 @@ fruit:
 
 <h2 id="collection-object-methods">コレクションオブジェクトのメソッド</h2>
 
-Iterable methods include:
+Iterable のメソッドは含まれます：
 
 | プロパティ | 説明 |
-| -------- | ----------- |
-| `Collection::append($items)` | Add another collection or array |
-| `Collection::first()` | Get the first item in the collection |
-| `Collection::last()` | Get the last item in the collection |
+| -------- | ------ |
+| `Collection::append($items)` | 別のコレクションや配列を追加 |
+| `Collection::first()` | コレクション内の最初のアイテムを取得 |
+| `Collection::last()` | コレクション内の最後のアイテムを取得 |
 | `Collection::random($num)` | Pick `$num` random items from the collection |
-| `Collection::reverse()` | Reverse the order of the collection |
-| `Collection::shuffle()` | Randomize the entire collection |
-| `Collection::slice($offset, $length)` | Slice the list |
+| `Collection::reverse()` | コレクションを逆順にする |
+| `Collection::shuffle()` | コレクション全体をシャッフルする |
+| `Collection::slice($offset, $length)` | リストをスライスする |
 
-Also has several useful Collection-specific methods:
+コレクション特有の便利なメソッドもいくつかあります：
 
 | プロパティ | 説明 |
-| -------- | ----------- |
-| `Collection::addPage($page)` | You can append another page to this collection |
-| `Collection::copy()` | Creates a copy of the current collection |
-| `Collection::current()` | Gets the current item in the collection |
-| `Collection::key()` | Returns the slug of the current item |
-| `Collection::remove($path)` | Removes a specific page in the collection, or current if `$path = null` |
-| `Collection::order($by, $dir, $manual)` | Orders the current collection |
-| `Collection::intersect($collection2)` | Merge two collections, keeping items that occur in both collections (like an "AND" condition) |
-| `Collection::merge($collection2)` | Merge two collections, keeping items that occur in either collection (like an "OR" condition) |
-| `Collection::isFirst($path)` | Determines if the page identified by path is first |
-| `Collection::isLast($path)` | Determines if the page identified by path is last |
-| `Collection::prevSibling($path)` | Returns the previous sibling page if possible |
-| `Collection::nextSibling($path)` | Returns the next sibling page if possible |
-| `Collection::currentPosition($path)` | Returns the current index |
-| `Collection::dateRange($startDate, $endDate, $field)` | Filters the current collection with dates |
-| `Collection::visible()` | Filters the current collection to include only visible pages |
-| `Collection::nonVisible()` | Filters the current collection to include only non-visible pages |
-| `Collection::pages()` | Filters the current collection to include only pages (and not modules) |
-| `Collection::modules()` | Filters the current collection to include only modules (and not pages) |
-| `Collection::published()` | Filters the current collection to include only published pages |
-| `Collection::nonPublished()` | Filters the current collection to include only non-published pages |
-| `Collection::routable()` | Filters the current collection to include only routable pages |
-| `Collection::nonRoutable()` | Filters the current collection to include only non-routable pages |
-| `Collection::ofType($type)` | Filters the current collection to include only pages where template = `$type` |
-| `Collection::ofOneOfTheseTypes($types)` | Filters the current collection to include only pages where template is in the array `$types` |
-| `Collection::ofOneOfTheseAccessLevels($levels)` | Filters the current collection to include only pages where page access is in the array of `$levels` |
+| -------- | ------ |
+| `Collection::addPage($page)` | このコレクションに別のページを追加する |
+| `Collection::copy()` | 現在のコレクションのコピーを作成する |
+| `Collection::current()` | コレクション内の現在のアイテムを取得 |
+| `Collection::key()` | 現在のアイテムのスラッグを返す |
+| `Collection::remove($path)` | コレクション内の特定のページを削除。もしくは、 `$path=null` の場合、現在のページを削除 |
+| `Collection::order($by, $dir, $manual)` | 現在のコレクションを並べる |
+| `Collection::intersect($collection2)` | 2つのコレクション両方にあるアイテムをまとめる（ "かつ" 条件のように）  |
+| `Collection::merge($collection2)` | 2つのコレクションいずれかにあるアイテムをまとめる（"または" 条件のように） |
+| `Collection::isFirst($path)` | 最初のページかどうか判断 |
+| `Collection::isLast($path)` | 最後のページかどうか判断 |
+| `Collection::prevSibling($path)` | 可能であれば、前のページを返す |
+| `Collection::nextSibling($path)` | 可能であれば、次のページを返す |
+| `Collection::currentPosition($path)` | 現在のインデックスを返す |
+| `Collection::dateRange($startDate, $endDate, $field)` | コレクションを日付でフィルタリングする |
+| `Collection::visible()` | コレクションを visible （ナビゲーションメニューなどに表示）のページのみにフィルタリングする |
+| `Collection::nonVisible()` | コレクションを non-visible のページのみにフィルタリングする |
+| `Collection::pages()` | コレクションをページのみ（モジュールは除く）にフィルタリングする |
+| `Collection::modules()` | コレクションをモジュールのみ（ページは除く）にフィルタリングする |
+| `Collection::published()` | コレクションを公開ページのみにフィルタリングする |
+| `Collection::nonPublished()` | コレクションを非公開ページのみにフィルタリングする |
+| `Collection::routable()` | コレクションをルーティング可能なページのみにフィルタリングする |
+| `Collection::nonRoutable()` | コレクションをルーティングしないページのみにフィルタリングする |
+| `Collection::ofType($type)` | テンプレートが = `$type` であるページのみにコレクションをフィルタリングする |
+| `Collection::ofOneOfTheseTypes($types)` | テンプレートが `$types` 配列に含まれているページのみにコレクションをフィルタリングする |
+| `Collection::ofOneOfTheseAccessLevels($levels)` | コレクションを `$levels` 配列に含まれるアクセスレベルのページのみにフィルタリングする |
 
 > [!Info]  
 > 次のメソッドは、**Grav 1.7** で非推奨となりました： `Collection::modular()` 及び `Collection::nonModular()` 。次のものを使ってください： `Collection::modules()` 及び `Collection::pages()` 。
 
-以下の例は、**Learn2** テーマの **docs.html.twig** によるものです。タクソノミーベースの（もしあればタグも設定可能な）コレクションが定義され、`Collection::isFirst` と `Collection::isLast` メソッドはページのナビゲーションに条件として利用されています：
+以下の例は、 **Learn2** テーマの **docs.html.twig** によるものです。  
+タクソノミーベースの（もしあればタグも設定可能な）コレクションが定義され、 `Collection::isFirst` と `Collection::isLast` メソッドはページのナビゲーションに条件として利用されています：
 
 
 ```twig
@@ -519,7 +561,8 @@ Also has several useful Collection-specific methods:
 {% endblock %}
 ```
 
-`nextSibling()` は、リストの次のものを指し、`prevSibling()` は、リストの前のものを指します。どのように動くかの例です。
+`nextSibling()` は、リストの次のものを指し、`prevSibling()` は、リストの前のものを指します。  
+どのように動くかの例です。
 
 次のようなページがあるとします：
 
@@ -529,13 +572,13 @@ Project B
 Project C
 ```
 
-Project Aにいるとき、前のページはProject Bです。
-もしProject Bにいるとき、前のページは Project Cであり、次のページは Project A です。
-You are on Project A, the previous page is Project B.
+Project Aにいるとき、前のページはProject Bです。  
+もしProject Bにいるとき、前のページは Project Cであり、次のページは Project A です。  
 
 <h2 id="programmatic-collections">プログラミングによるコレクション</h2>
 
-Gravのプラグインから、もしくはテーマや、Twigからでも、PHPを利用して直接コレクションを制御できます。これはページのフロントマターで定義する方法に比べると、ハードコーディングではありますが、より複雑で柔軟なコレクションのロジックを作成できます。
+Grav のプラグインから、もしくはテーマや、 Twig からでも、 PHP を利用して直接コレクションを制御できます。  
+これはページのフロントマターで定義する方法に比べると、ハードコーディングではありますが、より複雑で柔軟なコレクションのロジックを作成できます。
 
 <h3 id="php-collections">PHPによるコレクション</h3>
 
@@ -552,7 +595,9 @@ foreach ($collection as $page) {
 }
 ```
 
-The `order()`-function can also, in addition to the `by`- and `dir`-parameters, take a `manual`- and `sort_flags`-parameter. These are [documented above](#ordering-options). You can also use the same `evaluate()` method that the frontmatter-based page collections make use of:
+`order()` 関数は、 `by` や `dir` パラメータに加えて、 `manual` や `sort_flags` パラメータも使えます。  
+[上記のドキュメント](#ordering-options) を参照してください。  
+フロントマターで定義するものと同じ `evaluate()` メソッドを使うこともできます。
 
 ```php
 $page = Grav::instance()['page'];
@@ -560,13 +605,13 @@ $collection = $page->evaluate(['@page.children' => '/blog', '@taxonomy.tag' => '
 $ordered_collection = $collection->order('date', 'desc');
 ```
 
-And another example of custom ordering would be:
+カスタム順序の別の例です：
 
 ```php
 $ordered_collection = $collection->order('header.price','asc',null,SORT_NUMERIC);
 ```
 
-You can also do similar directly in **Twig Templates**:
+**Twig テンプレート** で、同様のことを直接することもできます：
 
 ```twig
 {% set collection = page.evaluate([{'@page.children':'/blog', '@taxonomy.tag':'photography'}]) %}
@@ -575,9 +620,11 @@ You can also do similar directly in **Twig Templates**:
 
 <h4 id="advanced-collections">発展的なコレクション</h4>
 
-By default when you call `page.collection()` in the Twig of a page that has a collection defined in the header, Grav looks for a collection called `content`.  This allows the ability to define [multiple collections](#multiple-collections), but you can even take this a step further.
+デフォルトでは、ページヘッダーでコレクションを定義した場合に、そのページの Twig で `page.collection()` 関数を呼び出すと、 Grav は、 `content` と呼ばれるコレクションを探します。  
+これにより、 [複数のコレクション](#multiple-collections) が定義できますが、さらにもう一歩深く進むこともできます。
 
-If you need to programmatically generate a collection, you can do so by calling `page.collection()` and passing in an array in the same format as the page header collection definition.  For example:
+プログラム処理によりコレクションを生成する必要がある場合、 `page.collection()` を呼び出し、ページヘッダーでコレクションを定義したときと同じフォーマットの配列を渡すことで、それが可能になります。  
+たとえば：
 
 ```twig
 {% set options = { items: {'@page.children': '/my/pages'}, 'limit': 5, 'order': {'by': 'date', 'dir': 'desc'}, 'pagination': true } %}
@@ -590,7 +637,7 @@ If you need to programmatically generate a collection, you can do so by calling 
 </ul>
 ```
 
-Generating menu for the whole site (you need to set *menu* property in the page's frontmatter):
+サイト全体のメニューが生成されます（ページのフロントマターに *menu* プロパティを設定しておく必要はあります）：
 
 
 ```yaml
@@ -619,9 +666,12 @@ menu: Home
 
 <h4 id="pagination-with-advanced-collections">発展的なコレクションでのページネーション</h4>
 
-A common question we hear is regarding how to enable pagiation for custom collections.  Pagination is a plugin that can be installed via GPM with the name `pagination`.  Once installed it works "out-of-the-box" with page configured collections, but knows nothing about custom collections created in Twig.  To make this process easier, pagination comes with it's own Twig function called `paginate()` that will provide the pagination functionality we need.
+カスタムコレクションにページネーション（ページ割）をするやり方について、よく質問を受けます。  
+ページネーションは、 `pagination` という名前で GPM 経由でインストールできるプラグインがあります。  
+インストールし、コレクションを設定するだけで、 "箱から開けてすぐに" 機能しますが、 Twig で作成されたカスタムコレクションについては、何も解説がありません。  
+この処理を簡単にするため、ページネーションプラグインには、 `paginate()` という Twig 関数があり、必要なページ割り機能を提供してくれます。
 
-After we pass the collection and the limit to the `paginate()` function, we also need to pass the pagination information directly to the `partials/pagination.html.twig` template to render properly.
+`paginate()` 関数に、コレクションと1ページ上限数を渡した後、適切にレンダリングされるためには、ページ割り情報を直接 `partials/pagination.html.twig` テンプレートに渡す必要があります。
 
 ```twig
 {% set options = { items: {'@root.descendants':''}, 'order': {'by': 'folder', 'dir': 'asc'}} %}
@@ -716,3 +766,4 @@ Then, we need to define the method and loop over the collection items, looking f
 ```
 
 Now your collection has the correct items, and all other plugins or Twig templates that rely on that collection will see this modified collection so things like pagination will work as expected.
+
