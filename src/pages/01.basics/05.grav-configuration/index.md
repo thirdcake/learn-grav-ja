@@ -1,7 +1,7 @@
 ---
 title: 'config 設定'
 layout: ../../../layouts/Default.astro
-lastmod: '2025-07-21'
+lastmod: '2025-07-23'
 description: 'Grav の設定は YAML 形式で簡単に管理できます。 system.yaml を中心に各種設定ファイルを紹介します。'
 ---
 
@@ -444,9 +444,9 @@ media:
 | プロパティ | 説明 |
 | -------- | ----------- |
 | **enable_media_timestamp:** | メディアのタイムスタンプを有効化 |
-| **unsupported_inline_types:** | Array of supported media types to try to display inline. These file types are placed within `[]` brackets |
-| **allowed_fallback_types:** | Array of allowed media types of files found if accessed via Page route. These file types are placed within `[]` brackets |
-| **auto_metadata_exif:** | Automatically create metadata files from Exif data where possible |
+| **unsupported_inline_types:** | インライン表示のサポート対象となるメディアタイプの配列。これらのファイルタイプは、 `[]` 角カッコ内に書いてください |
+| **allowed_fallback_types:** | ページルーティング経由でのアクセスがあったときに、見つかった場合に表示して良いファイルのメディアタイプの配列。これらのファイルタイプは、 `[]` 角カッコ内に書いてください |
+| **auto_metadata_exif:** | 可能な場合に、 Exif データからメタデータファイルを自動作成 |
 
 ### Session
 
@@ -497,11 +497,11 @@ gpm:
 
 | プロパティ | 説明 |
 | -------- | ------ |
-| **releases:** | Set to either `stable` or `testing` to determine if you want to update to the latest stable or testing build |
-| **proxy_url:** | Configure a manual proxy URL for GPM. For example: `127.0.0.1:3128` |
-| **method:** | Either `'curl'`, `'fopen'` or `'auto'`. `'auto'` will try fopen first and if not available cURL |
-| **verify_peer:** | On some systems (Windows mostly) GPM is unable to connect because the SSL certificate cannot be verified. Disabling this setting might help |
-| **official_gpm_only:** | By default GPM direct-install will only allow URLs via the official GPM proxy to ensure security, disable this to allow other sources |
+| **releases:** | `stable` もしくは `testing` を設定し、ビルドを最新の stable （安定版）にするか、 testing （テスト版）にするか決定します |
+| **proxy_url:** | GPM 用の手動のプロキシ URL を設定。例えば： `127.0.0.1:3128` |
+| **method:** | 値は、 `'curl'`, `'fopen'` もしくは `'auto'` のいずれか。 `'auto'` は、まず fopen を試し、利用できない場合は cURL を試します |
+| **verify_peer:** | 一部のシステム（ほとんど Windows ）では、 SSL 認証が検証できず、 GPM を接続できません。この設定を無効にすると解決することがあります |
+| **official_gpm_only:** | デフォルトでは、 GPM の直接インストールは、安全性確保のため、公式の GPM プロキシー経由の URL のみ許可します。他のソースを許可するには、これを無効化してください |
 
 ### Accounts
 
@@ -542,14 +542,14 @@ Flex Objects の cache は、**Grav 1.7** で新しく追加されました。
 | -------- | ------ |
 | **cache:** | (**Grav 1.7+**) |
 | **... index:** | (**Grav 1.7+**) |
-| **... ... enabled:** | Set to true to enable Flex index caching. Is used to cache timestamps in files (**Grav 1.7+**) |
-| **... ... lifetime:** | Lifetime of cached index in seconds (0 = infinite) (**Grav 1.7+**) |
+| **... ... enabled:** | Flex インデックスのキャッシュを有効化するには true を設定。 ファイル内のタイムスタンプをキャッシュするために使われます (**Grav 1.7+**) |
+| **... ... lifetime:** | キャッシュされたインデックスの有効秒数 (0 = 無限) (**Grav 1.7+**) |
 | **... object:** | (**Grav 1.7+**) |
-| **... ... enabled:** | Set to true to enable Flex object caching. Is used to cache object data (**Grav 1.7+**) |
-| **... ... lifetime:** | Lifetime of cached objects in seconds (0 = infinite) (**Grav 1.7+**) |
+| **... ... enabled:** | Flex オブジェクトのキャッシュを有効化するには true を設定。 オブジェクトデータをキャッシュするために使われます (**Grav 1.7+**) |
+| **... ... lifetime:** | キャッシュされたオブジェクトの有効秒数 (0 = 無限) (**Grav 1.7+**) |
 | **... render:** | (**Grav 1.7+**) |
-| **... ... enabled:** | Set to true to enable Flex render caching. Is used to cache rendered output (**Grav 1.7+**) |
-| **... ... lifetime:** | Lifetime of cached HTML in seconds (0 = infinite) (**Grav 1.7+**) |
+| **... ... enabled:** | Flex レンダリングのキャッシュを有効化するには true を設定。 レンダリングされた出力をキャッシュするために使われます (**Grav 1.7+**) |
+| **... ... lifetime:** | キャッシュされた HTML の有効秒数 (0 = 無限) (**Grav 1.7+**) |
 
 ### Strict Mode
 
@@ -565,9 +565,9 @@ Strict モードは、新しいバージョンの YAML と Twig プロセッサ�
 
 | プロパティ | 説明 |
 | -------- | ------ |
-| **yaml_compat:** | Enables YAML backwards compatibility |
-| **twig_compat:** | Enables deprecated Twig autoescape setting |
-| **blueprint_compat:** | Enables backward compatible strict support for blueprints |
+| **yaml_compat:** | YAML 後方互換性を有効化する |
+| **twig_compat:** | 非推奨の Twig のオートエスケープ設定を有効化する |
+| **blueprint_compat:** | ブループリントへの厳密なサポートについて後方互換性を有効化する |
 
 > [!Info]  
 > **すべての** 設定ファイルをコピーして上書きする必要はありません。最小限の上書きでも、最大限でも、好きなようにできます。ただし、上書きしたい特定の設定については、**正確に同じ名前の構造** となるように確認してください。
@@ -627,12 +627,12 @@ blog:
 | **author:** | |
 | ... **name:** | サイトの著者名です。必要な場合にいつでも参照できます |
 | ... **email:** | サイトで利用するデフォルトの email |
-| **taxonomies:** | An arbitrary list of high-level types that you can use to organize your content.  You can assign content to specific taxonomy types, for example, categories or tags. Feel free to edit, or add your own |
-| **metadata:** | Set default metadata for all your pages, see the [content page headers](../../02.content/02.headers) section for more details |
+| **taxonomies:** | コンテンツをタイプごとに分けて整理するために使う任意のリストです。コンテンツを、特定のタクソノミータイプに割り当てられます。たとえば、カテゴリーやタグのようなタイプです。自由に編集し、独自のものを追加してください |
+| **metadata:** | 全ページに付いてデフォルトのメタデータを設定。より詳しくは、 [コンテンツページのヘッダー](../../02.content/02.headers/) セクションを参照してください |
 | **summary:** | |
-| ... **size:** | A variable to override the default number of characters that can be used to set the summary size when displaying a portion of content |
-| **routes:** | This is a basic map that can provide simple URL alias capabilities in Grav.  If you browse to `/something/else` you will actually be sent to `/blog/sample-3`. Feel free to edit, or add your own as needed. **Regex Replacements** (`(.*) - $1`) are now supported at the end of route aliases.  You should put these at the bottom of the list for optimal performance |
-| **(custom options)** | You can create any option you like in this file and a good example is the `blog: route: '/blog'` option that is accessible in your Twig templates with `site.blog.route` |
+| ... **size:** | コンテンツの一部を表示する際の要約文のデフォルトの文字数を上書きする変数 |
+| **routes:** | Grav で提供されるシンプルな URL エイリアス（別名）機能を利用できる基本的な対応関係です。上記の例では、 `/something/else` をブラウザ表示すると、実際には `/blog/sample-3` が表示されます。自由に編集し、必要なものを追加してください。 **正規表現による書き換え** (`(.*) - $1`) が、新たにサポートされました。パフォーマンスの最適化のため、これを書く時はリストの最後にしてください |
+| **(カスタムオプション)** | このファイルには、お好みのオプションを作成できます。分かりやすい具体例としては： `blog: route: '/blog'` オプションで、これは Twig から `site.blog.route` によりアクセスできます |
 
 > [!Info]  
 > ほとんど場合、このファイルの最も重要な要素は、 `Taxonomy` リストです。コンテンツでタグやカテゴリーを使いたいならば、ここでタクソノミーのリストを **定義しなければなりません。**
