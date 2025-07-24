@@ -1,19 +1,23 @@
 ---
 title: マークダウン構文
 layout: ../../../layouts/Default.astro
-lastmod: '2025-04-13'
+lastmod: '2025-07-24'
+description: 'Grav で使用されるマークダウン構文について、その書き方と、その見え方を、合わせて解説します。'
 ---
-率直にいうと、webコンテンツを書くのは面倒です。WYSIWYG エディタは、助けになりますが、それらはたびたびひどいコードとなり、ひどいだけでなく、見にくいwebページになってしまいます。
 
-**マークダウン** は、**HTML** を書くより良い方法です。それを書くにあたり、複雑さや見にくさを避けられます。
+率直にいって、 web コンテンツを書くのは面倒です。  
+WYSIWYG エディタは助けになりますが、それらはたびたび、ひどいコードとなり、ひどいだけでなく、見にくい web ページになってしまいます。
+
+**マークダウン** は、 **HTML** を書くための良い方法です。  
+複雑さや見にくさを避けながら書けます。
 
 重要なメリットは、以下のとおりです：
 
-1. マークダウンは、最小限の文字が追加されるだけで、かんたんに学べるため、コンテンツ制作も早くできるようになります。
-2. Less chance of errors when writing in markdown.
-3. Produces valid XHTML output.
-4. Keeps the content and the visual display separate, so you cannot mess up the look of your site.
-5. Write in any text editor or Markdown application you like.
+1. マークダウンは、最小限の文字が追加されるだけで、簡単に学べるため、コンテンツ制作も早くできるようになります。
+2. マークダウンを書くとき、エラーになる危険性は減らせます。
+3. 妥当な XHTML 出力が作成されます。
+4. コンテンツとヴィジュアル表示を分けたままにできます。サイトの見た目を乱しようがありません。
+5. いかなるテキストエディタでも、マークダウンアプリケーションでも、好きなもので書けます。
 6. マークダウンは、使っていて楽しい！
 
 マークダウンを生み出したJohn Gruber は、次のように言います：
@@ -23,7 +27,7 @@ lastmod: '2025-04-13'
 
 Grav は、最初から [Markdown](https://daringfireball.net/projects/markdown/) と [Markdown Extra](https://michelf.ca/projects/php-markdown/extra/) をサポートしています。**Markdown Extra** を使用したい場合は、`system.yaml` ファイルの設定を有効にしてください。
 
-Without further delay, let us go over the main elements of Markdown and what the resulting HTML looks like:
+さっそく、マークダウンの主要な要素と、それが HTML でどう見えるかを見ていきましょう：
 
 > [!Info]  
 > これからいつでも参照できるように、このページをブックマークしてください！
@@ -63,7 +67,7 @@ HTMLは、こうなります：
 
 <h2 id="comments">コメント</h2>
 
-コメントは、HTMLと同じように書いてください
+コメントは、 HTML と同じように書いてください
 
 ```html
 <!--
@@ -72,7 +76,6 @@ This is a comment
 ```
 
 次のコメントは、 **見えない** はずです：
-Comment below should **NOT** be seen:
 
 <!--
 This is a comment
@@ -80,7 +83,8 @@ This is a comment
 
 <h2 id="horizontal-rules">水平線</h2>
 
-HTMLの `<hr>` 要素は、段落レベルの要素間で、「内容の区切り」を作ります。マークダウンでは、次のように書きます：
+HTMLの `<hr>` 要素は、段落レベルの要素間で、「内容の区切り」を作ります。  
+マークダウンでは、次のように書きます：
 
 * `___`: 3つ連続のアンダースコア
 * `---`: 3つ連続のダッシュ
@@ -96,7 +100,7 @@ ___
 
 <h2 id="body-copy">本文</h2>
 
-通常のプレーンなテキストで書かれた本文は、`<p></p>` タグで包まれてHTMLにレンダリングされます。
+通常のプレーンなテキストで書かれた本文は、 `<p></p>` タグで包まれて、 HTML にレンダリングされます。
 
 よって、この本文は：
 
@@ -112,9 +116,9 @@ Lorem ipsum dolor sit amet, graecis denique ei vel, at duo primis mandamus. Et l
 
 **改行** は、2つのスペースの後にリターンキーをすることによってできます。
 
-<h2 id="inline-html">一行のHTML</h2>
+<h2 id="inline-html">インラインの HTML</h2>
 
-HTMLタグが作りたい場合（classをつけるようなとき）は、シンプルにHTMLを使ってください：
+HTML タグが作りたい場合（class を付けるようなとき）は、単に HTML を使ってください：
 
 ```html
 Paragraph in Markdown.
@@ -140,7 +144,7 @@ Paragraph in Markdown.
 
 **rendered as bold text**
 
-HTMLはこのようになります：
+HTML は、このようになります：
 
 ```html
 <strong>rendered as bold text</strong>
@@ -158,7 +162,7 @@ _rendered as italicized text_
 
 _rendered as italicized text_
 
-HTMLはこのようになります：
+HTML は、このようになります：
 
 ```html
 <em>rendered as italicized text</em>
@@ -196,7 +200,7 @@ HTMLです：
 
 > **Fusion Drive** combines a hard drive with a flash storage (solid-state drive) and presents it as a single logical volume with the space of both drives combined.
 
-HTMLです：
+HTML です：
 
 ```html
 <blockquote>
@@ -362,7 +366,7 @@ odio non est accumsan facilisis. Aliquam id turpis in dolor tincidunt mollis ac 
 
 <h3 id="inline-code">1行コード</h3>
 
-`` ` `` でコード部分を囲んでください。
+`` ` `` （バッククオート）でコード部分を囲んでください。
 
 ```txt
 In this example, `<section></section>` should be wrapped as **code**.
@@ -372,7 +376,7 @@ In this example, `<section></section>` should be wrapped as **code**.
 
 In this example, `<section></section>` should be wrapped with **code**.
 
-HTMLです：
+HTML です：
 
 ```html
 <p>In this example, <code>&lt;section&gt;&lt;/section&gt;</code> should be wrapped with <strong>code</strong>.</p>
@@ -380,7 +384,7 @@ HTMLです：
 
 <h3 id="indented-code">インデント・コード</h3>
 
-Or indent several lines of code by at least four spaces, as in:
+4文字以上のスペースで複数行のコードををインデントしてください。次のように：
 
 <pre>
   // Some comments
@@ -389,7 +393,7 @@ Or indent several lines of code by at least four spaces, as in:
   line 3 of code
 </pre>
 
-Renders to:
+次のようにレンダリングされます：
 
 ```txt
 // Some comments
@@ -398,7 +402,7 @@ line 2 of code
 line 3 of code
 ```
 
-HTML:
+HTML です：
 
 ```html
 <pre>
@@ -421,7 +425,7 @@ Sample text here...
 ```
 </pre>
 
-HTML:
+HTML です：
 
 ```html
 <pre language-html>
@@ -431,7 +435,9 @@ HTML:
 
 <h3 id="syntax-highlighting">構文のハイライト</h3>
 
-GFM（GitHubフレーバーのマークダウン）は、構文のハイライトに対応しています。有効化すると、最初の"fence"に、言語の拡張子をつけるだけで、自動的に構文のハイライトが適用されます。たとえば、JavaScriptコードを適用できます：
+GFM（GitHubフレーバーのマークダウン）は、構文のハイライトに対応しています。  
+有効化すると、最初の "fence" に、言語の拡張子をつけるだけで、自動的に構文のハイライトが適用されます。  
+たとえば、 JavaScript コードを適用できます：
 
 <pre>
 ```js
@@ -480,11 +486,13 @@ grunt.initConfig({
 ```
 
 > [!Tip]  
-> ハイライトさせるには、 [Highlight plugin](https://github.com/getgrav/grav-plugin-highlight) をインストールして、有効化する必要があります。これはjqueryを使っており、テーマでも読み込む必要があります。
+> ハイライトさせるには、 [Highlight plugin](https://github.com/getgrav/grav-plugin-highlight) をインストールして、有効化する必要があります。これは jQuery を使っており、テーマでも読み込む必要があります。
 
 <h2 id="tables">表</h2>
 
-表は、それぞれのセルをパイプ（ `|` ）で区切って作ります。そして、表のヘッダの下に、（バーで区切られた）ダッシュ（ `-` ）の行を）追加してください。なお、パイプは垂直に揃える必要はありません。
+表は、それぞれのセルをパイプ（ `|` ）で区切って作ります。  
+そして、表のヘッダの下に、（バーで区切られた）ダッシュ（ `-` ）の行を）追加してください。  
+なお、パイプは垂直に揃える必要はありません。
 
 ```txt
 | Option | Description |
@@ -494,7 +502,7 @@ grunt.initConfig({
 | ext    | extension to be used for dest files. |
 ```
 
-Renders to:
+次のようにレンダリングされます：
 
 | Option | Description |
 | ------ | ----------- |
@@ -502,7 +510,7 @@ Renders to:
 | engine | engine to be used for processing templates. Handlebars is the default. |
 | ext    | extension to be used for dest files. |
 
-And this HTML:
+そして HTML です：
 
 ```html
 <table>
@@ -607,7 +615,7 @@ Content for chapter one.
 Content for chapter one.
 ```
 
-**NOTE** that specific placement of the anchor tag seems to be arbitrary. They are placed inline here since it seems to be unobtrusive, and it works.
+**注意** アンカータグの配置は、任意です。ここでは目立たないようにインラインにしており、機能します。
 
 <h2 id="images">画像</h2>
 

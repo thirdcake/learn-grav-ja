@@ -1,7 +1,7 @@
 ---
 title: ページ・コレクション
 layout: ../../../layouts/Default.astro
-lastmod: '2025-07-22'
+lastmod: '2025-07-24'
 description: 'Grav では、さまざまな方法でページのコレクションを定義できます。コレクションは、ページに並べて表示したり、繰り返し処理したりできます。'
 ---
 
@@ -694,9 +694,12 @@ menu: Home
 
 <h4 id="custom-collection-handling-with-oncollectionproces">`onCollectionProcessed()` イベントによるカスタムコレクションの制御</h4>
 
-There are times when the event options are just not enough.  Times when you want to get a collection but then further manipulate the collection based on something very custom.  Imagine if you will, a use case where you have what seems like a rather bog-standard blog listing, but your client wants to have fine grain control over what displays in the listing.  They want to have a custom toggle on every blog item that lets them remove it from the listing, but still have it published and available via a direct link.
+イベントオプションが不十分であるときもあります。  
+コレクションが欲しいけれど、何かカスタマイズされたものをベースとしてコレクションを操作したいようなときです。  
+想像してみてください： ありふれたブログ一覧ページがあって、しかしあなたのクライアントは、一覧に何を表示するのか、細かくコントロールしたいと思っているようなケースを。  
+クライアントは、一覧に入れるか入れないかを制御するカスタムスイッチをブログアイテムすべてに置いてほしいと望んでいますが、そのブログアイテムは、一覧には載らないだけで、公開したいし、直接リンクによって利用可能としておきたいような場合です。
 
-To make this happen, we can simply add a custom `display_in_listing: false` option in the page header for the item:
+このようなことを実現するには、アイテムのページヘッダーに `display_in_listing: false` というカスタムオプションを追加するだけでできます：
 
 ```yaml
 ---
@@ -710,7 +713,8 @@ display_in_listing: false
 ...
 ```
 
-The problem is that there is no way to define or include this filter when defining a collection in the listing page.  It probably is defined something like this:
+問題は、このフィルタを定義したり含めたりする方法が、一覧ページのコレクションを定義する際に無いということです。  
+おそらく、次のように定義されます：
 
 ```yaml
 ---
@@ -729,7 +733,11 @@ content:
 ...
 ```
 
-So the collection is simply defined by the `self@.children` directive to get all the published children of the current page. So what about those pages that have the `display_in_listing: false` set? We need to do some extra work on that collection before it is returned to ensure we remove any items that we don't want to see.  To do this we can use the `onCollectionProcessed()` event in a custom plugin.  We need to add the listener:
+コレクションは、 `self@.children` ディレクティブによって簡単に定義し、現在ページの子ページで公開されているものをすべて取得します。  
+それでは、 `display_in_listing: false` が設定されているページについてはどうしましょうか？  
+追加の機能を実行する必要があります。返される前のコレクションで、一覧表示させたくないあらゆるアイテムを確実に取り除く機能です。  
+これを行うため、カスタムプラグインで `onCollectionProcessed()` イベントを使うことができます。  
+イベントリスナーを追加する必要があります：
 
 ```php
     public static function getSubscribedEvents(): array
@@ -742,7 +750,7 @@ So the collection is simply defined by the `self@.children` directive to get all
     }
 ```
 
-Then, we need to define the method and loop over the collection items, looking for any pages with that `display_in_listing:` field set, then remove it if it is `false`:
+それから、メソッドを定義し、コレクションアイテムをループさせ、 `display_in_listing:` フィールドが設定されたページをすべて探し出し、もしそれが `false` であれば削除します：
 
 ```php
     /**
@@ -765,5 +773,5 @@ Then, we need to define the method and loop over the collection items, looking f
     }
 ```
 
-Now your collection has the correct items, and all other plugins or Twig templates that rely on that collection will see this modified collection so things like pagination will work as expected.
+これで、コレクションは正しいアイテムを持ちます。このコレクションを利用する他のすべてのプラグインと Twig テンプレートは、この修正後のコレクションを使うため、ページネーションのようなものも期待通り動きます。
 

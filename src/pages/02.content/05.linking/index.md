@@ -1,17 +1,21 @@
 ---
 title: ページリンク
 layout: ../../../layouts/Default.astro
-lastmod: '2025-04-14'
+lastmod: '2025-07-24'
 ---
-Gravには、たくさんの柔軟な方法でリンクできるので、あるページからサイト内の別ページ、もしくは別のサイトのページへリンクすることができます。これまでHTMlを使ってファイルをリンクしたり、あるいはファイルシステムをコマンドラインで使ったことがあれば、とてもかんたんに理解できるはずです。
 
-これから、かんたんな利用例を実演します。次のようなGravサイトの **Pages** ディレクトリのモデルを使います。
+Grav には、たくさんの柔軟な方法でリンクできるので、あるページからサイト内の別ページ、もしくは別のサイトのページへリンクすることができます。  
+これまで HTML を使ってファイルをリンクしたり、あるいはファイルシステムをコマンドラインで使ったことがあれば、とてもかんたんに理解できるはずです。
+
+これから、簡単な利用例を実演します。  
+次のような Grav サイトの **Pages** ディレクトリのモデルを使います。
 
 ![Pages Directory](pages.jpg)
 
 このディレクトリ構造を例として使うことで、コンテンツで使えるさまざまなタイプのリンクがわかるでしょう。
 
-はじめに、Gravのリンクの一般的なコンポーネントをかんたんに見ていきます。そして、それらの意味も解説します。
+はじめに、 Grav のリンクの一般的なコンポーネントをかんたんに見ていきます。  
+そして、それらの意味も解説します。
 
 ```markdown
 [Linked Content](../path/slug/page)
@@ -25,21 +29,31 @@ Gravには、たくさんの柔軟な方法でリンクできるので、ある�
 
 <h3 id="slug-relative">スラッグによる相対リンク</h3>
 
-Gravでは、サイト内リンクを、ファイル名やフォルダ名だけに限定しません。ファイルのフロントマターに書いたスラッグによっても、ディレクトリ名などと同様に、リンクできます。このことから、特定のファイル名をいちいち覚える必要はなく、よりわかりやすいスラッグを覚えておくだけで、かんたんに素早くリンクを貼ることができます。
+Grav では、サイト内リンクを、ファイル名やフォルダ名だけに限定しません。  
+ファイルのフロントマターに書いたスラッグによっても、ディレクトリ名などと同様に、リンクできます。  
+このことから、特定のファイル名をいちいち覚える必要はなく、よりわかりやすいスラッグを覚えておくだけで、かんたんに素早くリンクを貼ることができます。
 
-Gravのテンプレートエンジンは、ファイル名をテンプレートファイルの割り当てのために使います。たとえば、ブログ投稿の記事は `item.md` という名前になっていることが多いです。ブログ投稿そのものは、より意味のあるスラッグをつけることができます。たとえば、`grass` もしくは `grass-is-green` のように。
+Grav のテンプレートエンジンは、ファイル名をテンプレートファイルの割り当てのために使います。  
+たとえば、ブログ投稿の記事は `item.md` という名前になっていることが多いです。  
+ブログ投稿そのものは、より意味のあるスラッグをつけることができます。  
+たとえば、 `grass` もしくは `grass-is-green` のように。
 
-ディレクトリ名もまた、表示順を示すために番号が打たれています。スラッグの相対リンクでは、この番号を含める必要はありません。Gravは、スラッグを生成するときにこの数字を無視します。これにより、URLがきれいになります。
+ディレクトリ名もまた、表示順を示すために番号が打たれています。  
+スラッグの相対リンクでは、この番号を含める必要はありません。  
+Grav は、スラッグを生成するときにこの数字を無視します。  
+これにより、 URL がきれいになります。
 
 相対スラッグのリンクの例をいくつか示します。
 
-次の例では、`pages/01.blud/01.sky/item.md` から、親ディレクトリに移動したあとに、`pages/01.blue/02.water/item.md` ファイルを読み込みます。対象となりうる `item.md` ファイルには、スラッグが指定されていなかったので、Gravはディレクトリ名を使っています。
+次の例では、 `pages/01.blud/01.sky/item.md` から、親ディレクトリに移動したあとに、 `pages/01.blue/02.water/item.md` ファイルを読み込みます。  
+対象となりうる `item.md` ファイルには、スラッグが指定されていなかったので、 Grav はディレクトリ名を使っています。
 
 ```markdown
 [link](../water)
 ```
 
-次の例も似ていますが、`pages/01.blue/01.sky/item.md` から、`pages/02.green/02.tree/item.md` へのリンクです。しかし、ここで呼び出される `item.md` ファイルには、`tree-is-green` というスラッグが指定されていたので、このリンクが可能になっています。
+次の例も似ていますが、 `pages/01.blue/01.sky/item.md` から、 `pages/02.green/02.tree/item.md` へのリンクです。  
+しかし、ここで呼び出される `item.md` ファイルには、 `tree-is-green` というスラッグが指定されていたので、このリンクが可能になっています。
 
 ```markdown
 [link](../../green/tree-is-green)
@@ -113,7 +127,8 @@ You can link to pretty much any direct URL, including secured HTTPS links. For e
 
 <h3 id="link-attributes">リンク属性</h3>
 
-マークダウン構文を利用して、リンクの属性を提供してくれる機能が提供されました。これを使えば、**class** 属性、**id** 属性、**rel** 属性、そして **target** 属性を、[Markdown Extra](https://michelf.ca/projects/php-markdown/extra/) を使うことなく利用できます。
+マークダウン構文を利用して、リンクの属性を提供してくれる機能が提供されました。  
+これを使えば、 **class** 属性、 **id** 属性、 **rel** 属性、そして **target** 属性を、[Markdown Extra](https://michelf.ca/projects/php-markdown/extra/) を使うことなく利用できます。
 
 いくつかの例を示します：
 
@@ -171,7 +186,7 @@ HTMLにすると次のようになります：
 [Combinations of Attributes](../some-page?target=_blank&classes=button)
 ```
 
-HTMLにすると次のようになります：
+HTML にすると次のようになります：
 
 ```html
 <a href="/your/pages/some-page" target="_blank" class="button">Combinations of Attributes</a>
@@ -195,13 +210,13 @@ HTMLにすると次のようになります：
 [Element Anchor](?classes=button#element-id)
 ```
 
-HTMLにすると次のようになります：
+HTML にすると次のようになります：
 
 ```html
 <a href="#element-id" class="button">
 ```
 
-Note that the anchor should come _after_ the query as discussed in [Issue 1324](https://github.com/getgrav/grav/issues/1324#issuecomment-282587549)
+注意： [Issue 1324](https://github.com/getgrav/grav/issues/1324#issuecomment-282587549) での議論のように、アンカーはクエリの _後に_ 来なければいけません。
 
 <h5 id="pass-through-of-non-supported-attributes">未サポートの属性を素通り</h5>
 
@@ -209,7 +224,7 @@ Note that the anchor should come _after_ the query as discussed in [Issue 1324](
 [Pass-through of 'cat' attribute](../some-page?classes=underline&cat=black)
 ```
 
-HTMLにすると次のようになります：
+HTML にすると次のようになります：
 
 ```html
 <a href="/your/pages/some-page?cat=black" class="underline">Pass-through of 'cat' attribute</a>
@@ -221,7 +236,7 @@ HTMLにすると次のようになります：
 [Skip all attributes](../some-page?classes=underline&rel=nofollow&noprocess)
 ```
 
-HTMLにすると次のようになります：
+HTML にすると次のようになります：
 
 ```html
 <a href="/your/pages/some-page?rel=nofollow&classes=underline">Skip All attributes</a>
@@ -233,10 +248,11 @@ HTMLにすると次のようになります：
 [Skip Certain attributes](../some-page?id=myvariable&classes=underline&target=_blank&noprocess=id,classes)
 ```
 
-HTMLにすると次のようになります：
+HTML にすると次のようになります：
 
 ```html
 <a href="/your/pages/some-page?id=myvariable&classes=underline" target="_blank">Skip Certain attributes</a>
 ```
 
 これは、特定の属性のみスキップし、他のものは通常通り属性づけたい場合に便利です。
+

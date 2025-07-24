@@ -82,19 +82,19 @@
     <loc>https://thirdcake.github.io/learn-grav-ja/02.content/03.collections/</loc>
     <priority>1.0</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-07-22</lastmod>
+    <lastmod>2025-07-24</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/02.content/04.markdown/</loc>
     <priority>1.0</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-04-13</lastmod>
+    <lastmod>2025-07-24</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/02.content/05.linking/</loc>
     <priority>1.0</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-04-14</lastmod>
+    <lastmod>2025-07-24</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/02.content/06.image-linking/</loc>
@@ -976,7 +976,7 @@
     <loc>https://thirdcake.github.io/learn-grav-ja/12.migration/01.drupal7tograv/</loc>
     <priority>1.0</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-04-28</lastmod>
+    <lastmod>2025-07-24</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/12.migration/02.wordpresstograv/</loc>
