@@ -1,11 +1,12 @@
 ---
 title: ページリンク
 layout: ../../../layouts/Default.astro
-lastmod: '2025-07-24'
+lastmod: '2025-07-25'
+description: 'Grav では、マークダウン記法に独自拡張を加えて、サイト内外のページへのリンクを、柔軟に設定できます。'
 ---
 
 Grav には、たくさんの柔軟な方法でリンクできるので、あるページからサイト内の別ページ、もしくは別のサイトのページへリンクすることができます。  
-これまで HTML を使ってファイルをリンクしたり、あるいはファイルシステムをコマンドラインで使ったことがあれば、とてもかんたんに理解できるはずです。
+これまで HTML を使ってファイルをリンクしたり、あるいはファイルシステムをコマンドラインで使ったことがあれば、とても簡単に理解できるはずです。
 
 これから、簡単な利用例を実演します。  
 次のような Grav サイトの **Pages** ディレクトリのモデルを使います。
@@ -14,7 +15,7 @@ Grav には、たくさんの柔軟な方法でリンクできるので、ある
 
 このディレクトリ構造を例として使うことで、コンテンツで使えるさまざまなタイプのリンクがわかるでしょう。
 
-はじめに、 Grav のリンクの一般的なコンポーネントをかんたんに見ていきます。  
+はじめに、 Grav のリンクの一般的なコンポーネントを、簡単に見ていきます。  
 そして、それらの意味も解説します。
 
 ```markdown
@@ -31,7 +32,7 @@ Grav には、たくさんの柔軟な方法でリンクできるので、ある
 
 Grav では、サイト内リンクを、ファイル名やフォルダ名だけに限定しません。  
 ファイルのフロントマターに書いたスラッグによっても、ディレクトリ名などと同様に、リンクできます。  
-このことから、特定のファイル名をいちいち覚える必要はなく、よりわかりやすいスラッグを覚えておくだけで、かんたんに素早くリンクを貼ることができます。
+このことから、特定のファイル名をいちいち覚える必要はなく、よりわかりやすいスラッグを覚えておくだけで、かんたんに素早くリンクを張ることができます。
 
 Grav のテンプレートエンジンは、ファイル名をテンプレートファイルの割り当てのために使います。  
 たとえば、ブログ投稿の記事は `item.md` という名前になっていることが多いです。  
@@ -63,13 +64,19 @@ Grav は、スラッグを生成するときにこの数字を無視します。
 
 <h3 id="directory-relative">ディレクトリによる相対リンク</h3>
 
-**相対ディレクトリ** リンクは、現在ページからの相対的な位置にある目的地へリンクします。これは、同じディレクトリ内の画像へのリンクのような、かんたんなものもありますし、いくつものディレクトリ階層を上り、特定のフォルダやファイルまで下っていくような、複雑なものもあります。
+**相対ディレクトリ** リンクは、現在ページからの相対的な位置にある目的地へリンクします。  
+これは、同じディレクトリ内の画像へのリンクのような、かんたんなものもありますし、いくつものディレクトリ階層を上り、特定のフォルダやファイルまで下っていくような、複雑なものもあります。
 
-相対リンクにおいては、リンク元のファイルの場所が、リンク先のファイルの場所と同じくらい重要です。どちらかが動けば、それらの間の道筋が変わってしまい、リンクが壊れるかもしれません。
+相対リンクにおいては、リンク元のファイルの場所が、リンク先のファイルの場所と同じくらい重要です。  
+どちらかが動けば、それらの間の道筋が変わってしまい、リンクが壊れるかもしれません。
 
-一方で、長所もあります。ローカルサーバーと本番サーバーとの変更が容易です。異なるドメイン名であっても、ファイル間の構造さえ同じであれば、リンクは問題なく機能します。
+一方で、長所もあります。  
+ローカルサーバーと本番サーバーとの変更が容易です。  
+異なるドメイン名であっても、ファイル間の構造さえ同じであれば、リンクは問題なく機能します。
 
-ファイルリンクは、ファイル名を指し示します。ディレクトリ名やスラッグではありません。`pages/01.blue/01.sky/item.md` から、`pages/02.green/01.grass/item.md` へリンクしたい場合、以下のように書きます。
+ファイルリンクは、ファイル名を指し示します。  
+ディレクトリ名やスラッグではありません。  
+`pages/01.blue/01.sky/item.md` から、`pages/02.green/01.grass/item.md` へリンクしたい場合、以下のように書きます。
 
 ```markdown
 [link](../../02.green/01.grass/item.md)
@@ -77,7 +84,9 @@ Grav は、スラッグを生成するときにこの数字を無視します。
 
 `../../` とあるので、まず2階層上のフォルダへ移動し、それから2階層下のフォルダにある目的の `item.md` ファイルを、直接指し示します。
 
-ときには、あるひとつのディレクトリに誘導するだけで、そのデフォルトのページを読み込ませたいこともあります。ファイルを指定しなくても、ディレクトリを指定するだけで、Gravは正しいファイルを特定し、読み込んでくれます。正しく整頓されたサイトであれば、問題ないはずです。
+ときには、あるひとつのディレクトリに誘導するだけで、そのデフォルトのページを読み込ませたいこともあります。  
+ファイルを指定しなくても、ディレクトリを指定するだけで、Gravは正しいファイルを特定し、読み込んでくれます。  
+正しく整頓されたサイトであれば、問題ないはずです。
 
 次の例では、`pages/01.blue/01.key/item.md` から、デフォルトで `color.md` ファイルを読み込む `pages/02.green/` へリンクしています。
 
@@ -85,9 +94,11 @@ Grav は、スラッグを生成するときにこの数字を無視します。
 [link](../../02.green)
 ```
 
-If you want to link to a directory two steps up, you can do so using this process. 
+もし2階層上のディレクトリにリンクを張りたいなら、この処理でできます。
 
-The next example is a lot like the file link we demonstrated earlier. Instead of linking directly to the file, we're linking to its directory, which should load the file we want anyway since it's the default file. If you were creating a link from `pages/01.blue/01.sky/item.md` to `/pages/02.green/01.grass/` you would use the following command.
+次の例は、先ほど解説したファイルリンクにとても似ています。  
+ファイルに直接リンクする代わりに、そのディレクトリへリンクを張っており、そのディレクトリはデフォルトのファイルがあるので、いずれにせよそのファイルを読み込むことになります。  
+`pages/01.blue/01.sky/item.md` ファイルで `/pages/02.green/01.grass/` へリンクを作成したいとき、以下のようなコマンドが使えます。
 
 ```markdown
 [link](../../02.green/01.grass)
@@ -95,17 +106,25 @@ The next example is a lot like the file link we demonstrated earlier. Instead of
 
 <h3 id="absolute">絶対リンク</h3>
 
-絶対リンクは、相対リンクに似ていますが、サイトrootからの相対位置を示します。**Grav** においては、とくに **/user/pages/** ディレクトリがrootになります。絶対リンクには、2つの方法があります。
+絶対リンクは、相対リンクに似ていますが、サイトの root ディレクトリからの相対位置を示します。  
+**Grav** においては、とくに **/user/pages/** ディレクトリが root になります。  
+絶対リンクには、2つの方法があります。
 
-You can do it in a similar fashion to the **Slug Relative** style which uses the slug, or directory name in the path for simplicity. This method removes potential issues of order changes later on (changing the number at the beginning of the folder name) breaking the link. This would be the most commonly used method of absolute linking.
+最初の方法は、 **スラッグによる相対リンク** で解説した、スラッグを使う方法に似ています。  
+この方法は、コンテンツの順番が変わって、（フォルダ名の最初にある数字が変更することによる）リンク切れという潜在的な問題を引き起こしません。  
+絶対リンクを張るときの、最も一般的な方法がこの方法です。
 
-In an absolute link, the link opens with a `/`. Here is an example of an absolute link made to `pages/01.blue/01.sky/item.md` in the **Slug** style.
+絶対リンクでは、リンクを `/` で始めます。  
+以下は、 `pages/01.blue/01.sky/item.md` への **スラッグ** 方法での絶対リンクの具体例です。
 
 ```markdown
 [link](/blue/sky)
 ```
 
-The second method is fashioned after the **Directory Relative** style detailed previously. This method leaves in elements like the ordering numbers at the beginning of directory names. While this does add the potential of a broken link when content is reordered, it is more reliable when used with services like [Github](https://github.com) where content links do not have the benefit of Grav's flexibility. Here is an example of an absolute link made to `pages/01.blue/01.sky/item.md` using this style.
+2つ目の方法は、先ほど解説した **ディレクトリによる相対リンク** 方法と似た方法です。  
+この方法は、ディレクトリ名の最初にある順序を表す数字を残して使います。  
+コンテンツの順番を変えたときに、リンク切れを引き起こしうるものの、 Grav の柔軟性を利用できない [GitHub] のようなサービスで利用する場合には、より頼もしいやり方です。  
+以下は、この方法による `pages/01.blue/01.sky/item.md` への絶対リンクの例です。
 
 ```markdown
 [link](/01.blue/01.sky)
@@ -113,13 +132,16 @@ The second method is fashioned after the **Directory Relative** style detailed p
 
 <h3 id="remote">サイト外リンク</h3>
 
-Remote links enable you to link directly to pretty much any file or document out there via its URL. This doesn't have to include your own site's content, but it can. Here is an example of how you would link to Google's home page.
+サイト外へのリンクにより、 URL を使って、あらゆるファイルやドキュメントと直接つながることができます。  
+これは、あなたの所有するサイトコンテンツを含む必要はありません（そうすることは可能ですが）。  
+以下は、 Google のホームページへのリンク方法の具体例です。
 
 ```markdown
 [link](http://www.google.com)
 ```
 
-You can link to pretty much any direct URL, including secured HTTPS links. For example:
+安全な HTTPS リンクを含む直接リンクもできます。  
+具体例です：
 
 ```markdown
 [link](https://github.com)

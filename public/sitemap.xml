@@ -4,7 +4,7 @@
     <loc>https://thirdcake.github.io/learn-grav-ja/</loc>
     <priority>0.7</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-07-18</lastmod>
+    <lastmod>2025-07-25</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/01.basics/</loc>
@@ -94,7 +94,7 @@
     <loc>https://thirdcake.github.io/learn-grav-ja/02.content/05.linking/</loc>
     <priority>1.0</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-07-24</lastmod>
+    <lastmod>2025-07-25</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/02.content/06.image-linking/</loc>
@@ -724,7 +724,7 @@
     <loc>https://thirdcake.github.io/learn-grav-ja/09.webservers-hosting/</loc>
     <priority>1.0</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-04-14</lastmod>
+    <lastmod>2025-07-25</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/09.webservers-hosting/00.servers/01.nginx/</loc>
