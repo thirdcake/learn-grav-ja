@@ -1,44 +1,53 @@
 ---
 title: テーマ変数
 layout: ../../../layouts/Default.astro
-lastmod: '2025-04-19'
+lastmod: '2025-07-26'
+description: 'Grav のテーマをデザインする際に、 Twig テンプレート内で使える変数やオブジェクトはたくさんあります。主要なもの、便利なものを解説します。'
 ---
-テーマをデザインするとき、Twigのテンプレート内のすべての種類のオブジェクトや変数が使えます。Twigテンプレートエンジンは、これらオブジェクトや変数を強力に読み取り、計算します。このことは、[Twigドキュメントに書かれています](https://twig.symfony.com/doc/1.x/templates.html) し、[私たちのドキュメントでも概要を説明しました](../03.twig-primer/)
+
+テーマをデザインするとき、 Twig のテンプレート内のすべての種類のオブジェクトや変数が使えます。  
+Twig テンプレートエンジンは、これらオブジェクトや変数を強力に読み取り、計算します。  
+このことは、 [Twig ドキュメントに書かれています](https://twig.symfony.com/doc/1.x/templates.html) し、 [私たちのドキュメントでも概要を説明しました](../03.twig-primer/) 。
 
 > [!Warning]  
-> Twigでは、引数の必要がない場合、カッコ `()` を除いても、メソッド名のみでそのメソッドを呼び出せます。引数を渡す必要があるときは、メソッド名の後にカッコが必要です。`page.content` は、`page.content()` と同じです。
+> Twig では、引数の必要がない場合、カッコ `()` を除いても、メソッド名のみでそのメソッドを呼び出せます。引数を渡す必要があるときは、メソッド名の後にカッコが必要です。 `page.content` は、 `page.content()` と同じです。
 
 <h2 id="core-objects">コア・オブジェクト</h2>
 
-Twigテンプレートで使える、いくつかの **コア・オブジェクト** があります。それぞれのオブジェクトは、 **変数** や **関数** を持ちます。
+Twig テンプレートで使える、いくつかの **コア・オブジェクト** があります。  
+それぞれのオブジェクトは、 **変数** や **関数** を持ちます。
 
 <h3 id="base-dir-variable">`base_dir` 変数</h3>
 
-Gravがインストールされているベースのディレクトリを返します。
+Grav がインストールされているベースのディレクトリを返します。
 
 <h3 id="base-url-variable">`base_url` 変数</h3>
 
-GravサイトのベースのURLを返します。絶対URLを返すかどうかは、 [system.yamlの設定](../../01.basics/05.grav-configuration/#system-configuration) で、`absolute_urls` をどのように設定しているかによります。
+Grav サイトのベースの URL を返します。  
+絶対 URL を返すかどうかは、 [system.yaml の設定](../../01.basics/05.grav-configuration/#system-configuration) で、`absolute_urls` をどのように設定しているか次第です。
 
 <h3 id="base-url-relative-variable">`base_url_relative` 変数</h3>
 
-GravサイトのベースURLを、ホスト情報無しで返します。
+Grav サイトのベース URL を、ホスト情報無しで返します。
 
 <h3 id="base-url-absolute-variable">`base_url_absolute` 変数</h3>
 
-GravサイトのベースURLを、ホスト情報を含んで返します。
+Grav サイトのベース URL を、ホスト情報を含んで返します。
 
 <h3 id="base-url-simple-variable">`base_url_simple` 変数</h3>
 
-GravサイトのベースURLを、言語コード無しで返します。
+Grav サイトのベース URL を、言語コード無しで返します。
 
 <h3 id="home-url-variable">`home_url` 変数</h3>
 
-サイト上で、ホームに戻るリンクを使うときに便利です。[`base_url`](#base-url-variable) に似ていますが、こちらは、その時アクティブになっている言語を考慮に入れたURLが返ります。
+サイト上で、ホームに戻るリンクを使うときに便利です。  
+[`base_url`](#base-url-variable) に似ていますが、こちらは、その時アクティブになっている言語を考慮に入れた URL が返ります。
 
 <h3 id="html-lang-variable">`html_lang` 変数</h3>
 
-その時点でアクティブになっている言語が返ります。もし無ければ、`site.default_lang` の設定値が返ります。それもなければ、`en` を返します。
+その時点でアクティブになっている言語を返します。  
+もし無ければ、 `site.default_lang` の設定値を返します。  
+それもなければ、 `en` を返します。
 
 <h3 id="theme-dir-variable">`theme_dir` 変数</h3>
 
@@ -49,7 +58,7 @@ GravサイトのベースURLを、言語コード無しで返します。
 現在有効化されているテーマの相対URLを返します。
 
 > [!Info]  
-> 画像や、JavaScript、CSSファイルにリンクしたい時、おすすめの方法は、`url()` 関数を `theme://` ストリームと組み合わせて使うことです。[カスタム関数](../04.twig-tags-filters-functions/03.functions/#url) で解説しています。JavaScriptとCSSについては、[アセット管理](../07.asset-manager/) の方が、かんたんに使えます。ただし、動的に（もしくは条件付きで）読み込みたいような場合は、機能しないこともあります。
+> 画像や、 JavaScript 、 CSS ファイルにリンクしたい時、おすすめの方法は、 `url()` 関数を `theme://` ストリームと組み合わせて使うことです。 [カスタム関数](../04.twig-tags-filters-functions/03.functions/#url) で解説しています。 JavaScript と CSS については、 [アセット管理](../07.asset-manager/) の方が、かんたんに使えます。ただし、動的に（もしくは条件付きで）読み込みたいような場合は、機能しないこともあります。
 
 <h3 id="language-codes-variable">`language_codes` 変数</h3>
 
@@ -57,7 +66,7 @@ GravサイトのベースURLを、言語コード無しで返します。
 
 <h3 id="assets-object">`assets` オブジェクト</h3>
 
-**アセット管理** は、あなたのサイトでCSSやJavaScriptを管理するかんたんな方法です。
+**アセット管理** は、あなたのサイトで CSS や JavaScript を管理する簡単な方法です。
 
 ```twig
 {% do assets.addCss('theme://css/foo.css') %}
@@ -68,12 +77,12 @@ GravサイトのベースURLを、言語コード無しで返します。
 
 くわしくは、 [アセット管理](../07.asset-manager/) をお読みください。
 
-> [!Note]  
-> **TIP:** 代わりに、**[stylesタグ](../04.twig-tags-filters-functions/01.tags/#style)** や、**[scriptタグ](../04.twig-tags-filters-functions/01.tags/#script)** の使用をおすすめします。
+> [!Tip]  
+> 代わりに、 **[styles タグ](../04.twig-tags-filters-functions/01.tags/#style)** や、**[script タグ](../04.twig-tags-filters-functions/01.tags/#script)** の使用をおすすめします。
 
 <h3 id="config-object">`config` オブジェクト</h3>
 
-これを使えば、`/user/config` ディレクトリ内のYAMLファイルに設定されているすべての設定にアクセス可能です。
+これを使えば、 `/user/config` ディレクトリ内の YAML ファイルに設定されているすべての設定にアクセス可能です。
 
 ```twig
 {{ config.system.pages.theme }}{# returns the currently configured theme #}
@@ -81,28 +90,34 @@ GravサイトのベースURLを、言語コード無しで返します。
 
 <h3 id="site-object">`site` オブジェクト</h3>
 
-`config.site` オブジェクトの別名です。`site.yaml` ファイル内に設定した内容にアクセスできます。
+`config.site` オブジェクトの別名です。  
+`site.yaml` ファイル内に設定した内容にアクセスできます。
 
 <h3 id="system-object">`system` オブジェクト</h3>
 
-`config.system` オブジェクトの別名です。`system.yaml` ファイル内に設定した内容にアクセスできます。
+`config.system` オブジェクトの別名です。  
+`system.yaml` ファイル内に設定した内容にアクセスできます。
 
 <h3 id="theme-object">`theme` オブジェクト</h3>
 
-`config.theme` オブジェクトの別名です。現在有効になっているテーマで設定した内容にアクセスできます。プラグインに設定したものは、`config.plugins` から取得できます。
+`config.theme` オブジェクトの別名です。  
+現在有効になっているテーマで設定した内容にアクセスできます。  
+プラグインに設定したものは、 `config.plugins` から取得できます。
 
 <h3 id="page-object">`page` オブジェクト</h3>
 
-Gravでは、`pages/` フォルダ内のフォルダ構造を使うので、それぞれのページは、**pageオブジェクト** として利用できます。
+Grav では、 `pages/` フォルダ内のフォルダ構造を使うので、それぞれのページは、**pageオブジェクト** として利用できます。
 
 **page オブジェクト** は、おそらく _一番_ 重要なオブジェクトで、現在のページのすべての情報を持っています。
 
 > [!Info]  
-> The whole list of the Page object methods is available on the [API site](https://learn.getgrav.org/api#class-gravcommonpagepage). Here's a list of the methods you'll find most useful.
+> Page オブジェクトのメソッドの全体リストは、 [API サイト](../../14.api/#class-gravcommonpagepage) で利用できます。ここでは、最も便利なメソッドを紹介します。
 
 ##### summary([size])
 
-コンテンツの概要を返します。`size` を引数に渡すと、それを最大文字数とする概要になります。代わりに、何も引数を渡さないときは、 `site.yaml` 設定の `summary.size` 変数が適用されます。
+コンテンツの概要を返します。  
+`size` を引数に渡すと、それを最大文字数とする概要になります。  
+代わりに、何も引数を渡さないときは、 `site.yaml` 設定の `summary.size` 変数が適用されます。
 
 ```twig
 {{ page.summary|raw }}
@@ -114,11 +129,12 @@ Gravでは、`pages/` フォルダ内のフォルダ構造を使うので、そ�
 {{ page.summary(50)|raw }}
 ```
 
-3つ目のオプションは、コンテンツ中を `===` で区切ることです。この区切り文字の前にあるものが、概要として使われます。
+3つ目のオプションは、コンテンツ中を `===` で区切ることです。  
+この区切り文字の前にあるものが、概要として使われます。
 
 ##### content()
 
-ページのHTMLコンテンツ全体を返します。
+ページの HTML コンテンツ全体を返します。
 
 ```twig
 {{ page.content|raw }}
@@ -126,7 +142,8 @@ Gravでは、`pages/` フォルダ内のフォルダ構造を使うので、そ�
 
 ##### header()
 
-ページのフロントマターに定義したものが返ります。たとえば、以下のようなフロントマターを書いたとします。
+ページのフロントマターに定義したものを返します。  
+たとえば、以下のようなフロントマターを書いたとします。
 
 ```yaml
 title: My Page
@@ -141,7 +158,11 @@ The author of this page is: {{ page.header.author|e }}
 
 ##### media()
 
-ページに関連するすべてのメディアを含む **Media** オブジェクトを返します。これらには、**画像** や、 **動画** や、 その他の **ファイル** が、含まれます。[メディアのドキュメント](../../02.content/07.media/) で解説したように、メディアにアクセス可能です。配列としてふるまうので、Twigのフィルタや関数が使えます。注意点：SVG画像は、ファイルとして扱われます。画像ではありません。Twigの画像フィルタで計算できないためです。
+ページに関連するすべてのメディアを含む **Media** オブジェクトを返します。  
+これらには、**画像** や、 **動画** や、 その他の **ファイル** が、含まれます。  
+[メディアのドキュメント](../../02.content/07.media/) で解説したように、メディアにアクセス可能です。  
+配列として動作するので、 Twig のフィルタや関数が使えます。  
+注意点： SVG 画像は、ファイルとして扱われます。画像ではありません。 Twig の画像フィルタで計算できないためです。
 
 特定のファイルや画像を取得します：
 
@@ -155,7 +176,7 @@ The author of this page is: {{ page.header.author|e }}
 {% set first_image = page.media.images|first %}
 ```
 
-すべての画像をループし、HTMLタグで表示します：
+すべての画像をループし、 HTML タグで表示します：
 
 ```twig
 {% for image in page.media.images %}
@@ -165,7 +186,8 @@ The author of this page is: {{ page.header.author|e }}
 
 ##### title()
 
-ページのタイトルを返します。ページのフロントマターで、`title` 変数として設定したものです。
+ページのタイトルを返します。  
+ページのフロントマターで、 `title` 変数として設定したものです。
 
 ```yaml
 title: My Page
@@ -173,7 +195,8 @@ title: My Page
 
 ##### menu()
 
-ページのフロントマターで、`menu` 変数として設定した値が返ります。もしなければ、デフォルトでは `title` が返ります。
+ページのフロントマターで、 `menu` 変数として設定した値を返します。  
+もしなければ、デフォルトでは `title` が返ります。
 
 ```yaml
 title: My Page
@@ -182,7 +205,9 @@ menu: my-page
 
 ##### visible()
 
-ページが公開かどうかを返します。デフォルトでは、数字とピリオドが最初にあるページ（`01.somefolder1`）は公開され、無いページ（`subfolder2`）は公開とは認識されません。この設定は、ページのフロントマターで上書きできます。
+ページがメニューに表示されるかどうかを返します。  
+デフォルトでは、数字とピリオドが最初にあるページ（`01.somefolder1`）は表示され、無いページ（`subfolder2`）は表示されません。  
+この設定は、ページのフロントマターで上書きできます。
 
 ```yaml
 title: My Page
@@ -191,7 +216,10 @@ visible: true
 
 ##### routable()
 
-Gravが、そのページをルーティング対象とするかどうかを返します。つまり、ブラウザから呼ばれて、そのコンテンツを表示するかどうかです。ルーティング外のページは、テンプレートや、プラグインなどに使われますが、直接は表示されません。これは、ページのフロントマターで設定できます：
+Grav が、そのページをルーティング対象とするかどうかを返します。  
+つまり、ブラウザから呼ばれて、そのコンテンツを表示するかどうかです。  
+ルーティング外のページは、テンプレートや、プラグインなどに使われますが、直接は表示されません。  
+これは、ページのフロントマターで設定できます：
 
 ```yaml
 title: My Page
@@ -200,11 +228,12 @@ routable: true
 
 ##### slug()
 
-そのページのURLに表示される名前を返します。たとえば、`my-blog-post` などです。
+そのページの URL に表示される名前を返します。  
+たとえば、`my-blog-post` などです。
 
 ##### url([include_host = false])
 
-そのページのURLを返します。たとえば：
+そのページの URL を返します。たとえば：
 
 ```twig
 {{ page.url|e }} {# could return /my-section/my-category/my-blog-post #}
@@ -218,19 +247,23 @@ routable: true
 
 ##### permalink()
 
-ホスト情報を含んだURLを返します。どこからでもアクセス可能なリンクが必要なときに、とくに便利です。
+ホスト情報を含んだ URL を返します。  
+どこからでもアクセス可能なリンクが必要なときに、とくに便利です。
 
 ##### canonical()
 
-そのページの '望ましい' バージョンもしくはリンクのURLを返します。この値は、ページのフロントマターで `canonical` で上書きしていなければ、通常のURLです。
+そのページの '望ましい' バージョンもしくはリンクの URL を返します。  
+この値は、ページのフロントマターで `canonical` で上書きしていなければ、通常のURLです。
 
 ##### route()
 
-This returns the internal routing for a page.  This is primarily used for internal routing and dispatching of pages.
+ページの内部的なルーティングを返します。  
+主に、内部的なルーティングとページの割り当てに使われます。
 
 ##### home()
 
-そのページが、**ホーム** かどうかを返します。`system.yaml` ファイルで、ホームとなるページを設定できます。
+そのページが、 **ホーム** かどうかを返します。  
+`system.yaml` ファイルで、ホームとなるページを設定できます。
 
 ##### root()
 
@@ -238,7 +271,8 @@ This returns the internal routing for a page.  This is primarily used for intern
 
 ##### active()
 
-そのページが、ブラウザでアクセスしているページと同じかどうかを返します。ナビゲーションで、そのページがアクティブかどうかを知りたいときに、特に便利です。
+そのページが、ブラウザでアクセスしているページと同じかどうかを返します。  
+ナビゲーションメニューで、そのページがアクティブかどうかを知りたいときに、特に便利です。
 
 ##### modular()
 
@@ -246,11 +280,13 @@ This returns the internal routing for a page.  This is primarily used for intern
 
 ##### activeChild()
 
-そのURIのURLに、アクティブページのURLを含んでいるかどうかを返します。別の言い方をすると、このページのURLに、現在ページのURLが含まれているかどうかです。これもまた、ナビゲーションで、そのページがアクティブな子ページの親ページかどうかを知りたいときに便利です。
+その URI の URL に、アクティブページの URL を含んでいるかどうかを返します。  
+別の言い方をすると、このページの URL に、現在ページの URL が含まれているかどうかです。  
+これもまた、ナビゲーションメニューで、そのページがアクティブな子ページの親ページかどうかを知りたいときに便利です。
 
 ##### find(url)
 
-そのURLのページオブジェクトを返します。
+その URL のページオブジェクトを返します。
 
 ```twig
 {% include 'modular/author-detail.html.twig' with {'page': page.find('/authors/billy-bloggs')} %}
@@ -287,7 +323,7 @@ This returns the internal routing for a page.  This is primarily used for intern
 現在の場所に対して、前の兄弟のページを返します。
 
 > [!Info]  
-> nextSibling() と、prevSibling() は、スタック（後入れ先出し）形式でページを並べます。これは、ブログなどで最も機能するもので、一番始めに並ぶブログ投稿について、nextSibling は null で、prevSiblig は過去のブログ投稿となります。もしこの順番付けが難しいと感じるなら、 nextSibling の代わりに、 page.adjacentSibling(-1) を使ってください。また、テーマ内で使う定数を決めることもできます。`page.adjacentSibling(NEXT_PAGE)` のようにすれば、より読みやすくなります。
+> nextSibling() と、prevSibling() は、スタック（後入れ先出し）形式でページを並べます。これは、ブログなどで最も役に立つもので、一番始めに並ぶブログ投稿について、 nextSibling は null で、prevSiblig は過去のブログ投稿となります。もしこの順番付けが難しいと感じるなら、 nextSibling の代わりに、 page.adjacentSibling(-1) を使ってください。また、テーマ内で使う定数を決めることもできます。`page.adjacentSibling(NEXT_PAGE)` のようにすれば、より読みやすくなります。
 
 ##### children()
 
@@ -295,19 +331,25 @@ This returns the internal routing for a page.  This is primarily used for intern
 
 ##### orderBy()
 
-そのページの子ページの並べ方を返します。値は、 `default`, `title`, `date` そして `folder` のいずれかです。この値は、一般的にページのフロントマターで設定されます。
+そのページの子ページの並べ方を返します。  
+値は、 `default`, `title`, `date` そして `folder` のいずれかです。  
+この値は、一般的にページのフロントマターで設定されます。
 
 ##### orderDir()
 
-そのページの子ページの並び順の方向を返します。値は、昇順ならば `asc` で、降順なら `desc` です。この値は、一般的にページのフロントマターで設定されます。
+そのページの子ページの並び順の方向を返します。  
+値は、昇順ならば `asc` で、降順なら `desc` です。  
+この値は、一般的にページのフロントマターで設定されます。
 
 ##### orderManual()
 
-マニュアルに並べた順序で子ページの配列を返します。この値は、一般的にページのフロントマターで設定されます。
+マニュアルに並べた順序で子ページの配列を返します。  
+この値は、一般的にページのフロントマターで設定されます。
 
 ##### maxCount()
 
-コレクションとして返せる子ページの数の最大数を返します。この値は、一般的にページのフロントマターで設定されます。
+コレクションとして返せる子ページの数の最大数を返します。  
+この値は、一般的にページのフロントマターで設定されます。
 
 ##### children.count()
 
@@ -315,7 +357,8 @@ This returns the internal routing for a page.  This is primarily used for intern
 
 ##### children.current()
 
-現在の子ページを返します。子ページの繰り返しの中で使えます。
+現在の子ページを返します。  
+子ページの繰り返しの中で使えます。
 
 ##### children.next()
 
@@ -327,10 +370,10 @@ This returns the internal routing for a page.  This is primarily used for intern
 
 ##### children.nth(position)
 
-子ページの配列の中から、1つの `position` を持つ子ページを返します。この `position` は、 `0` から、 `children.count() - 1` までの間の整数値です。
+子ページの配列の中から、1つの `position` を持つ子ページを返します。  
+この `position` は、 `0` から、 `children.count() - 1` までの間の整数値です。
 
 ##### children.sort(orderBy, orderDir)
-
 
 **orderBy** (`default`, `title`, `date` そして `folder`) と、 **orderDir** (`asc` もしくは `desc`) によって、子ページを並べかえます。
 
@@ -369,19 +412,24 @@ This returns the internal routing for a page.  This is primarily used for intern
 
 ##### filePathClean()
 
-Gravのルートディレクトリからの相対パスが返ります。たとえば、 `user/pages/01.home/default.md`
+Grav のルートディレクトリからの相対パスが返ります。  
+たとえば、 `user/pages/01.home/default.md`
 
 ##### path()
 
-そのページを持つディレクトリのフルパスが返ります。たとえば、 `/Users/yourname/sites/grav/user/pages/01.home`
+そのページを持つディレクトリのフルパスが返ります。  
+たとえば、 `/Users/yourname/sites/grav/user/pages/01.home`
 
 ##### folder()
 
-ページのフォルダ名が返ります。たとえば、 `01.home`
+ページのフォルダ名が返ります。  
+たとえば、 `01.home`
 
 ##### taxonomy()
 
-ページに関係するタクソノミーの配列を返します。繰り返し可能です。タグを表示するときに特に便利です。
+ページに関係するタクソノミーの配列を返します。  
+繰り返し可能です。  
+タグを表示するときに特に便利です。
 
 ```twig
 {% for tag in page.taxonomy.tag %}
@@ -391,14 +439,16 @@ Gravのルートディレクトリからの相対パスが返ります。たと�
 
 <h3 id="pages-object">`pages` オブジェクト</h3>
 
-**pages** オブジェクトは、Gravが確認できるすべての **page** オブジェクトのツリー構造を表したルートページです。サイトマップや、ナビゲーション、特定の **page** を探すようなときに、特に便利です。
+**pages** オブジェクトは、 Grav が確認できるすべての **page** オブジェクトのツリー構造を表したルートページです。  
+サイトマップや、ナビゲーション、特定の **page** を探すようなときに、特に便利です。
 
 > [!Info]  
 > このオブジェクトは、`Pages` クラスのインスタンスである `grav.pages` とは違うものです。
 
 <h5 id="children-method">children メソッド</h5>
 
-**page objects** の配列から、直接の子ページを返します。pages オブジェクトは、すべての木構造を表すので、再帰的にすべての pages/ フォルダ内のページを取得可能です。
+**page objects** の配列から、直接の子ページを返します。  
+pages オブジェクトは、すべての木構造を表すので、再帰的にすべての pages/ フォルダ内のページを取得可能です。
 
 シンプルなメニューを作るため、トップレベルのページを取得してみます：
 
@@ -414,7 +464,9 @@ Gravのルートディレクトリからの相対パスが返ります。たと�
 
 <h3 id="media-object">`media` オブジェクト</h3>
 
-ページオブジェクトの外にある[メディア](../../02.content/07.media/) に、TwigからPHPストリームを使ってアクセスできるオブジェクトです。これは、[画像リンク](../../02.content/06.image-linking/#php-stream) と似たような方法で機能します。ストリームを使って画像やメディアにアクセスし、テーマを操作します。
+ページオブジェクトの外にある [メディア](../../02.content/07.media/) に、 Twig から PHP ストリームを使ってアクセスできるオブジェクトです。  
+これは、 [画像リンク](../../02.content/06.image-linking/#php-stream) と似たような方法で機能します。  
+ストリームを使って画像やメディアにアクセスし、テーマを操作します。
 
 ```twig
 {{ media['user://media/bird.png'].resize(50, 50).rotate(90).html()|raw }}
@@ -423,13 +475,20 @@ Gravのルートディレクトリからの相対パスが返ります。たと�
 <h3 id="uri-object">`uri` オブジェクト</h3>
 
 > [!Info]  
-> Uriオブジェクトのすべてのメソッドは [API site](https://learn.getgrav.org/api#class-gravcommonuri) を参照してください。ここでは、特に便利なものを列挙します。
+> Uri オブジェクトのすべてのメソッドは [API site](https://learn.getgrav.org/api#class-gravcommonuri) を参照してください。ここでは、特に便利なものを列挙します。
 
-Uriオブジェクトには、現在のURIの部分にアクセスするメソッドがあります。フルのURIは、 `http://mysite.com/grav/section/category/page.json/param1:foo/param2:bar/?query1=baz&query2=qux` とします:
+Uriオブジェクトには、現在のURIの部分にアクセスするメソッドがあります。  
+完全なURIは：
+
+```txt
+http://mysite.com/grav/section/category/page.json/param1:foo/param2:bar/?query1=baz&query2=qux
+```
+
+とします:
 
 ##### path()
 
-URLのパス部分を返します： (例 `uri.path` = `/section/category/page`)
+URLi のパス部分を返します： (例 `uri.path` = `/section/category/page`)
 
 ##### paths()
 
@@ -441,47 +500,48 @@ URLのパス部分を返します： (例 `uri.path` = `/section/category/page`)
 
 ##### params()
 
-This returns the params portion of the URL: (e.g. `uri.params` = `/param1:foo/param2:bar`)
+URL のパラメータ部分を返します。 （例 `uri.params` = `/param1:foo/param2:bar` ）
 
 ##### param(id)
 
-This returns the value of a particular param.  (e.g. `uri.param('param1')` = `foo`)
+特定のパラメータの値を返します。 (例 `uri.param('param1')` = `foo`)
 
 ##### query()
 
-This returns the query portion of the URL: (e.g. `uri.query` = `query1=bar&query2=qux`)
+URL のクエリー部分を返します： (例 `uri.query` = `query1=bar&query2=qux`)
 
 ##### query(id)
 
-You can also retrieve specific query items: (e.g. `uri.query('query1')` = `bar`)
+特定のクエリーアイテムを扱うこともできます： (例 `uri.query('query1')` = `bar`)
 
 ##### url([include_host = true])
 
-This returns the full URL with or without the host.  (e.g. `uri.url(false)` = `grav/section/category/page/param:foo?query=bar`)
+ホスト名を含める・含めない、完全な URL を返します。 (例 `uri.url(false)` = `grav/section/category/page/param:foo?query=bar`)
 
 ##### extension()
 
-This returns the extension, or will return `html` if not provided: (e.g. `uri.extension` = `json`)
+拡張子を返します。無ければ `html` が返ります： (例 `uri.extension` = `json`)
 
 ##### host()
 
-This returns the host portion of the URL. (e.g. `uri.host` = `mysite.com`)
+URL のホスト部分を返します。 (例 `uri.host` = `mysite.com`)
 
 ##### base()
 
-This returns the base portion of the URL. (e.g. `uri.base` = `http://mysite.com`)
+URL のベース部分を返します。 (例 `uri.base` = `http://mysite.com`)
 
 ##### rootUrl([include_host = false])
 
-This returns the root url to the grav instance.  (e.g. `uri.rootUrl()` = `http://mysite.com/grav`)
+Grav インスタンスのルートとなる URL を返します。 (例 `uri.rootUrl()` = `http://mysite.com/grav`)
 
 ##### referrer()
 
-This returns the referrer information for this page.
+このページに対するリファラ情報を返します。
 
 <h3 id="header-object">`header` オブジェクト</h3>
 
-The header object is an alias for `page.header()` of the original page.  It's a convenient way to access the original page headers when you are looping through other `page` objects of child pages or collections.
+ヘッダーオブジェクトは、オリジナルページの `page.header()` の別名です。  
+子ページやコレクションをループして、 `page` オブジェクトを扱う場合に、オリジナルのページヘッダーにアクセスできるのは便利です。
 
 <h3 id="content-string">`content` 文字列</h3>
 
@@ -495,14 +555,15 @@ content オブジェクトは、オリジナルページの `page.content()` の
 
 <h3 id="taxonomy-object">`taxonomy` オブジェクト</h3>
 
-グローバルのタクソノミーオブジェクトは、サイトのタクソノミー情報をすべて持っています。より詳しくは、[タクソノミー](../../02.content/08.taxonomy/) をご覧ください。
+グローバルのタクソノミーオブジェクトは、サイトのタクソノミー情報をすべて持っています。  
+より詳しくは、 [タクソノミー](../../02.content/08.taxonomy/) をご覧ください。
 
 <h3 id="browser-object">`browser` オブジェクト</h3>
 
 > [!Info]  
 > ブラウザオブジェクトのすべてのメソッドは、 [API site](https://learn.getgrav.org/api#class-grav-common-browser) をご覧ください。ここでは、最も便利なメソッドを列挙します。
 
-Gravは組み込みで、ユーザーのプラットフォームや、ブラウザ、バージョンを調べるようにプログラムされています。
+Grav は組み込みで、ユーザーのプラットフォームや、ブラウザ、バージョンを調べるようにプログラムされています。
 
 ```twig
 {{ browser.platform|e }}   # macintosh
@@ -512,7 +573,8 @@ Gravは組み込みで、ユーザーのプラットフォームや、ブラウ�
 
 <h3 id="user-object">`user` オブジェクト</h3>
 
-You can access the current logged in user object indirectly via the Grav object.  This allows you to access such data as `username`, `fullname`, `title`, and `email`:
+Grav オブジェクトを経由して、間接的に現在ログインしているユーザーオブジェクトにアクセスできます。  
+これにより、 `username`, `fullname`, `title`, そして `email` のようなデータにアクセスできます：
 
 ```twig
 {{ grav.user.username|e }}  # admin
@@ -523,13 +585,17 @@ You can access the current logged in user object indirectly via the Grav object.
 
 <h2 id="adding-custom-variables">カスタム変数を追加</h2>
 
-カスタム変数を追加するのは、さまざまな方法で、かんたんにできます。サイト全体で使いたい変数なら、`user/config/site.yaml` ファイルに追加できます。そして、以下のようにアクセスできます。
+カスタム変数を追加するのは、さまざまな方法で、簡単にできます。  
+サイト全体で使いたい変数なら、 `user/config/site.yaml` ファイルに追加できます。  
+そして、以下のようにアクセスできます。
 
 ```twig
 {{ site.my_variable|e }}
 ```
 
-一方、特定のページでのみ必要な変数であれば、ページのYAMLフロントマターで変数を追加できます。 `page.header` オブジェクトでアクセスできます。たとえば：
+一方、特定のページでのみ必要な変数であれば、ページの YAML フロントマターで変数を追加できます。  
+`page.header` オブジェクトでアクセスできます。  
+たとえば：
 
 ```twig
 title: My Page
@@ -544,5 +610,6 @@ The author of this page is: {{ page.header.author|e }}
 
 <h2 id="adding-custom-objects">カスタムオブジェクトを追加</h2>
 
-Twigオブジェクトにカスタムオブジェクトを追加するのは、発展的な方法で、プラグインを使います。これは発展的なトピックで、より詳しい内容は、[プラグインの章](../../04.plugins/04.event-fooks/) で解説します。
+Twig オブジェクトにカスタムオブジェクトを追加するのは、発展的な方法で、プラグインを使います。  
+これは発展的なトピックで、より詳しい内容は、 [プラグインの章](../../04.plugins/04.event-fooks/) で解説します。
 
