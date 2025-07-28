@@ -1,15 +1,20 @@
 ---
 title: アセットマネージャー
 layout: ../../../layouts/Default.astro
-lastmod: '2025-06-13'
+lastmod: '2025-07-28'
 ---
 
 > [!訳注]  
 > このページの内容は、今のわたしには難しい内容のため、後回しになっています。とりあえず、 Twig カスタムタグの [`script`](../04.twig-tags-filters-functions/01.tags/#script) と [`style`](../04.twig-tags-filters-functions/01.tags/#style) の使い方がわかっていれば、実務上は、ほとんど問題は無いと思います。Grav 1.7.28 以上では、`アセットパイプライン` を使って、ミニファイや1つのファイルに結合したい場合にのみ、このアセットマネージャーが必要になり、それ以外の場合は、上記のカスタムタグで代替可能という認識です。
 
-Grav 1.6 で、**アセットマネージャー** が完全に書き直されました。テーマで、**CSS** や **JavaScript** のアセットをより柔軟なメカニズムで管理できるようになりました。アセットマネージャーの主な目的は、テーマやプラグインでアセットを追加する処理をシンプルにし、優先順位などの強化された機能を提供することです。また、アセットを **ミニファイ** し、**圧縮** し、**インライン化** する **アセットパイプライン** を提供し、ブラウザのリクエストを減らし、アセットの全体サイズも小さくします。
+Grav 1.6 で、**アセットマネージャー** が完全に書き直されました。  
+テーマで、**CSS** や **JavaScript** のアセットをより柔軟なメカニズムで管理できるようになりました。  
+アセットマネージャーの主な目的は、テーマやプラグインでアセットを追加する処理をシンプルにし、優先順位などの強化された機能を提供することです。  
+また、アセットを **ミニファイ** し、**圧縮** し、**インライン化** する **アセットパイプライン** を提供し、ブラウザのリクエストを減らし、アセットの全体サイズも小さくします。
 
-以前よりも、より柔軟に、より信頼できるようになりました。さらに、コードもより 'クリーン' になり、読みやすくなりました。アセットマネージャーは、 Grav の処理中に利用可能で、プラグインのイベントフックでも利用でき、さらに Twig の呼び出しでテーマから直接利用できます。
+以前よりも、より柔軟に、より信頼できるようになりました。  
+さらに、コードもより 'クリーン' になり、読みやすくなりました。  
+アセットマネージャーは、 Grav の処理中に利用可能で、プラグインのイベントフックでも利用でき、さらに Twig の呼び出しでテーマから直接利用できます。
 
 > [!Note]  
 > **技術的詳細** ：主要なアセットの class は大幅にシンプルになり、小さくなりました。ロジックの多くは3つの trait に分割されました。 _testing trait_ は、主に test suite で使われる関数を含みます。 _utils trait_ は、通常のアセットタイプ（JS、インラインJS、CSS、インラインCSS）と、ミニファイや圧縮を行うアセットパイプラインで共有されるメソッドを含みます。最後に、 _legacy trait_ は、ショートカットや回避策のメソッドを含みますが、一般的には、今後は使わない方が良いです。
@@ -19,7 +24,9 @@ Grav 1.6 で、**アセットマネージャー** が完全に書き直されま
 
 <h2 id="configuration">設定</h2>
 
-アセットマネージャーには、シンプルな設定オプションがあります。デフォルト値は、 system フォルダの `system.yaml` ファイルにあります。 `user/config/system.yaml` ファイルで、上書きしてください。
+アセットマネージャーには、シンプルな設定オプションがあります。  
+デフォルト値は、 system フォルダの `system.yaml` ファイルにあります。  
+`user/config/system.yaml` ファイルで、上書きしてください。
 
 ```yaml
 assets:                                        # Configuration for Assets Manager (JS, CSS)
@@ -43,9 +50,10 @@ assets:                                        # Configuration for Assets Manage
 
 <h2 id="structure">構造</h2>
 
-下のダイアグラムに示すように、ポジションを制御する多数の層に分かれています。スコープの順に並べると、次のようになります：
+下のダイアグラムに示すように、ポジションを制御する多数の層に分かれています。  
+スコープの順に並べると、次のようになります：
 
-* **Group** - アセットを次のようにグループ分けします。 `head` （デフォルト）と、 `bottom`
+* **Group** - アセットを `head` （デフォルト）と、 `bottom` にグループ分けします。
 * **Position** - `before`, `pipeline` （デフォルト）そして `after` に分かれています。基本的に、これによって、アセットがどこで読み込まれるべきかが判別できるようになります。
 * **Priority** - ここで、 **順序** を制御します。デフォルトでは、大きな整数値（例 `100`） は、小さな整数値（`10`）よりも前になります。
 
@@ -117,17 +125,25 @@ JS Module
 └───────────────────────┘
 ```
 
-デフォルトでは、`CSS` と、 `JS` 、 `JS Module` は、`pipeline` ポジションに置かれます。一方、 `InlineCSS` と、 `InlineJS` 、 `Inline JS Module` は、`after` ポジションになります。しかしこの設定は変更可能です。どんなアセットを、どんなポジションに設定することもできます。
+デフォルトでは、`CSS` と、 `JS` 、 `JS Module` は、`pipeline` ポジションに置かれます。  
+一方、 `InlineCSS` と、 `InlineJS` 、 `Inline JS Module` は、`after` ポジションになります。  
+しかしこの設定は変更可能です。  
+どんなアセットを、どんなポジションに設定することもできます。
 
 <h2 id="assets-in-themes">テーマ中のアセット</h2>
 
 <h3 id="overview">概要</h3>
 
-CSS アセットを追加したい時、普通は、`assets.addCss()` や、`assets.addInlineCss()` を呼び出して、 `assets.css()` によりレンダリングすると思います。優先度や、パイプライン化、インライン化をしたい場合、アセットの追加時にアセットごとに指定することもできますし、アセットグループに対してレンダリング時にすることもできます。
+CSS アセットを追加したい時、普通は、`assets.addCss()` や、`assets.addInlineCss()` を呼び出して、 `assets.css()` によりレンダリングすると思います。  
+優先度や、パイプライン化、インライン化をしたい場合、アセットの追加時にアセットごとに指定することもできますし、アセットグループに対してレンダリング時にすることもできます。
 
-JS アセットも似ていて、`assets.addJs()` や、 `assets/addInlineJs()` を呼び出します。一般的な `assets.add()` メソッドもあり、アセットのタイプを推測しますが、特定のメソッドを呼び出すことをおすすめします。
+JS アセットも似ていて、`assets.addJs()` や、 `assets/addInlineJs()` を呼び出します。  
+一般的な `assets.add()` メソッドもあり、アセットのタイプを推測しますが、特定のメソッドを呼び出すことをおすすめします。
 
-バージョン 1.7.27 から、アセットマネージャーは、JS Modulesにも対応します。これらのアセットは、JSアセットと同じように機能しますが、`type="module"` となり、`assets.addJsModule()` や、 `assets.addInlineJsModule()` で呼び出します。`assets.add()` メソッドは、拡張子が `.mjs` のときのみ、JS Module と認識します。しかし、`.js` ファイルはすべて、普通のJSファイルとして扱います。
+バージョン 1.7.27 から、アセットマネージャーは、JS Modules にも対応します。  
+これらのアセットは、JSアセットと同じように機能しますが、`type="module"` となり、`assets.addJsModule()` や、 `assets.addInlineJsModule()` で呼び出します。 
+`assets.add()` メソッドは、拡張子が `.mjs` のときのみ、JS Module と認識します。  
+しかし、`.js` ファイルはすべて、普通のJSファイルとして扱います。
 
 > [!Note]  
 > JS Modulesについてもっと学びたいとき：
@@ -142,7 +158,8 @@ JS アセットも似ていて、`assets.addJs()` や、 `assets/addInlineJs()` 
 
 <h3 id="example">具体例</h3>
 
-テーマ内で CSS ファイルを追加できる方法の具体例は、 Grav に最初からバンドルされているデフォルトの **quark** テーマにあります。もし [`templates/partials/base.html.twig`](https://github.com/getgrav/grav-theme-quark/blob/develop/templates/partials/base.html.twig) 部分を見れば、次のようなことが書いてあるでしょう：
+テーマ内で CSS ファイルを追加できる方法の具体例は、 Grav に最初からバンドルされているデフォルトの **quark** テーマにあります。  
+もし [`templates/partials/base.html.twig`](https://github.com/getgrav/grav-theme-quark/blob/develop/templates/partials/base.html.twig) 部分を見れば、次のようなことが書いてあるでしょう：
 
 ```twig
 <!DOCTYPE html>
@@ -180,16 +197,23 @@ JS アセットも似ていて、`assets.addJs()` や、 `assets/addInlineJs()` 
 </html>
 ```
 
-`block stylesheets` という twig タグは、これを extend するテンプレートで、入れ替えられたり、追加されたりする場所を定義しているだけです。ブロック内では、たくさんの `do assets.addCss()` が呼び出されていることがわかります。
+`block stylesheets` という twig タグは、これを extend するテンプレートで、入れ替えられたり、追加されたりする場所を定義しているだけです。  
+ブロック内では、たくさんの `do assets.addCss()` が呼び出されていることがわかります。
 
 この `{% do %}` タグは、それ自体が [Twig に組み込まれたタグ](https://twig.symfony.com/doc/1.x/tags/do.html) であり、これにより、出力を生成することなく、変数を操作できます。
 
-`addCss()` メソッドは、 CSS アセットを アセットマネージャーに追加するメソッドです。優先度を指定しない場合、アセットが追加される優先度は、それらがレンダリングされた順番になります。 Grav が現在のテーマの相対パスを決定しやすくするために **PHP ストリームラッパー** である `theme://` が使われていることにお気づきでしょう。
+`addCss()` メソッドは、 CSS アセットを アセットマネージャーに追加するメソッドです。  
+優先度を指定しない場合、アセットが追加される優先度は、それらがレンダリングされた順番になります。  
+Grav が現在のテーマの相対パスを決定しやすくするために **PHP ストリームラッパー** である `theme://` が使われていることにお気づきでしょう。
 
 > [!Info]  
 > `assets.addJs('jquery', 101)` は、グローバルのアセット設定で定義された `jquery` のコレクションを含みます。ここでの `101` というオプションのパラメータは、確実に最初にレンダリングされるように、極めて高い優先度を設定されています。パラメータが無かった場合のデフォルトの優先度は `10` です。より柔軟な書き方は、 `assets.addJs('jquery', {priority: 101})` です。これにより、優先順位とともに他のパラメータも追加できます。
 
-`assets.css()|raw` を呼び出すと、CSS アセットを HTML タグとしてレンダリングします。このメソッドにはパラメータが適用されていないので、このグループはデフォルトで `head` に設定されます。これがどのように `assets deferred` ブロックに囲まれているか、注意して見てください。これは Grav 1.6 の新しい機能で、ページの後から読み込まれた（もしくは、実際は後でなくても任意の場所で読み込まれた）他のテンプレートからアセットを追加できるようになります。そして、必要であればこの `head` にレンダリングされることが保証されます。
+`assets.css()|raw` を呼び出すと、CSS アセットを HTML タグとしてレンダリングします。  
+このメソッドにはパラメータが適用されていないので、このグループはデフォルトで `head` に設定されます。  
+これがどのように `assets deferred` ブロックに囲まれているか、注意して見てください。  
+これは Grav 1.6 の新しい機能で、ページの後から読み込まれた（もしくは、実際は後でなくても任意の場所で読み込まれた）他のテンプレートからアセットを追加できるようになります。  
+そして、必要であればこの `head` にレンダリングされることが保証されます。
 
 テーマ出力の最後にある `bottom` ブロックは、 `bottom` グループに配置された JavaScript をレンダリングします。
 
@@ -197,48 +221,72 @@ JS アセットも似ていて、`assets.addJs()` や、 `assets/addInlineJs()` 
 
 #### add(asset, [options])
 
-add メソッドは、ファイル拡張子をもとにアセットにマッチするように最善を尽くします。これは便利なメソッドではありますが、CSS や、Link、JS や JS モジュールの直接的なメソッドを呼び出す方が良いでしょう。詳細は直接的なメソッドの説明をお読みください。
+add メソッドは、ファイル拡張子をもとにアセットにマッチするように最善を尽くします。  
+これは便利なメソッドではあるものの、CSS や、Link、JS や JS モジュールの直接的なメソッドを呼び出す方が良いでしょう。  
+各詳細は、直接的なメソッドの説明をお読みください。
 
 > [!Info]  
 > 複数のオプションを渡す際には、オプションの配列を渡すのが望ましいです。しかし、先ほどの `jquery` の例のように、**優先度** だけ設定したい場合は、ショートカットを使い、 **第2引数** として整数を渡すことができます。
 
 #### addCss(asset, [options])
 
-このメソッドは、アセットを CSS アセットのリストに追加します。指定しなかった場合のデフォルトの優先度は、 10 です。優先度が大きい数字のアセットは、小さい数字のアセットよりも先に表示されます。 `pipeline` オプションは、このアセットが combination/minify パイプラインに含まれるべきかどうかを制御します。パイプラインに含まれないなら、 `loading` オプションは、そのアセットが外部のスタイルシートへのリンクと同様にレンダリングされるべきか、それともインラインのスタイルタグ内に直接書き込まれるべきコンテンツかをコントロールします。
+このメソッドは、アセットを CSS アセットのリストに追加します。  
+優先度を指定しなかった場合のデフォルト値は、 10 です。  
+優先度が大きい数字のアセットは、小さい数字のアセットよりも先に表示されます。  
+`pipeline` オプションは、このアセットが combination/minify パイプラインに含まれるべきかどうかを制御します。  
+パイプラインに含まれないなら、 `loading` オプションは、そのアセットが外部のスタイルシートへのリンクと同様にレンダリングされるべきか、それともインラインのスタイルタグ内に直接書き込まれるべきコンテンツかをコントロールします。
 
 #### addLink($asset, [options])
 
-このメソッドは、アセットを `<link>` タグ形式の Link アセットのリストに追加します。これは、CSS ファイルではない link タグをサイト内の任意の場所から head タグに追加するときに便利です。優先度は、指定されなければデフォルトで 10 です。優先度の大きい数字のアセットは、小さい数字のアセットよりも先に表示されます。
+このメソッドは、アセットを `<link>` タグ形式の Link アセットのリストに追加します。  
+これは、CSS ファイルではない link タグをサイト内の任意の場所から head タグに追加するときに便利です。  
+優先度は、指定されなければデフォルトで 10 です。  
+優先度の大きい数字のアセットは、小さい数字のアセットよりも先に表示されます。
 
 他のアセット追加メソッドとは異なり、 `link()` はパイプラインも `inline` もサポートしません。
 
 #### addInlineCss(css, [options])
 
-インラインの style タグ内に CSS 文字列を追加します。初期化や、動的処理の際に便利です。標準的なアセットファイルコンテンツをインライン化するには、 `addCss()` と `css()` メソッドの `{'loading': 'inline'}` オプションを参照してください。
+インラインの style タグ内に CSS 文字列を追加します。  
+初期化や、動的処理の際に便利です。  
+標準的なアセットファイルコンテンツをインライン化するには、 `addCss()` と `css()` メソッドの `{'loading': 'inline'}` オプションを参照してください。
 
 #### addJs(asset, [options])
 
-このメソッドは、 JavaScript アセットのリストにアセットを追加します。優先度はデフォルトで 10 です。大きい数字のアセットが、小さい数字のアセットよりも先に読み込まれます。 `pipeline` オプションは、このアセットが 結合/ミニファイ するパイプラインに含まれるべきかどうかを制御します。パイプラインされない場合、 `loading` オプションで、アセットが外部のスクリプトファイルへのリンクとしてレンダリングされるべきか、インラインの script タグ内に書き込まれるべきコンテンツかを制御します。
+このメソッドは、 JavaScript アセットのリストにアセットを追加します。  
+優先度はデフォルトで 10 です。  
+大きい数字のアセットが、小さい数字のアセットよりも先に読み込まれます。  
+`pipeline` オプションは、このアセットが 結合/ミニファイ するパイプラインに含まれるべきかどうかを制御します。  
+パイプラインされない場合、 `loading` オプションで、アセットが外部のスクリプトファイルへのリンクとしてレンダリングされるべきか、インラインの script タグ内に書き込まれるべきコンテンツかを制御します。
 
 #### addInlineJs(javascript, [options])
 
-インラインの script タグ内に、JavaScript 文字列を追加します。初期化や、あらゆる動的処理に便利です。標準的なアセットファイルのコンテンツに書き込むため、 `addJs()` メソッドや、 `js()` メソッドの `{ 'loading': 'inline' }` オプションを参照してください。
+インラインの script タグ内に、JavaScript 文字列を追加します。  
+初期化や、あらゆる動的処理に便利です。  
+標準的なアセットファイルのコンテンツに書き込むため、 `addJs()` メソッドや、 `js()` メソッドの `{ 'loading': 'inline' }` オプションを参照してください。
 
 #### addJsModule(asset, [options])
 
-このメソッドは、 JavaScript モジュールアセットのリストに、アセットを追加します。優先度はデフォルトで 10 です。大きい数字のアセットが、小さい数字のアセットよりも先に読み込まれます。 `pipeline` オプションは、このアセットが 結合/ミニファイ するパイプラインに含まれるべきかどうかを制御します。パイプラインされない場合、 `loading` オプションで、アセットが外部のスクリプトファイルへのリンクとしてレンダリングされるべきか、インラインの script タグ内に書き込まれるべきコンテンツかを制御します。
+このメソッドは、 JavaScript モジュールアセットのリストに、アセットを追加します。  
+優先度はデフォルトで 10 です。  
+大きい数字のアセットが、小さい数字のアセットよりも先に読み込まれます。  
+`pipeline` オプションは、このアセットが 結合/ミニファイ するパイプラインに含まれるべきかどうかを制御します。  
+パイプラインされない場合、 `loading` オプションで、アセットが外部のスクリプトファイルへのリンクとしてレンダリングされるべきか、インラインの script タグ内に書き込まれるべきコンテンツかを制御します。
 
 #### addInlineJsModule(javascript, [options])
 
-インラインのモジュール script タグ内に、 JavaScript 文字列を追加します。標準的なアセットファイルのコンテンツをインライン化するために、 `addJsModule()` メソッドや、 `Js()` メソッドの `{ 'loading': 'inline' }` オプションを参照してください。
+インラインのモジュール script タグ内に、 JavaScript 文字列を追加します。  
+標準的なアセットファイルのコンテンツをインライン化するために、 `addJsModule()` メソッドや、 `Js()` メソッドの `{ 'loading': 'inline' }` オプションを参照してください。
 
 #### registerCollection(name, array)
 
-CSS と JavaScript アセットの配列を名前付きで登録でき、あとで `add()` メソッドにより使うことができます。 jQuery や Bootstrap のように、複数のテーマやプラグインで使われるコレクションを登録したい場合に、特に便利です。
+CSS と JavaScript アセットの配列を名前付きで登録でき、あとで `add()` メソッドにより使うことができます。  
+jQuery や Bootstrap のように、複数のテーマやプラグインで使われるコレクションを登録したい場合に、特に便利です。
 
 <h2 id="options">オプション</h2>
 
-必要に応じて、アセットオプションの配列を渡すことができます。コアのオプションは、次のとおりです：
+必要に応じて、アセットオプションの配列を渡すことができます。  
+コアのオプションは、次のとおりです：
 
 <h4 id="for-css">CSS 向け</h4>
 
@@ -262,7 +310,9 @@ CSS と JavaScript アセットの配列を名前付きで登録でき、あと�
 
 <h4 id="other-attributes">その他の属性</h4>
 
-オプションの配列には、他に好きなものを何でも渡すことができます。もしそれらが標準的な型でない場合は、たとえば `{id: 'custom-id'}` が HTML タグ中の `id="custom-id"` としてレンダリングされるように、属性としてレンダリングされます。このことは、 `{type: 'application/ld+json'}` を使って、 `addInlineJs()` を経由した json-ld のような構造化データを含んでも使われます。
+オプションの配列には、他に好きなものを何でも渡すことができます。  
+もしそれらが標準的な型でない場合は、たとえば `{id: 'custom-id'}` が HTML タグ中の `id="custom-id"` としてレンダリングされるように、属性としてレンダリングされます。  
+このことは、 `{type: 'application/ld+json'}` を使って、 `addInlineJs()` を経由した json-ld のような構造化データを含んでも使われます。
 
 <h4 id="examples">具体例</h4>
 
@@ -315,25 +365,32 @@ Link の具体例：
 
 #### css(group, [options], include_link = true)
 
-アセットマネージャーのグループ（デフォルトでは `head` ）に追加されている CSS アセットをレンダリングします。オプションは：
+アセットマネージャーのグループ（デフォルトでは `head` ）に追加されている CSS アセットをレンダリングします。  
+[options] に入るのは：
 
-* **loading**: `inline` if **all** assets in this group should be inlined (default: render each asset according to its `position` option)
+* **loading**: `inline` にすると、このグループ内 **すべての** アセットがインライン出力されます。（デフォルトの挙動は、各アセットごとにaddXxx したときの `position` オプションに従います）
 
-* **_link attributes_**, see below (default: `{'type': 'text/css', 'rel': 'stylesheet'}`). Effective only if `inline` is **not** used as this group's rendering option
+* **_リンク属性_**, 次の例を見てください (デフォルト: `{'type': 'text/css', 'rel': 'stylesheet'}`). `inline` がこのグループのレンダリングオプションとして使われて **いない** ときだけ影響があります
 
-When `include_link` is enabled, which it is by default, calling `css()` will also propagate to calling `link()`.
+`include_link` が有効になっているとき（デフォルト）は、 `css()` が `link()` も一緒に呼びます。
 
-If pipelining is turned **off** in the configuration, the group's assets are rendered individually, ordered by asset priority (high to low), followed by the order in which assets were added.
+もし config 設定でパイプラインが **off** になっていた場合、グループのアセットは個別にレンダリングされます。アセットの優先度（高低）の順番で、アセットが追加された順に従います。
 
-If pipelining is turned **on** in the configuration, assets in the pipeline position are combined in the order in which assets were added, then processed according to the pipeline configuration.
+もし config 設定でパイプラインが **on** になっていた場合、ポジションにパイプラインを設定したアセットは、アセットが追加された順に結合され、パイプライン config 設定に従って処理されます。
 
-Each asset is rendered either as a stylesheet link or inline, depending on the asset's `loading` option and whether `{'loading': 'inline'}` is used for this group's rendering. CSS added by `addInlineCss()` will be rendered in the `after` position by default, but you can configure it to render before the pipelined output with `position: before`
+各アセットは、スタイルシートの link タグもしくはインラインのどちらかでレンダリングされます。  
+アセットの `loading` オプションと `{'loading': 'inline'}` がこのグループのレンダリングに使われているかどうでによります。  
+`addInlineCss()` で追加された CSS  は、デフォルトでは `after` ポジションでレンダリングされますが、パイプライン出力の前に `position: before` と一緒にレンダリングする設定をすることもできます。
+
+> [!訳注]  
+> 上記の説明を読んだだけでで、分かるかどうか分かりませんが（私は混乱しました）、 `assets.css()` で出力されるものがあまりにもたくさんあるので、混乱するのだと思います。機能を詰め込みすぎです。困った場合は、とりあえず、次の各パターンを、実際に試してみてください。 `assets.addCss()` に、 `position` をそれぞれ `before`, `pipeline`, `after` にしたもの、 `addLink()` に CSS 以外の link タグを設定したもの、 `assets.css()` に `loading` を `inline` にしたものと、しないもの、 `include_link` を `true` と `false` にしたもの。各パターンを作って、実際に試してみないと、分かりません。
 
 #### link(group, [options])
 
-Renders Link assets that have been added to an Asset Manager's group (default is `head`). It is not recommended using a group different from `head`, this is where the browser expect the tag to be found and processed.
+Link アセットのレンダリングは、アセットマネージャーのグループ（デフォルトでは `head`）に追加できます。  
+`head` と異なるグループはおすすめしません。ブラウザ側は、 `head` にそのタグが見つかると期待し、処理するところだからです。
 
-Differently than the other methods for adding assets, `link()` does not support pipelining, nor does support `inline`.
+アセットを追加するその他のメソッドと違い、 `link()` はパイプラインをサポートしませんし、 `inline` もサポートしません。
 
 #### js(group, [options], include_js_module = true)
 
