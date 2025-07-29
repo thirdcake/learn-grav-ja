@@ -1,11 +1,9 @@
 ---
 title: アセットマネージャー
 layout: ../../../layouts/Default.astro
-lastmod: '2025-07-28'
+lastmod: '2025-07-29'
+description: 'Grav では、CSS や JS などを、アセットマネージャーで動的に管理できます。ファイルの指定方法やレンダリング方法、便利な使い方を解説します。'
 ---
-
-> [!訳注]  
-> このページの内容は、今のわたしには難しい内容のため、後回しになっています。とりあえず、 Twig カスタムタグの [`script`](../04.twig-tags-filters-functions/01.tags/#script) と [`style`](../04.twig-tags-filters-functions/01.tags/#style) の使い方がわかっていれば、実務上は、ほとんど問題は無いと思います。Grav 1.7.28 以上では、`アセットパイプライン` を使って、ミニファイや1つのファイルに結合したい場合にのみ、このアセットマネージャーが必要になり、それ以外の場合は、上記のカスタムタグで代替可能という認識です。
 
 Grav 1.6 で、**アセットマネージャー** が完全に書き直されました。  
 テーマで、**CSS** や **JavaScript** のアセットをより柔軟なメカニズムで管理できるようになりました。  
@@ -383,7 +381,7 @@ Link の具体例：
 `addInlineCss()` で追加された CSS  は、デフォルトでは `after` ポジションでレンダリングされますが、パイプライン出力の前に `position: before` と一緒にレンダリングする設定をすることもできます。
 
 > [!訳注]  
-> 上記の説明を読んだだけでで、分かるかどうか分かりませんが（私は混乱しました）、 `assets.css()` で出力されるものがあまりにもたくさんあるので、混乱するのだと思います。機能を詰め込みすぎです。困った場合は、とりあえず、次の各パターンを、実際に試してみてください。 `assets.addCss()` に、 `position` をそれぞれ `before`, `pipeline`, `after` にしたもの、 `addLink()` に CSS 以外の link タグを設定したもの、 `assets.css()` に `loading` を `inline` にしたものと、しないもの、 `include_link` を `true` と `false` にしたもの。各パターンを作って、実際に試してみないと、分かりません。
+> 上記の説明を読んだだけで、分かるかどうか分かりませんが（私は混乱しました）、 `assets.css()` で出力されるものがあまりにもたくさんあるので、混乱するのだと思います。機能を詰め込みすぎです。困った場合は、とりあえず、次の各パターンを、実際に試してください。 `assets.addCss()` に、 `position` をそれぞれ `before`, `pipeline`, `after` にしたもの、 `addLink()` に CSS 以外の link タグを設定したもの、 `assets.css()` に `loading` を `inline` にしたものと、しないもの、 `include_link` を `true` と `false` にしたもの。各パターンを作って、実際に試してみないと、確実に混乱します。
 
 #### link(group, [options])
 
@@ -394,30 +392,34 @@ Link アセットのレンダリングは、アセットマネージャーのグ
 
 #### js(group, [options], include_js_module = true)
 
-Renders JavaScript assets that have been added to an Asset Manager's group (default is `head`). Options are
+アセットマネージャーグループ（デフォルトは `head` ）に追加してある JavaScript アセットをレンダリングします。  
+オプションは、次の通りです。
 
-* **loading**: `inline` if **all** assets in this group should be inlined (default: render each asset according to its `position` option)
+* **loading**: もし `inline` にすると、このグループのアセット **すべて** がインラインで出力されます。（デフォルトでは、各アセットの `position` オプションによります）
 
-* **_script attributes_**, see below (default: `{'type': 'text/javascript'}`). Effective only if `inline` is **not** used as this group's rendering option
+* **_script attributes_**, 次のようにしてください (デフォルトでは： `{'type': 'text/javascript'}`) 。 このグループのレンダリングオプションで `inline` では **ない** ときのみ影響があります。
 
-When `include_js_module` is enabled, which it is by default, calling `js()` will also propagate to calling `jsModule()`.
+`include_js_module` が有効であるとき（デフォルトの場合）、 `js()` の呼び出しと同時に `jsModule()` が呼び出されます。
 
-If pipelining is turned **off** in the configuration, the group's assets are rendered individually, ordered by asset priority (high to low), followed by the order in which assets were added.
+パイプラインが設定で **無効** になっている場合、そのグループのアセットは個別にレンダリングされます。優先度の高低の順で、それからアセットが追加された順です。
 
-If pipelining is turned **on** in the configuration, assets in the pipeline position are combined in the order in which assets were added, then processed according to the pipeline configuration. The combined pipeline result is then rendered before or after non-pipelined assets depending on the setting of `js_pipeline_before_excludes`.
+パイプラインが設定で **有効** 担っている場合、パイプラインポジションのアセットは、アセットが追加された順に結合され、パイプラインの config 設定の通りに処理されます。  
+結合されたパイプラインの結果は、 `js_pipeline_before_excludes` の設定次第で、パイプラインされていないアセットの前か後ろにレンダリングされます。
 
-Each asset is rendered either as a script link or inline, depending on the asset's `loading` option and whether `{'loading': 'inline'}` is used for this group's rendering. Note that the only way to inline a JS pipeline is to use inline loading as an option of the `js()` method. JS added by `addInlineJs()` will be rendered in the `after` position by default, but you can configure it to render before the pipelined output with `position: before`
-
+各アセットは、スクリプトリンクとして、あるいはインラインとして、いずれかの方法でレンダリングされます。アセットの `loading` オプションと `{'loading': 'inline'}` がこのグループのレンダリングに使われているか次第です。  
+JS パイプラインをインライン出力する唯一の方法は、 `js()` メソッドで loading オプションとしてインラインを利用することであることに注意してください。  
+`addInlineJs()` で追加された JS は、デフォルトでは `after` ポジションにレンダリングされます。しかし、 `position: before` にすれば、パイプライン出力の前にレンダリングする設定は可能です。
 
 #### jsModule(group, [options])
 
-Works exactly like the `js()` renderer, but for JavaScript modules. The default script type attribute is `type="module"`, even when rendering `inline`.
+`js()` によるレンダリングと全く同じように、 JavaScript モジュール用として機能します。  
+デフォルトのスクリプトタイプ属性は、 `type="module"` です。 `inline` レンダリングのときも同様です。
 
 #### all(group, [options])
 
-Renders every asset above in the order: `css()`, `link()`, `js()`, `jsModule()`
+次の順に、上記すべてのアセットをレンダリングします： `css()`, `link()`, `js()`, `jsModule()`
 
-This is the recommended way of including deferred assets into your main twig file (usually `base.html.twig`).
+この方法は、（通常は `base.html.twig` の） メイン twig ファイルに defer 属性のアセットを含める場合に推奨される方法です。
 
 ```twig
 {% block assets deferred %}
@@ -425,9 +427,11 @@ This is the recommended way of including deferred assets into your main twig fil
 {% endblock %}
 ```
 
-## Named Assets and Collections
+<h2 id="named-assets-and-collections">名前付きアセットとコレクション</h2>
 
-Grav now has a powerful feature called **named assets** that allows you to register a collection of CSS and JavaScript assets with a name.  Then you can simply **add** those assets to the Asset Manager via the name you registered the collection with.  Grav comes preconfigured with **jQuery** but has the ability to define custom collections in the `system.yaml` to be used by any theme or plugin:
+Grav には、 **named assets** という強力な機能があります。これは、 CSS と JavaScript のコレクションを名前付きで登録できるというものです。  
+これらのアセットを登録した名前によってアセットマネージャーに簡単に **追加** できます。  
+Grav では、**jQuery** を事前設定していますが、 `system.yaml` ファイルで、カスタムのコレクションを定義できる機能があり、あらゆるテーマやプラグインで使えます：
 
 ```yaml
 assets:
@@ -439,7 +443,7 @@ assets:
         - https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js
 ```
 
-You can also use the `registerCollection()` method programmatically.
+プログラミングによって、 `registerCollection()` メソッドを使うこともできます。
 
 ```yaml
 $assets = $this->grav['assets'];
@@ -450,10 +454,13 @@ $assets->registerCollection('bootstrap', $bootstrap_bits);
 $assets->add('bootstrap', 100);
 ```
 
-An example of this action can be found in the [**bootstrapper** plugin](https://github.com/getgrav/grav-plugin-bootstrapper/blob/develop/bootstrapper.php#L51-L71).
+このアクションの具体例として、 [**bootstrapper** プラグイン](https://github.com/getgrav/grav-plugin-bootstrapper/blob/develop/bootstrapper.php#L51-L71) があります。
 
-##### Collections with attributes
-Sometimes you might want to specify custom and/or different attributes to specific items in a collection, for example if you are loading assets from a remote CDN, and you wish to include the integrity check (SRI). This is possible by treating the value of the named asset as an array where the key is the asset location, and the value is the list of additional attributes. For example:
+<h5 id="collections-with-attributes">属性のコレクション</h5>
+
+コレクションの特定のアイテムに、特定のもしくは通常と異なるカスタム属性が欲しいときがあるかもしれません。たとえば、リモートの CDN からアセットを読み込む場合で、インテグリティチェック（SRI）をしたいような場合です。  
+キーをアセットのロケーションとし、値を追加属性のリストとする配列として、名前付きアセットの値を扱うことにより、これが可能になります。  
+具体例：
 
 ```yaml
 assets:
@@ -467,55 +474,58 @@ assets:
             group: 'bottom'
 ```
 
-Then, after you add the JS in your twig via `{% do assets.addJs('jquery_and_ui', { defer: true }) %}`, the assets will load as:
+twig で JS を `{% do assets.addJs('jquery_and_ui', { defer: true }) %}` によって追加した後、 アセットは、次のように読み込まれます：
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" defer="1" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" defer="1" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA=="></script>
 ```
 
-Note that `defer` was defined at the twig level and it was applied to all the assets in the collection. This is because Grav will merge together the attributes from both the twig and the yaml definition, giving priority to the ones in the yaml definition.
+`defer` は、 twig レベルで定義されており、コレクションのすべてのアセットに適用されることに注意してください。  
+なぜなら、 Grav は、 twig と yaml 定義の両方から属性をマージしますが、 yaml 定義の方を優先するからです。
 
-If the `jquery-ui.min.js` asset included also an attribute `defer: null` then it would have taken precedence over the twig `defer: 1` and it would have not been rendered.
+もし、 `jquery-ui.min.js` アセットが `defer: null` 属性を含んでいる場合、 twig の `defer: 1` よりも優先され、defer はレンダリングされなくなります。
 
-## Grouped Assets
+<h2 id="grouped-assets">グルーピングしたアセット</h2>
 
-The Asset manager lets you pass an optional `group` as part of an options array when adding assets.  While this is of marginal use for CSS, it is especially useful for JavaScript where you may need to have some JS files or Inline JS referenced in the header, and some at the bottom of the page.
+アセットマネージャーによって、アセットを追加する際に、オプションの一部として `group` オプションを渡せます。  
+CSS よりも、特に JavaScript で便利な機能です。というのも、 JS ファイルもしくはインラインの JS レンダリングを、一部はヘッダー内で行い、別の一部をページの下部で行う必要があるからです。
 
-To take advantage of this capability you must specify the group when adding the asset, and should use the options syntax:
+この機能を利用するため、アセット追加時に、オプション構文を使って、グループを指定しなければいけません：
 
 ```twig
 {% do assets.addJs('theme://js/example.js', {'priority':102, 'group':'bottom'}) %}
 ```
 
-Then for these assets in the bottom group to render, you must add the following to your theme:
+たとえば bottom グループをレンダリングするためには、以下のようにテーマ内で追加する必要があります：
 
 ```twig
 {{ assets.js('bottom')|raw }}
 ```
 
-If no group is defined for an asset, then `head` is the default group.  If no group is set for rendering, the `head` group will be rendered. This ensures the new functionality is 100% backwards compatible with existing themes.
+アセットにグループが定義されなかった場合は、 `head` がデフォルトのグループになります。  
+レンダリング時にグループの指定がなければ、 `head` グループがレンダリングされます。  
+これにより、新機能が、既存のテーマと 100% 後方互換性を保証してくれます。
 
-The same goes for CSS files:
+CSS ファイルについても同様です：
 
 ```twig
 {% do assets.addCss('theme://css/ie8.css', {'group':'ie'}) %}
 ```
 
-and to render:
-
+そしてレンダリング時は：
 
 ```twig
 {{ assets.css('ie')|raw }}
 ```
 
-## Change attribute of the rendered CSS/JS assets
+<h2 id="change-attribute-of-the-rendered-css-js-assets">レンダリングされた CSS/JS アセットの属性変更</h2>
 
-CSS is by default added using the `rel="stylesheet"` attribute, and `type="text/css"` , while JS has `type="text/javascript"`.
+CSS は、デフォルトでは、 `rel="stylesheet"` 属性と `type="text/css"` が追加され、 JS には `type="text/javascript"` が追加されます。
 
-To change the defaults, or to add new attributes, you need to create a new group of assets, and tell Grav to render it with that attribute.
+デフォルトの仕様を変更したい場合、もしくは新しい属性を追加したい場合は、新しいアセットのグループを作成する必要があります。そして、その属性とともにレンダリングするよう Grav に伝えます。
 
-Example of editing the `rel` attribute on a group of assets:
+あるアセットグループに、 `rel` 属性を編集する具体例です：
 
 ```twig
 {% do assets.addCSS('theme://whatever.css', {'group':'my-alternate-group'}) %}
@@ -523,15 +533,21 @@ Example of editing the `rel` attribute on a group of assets:
 {{ assets.css('my-alternate-group', {'rel': 'alternate'})|raw }}
 ```
 
-## Inlining Assets
+<h2 id="inlining-assets">インラインアセット</h2>
 
-Inlining allows the placing critical CSS (and JS) code directly into the HTML document enables the browser to render a page immediately without waiting for external stylesheet or script downloads. This can improve site performance noticeably for users, particularly over mobile networks. Details can be found in [this article on optimizing CSS delivery](https://developers.google.com/speed/docs/insights/OptimizeCSSDelivery).
+インライン化すると、 HTML ドキュメントに直接 CSS （と JS ）のコードを書き込めるので、ブラウザが外部のスタイルシートやスクリプトをダウンロードする時間を省いて、すぐにページをレンダリングできるようになります。  
+これにより、ユーザーへのサイトパフォーマンスが向上でき、モバイルのネットワーク環境では特に改善されます。  
+詳しくは、 [CSS 提供の最適化に関するこの記事](https://developers.google.com/speed/docs/insights/OptimizeCSSDelivery) を参照してください。
 
-However, directly inserting CSS or JavaScript code into a page template is not always feasible, for example, where Sass-complied CSS is used. Keeping CSS and JS assets in separate files also simplifies maintenance. Using the Asset Manager's inline capability enables you to optimize for speed without changing the way your assets are stored. Even entire pipelines can be inlined.
+しかしながら、 CSS や JavaScirpt コードを直接ページテンプレートに挿入することは、常に可能とは限りません。たとえば、 Sass コンパイルが必要な CSS を使うような場合です。  
+分離された CSS と JS アセットファイルは、メンテナンスも簡単にしてくれます。  
+アセットマネージャーのインライン化機能を使って、アセットの保存方法を変えることなく、表示スピードの最適化ができるようになります。  
+パイプライン全体さえ、インライン化できます。
 
-To inline an asset file's content, use the option `{'loading': 'inline'}` with `addCss()` or `addJs()`. You can also inline all assets when rendering a group with `js()` or `css()`, which provide the same option.
+あるアセットファイルのコンテンツをインライン化するため、 `{'loading': 'inline'}` オプションを `addCss()` もしくは `addJs()` で利用します。  
+同じオプションを `js()` や `css()` に適用すれば、グループのレンダリング時にすべてのアセットがインライン化することも可能です。
 
-Example of using `system.yaml` to define asset collections named according to asset loading requirements, with `app.css` being a [Sass](http://sass-lang.com/)-generated CSS file:
+次の例は、 `system.yaml` を使って、名前付きアセットコレクションを定義し、 [Sass](http://sass-lang.com/) 生成の CSS ファイルである `app.css` とともに読み込むようにしたものです：
 
 ```yaml
 assets:
@@ -546,7 +562,8 @@ assets:
       - 'theme://js/header-display.js'
 ```
 
-The template inserts each collection into its corresponding group, namely `head` and `head-link` for CSS, `head` and `head-async` for JS. The default group `head` is used for inline loading in each case:
+テンプレートは、各コレクションを対応するグループに挿入します。 `head` と `head-link` を CSS に、 `head` と `head-async` を JS に。  
+デフォルトグループの `head` は、各ケースのインライン読み込みに使われます：
 
 ```twig
 {% block stylesheets %}
@@ -563,16 +580,20 @@ The template inserts each collection into its corresponding group, namely `head`
 {{ assets.js('head', {'loading': 'inline'})|raw }}
 ```
 
+<h2 id="static-assets">静的アセット</h2>
 
-## Static Assets
-
-Sometimes there is a need to reference assets without using the Asset Manager.  There is a `url()` helper method available to achieve this.  An example of this could be if you wanted to reference an image from the theme. The syntax for this is:
+アセットマネージャーを使わずにアセットを参照する必要がある場合もあります。  
+`url()` ヘルパーメソッドを使って、これを解決できます。  
+この例では、テーマから画像を参照したい場合のものです。  
+このための構文は、次の通りです：
 
 ```twig
 <img src="{{ url("theme://" ~ widget.image)|e }}" alt="{{ widget.text|e }}" />
 ```
 
-The `url()` method takes an optional second parameter of `true` or `false` to enable the URL to include the schema and domain. By default this value is assumed `false` resulting in just the relative URL.  For example:
+`url()` メソッドは、第2引数に `true` か `false` を使い、 URL にスキーマとドメインを含めることができます。  
+デフォルトでは、この値は `false` となり、相対 URL が返ります。  
+具体例：
 
 ```twig
 <script src="{{ url('theme://some/extra.css', true)|e }}"></script>
