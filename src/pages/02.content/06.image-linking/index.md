@@ -1,14 +1,15 @@
 ---
 title: 画像リンク
 layout: ../../../layouts/Default.astro
-lastmod: '2025-07-29'
+lastmod: '2025-07-30'
+description: 'Grav のマークダウンでは、様々な方法で画像を表示できます。Grav オリジナルの拡張も含めて解説します。'
 ---
 
 Grav には、たくさんの柔軟なリンク方法があり、各ページからサイト内の画像、もしくは別のサイトの画像を表示することができます。  
 これまで HTML を使ってファイルをリンクしたり、あるいはファイルシステムをコマンドラインで使ったことがあれば、とても簡単に理解できるはずです。
 
 これから、簡単な利用例を実演します。  
-次のような Grav サイトの **Pages** ディレクトリのモデルを使います。
+次のような Grav サイトの **Pages** ディレクトリをモデルにします。
 
 ![Pages Directory](pages.png)
 
@@ -40,32 +41,37 @@ Grav には、たくさんの柔軟なリンク方法があり、各ページか
 
 <h3 id="slug-relative">スラッグによる相対画像リンク</h3>
 
-**Relative** image links use destinations set relative to the current page. This can be as simple as linking to another file in the current directory, such as an image file associated with the current page, or as complex as going up several directory levels and then back down to the specific folder/file where an image may reside.
+**相対** 画像リンクは、現在ページからの相対的な行き先を使用します。  
+現在ページに関連付けられている画像のように、現在ディレクトリにある別ファイルにリンクを張るだけの簡単なものもあれば、ディレクトリをいくつか上り、さらに画像の存在する特定のフォルダ・ファイルまで下っていくような複雑なものもありえます。
 
-With relative links, the location of the source file is every bit as important as that of the destination. If either file in the mix is moved, changing the path between them, the link can be broken.
+相対リンクでは、リンク元ファイルの場所は、リンク先と全く同じくらい重要です。  
+どちらかのファイルが移動し、その間のパスが変更されてしまったら、リンクは壊れてしまうでしょう。
 
-The advantage of this type of linking structure is that you can quickly switch between a local development server and a live server with a different domain name and as long as the file structure remains consistent, the links should work without a problem.
+このタイプのリンク構造の利点は、ローカルの開発サーバーから、異なるドメイン名のライブサーバーに移動させるのが簡単であり、ファイル構造が一貫している限り、リンクは問題を起こさないということです。
 
-A file link points to a particular file by name, rather than its directory or slug. If you were creating an image link in `pages/01.blog/test-post-1/item.md` to `/pages/01.blog/test-post-3/test-image-3.jpg` you would use the following command.
+ファイルリンクは、特定のファイルをディレクトリやスラッグではなく、名前で指定します。  
+`pages/01.blog/test-post-1/item.md` ファイルで、 `/pages/01.blog/test-post-3/test-image-3.jpg` ファイルへの画像リンクを作成した場合、次のようなコマンドを使うことになります。
 
 ```markdown
 ![Test Image 3](../test-post-3/test-image-3.jpg)
 ```
 
-This link moves up one folder, as indicated by `../`, and then down one folder, pointing directly to `test-image-3.jpg` as the destination.
+このリンクは、 `../` でフォルダを1つ上がり、フォルダを1つ下がり、直接リンク先である `test-image-3.jpg` ファイルを指し示します。
 
-If we want to load `blog-header.jpg` from the `01.blog` directory, we would do the following:
+`01.blog` ディレクトリから `blog-header.jpg` を読み込みたいなら、次のようにします：
 
 ```markdown
 ![Blog Header](../../blog/blog-header.jpg)
 ```
 
 > [!Note]  
-> You do not need to include ordering numerals (`01.`) for slug relative links.
+> スラッグの相対リンクでは、順序を示す番号 (`01.`) を含める必要はありません。
 
-Grav has integrated support for slugs in the header of the page's primary markdown file. This slug supersedes the folder name for the page, and any media files contained within.
+Grav は、ページの主なマークダウンファイルのヘッダーでスラッグをサポートしています。  
+このスラッグは、ページのフォルダ名に優先し、その中にメディアファイルを含められます。
 
-For example, **Test Post 2** has a slug set through its markdown file (`/pages/01.blog/test-post-2/item.md`). The header of this file contains the following:
+たとえば、次のような **Test Post 2** ページには、スラッグが設定されています  (`/pages/01.blog/test-post-2/item.md`) 。  
+このファイルのヘッダーは、次のようになっています：
 
 ```yaml
 ---
@@ -76,46 +82,57 @@ taxonomy:
 ---
 ```
 
-You will notice the slug `test-slug` has been set. Slugs set this way are completely optional, and do not have to be present. As mentioned in the last chapter, they do provide an easy way of linking. If a slug is set, then any link you make to a media file within that folder will have to be either **Slug Relative** or **Absolute** with a full URL set for the link.
+スラッグに `test-slug` が設定されていることにお気づきでしょう。  
+このように設定されたスラッグは、完全にオプションであり、無くてもかまいません。  
+前のチャプターで解説したように、リンクを簡単にしてくれるものです。  
+スラッグが設定されると、そのフォルダ内のメディアファイルへのリンクは、 **スラッグによる相対リンク** か、 **絶対リンク** のどちらかでなければならず、リンクには完全な URL が設定されます。
 
-If we want to link `test-image-2.jpg` from **Test Post 2**, we would enter the following:
+**Test Post 2** から `test-image-2.jpg` にリンクしたいときは、次のようにします：
 
 ```markdown
 ![Test Image 2](../test-slug/test-image-2.jpg)
 ```
 
-You will notice that we navigated up one directory using (`../`) and then down into the `test-slug` page folder using the slug which was set in `/pages/01.blog/test-post-2/item.md` file.
+お気づきのように、 (`../`) を使って1つディレクトリを上がり、 `/pages/01.blog/test-post-2/item.md` ファイルに設定されたスラッグを使って `test-slug` ページフォルダに下ります。
 
 <h3 id="directory-relative">ディレクトリによる相対画像リンク</h3>
 
-**Directory Relative** image links use destinations set relative to the current page. The main difference between a slug relative, and directory relative link, is that rather than using the URL slugs, you reference via the full path with folder names.
+**ディレクトリによる相対** 画像リンクは、現在ページから相対的なリンク先を使います。  
+スラッグによる相対リンクとの主な違いは、 URL スラッグを使うのではなく、フォルダ名のフルパスを使って画像を参照するということです。
 
-An example of this would be something like:
+この具体例として、たとえば次のようになります：
 
 ```markdown
 ![Test Image 3](../../01.blog/02.my_folder/test-image-3.jpg)
 ```
 
 > [!Info]  
-> The main benefit of this, is that you can maintain link integrity in other systems outside of Grav, such as GitHub.
+> この方法の主な利点は、 たとえば GitHub のような Grav 以外のシステムでもリンクを利用できるということです。
 
 <h3 id="absolute">絶対画像リンク</h3>
 
-Absolute links are similar to relative links, but are relative to the root of the site. In **Grav**, this is typically based in your **/user/pages/** directory. This type of link can be done in two different ways.
+絶対リンクは、総体リンクに似ていますが、サイトのルートディレクトリからの相対です。  
+**Grav** では特に、 **/user/pages/** ディレクトリを基準にします。  
+このタイプのリンクは、2つの異なる方法で行われます。
 
-You can do it in a similar fashion to the **Slug Relative** style which uses the slug, or directory name in the path for simplicity. This method removes potential issues of order changes later on (changing the number at the beginning of the folder name) breaking the link. This would be the most commonly used method of absolute linking.
+**スラッグ相対** リンクのやり方に似た方法で、スラッグもしくはパスのディレクトリ名を使う方法です。  
+この方法は、後で順番を変更するような（フォルダ名の最初の数字が変更してしまうような）ことによりリンク切れを起こすという潜在的な問題を避けることができます。  
+絶対リンクによる方法で使われる、最も一般的なやりかたです。
 
-In an absolute link, the link opens with a `/`. Here is an example of an absolute link made to `pages/01.blog/test-post-2/test-image-2.jpg` in the **Slug** style from `pages/01.blog/blog.md`.
+絶対リンクでは、リンクは `/` で始まります。  
+次の例は、 `pages/01.blog/blog.md` ファイルから、 **スラッグ** スタイルで `pages/01.blog/test-post-2/test-image-2.jpg` へ絶対リンクを張るものです。
 
 ```markdown
 ![Test Image 2](/blog/test-slug/test-image-2.jpg)
 ```
 
-!!! A powerful technique is to create a `user/pages/images/` folder in your Grav site and put your images here.  Then you can easily reference them with an absolute URL from any Grav page: `/images/test-image-4.jpg` and still be able to perform [media actions](../media) on them.
+> [!Tip]  
+> `user/pages/images/` フォルダを Grav サイトに作成し、そこに画像を置くのは、強力なテクニックです。そうすれば、 Grav のページから絶対 URL で画像を簡単に参照できます： `/images/test-image-4.jpg` また、それらに [メディアアクション](../07.media/) を処理することもできます。
 
 <h3 id="php-streams">PHPストリーム</h3>
 
-Gravでは、PHPストリームを使って、画像を参照したりリンクしたりすることもできます。いくつかのPHPストリームを用意しています：
+Grav では、 PHP ストリームを使って、画像を参照したりリンクしたりすることもできます。  
+いくつかの PHP ストリームを用意しています：
 
 * `user://` - userフォルダ. 例： `user/`
 * `page://` - pagesフォルダ 例： `user/pages/`
@@ -123,7 +140,7 @@ Gravでは、PHPストリームを使って、画像を参照したりリンク�
 * `plugins://` - pluginsフォルダ  例： `user/plugins/`
 * `theme://` - 現在テーマ  例： `user/themes/antimatter/`
 
-これらにより、以前はpagesの階層（`user/pages/`）の外にあった画像へのアクセスが容易になります。
+これらにより、以前は pages の階層（`user/pages/`）の外にあった画像へのアクセスが容易になります。
 
 ```markdown
 ![Stream Image](user://media/images/my-image.jpg)
@@ -135,27 +152,31 @@ Gravでは、PHPストリームを使って、画像を参照したりリンク�
 ![Stream Image](theme://images/my-image.jpg)
 ```
 
-デフォルトで使えるストリームの全体像は、[複数サイト設定 - ストリーム](../../08.advanced/05.multisite-setup#streams) を参照してください。
+デフォルトで使えるストリームの全体像は、[複数サイト設定 - ストリーム](../../08.advanced/05.multisite-setup/#streams) を参照してください。
 
 <h3 id="remote">サイト外リンク</h3>
 
-Remote image links enable you to directly display pretty much any media file via its URL. This doesn't have to include your own site's content, but it can. Here is an example of how you would display a remote image file.
+外部サイトの画像リンクにより、 URL を使ってあらゆるメディアファイルを直接サイトに表示することができます。  
+これは、自身のサイトコンテンツにメディアファイルを含める必要が無くできます。  
+以下は、外部サイトの画像ファイルを表示する方法の例です。
 
 ```markdown
 ![Remote Image 1](https://getgrav.org/images/testimage.png)
 ```
 
-You can link to pretty much any direct URL, including secured HTTPS links.
+あらゆるダイレクト URL にリンクができます。  
+安全な HTTPS リンクも含まれます。
 
-### Media Actions on Images
+<h3 id="media-actions-on-images">画像でのメディアアクション</h3>
 
-One of the main benefits of using images associated with pages is that it enables you to take advantage of [Grav's powerful media actions](../07.media). For example, here is a line you would use to load an image from another page:
+ページに関連付けられた画像を使う主な利点のひとつは、 [Grav の強力なメディアアクション](../07/media/) が使えるということです。  
+たとえば、別ページから読み込んだ画像を使う例です：
 
 ```markdown
 ![Styling Example](../test-post-3/test-image-3.jpg?cropResize=400,200)
 ```
 
-or taking advantage of streams to access an image in your current theme:
+もしくは、現在テーマにある画像にストリームでアクセスすることもできます：
 
 ```markdown
 ![Stream Image](theme://images/default-avatar.jpg?cropZoom=200,200&brightness=-75)
@@ -165,9 +186,10 @@ You will find more information about actions and other [media file functionality
 
 <h3 id="image-attributes">画像属性</h3>
 
-A great new feature you can take advantage of is providing image attributes directly via the markdown syntax. This allows you to easily add **classes** and **id** HTML attributes without the need of [Markdown Extra](https://michelf.ca/projects/php-markdown/extra/).
+新しく、素晴らしい機能が使えるようになりました。マークダウン構文を使って、画像属性を直接提供できる機能です。  
+これにより、 HTML 属性に、 [Markdown Extra](https://michelf.ca/projects/php-markdown/extra/) を使うこと無く、簡単に **class** や **id** を追加できます。
 
-Some examples of this are:
+いくつか具体例を紹介します：
 
 <h5 id="single-class-attribute">ひとつのクラス属性</h5>
 
@@ -175,7 +197,7 @@ Some examples of this are:
 ![My Image](my-image.jpg?classes=float-left)
 ```
 
-which will result in HTML similar to:
+これは、次のような HTML になります：
 
 ```html
 <img src="/your/pages/some-page/my-image.jpg" class="float-left" />
@@ -187,7 +209,7 @@ which will result in HTML similar to:
 ![My Image](my-image.jpg?classes=float-left,shadow)
 ```
 
-which will result in HTML similar to:
+これは、次のような HTML になります：
 
 ```html
 <img src="/your/pages/some-page/my-image.jpg" class="float-left shadow" />
@@ -199,7 +221,7 @@ which will result in HTML similar to:
 ![My Image](my-image.jpg?id=special-id)
 ```
 
-which will result in HTML similar to:
+これは、次のような HTML になります：
 
 ```html
 <img src="/your/pages/some-page/my-image.jpg" id="special-id" />

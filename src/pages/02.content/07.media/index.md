@@ -3,61 +3,73 @@ title: メディア
 layout: ../../../layouts/Default.astro
 lastmod: '2025-05-03'
 ---
+
 > [!訳注]  
-> このページでは、ファイルの動的な処理をするため、静的サイトでは再現できない部分があります。また、動画などの容量が大きく、このGitHub Pages上では削除しています。メディア編集によるGravの機能については、[翻訳元](https://learn.getgrav.org/content/media) にてご確認ください。
+> このページでは、ファイルの動的な処理をするため、静的サイトでは再現できない部分があります。また、動画などの容量が大きく、このGitHub Pages上では削除しています。メディア編集による Grav の機能については、 [翻訳元](https://learn.getgrav.org/content/media) にてご確認ください。
 
-コンテンツを作るとき、**画像** や、 **動画** や、他の種類の **ファイル** を表示することもあります。Gravは、これらのファイルも自動で探し出し、処理して、どんなページからでも使えるようにします。ページにあらかじめ搭載された機能として、サムネイル画像を使ったり、メタデータにアクセスしたり、メディアを動的に修正したり（例：画像のリサイズ、動画の表示サイズの設定など）と、必要なことを必要なとおりにできるので、とても便利です。
+コンテンツを作るとき、**画像** や、 **動画** や、他の種類の **ファイル** を表示することもあります。  
+Grav は、これらのファイルも自動で探し出し、処理して、どんなページからでも使えるようにします。  
+ページにあらかじめ搭載された機能として、サムネイル画像を使ったり、メタデータにアクセスしたり、メディアを動的に修正したり（例：画像のリサイズ、動画の表示サイズの設定など）と、必要なことを必要なとおりにできるので、とても便利です。
 
-Gravでは、**スマートキャッシュ** システムが使われており、動的に生成されたメディアは、必要なときに自動でキャッシュされます。これにより、以降のリクエストでは、再度動的に生成することなく、キャッシュされたバージョンを利用できます。
+Grav では、 **スマートキャッシュ** システムが使われており、動的に生成されたメディアは、必要なときに自動でキャッシュされます。  
+これにより、以降のリクエストでは、再度動的に生成することなく、キャッシュされたバージョンを利用できます。
 
 <h2 id="supported-media-files">サポート対象のメディアファイル</h2>
 
-以下のメディアファイルのタイプが、Gravが始めからサポートする対象です。追加のサポートは、プラグインを通じて行われます。
+以下のメディアファイルのタイプが、 Grav が始めからサポートする対象です。  
+追加のサポートは、プラグインを通じて行われます。
 
-| Media Type | File Type |
+| メディアタイプ | ファイルタイプ |
 | :-----  | :-----   |
-| Image  | jpg, jpeg, png  |
-| Audio              | mp3, wav, wma, ogg, m4a, aiff, aif  |
-| Animated image     | gif  |
-| Vectorized image   | svg  |
-| Video              | mp4, mov, m4v, swf, flv, webm, ogv      |
-| Data / Information | txt, doc, docx, html, htm, pdf, zip, gz, 7z, tar, css, js, json, xml, xls, xlt, xlm, xlsm, xld, xla, xlc, xlw, xll, ppt, pps, rtf, bmp, tiff, mpeg, mpg, mpe, avi, wmv |
+| 画像  | jpg, jpeg, png  |
+| 音声  | mp3, wav, wma, ogg, m4a, aiff, aif  |
+| アニメーション画像   | gif  |
+| ベクトル画像   | svg  |
+| ビデオ     | mp4, mov, m4v, swf, flv, webm, ogv      |
+| データ / 情報 | txt, doc, docx, html, htm, pdf, zip, gz, 7z, tar, css, js, json, xml, xls, xlt, xlm, xlsm, xld, xla, xlc, xlw, xll, ppt, pps, rtf, bmp, tiff, mpeg, mpg, mpe, avi, wmv |
 
-サポート対象の mime タイプの全リストは、 `system/config/media.yaml` にあります。もしまだサポートされていない mime タイプがあれば、自身で `user/config/media.yaml` を作り、そこに書き加えてください。オリジナルの media.yaml と同じ書式となるように注意してください。最もシンプルな方法は、元のファイルをすべてコピーして、それに書き加える方法です。
+サポート対象の mime タイプの全リストは、 `system/config/media.yaml` にあります。  
+もしまだサポートされていない mime タイプがあれば、あなた自身で `user/config/media.yaml` を作り、そこに書き加えてください。  
+オリジナルの media.yaml と同じ書式となるように注意してください。  
+最もシンプルな方法は、元のファイルをすべてコピーして、それに書き加える方法です。
 
 <h2 id="where-to-put-your-media-files">メディアファイルを置く場所</h2>
 
-通常は、メディアファイルはページ内で使うでしょうから、ページのフォルダに置き、そしてページのマークダウンから参照すれば良いです。以下のように：
+通常は、メディアファイルはページ内で使うでしょうから、ページのフォルダに置き、そしてページのマークダウンから参照すれば良いです。  
+以下のように：
 
 ```markdown
 ![my image](image.jpg)
 ```
 
-ひとつのフォルダで画像を管理したい場合は、`user/pages/images` フォルダを作り、そこに置くこともできます。この方法では、 twig は、次のようにして画像にアクセスできます
+ひとつのフォルダで画像を管理したい場合は、`user/pages/images` フォルダを作り、そこに置くこともできます。  
+この方法では、 twig は、次のようにして画像にアクセスできます
 
 ```twig
 {% set my_image = page.find('/images').media['my-image.jpg'] %}
 ```
 
-そして、マークダウンからも、かんたんにメディアを見つけることができ、処理できます：
+そして、マークダウンからも、簡単にメディアを見つけることができ、処理できます：
 
 ```markdown
 ![my image](/images/my-image.jpg?cropResize=300,300)
 ```
 
-他方で、テーマファイルに置くこともできます。そうすると、CSSでかんたんにアクセスできますし、マークダウンファイルからは、`theme://` ストリームから利用できます：
+他方で、テーマファイルに置くこともできます。  
+そうすると、 CSS で簡単にアクセスできますし、マークダウンファイルからは、`theme://` ストリームから利用できます：
 
 ```markdown
 ![my image](theme://images/theme-image.jpg)
 ```
 
-別の選択肢としては、`user/image` フォルダというのもあります。`image://` ストリームからアクセスできます：
+別の選択肢としては、 `user/image` フォルダというのもあります。  
+`image://` ストリームからアクセスできます：
 
 ```markdown
 ![my image](image://my-image.jpg)
 ```
 
-実際は、`user/` フォルダ内にあるあらゆるストリームデータは、`user://` ストリームを通して利用可能です：
+実際は、 `user/` フォルダ内にあるあらゆるストリームデータは、`user://` ストリームを通して利用可能です：
 
 ```markdown
 ![my image](user://themes/mytheme/images/my-image.jpg)
@@ -70,9 +82,13 @@ Twig の `Media` オブジェクトにより、同じことができます：
 ```
 
 > [!Warning]  
-> Gravには、ルート（一番上のフォルダ）に、`/images` フォルダがあります。しかしこのフォルダには入れないでください。これは Grav が自動で生成したキャッシュ画像が入る場所だからです。
+> Grav には、ルート（一番上のフォルダ）に、`/images` フォルダがあります。しかしこのフォルダには画像を入れないでください。ここは、 Grav が自動で生成したキャッシュ画像を入れる場所だからです。
 
-また、すべてのメディアファイルをそれぞれ自身のフォルダに入れたいと思うかもしれません。その場合、ファイルは一度にアクセスすることができます。たとえば、すべての MP3 ファイルを、（ visible でない）`user/pages/mp3s` というひとつのフォルダで管理するとします。そして、あるページで、そのページに関係する MP3 ファイルの名前を、そのページのフロントマターに `thistrack` というフィールドで定義したとします。すると、 HTML5 のオーディオ要素でアクセスするには、次のようなコードを書いてください：
+また、すべてのメディアファイルをそれぞれ自身のフォルダに入れたいと思うかもしれません。  
+その場合、ファイルは一度にアクセスすることができます。  
+たとえば、すべての MP3 ファイルを、（ visible でない） `user/pages/mp3s` というひとつのフォルダで管理するとします。  
+そして、あるページで、そのページに関係する MP3 ファイルの名前を、そのページのフロントマターに `thistrack` というフィールドで定義したとします。  
+すると、 HTML5 のオーディオ要素でアクセスするには、次のようなコードを書いてください：
 
 ```twig
 <audio controls>
@@ -82,7 +98,7 @@ Twig の `Media` オブジェクトにより、同じことができます：
 
 <h2 id="display-modes">ディスプレイ・モード</h2>
 
-Gravには、すべてのメディアオブジェクトに対して、いくつかの異なるディスプレイモードがあります。
+Grav には、すべてのメディアオブジェクトに対して、いくつかの異なるディスプレイモードがあります。
 
 | モード    | 説明  |
 | :-----    | :----- |
@@ -95,7 +111,7 @@ Gravには、すべてのメディアオブジェクトに対して、いくつ�
 
 <h2 id="thumbnail-location">サムネイルの場所</h2>
 
-Gravでは、3つのサムネイル画像の保存場所があります。
+Grav では、3つのサムネイル画像の保存場所があります。
 
 1. メディアファイルと同じフォルダ： `[media-name].[media-extension].thumb.[thumb-extension]` ここでの `media-name` と `media-extension` は、それぞれオリジナルのメディアファイルの名前と拡張子であり、 `thumb-extension` は、`image` メディアタイプがサポートする拡張子です。たとえば、 `my_video.mp4.thumb.jpg` や、 `my-image.jpg.thumb.png` などです。 **画像のみです！** 画像それ自体が、サムネイルとして使われます。
 2. ユーザーフォルダ： `user/images/media/thumb-[media-extension].png` ここでの `media-extension` は、オリジナルのメディアファイルの拡張子です。 たとえば、 `thumb-mp4.png` や、 `thumb-jpg.jpg` です。
@@ -104,14 +120,17 @@ Gravでは、3つのサムネイル画像の保存場所があります。
 > [!Info]  
 > 以下に説明するような方法で、手動でサムネイルを選ぶこともできます。
 
-<h2 id="links-and-lightboxes">リンクとlightbox</h2>
+<h2 id="links-and-lightboxes">リンクと lightbox</h2>
 
-上記のディスプレイ・モードは、リンクと lightbox でも使えます。詳細は後ほど説明しますが、さしあたり重要な点は：
+上記のディスプレイ・モードは、リンクと lightbox でも使えます。  
+詳細は後ほど説明しますが、さしあたり重要な点は：
 
 > [!Warning]  
-> Gravは、初期状態ではlightbox機能を提供しません。プラグインが必要です。 [FeatherLight Grav plugin](https://github.com/getgrav/grav-plugin-featherlight) を使ってください。
+> Grav は、初期状態では lightbox 機能を提供しません。プラグインが必要です。 [FeatherLight Grav plugin](https://github.com/getgrav/grav-plugin-featherlight) を使ってください。
 
-lightbox をレンダリングするために Grav のメディア機能を使う場合、Grav がやるのは、**アンカー** タグの出力です。そのタグは、 lightbox プラグインが読めるようにするためのいくつかの属性を持ちます。わたしたちのプラグインリポジトリのものではない lightbox ライブラリの使用に興味があり、自身のプラグインを作成したい場合は、以下の表を参照して使ってください。
+lightbox をレンダリングするために Grav のメディア機能を使う場合、 Grav がやるのは、**アンカー** タグの出力です。  
+そのタグは、 lightbox プラグインが読めるようにするためのいくつかの属性を持ちます。  
+わたしたちのプラグインリポジトリのものではない lightbox ライブラリの使用に興味があり、自身のプラグインを作成したい場合は、以下の表を参照して使ってください。
 
 | 属性   | 説明  |
 | :-----      | :-----  |
@@ -123,7 +142,9 @@ lightbox をレンダリングするために Grav のメディア機能を使�
 
 <h2 id="actions">アクション</h2>
 
-Grav は、メディアを制御するとき、 **builder-pattern** を使います。このため、特定のメディアに、**複数のアクション** を実行できます。いくつかのアクションは、すべての種類のメディアで利用可能であり、その他は特定のメディアでのみ使えます。
+Grav は、メディアを制御するとき、 **builder-pattern** を使います。  
+このため、特定のメディアに、**複数のアクション** を実行できます。  
+いくつかのアクションは、すべての種類のメディアで利用可能であり、その他は特定のメディアでのみ使えます。
 
 <h3 id="general">一般</h3>
 
@@ -134,23 +155,20 @@ Grav は、メディアを制御するとき、 **builder-pattern** を使いま
 > [!Info]  
 > このメソッドは、**Twig** テンプレートでのみ使われることを想定しています。そのため、マークダウンでは使えません。
 
-そのメディアへの **生のURL path** 返します。
+そのメディアへの **生のURL パス** 返します。
 
 ```twig
 {{ page.media['sample-image.jpg'].url|e }}
 ```
 
-```html
-実行結果は<a href="https://learn.getgrav.org/content/media#url">翻訳元</a>を見てください
-```
-
+実行結果は <a href="https://learn.getgrav.org/content/media#url">翻訳元</a> を見てください
 
 <h4 id="html">html</h4>
 
 > [!Info]  
 > マークダウンでは、このメソッドは `![]` 構文を使って、暗黙的に呼び出されます。
 
-The `html` action will output a valid HTML tag for the media based on the current display mode.
+`html` アクションは、現在の表示モードをもとに、メディアの妥当な HTML タグを出力します。
 
 ```markdown
 ![Some ALT text](sample-image.jpg?classes=myclass "My title")
@@ -158,10 +176,8 @@ The `html` action will output a valid HTML tag for the media based on the curren
 ```twig
 {{ page.media['sample-image.jpg'].html('My title', 'Some ALT text', 'myclass')|raw }}
 ```
-```html
-実行結果は<a href="https://learn.getgrav.org/content/media#html">翻訳元</a>を見てください
-```
 
+実行結果は <a href="https://learn.getgrav.org/content/media#html">翻訳元</a> を見てください
 
 #### display
 
