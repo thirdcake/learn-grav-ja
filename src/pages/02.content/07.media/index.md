@@ -1,7 +1,7 @@
 ---
 title: メディア
 layout: ../../../layouts/Default.astro
-lastmod: '2025-05-03'
+lastmod: '2025-07-31'
 ---
 
 > [!訳注]  
@@ -128,14 +128,17 @@ Grav では、3つのサムネイル画像の保存場所があります。
 > [!Warning]  
 > Grav は、初期状態では lightbox 機能を提供しません。プラグインが必要です。 [FeatherLight Grav plugin](https://github.com/getgrav/grav-plugin-featherlight) を使ってください。
 
+> [!訳注]  
+> 上記の FeatherLight プラグインは、もう何年も開発が止まっているようなので、使わない方が良いかもしれません。代替プラグインなどについては、 GitHub issue などを読んでください。
+
 lightbox をレンダリングするために Grav のメディア機能を使う場合、 Grav がやるのは、**アンカー** タグの出力です。  
 そのタグは、 lightbox プラグインが読めるようにするためのいくつかの属性を持ちます。  
 わたしたちのプラグインリポジトリのものではない lightbox ライブラリの使用に興味があり、自身のプラグインを作成したい場合は、以下の表を参照して使ってください。
 
 | 属性   | 説明  |
-| :-----      | :-----  |
-| rel         | 通常のリンクではなく、lightbox のリンクであることを示すシンプルな指標です。その値は、常に `lightbox` です。 |
-| href        | メディアオブジェクトそのものへの URL |
+| :----- | :----- |
+| rel    | 通常のリンクではなく、lightbox のリンクであることを示すシンプルな指標です。その値は、常に `lightbox` です。 |
+| href   | メディアオブジェクトそのものへの URL |
 | data-width  | この lightbox に望まれる幅 |
 | data-height | この lightbox に望まれる高さ |
 | data-srcset | 画像メディアの場合に、 `srcset` の文字列をここに入力できます（ [more info](#responsive-images) ） |
@@ -163,7 +166,7 @@ Grav は、メディアを制御するとき、 **builder-pattern** を使いま
 
 実行結果は <a href="https://learn.getgrav.org/content/media#url">翻訳元</a> を見てください
 
-<h4 id="html">html</h4>
+#### html
 
 > [!Info]  
 > マークダウンでは、このメソッドは `![]` 構文を使って、暗黙的に呼び出されます。
@@ -181,21 +184,24 @@ Grav は、メディアを制御するとき、 **builder-pattern** を使いま
 
 #### display
 
-Use this action to switch between the various display modes that Grav provides. Once you switch display mode, all previous actions will be reset. The exceptions to this rule are the `lightbox` and `link` actions and any actions that have been used before those two.
+このアクションを使うと、 Grav の提供するさまざまなディスプレイモードを切り替えられます。  
+ディスプレイモードを切り替えると、すべてのこれまでのアクションがリセットされます。  
+このルールの例外は、 `lightbox` と `link` アクションと、これら2つよりも前に使用されたアクションです。
 
-For example, the thumbnail that results from calling `page.media['sample-image.jpg'].sepia().display('thumbnail').html()` will not have the `sepia()` action applied, but `page.media['sample-image.jpg'].display('thumbnail').sepia().html()` will.
+たとえば、 `page.media['sample-image.jpg'].sepia().display('thumbnail').html()` から呼び出されたサムネイルは、 `sepia()` アクションが適用されませんが、 `page.media['sample-image.jpg'].display('thumbnail').sepia().html()` とすれば適用されます。
 
 > [!Note]  
-> Once you switch to thumbnail mode, you will be manipulating an image. This means that even if your current media is a video, you can use all the image-type actions on the thumbnail.
+> サムネイルモードに切り替えると、画像処理されます。これはつまり、ビデオコンテンツであっても、サムネイルに対して画像タイプのアクションが利用できるということです。
 
 #### link
 
-Turn your media object into a link. All actions that you call before `link()` will be applied to the target of the link, while any actions called after will apply to what's displayed on your page.
+メディアオブジェクトをリンクにします。  
+`link()` よりも前に呼び出したあらゆるアクションは、リンクのターゲットに適用される一方で、後に呼び出したアクションは、ページで表示されるものに適用されます。
 
 > [!Info]  
-> After calling `link()`, Grav will automatically switch the display mode to **thumbnail**.
+> `link()` を呼び出した後、 Grav は自動的に **サムネイル** ディスプレイモードに切り替えます。
 
-The following example will display a textual link (`display('text')`) to a sepia version of the `sample-image.jpg` file:
+以下の具体例では、 `sample-image.jpg` ファイルのセピアバージョンへのテキストリンク (`display('text')`) を表示します：
 
 ```markdown
 ![Image link](sample-image.jpg?sepia&link&display=text)
@@ -205,15 +211,21 @@ The following example will display a textual link (`display('text')`) to a sepia
 {{ page.media['sample-image.jpg'].sepia().link().display('text').html('Image link')|raw }}
 ```
 
-```html
-{{ page.media['sample-image.jpg'].sepia().link().display('text').html('Image link')|e }}
-```
+実行結果は <a href="https://learn.getgrav.org/content/media#link">翻訳元</a> を見てください
+
+> [!訳注]  
+> 説明文では、テキストリンクになるとのことですが、2025年7月31日確認時点での翻訳元の実行結果は画像リンクになっているようなので、説明が間違っているのか、この機能が正しく実装されていないのかは不明です。
 
 #### Cache only
 
-Grav can be set to cache all image files, this may increase the speed that files are served. However, images will go through the Grav image manipulation system which may lead to a considerably larger file size for images that have already been optimized prior to Grav. Image manipulation can be bypassed.
+Grav は、すべての画像ファイルをキャッシュする設定になっており、これによりファイルの提供スピードが高速化されます。  
+しかし、画像が Grav 画像処理システムで処理されると、このシステムは以前最適化済みの画像サイズをかなり大きくして読み込むかもしれません。  
+画像処理はショートカットできます。
 
-Enable `cache_all` in `system/config/system.yaml`
+`system/config/system.yaml` の `cache_all` を有効化してください
+
+> [!訳注]  
+> ここの説明文は、無効化してください (Disable ...) の間違いかもしれません。
 
 ```yaml
 images:
@@ -221,7 +233,7 @@ images:
   cache_all: false
 ```
 
-Disable image manipulation with the `cache`option.
+`cache` オプションについて画像処理が無効化されます。
 
 ```markdown
 ![](sample-image.jpg?cache)
@@ -231,15 +243,16 @@ Disable image manipulation with the `cache`option.
 {{ page.media['sample-image.jpg'].cache.html()|raw }}
 ```
 
-```html
-{{ page.media['sample-image.jpg'].cache.html()|e }}
-```
+実行結果は <a href="https://learn.getgrav.org/content/media#cache-only">翻訳元</a> を見てください
 
 #### lightbox
 
-The lightbox action is essentially the same as the link action but with a few extras. Like explained above ([Links and Lightboxes](https://learn.getgrav.org/16/content/media#links-and-lightboxes)), the lightbox action will not do anything more than create a link with some extra attributes. It differs from the link action in that it adds a `rel="lightbox"` attribute and accepts a `width` and `height` attribute.
+lightbox アクションは、本質的に link アクションと同じですが、いくつか追加事項があります。  
+[上記の解説](#links-and-lightboxes) にもあるように、 lightbox アクションは、 link 作成に追加の属性があるというだけです。  
+link アクションとの違いは、 `rel="lightbox"` 属性が追加されることと、 `width` `hight` 属性を受け入れるということです。
 
-If possible (currently only in the case of images), Grav will resize your media to the requested width and height. Otherwise it will simply add a `data-width` and `data-height` attribute to the link.
+もし可能なら（現在は画像の場合のみですが）、 Grav はリクエストされた幅と高さにメディアをリサイズします。  
+そうでなければ、単に `data-width` と `data-height` 属性をリンクに追加します。
 
 ```markdown
 ![Sample Image](sample-image.jpg?lightbox=600,400&resize=200,200)
@@ -249,18 +262,17 @@ If possible (currently only in the case of images), Grav will resize your media 
 {{ page.media['sample-image.jpg'].lightbox(600,400).resize(200,200).html('Sample Image')|raw }}
 ```
 
-```html
-{{ page.media['sample-image.jpg'].lightbox(600,400).resize(200,200).html('Sample Image')|e }}
-```
+実行結果は <a href="https://learn.getgrav.org/content/media#lightbox">翻訳元</a> を見てください
 
-##### Result:
+<h5 id="result">結果</h5>
 
 > [!訳注]  
-> 削除しているため、[翻訳元](https://learn.getgrav.org/content/media#lightbox) で確認してください
+> 結果を削除しているため、動作確認は [翻訳元](https://learn.getgrav.org/content/media#lightbox) でしてください
 
 #### thumbnail
 
-Manually choose the thumbnail Grav should use. You can choose between `page` and `default` for any type of media as well as `media` for image media if you want to use the media object itself as your thumbnail.
+Grav で利用されるサムネイルを手動で選べます。  
+すべてのタイプのメディアについて、 `page` と `default` から選べます。画像メディアについては `media` も選べ、その画像自体をサムネイルとして使えます。
 
 ```markdown
 ![Sample Image](sample-image.jpg?thumbnail=default&display=thumbnail)
@@ -281,7 +293,7 @@ Manually choose the thumbnail Grav should use. You can choose between `page` and
 
 #### attribute
 
-This adds an additional HTML attribute to the output.
+これは、出力に HTML 属性を追加できます。
 
 ```markdown
 ![Sample Image](sample-image.jpg?attribute=myattribute,myvalue)
