@@ -1,7 +1,7 @@
 ---
 title: メディア
 layout: ../../../layouts/Default.astro
-lastmod: '2025-07-31'
+lastmod: '2025-08-01'
 ---
 
 > [!訳注]  
@@ -312,7 +312,10 @@ Grav で利用されるサムネイルを手動で選べます。
 
 #### resize
 
-Resizing does exactly what you would expect it to do.  `resize` lets you create a new image based on the `width` and the `height`.  The aspect ratio is maintained and the new image will contain blank areas in the color of the **optional** background color provided as a `hex value`, e.g. `0xffffff`. The background parameter is optional, and if not provided will default to **transparent** if the image is a PNG, or **white** if it is a JPEG.
+リサイズは、あなたの期待どおりに行われます。  
+`resize` により、 `width` と `height` の通りの新しい画像が作成されます。  
+アスペクト比は元のままで、新しい画像は、`0xffffff` のような `hex value` (16進法の値) で提供される **オプションの** 背景色で空白部分を埋められます。  
+背景のパラメータはオプションです。提供されなければ、 PNG ファイルの場合 **透明** がデフォルトになり、 JPEG であれば **白色** になります。
 
 ```markdown
 ![Sample Image](sample-image.jpg?resize=400,200)
@@ -329,7 +332,8 @@ Resizing does exactly what you would expect it to do.  `resize` lets you create 
 
 #### forceResize
 
-Resizes the image to the `width` and `height` as provided.  `forceResize` will not respect original aspect-ratio and will stretch the image as needed to fit the new image size.
+画像を提供された `width` と `height` でリサイズします。  
+`forceResize` は、元画像のアスペクト比を無視し、新しい画像サイズに合わせるために引き伸ばします。
 
 ```markdown
 ![Sample Image](sample-image.jpg?forceResize=200,300)
@@ -346,22 +350,19 @@ Resizes the image to the `width` and `height` as provided.  `forceResize` will n
 
 #### cropResize
 
-`cropResize` resizes an image to a smaller or larger size based on the `width` and the `height`.  The aspect ratio is maintained and the new image will be resized to fit in the bounding-box as described by the `width` and `height` provided. In other words, any background area you would see in a regular `resize` is cropped.
+`cropResize` は、 `width` と `height` をもとにより小さい・より大きい画像にリサイズします。  
+アスペクト比は元のままで、 `width` と `height` による枠にフィットするようにリサイズされます。  
+別の言い方をすると、通常の `resize()` をしたときの背景部分はトリミングされます。
 
-For example, if you have an image that is `640` x `480` and you perform a `cropResize(100, 100)` action upon it, you will end up with an image that is `100` x `75`.
-
-
+たとえば、 `640` x `480` サイズの画像（アスペクト比4:3）を `cropResize(100,100)` (アスペクト比:1) アクションで処理した場合、出来上がる画像は `100` x `75` (4:3) になります。
 
 ```markdown
 ![Sample Image](sample-image.jpg?cropResize=300,300)
 ```
 
-
 ```twig
 {{ page.media['sample-image.jpg'].cropResize(300, 300).html()|raw }}
 ```
-
-
 
 ##### Result:
 
@@ -370,22 +371,20 @@ For example, if you have an image that is `640` x `480` and you perform a `cropR
 
 #### crop
 
-`crop` will not resize the image at all, it will merely crop the original image so that only the portion of the bounding box as described by the `width` and the `height` originating from the `x` and `y` location is used to create the new image.
+`crop` は、画像のサイズを変更しません。元画像をただ単に切り取ります。次のような領域部分だけを使って新しい画像を作成します： `x` と `y` から始まり、 `width` と `height` で示される領域部分です。
 
-For example, an image that is `640` x `480` with `crop(0, 0, 400, 100)` will produce an image with a width of `400` and a height of `100` originating from the top-left corner as described by `0, 0`.
+> [!訳注]  
+> 上記は、つまり、 `crop(x, y, width, height)` ということが言いたいのだと思います。
 
-
+たとえば、ある `640` x `480` サイズの画像を `crop(0, 0, 400, 100)` とする場合、作成される画像は、幅 `400` で、高さ `100` となり、 `0, 0` とあるように左上の角からその幅と高さに切り取られた画像です。
 
 ```markdown
 ![Sample Image](sample-image.jpg?crop=100,100,300,200)
 ```
 
-
 ```twig
 {{ page.media['sample-image.jpg'].crop(100,100,300,200).html()|raw }}
 ```
-
-
 
 ##### Result:
 
@@ -394,30 +393,26 @@ For example, an image that is `640` x `480` with `crop(0, 0, 400, 100)` will pro
 
 #### cropZoom
 
-Similar to regular `cropResize`, `cropZoom` also takes a `width` and a `height` but will **resize and crop** the image to ensure the resulting image is the exact size you requested.  The aspect ratio is maintained but parts of the image may be cropped, however the resulting image is centered.
+通常の `cropResize` に似て、 `cropZoom` も、 `width` と `height` を引数に取りますが、要求したサイズと正確に同じサイズとなることが保証された画像を **リサイズし、切り取ります** 。  
+アスペクト比は元のままで、結果画像が中心になるように画像が切り取られます。
 
 > [!Info]  
-> The primary difference between **cropResize** and **cropZoom** is that in cropResize, the image is resized maintaining aspect ratio so that the entire image is shown, and any extra space is considered background.
+> **cropResize** と **cropZoom** の主な違いは、 cropResize が、元画像のアスペクト比をそのままとし、画像全体を表示できます。余分なスペースは、背景と認識されます。
 
-With **cropZoom**, the image is resized so that there is no background visible, and the extra image area of the image outside of the new image size is cropped.
+**cropZoom** では、画像はリサイズされ、背景として見える部分はありません。画像サイズの外にはみ出した余分な画像エリアは、切り取られます。
 
-For example if you have an image that is `640` x `480` and you perform a `cropZoom(400, 100)` action, the resulting image will be resized to `400` x `300` and then the height is cropped resulting in a `400` x `100` image.
-
-
+たとえば、 `640` x `480` サイズの画像について、 `cropZoom(400, 100)` アクションを実行した場合、結果画像は、まず `400` x `300` にリサイズされたあと、高さが `400` x `100` に合わせて切り取られます。
 
 ```markdown
 ![Sample Image](sample-image.jpg?cropZoom=600,200)
 ```
 
-
 ```twig
 {{ page.media['sample-image.jpg'].cropZoom(600,200).html()|raw }}
 ```
 
-
-
 > [!Info]  
-> Folks familiar with using `zoomCrop` for this purpose will find that it also works in Grav.
+> `zoomCrop` に親しんでいる方は、 Grav でこれも機能することに気づくでしょう。
 
 ##### Result:
 
@@ -426,20 +421,16 @@ For example if you have an image that is `640` x `480` and you perform a `cropZo
 
 #### quality
 
-Dynamically allows the setting of a **compression percentage** `value` for the image between `0` and `100`. A lower number means less quality, where `100` means maximum quality.
-
-
+動的に、画像の **圧縮率** の `value` を設定でき、 `0` から `100` までの値を取ります。  
+小さい数字は、低クオリティで、 `100` は、最高品質を意味します。
 
 ```markdown
 ![Sample Image](sample-image.jpg?cropZoom=300,200&quality=25)
 ```
 
-
 ```twig
 {{ page.media['sample-image.jpg'].cropZoom(300,200).quality(25).html()|raw }}
 ```
-
-
 
 ##### Result:
 
@@ -448,20 +439,15 @@ Dynamically allows the setting of a **compression percentage** `value` for the i
 
 #### negate
 
-Applies a **negative filter** to the image where colors are inverted.
-
-
+**negative フィルター** を画像に適用し、色を反転させます。
 
 ```markdown
 ![Sample Image](sample-image.jpg?cropZoom=300,200&negate)
 ```
 
-
 ```twig
 {{ page.media['sample-image.jpg'].cropZoom(300,200).negate.html()|raw }}
 ```
-
-
 
 ##### Result:
 
@@ -470,20 +456,16 @@ Applies a **negative filter** to the image where colors are inverted.
 
 #### brightness
 
-Applies a **brightness filter** to the image with a `value` from `-255` to `+255`. Larger negative numbers will make the image darker, while larger positive numbers will make the image brighter.
-
-
+**brightness フィルター** を画像に適用し、 `value` は `-255` から `+255` までの値を取ります。  
+負の数の方向に大きい数字は、画像をより暗くし、正の数の方向に大きい数字は、画像を明るくします。
 
 ```markdown
 ![Sample Image](sample-image.jpg?cropZoom=300,200&brightness=-100)
 ```
 
-
 ```twig
 {{ page.media['sample-image.jpg'].cropZoom(300,200).brightness(-100).html()|raw }}
 ```
-
-
 
 ##### Result:
 
@@ -492,40 +474,31 @@ Applies a **brightness filter** to the image with a `value` from `-255` to `+255
 
 #### contrast
 
-This applies a **contrast filter** to the image with a `value` from `-100` to `+100`. Larger negative numbers will increase the contrast, while larger positive numbers will reduce the contrast.
-
-
+**contrast フィルター** を画像に適用し、 `value` は `-100` から `+100` までの値を取ります。  
+負の数の方向に大きい数字は、コントラストを大きくし、正の数の方向に大きい数字は、コントラストを減らします。
 
 ```markdown
 ![Sample Image](sample-image.jpg?cropZoom=300,200&contrast=-50)
 ```
 
-
 ```twig
 {{ page.media['sample-image.jpg'].cropZoom(300,200).contrast(-50).html()|raw }}
 ```
-
-
 
 > [!訳注]  
 > 削除しているため、[翻訳元](https://learn.getgrav.org/content/media#contrast) で確認してください
 
 #### grayscale
 
-This processes the image with a **grayscale filter**.
-
-
+画像に **grayscale フィルター** を処理します。
 
 ```markdown
 ![Sample Image](sample-image.jpg?cropZoom=300,200&grayscale)
 ```
 
-
 ```twig
 {{ page.media['sample-image.jpg'].cropZoom(300,200).grayscale.html()|raw }}
 ```
-
-
 
 ##### Result:
 
@@ -534,20 +507,15 @@ This processes the image with a **grayscale filter**.
 
 #### emboss
 
-This processes the image with an **embossing filter**.
-
-
+画像に **embossing フィルター** を処理します。
 
 ```markdown
 ![Sample Image](sample-image.jpg?cropZoom=300,200&emboss)
 ```
 
-
 ```twig
 {{ page.media['sample-image.jpg'].cropZoom(300,200).emboss.html()|raw }}
 ```
-
-
 
 ##### Result:
 
@@ -556,20 +524,15 @@ This processes the image with an **embossing filter**.
 
 #### smooth
 
-This applies a **smoothing filter** to the image based on smooth `value` setting from `-10` to `10`.
-
-
+**smoothing フィルター** を画像に適用し、 `-10` から `10` までに設定されたスムーズ `value` をもとに処理します。
 
 ```markdown
 ![Sample Image](sample-image.jpg?cropZoom=300,200&smooth=5)
 ```
 
-
 ```twig
 {{ page.media['sample-image.jpg'].cropZoom(300,200).smooth(5).html()|raw }}
 ```
-
-
 
 ##### Result:
 
@@ -578,20 +541,15 @@ This applies a **smoothing filter** to the image based on smooth `value` setting
 
 #### sharp
 
-This applies a **sharpening filter** on the image.
-
-
+**sharpening フィルター** を画像に適用します。
 
 ```markdown
 ![Sample Image](sample-image.jpg?cropZoom=300,200&sharp)
 ```
 
-
 ```twig
 {{ page.media['sample-image.jpg'].cropZoom(300,200).sharp.html()|raw }}
 ```
-
-
 
 ##### Result:
 
@@ -600,20 +558,15 @@ This applies a **sharpening filter** on the image.
 
 #### edge
 
-This applies an **edge finding filter** on the image.
-
-
+**edge finding フィルター** を画像に適用します。
 
 ```markdown
 ![Sample Image](sample-image.jpg?cropZoom=300,200&edge)
 ```
 
-
 ```twig
 {{ page.media['sample-image.jpg'].cropZoom(300,200).edge.html()|raw }}
 ```
-
-
 
 ##### Result:
 
@@ -622,14 +575,11 @@ This applies an **edge finding filter** on the image.
 
 #### colorize
 
-You can colorize the image based on adjusting the `red`, `green`, and `blue` values for the image from `-255` to `+255` for each color.
-
-
+画像を色付けできます。 `red`, `green`, そして `blue` の値について、各色 `-255` から `+255` までの値で調整できます。
 
 ```markdown
 ![Sample Image](sample-image.jpg?cropZoom=300,200&colorize=100,-100,40)
 ```
-
 
 ```twig
 {{ page.media['sample-image.jpg'].cropZoom(300,200).colorize(100,-100,40).html()|raw }}
@@ -641,12 +591,11 @@ You can colorize the image based on adjusting the `red`, `green`, and `blue` val
 
 #### sepia
 
-This applies a **sepia filter** on the image to produce a vintage look.
+**sepia フィルター** を画像に適用し、ビンテージな見た目にできます。
 
 ```markdown
 ![Sample Image](sample-image.jpg?cropZoom=300,200&sepia)
 ```
-
 
 ```twig
 {{ page.media['sample-image.jpg'].cropZoom(300,200).sepia.html()|raw }}
@@ -659,20 +608,16 @@ This applies a **sepia filter** on the image to produce a vintage look.
 
 #### gaussianBlur
 
-**blurs** the image by an Factor, that defines how often the blur filter is applied to the image. Default is 1 time.
-
-
+ファクターによって、画像を **ぼかします** 。画像にぼかしフィルターをどれくらいの頻度で適用するかを決定します。
+デフォルトは1回です。
 
 ```markdown
 ![Sample Image](sample-image.jpg?gaussianBlur=3)
 ```
 
-
 ```twig
 {{ page.media['sample-image.jpg'].gaussianBlur(3).html()|raw }}
 ```
-
-
 
 ##### Result:
 
@@ -681,20 +626,15 @@ This applies a **sepia filter** on the image to produce a vintage look.
 
 #### rotate
 
-**rotates** the image by `angle` degrees counterclockwise, negative values rotate clockwise.
-
-
+`angle` 度、半時計回りに画像を **回転させます** 。負の数の場合、時計回りに回転させます。
 
 ```markdown
 ![Sample Image](sample-image.jpg?cropZoom=300,200&rotate=-90)
 ```
 
-
 ```twig
 {{ page.media['sample-image.jpg'].cropZoom(300,200).rotate(-90).html()|raw }}
 ```
-
-
 
 ##### Result:
 
@@ -703,20 +643,17 @@ This applies a **sepia filter** on the image to produce a vintage look.
 
 #### flip
 
-**flips** the image in the given directions. Both params can be `0|1`.  Both `0` is equivalent to no flipping in either direction.
-
-
+与えられた方向に画像を **反転させます** 。  
+両方のパラメータに `0|1` が使えます。  
+`0` は、反転しないことを意味します。
 
 ```markdown
 ![Sample Image](sample-image.jpg?cropZoom=300,200&flip=0,1)
 ```
 
-
 ```twig
 {{ page.media['sample-image.jpg'].cropZoom(300,200).flip(0,1).html()|raw }}
 ```
-
-
 
 ##### Result:
 
@@ -725,40 +662,34 @@ This applies a **sepia filter** on the image to produce a vintage look.
 
 #### fixOrientation
 
-Fixes the orientation of the image when rotation is made via EXIF data (applies to jpeg images taken with phones and cameras).
-
-
+画像の回転が、 EXIF データ（ケータイやデジカメで撮影した jpeg 画像に適用されることがあるもの）で定義されている場合に、画像の向きを固定します。
 
 ```markdown
 ![Sample Image](sample-image.jpg?fixOrientation)
 ```
 
-
 ```twig
 {{ page.media['sample-image.jpg'].fixOrientation().html()|raw }}
 ```
 
-
-
 #### watermark
 
-The **watermark action** merges two images, a watermark image and a source image, into a final watermarked image. This is a very specific action that needs a more detailed description than other actions or filters. In particular, the specific behavior when [combining filters](#combinations) must be taken into account. For those interested, there is a very detailed [blog post about the watermark action](https://www.grav.cz/blog/vodoznak-aneb-nepokrades-kelisova), written by [Vít Petira](https://github.com/petira), but only in Czech. However, the instructions are easy to understand.
+**watermark アクション** は、ウォーターマーク画像と、ソース画像の2つの画像を合体させ、最終的なウォーターマークされた画像にします。  
+このアクションは、他のアクションやフィルタよりも詳細な指定が必要な、とても特別なアクションです。  
+特に、 [フィルターを掛け合わせる](#combinations) 時の特別な挙動は、注意しなければいけません。  
+興味のある方向けに、とても詳細な [ウォーターマークアクションに関するブログポスト](https://www.grav.cz/blog/vodoznak-aneb-nepokrades-kelisova) が、 [Vit Petira](https://github.com/petira) によって書かれています。ただし、チェコ語のみです。  
+しかし、解説は理解しやすいです。
 
 > [!Note]  
-> If you are using a page-level [stream](/content/image-linking#php-streams), then page prefixes must also be specified.
-
-
+> ページレベルの [ストリーム](../06.image-linking/#php-streams) を利用している場合、ページのプレフィックスも特定されなければいけません。
 
 ```markdown
 ![Sample Image](sample-image.jpg?watermark=user://pages/02.content/07.media/sample-watermark.png,top-left,50)
 ```
 
-
 ```twig
 {{ page.media['sample-image.jpg'].watermark('user://pages/02.content/07.media/sample-watermark.png','top-left',50).html()|raw }}
 ```
-
-
 
 ##### Result:
 
@@ -767,16 +698,14 @@ The **watermark action** merges two images, a watermark image and a source image
 
 #### loading
 
-The loading attributing on images gives authors control over when the browser should start loading the resource. The value for the loading attribute can be one of `auto` (default), `lazy`, `eager`.
-Value can be set in `system.images.defaults.loading` as default value, or per md image with `?loading=lazy`
-When value `auto` is chosen, no `loading` attribute is added and browser will determine which strategy to use.
-
-
+画像へ loading 属性を付加することで、ブラウザがそのリソースをいつ読み込み始めるべきか、著者が制御できるようになります。  
+loading 属性の値は、 `auto` (デフォルト), `lazy`, `eager` です。  
+この値は、 `system.images.defaults.loading` にデフォルト値として設定でき、各マークダウンでは、画像に対して `?loading=lazy` のようにして設定します。  
+`auto` の値を選択した場合、 `loading` 属性は追加されません。ブラウザが、どちらの方法で読み込むかを決定します。
 
 ```markdown
 ![Sample Image](sample-image.jpg?loading=lazy)
 ```
-
 
 ```twig
 {# Using default value as defined in 'config.system.images.defaults.loading' #}
@@ -786,25 +715,20 @@ When value `auto` is chosen, no `loading` attribute is added and browser will de
 {{ page.media['sample-image.jpg'].loading('lazy').html('Sample Image')|raw }}
 ```
 
-
 ```html
 <img loading="lazy" title="Sample Image"  src="/images/e/f/1/0/5/ef10554cd3a99f2e65136e79dce170d4f8a7a1b9-sample-image.jpg" />
 ```
 
-
-
 #### decoding
 
-The decoding attributing on images gives authors control over when the browser should start decoding the resource. The value for the decoding attribute can be one of `auto` (default), `sync`, `async`.
-Value can be set in `system.images.defaults.decoding` as default value, or per md image with `?decoding=async`
-When value `auto` is chosen, no `decoding` attribute is added and browser will determine which strategy to use.
-
-
+画像の decoding 属性によりブラウザがリソースをいつデコードし始めるべきか、著者が制御できるようになります。 
+decoding 属性の値は、 `auto` (デフォルト), `sync`, `async` です。
+デフォルト値は、 `system.images.defaults.decoding` に設定でき、マークダウンごとには、画像に `?decoding=async` により設定できます。  
+`auto` を選んだ場合は、 `decoding` 属性は追加されません。ブラウザが、どちらの読み込み方針を取るか決定します。
 
 ```markdown
 ![Sample Image](sample-image.jpg?decoding=async)
 ```
-
 
 ```twig
 {# Using default value as defined in `config.system.images.defaults.decoding` #}
@@ -814,25 +738,20 @@ When value `auto` is chosen, no `decoding` attribute is added and browser will d
 {{ page.media['sample-image.jpg'].decoding('async').html('Sample Image')|raw }}
 ```
 
-
 ```html
 <img decoding="async" title="Sample Image"  src="/images/e/f/1/0/5/ef10554cd3a99f2e65136e79dce170d4f8a7a1b9-sample-image.jpg" />
 ```
 
-
-
 #### fetchpriority
 
-The fetchpriority attributing gives authors control over when the browser should prioritize the fetch of the image relative to other images. The value for the fetchpriority attribute can be one of `auto` (default), `high`, `low`.
-Value can be set in `system.images.defaults.fetchpriority` as default value, or per md image with `?fetchpriority=high`
-When value `auto` is chosen, no `fetchpriority` attribute is added and browser will determine which strategy to use.
-
-
+fetchpriority 属性により、著者は次のようなことが制御できます。ブラウザが、他の画像と比べて、画像の読み込み順序をどう優先付けるかの制御です。  
+fetchpriority 属性の値は、 `auto` (デフォルト), `hight`, `low` 。
+デフォルト値は、 `system.images.defaults.fetchpriority` に設定するか、マークダウンごとに画像に `?fetchpriority=high` のように設定できます。
+`auto` を選んだ場合、 `fetchpriority` 属性は追加されず、どちらの方針で行くかはブラウザが決めます。
 
 ```markdown
 ![Sample Image](sample-image.jpg?fetchpriority=high)
 ```
-
 
 ```twig
 {# Using default value as defined in `config.system.images.defaults.fetchpriority` #}
@@ -842,61 +761,58 @@ When value `auto` is chosen, no `fetchpriority` attribute is added and browser w
 {{ page.media['sample-image.jpg'].fetchpriority('high').html('Sample Image')|raw }}
 ```
 
-
 ```html
 <img fetchpriority="high" title="Sample Image"  src="/images/e/f/1/0/5/ef10554cd3a99f2e65136e79dce170d4f8a7a1b9-sample-image.jpg" />
 ```
 
+<h2 id="animated-vectorized-actions">アニメーション/ベクトルファイルのアクション</h2>
 
+<h4 id="resize-1">resize</h4>
 
-## Animated / Vectorized Actions
-
-#### resize
-
-Because PHP cannot handle dynamically resizing these types of media, the resize action will only make sure that a `width` and `height` or `data-width` and `data-height` attribute are set on your `<img>`/`<video>` or `<a>` tag respectively. This means your image or video will be displayed in the requested size, but the actual image or video file will not be converted in any way.
-
-
+PHP は、これらのメディアタイプを動的にリサイズできないため、 resize アクションは、 `<img>`/`<video>` もしくは `<a>` の各タグに、 `width` と `height` もしくは `data-width` と `data-height` 属性を設定するだけです。  
+これはつまり、画像や動画は、リクエストされたサイズで表示されますが、実質的には画像や動画が変換されているわけではないということです。
 
 ```markdown
 ![Sample Trailer](sample-trailer.mov?resize=400,200)
 ```
-
 
 ```twig
 {{ page.media['sample-trailer.mov'].resize(400, 200).html('Sample Trailer')|raw }}
 ```
 
-
 ```html
 {{ page.media['sample-trailer.mov'].resize(400, 200).html('Sample Trailer')|e }}
 ```
 
-
-
-
 #### examples
 
-Some examples of this:
+この具体例を、いくつか示します：
 
+ベクトル画像:
 
 ```markdown
 ![Sample Vector](sample-vector.svg?resize=300,300)
 ```
 
+アニメーション Gif:
+
 ```markdown
 ![Animated Gif](sample-animated.gif?resize=300,300)
 ```
 
+動画:
+
 ```markdown
 ![Sample Trailer](sample-trailer.mov?resize=400,200)
 ```
+
 > [!訳注]  
 > 事例は、[翻訳元](https://learn.getgrav.org/content/media#animated-vectorized-actions) で確認してください
 
 
 <h2 id="audio-actions">オーディオのアクション</h2>
 
-Audio media will display an HTML5 audio link:
+オーディオメディアは、 HTML5 audio タグのリンクを表示します：
 
 ```markdown
 ![Hal 9000: I'm Sorry Dave](hal9000.mp3)
@@ -906,8 +822,6 @@ Audio media will display an HTML5 audio link:
 {{ page.media['hal9000.mp3'].html()|raw }}
 ```
 
-
-
 ##### Result:
 
 > [!訳注]  
@@ -915,162 +829,128 @@ Audio media will display an HTML5 audio link:
 
 #### controls
 
-Allows explicitly setting or removing the HTML5 default controls. Passing `0` hides browser's controls for playback, volume, etc..
-
-
+明示的に、 HTML5 のデフォルトコントローラーを設定したり取り除いたりできます。  
+`0` を渡すと、ブラウザのコントローラー（プレイバック、ボリューム、その他）を隠します。
 
 ```markdown
 ![Hal 9000: I'm Sorry Dave](hal9000.mp3?controls=0)
 ```
 
-
 ```twig
 {{ page.media['hal9000.mp3'].controls(0)|raw }}
 ```
-
 
 ```html
 {{ page.media['hal9000.mp3'].controls(0)|e }}
 ```
 
-
-
 #### preload
 
-Allows setting of `preload` property, which defaults to `auto`. Permitted params are `auto`, `metadata`, and `none`.
+`preload` プロパティを設定できます。これは、デフォルトで `auto` です。  
+使用できるパラメータは、 `auto`, `metadata` そして `none` です。
 
 > [!Info]  
-> <q cite="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio#attr-preload">If not set, its default value is browser-defined (i.e. each browser may have its own default value). The spec advises it to be set to <code>metadata</code>.</q>
+> <q cite="https://developer.mozilla.org/ja/docs/Web/HTML/Reference/Elements/audio#preload">既定値はブラウザーによって異なります。仕様書では <code>metadata</code> にするよう助言しています。</q>
 
 > [!Info]  
-> The `preload` attribute is ignored if `autoplay` is present.
-
-
+> `autoplay` が指定されている場合、 `preload` 属性は無視されます。
 
 ```markdown
 ![Hal 9000: I'm Sorry Dave](hal9000.mp3?preload=metadata)
 ```
 
-
 ```twig
 {{ page.media['hal9000.mp3'].preload('metadata')|raw }}
 ```
 
-
-
 #### autoplay
 
-Allows setting whether audio will `autoplay` upon page load. Defaults to `false` by omission if not set.
+オーディオがページが読み込まれたら `autoplay` するかどうかを設定できます。  
+設定されていなければ、デフォルトは `false` です。
 
 > [!Info]  
-> If `autoplay` and `preload` are both present on a given `audio` element, `preload` will be ignored.
-
-
+> ひとつの `audio` 要素に `autoplay` と `preload` が両方指定された場合、 `preload` が無視されます。
 
 ```markdown
 ![Hal 9000: I'm Sorry Dave](hal9000.mp3?autoplay=1)
 ```
 
-
 ```twig
 {{ page.media['hal9000.mp3'].autoplay(1)|raw }}
 ```
 
-
-
-
 #### controlsList
 
-Allows setting of `controlsList` property, which takes one or more of three possible values: `nodownload`, `nofullscreen`, and `noremoteplayback`.
+`controlsList` プロパティを設定できます。3つの値が利用できます： `nodownload`, `nofullscreen`, そして `noremoteplayback` 。
 
 > [!Info]  
-> If setting more than one parameter in markdown, separate each with a dash (`-`). These will be replaced by spaces in the output HTML.
-
-
+> マークダウンで1つ以上のパラメータが設定する場合、各パラメータをダッシュ記号 (`-`) で分けてください。出力 HTML では、スペースに置き換わります。
 
 ```markdown
 ![Hal 9000: I'm Sorry Dave](hal9000.mp3?controlsList=nodownload-nofullscreen-noremoteplayback)
 ```
 
-
 ```twig
 {{ page.media['hal9000.mp3'].controlsList('nodownload nofullscreen noremoteplayback')|raw }}
 ```
 
-
-
 #### muted
 
-Allows setting whether audio is `muted` on load. Defaults to `false` by omission if not set.
-
-
+オーディオが読み込み時 `muted` になるかどうか設定できます。  
+設定されなければ、デフォルトでは `false` です。
 
 ```markdown
 ![Hal 9000: I'm Sorry Dave](hal9000.mp3?muted=1)
 ```
 
-
 ```twig
 {{ page.media['hal9000.mp3'].muted(1)|raw }}
 ```
 
-
-
 #### loop
 
-Allows setting whether audio will `loop` upon playing through completion. Defaults to `false` by omission if not set.
-
-
+オーディオの再生が完了した後に、 `loop` するかどうか設定できます。  
+設定されなければ、デフォルトでは `false` です。
 
 ```markdown
 ![Hal 9000: I'm Sorry Dave](hal9000.mp3?loop=1)
 ```
 
-
 ```twig
 {{ page.media['hal9000.mp3'].loop(1)|raw }}
 ```
 
+<h2 id="file-actions">ファイルのアクション</h2>
 
-
-## File Actions
-
-Grav does not provide any custom actions on files at this point in time and there are no plans to add any. Should you think of something, please contact us.
-
-
+現時点で、 Grav はファイルにカスタムアクションを提供していませんし、今後も追加予定はありません。  
+何か考えがある方は、私たちにコンタクトを取ってください。
 
 ```markdown
 [View Text File](acronyms.txt)
 ```
 
-
 ```twig
 <a href="{{ page.media['acronyms.txt'].url()|raw }}">View Text File</a>
 ```
-
-
 
 ##### Result:
 
 > [!訳注]  
 > 削除しているため、[翻訳元](https://learn.getgrav.org/content/media#file-actions) で確認してください
 
-### Combinations
+<h3 id="combinations">組み合わせ</h3>
 
-As you can see: Grav provides some powerful image manipulation functionality that makes it really easy to work with images!  The real power comes when you combine multiple effects and produce some very sophisticated dynamic image manipulations.  For example, this is totally valid:
-
-
+ここまで見てきた通り： Grav は、いくつかの強力な画像処理機能を提供しており、その機能は画像を扱うのを本当に簡単にしてくれます！  
+本当の力は、複数のエフェクトを組み合わせ、とても洗練された動的画像処理を作成したときに現れます。  
+たとえば、以下は完全に妥当な処理です：
 
 ```markdown
 ![Sample Image](sample-image.jpg?negate&lightbox&cropZoom=200,200)
 ```
 
-
 ```twig
 {{ page.media['sample-image.jpg'].negate.lightbox.cropZoom(200,200)|raw }}
 ```
-
-
 
 ##### Result:
 
@@ -1092,7 +972,7 @@ To combat this, you can reset the actions on the images by passing `false` to th
 {% endfor %}
 ```
 
-### Responsive images
+<h3 id="responsive-images">レスポンシブ画像</h3>
 
 #### Higher density displays
 
@@ -1246,8 +1126,8 @@ The options are as follows:
 
 | 属性   | 説明      |
 | :-----      | :-----   |
-| autoplay    | Enables (`1`) or Disables (`0`) autoplay for the video on pageload.  |
-| controls    | Enables (`1`) or Disables (`0`) media controls for the embedded video. |
-| loop        | Enables (`1`) or Disables (`0`) automatic looping for the video, replaying it as it ends. |
+| autoplay    | 有効化 (`1`)  無効化 (`0`) autoplay for the video on pageload.  |
+| controls    | 有効化 (`1`)  無効化 (`0`) media controls for the embedded video. |
+| loop        | 有効化 (`1`)  無効化 (`0`) automatic looping for the video, replaying it as it ends. |
 | muted       | Mute video and generally allow it to autoplay.  |
 
