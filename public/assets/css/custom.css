@@ -13,6 +13,7 @@ pre {
 
 main {
     word-break: break-all;
+    line-height:1.7;
 }
 
 .learn-grav-chapter h1 {
