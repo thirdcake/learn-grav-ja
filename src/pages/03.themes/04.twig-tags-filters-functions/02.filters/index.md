@@ -1,44 +1,48 @@
 ---
 title: カスタムフィルタ
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-04-18'
+lastmod: '2025-08-03'
+description: 'Grav で独自に追加した Twig のカスタムフィルタについて解説します。'
 ---
+
 > [!訳注]  
-> このページの内容は、Twigのフィルタを動的に実行している部分があり、静的サイトでは再現できません。実行結果は、[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)をご確認ください。
+> このページの内容は、 Twig のフィルタを動的に実行している部分があり、静的サイトでは再現できません。実行結果は、 [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters) をご確認ください。
 
-Twigのフィルタは、`|` という文字と、それに続くフィルタ名を使って、Twig変数に適用されます。Twig関数と同じように、カッコを使って引数を渡すことができます。
+Twig のフィルタは、 `|` という文字と、それに続くフィルタ名を使って、 Twig 変数に適用されます。  
+Twig 関数と同じように、カッコを使って引数を渡すことができます。
 
-### `absolute_url`
+<h3 id="absolute-url"><code>absolute_url</code></h3>
 
-相対パスを使った `src` 属性や `href` 属性を持つHTML部分に使われます。相対パスを、ホスト名を含む絶対URL表記の文字列に変換します。
+相対パスを使った `src` 属性や `href` 属性を持つ HTML 部分に使われます。  
+相対パスを、ホスト名を含む絶対 URL 表記の文字列に変換します。
 
-`'<img src="/some/path/to/image.jpg" />'|absolute_url` -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
+`'<img src="/some/path/to/image.jpg" />'|absolute_url` -&gt; （結果は [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters#absolute-url) へ）
 
-### `array_unique`
+<h3 id="array-unique"><code>array_unique</code></h3>
 
-PHPの `array_unique()` 関数と同様のもので、配列から重複するものを取り除きます。
+PHP の `array_unique()` 関数と同様のもので、配列から重複するものを取り除きます。
 
-`['foo', 'bar', 'foo', 'baz']|array_unique`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
+`['foo', 'bar', 'foo', 'baz']|array_unique`  -&gt; （結果は [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters#array-unique) へ）
 
-### `base32_encode`
+<h3 id="base32-encode"><code>base32_encode</code></h3>
 
 変数をbase32エンコードします。
 
-`'some variable here'|base32_encode`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
+`'some variable here'|base32_encode`  -&gt; （結果は [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters#base32-encode) へ）
 
-### `base32_decode`
+<h3 id="base32-decode"><code>base32_decode</code></h3>
 
 変数をbase32デコードします。
 
-`'ONXW2ZJAOZQXE2LBMJWGKIDIMVZGK'|base32_decode`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
+`'ONXW2ZJAOZQXE2LBMJWGKIDIMVZGK'|base32_decode`  -&gt; （結果は [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters#base32-decode) へ）
 
-### `base64_encode`
+<h3 id="base64-encode"><code>base64_encode</code></h3>
 
 変数をbase64エンコードします。
 
 `'some variable here'|base64_encode`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
-### `base64_decode`
+<h3 id="base64-decode"><code>base64_decode</code></h3>
 
 変数をbase64デコードします。
 
@@ -56,7 +60,7 @@ PHPの `array_unique()` 関数と同様のもので、配列から重複する�
 
 `'send_email'|camelize`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
-### `chunk_split`
+<h3 id="chunk-split"><code>chunk_split</code></h3>
 
 文字列をあるサイズで小さく区切ります。
 
@@ -107,7 +111,7 @@ PHP7から、型チェックが厳しくなりました。これにより、間�
 `'/etc/sudoers.d'|dirname`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
 
-### `ends_with`
+<h3 id="ends-with"><code>ends_with</code></h3>
 
 ニードルとヘイスタックを使って、ヘイスタックがニードルで終わっているか判断します。また、ニードルを配列で渡し、ヘイスタックがいずれかのニードルで終わっていれば `true` を返します。
 
@@ -120,7 +124,7 @@ PHP7から、型チェックが厳しくなりました。これにより、間�
 `'field.name'|fieldName`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
 
-### `get_type`
+<h3 id="get-type"><code>get_type</code></h3>
 
 変数の型を返します。
 
@@ -138,7 +142,7 @@ PHP7から、型チェックが厳しくなりました。これにより、間�
 
 `'Something Text to Read'|hyphenize`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
-### `json_decode`
+<h3 id="json-decode"><code>json_decode</code></h3>
 
 JSONをデコードします。
 
@@ -240,7 +244,7 @@ cronの構文を人間にとって読みやすい出力にします。
 第2引数に `false` を渡すと、相対的な時間の記述（'ago' や 'from now' など）が結果から取り除かれます。
 
 
-### `of_type`
+<h3 id="of-type"><code>of_type</code></h3>
 
 引数の型かどうかチェックします：
 
@@ -271,7 +275,7 @@ pad は、ある長さにするために他の文字で埋めます。これは�
 <p>We have {{ num_vacancies }} {{ 'vacancy'|pluralize(num_vacancies) }} right now.</p>
 ```
 
-### `print_r`
+<h3 id="print-r"><code>print_r</code></h3>
 
 人間に読みやすい形式で変数を表示します。
 
@@ -292,7 +296,7 @@ pad は、ある長さにするために他の文字で埋めます。これは�
 
 （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
-### `regex_replace`
+<h3 id="regex-replace"><code>regex_replace</code></h3>
 
 PHPの [`preg_replace`](https://www.php.net/manual/ja/function.preg-replace.php) 関数と同じ機能です。このフィルタを使えば、複雑な正規表現の書き換えができます：
 
@@ -313,7 +317,7 @@ PHPの [`preg_replace`](https://www.php.net/manual/ja/function.preg-replace.php)
 
 `'shoes'|singularize`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
-### `safe_email`
+<h3 id="safe-email"><code>safe_email</code></h3>
 
 eメールアドレスをASCII文字に変換します。Eメールスパムボットに認識されづらくします。
 
@@ -329,7 +333,7 @@ mailto リンクの例です：
 
 最初に見たときは、違いが分からないかもしれませんが、ページソース（ブラウザのディベロッパーツールではなく、実際のページソース）を確かめてください。文字列がエンコードされています。
 
-### `sort_by_key`
+<h3 id="sort-by-key"><code>sort_by_key</code></h3>
 
 配列を特定のキーでソートします。
 
@@ -342,7 +346,7 @@ mailto リンクの例です：
 
 （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
-### `starts_with`
+<h3 id="starts-with"><code>starts_with</code></h3>
 
 ニードルとヘイスタックを使って、ヘイスタックがニードルで始まるか調べます。ニードルが配列の場合、ヘイスタックがニードルの **いずれか** で始まるとき、`true` を返します。
 
@@ -406,18 +410,18 @@ trancateは、5文字の後の単語の終わりで、一番近いところで�
 
 <h4 id="specialized-versions">特別なバージョン：</h4>
 
-### `safe_truncate`
+<h3 id="safe-truncate"><code>safe_truncate</code></h3>
 
 `|safe_truncate` を使うと、 "word-safe" な方法で、テキストを文字数で切り捨てます。
 
 > [!訳注]  
 > ここでの"word-safe" が何を指すのか分からないのですが、たぶんマルチバイト文字列のことかなと思います。
 
-### `truncate_html`
+<h3 id="truncate-html"><code>truncate_html</code></h3>
 
 `|truncate_html` を使うと、HTMLを文字数で切り捨てます。"word-safe" ではありません！
 
-### `safe_truncate_html`
+<h3 id="safe-truncate-html"><code>safe_truncate_html</code></h3>
 
 `|safe_truncate_html` を使うと、 "word-safe" な方法で、HTMlを文字数で切り捨てます。
 
@@ -427,7 +431,7 @@ trancateは、5文字の後の単語の終わりで、一番近いところで�
 
 `'CamelCased'|underscorize`  -&gt; （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
-### `yaml_encode`
+<h3 id="yaml-encode"><code>yaml_encode</code></h3>
 
 変数をYAML構文に出力します。
 
@@ -438,7 +442,7 @@ trancateは、5文字の後の単語の終わりで、一番近いところで�
 
 （結果は[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters)へ）
 
-### `yaml_decode`
+<h3 id="yaml-decode"><code>yaml_decode</code></h3>
 
 YAML構文から変数にデコード・パースします。
 
