@@ -1,9 +1,12 @@
 ---
 title: 具体例：プラグインのブループリント
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-04-27'
+lastmod: '2025-08-04'
+description: 'Grav のプラグインで利用されるブループリントの例を示し、各プロパティの概要を解説します。'
 ---
-プラグインのブループリントは、そのプラグインがどのようなものかをGravに知らせます。ソースや、サポート、作成者などの情報から、依存関係、管理パネルで使うフォームの設定まで知らせます。
+
+プラグインのブループリントは、そのプラグインがどのようなものかを Grav に知らせます。  
+ソースや、サポート、作成者などの情報のほか、依存関係、管理パネルで使うフォームの設定なども知らせます。
 
 具体例として、次のようなプラグインのブループリントを使います：
 
@@ -30,8 +33,8 @@ dependencies:
   - { name: email, version: '~2.0' }
 ```
 
-
-There are different properties that you can use to give your resource an identity. Some are **required**, others are _optional_.
+リソースの識別に使える異なるプロパティがあります。  
+いくつかは **必須** で、それ以外は _オプション_ です。
 
 | プロパティ         | 説明  |
 | :-----           | :-----  |
@@ -55,7 +58,10 @@ There are different properties that you can use to give your resource an identit
 | _dependencies_   | _（オプション）_ リソースの依存関係のリストです。デフォルトの処理では、 GPM を使ってインストールしますが、GIT リポジトリの URL をオプションで設定すると、リポジトリから直接インストールすることもできます。また、配列を使うときは、 [Composerスタイルのパッケージバージョン](https://getcomposer.org/doc/articles/versions.md) を使用して、名前とバージョンを明示的に定義することができます。 |
 | _gpm_            | _（オプション）_ GPM からアップデートするかどうかです。 `false` とすると、non-GPM リソースとして、GPM アップデートできません |
 
-以下は、 [GitHub plugin](https://github.com/getgrav/grav-plugin-github) のブループリントのアイデンティティ部分の例です：
+> [!Info]  
+> dependencies では、プラグインやテーマの `blueprints.yaml` にある `slug` プロパティで定義された名前を使わなければいけないことに注意してください。
+
+以下は、 [GitHub plugin](https://github.com/getgrav/grav-plugin-github) のブループリントの識別子部分の例です：
 
 ```yaml
 name: GitHub

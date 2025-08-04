@@ -6,9 +6,9 @@ description: 'Grav で独自に追加した Twig のカスタム関数につい�
 ---
 
 > [!訳注]  
-> このページの内容は、Twigの関数を動的に実行している部分があり、静的サイトでは再現できません。実行結果は、[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions)をご確認ください。
+> このページの内容は、 Twig の関数を動的に実行している部分があり、静的サイトでは再現できません。実行結果は、[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions)をご確認ください。
 
-Twig関数は、カッコ内にパラメータを渡して、ダイレクトに呼び出せます。
+Twig 関数は、カッコ内にパラメータを渡して、ダイレクトに呼び出せます。
 
 ### `array`
 
@@ -38,7 +38,8 @@ Twig関数は、カッコ内にパラメータを渡して、ダイレクトに�
 
 ### `array_key_exists`
 
-PHPの `array_key_exists` 関数と同じです。配列にキーが存在するかどうかを判断します
+PHPの `array_key_exists` 関数と同じです。  
+配列にキーが存在するかどうかを判断します
 
 ```twig
 {% set my_array = {fruit: 'apple', meat: 'steak'} %}
@@ -75,7 +76,7 @@ PHPの `array_unique` 関数と同じです。配列から重複を除きます�
 
 ### `cron`
 
-cronの構文から、"Cron" オブジェクトを作ります
+cron の構文から、 "Cron" オブジェクトを作ります
 
 `cron("3 * * * *").getNextRunDate()|date(config.date_format.default)`
 
@@ -83,7 +84,8 @@ cronの構文から、"Cron" オブジェクトを作ります
 
 ### `dump`
 
-Twig変数を渡すと、[Gravデバッグパネル](../../../08.advanced/03.debugging/) に出力します。デバッガは、**enabled** になっていなければいけません。
+Twig 変数を渡すと、 [Grav デバッグパネル](../../../08.advanced/03.debugging/) に出力します。  
+デバッガは、**enabled** になっていなければいけません。
 
 `dump(page.header)`
 
@@ -93,19 +95,21 @@ Twig変数を渡すと、[Gravデバッグパネル](../../../08.advanced/03.deb
 
 ### `evaluate`
 
-文字列をTwigとして評価します。
+文字列を Twigとして評価します。
 
 `evaluate('grav.language.getLanguage')`
 
 ### `evaluate_twig`
 
-evaluateに似ていますが、Twigとして評価した後に処理します。
+evaluate に似ていますが、 Twig として評価した後に処理します。
 
 `evaluate_twig('This is a twig variable: {{ foo }}', {foo: 'bar'})`  
 
 ### `exif`
 
-filepathで渡した画像から、EXIFデータを出力します。これを実行するには、`system.yaml` で `media: auto_metadata_exif: true` が設定されている必要があります。たとえば、Twigテンプレート上で以下のようにします：
+filepath で渡した画像から、 EXIF データを出力します。  
+これを実行するには、 `system.yaml` で `media: auto_metadata_exif: true` が設定されている必要があります。  
+たとえば、 Twig テンプレート上で以下のようにします：
 
 ```twig
 {% set image = page.media['sample-image.jpg'] %}
@@ -113,11 +117,13 @@ filepathで渡した画像から、EXIFデータを出力します。これを�
 {{ exif.MaxApertureValue }}
 ```
 
-これは、`MaxApertureValue` が出力されます。これはカメラに設定されている値で、たとえば"40/10"です。いつでも`{{ dump(exif) }}` を使うことで、デバッガ利用できるデータはすべて見られます。
+これは、 `MaxApertureValue` が出力されます。  
+これはカメラに設定されている値で、たとえば "40/10" です。  
+いつでも `{{ dump(exif) }}` を使うことで、デバッガ利用できるデータはすべて見られます。
 
 ### `get_cookie`
 
-cookieを取得します：
+cookie を取得します：
 
 `get_cookie('your_cookie_key')`
 
@@ -160,7 +166,9 @@ title: Home
 
 ### `http_response_code`
 
-レスポンスコードを渡すと、そのステータスコードを返します。渡さない場合、現在のステータスコードが返ります。webサーバ環境では、両方とも、デフォルトは200です。
+レスポンスコードを渡すと、そのステータスコードを返します。  
+渡さない場合、現在のステータスコードが返ります。  
+web サーバ環境では、両方とも、デフォルトは 200 です。
 
 `http_response_code(404)`
 
@@ -171,13 +179,14 @@ title: Home
 
 ### `json_decode`
 
-JSONがシンプルにデコードできます：
+JSON がシンプルにデコードできます：
 
 `json_decode({"first_name": "Guido", "last_name":"Rossum"})`
 
 ### `media_directory`
 
-任意のディエク鳥から、メディアオブジェクトを返します。一度取得すれば、ページと似た方法で画像を操作できます。
+任意のディレクトリから、メディアオブジェクトを返します。  
+一度取得すれば、ページと似た方法で画像を操作できます。
 
 `media_directory('theme://images')['some-image.jpg'].cropResize(200,200).html`
 
@@ -228,13 +237,15 @@ JSONがシンプルにデコードできます：
 
 ### `random_string`
 
-渡された文字数分の、ランダムな文字列を生成します。ユニークなIDを作りたいときに便利です。
+渡された文字数分の、ランダムな文字列を生成します。  
+ユニークな ID を作りたいときに便利です。
 
 `random_string(10)` 
 
 ### `unique_id`
 
-接頭辞や接尾辞付きで、文字数分のランダムな文字列を作ります。PHP組み込みの `uniqid` 関数や、`random_string` カスタム関数と違い、この文字列は真にユニークで、コンフリクトしません。
+接頭辞や接尾辞付きで、文字数分のランダムな文字列を作ります。  
+PHP 組み込みの `uniqid` 関数や、`random_string` カスタム関数と違い、この文字列は真にユニークで、コンフリクトしません。
 
 
 `unique_id(9)`  
@@ -243,7 +254,8 @@ JSONがシンプルにデコードできます：
 
 ### `range`
 
-範囲内の要素を持つ配列を生成します。要素間の差も決められます
+範囲内の要素を持つ配列を生成します。  
+要素間の差も決められます
 
 `range(25, 300, 50)` 
 
@@ -281,13 +293,13 @@ PHPの [`preg_replace`](https://www.php.net/manual/ja/function.preg-replace.php)
 
 ### `regex_match`
 
-PHPの [`preg_match`](https://www.php.net/manual/ja/function.preg-match.php) 関数のように、複雑な正規表現にマッチするか調べられます。
+PHP の [`preg_match`](https://www.php.net/manual/ja/function.preg-match.php) 関数のように、複雑な正規表現にマッチするか調べられます。
 
 `regex_match('http://www.php.net/index.html', '@^(?:http://)?([^/]+)@i')`
 
 ### `regex_split`
 
-PHPの [`preg_split`](https://www.php.net/manual/ja/function.preg-split.php) 関数のように、正規表現で文字列を分割できます。
+PHP の [`preg_split`](https://www.php.net/manual/ja/function.preg-split.php) 関数のように、正規表現で文字列を分割できます。
 
 `regex_split('hypertext language, programming', '/\\s*,\\s*/u')`
 
@@ -299,7 +311,7 @@ PHPの [`preg_split`](https://www.php.net/manual/ja/function.preg-split.php) 関
 
 ### `string`
 
-値から文字列を返します。配列が渡されると、JSONにエンコードしたものが返ります
+値から文字列を返します。配列が渡されると、 JSON にエンコードしたものが返ります
 
 `string(23)` => **"23"**
 
@@ -307,7 +319,9 @@ PHPの [`preg_split`](https://www.php.net/manual/ja/function.preg-split.php) 関
 
 ### `svg_image`
 
-必要なクラスを付けて、SVG画像を返します。ページに直接コードを書くことなく、インラインのSVGの利益が得られます。ソーシャルメディアアイコンのような、再利用可能な画像のとき便利です。
+必要なクラスを付けて、 SVG 画像を返します。  
+ページに直接コードを書くことなく、インラインの SVG の利益が得られます。  
+ソーシャルメディアアイコンのような、再利用可能な画像のとき便利です。
 
 `{{ svg_image(path, classes, strip_style) }}`
 
@@ -322,11 +336,14 @@ PHPの [`preg_split`](https://www.php.net/manual/ja/function.preg-split.php) 関
 
 `theme_var($variable, $default = null, $page = null)`
 
-ページのフロントマターからテーマ変数を取得します。もし見つからない場合は、その親（先祖）や、テーマの設定ファイルや、デフォルト値が決められていればそれを取得します。
+ページのフロントマターからテーマ変数を取得します。  
+もし見つからない場合は、その親（先祖）や、テーマの設定ファイルや、デフォルト値が決められていればそれを取得します。
 
 `theme_var('grid-size')`
 
-上記の場合、まず`page.header.grid-size` を探します。無ければ、親フォルダのそれを探します。まだ見つからなければ、テーマの設定ファイルから、`theme.grid-size` を探します。
+上記の場合、まず `page.header.grid-size` を探します。  
+無ければ、親フォルダのそれを探します。  
+まだ見つからなければ、テーマの設定ファイルから、`theme.grid-size` を探します。
 
 見つからなかった時のための、デフォルト値を渡すこともできます：
 
@@ -345,13 +362,15 @@ PHPの [`preg_split`](https://www.php.net/manual/ja/function.preg-split.php) 関
 
 ### `tl`
 
-文字列を特定の言語に翻訳します。詳しくは、[multi-language documentation](../../02.content/11.multi-language/#complex-translations) を参照してください。
+文字列を特定の言語に翻訳します。  
+詳しくは、 [multi-language documentation](../../02.content/11.multi-language/#complex-translations) を参照してください。
 
 `tl('SIMPLE_TEXT', ['fr'])`
 
 ### `url`
 
-URLを作り、PHP URLストリームを適切なHTMLに変換します。URLとして解決できなかったときのため、デフォルト値を渡すこともできます。
+URL を作り、 PHP URL ストリームを適切な HTML に変換します。  
+URL として解決できなかったときのため、デフォルト値を渡すこともできます。
 
 `url('theme://images/logo.png')|default('http://www.placehold.it/150x100/f4f4f4')` 
 
