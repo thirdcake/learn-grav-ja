@@ -1,12 +1,12 @@
 ---
 title: カスタム関数
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-04-19'
+lastmod: '2025-08-05'
 description: 'Grav で独自に追加した Twig のカスタム関数について解説します。'
 ---
 
 > [!訳注]  
-> このページの内容は、 Twig の関数を動的に実行している部分があり、静的サイトでは再現できません。実行結果は、[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions)をご確認ください。
+> このページの内容は、 Twig の関数を動的に実行している部分があり、静的サイトでは再現できません。実行結果は、 [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions) をご確認ください。
 
 Twig 関数は、カッコ内にパラメータを渡して、ダイレクトに呼び出せます。
 
@@ -18,7 +18,7 @@ Twig 関数は、カッコ内にパラメータを渡して、ダイレクトに
 {% set value = array(value) %}
 ```
 
-### `array_diff`
+<h3 id="array-diff"><code>array_diff</code></h3>
 
 配列の差分を計算します。
 
@@ -26,7 +26,7 @@ Twig 関数は、カッコ内にパラメータを渡して、ダイレクトに
 {% set diff = array_diff(array1, array2...) %}
 ```
 
-### `array_key_value`
+<h3 id="array-key-value"><code>array_key_value</code></h3>
 
 キー/バリューのペアを配列に追加します。
 
@@ -36,9 +36,11 @@ Twig 関数は、カッコ内にパラメータを渡して、ダイレクトに
 {{ print_r(my_array)}}
 ```
 
-### `array_key_exists`
+出力： ( [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions#array-key-value) で確認してください。)
 
-PHPの `array_key_exists` 関数と同じです。  
+<h3 id="array-key-exists"><code>array_key_exists</code></h3>
+
+PHP の `array_key_exists` 関数と同じです。  
 配列にキーが存在するかどうかを判断します
 
 ```twig
@@ -46,9 +48,11 @@ PHPの `array_key_exists` 関数と同じです。
 {{ array_key_exists('meat', my_array) }}
 ```
 
-### `array_intersect`
+出力： ( [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions#array-key-exists) で確認してください。)
 
-2つの配列もしくはGrav collectionsの間の共通部分を調べます
+<h3 id="array-intersect"><code>array_intersect</code></h3>
+
+2つの配列もしくは Grav collections の間の共通部分を調べます
 
 ```twig
 {% set array_1 = {fruit: 'apple', meat: 'steak'} %}
@@ -56,21 +60,25 @@ PHPの `array_key_exists` 関数と同じです。
 {{ print_r(array_intersect(array_1, array_2)) }}
 ```
 
-### `array_unique`
+出力： ( [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions#array-intersect) で確認してください。)
 
-PHPの `array_unique` 関数と同じです。配列から重複を除きます。
+<h3 id="array-unique"><code>array_unique</code></h3>
 
-`array_unique(['foo', 'bar', 'foo', 'baz'])` 
+PHP の `array_unique` 関数と同じです。配列から重複を除きます。
+
+`array_unique(['foo', 'bar', 'foo', 'baz'])` -&gt; (結果は [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions#array-unique) で確認してください。)
 
 ### `authorize`
 
-そのリソースを見られるかどうか認証します。引数には、1つのstring型のパーミッション文字列か、複数のstring型のパーミッション文字列のみを要素に持つ配列を渡してください。
+そのリソースを見られるかどうか認証します。  
+引数には、1つの string 型のパーミッション文字列か、複数の string 型のパーミッション文字列のみを要素に持つ配列を渡してください。
 
 `authorize(['admin.statistics', 'admin.super'])`
 
-### `body_class`
+<h3 id="body-class"><code>body_class</code></h3>
 
-クラス名の配列を渡してください。`body_classes` に設定されていなければ、現在のテーマ設定にセットされているか調べます。
+クラス名の配列を渡してください。  
+`body_classes` に設定されていなければ、現在のテーマ設定にセットされているか調べます。
 
 `set body_classes = body_class(['header-fixed', 'header-animated', 'header-dark', 'header-transparent', 'sticky-footer'])`
 
@@ -79,8 +87,6 @@ PHPの `array_unique` 関数と同じです。配列から重複を除きます�
 cron の構文から、 "Cron" オブジェクトを作ります
 
 `cron("3 * * * *").getNextRunDate()|date(config.date_format.default)`
-
-
 
 ### `dump`
 
@@ -95,15 +101,15 @@ Twig 変数を渡すと、 [Grav デバッグパネル](../../../08.advanced/03.
 
 ### `evaluate`
 
-文字列を Twigとして評価します。
+文字列を Twig として評価します。
 
 `evaluate('grav.language.getLanguage')`
 
-### `evaluate_twig`
+<h3 id="evaluate-twig"><code>evaluate_twig</code></h3>
 
 evaluate に似ていますが、 Twig として評価した後に処理します。
 
-`evaluate_twig('This is a twig variable: {{ foo }}', {foo: 'bar'})`  
+`evaluate_twig('This is a twig variable: {{ foo }}', {foo: 'bar'})`  -&gt; (結果は [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions#evaluate-twig) で確認してください。)
 
 ### `exif`
 
@@ -121,25 +127,25 @@ filepath で渡した画像から、 EXIF データを出力します。
 これはカメラに設定されている値で、たとえば "40/10" です。  
 いつでも `{{ dump(exif) }}` を使うことで、デバッガ利用できるデータはすべて見られます。
 
-### `get_cookie`
+<h3 id="get-cookie"><code>get_cookie</code></h3>
 
 cookie を取得します：
 
 `get_cookie('your_cookie_key')`
 
-### `get_type`
+<h3 id="get-type"><code>get_type</code></h3>
 
 変数の型を取得します：
 
-`get_type(page)` 
+`get_type(page)` -&gt; (結果は [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions#get-type) で確認してください。)
 
 ### `gist`
 
-Takes a Github Gist ID and creates appropriate Gist embed code
+GitHub Gist ID を使って、適切な Gist 埋め込みコードを作成します
 
-`gist('bc448ff158df4bc56217')` 
+`gist('bc448ff158df4bc56217')` -&gt; (結果は [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions#gist) で確認してください。)
 
-### `header_var`
+<h3 id="header-var"><code>header_var</code></h3>
 
 `header_var($variable, $pages = null)`
 
@@ -149,12 +155,12 @@ Takes a Github Gist ID and creates appropriate Gist embed code
 > **NOTE:** Grav 1.7 から非推奨になりました。 `theme_var` を使ってください。
 
 > [!Note]  
-> The logic of finding the variable has changed, which might lead to unexptected results:  
-> - If an array of lookup pages is provided as second parameter, only the first page will be used.
-> - If `<variable>` is not defined in het header of the page, Grav will search for the variable in the tree of parents of the page.
-> - If still not found, Grav will search for the variable in the config file of the theme
+> 変数を探すロジックが変更され、期待しない結果になるかもしれません：
+> - 探すページの配列が第2引数に渡されたら、最初のページだけが使われます
+> - `<variable>` がページのフロントマターに定義されていなければ、 Grav はページの親のツリーで変数を探します
+> - それでも見つからなければ、 Grav はテーマの config ファイルの変数を探します
 
-Given frontmatter of
+次のようなフロントマターが与えられたとき：
 
 ```
 ---
@@ -162,9 +168,9 @@ title: Home
 ---
 ```
 
-`header_var('title')` 
+`header_var('title')` -&gt; (結果は [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions#header-var) で確認してください。)
 
-### `http_response_code`
+<h3 id="http-response-code"><code>http_response_code</code></h3>
 
 レスポンスコードを渡すと、そのステータスコードを返します。  
 渡さない場合、現在のステータスコードが返ります。  
@@ -177,13 +183,13 @@ web サーバ環境では、両方とも、デフォルトは 200 です。
 `HTTP_X_REQUESTED_WITH` ヘッダが設定されているかチェックします。 
 
 
-### `json_decode`
+<h3 id="json-decode"><code>json_decode</code></h3>
 
 JSON がシンプルにデコードできます：
 
 `json_decode({"first_name": "Guido", "last_name":"Rossum"})`
 
-### `media_directory`
+<h3 id="media-directory"><code>media_directory</code></h3>
 
 任意のディレクトリから、メディアオブジェクトを返します。  
 一度取得すれば、ページと似た方法で画像を操作できます。
@@ -194,31 +200,31 @@ JSON がシンプルにデコードできます：
 
 人間に読みやすいファイルサイズを出力します
 
-`nicefilesize(612394)` 
+`nicefilesize(612394)` -&gt; (結果は [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions#nicefilesize) で確認してください。)
 
 ### `nicenumber`
 
 人間に読みやすい数字を出力します
 
-`nicenumber(12430)` 
+`nicenumber(12430)` -&gt; (結果は [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions#nicenumber) で確認してください。)
 
 ### `nicetime`
 
 人間に読みやすいフォーマットの日付を返します
 
-`nicetime(page.date)` 
+`nicetime(page.date)` -&gt; (結果は [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions#nicetime) で確認してください。)
 
-### `nonce_field`
+<h3 id="nonce-field"><code>nonce_field</code></h3>
 
 `action` を渡すことで、フォームのセキュリティのための nonce フィールドを生成します：
 
-`nonce_field('action')` 
+`nonce_field('action')` -&gt; (結果は [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions#nonce-field) で確認してください。)
 
-### `of_type`
+<h3 id="of-type"><code>of_type</code></h3>
 
 変数の型をチェックします：
 
-`of_type(page, 'string')` 
+`of_type(page, 'string')` -&gt; (結果は [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions#of-type) で確認してください。)
 
 ### `pathinfo`
 
@@ -229,37 +235,42 @@ JSON がシンプルにデコードできます：
 {{ print_r(parts) }}
 ```
 
-### `print_r`
+出力： ( [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions#pathinfo) で確認してください。)
+
+<h3 id="print-r"><code>print_r</code></h3>
 
 読みやすい書式で、変数を表示します
 
 `print_r(page.header)`
 
-### `random_string`
+[翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions#print-r) で確認してください。
+
+<h3 id="random-string"><code>random_string</code></h3>
 
 渡された文字数分の、ランダムな文字列を生成します。  
 ユニークな ID を作りたいときに便利です。
 
-`random_string(10)` 
+`random_string(10)` -&gt; (結果は [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions#random-string) で確認してください。)
 
-### `unique_id`
+<h3 id="unique-id"><code>unique_id</code></h3>
 
 接頭辞や接尾辞付きで、文字数分のランダムな文字列を作ります。  
 PHP 組み込みの `uniqid` 関数や、`random_string` カスタム関数と違い、この文字列は真にユニークで、コンフリクトしません。
 
-
 `unique_id(9)`  
 `unique_id(11, { prefix: 'user_' })`  
-`unique_id(13, { suffix: '.json' })` 
+`unique_id(13, { suffix: '.json' })`  
+-&gt; (各結果は [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions#unique-id) で確認してください。)
 
 ### `range`
 
 範囲内の要素を持つ配列を生成します。  
 要素間の差も決められます
 
-`range(25, 300, 50)` 
+`range(25, 300, 50)` -&gt; (結果は [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions#range) で確認してください。)
 
-### `read_file`
+
+<h3 id="read-file"><code>read_file</code></h3>
 
 ファイルのパスをもとに、ファイルを読み込み、それを出力します。
 
@@ -271,44 +282,50 @@ PHP 組み込みの `uniqid` 関数や、`random_string` カスタム関数と�
 This **admin plugin** for [Grav](https://github.com/getgrav/grav) is an HTML user interface that provides a convenient way to configure Grav and easily create and modify pages...
 ```
 
-
-### `redirect_me`
+<h3 id="redirect-me"><code>redirect_me</code></h3>
 
 選んだURLにリダイレクトします
 
 `redirect_me('http://google.com', 304)`
 
-### `regex_filter`
+<h3 id="regex-filter"><code>regex_filter</code></h3>
 
-PHPの `preg_grep` 関数のように、正規表現パターンに合う配列を返します
+PHP の `preg_grep` 関数のように、正規表現パターンに合う配列を返します
 
 `regex_filter(['pasta', 'fish', 'steak', 'potatoes'], "/p.*/")`
 
+結果は [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions#regex-filter) で確認してください。
 
-### `regex_replace`
+<h3 id="regex-replace"><code>regex_replace</code></h3>
 
-PHPの [`preg_replace`](https://www.php.net/manual/ja/function.preg-replace.php) 関数のように、複雑な正規表現でテキストを書き換えます：
+PHP の [`preg_replace`](https://www.php.net/manual/ja/function.preg-replace.php) 関数のように、複雑な正規表現でテキストを書き換えます：
 
 `regex_replace('The quick brown fox jumps over the lazy dog.', ['/quick/','/brown/','/fox/','/dog/'], ['slow','black','bear','turtle'])`
 
-### `regex_match`
+結果は [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions#regex-replace) で確認してください。
+
+<h3 id="regex-match"><code>regex_match</code></h3>
 
 PHP の [`preg_match`](https://www.php.net/manual/ja/function.preg-match.php) 関数のように、複雑な正規表現にマッチするか調べられます。
 
 `regex_match('http://www.php.net/index.html', '@^(?:http://)?([^/]+)@i')`
 
-### `regex_split`
+結果は [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions#regex-match) で確認してください。
+
+<h3 id="regex-split"><code>regex_split</code></h3>
 
 PHP の [`preg_split`](https://www.php.net/manual/ja/function.preg-split.php) 関数のように、正規表現で文字列を分割できます。
 
 `regex_split('hypertext language, programming', '/\\s*,\\s*/u')`
 
+結果は [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions#regex-split) で確認してください。
+
 ### `repeat`
 
 引数に渡されたものを、その回数分繰り返します。
 
-`repeat('blah ', 10)` 
-
+`repeat('blah ', 10)` -&gt; (結果は [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions#repeat) で確認してください。)
+ 
 ### `string`
 
 値から文字列を返します。配列が渡されると、 JSON にエンコードしたものが返ります
@@ -317,7 +334,7 @@ PHP の [`preg_split`](https://www.php.net/manual/ja/function.preg-split.php) �
 
 `string(['test' => 'x'])` => **{"test":"x"}**
 
-### `svg_image`
+<h3 id="svg-image"><code>svg_image</code></h3>
 
 必要なクラスを付けて、 SVG 画像を返します。  
 ページに直接コードを書くことなく、インラインの SVG の利益が得られます。  
@@ -325,14 +342,13 @@ PHP の [`preg_split`](https://www.php.net/manual/ja/function.preg-split.php) �
 
 `{{ svg_image(path, classes, strip_style) }}`
 
+`strip_style` = svg インラインのスタイルを取り除きます - CSS class でスタイリングしたいときに便利です
 
 たとえば：
 
 `{{ svg_image('theme://images/something.svg', 'my-class-here mb-10', true) }}`
 
-
-
-### `theme_var`
+<h3 id="theme-var"><code>theme_var</code></h3>
 
 `theme_var($variable, $default = null, $page = null)`
 
@@ -351,10 +367,10 @@ PHP の [`preg_split`](https://www.php.net/manual/ja/function.preg-split.php) �
 
 ### `t`
 
-
 [`|t`](../02.filters/#t) フィルタのように、文字列を翻訳します。
 
-`t('SITE_NAME')` 
+`t('SITE_NAME')` -&gt; (結果は [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions#t) で確認してください。)
+
 
 ### `ta`
 
@@ -363,7 +379,7 @@ PHP の [`preg_split`](https://www.php.net/manual/ja/function.preg-split.php) �
 ### `tl`
 
 文字列を特定の言語に翻訳します。  
-詳しくは、 [multi-language documentation](../../02.content/11.multi-language/#complex-translations) を参照してください。
+詳しくは、 [多言語サイトのドキュメント](../../02.content/11.multi-language/#complex-translations) を参照してください。
 
 `tl('SIMPLE_TEXT', ['fr'])`
 
@@ -372,20 +388,23 @@ PHP の [`preg_split`](https://www.php.net/manual/ja/function.preg-split.php) �
 URL を作り、 PHP URL ストリームを適切な HTML に変換します。  
 URL として解決できなかったときのため、デフォルト値を渡すこともできます。
 
-`url('theme://images/logo.png')|default('http://www.placehold.it/150x100/f4f4f4')` 
+`url('theme://images/logo.png')|default('http://www.placehold.it/150x100/f4f4f4')` -&gt; (結果は [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions#url) で確認してください。)
 
 ### `vardump`
 
-現在の変数を画面に表示します（`dump` のように、デバッガでなくても動きます）
+現在の変数を画面に表示します（ `dump` のように、デバッガでなくても動きます）
 
 ```twig
 {% set my_array = {foo: 'bar', baz: 'qux'} %}
 {{ vardump(my_array) }}
 ```
 
+結果は [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions#vardump) で確認してください。
+
 ### `xss`
 
-文字列のXSS脆弱性を手動でチェックできます
+文字列の XSS 脆弱性を手動でチェックできます
 
-`xss('this string contains a <script>alert("hello");</script> XSS vulnerability')` 
+`xss('this string contains a <script>alert("hello");</script> XSS vulnerability')` -&gt; (結果は [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/functions#xss) で確認してください。)
+
 

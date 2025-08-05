@@ -1,8 +1,10 @@
 ---
 title: テーマ
 layout: ../../layouts/Chapter.astro
-lastmod: '2025-05-04'
+lastmod: '2025-08-05'
+description: 'Grav サイトの見た目は、テーマで決まります。テーマのしくみや、編集・作成の手軽さを見ていきましょう'
 ---
+
 ### 第3章
 
 # テーマ

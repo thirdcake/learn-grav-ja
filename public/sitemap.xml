@@ -4,7 +4,7 @@
     <loc>https://thirdcake.github.io/learn-grav-ja/</loc>
     <priority>0.7</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-08-04</lastmod>
+    <lastmod>2025-08-05</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/01.basics/</loc>
@@ -142,7 +142,7 @@
     <loc>https://thirdcake.github.io/learn-grav-ja/03.themes/</loc>
     <priority>1.0</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-05-04</lastmod>
+    <lastmod>2025-08-05</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/03.themes/01.theme-basics/</loc>
@@ -184,13 +184,13 @@
     <loc>https://thirdcake.github.io/learn-grav-ja/03.themes/04.twig-tags-filters-functions/03.functions/</loc>
     <priority>1.0</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-04-19</lastmod>
+    <lastmod>2025-08-05</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/03.themes/05.theme-configuration/</loc>
     <priority>1.0</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-04-19</lastmod>
+    <lastmod>2025-08-05</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/03.themes/06.theme-vars/</loc>
@@ -208,7 +208,7 @@
     <loc>https://thirdcake.github.io/learn-grav-ja/03.themes/08.customization/</loc>
     <priority>1.0</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-04-21</lastmod>
+    <lastmod>2025-08-05</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/04.plugins/</loc>
