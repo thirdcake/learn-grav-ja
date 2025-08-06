@@ -4,7 +4,7 @@
     <loc>https://thirdcake.github.io/learn-grav-ja/</loc>
     <priority>0.7</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-08-05</lastmod>
+    <lastmod>2025-08-06</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/01.basics/</loc>
@@ -214,31 +214,31 @@
     <loc>https://thirdcake.github.io/learn-grav-ja/04.plugins/</loc>
     <priority>1.0</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-05-04</lastmod>
+    <lastmod>2025-08-06</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/04.plugins/01.plugin-basics/</loc>
     <priority>1.0</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-04-21</lastmod>
+    <lastmod>2025-08-06</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/04.plugins/02.plugin-install/</loc>
     <priority>1.0</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-04-21</lastmod>
+    <lastmod>2025-08-06</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/04.plugins/03.plugin-tutorial/</loc>
     <priority>1.0</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-04-22</lastmod>
+    <lastmod>2025-08-06</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/04.plugins/04.event-hooks/</loc>
     <priority>1.0</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-04-24</lastmod>
+    <lastmod>2025-08-06</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/04.plugins/05.grav-lifecycle/</loc>
