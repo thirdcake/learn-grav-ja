@@ -41,7 +41,7 @@ const sidebarPagetreeList = pagetree.children.reduce((p:any,c:any)=>{
 }, []);
 
 // 構造化データ
-const breadobjJson = [{title:'Home', pathname: '/'}, ...breadobj];
+const breadobjJson = [{title:'Home', pathname: ''}, ...breadobj];
 const breadcrumbJsonLd = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
