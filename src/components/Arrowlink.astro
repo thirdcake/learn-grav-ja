@@ -1,11 +1,11 @@
 ---
 const { direction = 'next', linkurl } = Astro.props;
-const text = (direction === 'next') ? '< 前' : '次 >';
+const text = (direction === 'next') ? '次 >' : '< 前';
 const canNotLink =  (linkurl === '#') ? true : false;
 const hrefurl = (linkurl === '#') ? linkurl : linkurl + '/';
 ---
 
 
 <div class="flex-shrink-0">
-    <a href={ hrefurl } class:list={['btn', 'border-0', { disabled: canNotLink }]} >{ text }</a>
+    <a href={ hrefurl } id={ direction + '-button' } class:list={['btn', 'border-0', { disabled: canNotLink }]} >{ text }</a>
 </div>

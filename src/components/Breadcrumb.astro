@@ -1,7 +1,7 @@
 ---
 const { breadobj } = Astro.props;
 const title = (rawTitle: string): string =>
-    rawTitle.length > 18 ? rawTitle.slice(0, 16) + "..." : rawTitle;
+    rawTitle.length > 14 ? rawTitle.slice(0, 12) + "..." : rawTitle;
 ---
 
 <ol class="breadcrumb">
@@ -16,7 +16,7 @@ const title = (rawTitle: string): string =>
             } else if (page.redirect === false) {
                 return (
                     <li class="breadcrumb-item">
-                        <a href={"/learn-grav-ja/"+page.pathname + "/"}>
+                        <a href={"/learn-grav-ja/"+page.pathname}>
                             {title(page.title)}
                         </a>
                     </li>

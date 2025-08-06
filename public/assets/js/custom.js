@@ -26,18 +26,12 @@ function create_mokuji() {
         return frag;
     }, document.createDocumentFragment());
     ul.appendChild(frag);
-    // todo: できれば h3 の margin を li ではなく a に当てたい。
 }
 
 // 不足しているtable classを補う
 function add_table_class () {
     document.querySelectorAll('.learn-grav-default table').forEach(table => {
-        const div = document.createElement('div');
-        div.classList.add('table-responsive');
         table.classList.add('table');
-        const parent = table.parentNode;
-        parent.insertBefore(div, table);
-        div.appendChild(table);
     });
 }
 
@@ -75,17 +69,21 @@ function headings_external_link () {
         href.hash = heading.id;
         anc.href = href;
         const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-        svg.setAttribute("width", "16");
-        svg.setAttribute("height", "16");
-        svg.setAttribute("viewBox", "0 0 16 16");
+        svg.setAttribute("width", "24");
+        svg.setAttribute("height", "24");
+        svg.setAttribute("viewBox", "0 0 24 24");
         const use = document.createElementNS("http://www.w3.org/2000/svg", "use");
         use.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", "#box-arrow-up-right");
+        const title = document.createElementNS("http://www.w3.org/2000/svg", "title");
+        title.textContent = '翻訳元の見出しへのリンク';
         svg.appendChild(use);
+        svg.appendChild(title);
         anc.appendChild(svg);
         heading.appendChild(anc);
     });
 }
-window.addEventListener('DOMContentLoaded', ()=>{
+
+document.addEventListener('DOMContentLoaded', ()=>{
     create_mokuji();
     add_table_class();
     add_blockquote_class();

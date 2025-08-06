@@ -24,7 +24,8 @@ const nexturl = (currentIndex-1 >= 0)? `${baseurl}/${pagesWithoutRedirect[curren
 const editPageUrl = `${bloburl}${currentpath.replace(baseurl, '')}/index.md`;
 
 // ページ中央上のパンくずリスト
-const breadobj = pagelist.filter(page => (currentpath.replace(baseurl+'/','').startsWith(page.pathname??'###')));
+const breadobj = pagelist.filter(page => (currentpath.replace(baseurl+'/','').startsWith(page.pathname??'###')))
+  .map(page=>({title: page.title, pathname: page.pathname+'/', redirect: page.redirect ?? false}));
 
 // ページ下部の翻訳元記事リンク
 const learnFullUrl = `${learnurl}${currentpath.replace(baseurl,'').replace(/\/\d+\./g,'/')}`;
@@ -40,7 +41,7 @@ const sidebarPagetreeList = pagetree.children.reduce((p:any,c:any)=>{
 }, []);
 
 // 構造化データ
-const breadobjJson = [{title:'Home', pathname:'/'}, ...breadobj];
+const breadobjJson = [{title:'Home', pathname: '/'}, ...breadobj];
 const breadcrumbJsonLd = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -48,7 +49,7 @@ const breadcrumbJsonLd = JSON.stringify({
     "@type": "ListItem",
     "position": index + 1,
     "name": page.title,
-    "item": hosturl + baseurl + (page.pathname ?? ""),
+    "item": hosturl + baseurl + '/' + (page.pathname ?? ''),
   }))
 });
 
@@ -131,8 +132,8 @@ const breadcrumbJsonLd = JSON.stringify({
         <div class="flex-shrink-0">
           <a href={ editPageUrl } class="btn">編集</a>
         </div>
-        <Arrowlink direction="next" linkurl={ nexturl } />
-        <Arrowlink direction="prev" linkurl={ prevurl } />
+        <Arrowlink direction="prev" linkurl={ nexturl } />
+        <Arrowlink direction="next" linkurl={ prevurl } />
       </header>
       
       <slot />
