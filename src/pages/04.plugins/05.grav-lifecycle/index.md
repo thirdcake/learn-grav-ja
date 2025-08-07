@@ -8,6 +8,15 @@ lastmod: '2025-04-22'
 
 プラグインからGravを拡張するベストな方法を理解するために、Gravのプロセスを知っておくことはしばしば有益です。Gravのライフサイクルは、以下のとおりです：
 
+> <h3 id="index-php" style="margin:0;padding:0;color:#fff;background-color:#1abc9c;">index.php</h3>
+> 1. PHP バージョンをチェックし、 **7.1.3** 以上で実行中であることを確認する
+> 1. Class loader 初期化
+> 1. Grav インスタンスを取得
+>     > <h3 id="grav-php" style="margin:0;padding:0;color:#fff;background-color:#2ecc71;">Grav.php</h3>
+>     > 1. インスタンスが無ければ、 `load()` を呼び出す
+>     > 1. `loader` を追加
+>     > 1. `debugger` を追加し、初期化
+
 ### index.php
 1. Check PHP version to ensure we're running at least version **7.1.3**
 1. Class loader initialization

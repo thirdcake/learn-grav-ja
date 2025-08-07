@@ -1,10 +1,11 @@
 ---
 title: イベントフック
 layout: ../../../layouts/Default.astro
-lastmod: '2025-08-06'
+lastmod: '2025-08-07'
+description: 'Grav プラグインの実行順序や実行条件を制御するイベントフックという仕組みと、その全体像を解説します。'
 ---
 
-前回の [プラグインチュートリアル](../03.plugin-tutorial/) では、プラグインのプログラミングが、2つのメソッドで包まれていたことにお気づきかもしれません。  
+前回の [プラグインチュートリアル](../03.plugin-tutorial/) の解説では、プラグインのプログラミングロジックが、2つのメソッドで作られていたことに気づいたかもしれません。  
 これらのメソッド `onPluginInitialized` と、 `onPageInitialized` はそれぞれ、 Grav のライフサイクルで利用可能な **イベントフック** に対応しています。
 
 Grav においてプラグインの力を完全に発揮するには、利用可能なイベントフックを、その呼ばれる順番や、それが呼ばれている間にできることも含めて、知っておく必要があります。  
@@ -33,7 +34,7 @@ Grav 内のほとんどのイベントは、特定の順番で発火します。
 1. [onTwigLoader](#ontwigloader)
 1. [onTwigInitialized](#ontwiginitialized)
 1. [onTwigExtensions](#ontwigextensions)
-1. [onBuildPagesInitialized](#onbuildpagesinitialized) _（pagesが再処理されるときに一度だけ）_
+1. [onBuildPagesInitialized](#onbuildpagesinitialized) _（pages が再処理されるときに一度だけ）_
   1. [onPageProcessed](#onpageprocessed) _(each page not cached yet)_
   1. onFormPageHeaderProcessed (1.6) _(each page not cached yet)_
   1. [onFolderProcessed](#onfolderprocessed) _(for each folder found)_
@@ -101,7 +102,7 @@ PHP が致命的（fatal）なエラーを投げたときに、いつでも発�
 
 #### onAssetsInitialized
 
-アセット管理が初期化され、アセット（JSやCSSなど）を追加したり管理したりできるときに発火します。
+アセットマネージャーが初期化され、アセット（ JS や CSS など）を追加したり管理したりできる準備ができたときに発火します。
 
 #### onPagesInitialized
 
