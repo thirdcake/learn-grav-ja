@@ -1,37 +1,45 @@
 ---
-title: プラグインでFlexを使う
+title: プラグインで Flex を使う
 layout: ../../../layouts/Default.astro
-lastmod: '2025-04-23'
+lastmod: '2025-08-08'
+description: '同じ型を持つオブジェクトを作成・操作できる Flex Objects について、その概要と基本的な使い方を解説します。'
 ---
+
 <h2 id="introduction">はじめに</h2>
 
-このページの目的は、twigやコード中の Flex objects の利用方法を解説することだけです。Flex のパワーや柔軟性を理解するために、ぜひ[Flexのドキュメント](../../08.advanced/01.flex/) を読んでください。
+このページの目的は、 twig やコード中の Flex objects の利用方法を解説することだけです。  
+Flex のパワーや柔軟性を理解するために、ぜひ [Flex のドキュメント](../../08.advanced/01.flex/) をお読みください。
 
-Flexにより、オブジェクトのカスタムCRUD処理をひとつのオブジェクトやそのコレクションで行うことができ、プラグインコードやテンプレートから使える、幅広いAPIが使えます。
+Flex により、カスタムのオブジェクトを、ひとつのオブジェクトやコレクションとして CRUD 処理することができるようになります。  
+また、プラグインのコードやテンプレートから使える、幅広い API を提供してくれます。
 
-管理パネルのUIもかんたんに追加でき、標準的なテンプレートを使ったり、カスタマイズされた一覧やフォーム（やその他）を使ったりできます。
+管理パネルの UI も簡単に追加でき、標準的なテンプレートを使ったり、独自にカスタマイズされた一覧表示やフォーム（やその他）を使ったりできます。
 
 <h2 id="requirements">利用要件</h2>
 
-Grav 1.7 以降が必要要件です。このドキュメントの目的のため、管理パネル付きのGravをインストールしてください。そうすれば、以下のステップを実行できます。[インストールの解説](../../01.basics/03.installation/) で管理パネル付きのGravを始められます。
+Grav 1.7 以降が必要要件です。  
+このドキュメントの目的のため、以下の各手順を確実に実行したいので、管理パネル付きの Grav をインストールします。  
+準備方法は、 [インストールの解説](../../01.basics/03.installation/) をご覧ください。
 
 <h2 id="create-your-plugins">プラグインの作成</h2>
 
-プラグインを作った時のように、flexをスクラッチで作るかどうかに関わらず、すべての最新の変更をひとつの場所にまとめるため、devtools でスケルトンをと基本的な機能を生成することを、強くおすすめします。
+プラグインを作った時のように、 flex をスクラッチで作るかどうかに関わらず、すべての最新の変更をひとつの場所にまとめるため、 devtools でスケルトンと基本的な機能を生成することを、強くおすすめします。
 
-そのために、devtools CLIを使いましょう：
+そのために、 devtools CLIを使いましょう：
 
 ```sh
 bin/gpm install devtools
 ```
 
-[detoolsを使って新しくプラグインを作成する](../03.plugin-tutorial/) ため、以下のコマンドを入力します。プラグイン名は、`myflexplugin` としましょう：
+[detools を使って新しくプラグインを作成する](../03.plugin-tutorial/) ため、以下のコマンドを入力します。  
+プラグイン名は、`myflexplugin` としましょう：
 
 ```sh
 bin/plugin devtools new-plugin
 ```
 
-以下のように質問に答えてください。重要なのは、`Please choose an option:` で flex を選ぶことです。
+以下のように質問に答えてください。  
+重要なのは、 `Please choose an option:` で flex を選ぶことです。
 
 ```sh
  Enter Plugin Name:
@@ -95,14 +103,15 @@ Generating autoload files
 No installed packages - skipping audit.
 ```
 
-Gravをインストールしたルートフォルダに戻ってください：
+Grav をインストールしたルートフォルダに戻ってください：
 
 
 ```sh
 cd -
 ```
 
-DevTools は、名前と説明からなる、とても基本的な flex objects を生成します。管理パネルUIは、1行もコードを書かずに、これらの books objects を一覧リスト化し、作成や編集、削除できるようになっています。
+DevTools は、名前と説明からなる、とても基本的な flex objects を生成します。  
+管理パネル UI は、1行もコードを書かずに、これらの books objects を一覧リスト化し、作成や編集、削除できるようになっています。
 
 管理パネルプラグインの、左のサイドメニューに新しいエントリーが追加されています：
 
@@ -157,16 +166,20 @@ DevTools は、名前と説明からなる、とても基本的な flex objects 
 
 <h3 id="flex-object-definition">Flex Object の定義</h3>
 
-重要なファイルは、[blurprints](../../08.advanced/01.flex/03.custom-types/01.blueprint/) の定義です。flex object のスキーマを、たくさんのカスタマイズオプションとともに、定義するところです。
+重要なファイルは、 [blurprints](../../08.advanced/01.flex/03.custom-types/01.blueprint/) の定義です。  
+flex object のスキーマを、たくさんのカスタマイズオプションとともに、定義するところです。
 
-今回のプラグインでは、book blueprints が、`user/plugins/myflexplugin/blueprints/flex-objects/book.yaml` ファイルに入っています。
+今回のプラグインでは、 book blueprints が、`user/plugins/myflexplugin/blueprints/flex-objects/book.yaml` ファイルに入っています。
 
 > [!Note]  
 > **重要** それぞれの flex object の blueprint は、`blueprints/flex-objects/` フォルダ内に入っていなければいけません。
 
-スキーマは、このblueprints の Form セクションを使って定義されます。管理パネルプラグインのUIを使うかどうかに関わらず、このセクションはこのflex object のプロパティを定義します。
+スキーマは、この blueprints の Form セクションを使って定義されます。  
+管理パネルプラグインの UI を使うかどうかに関わらず、このセクションはこの flex object のプロパティを定義します。
 
-ここでは、すべてのオプションを説明することはできません。まずは book オブジェクトを実装することに集中しましょう。[詳しい Flex blueprints のドキュメント](../08.advanced/01.flex/03.custom-types/01.blueprint/) では、より深くカスタマイズ方法をガイドします。
+ここでは、すべてのオプションを説明することはできません。  
+まずは book オブジェクトを実装することに集中しましょう。  
+[詳しい Flex blueprints のドキュメント](../08.advanced/01.flex/03.custom-types/01.blueprint/) では、より深くカスタマイズ方法をガイドします。
 
 以下のようなスキーマで、2つのプロパティを定義しています：
 
@@ -201,7 +214,7 @@ form:
 
 `myflexplugin.php` は、プラグインの実装や、フックなどを定義する中心となるものです。
 
-以下のようなパーツが、flex を有効化するのに必要です：
+以下のようなパーツが、 flex を有効化するのに必要です：
 
 ```php
     public $features = [
@@ -231,13 +244,17 @@ form:
     }
 ```
 
-その他のファイルは、標準的で、これまでのプラグインのセクションでも解説してきたようなファイルです。ここでは、それらには触れません。
+その他のファイルは、標準的で、これまでのプラグインのセクションでも解説してきたようなファイルです。  
+ここでは、それらには触れません。
 
-_classes_ フォルダには、book flex object と、book flex collection で使う class が入っています。ここにある class には、すべての object や collection で使えるカスタムメソッドを追加できます。[flex object にカスタムメソッドを追加する](#add-custom-method-to-the-flex-object) を見てください。
+_classes_ フォルダには、 book flex object と、book flex collection で使う class が入っています。  
+ここにある class には、すべての object や collection で使えるカスタムメソッドを追加できます。  
+[flex object にカスタムメソッドを追加する](#add-custom-method-to-the-flex-object) を見てください。
 
 <h2 id="modify-the-flex-object-schema">flex object のスキーマを修正する</h2>
 
-object に、フィールドを追加してみましょう。本の出版日をあらわす datetime フィールドを追加するなら、シンプルに `pub_date` フィールドを blueprints に追加するだけです：
+object に、フィールドを追加してみましょう。  
+本の出版日をあらわす datetime フィールドを追加するなら、シンプルに `pub_date` フィールドを blueprints に追加するだけです：
 
 ```yaml
 form:
@@ -270,11 +287,11 @@ form:
 
 ![Simple form edit](pub_date_added.png)
 
-フィールドタイプは、[ここ](../../06.forms/01.blueprints/01.fields-available/) にその全体のリストがあります。
+フィールドタイプは、 [ここ](../../06.forms/01.blueprints/01.fields-available/) にその全体のリストがあります。
 
 <h2 id="add-custom-method-to-the-flex-object">flex object にカスタムメソッドを追加する</h2>
 
-現在の book flex object は、`user/plugins/myflexplugin/classes/Flex/Types/Book/BookObject.php` に、GenericObject という trait を使用した class しか実装されていません。
+現在の book flex object は、 `user/plugins/myflexplugin/classes/Flex/Types/Book/BookObject.php` に、GenericObject という trait を使用した class しか実装されていません。
 
 ```php
 <?php
@@ -304,7 +321,7 @@ class BookObject extends GenericObject
 }
 ```
 
-概要のための区切りを使って、本の概要を取得するメソッドを追加してみましょう。
+概要のためのデリミタ（区切り）を使って、本の概要を取得するメソッドを追加してみましょう。
 
 
 ```php
@@ -339,7 +356,8 @@ class BookObject extends GenericObject
 }
 ```
 
-これで、book flex object を利用する場所ならどこからでも、このメソッドを呼び出せます。たとえば、テンプレート中でも可能です：
+これで、book flex object を利用する場所ならどこからでも、このメソッドを呼び出せます。  
+たとえば、テンプレート中でも可能です：
 
 
 ```twig
@@ -350,7 +368,10 @@ class BookObject extends GenericObject
 {% endfor %}
 ```
 
-`::getSummary` メソッドは、PHPコードでも使えます。
+`::getSummary` メソッドは、 PHP コードでも使えます。
 
-同じことが、collection class （`user/plugins/myflexplugin/classes/Flex/Types/Book/BookCollection.php`）でも行えます。たとえば、些細ではないクエリを利用して検索するフレンドリーなメソッドを追加できます。実際、コレクションclass は、すでにすべての一般的なコレクションメソッドを提供しています。オブジェクトに多くの異なるフィールドがあり、標準的なコレクションメソッドではエラーが出るような場合は、ヘルパーメソッドを追加すると便利です。
+同じことが、 collection class （`user/plugins/myflexplugin/classes/Flex/Types/Book/BookCollection.php`）でも行えます。  
+たとえば、複雑なクエリを利用して検索する親切なメソッドを追加できます。  
+実際、コレクション class は、すでにすべての一般的なコレクションメソッドを提供しています。  
+オブジェクトに多くの異なるフィールドがあり、標準的なコレクションメソッドではエラーが出るような場合は、ヘルパーメソッドを追加すると便利です。
 
