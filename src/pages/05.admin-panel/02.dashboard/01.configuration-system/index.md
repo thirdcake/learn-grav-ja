@@ -1,17 +1,21 @@
 ---
 title: 'System 設定'
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-05-20'
+lastmod: '2025-08-11'
+description: '管理パネルプラグインの Configuration ページの System 設定タブの操作方法を解説します。'
 ---
+
 ![Admin Configuration](configuration.png)
 
-**Configuration** ページでは、サイトの **System** 設定及び **Site** 設定にアクセスできます。加えて、PHP プロパティや、サーバー環境のプロパティ、その他のサイトの運営を決定づけるさまざまなコンポーネントのプロパティを閲覧できます。
+**Configuration** ページでは、サイトの **System** 設定及び **Site** 設定にアクセスできます。  
+加えて、PHP プロパティや、サーバー環境のプロパティ、その他のサイトの運営を決定づけるさまざまなコンポーネントのプロパティを閲覧できます。
 
 > [!Info]  
 > Configuration ページには、 `access.admin.super` もしくは `access.admin.configuration` のアクセスレベルが必要です。
 
 **System** タブは、 `/user/config/system.yaml` ファイルで設定できることをカスタマイズできます。
-これらの設定は、 Grav が操作する system に関係する機能の数によります。サイトのホームページや、キャッシュの設定、その他について、ここで設定できます。
+これらの設定は、 Grav が操作する system に関係する機能の数によります。  
+サイトのホームページや、キャッシュの設定、その他について、ここで設定できます。
 
 これらの設定は、いくつかのセクションに分けられ、それぞれ、 Grav 操作の特定の側面を設定できます。
 
@@ -21,7 +25,8 @@ lastmod: '2025-05-20'
 
 ![Admin Configuration](configuration-system-content.png)
 
-このセクションでは、サイト内でのコンテンツ制御の基本的なプロパティを設定します。ホームとなるページや、デフォルトテーマ、その他さまざまなコンテンツ表示オプションを、ここで設定します。
+このセクションでは、サイト内でのコンテンツ制御の基本的なプロパティを設定します。  
+ホームとなるページや、デフォルトテーマ、その他さまざまなコンテンツ表示オプションを、ここで設定します。
 
 | オプション | 説明 |
 | :----- | :----- |
@@ -48,16 +53,20 @@ lastmod: '2025-05-20'
 | :----- | :----- |
 | **Supported**  | 2文字の言語コードのカンマ区切りのリスト（たとえば、`en,fr,de`）  |
 | **Translations Enabled** | Gravや、プラグイン、拡張機能で翻訳をサポートする |
-| **Translations Fallback**  |  Fallback through supported translations if active language doesn't exist. |
-| **Active Language in Section**     | Store the active language in the session.                                 |
+| **Translations Fallback**  | 有効な言語が存在しなかったとき、サポート対象言語にフォールバックする |
+| **Active Language in Section** | セッションに有効言語を保存する |
 | **Home Redirect Include Language** | Include language in home redirect (/en).                                  |
 | **Home Redirect Include Route**    | Home redirect include route.                                              |
+
+> [!訳注]  
+> 最後の2つは、2025年現在の管理画面にありませんし、画像とも違うので、古い仕様なのかもしれません。
 
 ### HTTP Headers
 
 ![Admin Configuration](configuration-system-http.png)
 
-HTTP ヘッダオプションは、このセクションで設定できます。ブラウザベースのキャッシュと、最適化に便利です。
+HTTP ヘッダオプションは、このセクションで設定できます。  
+ブラウザベースのキャッシュと、最適化に便利です。
 
 | オプション | 説明 |
 | :----- | :----- |
@@ -70,7 +79,8 @@ HTTP ヘッダオプションは、このセクションで設定できます。
 
 ![Admin Configuration](configuration-system-markdown.png)
 
-マークダウンは、Grav のページコンテンツの大部分を占めています。このセクションでは、Markdown Extra の有効化オプションや、Grav がどのようにマークダウンを制御するかの設定ができます。
+マークダウンは、 Grav のページコンテンツの大部分を占めています。  
+このセクションでは、 Markdown Extra の有効化オプションや、 Grav がどのようにマークダウンを制御するかの設定ができます。
 
 | オプション | 説明 |
 | :----- | :----- |
@@ -83,7 +93,8 @@ HTTP ヘッダオプションは、このセクションで設定できます。
 
 ![Admin Configuration](configuration-system-caching.png)
 
-Grav の統合されたキャッシュ機能のおかげで、Grav は最速のフラットファイル CMS のひとつとなっています。このセクションで、サイトの主要なキャッシュ機能の設定ができます。
+Grav の統合されたキャッシュ機能のおかげで、Grav は最速のフラットファイル CMS のひとつとなっています。  
+このセクションで、サイトの主要なキャッシュ機能の設定ができます。
 
 | オプション | 説明 |
 | :----- | :----- |
@@ -98,7 +109,8 @@ Grav の統合されたキャッシュ機能のおかげで、Grav は最速の�
 
 ![Admin Configuration](configuration-system-twig.png)
 
-このセクションでは、 Grav の Twig テンプレートに焦点を当てます。 Twig のキャッシュや、デバッグ、変更があったときの検出の設定を行うことができます。
+このセクションでは、 Grav の Twig テンプレートに注目します。  
+Twig のキャッシュや、デバッグ、変更があったときの検出の設定を行うことができます。
 
 | オプション | 説明 |
 | :----- | :----- |
@@ -140,7 +152,8 @@ Grav の統合されたキャッシュ機能のおかげで、Grav は最速の�
 
 ![Admin Configuration](configuration-system-debugger.png)
 
-エラー制御のように、 Grav の統合デバッグツールによって、問題の場所を確定したり、トラブルシューティングできるようになります。これも開発中に、特に便利です。
+エラー制御のように、 Grav の統合デバッグツールによって、問題の場所を確定したり、トラブルシューティングできるようになります。  
+これも開発中に、特に便利です。
 
 | オプション | 説明 |
 | :----- | :----- |
@@ -152,7 +165,8 @@ Grav の統合されたキャッシュ機能のおかげで、Grav は最速の�
 
 ![Admin Configuration](configuration-system-media.png)
 
-このセクションでは、 Grav がメディアコンテンツをどう制御するかを決定します。画質やその他のメディアを制御するオプションが、ここで設定できます。
+このセクションでは、 Grav がメディアコンテンツをどう制御するかを決定します。  
+画質やその他のメディアを制御するオプションが、ここで設定できます。
 
 | オプション | 説明 |
 | :----- | :----- |
