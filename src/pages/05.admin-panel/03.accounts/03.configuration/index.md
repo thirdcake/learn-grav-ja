@@ -1,8 +1,10 @@
 ---
 title: 'config 設定'
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-05-06'
+lastmod: '2025-08-15'
+description: '管理パネルでのアカウントの config 設定タブでの操作方法を解説します。'
 ---
+
 ![Compatibility Tab](accounts-configuration1.png)
 
 | オプション | 説明 |
@@ -11,7 +13,7 @@ lastmod: '2025-05-06'
 
 ![Caching Tab](accounts-configuration2.png)
 
-詳しい情報は、 Flex Objects をご覧ください。
+より詳しい情報は、 Flex Objects を参照してください。
 
 | オプション | 説明 |
 | :----- | :----- |

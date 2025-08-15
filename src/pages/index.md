@@ -1,7 +1,7 @@
 ---
 title: 'サイト全体の注記'
 layout: ../layouts/Home.astro
-lastmod: '2025-08-06'
+lastmod: '2025-08-12'
 ---
 
 ## このサイトについて
@@ -17,7 +17,7 @@ Grav が、他の CMS と比較して優れているところは、学習曲線�
 
 ## 更新状況
 
-2025-08-04 の [GitHub のコミット](https://github.com/getgrav/grav-learn/commits/develop/) まで対応しています。
+2025-08-12 の [GitHub のコミット](https://github.com/getgrav/grav-learn/commits/develop/) まで対応しています。
 
 ## 訳文について
 
