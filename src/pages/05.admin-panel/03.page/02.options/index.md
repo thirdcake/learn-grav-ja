@@ -1,13 +1,16 @@
 ---
 title: 'エディタ（Options タブ）'
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-05-06'
+lastmod: '2025-08-19'
+description: '管理パネルのページ画面のオプションタブの使い方を解説します。'
 ---
+
 ![Admin Page Editor](page-options.png)
 
-管理パネルの **Page Editor** は、パワフルなテキストエディタであり、ページ管理マネージャーです。ページのコンテンツ（やメディアファイル）を作成したり、公開設定やタクソノミー設定をしたり、その他設定、上書きをしたり、テーマ特有のオプションを設定できたりします。
+管理パネルの **Page Editor** は、パワフルなテキストエディタであると同時に、ページを管理できます。  
+ページのコンテンツ（やメディアファイル）を作成したり、公開設定や、タクソノミー設定をしたり、その他の設定の上書きをしたり、テーマ特有のオプションを設定できたりします。
 
-これにより、特定のページをワンストップで管理できます。
+これにより、そのページを一括で管理できます。
 
 このページでは、 **Page Editor** の **Options** タブについて、その特長と機能を説明します。
 
@@ -21,7 +24,8 @@ lastmod: '2025-05-06'
 
 ![Admin Page Editor](page-options-publishing.png)
 
-このセクションは、コンテンツの公開に関する制御を扱います。コンテンツを公開（もしくは非公開）にしたり、公開開始日や、公開終了日時を設定したり、ページに特定のメタデータを作成したりできます。
+このセクションは、コンテンツの公開に関する制御を扱います。  
+コンテンツを公開（もしくは非公開）にしたり、公開開始日や、公開終了日時を設定したり、ページに特定のメタデータを作成したりできます。
 
 | オプション | 説明 |
 | :-----  | :-----  |
@@ -35,7 +39,8 @@ lastmod: '2025-05-06'
 
 ![Admin Page Editor](page-options-taxonomies.png)
 
-タクソノミーエリアでは、ページを整理するプロパティを設定できます。そのページをどのカテゴリーで表示したいか、どのタグか、それ以外のタクソノミーかなどを、ここで設定できます。
+タクソノミーエリアでは、ページを整理するプロパティを設定できます。  
+そのページをどのカテゴリーで表示したいか、どのタグか、それ以外のタクソノミーかなどを、ここで設定できます。
 
 | オプション | 説明 |
 | :-----  | :-----  |
@@ -47,12 +52,14 @@ lastmod: '2025-05-06'
 
 ![Admin Page Editor](page-options-sitemap.png)
 
-良い、クリーンなサイトマップがあるのは、いくつかの点で重要です。その中でも、ユーザーのナビゲーションと、検索エンジン最適化（SEO）で重要です。サイトマップがあることで、あなたのサイトは検索エンジンと親しくなり、ランキングにも直接的なインパクトを与えます。
+良い、クリーンなサイトマップがあるのは、いくつかの点で重要です。  
+その中でも、ユーザーのナビゲーションと、検索エンジン最適化（SEO）で重要です。  
+サイトマップがあることで、あなたのサイトは検索エンジンと親しくなり、ランキングにも直接的なインパクトを与えます。
 
 options ページのこのエリアは、 [Sitemap プラグイン](https://github.com/getgrav/grav-plugin-sitemap) をインストールしたときのみ利用可能です。
 
 | オプション | 説明 |
 | :-----  | :-----  |
-| Sitemap Change Frequency | This drop-down enables you to set a frequency by which the page's sitemap is updated. This can be any time a change is made, hourly, daily, weekly, monthly, yearly, or never. By default, the global sitemap options are used. |
-| Sitemap Priority         | Sets the priority of this page in your sitemap.                                                                                                                                                                                 |
+| Sitemap Change Frequency | このドロップダウンにより、どれくらいの頻度でページのサイトマップが更新されるか設定できます。変更が行われる時ならいつでも設定できます。 hourly (毎時), daily(毎日), weekly(毎週), monthly(毎月), yearly(毎年), or never(変更されない)。デフォルトでは、グローバルのサイトマップオプションが使われます。 |
+| Sitemap Priority | サイトマップ内でのこのページの priority （優先度）を設定します |
 
