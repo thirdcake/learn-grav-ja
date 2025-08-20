@@ -1,9 +1,15 @@
 ---
 title: ページのパーミッション
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-05-06'
+lastmod: '2025-08-20'
+description: '管理パネルのページ画面のセキュリティタブ内のページパーミッションの部分を解説します。'
 ---
+
+> [!訳注]  
+> このページの解説も、画像がリンク切れしており、内容も [アカウント &gt; パーミッション](../../03.accounts/04.permissions/) に類似しています。内容的には、アカウント画面のパーミッションの設定と、各ページ編集画面のセキュリティタブにある、Page Permissions のセクションにおける設定方法を解説していると思われますが、ここで解説されている内容がよくわからず、実際に試してはいません。
+
 ```
+// リンク切れ画像です
 ![Pages Permissions](page-permissions.png?width=2030&classes=shadow)
 ```
 
@@ -11,62 +17,71 @@ lastmod: '2025-05-06'
 
 | オプション | 値 | 説明 |
 | :----- | :----- | :----- |
-| **Configuration**                     | *admin.configuration*         | Gives the user access to the **Configuration** area of the admin. |
-| &nbsp; &nbsp; **Pages Configuration** | *admin.configuration.pages*   | Gives the user access to the **Pages Configuration** found inside the **Pages** area of the admin.  |
-| **Pages**                             | *admin.pages*                 | Gives the user full access to the **Pages** area of the admin.    |
-| &nbsp; &nbsp; **Create**              | *admin.pages.create*          | Gives the user access to **Create** pages.                        |
-| &nbsp; &nbsp; **Read**                | *admin.pages.read*            | Gives the user access to **Read** pages.                          |
-| &nbsp; &nbsp; **Update**              | *admin.pages.update*          | Gives the user access to **Update** pages.                        |
-| &nbsp; &nbsp; **Delete**              | *admin.pages.delete*          | Gives the user access to **Delete** pages.                        |
-| &nbsp; &nbsp; **List**                | *admin.pages.list*            | Gives the user access to **Pages** area of the admin.             |
+| **Configuration** | *admin.configuration* | 管理パネルの **Congiguration** エリアへのアクセス権限をユーザーに与える |
+| &nbsp; &nbsp; **Pages Configuration** | *admin.configuration.pages* | 管理パネルの **Pages** エリア内にある **Pages Configuration** へのアクセス権限をユーザーに与える |
+| **Pages** | *admin.pages* | 管理パネルの **Pages** エリアへの完全なアクセス権限をユーザーに与える |
+| &nbsp; &nbsp; **Create** | *admin.pages.create* | ページを **作成** するアクセス権限をユーザーに与える |
+| &nbsp; &nbsp; **Read** | *admin.pages.read* | ページを **読み込み** するアクセス権限をユーザーに与える |
+| &nbsp; &nbsp; **Update** | *admin.pages.update* | ページを **更新** するアクセス権限をユーザーに与える |
+| &nbsp; &nbsp; **Delete** | *admin.pages.delete* | ページを **削除** するアクセス権限をユーザーに与える |
+| &nbsp; &nbsp; **List** | *admin.pages.list* | 管理パネルの **Pages** エリアへのアクセス権限をユーザーに与える |
 
-> [!Info]  
-> **WARNING:** All actions in Grav are only checked against a single permission type. If you prevent user from listing or reading pages in admin, but still allow users to perform create, update and delete, they can perform those actions. This means that even if users cannot see the `Pages` in admin, they can visit the edit page directly and perform those actions from there.
+> [!Warning]  
+> Grav 内のすべてのアクションは、ひとつのパーミッションタイプに対してチェックされます。管理パネルで、listing もしくは reading 権限をユーザーに与えない場合でも、ユーザーが create, update, そして delete 権限を持っている場合、そのユーザーはそれらのアクションを行えます。つまり、このユーザーは、管理パネル内の `Pages` 画面が表示されないとしても、ページ編集画面に直接アクセスし、これらのアクションを実行することが可能です。
 
 > [!Tip]  
-> **TIP:** Starting from Grav 1.7, you can and should restrict the **CRUD** access for the individual pages and their children directly from the pages themselves.
+> Grav 1.7 より、個々のページとその子ページに対する **CRUD** アクセスを、そのページ自体から直接制限できるようになりました。
 
-The possible values for the permissions are:
+パーミッションでの妥当な値は：
 
 | オプション | 値 | 説明 |
 | :----- | :----- | :----- |
-| **Allowed**                           | `true`                        | **Allows** action to be performed if there is no **Denied** permission at the same level. |
-| **Denied**                            | `false`                       | **Denies** action from being performed. If user has both **Allowed** and **Denied** set, **Denied** permission wins. |
-| **Not set**                           | `null`                        | No effect, but acts as **Denied** if no other rules apply.                                |
+| **Allowed** | `true`  | 同じレベルに **Denied** パーミッションがひとつも無ければ、 **許可** する |
+| **Denied** | `false` | **不許可** にする。ユーザーに **Allowed** と **Denied** があったら、**Denied** が勝ちます |
+| **Not set** | `null` | 影響を与えず、もし他のルールが適用されなければ、 **Denied** になる |
 
-Permissions set specifically for the user account take precedence over the group permissions. If the permission has not been set in the user account, access check will be performed against all the user groups the user belongs to. If any of the user groups have **Denied** the action, user has no permission for the action. Otherwise, if any of the user groups have **Allowed** the action, permission will be granted. If permission has not been set in any of the user's groups, **Super User** permission acts as universal **Allowed**, otherwise **Denied** will be applied.
+ユーザーアカウントに対して特に設定されたパーミッションは、グループパーミッションより優先されます。  
+ユーザーアカウントにパーミッションが設定されていない場合、そのユーザーが属するすべてのユーザーグループに対してアクセスチェックされます。  
+もしアクションを **Denied** するユーザーグループがひとつでもあれば、そのアクションに対してパーミッションは許可されません。  
+一方、すべてのグループで **Allowed** だったら、そのアクションは許可されます。  
+いずれのグループにもパーミッションが設定されていなければ、 **Super User** パーミッションは全体に対して **Allowed** になり、そうでなければ **Denied** が適用されます。
 
-Permissions set for the user accounts and user groups act as default permissions for managing the pages. All of these rules can be overridden inside any page [Security](/admin-panel/page/security) tab.
+ユーザーアカウントとユーザーグループに設定されたパーミッションは、そのページを管理するデフォルトのパーミッションとなります。  
+これらのルールすべては、各ページの [セキュリティ](../04.security/) タブで上書き可能です。
 
-### Page CRUD Access Check Workflow
+<h3 id="page-crud-access-check-workflow">ページの CRUD アクセスチェックワークフロー</h3>
 
-CRUD authorization check workflow for an individual page is following:
+CRUD 認証の個々のページをチェックするワークフローは、次の通りです：
 
-1. Set **action** = `Create`, `Read`, `Update`, `Delete` or `List`
-1. Go through all `Page Groups` from the current page
-  - **match** special `authors` group if the user is listed in `Page Authors`
-  - **match** special `defaults` group if the user is logged in
-  - **match** the group if the user also has the group
-  - if **match**
-     - if **action** authorize returns `Deny`: stop immediately and *return* `false`
-     - if **action** authorize returns `Allow`: set **allow flag** = `true`
-  - continue to the next group
-1. After going through all the groups, check if user has permission for the action
-  - if **allow flag** is `true`: return `true`
-1. Check user's global Pages administration permissions (only once)
-  - if **action** authorize returns `Deny`: *return* `false`
-  - if **action** authorize returns `Allow`: *return* `true`
-1. Check if page inherits parent permissions
-  - if `Inherit Permissions` = `Yes`, do the same checks with the parent page
-  - else *return* `null`
+1. **action** = `Create`, `Read`, `Update`, `Delete` もしくは `List` を設定する
+1. 現在のページからすべての `Page Groups` を走査する
+  - `Page Authors` 一覧にユーザーがいれば、特別な `authors` グループに **マッチ** する
+  - ユーザーがログインしていたら、特別な `defaults` グループに **マッチ** する
+  - ユーザーがグループを持っていれば、そのグループに **マッチ** する
+  - もし **マッチ** していたら：
+     - **action** 認証が `Deny` を返すとき： 即中断し、 `false` を *返す*
+     - **action** 認証が `Allow` を返すとき： **allow flag** = `true` を設定する
+  - 続けて次のグループを処理する
+1. すべてのグループを走査し終わったら、action のユーザーパーミッションをチェックする
+  - **allow flag** が `true` だったとき： `true` を返す
+1. ユーザーのグローバルな Pages 管理パーミッションをチェックする（一度だけ）
+  - **action** 認証が `Deny` を返すとき： `false` を *返す*
+  - **action** 認証が `Allow` を返すとき： `true` を *返す*
+1. ページが親パーミッションを継承するかチェックする
+  - `Inherit Permissions` = `Yes` の場合：親ページについて同じチェックを行う
+  - 上記以外の場合、 `null` を *返す*
 
 ### Root Page
 
 ```
+// リンク切れ画像です
 ![Root Page](page-permissions.png?width=2030&classes=shadow)
 ```
 
-Root page is a special page in Grav 1.7+ which allows site admins to set default permissions for all the pages. It can only be seen by **Super User** or a user who has **Pages Configuration** rights.
+Root ページは、 Grav 1.7 以上で特別なページです。  
+それにより、サイト管理者は、すべてのページについてデフォルトのパーミッションを設定できます。  
+**Super User** もしくは **Pages Configuration** の権利を持つユーザーのみがそれを見られます。
 
-The root page will be saved into `user/pages/root.md` file and does not contain any content as the page is currently unreachable (this may change in the future).
+root ページは、 `user/pages/root.md` ファイルに保存されます。  
+現在このページはアクセスできないため、ページとしてのコンテンツを含みません（将来、変更されるかもしれません）。
 

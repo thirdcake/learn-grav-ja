@@ -23,7 +23,7 @@ description: 'ユーザーアカウントのパーミッション設定ででき
 | &nbsp; &nbsp; **Delete** | *admin.accounts.delete* | ユーザーアカウントとグループを **Delete** する権限を与えます |
 | &nbsp; &nbsp; **List** | *admin.accounts.list* | 管理パネルの **Accounts** エリアへのアクセスを許可 |
 
-パーミッションとして受け入れ可能な値は：
+パーミッションとして妥当な値は：
 
 | オプション | 値 | 説明 |
 | :----- | :----- | :----- |
