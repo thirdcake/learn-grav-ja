@@ -2,7 +2,9 @@
 title: テーマ
 layout: ../../../layouts/Default.astro
 lastmod: '2025-05-07'
+description: 'Grav の管理パネルのテーマ画面の使い方について解説します'
 ---
+
 ![Admin Themes](themes.png)
 
 管理パネルの **Themes** では、サイトのテーマを追加したり管理したりできます。

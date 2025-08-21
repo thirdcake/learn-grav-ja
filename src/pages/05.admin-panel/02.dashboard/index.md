@@ -2,7 +2,7 @@
 title: ダッシュボード
 layout: ../../../layouts/Default.astro
 lastmod: '2025-08-11'
-description: '管理パネルプラグインのダッシュボード画面について解説します'
+description: 'Grav の管理パネルプラグインのダッシュボード画面の見方について解説します'
 ---
 
 ![Admin Dashboard](grav-dashboard.png)
