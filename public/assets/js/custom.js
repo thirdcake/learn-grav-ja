@@ -57,6 +57,8 @@ function add_blockquote_class () {
 
 // 見出しに翻訳元への外部リンクを追加
 function headings_external_link () {
+    const source_page = document.getElementById('source-page');
+    if(!source_page) return;
     const heads = [...document.querySelectorAll(
         '.learn-grav-default h2, .learn-grav-default h3'
     )];
@@ -65,7 +67,7 @@ function headings_external_link () {
         const anc = document.createElement('a');
         anc.target = '_blank';
         anc.rel = 'noopener';
-        const href = new URL(document.getElementById('source-page').href);
+        const href = new URL(source_page.href);
         href.hash = heading.id;
         anc.href = href;
         const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -83,9 +85,27 @@ function headings_external_link () {
     });
 }
 
+// home画面でfaqを開閉
+function home_faq_open_close() {
+    const button = document.querySelector('button[data-faq="clickable"]');
+    if(!button) return;
+    const items = [...document.querySelectorAll('details[data-faq="item"]')];
+    if(items.length===0) return;
+    const toggleAll = (open) => {
+        items.forEach((item) => (item.open = open));
+        button.setAttribute('aria-expanded', String(open));
+        button.textContent = open ? 'すべて閉じる' : 'すべて開く';
+    };
+    button.addEventListener('click', ()=>{
+        const isOpen = button.getAttribute('aria-expanded') === 'true';
+        toggleAll(!isOpen);
+    }, false);
+}
+
 document.addEventListener('DOMContentLoaded', ()=>{
     create_mokuji();
     add_table_class();
     add_blockquote_class();
     headings_external_link();
+    home_faq_open_close();
 }, false);

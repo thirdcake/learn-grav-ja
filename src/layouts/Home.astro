@@ -17,6 +17,20 @@ const breadcrumbJsonLd = JSON.stringify({
     "item": hosturl + baseurl,
     }]
 });
+const faqJsonLd = frontmatter.faq
+  ? JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": frontmatter.faq.map((item: { q: string; a: string }) => ({
+        "@type": "Question",
+        "name": item.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": item.a
+        }
+      }))
+    })
+  : null;
 
 ---
 
@@ -54,11 +68,26 @@ const breadcrumbJsonLd = JSON.stringify({
 
   <!-- 構造化データ：パンくずリスト -->
   <script type="application/ld+json" set:html={breadcrumbJsonLd}></script>
+  { faqJsonLd && ( <script type="application/ld+json" set:html={faqJsonLd}></script> )}
 </head>
 <body>
   <main class="container learn-grav-default pb-5">
     <h1>{ frontmatter.title }</h1>
     <slot />
+    {frontmatter.faq && frontmatter.faq.length > 0 && (
+      <>
+        <h2>FAQ</h2>
+        <div>
+          <button type="button" data-faq="clickable" aria-expanded="false" class="btn btn-outline-secondary m-3">全部開閉</button>
+          {frontmatter.faq.map((item: { q: string; a: string }) => (
+            <details data-faq="item" style="border: 1px solid #ddd; border-radius: 6px; padding: 0.75rem 1rem; margin:0 0 1rem;">
+              <summary style="cursor: pointer; font-weight: bold;">{item.q}</summary>
+              <div style="margin-top: 0.5rem; padding-left: 0.5rem; color: #444;" set:html={item.a}></div>
+            </details>
+          ))}
+        </div>
+      </>
+    )}
     <h2>全ページ一覧</h2>
     <Sidebar pages={ pagetree.children } currentpath='' />
   </main>

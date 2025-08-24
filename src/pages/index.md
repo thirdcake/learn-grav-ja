@@ -1,7 +1,7 @@
 ---
 title: 'サイト全体の注記'
 layout: ../layouts/Home.astro
-lastmod: '2025-08-12'
+lastmod: '2025-08-24'
 faq:
   - q: 'サイトを日本語化(langをjaに)したい'
     a: 'サイドバーの「設定」を選択し、「サイト」タブの「既定の言語」をjaにしてください。'
