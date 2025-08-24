@@ -76,9 +76,9 @@ const faqJsonLd = frontmatter.faq
     <slot />
     {frontmatter.faq && frontmatter.faq.length > 0 && (
       <>
-        <h2>FAQ</h2>
+        <h2>Grav のよくある質問</h2>
         <div>
-          <button type="button" data-faq="clickable" aria-expanded="false" class="btn btn-outline-secondary m-3">全部開閉</button>
+          <button type="button" data-faq="clickable" aria-expanded="false" class="btn btn-outline-secondary m-3">すべて開く</button>
           {frontmatter.faq.map((item: { q: string; a: string }) => (
             <details data-faq="item" style="border: 1px solid #ddd; border-radius: 6px; padding: 0.75rem 1rem; margin:0 0 1rem;">
               <summary style="cursor: pointer; font-weight: bold;">{item.q}</summary>
