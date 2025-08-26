@@ -2,7 +2,9 @@
 title: フォーム
 layout: ../../layouts/Chapter.astro
 lastmod: '2025-05-04'
+description: 'Grav では、管理パネルで使われるフォームや、サイト上に表示されるフォームを簡単に設定・編集できます。'
 ---
+
 ### 第6章
 
 # フォーム

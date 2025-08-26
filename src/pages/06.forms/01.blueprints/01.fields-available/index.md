@@ -1,62 +1,68 @@
 ---
 title: リファレンス：ブループリントのform.fields
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-05-01'
+lastmod: '2025-08-26'
+description: 'Grav の管理パネルで利用できるフォーム入力欄を、ブループリントファイルで定義する方法を解説します。'
 ---
+
 <h2 id="available-form-fields-for-use-in-the-admin">管理プラグインで使えるform.fields</h2>
 
-管理パネルでは、さまざまな入力欄を作れます。このドキュメントでは、それぞれの入力欄のプロパティの完全なリファレンスと、使用例を提供します。
+管理パネルでは、さまざまな入力欄を作れます。  
+このドキュメントでは、それぞれの入力欄のプロパティの完全なリファレンスと、使用例を提供します。
 
-管理パネルでは、以下に一覧表示されている、 form.fields に加えて、フロントエンドで利用できる form.fields もすべて利用できます。[フロントエンドのフォーム入力欄のリファレンス](../../02.forms/02.fields-available/) に解説されています。
+管理パネルでは、以下に一覧表示している、 form.fields に加えて、フロントエンドで利用できる form.fields もすべて利用できます。  
+[フロントエンドのフォーム入力欄のリファレンス](../../02.forms/02.fields-available/) に解説されています。
 
 <h3 id="special-form-fields-available-exclusively-in-the-admin">管理プラグインだけで利用できる特別なフォームフィールド</h3>
 
-| フィールド                                             | 説明                                                  |
-| :-----                                            | :-----                                                       |
-| **[Array](#array-field)**                         | key-value 形式の配列を作ります                              |
-| **BackupHistory**                                 |                                                              |
-| **Blueprint**                                     |                                                              |
-| **[Colorpicker](#colorpicker-field)**             | カラーピッカーを表示                                         | 
-| **[Columns](#columns-column-fields)**             | 複数のカラムに分けます |
-| **[Column](#columns-column-fields)**              | （`Columns` フィールドで使われて）1つのカラムを表示します |
-| **Cron**                                          |                                                              |
-| **CronStatus**                                    |                                                              |
-| **[Dateformat](#dateformat-field)**               | 渡されたフォーマットで、今日/今の時間 をレンダリングする特別な選択 |
-| **[Datetime](#datetime-field)**                   | 日時を選択するフィールド |
-| **[Editor](#editor-field)**                       | markdown エディタを表示 |
-| **[Elements](#elements-field)**                   | 選択された "トリガー" の値をもとに、子要素を見せたり/隠したりする条件付きの整理用フィールドです。表示するオプションが多いとき、煩雑さを抑えるのにとても便利です |
-| **[Fieldset](#fieldset-field)**                   | 折りたたみ可能なアコーディオン内にフィールドのセットをグルーピングします   |
-| **[File](#file-field)**                           | 管理プラグイン内では、 **File** は、プラグインやテーマ設定（ブループリント）で使用されることに特化しています。ファイルのアップロード保存と、そのファイルの削除、テーマ/プラグイン設定からの参照の削除などを行います |
-| **[Filepicker](#filepicker-field)**               | **Filepicker** により、web サーバーのファイルシステムに保存したファイルを選択できます |
-| **Frontmatter**                                   |                                                              |
-| **IconPicker**                                    |                                                              |
-| **[List](#list-field)**                           | フィールドのコレクションを作ります |
-| **Markdown**                                      |                                                              |
-| **MediaPicker**                                   |                                                              |
-| **Multilevel**                                    |                                                              |
-| **Order**                                         |                                                              |
-| **PageMedia**                                     |                                                              |
+| フィールド | 説明  |
+| :----- | :----- |
+| **[Array](#array-field)** | key-value 形式の配列を作ります |
+| **BackupHistory** | |
+| **Blueprint** |  |
+| **[Colorpicker](#colorpicker-field)**  | カラーピッカーを表示 | 
+| **[Columns](#columns-column-fields)** | 複数のカラムに分けます |
+| **[Column](#columns-column-fields)** | （`Columns` フィールドで使われて）1つのカラムを表示します |
+| **Cron** |  |
+| **CronStatus** |  |
+| **[Dateformat](#dateformat-field)** | 渡されたフォーマットで、今日/今の時間 をレンダリングする特別な選択 |
+| **[Datetime](#datetime-field)** | 日時を選択するフィールド |
+| **[Editor](#editor-field)** | markdown エディタを表示 |
+| **[Elements](#elements-field)** | 選択された "トリガー" の値をもとに、子要素を見せたり/隠したりする条件付きの整理用フィールドです。表示するオプションが多いとき、煩雑さを抑えるのにとても便利です |
+| **[Fieldset](#fieldset-field)** | 折りたたみ可能なアコーディオン内にフィールドのセットをグルーピングします   |
+| **[File](#file-field)** | 管理プラグイン内では、 **File** は、プラグインやテーマ設定（ブループリント）で使用されることに特化しています。ファイルのアップロード保存と、そのファイルの削除、テーマ/プラグイン設定からの参照の削除などを行います |
+| **[Filepicker](#filepicker-field)** | **Filepicker** により、web サーバーのファイルシステムに保存したファイルを選択できます |
+| **Frontmatter** |  |
+| **IconPicker** |  |
+| **[List](#list-field)** | フィールドのコレクションを作ります |
+| **Markdown** |  |
+| **MediaPicker** |  |
+| **Multilevel** |  |
+| **Order** |  |
+| **PageMedia** |  |
 | **[PageMediaSelect](#pagemediaselect-field)**     | すべてのページメディアからの選択を表示します。ページのブループリントで使われ、ユーザーがそのフィールドに適用されたメディアファイルを選べるようになります |
-| **[Pages](#pages-field)**                         | サイトページの一覧を表示します |
-| **Parents**                                       |                                                              |
-| **Permissions**                                   |                                                              |
-| **Range**                                         |                                                              |
-| **[Section](#section-field)**                     | 設定ページをセクションに区切ります； each section comes with a title                                                                                                                                |
-| **[Selectize](#selectize-field)**                 | テキストボックスとセレクトボックスのハイブリッドです。タグなどの要素をピックアップするのに便利です。 |
-| **SelectUnique**                                  |                                                              |
-| **[Taxonomy](#taxonomy-field)**                   | タクソノミーを1つもしくは複数選択するために、事前に設定された特別な選択肢 |
-| **ThemeSelect**                                   |                                                              |
-| **UserInfo**                                      |                                                              |
-| **Xss**                                           |                                                              |
+| **[Pages](#pages-field)** | サイトページの一覧を表示します |
+| **Parents** |  |
+| **Permissions** |  |
+| **Range** |  |
+| **[Section](#section-field)** | 設定ページをセクションに区切ります； each section comes with a title  |
+| **[Selectize](#selectize-field)**  | テキストボックスとセレクトボックスのハイブリッドです。タグなどの要素をピックアップするのに便利です。 |
+| **SelectUnique** | |
+| **[Taxonomy](#taxonomy-field)** | タクソノミーを1つもしくは複数選択するために、事前に設定された特別な選択肢 |
+| **ThemeSelect** |  |
+| **UserInfo**  |  |
+| **Xss** |  |
 
 <h3 id="common-fields-attributes">一般的な属性フィールド</h3>
 
-このリストの属性は、基本的にすべてのフィールドで利用可能です。それぞれのフィールドは、一般的な属性を共有しますが、特定のフィールドでは、適用されないこともあります。フィールドでどの属性が利用可能かを知る最良の方法は、このページの説明を読み、どの属性が言及されているか確認することです。
+このリストの属性は、基本的にすべてのフィールドで利用可能です。  
+それぞれのフィールドは、一般的な属性を共有しますが、特定のフィールドでは、適用されないこともあります。  
+フィールドでどの属性が利用可能かを知る最良の方法は、このページの説明を読み、どの属性が言及されているか確認することです。
 
 このリストは共通事項なので、フィールドで説明は繰り返しません。
 
-| 属性           | 説明    |
-| :-----              | :-----  |
+| 属性 | 説明 |
+| :----- | :-----  |
 | `autocomplete`      | `on` もしくは `off` を受付 |
 | `autofocus`         | 有効化すると、フィールドをオートフォーカスします |
 | `classes`           | 文字列を受け付け、CSSのクラスを追加します |
@@ -80,7 +86,8 @@ lastmod: '2025-05-01'
 
 <h3 id="know-more-about-fields">フィールドについてより詳しく知る</h3>
 
-どのようにソースコードからフィールドがビルドされるかは、ここで読めます： [Form Plugin によるフィールドの追加](https://github.com/getgrav/grav-plugin-form/tree/master/templates/forms) 及び [管理パネルでのみ利用可能なフィールド](https://github.com/getgrav/grav-plugin-admin/tree/master/themes/grav/templates/forms) 。
+どのようにソースコードからフィールドがビルドされるかは、ここで読めます： 
+[Form Plugin によるフィールドの追加](https://github.com/getgrav/grav-plugin-form/tree/master/templates/forms) 及び [管理パネルでのみ利用可能なフィールド](https://github.com/getgrav/grav-plugin-admin/tree/master/themes/grav/templates/forms) 。
 
 ### Validation
 
@@ -91,7 +98,7 @@ validate:
     required: true
 ```
 
-上記により、そのフィールドは required となります。
+上記により、そのフィールドは required (必須入力) となります。
 
 ```yaml
 validate:
@@ -105,7 +112,14 @@ validate:
     pattern: 'Some pattern'
 ```
 
-上記では、入力値を、渡された正規表現でバリデーションします。たとえば： `pattern: "[1-9][0-9]*"`, `pattern: '[A-Za-z0-9-]+'`, `pattern: '[a-z0-9-]+'`, ` pattern: '^[a-z0-9_-]{3,16}$'`, `pattern: '(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}'`
+上記では、入力値を、渡された正規表現でバリデーションします。  
+たとえば:
+
+- `pattern: "[1-9][0-9]*"`
+- `pattern: '[A-Za-z0-9-]+'`
+- `pattern: '[a-z0-9-]+'`
+- `pattern: '^[a-z0-9_-]{3,16}$'`
+- `pattern: '(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}'`
 
 #### validate.type
 
@@ -221,7 +235,8 @@ folder:
 
 ![Array](array_field_bp.gif)
 
-シンプルな key - values オブジェクト（一般的な連想配列）を作ります。もしくは、 `value_only` オプションを使うと、ただの values のリスト（配列） を作ります。
+シンプルな key - values オブジェクト（一般的な連想配列）を作ります。  
+もしくは、 `value_only` オプションを使うと、ただの values のリスト（配列） を作ります。
 
 具体例：
 
@@ -236,15 +251,15 @@ metadata:
 ```
 
 
-| 属性           | 説明 |
-| :-----              | :-----      |
-| `placeholder_key`   |             |
-| `placeholder_value` |             |
+| 属性 | 説明 |
+| :----- | :----- |
+| `placeholder_key` |  |
+| `placeholder_value` |  |
 | `value_only`        | 配列の key を求めたり、保存したりしないでください。シンプルな値のみの配列を保存してください。 |
 | `value_type`        | 配列値を入力する際に、小さい [text field](../../02.forms/02.fields-available/#text-field) ではなく、 [textarea field](../../02.forms/02.fields-available/#textarea-field) で表示したい場合に、`textarea` を設定してください |
 
 
-| 利用可能な一般属性                      |
+| 利用可能な一般属性  |
 | :-----                                         |
 | [default](#common-fields-attributes)           |
 | [help](#common-fields-attributes)              |
@@ -296,7 +311,7 @@ color:
 
 ![Columns](columns_field_bp.gif)
 
-`columns` と `column` フィールドタイプは、フィールドをカラムに分けます（縦に分割します）
+`columns` と `column` フィールドタイプは、フィールドをカラムに (縦に) 分割します。
 
 具体例：
 
@@ -347,11 +362,11 @@ pages.dateformat.short:
         "jS M Y": Date5
 ```
 
-| 属性   | 説明                                             |
-| :-----      | :-----                                                  |
+| 属性   | 説明  |
+| :-----      | :-----  |
 | `options`   | key-value 型の選択肢                   |
 | `multiple`  | 真偽値。もしポジティブ（`true` など）なら、複数の値を許容します |
-| `selectize` |                                                         |
+| `selectize` |     |
 
 
 | 利用可能な一般属性                      |
@@ -437,11 +452,10 @@ frontmatter:
 
 
 
-| 属性    | 説明                                                                              |
-| :-----       | :-----                                                                                   |
+| 属性    | 説明   |
+| :-----       | :-----  |
 | `codemirror` | [codemirror editor](https://codemirror.net/doc/manual.html#config) の設定値。デフォルトでは、gfm（github flavored markdown）モードです |
 | `resizer`    | ポジティブな値の場合、resizer を有効化します。そうでない場合、エディタは固定です。 |
-
 
 
 | 利用可能な一般属性                      |
@@ -466,7 +480,8 @@ frontmatter:
 
 ![Elements](elements_field.gif)
 
-このフィールドは、整理するだけのものです。アイテムをグループ化し、名前を付け、select 要素の値と一致すればそれだけを表示します。
+このフィールドは、整理するだけのものです。  
+アイテムをグループ化し、名前を付け、select 要素の値と一致すれば、それだけを表示します。
 
 具体例：
 
@@ -561,7 +576,8 @@ header.fieldset:
 
 #### Icon of the fieldset
 
-フィールドセットのヘッダにアイコンが使えます。システムの使うアイコンは、[Fork Awesome](https://forkaweso.me) です。
+フィールドセットのヘッダにアイコンが使えます。  
+システムの使うアイコンは、 [Fork Awesome](https://forkaweso.me) です。
 
 
 | 属性     | 説明   |
@@ -591,7 +607,7 @@ header.fieldset:
 > `file`  フィールドは、**configration** と、 **テーマ** と、**プラグイン** のブループリントで使われるためのもので、 **ページのブループリントのためのものではありません** 。ページのためには、既存の `pagemedia` フィールドを使うべきです。その後のファイルの選択には、 [filepicker](#filepicker-field) を使ってください。
 
 > [!Info]  
-> The `file` field does not currently work as expected in a list field. Use a single `pagemedia` field separate from the list with one or more `filepicker` fields in the list.
+> `file` フィールドは、現状、 list フィールド内で期待通りに機能しません。 `pagemedia` フィールドを list から分けて、リスト内には `filepicker` フィールドを使ってください。
 
 > [!Note]  
 > より詳しくは、 [ハウツー： アップロードでファイルを追加](../04.how-to-add-file-upload/) セクションをご覧ください。 また、 file フィールドにアップロードされた画像の表示方法は、 filepicker フィールドによるものとは、同じ方法ではないことにも注意してください。 file フィールドでアップロードした画像へのアクセスに関する詳細は、この [レシピ](../../../10.cookbook/02.twig-recipes/#displaying-an-image-uploaded-in-a-file-field) をご覧ください。
@@ -651,7 +667,8 @@ custom_file:
 
 ![Filepicker Field](filepicker_field.png)
 
-`filepicker` フィールドタイプは、ページ、プラグイン、テーマの設定（ブループリント）で使われます。特定の場所からファイルを選択し、ページヘッダーもしくはテーマ / プラグイン設定に保存します。
+`filepicker` フィールドタイプは、ページ、プラグイン、テーマの設定（ブループリント）で使われます。  
+特定の場所からファイルを選択し、ページヘッダーもしくはテーマ / プラグイン設定に保存します。
 
 具体例：
 
@@ -699,7 +716,8 @@ header.a_file:
 
 ### Honeypot Field
 
-`honeypot` フィールドタイプは、入力されるとエラーを返す hidden フィールドを作成します。ボットによるフォームの入力と送信を防ぐのに便利です。
+`honeypot` フィールドタイプは、入力されるとエラーを返す hidden フィールドを作成します。  
+ボットによるフォームの入力と送信を防ぐのに便利です。
 
 具体例：
 
@@ -709,7 +727,10 @@ fields:
       type: honeypot
 ```
 
-これは、シンプルな text フィールドですが、フロントエンドには表示されません。コード内のフィールドを探索し、自動入力するボットは、このフィールドも入力する可能性があります。このエラーにより、フォームは適切に送信されません。エラーは、メッセージブロックの上部ではなく、フォーム要素の次に表示されます。
+これは、シンプルな text フィールドですが、フロントエンドには表示されません。  
+コード内のフィールドを探索し、自動入力するボットは、このフィールドも入力する可能性があります。  
+このエラーにより、フォームは適切に送信されません。  
+エラーは、メッセージブロックの上部ではなく、フォーム要素の次に表示されます。
 
 ハニーポットは、captcha フィールドの代替としてよく利用されます。
 
@@ -718,7 +739,9 @@ fields:
 
 ![List Field](list_field_bp.gif)
 
-`list` フィールドタイプは、フィールドのコレクションを作成します。このフィールドには、サブフィールドの親となる `fields` 属性を与えます。 "Add item" ボタンが表示され、ユーザーはコレクションにアイテムを追加することができます。
+`list` フィールドタイプは、フィールドのコレクションを作成します。  
+このフィールドには、サブフィールドの親となる `fields` 属性を与えます。  
+"Add item" ボタンが表示され、ユーザーはコレクションにアイテムを追加することができます。
 
 具体例：
 
@@ -767,7 +790,9 @@ buttons:
 
 これは、テーマの Twig で、適切な方法でリストを出力するために使われます。
 
-このフィールド定義の別の例として、Features のリストがあります。Antimatter テーマの Features Modular child page で使われます。すべての feature には、アイコンと、ヘッダーと、テキストが含まれます：
+このフィールド定義の別の例として、 Features のリストがあります。  
+Antimatter テーマの Features Modular child page で使われます。  
+すべての feature には、アイコンと、ヘッダーと、テキストが含まれます：
 
 ```yaml
 header.features:
@@ -787,7 +812,8 @@ header.features:
       label: Text
 ```
 
-`list` フィールドのデータにアクセスし、表示するには、シンプルな twig のループを使います。次の例のように：
+`list` フィールドのデータにアクセスし、表示するには、シンプルな twig のループを使います。  
+次の例のように：
 
 ```twig
 {% for feature in page.header.features %}
@@ -888,7 +914,7 @@ home.alias:
 | `limit_levels`  | 表示するレベル数      |
 | `selectize`     |                                        |
 
-`multiple` を true に設定するときは、`validate.type: array` を追加する必要があります。
+`multiple` を true に設定するときは、`validate.type: array` を追加する必要があります。  
 そうでなければ、選択されたページの配列が、正しく保存されません。
 
 | 利用可能な一般属性                      |
@@ -939,7 +965,8 @@ content:
 
 ![Selectize](selectize_field_bp.gif)
 
-`selectize` フィールドタイプは、text ボックスと select ボックスのハイブリッドを表示します。主に、タグ付けやその他の要素選択フィールドに便利です。
+`selectize` フィールドタイプは、text ボックスと select ボックスのハイブリッドを表示します。  
+主に、タグ付けやその他の要素選択フィールドに便利です。
 
 具体例：
 
