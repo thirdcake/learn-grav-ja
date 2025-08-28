@@ -1,8 +1,9 @@
 ---
 title: 高度なブループリントの機能
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-05-02'
+lastmod: '2025-08-28'
 ---
+
 ブループリントには、それらを拡張し、動的にフィールドを使える高度な機能があります。
 
 <h2 id="defining-validation-rules">バリデーションルールの定義</h2>
@@ -34,7 +35,7 @@ form:
 extends@: default
 ```
 
-In the extended format you can specify a lookup context for your base file:
+拡張フォーマットでは、ベースファイルとして見つけるコンテクストを指定できます:
 
 ```yaml
 extends@:
@@ -42,13 +43,14 @@ extends@:
   context: blueprints://pages
 ```
 
-You can also extend the blueprint itself, if there are multiple versions of the same blueprint.
+同じブループリントの複数のバージョンがある場合は、ブループリント自体を拡張することもできます。
 
 ```yaml
 extends@: parent@
 ```
 
-There is no limit on how many blueprints you can extend. Fields defined in the first blueprint will be replaced by any later blueprints in the list.
+拡張できるブループリントの数に制限はありません。  
+最初のブループリントで定義されたフィールドは、後に続くブループリントで書き換えられます。
 
 ```yaml
 extends@:
@@ -57,19 +59,23 @@ extends@:
     context: blueprints://pages
 ```
 
-### Understanding the type- and context-properties
+<h3 id="understanding-the-type-and-context-properties">type 及び context プロパティを理解する</h3>
 
-In the examples above, `type` is referencing a file and `context` a path. The `context`-property uses [Streams](https://learn.getgrav.org/advanced/multisite-setup#streams), which means that it resolves to a physical location.
+上記の例で、 `type` は参照ファイルで、 `context` は path です。  
+`context` プロパティは、 [ストリーム](../../../08.advanced/05.multisite-setup/#streams) を使い、これはつまり、物理的なロケーションを解決します。
 
-`context: blueprints://` by default will yield `/user/plugins/admin/blueprints`, Admin's blueprints-folder. `type: default` will yield `default.yaml`, when looking up files. Because these two properties are used together, they yield a full path that Grav can understand: `/user/plugins/admin/blueprints/default.yaml`.
+デフォルトの `context: blueprints://` は、 `/user/plugins/admin/blueprints` つまり、管理パネルのブループリントフォルダを出力します。  
+`type: default` は、ファイルを探す時に `default.yaml` を出力します。  
+これら2つのプロパティが一緒に使われるので、 Grav は、 `/user/plugins/admin/blueprints/default.yaml` として理解できるフルパスを出力します。
 
-Whenever you see the `://`-syntax in these docs, you can be pretty sure it's referring to a stream. And when using `context`, this stream must resolve to an existing folder to work.
+`://` という構文を見た場合はいつでも、ストリームを参照すると確信してもらって構いません。  
+そして `context` を使う場合は、このストリームは、機能するフォルダの存在を解決しなければいけません。
 
-## Embedding Form (import@)
+<h2 id="embedding-form-importat">埋め込みフォーム(import@)</h2>
 
-Sometimes you may want to share some fields or sub-forms between multiple forms.
+複数のフォーム間で、いくつかの入力フィールドや、サブフォームを共有したい場面があるかもしれません。
 
-Let's create `blueprints://partials/gallery.yaml` which we want to embed to our form:
+フォームに埋め込む目的の `blueprints://partials/gallery.yaml` を作成してみましょう:
 
 ```yaml
 form:
@@ -83,7 +89,7 @@ form:
           label: Image
 ```
 
-Our form then has a section where we would like to embed the gallery images:
+そして、このフォームは、ギャラリー画像を埋め込みたい場所としてのセクションを持ちます:
 
 ```yaml
 form:
@@ -97,7 +103,8 @@ form:
           context: blueprints://
 ```
 
-While YAML does not allow using the same `import@` key multiple times, you can still import multiple blueprints by appending a unique number after `@`, e.g. `import@1`, `import@2` and so on. The number has no other meaning than preventing YAML parser from erroring out:
+YAML は、同一の `import@` キーを複数回使うことを許容しないものの、たとえば `import@1`, `import@2`, のように、 `@` の後に一意の数字を追加することで、複数のブループリントをインポートできます。  
+その数字は、 YAML のパーサーがエラーを出力しないようにするため以上の意味はありません:
 
 ```yaml
 form:
@@ -114,15 +121,16 @@ form:
           context: blueprints://
 ```
 
-## Removing Fields / Properties (unset-*@)
+<h2 id="removing-fields-properties-unset-at">フィールド・プロパティの削除(unset-*@)</h2>
 
-If you want to remove a field, you can add `unset@: true` inside of it.
-If you want to remove a property of field, you just append property name, eg: `unset-options@` removes all options.
+フィールドを削除したい場合、その内部に `unset@: true` を追加できます。
+フィールドのプロパティを削除したい場合、プロパティ名に、たとえば `unset-options@` を付けるだけで、すべてのオプションを削除できます。
 
-## Replacing Fields / Properties (replace-*@)
+<h2 id="replacing-fields-properties-replace-at">フィールド・プロパティの置き換え(replace-*@)</h2>
 
-By default blueprints use deep merging of its properties. Sometimes instead of merging the content of the field, you want to start from a clean table.
-If you want to replace the whole field, your new field needs to start with `replace@`:
+デフォルトでは、ブループリントは、プロパティを深くマージ(再帰的に中身まで含めてマージ)します。  
+ときには、フィールドのコンテンツをマージするのではなく、クリーンなテーブルから始めたい場合もあります。
+フィールド全体を置き換えたい場合、その新しいフィールドは、 `replace@` で始める必要があります:
 
 ```yaml
 author.name:
@@ -131,9 +139,8 @@ author.name:
   label: Author name
 ```
 
-
-As the result `author.name` will have only two properties: `type` and `label` regardless of what the form had before.
-You can do the same for individual properties:
+`author.name` の結果は、以前のフォームが持っていたものと関係なく、2つのプロパティ (`type` と `label`) だけです。
+個々のプロパティにも同じことができます:
 
 ```yaml
 summary.enabled:
@@ -144,9 +151,9 @@ summary.enabled:
     2: Do not care
 ```
 
-Note: `replace-*@` is alias for `unset-*@`.
+注意: `replace-*@` は、 `unset-*@` のエイリアス(別名)です。
 
-## Using Configuration (config-*@)
+<h2 id="using-configuration-config-at">設定を利用する (config-*@)</h2>
 
 There are times when you might want to get default value from Grav configuration. For example you may want to have author field to default to author of the site:
 

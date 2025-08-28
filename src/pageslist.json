@@ -451,7 +451,7 @@
     },
     {
         "pathname": "06.forms\/01.blueprints\/05.example-config-blueprints",
-        "title": "\u5177\u4f53\u4f8b\uff1a\u30d6\u30eb\u30fc\u30d7\u30ea\u30f3\u30c8\u306e\u8a2d\u5b9a",
+        "title": "\u5177\u4f53\u4f8b\uff1aconfig \u8a2d\u5b9a\u306e\u30d6\u30eb\u30fc\u30d7\u30ea\u30f3\u30c8",
         "redirect": false,
         "isonlyja": false
     },

@@ -1,9 +1,13 @@
 ---
 title: 具体例：ページのブループリント
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-05-01'
+lastmod: '2025-08-28'
+description: 'ページのブループリントについて、それが設定できる内容や、保存場所、設定方法などを解説します。'
 ---
-**ページのブループリント** は、デフォルトのページを拡張し、オプションを追加できる機能を提供します。基本的に、カスタムページは、ページのブループリントを使うことで成立します。ページのブループリントによって、管理パネル上のページの編集画面を 100% 設定できます。
+
+**ページのブループリント** は、デフォルトのページを拡張し、オプションを追加できる機能を提供します。  
+基本的に、カスタムページは、ページのブループリントを使うことで成立します。  
+ページのブループリントによって、管理パネル上のページの編集画面を 100% 設定できます。
 
 > [!訳注]  
 > このドキュメント中に明示的に書かれていませんが、ページのフォームタイプは、基本的にページのファイル名と一致する YAML ファイルのようです。（よって、おのずとテーマのテンプレート名にも一致するはずです）。たとえば、 `/user/pages/01.home/default.md` のページに対するページのブループリントは、 `/user/blueprints/pages/deafult.yaml` もしくは、 `/user/themes/あなたのテーマ/blueprints/default.yaml` であることが多いはずです。
@@ -78,11 +82,12 @@ form:
                 three: Three
 ```
 
-追加できるフィールドタイプは、[管理パネルで塩生可能なフォームフィールド](../01.fields-available/) に一覧表示されています。
+追加できるフィールドタイプは、[管理パネルで使用可能なフォームフィールド](../01.fields-available/) に一覧表示されています。
 
 <h3 id="how-to-name-fields">フィールドの命名法</h3>
 
-フィールドが `header.*` という構造を使うことは重要です。これにより、ページの保存時に、フィールドのコンテンツは **ページヘッダー** に保存されます。
+フィールドが `header.*` という構造を使うことは重要です。  
+これにより、ページの保存時に、フィールドのコンテンツは **ページヘッダー** に保存されます。
 
 <h3 id="create-a-completely-custom-page-form">完全にカスタムされたページのフォームを作成する</h3>
 
@@ -129,8 +134,8 @@ form:
 
 ```
 
-> [!Info]  
-> **WARNING:** `route` フィールドは、Grav 1.7 で変更されました。既存のブループリントを、新しい `type: parents` に更新してください。
+> [!Warning]  
+> `route` フィールドは、Grav 1.7 で変更されました。既存のブループリントを、新しい `type: parents` に更新してください。
 
 <h3 id="a-note-for-expert-mode">エキスパートモードに関する注意</h3>
 
@@ -142,22 +147,27 @@ form:
 
 <h4 id="in-the-user-blueprints-folder">ユーザーのブループリントフォルダ</h4>
 
-`user/blueprints/pages/` 内に保存します。ブループリントをサイトにシンプルに反映させたいときは、ここに置くのが良いです。
+`user/blueprints/pages/` 内に保存します。  
+ブループリントをサイトにシンプルに反映させたいときは、ここに置くのが良いです。
 
 <h4 id="in-the-theme">テーマ</h4>
 
-`user/themes/YOURTHEME/blueprints/` 内に保存します。テーマを配布する予定がある場合、ここが最適です。テーマがページのブループリントを提供し、使いやすくなります。
+`user/themes/YOURTHEME/blueprints/` 内に保存します。  
+テーマを配布する予定がある場合、ここが最適です。  
+テーマがページのブループリントを提供し、使いやすくなります。
 
 <h4 id="in-the-data-folder">データフォルダ</h4>
 
-Gantry5 ベースのテーマを利用している場合、`user/data/gantry5/themes/YOURTHEME/blueprints/` 内が、最適な場所です。そうでない場合、テーマのアップデート中に、ファイルが消えてしまうかもしれません。
+Gantry5 ベースのテーマを利用している場合、`user/data/gantry5/themes/YOURTHEME/blueprints/` 内が、最適な場所です。  
+そうでない場合、テーマのアップデート中に、ファイルが消えてしまうかもしれません。
 
 <h4 id="in-a-plugin">プラグイン</h4>
 
-`user/plugins/YOURPLUGIN/blueprints/` 内に保存します。これは、プラグインでカスタムページを定義して追加するようなときに保存する場所です。
+`user/plugins/YOURPLUGIN/blueprints/` 内に保存します。  
+これは、プラグインでカスタムページを定義して追加するようなときに保存する場所です。
 
-次に、 `onGetPageBlueprints` イベントを登録し、Grav に追加します。以下の例は、 `blueprints/` フォルダからブループリントを追加します。
-Then subscribe to the `onGetPageBlueprints` event and add them to Grav. The following example adds the blueprints from the `blueprints/` folder.
+次に、 `onGetPageBlueprints` イベントを登録し、Grav に追加します。  
+以下の例は、 `blueprints/` フォルダからブループリントを追加します。
 
 ```php
 public static function getSubscribedEvents()
