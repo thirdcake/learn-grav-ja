@@ -1,7 +1,8 @@
 ---
 title: 高度なブループリントの機能
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-08-28'
+lastmod: '2025-08-29'
+description: 'ブループリント設定ファイルを、拡張したり、動的に編集する方法を解説します。'
 ---
 
 ブループリントには、それらを拡張し、動的にフィールドを使える高度な機能があります。
@@ -155,7 +156,8 @@ summary.enabled:
 
 <h2 id="using-configuration-config-at">設定を利用する (config-*@)</h2>
 
-There are times when you might want to get default value from Grav configuration. For example you may want to have author field to default to author of the site:
+Grav config 設定から、デフォルト値を得たい場合があります。  
+たとえば、サイトの著者をデフォルト著者として使いたい場合です:
 
 ```yaml
 form:
@@ -166,7 +168,7 @@ form:
       config-default@: site.author.name
 ```
 
-If your site author name is `John Doe`, the form is equivalent to:
+サイトの著者名が `John Doe` だったら、フォームは次と同等です:
 
 ```yaml
 form:
@@ -177,13 +179,17 @@ form:
       default: "John Doe"
 ```
 
-You can use `config-*@` for any field; for example if you want to change the field `type`, you can just have `config-type@: site.forms.author.type` to allow you to change the input field type from your configuration.
+`config-*@` は、どの入力フィールドでも使えます; たとえば、 `type` フィールドを変更したい場合、 `config-type@: site.forms.author.type` とするだけで、入力フィールドの type を config 設定から変更できます。
 
-## Using Function Calls (data-*@)
+<h2 id="using-function-calls-data-at">関数呼び出しを利用する (data-*@)</h2>
 
-You can make function calls with parameters from your blueprints to dynamically fetch a value for any property in your field. You can do this by using `data-*@:` notation as the key, where `*` is the field name you want to fill with the result of the function call.
+ブループリントから引数とともに関数を呼び出して、動的にフィールド内の任意のプロパティ値を取得できます。  
+これを行うには `data-*@` 表記をキーとして使います。  
+`*` は、関数呼び出しの結果を入力するフィールド名です。 
 
-As an example we are editing a page and we want to have a field that allows us to change its parent or in another words move page into another location. For that we need default value that points to the current location as well as a list of options which consists of all possible locations. For that we need a way to ask Grav
+具体例として、ページを編集している時に、そのページの親を変更できる入力フィールド (別の言い方をすれば、ページを別の場所に移動するフィールド) が欲しいとします。  
+そのためには、現在の位置であるデフォルト値とともに、すべての可能な移動先の選択肢が必要です。  
+そのため、 Grav に尋ねる必要があります:
 
 ```yaml
 form:
@@ -198,7 +204,7 @@ form:
         '/': '- Root -'
 ```
 
-If you were editing team member page, resulting form would look something like this:
+チームメンバーのページを編集中に、フォームの結果が、次のようになるかもしれません:
 
 ```yaml
 form:
@@ -216,21 +222,25 @@ form:
         ...
 ```
 
-While `data-default@:` and `data-options@:` are likely the most used dynamic field properties, you are not limited to those. There are no limits on which properties you can fetch, including `type`, `label`, `validation` and even `fields` under the current field.
+`data-default@:` と `data-options@:` が、よく使われる動的なフィールドプロパティと思われますが、これらだけに限定する必要はありません。  
+取得できるプロパティに制限はありません。 `type` や、 `label`, `validation`, そして現在のフィールド下にある `fields` さえも含まれます。
 
-Additionally you can pass parameters to the function call just by using array where the first value is the function name and parameters follow:
+さらに、関数呼び出しには引数を使うこともできます。最初の値を関数名とし、それ以降引数続けた配列を使うだけです:
 
 ```yaml
   data-default@: ['\Grav\Theme\ImaginaryClass::getMyDefault', 'default', false]
 ```
 
-## Changing field ordering
+<h2 id="changing-field-ordering">フィールドの順番を変更する</h2>
 
-When you extend a blueprint or import a file, by default the new fields are added to the end of the list. Sometimes this is not what you want to do, you may want to add item as the first or after some existing field.
+ブループリントを拡張したり、ファイルをインポートしたとき、デフォルトでは新しいフィールドはリストの最後に追加されます。  
+場合によっては、そういうことがやりたいのではないこともあります。  
+アイテムを最初に追加したかったり、とある既存のフィールドの後に入れたかったりするかもしれません。
 
-If you want to create a field, you can state its ordering using the `ordering@` property. This field can contain either a field name or an integer (-1 = first item).
+フィールドを作成したい場合、 `ordering@` プロパティを使って順番を指定できます。  
+このフィールドには、フィールド名か、整数を入れられます (-1 = 最初のアイテム) 。
 
-Here is an example:
+具体例です:
 
 ```yaml
 form:
@@ -249,9 +259,10 @@ form:
         ...
 ```
 
-Doing this ensures that the route field will be the first field to appear in the form. This makes it easy to import and/or extend an existing field and place your additional fields where you would like them to go.
+このようにすることで、 route フィールドはフォームで最初に現れるフィールドになります。  
+これにより、既存のフィールドをインポートしたり、拡張したりするのが簡単になり、追加のフィールドを置きたい場所に置きやすくなります。
 
-Here is another example:
+次も、具体例です:
 
 ```yaml
 form:
@@ -263,13 +274,15 @@ form:
       default: "John Doe"
 ```
 
-In the example above, we used the name of another field to set the ordering. In this example, we have set it up so that the `author` field appears after the `title` field in the form.
+上記の例では、別のフィールドの名前を使って、順番を設定しています。  
+この例では、 `author` フィールドがフォーム内の `title` フィールドの後に現れるように設定しました。
 
-!! When ordering fields in a page blueprint, you still need to reference the field names prefixed with `header.`, eg: `header.title` for the ordering to work.
+> [!Info]  
+> ページのブループリントでフィールドを順序付ける場合、順序付けが機能するためには、フィールド名に `header` 接頭辞を参照する必要があります。例: `header.title`
 
-## Creating new form field type
+<h2 id="creating-new-form-field-type">新しいフォームフィールドタイプを作成する</h2>
 
-If you create a special form field type, which needs a special handling in blueprints, there is a plugin function that you can use.
+ブループリントで特別な制御を必要とする、特別なフォームフィールドタイプを作成する場合に、利用できるプラグインの関数があります。
 
 ```php
     /**
@@ -290,27 +303,29 @@ If you create a special form field type, which needs a special handling in bluep
     }
 ```
 
-You do not need to register this function as it's not really an event, but gets fired when plugin object gets constructed.
-The purpose of this function is to give extra instructions how to handle the field, for example above code makes display and spacer types to be virtual, meaning that they won't exist in real data.
+この関数は、登録する必要はありません。  
+これは実際のイベントではなく、プラグインオブジェクトが construct されたときに発火するからです。  
+この関数の目的は、フィールドの処理方法に追加の指示を与えることです。  
+たとえば、上記のコードでは、 display 型と spacer 型を仮想的に設定し、本当のデータとしては存在しないことを意味します。
 
-You can add any `key: value` pairs including dynamic properties like `data-options@` which will automatically get appended to the fields.
+フィールドに自動的に追加される `data-options@` のような動的なプロパティを含め、あらゆる `key: value` ペアを追加できます。
 
-## onBlueprintCreated or accessing blueprint data
+<h2 id="onblueprintcreated-or-accessing-blueprint-data">onBlueprintCreated もしくはブループリントデータへのアクセス</h2>
 
-Because of blueprints consist of fields with dots, getting nested field from blueprint uses `/` notation instead of `.` notation.
+ブループリントは、ドット付きのフィールドで構成されるため、ブループリントからネストされたフィールドを取得するには、 `.` 記法ではなく、 `/` 記法を使います。
 
 ```php
 $tabs = $blueprint->get('form/fields/tabs');
 ```
 
-This makes it possible to access special data fields, like:
+これにより、次のような特別なデータフィールドにアクセスできます:
 
 ```php
 $name = $blueprint->get('form/fields/content.name');
 $name = $blueprint->get('form/fields/content/fields/.name');
 ```
 
-For backwards compatibility, you can specify divider in the last (3rd) parameter of `set()` and `get()`
+後方互換性のため、 `set()` と `get()` の最後の (3番目の) 引数に、特別な分割記号を使うことができます
 
 ```php
 $tabs = $blueprint->get('form/fields/tabs', null, '/');
