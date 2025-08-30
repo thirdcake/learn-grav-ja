@@ -1,15 +1,18 @@
 ---
 title: 'リファレンス：form.fields の一覧'
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-05-04'
+lastmod: '2025-08-30'
 ---
+
 <h2 id="common-field-attributes">一般的なフィールドの属性</h2>
 
-すべてのフィールドは、使用可能な属性のリストを受け入れます。それぞれのフィールドは、一般的な属性を共有できますが、特定のフィールドでは無視されることがあります。フィールドで、どの属性が許可されているかチェックする最良の方法は、このページのフィールドの説明を確認して、どの属性が言及されているかを確認することです。
+すべてのフィールドは、使用可能な属性のリストを受け入れます。  
+それぞれのフィールドは、一般的な属性を共有できますが、特定のフィールドでは無視されることがあります。  
+フィールドで、どの属性が許可されているかチェックする最良の方法は、このページのフィールドの説明を確認して、どの属性が言及されているかを確認することです。
 
 以下のリストは、共通する事項なので、各フィールドの説明では繰り返しません。
 
-| 属性           | 説明                                     |
+| 属性 | 説明 |
 | :-----              | :-----                              |
 | `autocomplete`      | `on` もしくは `off` を受け付けます |
 | `autofocus`         | 有効化すると、フィールドでオートフォーカスします  |
@@ -66,11 +69,15 @@ datasets:
 
 ### Basic-Captcha Field
 
-Forms プラグイン `7.0.0` で、Google ReCaptcha フィールドのローカルでの代替として追加されました。このフィールドは、Google の提供する GDPR 制限に惑わされたくない場合で、コンタクトフォームでのスパムを取り扱うときに、特に便利です。攻撃を阻止するため、**OCR-耐性** のあるフォントを利用し、コピーするコードや、かんたんな算数の問題を設定できます。
+Forms プラグイン `7.0.0` で、 Google ReCaptcha フィールドのローカルでの代替として追加されました。  
+このフィールドは、 Google の提供する GDPR 制限に惑わされたくない場合で、コンタクトフォームでのスパムを取り扱うときに、特に便利です。  
+攻撃を阻止するため、 **OCR-耐性** のあるフォントを利用し、コピーするコードや、かんたんな算数の問題を設定できます。
 
 ![Basic-Captcha](basic-captcha_field.gif)
 
-`basic-captcha` フィールドタイプは、`forms` 設定で、完全に制御できますが、適切なデフォルト値が設定されています。Basic-Captcha の全体的な設定は、グローバルなフォーム設定ファイル（通常は、 `user/config/plugins/form.yaml` ）で行います。デフォルトのオプションは：
+`basic-captcha` フィールドタイプは、`forms` 設定で、完全に制御できますが、適切なデフォルト値が設定されています。  
+Basic-Captcha の全体的な設定は、グローバルなフォーム設定ファイル（通常は、 `user/config/plugins/form.yaml` ）で行います。  
+デフォルトのオプションは：
 
 ```yaml
 basic_captcha:
@@ -115,14 +122,18 @@ process:
 
 ### Turnstile Captcha Field (Cloudflare)
 
-Form プラグイン `v7.1.0` から、新しく Cloudflare 社の Turnstile フィールドをサポートしました。このフィールドは、フォームの SPAM 除けの新しい方法です。Google ReCaptcha フィールドと、 Google からの **GDPR** 規制の代替となる素晴らしいものです。このフィールドは、コンタクトフォームで SPAM を取り扱うときに特に便利です。[Turnstile については、こちらを参照してください](https://blog.cloudflare.com/turnstile-private-captcha-alternative/) 
+Form プラグイン `v7.1.0` から、新しく Cloudflare 社の Turnstile フィールドをサポートしました。  
+このフィールドは、フォームの SPAM 除けの新しい方法です。  
+Google ReCaptcha フィールドと、 Google からの **GDPR** 規制の代替となる素晴らしいものです。  
+このフィールドは、コンタクトフォームで SPAM を取り扱うときに特に便利です。  
+[Turnstile については、こちらを参照してください](https://blog.cloudflare.com/turnstile-private-captcha-alternative/) 
 
 <h5 id="advantages-over-google-recaptcha">Google ReCaptcha よりも優れている点</h5>
 
 1. GDPR に準拠し、ユーザーのプライバシーを重視している
 2. 検証が極めて速い
 3. Cloudflare と Grav の両方で、実装がとても簡単で、複雑な UI やパラメータを設定する必要がない
-4. No fancy workarounds for asynchronous form submissions (ajax), it just works!
+4. 非同期のフォーム送信 (ajax) のための派手な追加コードが不要で、そのまま動く!
 5. ReCaptcha と比べて、ユーザー体験が良い。車や信号機を数えたり、その他のナンセンスなことをしなくて済む
 6. 機械学習の上に構築されているので、時間の経過とともに改良され、新しい攻撃にも適応する
 7. チャレンジの効果を徹底的に分析できる。 [スクリーンショットを見てください](https://blog.cloudflare.com/content/images/2022/09/image1-64.png)
