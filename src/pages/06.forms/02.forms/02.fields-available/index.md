@@ -1,7 +1,8 @@
 ---
 title: 'リファレンス：form.fields の一覧'
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-08-30'
+lastmod: '2025-09-02'
+description: 'Grav の form プラグインで、フロントエンド向けに設定可能な入力フォームを、ひとつずつ解説します。'
 ---
 
 <h2 id="common-field-attributes">一般的なフィールドの属性</h2>
@@ -13,7 +14,7 @@ lastmod: '2025-08-30'
 以下のリストは、共通する事項なので、各フィールドの説明では繰り返しません。
 
 | 属性 | 説明 |
-| :-----              | :-----                              |
+| :----- | :----- |
 | `autocomplete`      | `on` もしくは `off` を受け付けます |
 | `autofocus`         | 有効化すると、フィールドでオートフォーカスします  |
 | `classes`           | 文字列を受けて、CSS クラスを追加します  |
@@ -141,14 +142,21 @@ Google ReCaptcha フィールドと、 Google からの **GDPR** 規制の代替
 
 <h5 id="integration">統合</h5>
 
-Grav のフォームを Turnstile と統合する前に、まずは [Turnstile サイトを新しく作らなければいけません](https://dash.cloudflare.com/?to=/:account/turnstile) 。そして、[公式の "get started" チュートリアル](https://developers.cloudflare.com/turnstile/get-started/) も進めてください。
-ここで、 widget のタイプを選べます。`managed` か、`non-interactive` か、 `invisible` のいずれかです。重要な注意点として、 widget のタイプは Cloudflare からのみ変更できます。Grav からは設定できません。しかし、ある選択が良くなかったとき、必要に応じて、後で変更は可能です。[widget タイプの違いについて、より詳しくはCloudflareで学んでください](https://developers.cloudflare.com/turnstile/reference/widget-types/) 
+Grav のフォームを Turnstile と統合する前に、まずは [Turnstile サイトを新しく作らなければいけません](https://dash.cloudflare.com/?to=/:account/turnstile) 。  
+そして、 [公式の "get started" チュートリアル](https://developers.cloudflare.com/turnstile/get-started/) も進めてください。
+ここで、 widget のタイプを選べます。  
+`managed` か、`non-interactive` か、 `invisible` のいずれかです。  
+重要な注意点として、 widget のタイプは Cloudflare からのみ変更できます。  
+Grav からは設定できません。  
+しかし、ある選択が良くなかったとき、必要に応じて、後で変更は可能です。  
+[widget タイプの違いについて、より詳しくはCloudflareで学んでください](https://developers.cloudflare.com/turnstile/reference/widget-types/) 
 
 > [!Note]  
 > Turnstile フィールドを使うかもしれないドメインはすべて、忘れずに追加してください。これには、あなたのローカル環境も含まれます。
 
-一度サイトを作成すると、`site_key` と `site_secret` が与えられます。これらはフォームの設定ファイル（通常は、`user/config/plugins/form.yaml` ）から設定するのに必要なものです。
-You can ignore the script tag suggested, as Grav takes care of it for you.
+一度サイトを作成すると、`site_key` と `site_secret` が与えられます。  
+これらはフォームの設定ファイル（通常は、`user/config/plugins/form.yaml` ）から設定するのに必要なものです。  
+Grav が処理するので、提案されたスクリプトタグは無視して構いません。
 
 デフォルトのオプションは、以下のとおりです：
 
@@ -207,12 +215,15 @@ form:
 
 ### Google Captcha Field (ReCaptcha)
 
-`captcha` フィールドタイプは、Google reCAPTCHA 要素をフォームに追加するために使われます。他の要素と違い、1つのフォームに1回だけ使えます。
+`captcha` フィールドタイプは、 Google reCAPTCHA 要素をフォームに追加するために使われます。  
+他の要素と違い、1つのフォームに1回だけ使えます。
 
 > [!Note]  
-> You should configure your Google reCAPTCHA configurations in the [reCAPTCHA Admin Console](https://www.google.com/recaptcha/admin)
+> Google reCAPTCHA の設定は、 [reCAPTCHA Admin Console](https://www.google.com/recaptcha/admin) で設定してください。
 
-As of version `3.0`, the field supports 3 variations of reCAPTCHA.  The overall configuration of reCAPTCHA is best set in your global form configuration file (typically `user/config/plugins/form.yaml`).  The default options are:
+バージョン `3.0` から、このフィールドは、 reCAPTCHA の3つのバリエーションをサポートしています。  
+reCAPTCHA の全体的な設定は、グローバルなフォームの設定ファイル (通常は `user/config/plugins/form.yaml`) で行うのが最適です。  
+デフォルトのオプションは、次の通りです:
 
 ```yaml
 recaptcha:
@@ -222,19 +233,20 @@ recaptcha:
   secret_key:
 ```
 
-These options should be set based on the following:
+これらのオプションは、以下のように設定してください:
 
-| Key | Values |
-|-----|--------|
-| version | Defaults to `2-checkbox`, but can also be `2-invisible` or `3` |
-| theme | Defaults to `light`, but can also be `dark` (currently only works for version `2-x` versions) |
-| site_key | Your Google Site Key  |
-| secret_key | Your Google Secret Key |
+| キー | 値 |
+| :----- | :----- |
+| version | デフォルトは、 `2-checkbox` ですが、 `2-invisible` や `3` にもできます |
+| theme | デフォルトは、 `light` ですが、 `dark` にもできます (現在、 `2-x` バージョンでのみ機能します) |
+| site_key | あなたの Google Site Key  |
+| secret_key | あなたの Google Secret Key |
 
 > [!Info]  
-> Please ensure the domain of the site is listed in Google's reCAPTCHA configuration
+> サイトのドメインが、 Google の reCAPTCHA 設定のリストに入っていることを確認してください。
 
-In the form definition, the `name` attribute of the captcha field must be `g-recaptcha-response`. The reason is that Google reCAPTCHA stores the Captcha confirmation code in a field named `g-recaptcha-response`.
+フォーム定義では、 captcha フィールドの `name` 属性は、 `g-recaptcha-response` でなければいけません。  
+というのも、 Google reCAPTCHA は、 Captcha 設定コードを `g-recaptcha-response` に保存するからです。
 
 具体例：
 
@@ -245,7 +257,9 @@ g-recaptcha-response:
 
 ```
 
-You can also provide a custom failure `recaptcha_not_validated` message, but if you don't the default one is provided by the Form plugin.  If you want to set a form-specific `recaptcha_site_key` rather than setting it globally in the form configuration, you can set that also.
+失敗したときの `recaptcha_not_validated` カスタムメッセージを提供することもできます。  
+カスタムメッセージがなければ、 Form プラグインのデフォルトのものが提供されます。  
+`recaptcha_site_key` を、サイト全体ではなく、フォームごとに設定したい場合は、そのようにもできます。
 
 ```yaml
 g-recaptcha-response:
@@ -257,8 +271,8 @@ g-recaptcha-response:
 
 | 属性                 | 説明                                     |
 | :-----                    | :-----                                          |
-| `recaptcha_site_key`      | The Google reCAPTCHA Site Key (optional)                   |
-| `recaptcha_not_validated` | The message to show if the captcha is not valid |
+| `recaptcha_site_key`      | Google reCAPTCHA の Site Key (オプション)  |
+| `recaptcha_not_validated` | captcha に失敗したときに表示されるメッセージ |
 
 | 利用可能な一般属性                      |
 | :-----                                         |
@@ -268,10 +282,10 @@ g-recaptcha-response:
 | [outerclasses](#common-fields-attributes)      |
 | [validate.required](#common-fields-attributes) |
 
-This also requires a matching `process:` element to ensure the form is validated properly.
+このフィールドも、フォームが適切にバリデーションされたことを確認するため、 `process:` 要素と整合する必要があります。
 
 > [!Note]  
-> This must be the first entry in the `process:` section of the form to ensure the form is not processed if ReCaptcha validation fails.
+> ReCaptcha のバリデーションが失敗したとき、フォームの処理が実行されないように、キャプチャの整合確認は、`process:` セクションの最初になければいけません。
 
 具体例：
 
@@ -282,14 +296,17 @@ process:
 
 <h5 id="server-side-captcha-validation">サーバーサイドのキャプチャのバリデーション</h5>
 
-The above code will validate the Captcha in the frontend and prevent form submission if not correct. To also validate the captcha server-side, add the captcha process action to your forms:
+上記のコードは、 Captcha をフロントエンドでバリデーションし、正しくない場合は送信しないようにします。  
+サーバーサイドでも captcha をバリデーションするには、フォームに captcha process アクションを追加してください。
 
 ```yaml
   process:
     captcha: true
 ```
 
-You can also provide an optional success `message`, but if you don't no specific message will be displayed on success.  If you want to set a form-specific `recaptcha_secret` rather than setting it globally in the form configuration, you can set that also.
+オプションの成功 `message` を提供することもできます。  
+提供されない場合は、成功時に何もメッセージは表示されません。  
+`recaptcha_secret` を、サイト全体ではなく、フォームごとに設定したい場合は、そのようにもできます。
 
 ```yaml
   process:
@@ -298,7 +315,7 @@ You can also provide an optional success `message`, but if you don't no specific
       message: 'Successfully passed reCAPTCHA!'
 ```
 
-[See the Contact Form example](../03.example-form/) to see it in action.
+アクション内の処理を知るには、 [コンタクトフォームの具体例をみてください](../03.example-form/) 。
 
 ---
 
@@ -424,7 +441,8 @@ my_conditional:
       label: A text field
 ```
 
-しかし、より複雑な条件を要するなら、`true` もしくは `false` を文字列で返すロジックを実行できます。そしてこのフィールドはそのことも理解します。
+しかし、より複雑な条件を要するなら、`true` もしくは `false` を文字列で返すロジックを実行できます。  
+そしてこのフィールドはそのことも理解します。
 
 ```yaml
 my_conditional:
@@ -436,8 +454,8 @@ my_conditional:
         label: A text field
 ```
 
-| 属性   | 説明                                                                       |
-| :-----      | :-----                                                                            |
+| 属性   | 説明  |
+| :----- | :-----  |
 | `condition` | Twig で評価される条件。Twig から利用可能な変数であれば、評価できます |
 
 | 利用可能な一般属性             |
@@ -496,7 +514,8 @@ my_conditional:
 
 ![Display Field](display_field.jpg)
 
-`display` フィールドタイプは、フォーム内でテキストや説明書きを表示するために使われます。マークダウンコンテンツを受け付けます
+`display` フィールドタイプは、フォーム内でテキストや説明書きを表示するために使われます。  
+マークダウンコンテンツを受け付けます。
 
 具体例：
 
@@ -512,8 +531,8 @@ test:
 
 | 属性  | 説明                                                         |
 | :-----     | :-----                                                              |
-| `markdown` | boolean value that enables markdown processing on the content field |
-| `content`  | the textual content to show                                         |
+| `markdown` | コンテンツフィールドでマークダウン処理を有効化するかどうかの真偽値 |
+| `content`  | 表示するテキストコンテンツ |
 
 | 利用可能な一般属性                 |
 | :-----                                    |
@@ -532,7 +551,7 @@ test:
 
 ![Email Field](email_field.gif)
 
-`email` フィールドタイプは、 [HTML5のemail input](http://html5doctor.com/html5-forms-input-types/#input-email) を使い、Eメールを受け付ける入力欄を表示します。
+`email` フィールドタイプは、 [HTML5 の email input](http://html5doctor.com/html5-forms-input-types/#input-email) を使い、Eメールを受け付ける入力欄を表示します。
 
 > [!Info]  
 > Eメールは、大文字と小文字を区別しないように設計されています。アプリケーションロジックを書くときは、大文字、小文字、それらの混在を適切に扱ってください。
@@ -546,8 +565,8 @@ header.email:
   label: Email
 ```
 
-| 属性 | 説明                                       |
-| :-----    | :-----                                            |
+| 属性 | 説明     |
+| :----- | :----- |
 | `minlength` | 最小文字数 |
 | `maxlength`  | 最大文字数 |
 | `validate.min` | minlength と同じ |
@@ -577,7 +596,8 @@ header.email:
 
 ### File Field
 
-`file` フィールドタイプにより、ユーザーはフォームからファイルをアップロードできるようになります。デフォルトでは、**画像** タイプの **1つのファイル** のみを許容し、フォームが表示されている **現在の** ページにアップロードされます。
+`file` フィールドタイプにより、ユーザーはフォームからファイルをアップロードできるようになります。  
+デフォルトでは、 **画像** タイプの **1つのファイル** のみを許容し、フォームが表示されている **現在の** ページにアップロードされます。
 
 ```yaml
 # Default settings
@@ -633,7 +653,8 @@ header.some_field:
 
 ### Honeypot Field
 
-`honeypot` フィールドタイプは、入力されるとエラーを返す hidden フィールドを作ります。入力を埋めて送信するだけのボットへの対策として便利です。
+`honeypot` フィールドタイプは、入力されるとエラーを返す hidden フィールドを作ります。  
+入力を埋めて送信するだけのボットへの対策として便利です。
 
 具体例：
 
@@ -643,7 +664,10 @@ fields:
       type: honeypot
 ```
 
-上記は、単純なテキストフィールドで、フロントエンドには表示されません。ボットは、コードを探索し、自動で入力欄を埋めるので、このフィールドも埋めてしまいます。エラーにより、フォームは正しく送信されません。エラーは、メッセージブロックの上部ではなく、フォーム要素の次に表示されます。
+上記は、単純なテキストフィールドで、フロントエンドには表示されません。  
+ボットは、コードを探索し、自動で入力欄を埋めるので、このフィールドも埋めてしまいます。  
+エラーにより、フォームは正しく送信されません。  
+エラーは、メッセージブロックの上部ではなく、フォーム要素の次に表示されます。
 
 honeypot は、captcha フィールドの代替として人気です。
 
@@ -680,8 +704,8 @@ header.count:
     step: 10
 ```
 
-| 属性 | 説明                                       |
-| :-----    | :-----                                            |
+| 属性 | 説明    |
+| :----- | :-----  |
 | `validate.min` | 最小値 |
 | `validate.max`  | 最大値 |
 | `validate.step`  | 増減の step |
@@ -746,7 +770,7 @@ password:
 
 ![Radio Field](radio_field.gif)
 
-ラジオボタンのセットを表示します
+ラジオボタンのひと組を表示します
 
 具体例：
 
@@ -835,12 +859,12 @@ content:
         #..... subfields
 ```
 
-| 属性     | 説明                                                    |
-| :-----        | :-----                                                         |
-| `title`       | A heading title                                                |
-| `text`        | A text to show beneath                                         |
-| `security`    | An array of credentials a user needs to visualize this section |
-| `title_level` | Set a custom headline tag. Default: `h3`                       |
+| 属性   | 説明   |
+| :----- | :----- |
+| `title`       | 見出しタイトル |
+| `text`        | 下部に表示するテキスト |
+| `security`    | このセクションを表示するためにユーザーが必要とするクレデンシャルの配列 |
+| `title_level` | カスタム見出しタグの設定。 デフォルト： `h3` |
 
 ---
 
@@ -885,8 +909,8 @@ my_element:
           value: 'Option 3'
 ```
 
-| 属性  | 説明                                         |
-| :-----     | :-----                                              |
+| 属性  | 説明    |
+| :----- | :----- |
 | `options`  | key-value 形式の選択肢の配列。key はフォームで送信されます。 |
 | `multiple` | 複数の値を許容するか |
 
@@ -941,8 +965,8 @@ header.newField:
         - Option4
 ```
 
-| 属性  | 説明                                         |
-| :-----     | :-----                                              |
+| 属性  | 説明    |
+| :----- | :----- |
 | `options`  | key-value 形式の選択肢の配列 |
 | `multiple` | 複数の値を許容するか |
 
@@ -982,8 +1006,8 @@ test:
     underline: true
 ```
 
-| 属性   | 説明                                            |
-| :-----      | :-----                                                 |
+| 属性   | 説明   |
+| :----- | :----- |
 | `title`     | タイトルを追加します |
 | `title_type` | タイトルの HTML タグ（例: `h1`, `h2`, `h3`, など）を決定します。指定しなければ、デフォルトでは `h3` です |
 | `text`      | テキストを追記します。タイトルが設定されていれば、タイトルの後に追加されます |
@@ -1135,8 +1159,8 @@ header.content:
   maxlength: 255
 ```
 
-| 属性 | 説明                                                     |
-| :-----    | :-----                                                          |
+| 属性 | 説明     |
+| :----- | :----- |
 | `rows`    | rows 属性を追加します |
 | `cols`    | cols 属性を追加します |
 | `minlength` | 文字数の最小値 |
@@ -1188,8 +1212,8 @@ summary.enabled:
 ```
 
 
-| 属性   | 説明                                                  |
-| :-----      | :-----                                                       |
+| 属性   | 説明   |
+| :----- | :----- |
 | `highlight` | オプションのキーを強調（選択されたときに緑色に着色） |
 | `options`   | key-value 形式の選択肢のリスト |
 
@@ -1250,22 +1274,22 @@ header.url:
 <h2 id="currently-undocumented-fields">未ドキュメント化のfields</h2>
 
 
-| Field                                             | 説明                                                               |
-| :-----                                            | :-----                                                                    |
-| **Array**                                         |                                                                           |
-| **Avatar**                                        |                                                                           |
-| **Color**                                         |                                                                           |
-| **Columns**                                       |                                                                           |
-| **Column**                                        |                                                                           |
-| **Datetime**                                      |                                                                           |
-| **Fieldset**                                      |                                                                           |
-| **Formname**                                      |                                                                           |
-| **Key**                                           |                                                                           |
-| **Month**                                         |                                                                           |
-| **Signature**                                     |                                                                           |
-| **Switch**                                        |                                                                           |
-| **Time**                                          |                                                                           |
-| **Unique Id**                                     |                                                                           |
-| **Value**                                         |                                                                           |
-| **Week**                                          |                                                                           |
+| フィールド | 説明 |
+| :----- | :-----  |
+| **Array**     |  |
+| **Avatar**    |  |
+| **Color**     |  |
+| **Columns**   |  |
+| **Column**    |  |
+| **Datetime**  |  |
+| **Fieldset**  |  |
+| **Formname**  |  |
+| **Key**       |  |
+| **Month**     |  |
+| **Signature** |  |
+| **Switch**    |  |
+| **Time**      |  |
+| **Unique Id** |  |
+| **Value**     |  |
+| **Week**      |  |
 
