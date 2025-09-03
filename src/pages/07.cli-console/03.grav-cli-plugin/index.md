@@ -1,7 +1,8 @@
 ---
 title: 'Plugin コマンド'
 layout: ../../../layouts/Default.astro
-lastmod: '2025-06-10'
+lastmod: '2025-09-03'
+description: 'プラグイン側で CLI 操作を準備している場合は、 bin/plugin コマンドが利用できます。'
 ---
 
 プラグインは、 Grav の CLI `bin/plugin` と統合でき、特定のタスクをターミナルから実行することで、プラグイン機能を強化します。
@@ -12,13 +13,18 @@ lastmod: '2025-06-10'
 
 ![](bin-plugin.png)
 
-`bin/plugin` コマンドに渡される最初のオプションは、常にプラグインのスラッグです（例  _error_, _login_, など）。2つ目のオプションは、プラグインが提供する実際の _command_ です。
+`bin/plugin` コマンドに渡される最初のオプションは、常にプラグインのスラッグです（例  _error_, _login_, など）。  
+2つ目のオプションは、プラグインが提供する実際の _command_ です。
 
-プラグインの実装次第で、他のオプションを受け付けることもあります。`bin/plugin [スラッグ] list` コマンドにより、それらの、より詳しい内容を調べられます。
+プラグインの実装次第で、他のオプションを受け付けることもあります。  
+`bin/plugin [スラッグ] list` コマンドにより、それらの、より詳しい内容を調べられます。
 
 <h2 id="reserved-commands-and-options">コマンドとオプションの予約語</h2>
 
-いくつか、予約された _コマンド_ と _オプション_ があります。これらは、どのプラグインでもいつでも使えます。あなたが開発者で、独自のタスクを実装しようとしているなら、これらを覚えておくことは特に重要です。なぜなら、これらの予約語をコマンドやオプションに使えないからです。
+いくつか、予約された _コマンド_ と _オプション_ があります。  
+これらは、どのプラグインでもいつでも使えます。  
+あなたが開発者で、独自のタスクを実装しようとしているなら、これらを覚えておくことは特に重要です。  
+なぜなら、これらの予約語をコマンドやオプションに使えないからです。
 
 | **コマンド** |   |
 | :----- | :----- |
@@ -48,16 +54,22 @@ lastmod: '2025-06-10'
 
 ![](bin-plugin-login.webp)
 
-見てのとおり、オプションとコマンドのほとんどは、 [予約語リスト](#reserved-commands-and-options) に対応しています。 login プラグインが提供する実質的なコマンドは、 `add-user`, `new-user` and `newuser` です。
+見てのとおり、オプションとコマンドのほとんどは、 [予約語リスト](#reserved-commands-and-options) に対応しています。  
+login プラグインが提供する実質的なコマンドは、 `add-user`, `new-user` and `newuser` です。
 
-お気づきのとおり、この3つの実質的なコマンドのヘルプ説明は同じです。これは、どれを選んでも、3つのコマンドは全く同じになるからです。 **add-user** と **newuser** は、実際、 **new-user** のエイリアス（別名）で、そのコマンドを知らなかったり、覚えていなくても、簡単に言い当てられるようになっています。
+お気づきのとおり、この3つの実質的なコマンドのヘルプ説明は同じです。  
+これは、どれを選んでも、3つのコマンドは全く同じになるからです。  
+**add-user** と **newuser** は、実際、 **new-user** のエイリアス（別名）で、そのコマンドを知らなかったり、覚えていなくても、簡単に言い当てられるようになっています。
 
-では、login プラグインに `new-user` コマンドがあることがわかりましたから、あとは使い方を知るだけです。ここで、予約語の **help** コマンドの出番です。 `bin/plugin login help new-user` を実行してみましょう。
+では、login プラグインに `new-user` コマンドがあることが分かったので、あとは使い方を知るだけです。  
+ここで、予約語の **help** コマンドの出番です。  
+`bin/plugin login help new-user` を実行してみましょう。
 
 ![](bin-plugin-newuser.webp)
 
-これで、 `new-user` コマンドと、その使い方を完全に理解しました。
-新しいユーザーを作ってみましょう。定義上、オプションはすべて任意なので、パスワードはあえて省略しています（後で、プロンプトに聞かれることになります）。
+これで、 `new-user` コマンドと、その使い方を完全に理解しました。  
+新しいユーザーを作ってみましょう。  
+定義上、オプションはすべて任意なので、パスワードはあえて省略しています（後で、プロンプトに聞かれることになります）。
 
 ```bash
 bin/plugin login newuser -u joeuser -e joeuser@grav.org -P b -N "Joe User" -t "Site Administrator"
@@ -71,11 +83,14 @@ Success! User joeuser created.
 
 <h2 id="developers-integrate-the-cli-in-plugin">開発者向け：プラグインに CLI を統合</h2>
 
-開発者の方は、管理パネルやユーザーが実行できる CLI コマンドを作りたくなるかもしれません。プラグインにそのような機能を追加するのは、とても簡単です。
+開発者の方は、管理パネルやユーザーが実行できる CLI コマンドを作りたくなるかもしれません。  
+プラグインにそのような機能を追加するのは、とても簡単です。
 
-最初にやるのは、プラグインのルートディレクトリ下に `cli/` フォルダを作成することです。このフォルダは、 `bin/plugin` により処理され、コマンドクラスへスキャンされます。
+最初にやるのは、プラグインのルートディレクトリ下に `cli/` フォルダを作成することです。  
+このフォルダは、 `bin/plugin` により処理され、コマンドクラスへスキャンされます。
 
-Grav の CLI は、素晴らしい [Symfony Console コンポーネント](http://symfony.com/doc/current/components/console/introduction.html) をもとにしており、Symfony のドキュメントが完全に利用可能です。その際、考慮すべき重要事項がいくつかあります。
+Grav の CLI は、素晴らしい [Symfony Console コンポーネント](http://symfony.com/doc/current/components/console/introduction.html) をもとにしており、Symfony のドキュメントが完全に利用可能です。  
+その際、考慮すべき重要事項がいくつかあります。
 
 1. class のファイル名は、標準にしてください。大文字から始まり、 **Command.php** で終わります。
     * `Hello.php`: 間違い
@@ -85,7 +100,8 @@ Grav の CLI は、素晴らしい [Symfony Console コンポーネント](http:
 2. 常に `ConsoleCommand` を拡張すべきです。これにより、カラーフォーマットや、Grav インスタンスへの直接アクセス、及びその他のユーティリティなど、Grav の拡張機能が使えます。（[詳しくは](https://github.com/getgrav/grav/blob/develop/system/src/Grav/Console/ConsoleTrait.php)）
 3. Symfony Console は、 `execute` メソッドが必要です。 **ConsoleCommand** を拡張するときは、これは `serve` になります。
 
-以下は、初めて作成するときのためのシンプルな具体例です。 `HelloCommand.php` として保存し、プラグインのルートディレクトリの `cli/` フォルダ（ **user/plugins/my_plugin/cli/HelloCommand.php** ）に置けば、そのまま試すことができます。
+以下は、初めて作成するときのためのシンプルな具体例です。  
+`HelloCommand.php` として保存し、プラグインのルートディレクトリの `cli/` フォルダ（ **user/plugins/my_plugin/cli/HelloCommand.php** ）に置けば、そのまま試すことができます。
 
 ```php
 <?php

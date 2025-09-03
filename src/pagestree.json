@@ -697,7 +697,7 @@
         },
         {
             "pathname": "07.cli-console",
-            "title": "CLI\u30b3\u30f3\u30bd\u30fc\u30eb",
+            "title": "CLI \u30b3\u30f3\u30bd\u30fc\u30eb",
             "redirect": false,
             "isonlyja": false,
             "dirname": "07.cli-console",
@@ -712,7 +712,7 @@
                 },
                 {
                     "pathname": "07.cli-console\/02.grav-cli",
-                    "title": "Grav\u30b3\u30de\u30f3\u30c9",
+                    "title": "Grav \u30b3\u30de\u30f3\u30c9",
                     "redirect": false,
                     "isonlyja": false,
                     "dirname": "02.grav-cli",
@@ -728,7 +728,7 @@
                 },
                 {
                     "pathname": "07.cli-console\/04.grav-cli-gpm",
-                    "title": "GPM\u30b3\u30de\u30f3\u30c9",
+                    "title": "GPM \u30b3\u30de\u30f3\u30c9",
                     "redirect": false,
                     "isonlyja": false,
                     "dirname": "04.grav-cli-gpm",
@@ -736,7 +736,7 @@
                 },
                 {
                     "pathname": "07.cli-console\/05.scripted-upgrades",
-                    "title": "Script\u306b\u3088\u308b\u30a2\u30c3\u30d7\u30c7\u30fc\u30c8",
+                    "title": "Script \u306b\u3088\u308b\u30a2\u30c3\u30d7\u30c7\u30fc\u30c8",
                     "redirect": false,
                     "isonlyja": false,
                     "dirname": "05.scripted-upgrades",

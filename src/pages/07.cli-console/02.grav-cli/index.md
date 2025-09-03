@@ -1,13 +1,22 @@
 ---
-title: Gravコマンド
+title: Grav コマンド
 layout: ../../../layouts/Default.astro
-lastmod: '2025-05-09'
+lastmod: '2025-09-03'
+description: 'ログ表示やスケジューラなど、サイト全体に関するコマンドを集めた bin/grav コマンドを解説します。'
 ---
-Grav には、組み込みで `bin/grav` というコマンドラインインターフェース（CLI） があります。繰り返しのタスク実行時に、CLIはとても便利です。たとえば、**キャッシュをクリアする** ときや、**バックアップ** を取るときなどです。
 
-CLIにアクセスするのは、シンプルな作業ですが、**ターミナル** を使う必要があります。MacOS では、`Terminal` と呼ばれ、Windowsでは、`cmd` と呼ばれ、Linuxでは、単にシェルと呼ばれます。Windows の cmd では、UNIX スタイルのコマンドは、そのままでは使えません。Windows マシンに [msysgit](http://msysgit.github.io/) をインストールし、[Git](https://git-scm.com/) と Git BASH という代替のコマンドプロンプトを追加することで、UNIX コマンドが利用可能になります。リモートでサーバーにアクセスするとき、**SSH** を使うでしょう。[SSHの素晴らしいチュートリアル](http://code.tutsplus.com/tutorials/ssh-what-and-how--net-25138) をチェックしてください。
+Grav には、組み込みで `bin/grav` というコマンドラインインターフェース（CLI） があります。  
+繰り返しのタスク実行時に、 CLI はとても便利です。  
+たとえば、**キャッシュをクリアする** ときや、**バックアップ** を取るときなどです。
 
-いくつかの処理を、手作業でやるのではなく、CLI に _頼る_ なら、それらの処理は、毎日の _cronjobs_ により自動化できます。
+CLI にアクセスすることは、単純な作業ですが、 **ターミナル** を使う必要があります。  
+MacOS では、`Terminal` と呼ばれ、 Windowsでは、`cmd` と呼ばれ、 Linuxでは、単にシェルと呼ばれます。  
+Windows の cmd では、 UNIX スタイルのコマンドは、そのままでは使えません。  
+Windows マシンに [msysgit](http://msysgit.github.io/) をインストールし、[Git](https://git-scm.com/) と Git BASH という代替のコマンドプロンプトを追加することで、UNIX コマンドが利用可能になります。  
+リモートでサーバーにアクセスするときは、 **SSH** を使うでしょう。  
+[SSHの素晴らしいチュートリアル](http://code.tutsplus.com/tutorials/ssh-what-and-how--net-25138) をチェックしてください。
+
+いくつかの処理を、手作業でやるのではなく、 CLI に _頼る_ なら、それらの処理は、毎日の _cronjobs_ により自動化できます。
 
 Grav で利用できるすべてのコマンドの一覧は、次のコマンドで表示できます：
 
@@ -41,9 +50,11 @@ bin/grav help install
 
 ## Backup
 
-Grav のバックアップシステムは、Grav 1.6 で完全に刷新され、複数のバックアップ・プロファイルに対応しました。これらのプロファイルは、`user/config/backups.yaml` に設定があります。もしこのカスタム設定ファイルが無ければ、`system/config/backups.yaml` にある、デフォルトの設定ファイルを利用します。
+Grav のバックアップシステムは、Grav 1.6 で完全に刷新され、複数のバックアップ・プロファイルに対応しました。  
+これらのプロファイルは、 `user/config/backups.yaml` に設定があります。  
+もしこのカスタム設定ファイルが無ければ、 `system/config/backups.yaml` にある、デフォルトの設定ファイルを利用します。
 
-Grav が複数のバックアッププロファイルを見つけたとき、CLI コマンドは、どのプロファイルでバックアップするかを選ぶよう、プロンプトで促します。
+Grav が複数のバックアッププロファイルを見つけたとき、 CLI コマンドは、どのプロファイルでバックアップするかを選ぶよう、プロンプトで促します。
 
 ```bash
 cd ~/workspace/portfolio
@@ -72,7 +83,9 @@ Archiving 36 files [===================================================] 100% < 
 
 ## Clean
 
-主に、パッケージをビルド処理する最中に使います。無関係なファイルやフォルダを Grav から取り除きます。独自の Grav パッケージをビルド処理するときに使うのでない限り、**このコマンドは使わない** ことを強く推奨します。
+主に、パッケージをビルド処理する最中に使います。  
+無関係なファイルやフォルダを Grav から取り除きます。  
+独自の Grav パッケージをビルド処理するときに使うのでない限り、**このコマンドは使わない** ことを強く推奨します。
 
 ```bash
 bin/grav clean
@@ -104,7 +117,7 @@ bin/grav cache
 
 ## Composer
 
-もし Grav をGitHub からインストールし、コンポーザーベースの vendor パッケージをインストールしていた場合、次のように、簡単にアップデートできます：
+もし Grav を GitHub からインストールし、 composer ベースの vendor パッケージをインストールしていた場合、次のように、簡単にアップデートできます：
 
 ```bash
 bin/grav composer
@@ -150,7 +163,8 @@ cd ~/webroot/my-grav-project
 bin/grav logviewer
 ```
 
-これにより、 `logs/grav.log` ファイルの直近の 20 ログエントリーを表示します。これには、いくつかのオプションがあります：
+これにより、 `logs/grav.log` ファイルの直近の 10 ログエントリーを表示します。  
+これには、いくつかのオプションがあります：
 
 ```txt
 -f, --file[=FILE]     custom log file location (default = grav.log)
@@ -203,28 +217,30 @@ viewing last 20 entries in grav.log
 
 ## New Project
 
-Grav で新しいプロジェクトを始めるときはいつでも、クリーンな Grav インスタンスで始める必要があります。CLI によって、この処理がとても簡単になり、数秒で終わります。
+Grav で新しいプロジェクトを始めるときはいつでも、クリーンな Grav インスタンスで始める必要があります。  
+CLI によって、この処理がとても簡単になり、数秒で終わります。
 
 1. **ターミナル** または **コンソール** を立ち上げ、 _grav_ フォルダに移動します（このドキュメントでは `~/Projects/grav` 下にあるものとします）
-
-```bash
-cd ~/Projects/grav
-```
-
-2. Grav CLI を実行し、新しいプロジェクトを作成します。プロジェクトを置く場所を指定します（一般的には、あなたのサーバーの [webroot](http://en.wikipedia.org/wiki/Webroot) です）。ここでの例では、 **ポートフォリオ** を作成するとしましょう。 `~/Webroot/portfolio` にそれを置きます。
-
-```bash
-bin/grav new-project ~/webroot/portfolio
-```
+    ```bash
+    cd ~/Projects/grav
+    ```
+    
+2. Grav CLI を実行し、新しいプロジェクトを作成します。  
+    プロジェクトを置く場所を指定します（一般的には、あなたのサーバーの [webroot](http://en.wikipedia.org/wiki/Webroot) です）。  
+    ここでの例では、 **ポートフォリオ** を作成するとしましょう。  
+    `~/Webroot/portfolio` にそれを置きます。
+    ```bash
+    bin/grav new-project ~/webroot/portfolio
+    ```
 
 これにより、新しい Grav インスタンスが作成され、必要な依存関係もすべてダウンロードされました。
 
-> [!訳注]  
-> Grav 1.7.48 で試してみましたが、Grav は新しくインストールされるものの、テーマやプラグインはダウンロードされず、別途作業が必要になりました。
 
 ## Sandbox
 
-Grav には、 `sandbox` という気の利いたツールがあります。 sandbox は、 [シムリンクされた](../01.command-line-intro#symbolic-links) Grav のコピーをすばやく作成します。 `bin/grav sandbox -s DESTINATION` （ "DESTINATION" は、 Grav のコピーを作りたいフォルダのパス）を実行すると、そのフォルダに　Grav のインストールが再作成されます。
+Grav には、 `sandbox` という気の利いたツールがあります。  
+sandbox は、 [シムリンクされた](../01.command-line-intro#symbolic-links) Grav のコピーをすばやく作成します。  
+`bin/grav sandbox -s DESTINATION` （ "DESTINATION" は、 Grav のコピーを作りたいフォルダのパス）を実行すると、そのフォルダに　Grav のインストールが再作成されます。
 
 たとえば：
 
@@ -232,7 +248,8 @@ Grav には、 `sandbox` という気の利いたツールがあります。 san
 bin/grav sandbox -s ../copy
 ```
 
-現在の Grav のフォルダから、 `copy` という名前の兄弟フォルダが作成され、そこに仮想のコピーが続きます：  `/bin, /system, /vendor, /webserver-configs` 及び、 Grav のルートフォルダにある典型的な標準ファイルも含まれます。 /user フォルダ内のすべてのコンテンツは、シムリンクのコピーではなく、実コピーされ、そのため、コアファイルのオーバーヘッドの必要なく、新しいインストールのカスタマイズを簡単に始められます。
+現在の Grav のフォルダから、 `copy` という名前の兄弟フォルダが作成され、そこに仮想のコピーが続きます：  `/bin, /system, /vendor, /webserver-configs` 及び、 Grav のルートフォルダにある典型的な標準ファイルも含まれます。  
+`/user` フォルダ内のすべてのコンテンツは、シムリンクのコピーではなく、実コピーされ、そのため、コアファイルのオーバーヘッドの必要なく、新しいインストールのカスタマイズを簡単に始められます。
 
 ## Scheduler
 
@@ -265,11 +282,13 @@ Running Scheduled Jobs
 -d, --details         Show Job Details
 ```
 
-[スケジューラー](../../08.advanced/06.scheduler/) セクションをぜひ参照してください。これらのオプションに関するより詳しい情報が書かれています。
+[スケジューラー](../../08.advanced/06.scheduler/) セクションをぜひ参照してください。  
+これらのオプションに関するより詳しい情報が書かれています。
 
 ## Security
 
-Grav 1.5 で追加された、セキュリティスキャン機能の CLI コマンドです。 [セキュリティ設定での設定内容](../../01.basics/05.grav-configuration/#security) について、コンテンツのスキャンを実行します。
+Grav 1.5 で追加された、セキュリティスキャン機能の CLI コマンドです。  
+[セキュリティ設定での設定内容](../../01.basics/05.grav-configuration/#security) について、コンテンツのスキャンを実行します。
 
 ```bash
 bin/grav security                                                                                       [12:34:12]
@@ -294,6 +313,8 @@ Zend Engine v2.5.0, Copyright (c) 1998-2014 Zend Technologies
     with the ionCube PHP Loader v4.6.1, Copyright (c) 2002-2014, by ionCube Ltd.
 ```
 
-`(cgi-fcgi)` と表示されていたら、すべての `bin/grav` コマンドの前に `php-cli` が必要です。もしくは、  `alias php="php-cli"` のようなエイリアスをシェルに設定することもできます。これにより、コマンドラインでは **CLI** バージョンの PHP で実行することができます。
+`(cgi-fcgi)` と表示されていたら、すべての `bin/grav` コマンドの前に `php-cli` が必要です。  
+もしくは、  `alias php="php-cli"` のようなエイリアスをシェルに設定することもできます。  
+これにより、コマンドラインでは **CLI** バージョンの PHP で実行することができます。
 
 

@@ -1,8 +1,10 @@
 ---
-title: CLIコンソール
+title: CLI コンソール
 layout: ../../layouts/Chapter.astro
-lastmod: '2025-04-14'
+lastmod: '2025-09-03'
+description: 'Grav は、便利なコマンドラインツールをたくさん提供しており、スクリプト操作でシンプルに管理できます。'
 ---
+
 ### 第7章
 
 # CLIコンソール
