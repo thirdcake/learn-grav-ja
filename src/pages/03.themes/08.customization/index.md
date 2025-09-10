@@ -1,7 +1,7 @@
 ---
 title: デザインのカスタマイズ
 layout: ../../../layouts/Default.astro
-lastmod: '2025-08-05'
+lastmod: '2025-09-10'
 description: '既存のテーマを活かしつつ、オリジナルのデザインや CSS スタイルをカスタマイズする方法を、いくつかの段階に分けて解説します'
 ---
 
@@ -138,7 +138,13 @@ DevTools では、同時に、既存テーマから継承することもでき�
 
    ```
    
-   注意： Grav 1.7 では、`mytheme.yaml` は、prefixes にシングルクオート（`'`）で囲んでください。古いドキュメントでは、シングルクオートがありませんでした。`-user/themes/mytheme, - user/themes/quark` のように。`mytheme.yaml` で間違った使い方をすると、致命的な（fatal）エラーになります。
+   注意： Grav 1.7 では、`mytheme.yaml` は、prefixes にシングルクオート（`'`）で囲んでください。  
+   古いドキュメントでは、次のようにシングルクオートがありませんでした。
+   ```
+   - user/themes/mytheme
+   - user/themes/quark
+   ```
+   `mytheme.yaml` で間違った使い方をすると、致命的な（fatal）エラーになります。
    
 4. `/user/themes/quark/blueprints.yaml` ファイルを `/user/themes/mytheme/blueprints.yaml` にコピーしてください。管理パネルでテーマのカスタマイズができるようにするためです。
 
@@ -162,7 +168,8 @@ DevTools では、同時に、既存テーマから継承することもでき�
    ?>
    ```
 
-これで、 **mytheme** という新しいテーマが作られました。最初に **mytheme** テーマを探し、その後 **quark** テーマを探すろいうストリームが設定されています。  
+これで、 **mytheme** という新しいテーマが作られました。  
+最初に **mytheme** テーマを探し、その後 **quark** テーマを探すろいうストリームが設定されています。  
 つまり、 Quark はこの新しいテーマのベーステーマであるということです。
 
 あとは、必要なファイルを追加していくだけです。  

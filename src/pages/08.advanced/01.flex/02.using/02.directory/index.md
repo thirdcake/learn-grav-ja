@@ -1,13 +1,15 @@
 ---
 title: 'Flex ディレクトリ'
 layout: ../../../../../layouts/Default.astro
-lastmod: '2025-05-08'
+lastmod: '2025-09-06'
 ---
+
 ## getTitle()
 
 `getTitle(): string` flex ディレクトリの名前を取得
 
 返り値：
+
 - `string` タイトル
 
 ```twig
@@ -35,6 +37,7 @@ if ($directory) {
 `getDescription(): string` flex ディレクトリの説明を取得
 
 返り値：
+
 - `string` 説明
 
 ```twig

@@ -1,10 +1,15 @@
 ---
 title: Flex
 layout: ../../../../../layouts/Default.astro
-lastmod: '2025-05-10'
+lastmod: '2025-09-06'
+description: 'twig や、プラグイン中の PHP で、 flex を取得する方法を解説します。'
 ---
-> [!Note]  
-> **TIP:** メソッドの完全な一覧は、 **Customizing Flex Objects** セクションで解説します。
+
+> [!Tip]  
+> メソッドの完全な一覧は、 **Customizing Flex Objects** セクションで解説します。
+
+> [!訳注]  
+> Customizing Flex Objects セクションは、まだ書かれていないようです。
 
 ## count()
 
@@ -12,7 +17,7 @@ lastmod: '2025-05-10'
 Flex に登録されたディレクトリの数を数えます。
 
 返り値：
-- `int` **[ディレクトリ](../02.directory/)** の数
+- `int` [**ディレクトリ**](../02.directory/) の数
 
 ```twig
 {% set flex = grav.get('flex') %}
@@ -36,13 +41,15 @@ $count = $flex->count();
 `getDirectories( [names] ): array` ディレクトリのリストを取得
 
 パラメータ：
+
 - **names** Optional: ディレクトリ名のリスト (`array`)
 
 返り値：
+
 - `array` **[ディレクトリ](../02.directory/)** のリスト
 
-> [!Note]  
-> **TIP:** 名前のリストが渡されなかった場合、メソッドは Flex に登録されたすべてのディレクトリを返します。
+> [!Tip]  
+> 名前のリストが渡されなかった場合、メソッドは Flex に登録されたすべてのディレクトリを返します。
 
 ```twig
 {% set flex = grav.get('flex') %}
@@ -77,17 +84,19 @@ $listedDirectoriesWithMissing = $flex->getDirectories(['contacts', 'phonebook'],
 // = ['contacts' => FlexDirectory, 'phonebook' => null]
 ```
 
-> [!Note]  
-> **TIP:** 必要なディレクトリのみ返すようにしてください。
+> [!Tip]  
+> 必要なディレクトリのみ返すようにしてください。
 
 ## hasDirectory()
 
 `hasDirectory( name ): bool`: ディレクトリが存在するかどうかチェック
 
 パラメータ：
+
 - **name** ディレクトリ名 (`string`)
 
 返り値：
+
 - `bool` 見つかった場合は True、そうでなければ false
 
 ```twig
@@ -112,10 +121,12 @@ $exists = $flex->hasDirectory('contacts');
 `getDirectory( name ): Directory | null` ディレクトリを取得。見つからなければ null を返します。
 
 パラメータ：
+
 - **name** ディレクトリ名 (`string`)
 
 返り値：
-- **[Directory](../02.directory/)** (`object`)
+
+- [**Directory**](../02.directory/) (`object`)
 - `null` ディレクトリが無かった場合
 
 ```twig
@@ -143,17 +154,20 @@ if ($directory) {
 ```
 
 > [!Tip]  
-> **[Flex ディレクトリ](../02.directory/)** でできることをチェックしてください。
+> [**Flex ディレクトリ**](../02.directory/) でできることを、見てみてください。
 
 ## getObject()
 
-`getObject( id, directory ): Object | null` オブジェクトを取得。見つからない場合は null を返します。
+`getObject( id, directory ): Object | null` オブジェクトを取得。  
+見つからない場合は null を返します。
 
 パラメータ：
+
 - **id** オブジェクトの ID (`string`)
 - **directory** ディレクトリ名 (`string`)
 
 返り値：
+
 - **[Object](../04.object/)** (`object`)
 - `null` 見つからなかった場合
 
@@ -187,16 +201,19 @@ if ($object) {
 ```
 
 > [!Tip]  
-> **[Flex オブジェクト](../04.object/)** でできることをチェックしてください。
+> [**Flex オブジェクト**](../04.object/) でできることを、見てみてください。
 
 ## getCollection()
 
-`getCollection( directory ): Collection | null` コレクションを取得。見つからない場合は null を返します。
+`getCollection( directory ): Collection | null` コレクションを取得。  
+見つからない場合は null を返します。
 
 パラメータ：
+
 - `directory` ディレクトリ名 (`string`)
 
 返り値：
+
 - **[Collection](../03.collection/)** (`object`)
 - `null` 見つからない場合
 
@@ -230,5 +247,5 @@ if ($collection) {
 ```
 
 > [!Tip]  
-> **[Flex コレクション](../03.collection/)** でできることをチェックしてください。
+> [**Flex コレクション**](../03.collection/) でできることを、見てみてください。
 

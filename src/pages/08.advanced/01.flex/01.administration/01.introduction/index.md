@@ -1,15 +1,18 @@
 ---
 title: 導入
 layout: ../../../../../layouts/Default.astro
-lastmod: '2025-05-10'
+lastmod: '2025-09-06'
 ---
-このセクションでは、既存の **Flex ディレクトリ** をすぐに有効化し、 Grav 管理パネルに表示する方法について解説します。具体例としてデモ用に、 **Flex Objects プラグイン** に含まれる **Contacts** flex ディレクトリを使用します。
+
+このセクションでは、既存の **Flex ディレクトリ** を速やかに有効化し、 Grav 管理パネルに表示するまでの手順について、解説します。  
+具体例として、このデモのために、 **Flex Objects プラグイン** に含まれる **Contacts** flex ディレクトリを使用します。
 
 <h2 id="enabling-a-directory">ディレクトリの有効化</h2>
 
 カスタムの **Flex ディレクトリ** を有効化するには、管理パネルのサイドバーから、 **Plugins** > **Flex Objects** へ移動してください。
 
-ページの下の方に、 **Directories** 設定があります。この設定には、 Grav で検出されたすべての **Flex ディレクトリ** が一覧表示されます。
+ページの下の方に、 **Directories** 設定があります。  
+この設定には、 Grav で検出されたすべての **Flex ディレクトリ** が一覧表示されます。
 
 ![Plugin Configuration](flex-objects-options.png)
 
@@ -29,14 +32,15 @@ $ cp user/plugins/flex-objects/data/flex-objects/contacts.json user/data/flex-ob
 
 <h2 id="create-a-page">ページの作成</h2>
 
-**[管理パネルのページ](../../../../05.admin-panel/03.page/)** へ移動して、 [新しいページを追加](../../../../05.admin-panel/03.page/#adding-new-pages) してください。以下の値を入力してください。
+**[管理パネルのページ](../../../../05.admin-panel/03.page/)** へ移動して、 [新しいページを追加](../../../../05.admin-panel/03.page/#adding-new-pages) してください。  
+以下の値を入力してください。
 
 - **Page Title** : `Directory`
 - **Page Template** : `Flex-objects`
 
 その後、 **Continue** ボタンをクリックします。
 
-**[コンテンツエディタの Advanced タブ](../02.views-edit/)** で、次のようにフロントマターに `flex.direcory` が `contacts` となっていることを確認してください：
+**[コンテンツエディタの Advanced タブ](../02.views-edit/)** で、次のように、フロントマターに `flex.direcory` が `contacts` となるようにしてください：
 
 ```twig
 ---
@@ -50,12 +54,13 @@ flex:
 
 ページがこれで良かったら、 **Save** をクリックします。
 
-> [!Note]  
-> **TIP:** `Flex ディレクトリ` を指定しなかったとき、単一のディレクトリではなく、すべてのディレクトリからページが表示されます。
+> [!Tip]  
+> `Flex ディレクトリ` を指定しなかったとき、単一のディレクトリではなく、すべてのディレクトリからページが表示されます。
 
 <h2 id="display-the-page">ページを表示</h2>
 
-作成したページに移動してください。 **Contacts** を含む以下のようなページが表示されます。
+作成したページに移動してください。  
+**Contacts** を含む以下のようなページが表示されます。
 
 ![](flex-objects-site.png)
 
