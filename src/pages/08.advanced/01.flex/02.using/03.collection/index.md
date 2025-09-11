@@ -1,15 +1,17 @@
 ---
 title: 'Flex コレクション'
 layout: ../../../../../layouts/Default.astro
-lastmod: '2025-06-10'
+lastmod: '2025-09-11'
+description: 'twig や、プラグイン中の PHP で使える、 flex collection のメソッドを解説します。'
 ---
 
 **Flex コレクション** とは、**flex オブジェクトの順序付きマップ** であり、リストのように使うこともできます。
 
-flex コレクションにより、いくつかの便利なメソッドが使えるようになります。出力をレンダリングするときに使われるメソッドや、オブジェクトを fetch するメソッド、並び替えるメソッド、などです。
+flex コレクションにより、いくつかの便利なメソッドが使えるようになります。  
+出力をレンダリングするときに使われるメソッドや、オブジェクトを fetch するメソッド、並び替えるメソッド、などです。
 
 > [!Tip]  
-> Flex コレクションは、 **[Doctrine Collections](https://www.doctrine-project.org/projects/doctrine-collections/en/1.6/index.html)** を拡張しています。
+> Flex コレクションは、 [**Doctrine Collections**](https://www.doctrine-project.org/projects/doctrine-collections/en/1.6/index.html) を拡張しています。
 
 <h2 id="render-collection">コレクションのレンダリング</h2>
 
@@ -61,7 +63,8 @@ if ($collection) {
 
 <h2 id="collection-manipulation">コレクションの操作</h2>
 
-これらのメソッドはすべて、 flex コレクションの **修正されたコピー** を返します。オリジナルの  flex コレクションは、変更されないままです。
+これらのメソッドはすべて、 flex コレクションの **修正されたコピー** を返します。  
+オリジナルの  flex コレクションは、変更されないままです。
 
 ### sort()
 
@@ -108,7 +111,7 @@ if ($collection) {
 - **limit** オブジェクトの最大数 (`int`)
 
 返り値：
-- **[Collection](/advanced/flex/using/collection)** (`object`) フィルタリングされたコレクションの新しいインスタンス
+- **Collection** (`object`) フィルタリングされたコレクションの新しいインスタンス
 
 ```twig
 {% set contacts = grav.get('flex').collection('contacts') %}
@@ -147,7 +150,7 @@ if ($collection) {
 - **filters** `property: value` のペア。コレクションのフィルタリングに使われます。 (`array`)
 
 返り値：
-- **[Collection](/advanced/flex/using/collection)** (`object`) フィルタリングされたコレクションの新しいインスタンス。
+- **Collection** (`object`) フィルタリングされたコレクションの新しいインスタンス。
 
 > [!Tip]  
 > デフォルトのフィルタリングは、 **Flex Type** ブループリント内で、フロントエンド向けに設定できます。
@@ -183,7 +186,7 @@ if ($collection) {
 `reverse(): Collection` コレクションのオブジェクトを逆順にする。
 
 返り値：
-- **[Collection](/advanced/flex/using/collection)** (`object`) 逆順にしたコレクションの新しいインスタンス。
+- **Collection** (`object`) 逆順にしたコレクションの新しいインスタンス。
 
 > [!Tip]  
 > `sort()` を使っている場合は、そこで逆順に設定することをおすすめします。余分なステップが省けます。
@@ -219,7 +222,7 @@ if ($collection) {
 `shuffle(): Collection` ランダムな順番でオブジェクトをシャッフルする。
 
 返り値：
-- **[Collection](/advanced/flex/using/collection)** (`object`) コレクションの、ランダムな順番になった新しいインスタンス
+- **Collection** (`object`) コレクションの、ランダムな順番になった新しいインスタンス
 
 ```twig
 {% set contacts = grav.get('flex').collection('contacts') %}
@@ -252,7 +255,7 @@ if ($collection) {
 - **keys** オブジェクトの選択に使われるキーのリスト (`array`)
 
 返り値：
-- **[Collection](/advanced/flex/using/collection)** (`object`) コレクションの新しいインスタンス
+- **Collection** (`object`) コレクションの新しいインスタンス
 
 ```twig
 {% set contacts = grav.get('flex').collection('contacts') %}
@@ -288,7 +291,7 @@ if ($collection) {
 - **keys** オブジェクトを取り除くために使われるキーのリスト (`array`)
 
 返り値：
-- **[Collection](/advanced/flex/using/collection)** (`object`) コレクションの新しいインスタンス
+- **Collection** (`object`) コレクションの新しいインスタンス
 
 ```twig
 {% set contacts = grav.get('flex').collection('contacts') %}
@@ -330,7 +333,7 @@ if ($collection) {
   - case_sensitive: `bool`
 
 返り値：
-- **[Collection](/advanced/flex/using/collection)** (`object`) コレクションのフィルタリングされた新しいインスタンス
+- **Collection** (`object`) コレクションのフィルタリングされた新しいインスタンス
 
 ```twig
 {% set contacts = grav.get('flex').collection('contacts') %}
@@ -360,7 +363,7 @@ if ($collection) {
 `copy(): Collection` コレクション内のオブジェクトをすべて clone することで、コピーを作成する
 
 返り値：
-- **[Collection](/advanced/flex/using/collection)** (`object`) clone されたオブジェクトを持つコレクションの新しいインスタンス
+- **Collection** (`object`) clone されたオブジェクトを持つコレクションの新しいインスタンス
 
 > [!Warning]  
 > コレクション内でオブジェクトを修正する場合は、常にコピーを使ってください！
@@ -431,7 +434,7 @@ if ($collection) {
 `first(): Object | false` コレクションの最初のオブジェクトにイテレータを設定し、このオブジェクトを返します。
 
 返り値：
-- **[Object](/advanced/flex/using/object)** (`object`) 最初のオブジェクト
+- [**Object**](../04.object/) (`object`) 最初のオブジェクト
 - `false` コレクションにオブジェクトが無かった場合
 
 ```twig
@@ -468,7 +471,7 @@ if ($collection) {
 `last(): Object | false` コレクションの最後のオブジェクトにイテレータを設定し、このオブジェクトを返します。
 
 返り値：
-- **[Object](/advanced/flex/using/object)** (`object`) 最後のオブジェクト
+- [**Object**](../04.object/) (`object`) 最後のオブジェクト
 - `false` コレクションにオブジェクトが無かった場合
 
 ```twig
@@ -505,7 +508,7 @@ if ($collection) {
 `next(): object | false` イテレータのポジションを次のオブジェクトに移し、この要素を返す。
 
 返り値：
-- **[Object](/advanced/flex/using/object)** (`object`) 次のオブジェクト
+- [**Object**](../04.object/) (`object`) 次のオブジェクト
 - `false` コレクションに、これ以上のオブジェクトが無かった場合
 
 ```twig
@@ -543,7 +546,7 @@ if ($collection) {
 `current(): object | false` 現在のイテレータのポジションにあるオブジェクトを取得する。
 
 返り値：
-- **[Object](/advanced/flex/using/object)** (`object`) 現在のオブジェクト
+- [**Object**](../04.object/)** (`object`) 現在のオブジェクト
 - `false` これ以上コレクションにオブジェクトが無い場合
 
 ```twig
@@ -971,7 +974,7 @@ if ($collection) {
 `add( Object )` コレクションの最後にオブジェクトを追加する。
 
 パラメータ：
-- **[Object](/advanced/flex/using/object)** 追加するオブジェクト (`object`)
+- [**Object**](../04.object/) 追加するオブジェクト (`object`)
 
 ### remove()
 
@@ -981,14 +984,14 @@ if ($collection) {
 - **key** 削除するオブジェクトのキー。 (`object`)
 
 返り値：
-- **[Object](/advanced/flex/using/object)** 削除されたオブジェクト (`object`) もしくは、見つからなければ `null`
+- [**Object**](../04.object/) 削除されたオブジェクト (`object`) もしくは、見つからなければ `null`
 
 ### removeElement()
 
 `removeElement( Object ): bool` 特定のオブジェクトについて、それがコレクション内に見つかった場合に削除する
 
 パラメータ：
-- **[Object](/advanced/flex/using/object)** 削除するオブジェクト (`object`)
+- [**Object**](../04.object/) 削除するオブジェクト (`object`)
 
 返り値：
 - `true` そのオブジェクトがコレクション内似合った場合。 `false` そうでない場合。
@@ -1014,7 +1017,7 @@ if ($collection) {
 `contains( object ): bool` コレクション内に要素があるかどうかチェックする。
 
 パラメータ：
-- **[Object](/advanced/flex/using/object)** テストするオブジェクト (`object`)
+- [**Object**](../04.object/) テストするオブジェクト (`object`)
 
 返り値：
 - `true` コレクション内にオブジェクトがあった場合。  `false` そうでない場合。
@@ -1024,10 +1027,10 @@ if ($collection) {
 `indexOf( object ): string | false` 与えられたオブジェクトの index/key を取得する
 
 パラメータ：
-- **[Object](/advanced/flex/using/object)** テストするオブジェクト (`object`)
+- [**Object**](../04.object/) テストするオブジェクト (`object`)
 
 返り値：
-- `string` オブジェクトの index/key 。  `false` オブジェクトが見つからなかった場合。
+- `string` オブジェクトの index/key 。 `false` オブジェクトが見つからなかった場合。
 
 ### isEmpty()
 
@@ -1041,7 +1044,7 @@ if ($collection) {
 `count(): int`
 
 返り値：
-- `int` Number of objects in the collection
+- `int` コレクションにあるオブジェクトの数
 
 <h2 id="bulk-actions-for-objects">オブジェクトへの一斉アクション</h2>
 
@@ -1174,7 +1177,7 @@ if ($collection) {
 - **Closure** 各オブジェクトのテストに使われるメソッド。
 
 返り値：
-- `bool` コールバック関数がすべｔねおオブジェクトで true を返す場合に true。
+- `bool` コールバック関数がすべてのオブジェクトで true を返す場合に true。
 
 <h2 id="closure-filtering-php-only">クロージャーによるフィルタリング（PHPのみ）</h2>
 
@@ -1215,13 +1218,13 @@ if ($collection) {
 `matching( Criteria ): Collection` Criteria 表現にマッチするすべてのオブジェクトを選択し、それらのオブジェクトからなる新しいコレクションを返します。
 
 パラメータ：
-- **[Criteria](https://www.doctrine-project.org/projects/doctrine-collections/en/1.6/expression-builder.html#expression-builder)** 表現
+- [**Criteria**](https://www.doctrine-project.org/projects/doctrine-collections/en/1.6/expression-builder.html#expression-builder) 表現
 
 返り値：
 - **Collection** (`object`) criteria にマッチするオブジェクトからなる新しいコレクション。
 
 > [!Tip]  
-> Doctrine ドキュメントの **[Expression Builder](https://www.doctrine-project.org/projects/doctrine-collections/en/1.6/expression-builder.html#expression-builder)** と、 ** [Expressions](https://www.doctrine-project.org/projects/doctrine-collections/en/1.6/expressions.html#expressions)** をチェックしてください。
+> Doctrine ドキュメントの [**Expression Builder**](https://www.doctrine-project.org/projects/doctrine-collections/en/1.6/expression-builder.html#expression-builder) と、  [**Expressions**](https://www.doctrine-project.org/projects/doctrine-collections/en/1.6/expressions.html#expressions) をチェックしてください。
 
 ### orderBy()
 

@@ -2,6 +2,7 @@
 title: 'Flex ディレクトリ'
 layout: ../../../../../layouts/Default.astro
 lastmod: '2025-09-06'
+description: 'twig や、プラグイン中の PHP で使える、 flex ディレクトリのメソッドを解説します。'
 ---
 
 ## getTitle()

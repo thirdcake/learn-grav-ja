@@ -1,24 +1,24 @@
 ---
 title: 'Flex オブジェクト'
 layout: ../../../../../layouts/Default.astro
-lastmod: '2025-05-08'
+lastmod: '2025-09-11'
 ---
+
 # Render Object
 
 ## render()
 
-`render( [layout], [context] ): Block` Renders the object.
+`render( [layout], [context] ): Block` オブジェクトをレンダリングする
 
 パラメータ：
-- **layout** Layout name (`string`)
-- **context** Extra variables that can be used inside the Twig template file (`array`)
+- **layout** レイアウト名 (`string`)
+- **context** Twig テンプレートファイル内で使うことができる追加の変数 (`array`)
 
 返り値：
-- **Block** (`object`) HtmlBlock class containing the output
+- **Block** (`object`) 出力を含んだ Html ブロック class
 
-!!! **NOTE:** In twig there is a `{% render %}` tag, which should be used instead of calling the method directly. This will allow JS/CSS assets from the object to work properly.
-
-
+> [!Note]  
+> Twig に、メソッドを直接呼ぶ代わりに使える `{% render %}` タグがあります。これにより、 object から JS/CSS が適切に機能します。 
 
 ```twig
 {% set contact = grav.get('flex').object('gizwsvkyo5xtms2s', 'contacts') %}
@@ -48,58 +48,59 @@ if ($object) {
 
 ## getKey()
 
-`getKey(): string` Get key of the object.
+`getKey(): string` オブジェクトのキーを取得する
 
 返り値：
-- `string` Object key
+- `string` オブジェクトのキー
 
 ## hasKey()
 
-`hasKey(): bool` Returns true if the object key has been set.
+`hasKey(): bool` オブジェクトのキーがある場合に true を返す
 
 返り値：
-- `true` if object has a key, `false` otherwise
+- `true` : オブジェクトにキーがあるとき。  `false` : そうでないとき。
 
 ## getFlexType()
 
-`getFlexType(): string` Get type of the object.
+`getFlexType(): string` オブジェクトの型を取得する
 
 返り値：
-- `string` Flex directory name where the object belongs into
+- `string` そのオブジェクトが所属する Flex ディレクトリ名
 
 ## hasProperty()
 
-`hasProperty( property ): bool` Returns true if the object property has been defined and has a value (not null).
+`hasProperty( property ): bool` オブジェクトのプロパティが定義され、値を持つ場合(null でない場合) に true を返す
 
 パラメータ：
-- **property** Property name (`string`)
+- **property** プロパティ名 (`string`)
 
 返り値：
-- `true` if property has a value, `false` otherwise.
+- `true` : プロパティが値を持つとき。 `false` : そうでないとき。
 
 ## getProperty()
 
-`getProperty( property, default ): mixed` Returns the value of the object property.
+`getProperty( property, default ): mixed` オブジェクトのプロパティの値を返す
 
 パラメータ：
-- **property** Property name (`string`)
+- **property** プロパティ名 (`string`)
 
 返り値：
-- `mixed` Value of the property
-- `null` if the property is not defined or has no value
+- `mixed` プロパティ値
+- `null` プロパティが定義されていない、もしくは値が無いとき
 
 ## setProperty()
 
-`setProperty( property, value ): Object` Set new value to the object property.
+`setProperty( property, value ): Object` オブジェクトのプロパティに新しい値を設定する
 
 パラメータ：
-- **property** Property name (`string`)
-- **value** New value (`mixed`)
+- **property** プロパティ名 (`string`)
+- **value** 新しい値 (`mixed`)
 
 返り値：
 - **Object** (`object`) The object for chaining the method calls
 
-!! **WARNING:** This method modifies the object instance shared between all the collections. If that is not intended, please `clone` the object before using this method.
+> [!Warning]  
+> This method modifies the object instance shared between all the collections. If that is not intended, please `clone` the object before using this method.
 
 ## defProperty()
 
