@@ -1,7 +1,7 @@
 ---
 title: システム要件
 layout: ../../../layouts/Default.astro
-lastmod: '2025-06-26'
+lastmod: '2025-10-15'
 description: 'Grav は、PHP といくつかの拡張だけで簡単に実行できます。軽量で幅広い環境に対応します。'
 ---
 
@@ -134,7 +134,7 @@ groups USERNAME
 ```bash
 chgrp -R GROUP .
 find . -type f | xargs chmod 664
-find . /bin -type f | xargs chmod 775
+find ./bin -type f | xargs chmod 775
 find . -type d | xargs chmod 775
 find . -type d | xargs chmod +s
 umask 0002

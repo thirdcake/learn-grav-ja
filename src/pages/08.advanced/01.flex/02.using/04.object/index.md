@@ -1,10 +1,11 @@
 ---
 title: 'Flex オブジェクト'
 layout: ../../../../../layouts/Default.astro
-lastmod: '2025-09-11'
+lastmod: '2025-10-15'
+description: 'twig や、プラグイン中の PHP で使える、 flex object のメソッドを解説します。'
 ---
 
-# Render Object
+## オブジェクトをレンダリング
 
 ## render()
 
@@ -42,9 +43,7 @@ if ($object) {
 }
 ```
 
-
-
-# Other
+## その他
 
 ## getKey()
 
@@ -100,50 +99,53 @@ if ($object) {
 - **Object** (`object`) The object for chaining the method calls
 
 > [!Warning]  
-> This method modifies the object instance shared between all the collections. If that is not intended, please `clone` the object before using this method.
+> このメソッドは、すべてのコレクションで共有されるオブジェクトインスタンスを修正します。そのつもりがない場合は、このメソッドを使う前に、オブジェクトを `clone` してください。
 
 ## defProperty()
 
-`defProperty( property, default ): Object` Define default value to the object property.
+`defProperty( property, default ): Object` オブジェクトのプロパティにデフォルト値を定義する。
 
 パラメータ：
-- **property** Property name (`string`)
-- **default** Default value (`mixed`)
+- **property** プロパティ名 (`string`)
+- **default** デフォルト値 (`mixed`)
 
 返り値：
-- **Object** (`object`) The object for chaining the method calls
+- **Object** (`object`) メソッドチェーンを呼び出せるオブジェクト
 
-!! **WARNING:** This method modifies the object instance shared between all the collections. If that is not intended, please `clone` the object before using this method.
+> [!Warning]  
+> このメソッドは、すべてのコレクションで共有されるオブジェクトインスタンスを修正します。そのつもりがない場合は、このメソッドを使う前に、オブジェクトを `clone` してください。
 
 ## unsetProperty()
 
-`unsetProperty( property ): Object` Remove value of the object property.
+`unsetProperty( property ): Object` オブジェクトプロパティの値を取り除く。
 
 パラメータ：
-- **property** Property name (`string`)
+- **property** プロパティ名 (`string`)
 
 返り値：
-- **Object** (`object`) The object for chaining the method calls
+- **Object** (`object`) メソッドチェーンを呼び出せるオブジェクト
 
-!! **WARNING:** This method modifies the object instance shared between all the collections. If that is not intended, please `clone` the object before using this method.
+> [!Warning]  
+> このメソッドは、すべてのコレクションで共有されるオブジェクトインスタンスを修正します。そのつもりがない場合は、このメソッドを使う前に、オブジェクトを `clone` してください。
 
 ## isAuthorized()
 
-`isAuthorized( action, [scope], [user] ): bool | null` Check if user is authorized for the action.
+`isAuthorized( action, [scope], [user] ): bool | null` ユーザーがそのアクションを認可されているかチェックします。
 
 パラメータ：
 - **action** (`string`)
-  - One of: `create`, `read`, `update`, `delete`, `list`
-- **scope** Optional (`string`)
-  - Usually either `admin` or `site`
-- **user** Optional User Object (`object`)
+  - 次のいずれか: `create`, `read`, `update`, `delete`, `list`
+- **scope** オプション (`string`)
+  - 通常は次のいずれか `admin` もしくは `site`
+- **user** オプション User オブジェクト (`object`)
 
 返り値：
-- `true` Allow action
-- `false` Deny action
-- `null` Not set (acts as Deny)
+- `true` 許可されたアクション
+- `false` 拒否されたアクション
+- `null` 未設定 (拒否として扱う)
 
-!!! **Note:** There are two deny values: denied (false), not set (null). This allows chaining multiple rules together when the previous rules were not matched.`
+> [!Note]  
+> 否定を意味する値が2つあります: 拒否(false) と、 未設定(null) です。これにより、マッチしないルールがあったとしても、複数のルールをつなげて判断できます。
 
 ## getFlexDirectory()
 
@@ -154,160 +156,162 @@ if ($object) {
 
 ## getTimestamp()
 
-`getTimestamp(): int` Get last modified timestamp for the object.
+`getTimestamp(): int` そのオブジェクトの最新の更新時のタイムスタンプを取得
 
 返り値：
-- `int` Timestamp.
+- `int` タイムスタンプ
 
 ## search()
 
-`search(string, [properties], [options] ): float` Search a string from the object, returns weight between 0 and 1.
+`search(string, [properties], [options] ): float` オブジェクトから文字列を検索し、0 から 1 の重みを返す
 
 パラメータ：
-- **string** Search string (`string`)
-- **properties** Properties to search, if null (or not provided), use defaults (`array` or `null`)
-- **options** Extra options used while searching (`array`)
-  - starts_with: `bool`
-  - ends_with: `bool`
-  - contains: `bool`
-  - case_sensitive: `bool`
+- **string** 検索文字列 (`string`)
+- **properties** 検索するプロパティ。もし null (もしくは空) の場合、デフォルト(`array` もしくは `null`) を利用する
+- **options** 検索中に使う追加のオプション (`array`)
+  - `starts_with`: `bool`
+  - `ends_with`: `bool`
+  - `contains`: `bool`
+  - `case_sensitive`: `bool`
 
 返り値：
-- `float` Search weight between 0 and 1, used for ordering the results
-- `0` Object does not match the search
+- `float` 結果の順番に利用できる 0 から 1 の間の検索の重み
+- `0` オブジェクトは検索にマッチしない場合
 
-!!! **Note:** If you override this function, make sure you return value in range 0...1!
+> [!Note]  
+> この関数を上書きする場合、必ず 0 から 1の間の値を返すようにしてください！
 
 ## getFlexKey()
 
-`getFlexKey(): string` Get a unique key for the object.
+`getFlexKey(): string` オブジェクトのユニークなキーを取得。
 
 返り値：
-- `string` **Flex key** of the object
+- `string` オブジェクトの **Flex キー**
 
-Flex Keys can be used without knowing the Directory the Object belongs into.
+Flex キーは、その Flex オブジェクトが、どの Flex ディレクトリに属しているかに関係なく使えます。
 
 ## getStorageKey()
 
-`getStorageKey(): string` Get a unique storage key (within the directory) which is used for figuring out the filename or database id.
+`getStorageKey(): string` ユニークな（ディレクトリ内の）ストレージキーを取得し、ファイル名やデータベースの ID を特定するのに使われます。
 
 返り値：
-- `string` **Storage key** of the object
+- `string` オブジェクトの **ストレージキー**
 
 ## exists()
 
-`exists(): bool` Returns true if the object exists in the storage.
+`exists(): bool` ストレージにオブジェクトが存在していれば true を返す。
 
 返り値：
-- `true` Object exists in the storage
-- `false` Object has not been saved
+- `true` ストレージにオブジェクトが存在する
+- `false` オブジェクトが保存されていない
 
 ## update()
 
-`update( data, files ): Object` Updates object in the memory.
+`update( data, files ): Object` メモリ内でオブジェクトを更新する。
 
 パラメータ：
-- **data** (`array`) Nested arrays of properties with their values
-- **files** (`array`) Array of `Psr\Http\Message\UploadedFileInterface` objects
+- **data** (`array`) ネストされたプロパティと値の連想配列
+- **files** (`array`) `Psr\Http\Message\UploadedFileInterface` オブジェクトの配列
 
 返り値：
-- **Object** (`object`) The object for chaining the method calls
+- **Object** (`object`) メソッドチェーンを呼び出せるオブジェクト
 
-! **TIP:** You need to save the object after calling this method.
+> [!Tip]  
+> このメソッドの呼び出し後、そのオブジェクトを保存する必要があります。
 
 ## create()
 
-`create( [key] ): Object` Create new object into the storage.
+`create( [key] ): Object` 新しいオブジェクトをストレージに作成する。
 
 パラメータ：
-- **key** (`string`) Optional key
+- **key** (`string`) オプションのキー
 
 返り値：
-- **Object** (`object`) Saved object
+- **Object** (`object`) 保存されたオブジェクト
 
 ## createCopy()
 
-`createCopy( [key] ): Object` Create a new object from the current one and save it into the storage.
+`createCopy( [key] ): Object` 現在のオブジェクトから新しいオブジェクトを作成し、ストレージに保存する。
 
 パラメータ：
-- **key** (`string`) Optional key
+- **key** (`string`) オプションのキー
 
 返り値：
-- **Object** (`object`) Saved object
+- **Object** (`object`) 保存されたオブジェクト
 
 ## save()
 
-`save(): Object` Save object into the storage.
+`save(): Object` ストレージにオブジェクトを保存する
 
 返り値：
-- **Object** (`object`) Saved object
+- **Object** (`object`) 保存されたオブジェクト
 
 ## delete()
 
-`delete(): Object` Delete object from the storage.
+`delete(): Object` ストレージからオブジェクトを削除する。
 
 返り値：
-- **Object** (`object`) Deleted object
+- **Object** (`object`) 削除されたオブジェクト
 
 ## getBlueprint()
 
-`getBlueprint( [name] ): Blueprint` Returns the blueprint of the object.
+`getBlueprint( [name] ): Blueprint` そのオブジェクトのブループリントを返す
 
 パラメータ：
-- **name** (`string`) Optional name for the blueprint
+- **name** (`string`) オプション ブループリントの名前
 
 返り値：
 - **Blueprint** (`object`)
 
 ## getForm()
 
-`getForm( [name], [options] ): Form` Returns a form instance for the object.
+`getForm( [name], [options] ): Form` オブジェクトの form インスタンスを返す
 
 パラメータ：
-- **name** (`string`) Optional name for the form
-- **options** (`array`) Optional options to the form
+- **name** (`string`) オプション フォーム名
+- **options** (`array`) フォームに対する追加のオプション
 
 返り値：
 - **Form** (`object`)
 
 ## getDefaultValue()
 
-`getDefaultValue( name, [separator] ): mixed` Returns default value suitable to be used in a form for the given property.
+`getDefaultValue( name, [separator] ): mixed` 与えられたプロパティに対するフォームで使われる適切なデフォルト値を返す。
 
 パラメータ：
-- **name** (`string`) Name of the property
-- **separator** (`string`) Optional separator character for nested properties, defaults to `.` (dot)
+- **name** (`string`) プロパティ名
+- **separator** (`string`) オプション ネストされたプロパティでセパレータとして使う文字。デフォルトは `.` (ドット)
 
 返り値：
-- `mixed` Default value of the property
+- `mixed` プロパティのデフォルト値
 
 ## getDefaultValues()
 
-`getDefaultValues(): array` Returns default values suitable to be used in a form for the given property.
+`getDefaultValues(): array` 与えられたプロパティに対するフォームで使われる適切なデフォルト値を複数返す。
 
 返り値：
-- `array` All default values
+- `array` すべてのデフォルト値
 
 ## getFormValue()
 
-`getFormValue( name, [default], [separator] ): mixed` Returns raw value suitable to be used in a form for the given property.
+`getFormValue( name, [default], [separator] ): mixed` 与えられたプロパティに対するフォームで使われる適切な生の値を返す。
 
 パラメータ：
-- **name** (`string`) Name of the property
-- **default** (`mixed`) Optional default value of the field, `null` if not given
-- **separator** (`string`) Optional separator character for nested properties, defaults to `.` (dot)
+- **name** (`string`) プロパティ名
+- **default** (`mixed`) オプション フィールドのデフォルト値で、与えられなかった場合は `null` となる
+- **separator** (`string`) オプション ネストされたプロパティでセパレータとして使う文字。デフォルトは `.` (ドット)
 
 返り値：
-- `mixed` Value of the form field
+- `mixed` フォームフィールドの値
 
 ## triggerEvent()
 
-`triggerEvent( name, [Event] ): Object` Trigger an event of your choice.
+`triggerEvent( name, [Event] ): Object` 選択したイベントのトリガー
 
 パラメータ：
-- **name** (`string`) Name of the event
-- **Event** (`object`) Optional event class
+- **name** (`string`) イベント名
+- **Event** (`object`) オプション イベントの class
 
 返り値：
-- **Object** (`object`) The object for chaining the method calls
+- **Object** (`object`) メソッドチェーンを呼び出せるオブジェクト
 
