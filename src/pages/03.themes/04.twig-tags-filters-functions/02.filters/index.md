@@ -1,7 +1,7 @@
 ---
 title: カスタムフィルタ
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-08-04'
+lastmod: '2025-10-25'
 description: 'Grav で独自に追加した Twig のカスタムフィルタについて解説します。'
 ---
 
@@ -452,6 +452,43 @@ trancate は、5文字の後の単語の終わりで、一番近いところで�
 「アンダースコア」のフォーマットに文字列を変換します。
 
 `'CamelCased'|underscorize`  -&gt; （結果は [翻訳元](https://learn.getgrav.org/themes/twig-tags-filters-functions/filters#underscorize) へ）
+
+### `wordcount`
+
+テキスト文字列内の単語数を数えます。複数言語をサポートし、 HTML コンテンツの精度が向上しました。
+
+```twig
+{{ page.content|wordcount }}
+```
+
+```txt
+36
+```
+
+`wordcount` フィルタは、オプションで、ロケール引数を受け取ることもでき、異なる言語を適切に処理します。  
+西欧言語（英語、スペイン語、フランス語など）では、スペース文字で独立している単語を数えます。  
+アジア言語（中国語、日本語、韓国語）では、単語ではなく文字を数えます。これは、それぞれの言語の書き方において適切な方法です。
+
+```twig
+{# With specific locale for English content #}
+{{ page.content|wordcount('en') }}
+
+{# For Chinese content - counts characters instead of words #}
+{{ page.content|wordcount('zh') }}
+
+{# Usage in JSON-LD structured data #}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "wordCount": page.content|wordcount,
+  "headline": page.title
+}
+</script>
+```
+
+> [!Info]  
+> **サポートするロケール:** `en` (英語, デフォルト), `es` (スペイン語), `fr` (フランス語), `de` (ドイツ語), その他西欧言語では、単語ベースに数えます。 `zh`/`zh-cn`/`zh-tw`/`chinese` (中国語), `ja`/`japanese` (日本語), そして `ko`/`korean` (韓国語) は、文字ベースに数えます。
 
 <h3 id="yaml-encode"><code>yaml_encode</code></h3>
 

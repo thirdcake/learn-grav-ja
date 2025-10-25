@@ -1,9 +1,10 @@
 ---
 title: ブループリント
 layout: ../../../../../layouts/Default.astro
-lastmod: '2025-05-11'
+lastmod: '2025-10-25'
 ---
-**Flex ブループリント** の基本構造は、flex タイプを説明する `title` と、 `description` と、 `type` があり、 Flex タイプのそれぞれ異なる側面を説明する3つのセクション（ `config` と、 `blueprints` と `form` ）もあります。
+
+**Flex ブループリント** の基本構造は、 flex タイプを説明する `title` と、 `description` と、 `type` があり、 Flex タイプのそれぞれ異なる側面を説明する3つのセクション（ `config` と、 `blueprints` と `form` ）もあります。
 
 `contacts.yaml` の主要構造は、次のようになっています：
 
@@ -26,11 +27,11 @@ form: {}
 
 ファイルを作成し、基本情報が入力できたら、次のステップとして、ファイルに既存のフォームをコピーするか、フィールドを追加します。
 
-> [!Note]  
-> **TIP:** ここでは、オリジナルの **[フォームとブループリント](../../../../06.forms/)** の作成方法を知っているという前提で、話を進めます。
+> [!Tip]  
+> ここでは、オリジナルの **[フォームとブループリント](../../../../06.forms/)** の作成方法を知っているという前提で、話を進めます。
 
-> [!Info]  
-> **WARNING:** **[シンプルな1つのフォームを作成](../../../../06.forms/02.forms/#create-a-simple-single-form)** で説明したような、シンプルなリストフォーマットは使わない方が良いでしょう。また、 `process` セクションは、このファイルの form には渡さないでください。 Flex では利用できません。
+> [!Warning]  
+> **[シンプルな1つのフォームを作成](../../../../06.forms/02.forms/#create-a-simple-single-form)** で説明したような、シンプルなリストフォーマットは使わない方が良いでしょう。また、 `process` セクションは、このファイルの form には渡さないでください。 Flex では利用できません。
 
 ## Form
 
@@ -85,16 +86,22 @@ form:
         type: commalist
 ```
 
-form の見た目は、ページから取り出されたものも、config 設定や、プラグインやテーマのブループリントファイルから取り出されたものも、同じです。これが、この flex ディレクトリ内のすべての flex オブジェクトに適用されるメインのブループリントであり、オブジェクトに定義されるフィールドはすべて含まれている必要があります。管理パネルに表示されるフォームのように考えてください。
+form の見た目は、ページから取得するものも、config 設定や、プラグインやテーマのブループリントファイルから取得するものも、同じ見た目です。  
+上記が、この flex ディレクトリ内のすべての flex オブジェクトに適用されるメインのブループリントであり、 flex オブジェクトに定義されるフィールドは、すべてここに含まれている必要があります。  
+管理パネルに表示されるフォームだと考えてください。
 
-> [!Info]  
-> **WARNING:** 既存の Flex タイプのブループリントを修正するときは気をつけてください。保存済みのオブジェクトが、新しいバージョンのブループリントに適合することを確認してください。 - つまり、古いオブジェクトも保存や表示できるようにすべきという意味です。
+> [!Warning]  
+> 既存の Flex タイプのブループリントを修正するときは気をつけてください。保存済みのオブジェクトが、新しいバージョンのブループリントに、必ず適合するように確認してください。 - つまり、古いオブジェクトも保存や表示できるようにすべきという意味です。
 
-まだ終わっていません。あと2項目ほど、 flex ディレクトリを機能させるために必要です：データストレージレイヤーの設定と、管理パネルでの一覧画面に表示するフィールドの定義が必要です。これらはどちらも、 `config` セクションでできます。
+ここで終わりではありません。  
+あと2項目ほど、 flex ディレクトリを機能させるために必要です: データストレージレイヤーの設定と、管理パネルでの一覧画面に表示するフィールドの定義が必要です。  
+これらはどちらも、 `config` セクションでできます。
 
 ## Config
 
-Config セクションは、 Flex ブループリントで最も複雑な部分です。しかしその多くは、ただのカスタム用です。セクションには、 `data` と、 `admin` と、`site` があります。
+Config セクションは、 Flex ブループリントで最も複雑な部分です。  
+しかしその多くは、ただのカスタム用です。  
+セクションには、 `data` と、 `admin` と、`site` があります。
 
 ```yaml
 # Flex Configuration
@@ -134,11 +141,16 @@ config:
         website:
 ```
 
-config 設定には、2つの必須セクションがあります： `config.data.storage` と、 `config.admin.list.fields` です。後者は、管理パネルでのリスト表示画面で表示されるフィールドを定義します。前者のデータストレージは、データをどのように保存するかを定義します。
+config 設定には、2つの必須セクションがあります: `config.data.storage` と、 `config.admin.list.fields` です。  
+後者は、管理パネルでのリスト表示画面で表示されるフィールドを定義します。  
+前者のデータストレージは、データをどのように保存するかを定義します。
 
 ### Config > Data
 
-**Flex ディレクトリ** は、柔軟にカスタマイズできます。 `object` と、 `collection` と、 `index` の3つの PHP class に、独自のふるまいを追加できます。さらに、`storage` レイヤーを好きなところに設定できます。 flex ディレクトリは、デフォルトの `ordering` （順序）と、 `search` （検索）機能を付けることもできます。
+**Flex ディレクトリ** は、柔軟にカスタマイズできます。  
+`object` と、 `collection` と、 `index` の3つの PHP class に、独自のふるまいを追加できます。  
+さらに、`storage` レイヤーを好きなところに設定できます。  
+flex ディレクトリは、デフォルトの `ordering` （順序）と、 `search` （検索）機能を付けることもできます。
 
 ```yaml
 config:
@@ -157,7 +169,8 @@ config:
     search: {}
 ```
 
-Object と、 collection と、 index は、class 名を使います。これらを入力しなかった場合、 Grav は以下のデフォルトの config 設定を使います：
+Object と、 collection と、 index は、class 名を使います。  
+これらを入力しなかった場合、 Grav は以下のデフォルトの config 設定を使います：
 
 ```yaml
 config:
@@ -167,7 +180,8 @@ config:
     index: 'Grav\Common\Flex\Types\Generic\GenericIndex'
 ```
 
-これらの class は、一緒に flex type へふるまいを定義します。独自の flex type をカスタマイズしたい場合、これらの class を拡張し、独自の class をここで渡すことで可能になります。
+これらの class は、一緒に flex type へふるまいを定義します。  
+独自の flex type をカスタマイズしたい場合、これらの class を拡張し、独自の class をここで渡すことで可能になります。
 
 最も重要な部分のひとつは、データをどこに、どのように保存するかを定義するところです：
 
@@ -315,14 +329,18 @@ Search のオプションは、次のとおりです：
 | ends_with | 0 ... 1 | Value of the field must end with the search string |
 | contains | 0 ... 1 | Value of the field must contain the search string |
 
-検索機能は、マッチしなかった場合、0 を返します。マッチした場合は、 0 から 1 の重みを付けます。重みは、検索結果の順序付けに利用されます。最も高いスコアを得たオブジェクトが、それより低いスコアのオブジェクトよりも、よくマッチしています。
+検索機能は、マッチしなかった場合、0 を返します。  
+マッチした場合は、 0 から 1 の重みを付けます。  
+重みは、検索結果の順序付けに利用されます。  
+最も高いスコアを得たオブジェクトが、それより低いスコアのオブジェクトよりも、よくマッチしています。
 
 > [!Tip]  
 > 現在、検索機能は、フィールドごとの重み付けや戦略には対応していません。
 
 ### Config > Admin
 
-Admin section contains various configuration options to customize directory administration. It contains a few main sections: `router`, `actions`, `permissions`, `menu`, `template` and `views`.
+Admin セクションには、 flex ディレクトリ管理をカスタマイズする多様なオプションが含まれます。  
+メインのセクションは、次の通りです:  `router`, `actions`, `permissions`, `menu`, `template` そして `views` 。
 
 ```yaml
 config:
@@ -342,7 +360,9 @@ config:
     views: {}
 ```
 
-Optional `router` section can be used to customize the **Flex Directory** admin routes. Routing supports a base path, customizable routes for every action as well as redirects to handle for example backwards compatibility. All the paths are relative to admin base URL.
+オプションの `router` セクションでは、 **Flex Directory** 管理ルーティングをカスタマイズするのに使えます。  
+ルーティングは、ベースパスや、すべてのアクションに対するカスタマイズ可能なルーティング、そして、後方互換性などの制御のためのリダイレクトをサポートします。
+すべてのパスは、管理パネルのベース URL からの相対パスです。
 
 ```yaml
 config:
@@ -357,7 +377,8 @@ config:
         '/flex-objects/contacts': '/contacts'
 ```
 
-Sometimes you want to restrict the administration to only display the entries or for example to only allow editing the existing ones. For this `actions` is where you can tweak the allowed CRUD operations to fit better your needs.
+場合によっては、管理パネルで、入力欄のみが表示されるように制限したり、たとえば、既存の入力エントリーの編集のみを許可したいこともあります。  
+このような場合のため、 `actions` で、許可する CRUD 操作を調整したりして、よりやりたいことに合わせることができます。
 
 ```yaml
 config:
@@ -371,9 +392,11 @@ config:
       delete: false # Set to false to disable deleting objects
 ```
 
-Above example will prevent saving existing objects and deleting them for every user, including Super Admin.
+上記の例では、管理者を含むすべてのユーザーに対して、既存のオブジェクトを保存したり、削除したりすることができないようにしています。
 
-Permissions section allows you to add new permission rules for Grav. These rules will appear in user/group admin. You can create as many permission rules as you wish, but you need to add your own logic or `authorize` rules in this file to use them.
+Permissions セクションでは、 Grav に新しいパーミッションルールを追加できます。  
+これらのルールは、 user/group 管理に現れます。  
+必要ならいくらでもたくさんのパーミッションを作成できます。ただし、それぞれを利用するための独自ロジックや `authorize` ルールをこのファイルに追加する必要があります。
 
 ```yaml
 config:
@@ -390,7 +413,8 @@ config:
         label: Contacts Configuration
 ```
 
-If you do not want to display your directory in `Flex Objects` administration, one option is to display menu item in the main navigation. You can do just that in the `menu` section of the configuration.
+もし、管理パネルの `Flex Objects` にあなたの flex ディレクトリを表示させたくない場合、オプションで、メインナビ内のメニューアイテムに表示させることができます。  
+設定の `menu` セクションに、次のように書くだけです。
 
 ```yaml
 config:
@@ -406,9 +430,10 @@ config:
         priority: 2 # Priority -10 .. 10 (highest goes up)
 ```
 
-Above example creates **Contacts** menu item pointing to `/admin/contacts`.
+上記の例では、 **Contacts** メニューアイテムを `/admin/contacts` にリンクさせて作成しています。
 
-When you're creating your own Flex Directories, you may sometimes want to share the same templates between all of your custom directories. You can do this with `template`:
+独自の Flex ディレクトリを作成したとき、すべてのカスタムディレクトリ間で同じテンプレートを共有したい場合があるかもしれません。
+そのようなときは、 `template` を使ってできます:
 
 ```yaml
 config:
@@ -417,7 +442,9 @@ config:
     template: contacts
 ```
 
-**Flex Admin** has multiple views to the objects. By default, following views are supported: `list`, `edit`, `configure` and optionally `preview` & `export`. It is possible to add your own views as well.
+**Flex Admin** は、 Flex オブジェクトをいくつかのやり方で表示します。  
+デフォルトでは、以下のような表示をサポートします: `list`, `edit`, `configure` そして、オプションで次をサポートします: `preview`, `export` 。  
+独自の表示方法を追加することもできます。
 
 ```yaml
 config:
@@ -435,9 +462,11 @@ config:
       export: {}
 ```
 
-#### List View
+<h4 id="list-view">リスト表示</h4>
 
-The first view you will need, is the one which lists all of your objects. By default `list` view uses *VueTable* and *AJAX* to paginate the objects. It needs a list of `fields` to display as well as `options` to define how many items are being shown at once as well as the default field used for ordering.
+最初の表示は、すべての Flex オブジェクトをリスト表示するものです。  
+デフォルトでは、 `list` 表示は、 *VueTable* と *AJAX* を使い、 Flex オブジェクトをページ分けします。  
+この表示には、一覧に表示する `fields` と、1ページにいくつのアイテムを表示させるかや、デフォルトの表示順を定義する `options` が必要です。
 
 ```yaml
 config:
@@ -455,29 +484,32 @@ config:
             dir: asc      # Default ordering direction
 ```
 
-**Icon** and **title** are used to customize the icon and title of the listing page. **Title** supports also using Twig template by using following format:
+**Icon** と **title** は、リストページのアイコンとタイトルをカスタマイズします。  
+**Title** は、以下のようなフォーマットを使うことで、 Twig テンプレートもサポートします:
 
 ```yaml
         title:
           template: "{{ 'PLUGIN_CONTACTS.CONTACTS_TITLE'|tu }}"
 ```
 
-**Fields** contains the fields you want to display in the directory listing. Each field has a key, which is the name of the field. Value can be omitted or it can contain the following configuration options:
+**Fields** には、一覧に表示したいフィールドを含めます。  
+各フィールドは、フィールド名をキーとして持ちます。  
+値は、省略するか、以下のような設定オプションを含めることができます:
 
 | 名前 | 値 | 具体例 | 説明 |
 |------|----|--------|------|
-| width | `integer` | 8 | Width of the field in pixels |
-| alias | `string` | 'header.published' | Name of the form field to use. VueTable doesn't like dots in the names, so set alias for nested variables. |
+| width | `integer` | 8 | ピクセル単位のフィールドの幅 |
+| alias | `string` | 'header.published' | 利用するフォームフィールド名。 VueTable は、名前にドット `.` を使えないため、ネストされた変数にはエイリアスを設定してください。 |
 | field | `array` |  | Form field override. Written just like any form field, but just without a key. |
-| link | `string` | 'edit' | Adds edit link to the text. |
-| search | `boolean` | true | Makes the field searchable in admin list. |
+| link | `string` | 'edit' | テキストに編集画面へのリンクを追加する。 |
+| search | `boolean` | true | 管理画面リストでそのフィールドを検索対象とするか。 |
 | sort | `array` | field: 'first_name' | You can specify different value if you use different field name when querying data on the server side, e.g. first_name. |
-| title_class | `string` | 'center' | CSS classes used in titles. |
-| data_class | `string` |  'left' | CSS classes used in data columns. |
+| title_class | `string` | 'center' | タイトルで使われる CSS クラス。 |
+| data_class | `string` |  'left' | データ列で使われる CSS クラス。 |
 
 #### Edit View
 
-Edit view has the same basic configuration options as list view:
+Edit 表示では、リスト表示と同じく基本的な設定オプションが使えます:
 
 ```yaml
 config:
@@ -492,7 +524,7 @@ config:
 
 #### Configure view
 
-Configure view allows you to add directory wide configuration options, which can then be used in the template files.
+Configure 表示では、さまざまな設定オプションを Flex ディレクトリに追加し、それらをテンプレートファイルで使うことができます。
 
 ```yaml
 config:
@@ -511,7 +543,7 @@ config:
 
 #### Preview view
 
-Flex also supports preview, though right now it works by rendering a page from the frontend, which can be defined in the blueprint file.
+Flex では、プレビューもサポートします。ただし、現状では、フロントエンドからページをレンダリングすることで機能しています。この方法は、ブループリントファイルで定義可能です。
 
 ```yaml
     # Preview View
@@ -527,7 +559,7 @@ Flex also supports preview, though right now it works by rendering a page from t
 
 #### Export view
 
-All objects can be exported into a single file, here is an example configuration how to export data into YAML file:
+すべての Flex オブジェクトをひとつのファイルにエクスポートすることができます。以下は、 YAML ファイルにデータをエクスポートする設定方法の例です。
 
 ```yaml
     # Data Export
