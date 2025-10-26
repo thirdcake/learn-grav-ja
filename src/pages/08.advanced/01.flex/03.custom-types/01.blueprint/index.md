@@ -1,10 +1,12 @@
 ---
 title: ブループリント
 layout: ../../../../../layouts/Default.astro
-lastmod: '2025-10-25'
+lastmod: '2025-10-26'
+description: 'Flex ディレクトリの設定ファイルであるブループリントの書き方について解説します。'
 ---
 
-**Flex ブループリント** の基本構造は、 flex タイプを説明する `title` と、 `description` と、 `type` があり、 Flex タイプのそれぞれ異なる側面を説明する3つのセクション（ `config` と、 `blueprints` と `form` ）もあります。
+**Flex ブループリント** の基本構造には、その Flex タイプがどんなものかを説明する `title` と、 `description` と、 `type` が含まれています。  
+さらに、 Flex ディレクトリを、異なる観点から設定する3つのセクション（ `config` と、 `blueprints` と `form` ）があります。
 
 `contacts.yaml` の主要構造は、次のようになっています：
 
@@ -23,12 +25,12 @@ blueprints: {}
 form: {}
 ```
 
-ご自身でカスタムディレクトリを作成するには、まず `type` （ファイル名）を名付けて、 `title` と `description` を入力します。
+独自に、カスタムディレクトリを作成するには、まず `type` （ファイル名）を名付けて、 `title` と `description` を入力します。
 
 ファイルを作成し、基本情報が入力できたら、次のステップとして、ファイルに既存のフォームをコピーするか、フィールドを追加します。
 
 > [!Tip]  
-> ここでは、オリジナルの **[フォームとブループリント](../../../../06.forms/)** の作成方法を知っているという前提で、話を進めます。
+> ここからの文章では、 **[フォームとブループリント](../../../../06.forms/)** のカスタマイズ方法を知っているという前提で、話を進めます。
 
 > [!Warning]  
 > **[シンプルな1つのフォームを作成](../../../../06.forms/02.forms/#create-a-simple-single-form)** で説明したような、シンプルなリストフォーマットは使わない方が良いでしょう。また、 `process` セクションは、このファイルの form には渡さないでください。 Flex では利用できません。
@@ -324,10 +326,10 @@ Search のオプションは、次のとおりです：
 | 名前 | 値 | 説明 |
 |------|-------|-------------|
 | case_sensitive | `true` or `false` | true にすると、大文字・小文字を区別します。デフォルトは false |
-| same_as | 0 ... 1 | Value of the field must be identical to the search string |
-| starts_with | 0 ... 1 | Value of the field must start with the search string |
-| ends_with | 0 ... 1 | Value of the field must end with the search string |
-| contains | 0 ... 1 | Value of the field must contain the search string |
+| same_as | 0 ... 1 | フィールドの値は、検索文字列と完全に一致する必要があります |
+| starts_with | 0 ... 1 | フィールドの値は、検索文字列で始まる必要があります |
+| ends_with | 0 ... 1 | フィールドの値は、検索文字列で終わる必要があります |
+| contains | 0 ... 1 | フィールドの値は、検索文字列を含む必要があります |
 
 検索機能は、マッチしなかった場合、0 を返します。  
 マッチした場合は、 0 から 1 の重みを付けます。  
@@ -462,7 +464,7 @@ config:
       export: {}
 ```
 
-<h4 id="list-view">リスト表示</h4>
+#### List View
 
 最初の表示は、すべての Flex オブジェクトをリスト表示するものです。  
 デフォルトでは、 `list` 表示は、 *VueTable* と *AJAX* を使い、 Flex オブジェクトをページ分けします。  
@@ -500,10 +502,10 @@ config:
 |------|----|--------|------|
 | width | `integer` | 8 | ピクセル単位のフィールドの幅 |
 | alias | `string` | 'header.published' | 利用するフォームフィールド名。 VueTable は、名前にドット `.` を使えないため、ネストされた変数にはエイリアスを設定してください。 |
-| field | `array` |  | Form field override. Written just like any form field, but just without a key. |
+| field | `array` |  | フォームフィールドの上書き。通常のフォームフィールドと同様に記述しますが、キーを指定しません。 |
 | link | `string` | 'edit' | テキストに編集画面へのリンクを追加する。 |
 | search | `boolean` | true | 管理画面リストでそのフィールドを検索対象とするか。 |
-| sort | `array` | field: 'first_name' | You can specify different value if you use different field name when querying data on the server side, e.g. first_name. |
+| sort | `array` | field: 'first_name' |  You can specify different value if you use different field name when querying data on the server side, e.g. first_name. |
 | title_class | `string` | 'center' | タイトルで使われる CSS クラス。 |
 | data_class | `string` |  'left' | データ列で使われる CSS クラス。 |
 
@@ -543,7 +545,9 @@ config:
 
 #### Preview view
 
-Flex では、プレビューもサポートします。ただし、現状では、フロントエンドからページをレンダリングすることで機能しています。この方法は、ブループリントファイルで定義可能です。
+Flex では、プレビューもサポートします。  
+ただし、現状では、フロントエンドからページをレンダリングすることで機能しています。  
+この方法は、ブループリントファイルで定義可能です。
 
 ```yaml
     # Preview View
@@ -559,7 +563,8 @@ Flex では、プレビューもサポートします。ただし、現状では
 
 #### Export view
 
-すべての Flex オブジェクトをひとつのファイルにエクスポートすることができます。以下は、 YAML ファイルにデータをエクスポートする設定方法の例です。
+すべての Flex オブジェクトをひとつのファイルにエクスポートすることができます。  
+以下は、 YAML ファイルにデータをエクスポートする設定方法の例です。
 
 ```yaml
     # Data Export
@@ -593,11 +598,12 @@ config:
         layout: default
 ```
 
-Template settings allow you to customize the template lookup paths and set the default type and layout name in the frontend.
+テンプレートを設定することで、探すテンプレートのパスをカスタマイズでき、デフォルトのタイプとフロントエンドでのレイアウト名を設定できます。
 
 ## Blueprints
 
-Blueprints section defines the common configuration options for the whole Directory. The options allow you to customize a common directory to better suit the needs of the site without requiring manual editing of the files.
+blueprints セクションでは、 Flex ディレクトリ全体に対する一般的な設定オプションを定義します。  
+オプションの設定により、一般的な Flex ディレクトリを、手作業のファイル編集をせずに、よりサイトのニーズに合ったものへカスタマイズできます。
 
 ```yaml
 blueprints:
@@ -625,9 +631,9 @@ blueprints:
               type: bool
 ```
 
-> [!Note]  
-> **TIP:** These configuration options can be modified in **[Configuration](../../01.administration/03.configuration/)** section of the **[Flex Directory Administration](../../advanced/flex/administration/)**.
-
 > [!Tip]  
-> **NOTE:** Currently the only used configuration options are inside the cache section. For your custom settings, you need to add logic to use them by yourself.
+> これらの設定オプションは、 [**Flex ディレクトリ管理パネル**](../../01.administration/) の [**Configuration**](../../01.administration/03.configuration/) セクション で修正できます。
+
+> [!Note]  
+> 現在使用されている設定オプションは、キャッシュセクション内にのみ存在します。カスタム設定を使用するには、それらを利用するロジックを独自に追加する必要があります。
 
