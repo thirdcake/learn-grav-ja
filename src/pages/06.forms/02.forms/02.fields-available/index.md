@@ -1,7 +1,7 @@
 ---
 title: 'リファレンス：form.fields の一覧'
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-09-02'
+lastmod: '2025-10-30'
 description: 'Grav の form プラグインで、フロントエンド向けに設定可能な入力フォームを、ひとつずつ解説します。'
 ---
 
@@ -644,6 +644,7 @@ header.some_field:
 | 属性 | 説明  |
 | :-----    | :----- |
 | `name`    | フィールド名です。もし書き忘れた場合、要素の定義フィールドの名前になります（上の例では： `header.some_field` ）|
+| `evaluate` | `page.title` のような変数を、値として使えるようにするため、この値を `true` にする必要がある |
 
 | 利用可能な一般属性            |
 | :-----                               |

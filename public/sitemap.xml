@@ -4,7 +4,7 @@
     <loc>https://thirdcake.github.io/learn-grav-ja/</loc>
     <priority>0.7</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-10-25</lastmod>
+    <lastmod>2025-10-30</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/01.basics/</loc>
@@ -28,7 +28,7 @@
     <loc>https://thirdcake.github.io/learn-grav-ja/01.basics/03.installation/</loc>
     <priority>1.0</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-06-26</lastmod>
+    <lastmod>2025-10-30</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/01.basics/04.basic-tutorial/</loc>
@@ -472,7 +472,7 @@
     <loc>https://thirdcake.github.io/learn-grav-ja/06.forms/01.blueprints/07.advanced-features/</loc>
     <priority>1.0</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-08-29</lastmod>
+    <lastmod>2025-10-30</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/06.forms/02.forms/</loc>
@@ -490,7 +490,7 @@
     <loc>https://thirdcake.github.io/learn-grav-ja/06.forms/02.forms/02.fields-available/</loc>
     <priority>1.0</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-09-02</lastmod>
+    <lastmod>2025-10-30</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/06.forms/02.forms/03.example-form/</loc>
@@ -844,7 +844,7 @@
     <loc>https://thirdcake.github.io/learn-grav-ja/09.webservers-hosting/04.local-development-with-ddev/</loc>
     <priority>1.0</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-05-27</lastmod>
+    <lastmod>2025-10-30</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/09.webservers-hosting/05.deploying-with-git/</loc>

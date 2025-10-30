@@ -1,7 +1,7 @@
 ---
 title: 高度なブループリントの機能
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-08-29'
+lastmod: '2025-10-30'
 description: 'ブループリント設定ファイルを、拡張したり、動的に編集する方法を解説します。'
 ---
 
@@ -120,6 +120,21 @@ form:
         import@2:
           type: partials/another-gallery
           context: blueprints://
+```
+
+デフォルトでは、 `blueprints://` は、 `/user/plugins/admin/blueprints/` を指し示します。  
+このため、テーマのコンテキスト内で作業する場合は、インポート文を調整する必要があることに注意してください:
+
+```yaml
+form:
+  fields:
+    images:
+        type: section
+        title: Images
+        underline: true
+        import@:
+          type: partials/gallery
+          context: theme://blueprints
 ```
 
 <h2 id="removing-fields-properties-unset-at">フィールド・プロパティの削除(unset-*@)</h2>
@@ -309,6 +324,67 @@ form:
 たとえば、上記のコードでは、 display 型と spacer 型を仮想的に設定し、本当のデータとしては存在しないことを意味します。
 
 フィールドに自動的に追加される `data-options@` のような動的なプロパティを含め、あらゆる `key: value` ペアを追加できます。
+
+<h2 id="override-or-extend-a-plugin-s-blueprint">プラグインのブループリントを上書きもしくは拡張する</h2>
+
+プラグインで提供されているブループリントについて、変更を加えたいこともあります； そこにあるオプションに付け加えたり、移動させたり、削除したい場合です。  
+これは、単純ではありません: プラグインのブループリントは、ただの `form`-プロパティ以上のものを含み、暗黙的に拡張可能なものではないからです。  
+しかしながら、プラグインを作成する際には、 [ユーザーのブループリント](../../../01.basics/06.folder-structure/#userblueprints) 向けに変更しやすくする価値があります。
+
+- まず、その PHP-ファイル内で public-プロパティを追加することにより、ブループリントをサポートしていることを宣言する必要があります: `public $features = ['blueprints' => 10];`
+- 次に、プラグインは、ファイルから form-フィールドを `import@` する必要があります。たとえば:
+
+```yaml
+form:
+  validation: strict
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+      fields:
+        import@:
+          type: options
+          context: blueprints://plugins/yourpluginname
+```
+
+この例では、 `user/plugins/yourpluginname/blueprints/plugins/yourpluginname/options.yaml` をインポートしています。
+
+- 3番目に、このファイルは、デフォルトの form-パーツを宣言しておく必要があります:
+
+```yaml
+form:
+  options:
+    type: tab
+    title: PLUGIN_ADMIN.OPTIONS
+    fields:
+      enabled:
+        type: toggle
+        label: PLUGIN_ADMIN.PLUGIN_STATUS
+        default: 1
+        options:
+          1: PLUGIN_ADMIN.ENABLED
+          0: PLUGIN_ADMIN.DISABLED
+        validate:
+          type: bool
+```
+
+> [!Info]  
+> `context` と `type` は、このフォーム内で、潜在的なファイルの衝突や、名前の衝突を避けるべきです。そして簡単に識別できるようにしておき、上記のような冗長に見える長いパスを利用するべきです。
+
+それにより、ユーザーは `user/blueprints/plugins/yourpluginname/options.yaml` 内にユーザー定義の変更を加えられるようになります:
+
+```yaml
+form:
+  options:
+    fields:
+      category:
+        type: selectize
+        label: Category
+        validate:
+          type: commalist
+```
+
+そして、これはプラグインの configuration-ページでピックアップされるでしょう。
 
 <h2 id="onblueprintcreated-or-accessing-blueprint-data">onBlueprintCreated もしくはブループリントデータへのアクセス</h2>
 

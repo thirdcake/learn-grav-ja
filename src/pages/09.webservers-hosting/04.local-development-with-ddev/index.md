@@ -1,7 +1,7 @@
 ---
 title: 'DDEV によるローカル開発'
 layout: ../../../layouts/Default.astro
-lastmod: '2025-05-27'
+lastmod: '2025-10-30'
 ---
 
 [DDEV](https://ddev.readthedocs.io) とは、 Docker 上に構築されたオープンソースの PHP 開発ツールです。簡単にローカルのホスティング環境を作成でき、サーバー設定のバージョンコントロールができます。本来は Drupal DEVelopment を意味した DDEV ですが、Drupal だけでなく、 WordPress や GravCMS サイトもホスティングできます。Docker ベースなので、 DDEV は Windows にも、 Mac にも、 Linux にも互換性があります。
@@ -20,6 +20,22 @@ lastmod: '2025-05-27'
   - プロジェクトタイプ（このオプションでは `php` タイプを使います）
 - `ddev start` を Grav のルートフォルダで実行します。
 - DDEV は必要なコンテナを構築します。 ローカルホストを変更するために、ルートディレクトリに Sudo 認証が必要になるかもしれません。
+
+<h3 id="symlinking">シムリンク</h3>
+
+Grav では、config 設定、テーマやプラグインのようなフォルダをシムリンクさせるのは便利です。  
+残念ながら、シムリンクは DDEV で作成されたコンテナ内ではリンクされません。  
+これをするために、 MOUNTS を追加することができます:
+  * .ddev フォルダ内で、 docker-compose.mounts.yaml を追加
+  * mount を追加（テーマの例）:
+    ```yaml
+        services:
+          web:
+            volumes:
+              - /absolute/path/to/my/themes_repo:/var/www/html/user/themes
+    ```
+  * それから、 `ddev restart` を実行
+
 
 <h2 id="note-about-ddev-and-the-feed-plugin">DDEV と Feed プラグインの注意点</h2>
 

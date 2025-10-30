@@ -1,7 +1,7 @@
 ---
 title: インストール
 layout: ../../../layouts/Default.astro
-lastmod: '2025-06-26'
+lastmod: '2025-10-30'
 description: 'Grav のインストールは簡単です。ZIP を展開するだけで使えます。 Composer や GitHub にも対応しています。'
 ---
 
@@ -116,7 +116,7 @@ Cloudron では、Grav を数クリックだけでインストール可能です
 
 <h3 id="install-through-linode-marketplace">Linode マーケットプレイスでのインストール</h3>
 
-Linode サーバーを利用されているなら、 [Linode マーケットプレイスを使った、簡単でドキュメント化された方法](https://www.linode.com/docs/guides/grav-marketplace-app/) があります。  
+Linode サーバーを利用されているなら、 [Linode マーケットプレイスを使った、簡単でドキュメント化された方法](https://www.linode.com/docs/marketplace-docs/guides/grav/) があります。  
 これは、新しい Grav サイトを専用の Linode 仮想サーバー上に設定します。  
 仮想サーバーには、定期的に料金が発生します。
 
