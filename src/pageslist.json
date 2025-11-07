@@ -696,6 +696,12 @@
         "isonlyja": false
     },
     {
+        "pathname": "08.advanced\/09.grav-development\/04.grav-18-upgrade-guide",
+        "title": "Grav 1.8 \u30d9\u30fc\u30bf \u3078\u306e\u30a2\u30c3\u30d7\u30c7\u30fc\u30c8",
+        "redirect": false,
+        "isonlyja": false
+    },
+    {
         "pathname": "08.advanced\/11.yaml",
         "title": "YAML\u69cb\u6587",
         "redirect": false,

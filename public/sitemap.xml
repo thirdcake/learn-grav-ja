@@ -490,7 +490,7 @@
     <loc>https://thirdcake.github.io/learn-grav-ja/06.forms/02.forms/02.fields-available/</loc>
     <priority>1.0</priority>
     <changefreq>yearly</changefreq>
-    <lastmod>2025-10-30</lastmod>
+    <lastmod>2025-11-07</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/06.forms/02.forms/03.example-form/</loc>
@@ -701,6 +701,12 @@
     <priority>1.0</priority>
     <changefreq>yearly</changefreq>
     <lastmod>2025-07-09</lastmod>
+  </url>
+  <url>
+    <loc>https://thirdcake.github.io/learn-grav-ja/08.advanced/09.grav-development/04.grav-18-upgrade-guide/</loc>
+    <priority>1.0</priority>
+    <changefreq>yearly</changefreq>
+    <lastmod>2025-11-07</lastmod>
   </url>
   <url>
     <loc>https://thirdcake.github.io/learn-grav-ja/08.advanced/11.yaml/</loc>

@@ -1,7 +1,7 @@
 ---
 title: 'リファレンス：form.fields の一覧'
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-10-30'
+lastmod: '2025-11-07'
 description: 'Grav の form プラグインで、フロントエンド向けに設定可能な入力フォームを、ひとつずつ解説します。'
 ---
 
@@ -76,37 +76,127 @@ Forms プラグイン `7.0.0` で、 Google ReCaptcha フィールドのロー�
 
 ![Basic-Captcha](basic-captcha_field.gif)
 
-`basic-captcha` フィールドタイプは、`forms` 設定で、完全に制御できますが、適切なデフォルト値が設定されています。  
-Basic-Captcha の全体的な設定は、グローバルなフォーム設定ファイル（通常は、 `user/config/plugins/form.yaml` ）で行います。  
-デフォルトのオプションは：
+`basic-captcha` フィールドタイプは、グローバルにも、フィールドごとにも、完全に設定可能です。  
+グローバル設定は、 form の設定ファイル（通常は、 `user/config/plugins/form.yaml` ）で設定し、フィールドごとの設定は、フォーム内の独立した captcha フィールドでカスタマイズできます。
+
+<h4 id="global-configuration">グローバル設定</h4>
+
+デフォルトのグローバルオプションは：
 
 ```yaml
 basic_captcha:
-  type: characters            # options: [characters | math]
+  type: characters            # options: [characters | math | dotcount | position]
+  debug: false                # enable debug logging
+  image:
+    width: 135                # default image width (for math/dotcount/position types)
+    height: 40                # default image height (for math/dotcount/position types)
+    bg: '#ffffff'             # default background color
   chars:
     length: 6                 # number of chars to output
-    font: zxx-noise.ttf       # options: [zxx-noise.ttf | zxx-camo.ttf | zxx-xed.ttf | zxx-sans.ttf]
-    bg: '#cccccc'             # 6-char hex color
-    text: '#333333'           # 6-char hex color
+    font: zxx-xed.ttf         # options: [zxx-xed.ttf | zxx-sans.ttf | zxx-camo.ttf | zxx-noise.ttf]
     size: 24                  # font size in px
-    start_x: 5                # start position in x direction in px
-    start_y: 30               # start position in y direction in px
-    box_width: 135            # box width in px
-    box_height: 40            # box height in px
+    box_width: 200            # image width for character captchas (overrides image.width)
+    box_height: 70            # image height for character captchas (overrides image.height)
+    start_x: 10               # start position in x direction in px
+    start_y: 40               # start position in y direction in px
+    bg: '#ffffff'             # background color for character captchas
+    text: '#000000'           # text color (hex format)
   math:
     min: 1                    # smallest digit
     max: 12                   # largest digit
     operators: ['+','-','*']  # operators that can be used in math
 ```
 
-具体例：
+<h4 id="field-level-configuration">フィールドレベルの設定</h4>
+
+As of Forms `7.1.0`, you can override the global configuration on a per-field basis. This allows different forms to have different captcha styles, fonts, colors, and types.
+
+! **Important**: Use `captcha_type` (not `type`) for the captcha type in field-level configuration to avoid conflict with the required `type: basic-captcha` field type declaration.
+
+**Simple Example:**
+
+[prism classes="language-yaml line-numbers"]
+basic-captcha:
+    type: basic-captcha
+    placeholder: enter the characters
+    label: Are you human?
+[/prism]
+
+**Advanced Example with Field-Level Configuration:**
 
 ```yaml
 basic-captcha:
     type: basic-captcha
-    placeholder: copy the 6 characters
+    placeholder: enter the characters
     label: Are you human?
+    # Field-level configuration overrides global defaults
+    captcha_type: characters        # use 'captcha_type' not 'type'
+    chars:
+        font: zxx-sans.ttf          # cleaner font
+        size: 32                    # larger text
+        length: 6                   # 6 characters
+        box_width: 200              # wider image
+        box_height: 70              # taller image
+        bg: '#f0f8ff'               # light blue background
+        text: '#0066cc'             # dark blue text
+        start_x: 20                 # custom X position
+        start_y: 50                 # custom Y position
 ```
+
+**Math Captcha Example:**
+
+```yaml
+basic-captcha:
+    type: basic-captcha
+    placeholder: enter the answer
+    label: Solve this math problem
+    captcha_type: math              # math problem instead of characters
+    math:
+        min: 1                      # use small numbers
+        max: 10
+        operators: ['+','-']        # only addition and subtraction
+```
+
+#### Available Captcha Types
+
+When using field-level configuration, set the captcha type with `captcha_type`:
+
+- **`characters`** - Random character string (default)
+- **`math`** - Simple math problem (e.g., "3 + 5 = ?")
+- **`dotcount`** - Count dots of a specific color
+- **`position`** - Identify position of a symbol
+
+#### Available Fonts
+
+The Basic-Captcha field includes four OCR-resistant fonts:
+
+- **`zxx-xed.ttf`** - Default, balanced readability and security
+- **`zxx-sans.ttf`** - Clean sans-serif, easier to read
+- **`zxx-camo.ttf`** - Camouflage style, more challenging
+- **`zxx-noise.ttf`** - Noisy style, highest security
+
+#### Configuration Options Reference
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `captcha_type` | string | `characters` | Type of captcha: `characters`, `math`, `dotcount`, or `position` |
+| `chars.font` | string | `zxx-xed.ttf` | Font file for character captchas |
+| `chars.size` | int | `24` | Font size in pixels |
+| `chars.length` | int | `6` | Number of characters to generate |
+| `chars.box_width` | int | `200` | Image width for character captchas |
+| `chars.box_height` | int | `70` | Image height for character captchas |
+| `chars.bg` | string | `#ffffff` | Background color (hex) for character captchas |
+| `chars.text` | string | `#000000` | Text color (hex) |
+| `chars.start_x` | int | `10` | Starting X position for text |
+| `chars.start_y` | int | `40` | Starting Y position for text |
+| `math.min` | int | `1` | Minimum number in math problems |
+| `math.max` | int | `12` | Maximum number in math problems |
+| `math.operators` | array | `['+','-','*']` | Available operators |
+| `image.width` | int | `135` | Default image width (non-character types) |
+| `image.height` | int | `40` | Default image height (non-character types) |
+| `image.bg` | string | `#ffffff` | Default background color |
+
+#### Form Processing
 
 これは、フォームのバリデーションが適切に行われるために、`process:` とも適合している必要があります。
 
@@ -626,6 +716,243 @@ my_files:
 | [outerclasses](#common-fields-attributes)      |
 
 デフォルトでは、管理パネルでは、フィールド定義で、`avoid_overwriting` を `true` にしておかない限り、 `file` フィールドは同じフォルダに同じ名前のファイルがアップロードされると、上書きします。
+
+---
+
+### FilePond Field
+
+Forms プラグイン `7.0.0` で追加された `filepond` フィールドは、 File フィールドの代替となるモダンな技術で、 [FilePond JavaScript library](https://pqina.nl/filepond/) により作成されています。  
+これにより、ドラッグアンドドロップによるアップロードや、画像プレビュー、組み込みの画像編集（切り取り、リサイズ、回転）、そしてスムーズなアニメーションによる、より良いユーザー体験が提供されます。
+
+**FilePond を使う場面:**
+
+- プレビューと画像編集機能が必要な画像重視のフォーム
+- ドラッグアンドドロップによるモダンな UI 機能
+- アップロード前に、クライアントサイドでの画像最適化が必要なフォーム
+- 古いブラウザをサポートするよりも、ユーザー体験を重視するプロジェクト
+
+**File フィールド（Dropzone）を使う場面:**
+
+- 一般的なファイルアップロード（画像ファイル以外）
+- 画像編集が不要なシンプルな実装
+- 古いブラウザの機能へ対応が必要
+
+<h4 id="basic-usage">基本的な使い方</h4>
+
+```yaml
+my_images:
+    type: filepond
+    label: Upload Images
+    destination: user/media/uploads
+    multiple: true
+    limit: 5
+    filesize: 10
+    accept:
+        - image/*
+```
+
+<h4 id="configuration-options">オプション設定</h4>
+
+| 属性 | 説明 |
+| :-------- | :---------- |
+| `multiple` | 真偽値。 `true` のとき、複数ファイルを同時に選択できます（デフォルト: `false`） |
+| `limit` | 整数値。 フィールドごとに許容する最大ファイル数 （デフォルト: `10`） |
+| `destination` | アップロード先。オプション:<br>• `@self` - 現在のページにアップロード<br>• `@page:/route` - 特定のページルーティング先にアップロード<br>• `user/path/to/folder` - Grav のルートディレクトリからの相対パス<br>• PHP streams のような `user-data://uploads` |
+| `filesize` | 整数値。 MB単位の最大ファイルサイズ。 `0` は無制限を意味し、サーバーの制限値によります。 (デフォルト: `0`) |
+| `accept` | 許可する MIME types/extensions の配列。例えば:<br>• `['image/*']` - すべての画像<br>• `['image/jpeg', 'image/png']` - 特定のタイプ<br>• `['application/pdf']` - PDF |
+| `avoid_overwriting` | 真偽値。 `true` のとき、上書きを防ぐために日付プレフィックスを追加します (デフォルト: `false`) |
+| `random_name` | 真偽値。 `true` のとき、アップロード時にランダムなファイル名を生成します (デフォルト: `false`) |
+| `validate.required` | 真偽値。フィールドを required （入力必須）にします (デフォルト: `false`) |
+
+<h4 id="image-transform-resize-options">画像変形とリサイズオプション</h4>
+
+FilePond では、 `filepond` 設定キーにより、パワフルな画像処理機能を使えます:
+
+```yaml
+my_images:
+    type: filepond
+    label: Upload and Edit Images
+    destination: user/media/uploads
+    multiple: true
+    filesize: 10
+    accept:
+        - image/jpeg
+        - image/png
+        - image/webp
+    filepond:
+        # Output Format
+        allowImageTransform: true
+        imageTransformOutputMimeType: 'image/jpeg'
+        imageTransformOutputQuality: 85
+        imageTransformOutputStripImageHead: true
+
+        # Resize Settings
+        allowImageResize: true
+        imageResizeTargetWidth: 1024
+        imageResizeTargetHeight: 768
+        imageResizeMode: 'contain'
+        imageResizeUpscale: false
+
+        # Crop Settings
+        allowImageCrop: true
+        imageCropAspectRatio: '16:9'
+
+        # Preview Settings
+        allowImagePreview: true
+        imagePreviewHeight: 256
+
+        # UI Customization
+        stylePanelLayout: 'compact'
+        labelIdle: '<span class="filepond--label-action">Browse</span> or drop images'
+```
+
+<h4 id="filepond-specific-options-reference">FilePond 特有のオプションのリファレンス</h4>
+
+
+| オプション | タイプ | デフォルト | 説明 |
+| :----- | :--- | :------ | :---------- |
+| **画像変形** | | | |
+| `allowImageTransform` | boolean | `true` | アップロード前に画像の変形を許可 |
+| `imageTransformOutputMimeType` | string | `image/jpeg` | 出力フォーマット: `image/jpeg`, `image/png`, `image/webp` |
+| `imageTransformOutputQuality` | int | `90` | 出力の画質 0-100 (JPEG/WebP のみ) |
+| `imageTransformOutputStripImageHead` | boolean | `true` | 画像から EXIF メタデータを削除 |
+| **画像リサイズ** | | | |
+| `allowImageResize` | boolean | `true` | 自動で画像リサイズを許可 |
+| `imageResizeTargetWidth` | int | `null` | リサイズする目標ピクセル幅 (null = リサイズしない) |
+| `imageResizeTargetHeight` | int | `null` | リサイズする目標ピクセル高さ (null = リサイズしない) |
+| `imageResizeMode` | string | `cover` | リサイズモード: `cover` (切り取って合わせる), `contain` (含まれるように合わせる), `force` (強制リサイズ) |
+| `imageResizeUpscale` | boolean | `false` | 元画像より目標サイズが大きいときに大きいリサイズを許可する |
+| **画像切り取り** | | | |
+| `allowImageCrop` | boolean | `true` | プレビューに切り取りツールを許可 |
+| `imageCropAspectRatio` | string | `null` | 次のようなアスペクト比 `16:9`, `4:3`, `1:1`, もしくは自由切り取りの `null` |
+| **プレビュー** | | | |
+| `allowImagePreview` | boolean | `true` | 編集ツールとともにプレビュー画像を表示 |
+| `imagePreviewHeight` | int | `256` | プレビューパネルのピクセル高さ |
+| **UI とスタイル** | | | |
+| `stylePanelLayout` | string | `compact` | パネルのレイアウトスタイル |
+| `styleLoadIndicatorPosition` | string | `center bottom` | ローディング表示の場所 |
+| `styleProgressIndicatorPosition` | string | `center bottom` | 読み込み表示バーの場所 |
+| `styleButtonRemoveItemPosition` | string | `right` | 削除ボタンの場所 |
+| **ラベル** | | | |
+| `labelIdle` | string | `Browse or drop files` | メインのドロップゾーンのラベル (HTML タグをサポート) |
+| `labelFileTypeNotAllowed` | string | `Invalid file type` | ファイルのタイプが間違っていた場合のエラーメッセージ |
+| `labelFileSizeNotAllowed` | string | `File is too large` | ファイルサイズがオーバーしたときのエラーメッセージ |
+
+<h4 id="complete-form-example">完全なフォームの例</h4>
+
+```txt
+---
+title: 'Photo Upload Form'
+form:
+    id: photo-upload
+    xhr_submit: true
+    fields:
+        photos:
+            type: filepond
+            label: Upload Your Photos
+            help: Upload up to 5 photos. They will be automatically resized to 1920x1080.
+            destination: user/media/galleries
+            multiple: true
+            limit: 5
+            filesize: 15
+            accept:
+                - image/jpeg
+                - image/png
+                - image/webp
+            validate:
+                required: true
+            filepond:
+                # Optimize images for web
+                imageTransformOutputMimeType: 'image/jpeg'
+                imageTransformOutputQuality: 85
+                imageTransformOutputStripImageHead: true
+
+                # Resize to HD
+                allowImageResize: true
+                imageResizeTargetWidth: 1920
+                imageResizeTargetHeight: 1080
+                imageResizeMode: 'contain'
+
+                # Force 16:9 crop
+                allowImageCrop: true
+                imageCropAspectRatio: '16:9'
+
+                # Custom label
+                labelIdle: '<span class="filepond--label-action">Click to browse</span> or drag photos here'
+
+    buttons:
+        submit:
+            type: submit
+            value: Upload Photos
+
+    process:
+        upload: true
+        message: 'Thank you! Your photos have been uploaded successfully.'
+        reset: true
+---
+
+# Photo Gallery Upload
+
+Upload your photos and they will be automatically optimized and resized.
+```
+
+#### Form Processing
+
+FilePond フィールドは、アップロードされたファイルを保存するため、 `upload` プロセスアクションが必要です:
+
+```yaml
+process:
+    upload: true
+    message: 'Files uploaded successfully!'
+```
+
+ファイルは、 AJAX 経由で処理され、特定の `destination` フォルダへ保存されます。  
+画像変形（リサイズ、切り取り、フォーマット変更）は、ブラウザ内でアップロード前に実行され、サーバー読み込みとアップロード時間が短縮されます。
+
+#### XHR Form Integration
+
+FilePond は、 AJAX フォーム送信（`xhr_submit: true`） にもシームレスに対応します。  
+このフィールドは、自動的に以下を行います:
+
+- ファイルのアップロード中はフォームの送信をしないようにします
+- フォームの更新後に再度初期化します
+- バリデーションエラー中も、アップロードされたファイルを保持します
+- 送信が成功したら一時ファイルをクリーンアップします
+
+<h4 id="features-summary">機能の要点</h4>
+
+- **モダンなドラッグアンドドロップのインターフェース** - スムーズなアニメーションと視覚的なフィードバック
+- **画像プレビュー** - アップロード前に、画像をズームしたり移動したりできる
+- **組み込みの画像編集** - 画像の切り取り、リサイズ、回転をブラウザ上でできる
+- **クライアントサイドの最適化** - アップロード前にファイルサイズを削減できる
+- **フォーマット変更** - 画像を JPEG/PNG/WebP に変換できる
+- **リアルタイムのバリデーション** - ファイルのタイプとサイズのバリデーションを即座にフィードバックできる
+- **進捗表示** - ファイルごとにアップロード処理の進捗バーを表示できる
+- **複数ファイルに対応** - ひとつのフィールドでいくつかのファイルをアップロードできる
+- **レスポンシブデザイン** - デスクトップでも、タブレットでも、モバイルデバイスでも機能する
+- **アクセシビリティ** - キーボードナビゲーション及びスクリーンリーダー対応
+
+<h4 id="comparison-with-file-field">File Field との比較</h4>
+
+| 機能 | FilePond | File (Dropzone) |
+| :------ | :------- | :-------------- |
+| 画像プレビュー | ✅ ズーム/移動可能 | ✅ サムネイルのみ |
+| 画像編集 | ✅ 切り取り, リサイズ, 回転 | ❌ 無し |
+| 画像最適化 | ✅ クライアントサイド | ❌ サーバサイドのみ |
+| フォーマット変換 | ✅ JPEG/PNG/WebP | ❌ 無し |
+| ドラッグ & ドロップ | ✅ モダンな UI | ✅ クラシックな UI |
+| ファイルタイプのバリデーション | ✅ 即時 | ✅ アップロード時 |
+| 複数ファイル | ✅ 可能 | ✅ 可能 |
+| XHR フォーム対応 | ✅ 自動対応 | ✅ config の設定が必要 |
+| 何に最適か | 画像 & UX | 普通のファイル |
+
+| 利用可能な一般属性 |
+| :-----  |
+| [help](#common-fields-attributes)              |
+| [label](#common-fields-attributes)             |
+| [name](#common-fields-attributes)              |
+| [outerclasses](#common-fields-attributes)      |
+| [validate](#common-fields-attributes)          |
 
 ---
 
