@@ -1,21 +1,22 @@
 ---
 title: 'Grav 1.8 ベータ へのアップデート'
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-11-07'
+lastmod: '2025-11-08'
 ---
 
 > [!Note]  
 > ここは、現在作業中です。最新版の Grav 1.7 や 1.8ベータと不整合が含まれる可能性があります。
 
-Grav 1.8 introduces significant improvements including PHP 8.3 requirement, updated dependencies, and a new safe upgrade system. Here are a few highlights:
+Grav 1.8 では、大幅な改善が導入されました。たとえば、 PHP 8.3 の要件、依存関係の更新、そして新しく安全なアップグレードシステムなどです。  
+以下は、注目ポイントの例です:
 
-* **PHP 8.3+ Requirement**: Major update from PHP 7.3 requirement in Grav 1.7
-* **Safe Upgrade System**: Comprehensive preflight checks, staging, validation, and rollback capabilities
-* **Enhanced Twig Support**: Updated to Twig 3.x (forked version for Defer compatibility)
-* **Symfony 7 Integration**: Upgraded to Symfony 7.x components for better performance and security
-* **Improved Caching**: Symfony Cache provider replaces Doctrine Cache (deprecated)
-* **Monolog Compatibility**: Switched to Monolog 3, but retains support for Monolog 2.3+ syntax
-* **Code Quality**: PHPStan level 6 support and PHP 8.4 compatibility fixes
+* **PHP 8.3+ 要件**: Grav 1.7 での要件である PHP 7.3 から大幅にアップデートされました
+* **安全なアップグレードシステム**: Comprehensive preflight checks, staging, validation, and rollback capabilities
+* **Twig 対応の強化**: Updated to Twig 3.x (forked version for Defer compatibility)
+* **Symfony 7 統合**: Upgraded to Symfony 7.x components for better performance and security
+* **キャッシュの改善**: Symfony Cache provider replaces Doctrine Cache (deprecated)
+* **Monolog 機能**: Switched to Monolog 3, but retains support for Monolog 2.3+ syntax
+* **Code 品質**: PHPStan level 6 support and PHP 8.4 compatibility fixes
 
 !!!! **IMPORTANT:** Grav 1.8 requires **PHP 8.3** or later version. This is a major change from Grav 1.7's PHP 7.3.6+ requirement. Always **take a backup** of your site and **test the upgrade in a testing environment** before upgrading your live site, or use 'safe-upgrade' which automatically creates a restorable snapshot of Grav core.
 
