@@ -1,8 +1,9 @@
 ---
-title: WordPressからGravへの引っ越し
+title: WordPress から Grav への引っ越し
 layout: ../../../layouts/Default.astro
-lastmod: '2025-04-28'
+lastmod: '2025-12-04'
 ---
+
 <h2 id="requirements">要件</h2>
 
 * PHP v7.1 以上 composer の依存関係のため
@@ -13,36 +14,36 @@ lastmod: '2025-04-28'
 
 <h2 id="installation">インストール</h2>
 
-1. Download the latest release of the [wp2grav_exporter](https://github.com/jgonyea/wp2grav_exporter/releases) plugin and upload it to your WordPress's `wp-content/plugins` directory.
-2. Run `composer install --no-dev` within the `wp2grav_exporter` directory to install dependencies.
-3. Enable the new plugin:
-   - Using wp-cli: `wp plugin activate wp2grav_exporter`, or - Via the admin GUI.
-4. Run `wp wp2grav-all` to export all items.  See other options below.
-5. Exported files are located at `WP_ROOT/wp-content/uploads/wp2grav-exports/DATE`
-6. For Grav v1.6 sites, [https://github.com/david-szabo97/grav-plugin-admin-addon-user-manager](admin-addon-user-manager) is recommended to view and manage users.  This is not required for Grav 1.7+ sites.
+1. 最新リリースの [wp2grav_exporter](https://github.com/jgonyea/wp2grav_exporter/releases) プラグインをダウンロードし、 WordPress の `wp-content/plugins` ディレクトリにアップロードしてください。
+2. `wp2grav_exporter` ディレクトリ内で、依存関係のインストールのため、 `composer install --no-dev` を実行してください。
+3. 新しいプラグインを有効にしてください：
+   - wp-cli を使う： `wp plugin activate wp2grav_exporter` か、 GUI の管理パネルから有効化
+4. すべてのアイテムをエクスポートするため、 `wp wp2grav-all` を実行してください。その他のオプションは以下を参照してください。
+5. エクスポートされたファイルは、 `WP_ROOT/wp-content/uploads/wp2grav-exports/DATE` に置かれます。
+6. Grav v1.6 サイトに対しては、ユーザーを表示し、管理するために [admin-addon-user-manager](https://github.com/david-szabo97/grav-plugin-admin-addon-user-manager) を推奨します。 Grav 1.7 以上のサイトには不要です。
 
 <h2 id="notes">注意点</h2>
 
-> Running `wp wp2grav-all` will run each of the following export steps at once.  Afterwards, follow each section below on how to import the new data to a Grav install.
+> `wp wp2grav-all` を実行すると、以下のエクスポートの各手順を、一度に実行することになります。それから、インストールされている Grav に、データをインポートする方法を解説した、以下の各セクションに従ってください。
 
-<h2 id="exporting-users-from-wordpress">WordPressからユーザーのエクスポート</h2>
+<h2 id="exporting-users-from-wordpress">WordPress からユーザーのエクスポート</h2>
 
 ![WordPress users exported to Grav](users.webp)
 
-WordPress users on left exported to Grav on the right.
+左にある WordPress ユーザー一覧を、右の Grav にエクスポートしました。
 
 <h3 id="command">コマンド</h3>
 
-`wp wp2grav-users` will generate Grav user account files.
+`wp wp2grav-users` により、 Grav のユーザーアカウントファイルが生成されます。
 
 <h3 id="results">結果</h3>
 
-* User accounts in the export directory under `EXPORT/accounts/`.
-  * Usernames will be padded to a minimum of 3 characters, maximum of 16.
-  * If a username is truncated or padded, the username will also have the WordPress uid to avoid collisions.
-  * Passwords in each account are randomly generated, and have no connection with the respective WordPress account.  The plaintext password automatically converts to a hashed_password once the account authenticates for the first time.
+* ユーザーアカウントは、 `EXPORT/accounts/` 下のエクスポートディレクトリにあります。
+  * ユーザーネームは、 3文字以上16文字以下になります。
+  * もしユーザーネームが短縮されたり調整された場合、衝突を避けるため、ユーザーネームに、 WordPress の uid も付与されます。
+  * 各アカウントのパスワードはランダムに生成され、対応する WordPress アカウントとは関係ありません。アカウントが初回に認証を行うと、平文のパスワードは自動でハッシュ化されたパスワードに変換されます。
 
-<h3 id="importing-users-to-grav">Gravへのユーザーのインポート</h3>
+<h3 id="importing-users-to-grav">Grav へのユーザーのインポート</h3>
 
 Copy the `EXPORT/accounts` directory to your `user` directory (e.g. username.yaml files should be placed at `user/accounts`).
 
