@@ -1,15 +1,16 @@
 ---
 title: WordPress から Grav への引っ越し
 layout: ../../../layouts/Default.astro
-lastmod: '2025-12-04'
+lastmod: '2025-12-06'
+description: 'WordPress のサイトコンテンツをエクスポートし、 Grav へインポートする方法を解説します。'
 ---
 
 <h2 id="requirements">要件</h2>
 
-* PHP v7.1 以上 composer の依存関係のため
+* PHP v7.1 以上 (composer の依存関係のため)
 * その WordPress がホストされている環境に [WP-CLI](https://wp-cli.org/) がインストールされている
-* エクスポートされるコンテンツのある WordPress が機能している
-* WordPress サイトの `wp-content/uploads` に読み/書きのアクセスができる
+* エクスポート元の WordPress サイトが機能している
+* WordPress サイトの `wp-content/uploads` に読み/書きアクセスができる
 * Grav がホストされる環境に [Composer](https://getcomposer.org/) がインストールされている
 
 <h2 id="installation">インストール</h2>
@@ -18,13 +19,13 @@ lastmod: '2025-12-04'
 2. `wp2grav_exporter` ディレクトリ内で、依存関係のインストールのため、 `composer install --no-dev` を実行してください。
 3. 新しいプラグインを有効にしてください：
    - wp-cli を使う： `wp plugin activate wp2grav_exporter` か、 GUI の管理パネルから有効化
-4. すべてのアイテムをエクスポートするため、 `wp wp2grav-all` を実行してください。その他のオプションは以下を参照してください。
+4. すべてのアイテムをエクスポートするため、 `wp wp2grav-all` を実行してください。その他のオプションについては、以下を参照してください。
 5. エクスポートされたファイルは、 `WP_ROOT/wp-content/uploads/wp2grav-exports/DATE` に置かれます。
 6. Grav v1.6 サイトに対しては、ユーザーを表示し、管理するために [admin-addon-user-manager](https://github.com/david-szabo97/grav-plugin-admin-addon-user-manager) を推奨します。 Grav 1.7 以上のサイトには不要です。
 
 <h2 id="notes">注意点</h2>
 
-> `wp wp2grav-all` を実行すると、以下のエクスポートの各手順を、一度に実行することになります。それから、インストールされている Grav に、データをインポートする方法を解説した、以下の各セクションに従ってください。
+> `wp wp2grav-all` を実行すると、以下のエクスポートの各手順を、一度に実行することになります。エクスポートの実行後、後述の各セクションに従って、インストールされている Grav に、データをインポートしてください。
 
 <h2 id="exporting-users-from-wordpress">WordPress からユーザーのエクスポート</h2>
 
@@ -45,92 +46,93 @@ lastmod: '2025-12-04'
 
 <h3 id="importing-users-to-grav">Grav へのユーザーのインポート</h3>
 
-Copy the `EXPORT/accounts` directory to your `user` directory (e.g. username.yaml files should be placed at `user/accounts`).
+`EXPORT/accounts` ディレクトリを、 `user` ディレクトリにコピーしてください（たとえば: username.yaml ファイルは、 `user/accounts` ディレクトリ内に置かれるべきです）。
 
-<h2 id="exporting-user-roles-from-wordpress">WordPressからユーザーロールのエクスポート</h2>
+<h2 id="exporting-user-roles-from-wordpress">WordPress からユーザーロールのエクスポート</h2>
 
 ![WordPress roles exported to Grav groups](roles.webp)
 
-WordPress users with roles on left exported to Grav groups on the right.
+左の WordPress のロール付きユーザーを、右の Grav グループにエクスポートしました。
 
 <h3 id="command-1">コマンド</h3>
 
-`wp wp2grav-roles` will generate a Grav groups.yaml file.
+`wp wp2grav-roles` により、 Grav の groups.yaml ファイルを生成します。
 
 <h3 id="results-1">結果</h3>
 
-WordPress user roles export as Grav groups in a `groups.yaml` file at `config/groups.yaml`. Some notes about the role exporting:
+WordPress ユーザーロールは、 `config/groups.yaml` にある `groups.yaml` ファイルの Grav グループとしてエクスポートされます。  
+ロールのエクスポートには、いくつかの注意点があります:
 
-* Each WordPress role is converted to the Grav group `wp_<ROLE_WITH_UNDERSCORES>` (e.g. `subscriber` becomes `wp_subscriber`).
-* WordPress users with administrator roles receive the `wp_administrator` group.
-* The `wp_administrator` group receives `admin.super` access along with `admin.login` access.  Accounts with these permissions are full admins on the site!
-* A new Grav group called `wp_authenticated_user` group receives `admin.login` access.
-* All accounts receive the "wp_authenticated_user" group.
+* 各 WordPress ロールは、 Grav の `wp_<アンダースコア付きロール>` グループに変換されます（例: `subscriber` の場合、 `wp_subscriber` になります）。
+* WordPress 管理者ユーザーロールは、 `wp_administrator` グループを受け取ります。
+* `wp_administrator` グループは、 `admin.login` アクセスとともに `admin.super` アクセスを受け取ります。これらのパーミッションを持つアカウントは、 Grav サイトのすべての管理権限を持ちます！
+* `wp_authenticated_user` グループと呼ばれる新しい Grav グループは、 `admin.login` アクセスを受け取ります。
+* すべてのアカウントは、 `wp_authenticated_user` グループを受け取ります。
 
 <h3 id="importing-user-roles">ユーザーロールのインポート</h3>
 
-Copy the `EXPORT/config` directory to `users/config`.
+`EXPORT/config` ディレクトリを、 `users/config` にコピーしてください。
 
-<h2 id="exporting-post-types-from-wordpress">WordPressから投稿タイプのエクスポート</h2>
+<h2 id="exporting-post-types-from-wordpress">WordPress から投稿タイプのエクスポート</h2>
 
 ![Exported post types](post-types.png)
 
-WordPress post types are converte to Grav page types, with a pre-pended "WP" in front of each type (highlighted in yellow here).
+WordPress の投稿タイプ（post type）は、（上記画像で黄色く強調しているような） "WP" 付きの Grav ページタイプに変換されます。
 
 <h3 id="command-2">コマンド</h3>
 
-* `wp wp2grav-post-types` will generate a basic Grav plugin, along with page types that match the WordPress post types.
+* `wp wp2grav-post-types` により、 WordPress 投稿タイプに対応したページタイプとともに、基本的な Grav プラグインを生成します。
 
 <h3 id="results-2">結果</h3>
 
-* A Grav plugin will be generated that will present basic field functionality within the Admin tool.
+* Grav プラグインは、管理パネルツール内で、基本的なフィールド機能を表示するものとして生成されます。
 
 <h3 id="importing-post-types-to-grav">Gravへの投稿タイプのインポート</h3>
 
-* Copy the `EXPORT/plugins` directory to your `user` directory
-* Navigate to the Grav plugin directory `user/plugins/wordpress-exporter-helper` and run `composer install`.
+* `EXPORT/plugins` ディレクトリを `user` ディレクトリにコピーしてください。
+* Grav の `user/plugins/wordpress-exporter-helper` プラグインディレクトリに移動し、 `composer install` を実行してください。
 
-<h2 id="exporting-posts-from-wordpress">WordPressから投稿のエクスポート</h2>
+<h2 id="exporting-posts-from-wordpress">WordPress から投稿のエクスポート</h2>
 
 ![Sample page, admin view](sample-page-admin.webp)
 
-Admin view of WordPress "Sample Page" on left exported to Grav markdown on the right.
-
+左にある WordPress の管理パネルの "Sample Page" を、右の Grav のマークダウンにエクスポートします。
 
 ![Sample page, page view](sample-page-render.webp)
 
-User view of WordPress "Sample Page" on left exported and rendered via Grav on the right.
+
+左にある WordPress の管理パネルの "Sample Page" をエクスポートし、右のように Gravu によるレンダリング表示します。
 
 
 <h3 id="command-3">コマンド</h3>
 
-* `wp wp2grav-posts` will export all posts.
+* `wp wp2grav-posts` により、すべての投稿をエクスポートします。
 
 <h3 id="results-3">結果</h3>
 
-* Each post/page will be exported to directories matching metadata from the post, typically the post/ page title.
-* Library media will be copied to the `data/wp-content` and in-line content will (eventually) be included within the page's directory.
+* 各 投稿/固定ページ は、たとえば各タイトルのようなメタデータに対応したディレクトリにエクスポートされます。
+* ライブラリメディアは、 `data/wp-content` にコピーされ、インラインコンテンツは、（最終的に）そのページのディレクトリ内に含まれます。
 
 <h3 id="importing-posts-to-grav">Gravへの投稿のインポート</h3>
 
-* Copy the `EXPORT/pages` directory to your `user` directory
-* Copy the `EXPORT/data` directory to your `user` directory
+* `EXPORT/pages` ディレクトリを `user` ディレクトリにコピーしてください。
+* `EXPORT/data` ディレクトリを `user` ディレクトリにコピーしてください。
 
-<h2 id="exporting-site-metadata-from-wordpress">WordPressからサイトのメタデータのエクスポート</h2>
+<h2 id="exporting-site-metadata-from-wordpress">WordPress からサイトのメタデータのエクスポート</h2>
 
 ![Sample page, admin view](site-metadata.webp)
 
-Admin view of WordPress General Settings on left exported to Grav Site Config on the right.
+左の WordPress 管理パネルに表示される一般設定を、右の Grav サイトの config 設定にエクスポートします。
 
 <h3 id="command-4">コマンド</h3>
 
-* `wp wp2grav-site` will export site metadata.
+* `wp wp2grav-site` により、サイトのメタデータがエクスポートされます。
 
 <h3 id="results-4">結果</h3>
 
-* Grav site metadata is stored in `EXPORT/config/site.yaml`.
+* Grav サイトのメタデータは、 `EXPORT/config/site.yaml` に保存されます。
 
-<h3 id="importing-site-metadata-to-grav">Gravへのサイトのメタデータのインポート</h3>
+<h3 id="importing-site-metadata-to-grav">Grav へのサイトのメタデータのインポート</h3>
 
-* Copy the `EXPORT/config/site.yaml` directory to Grav at `user/config/site.yaml`.
+* `EXPORT/config/site.yaml` を、`user/config/site.yaml` にコピーしてください。
 
