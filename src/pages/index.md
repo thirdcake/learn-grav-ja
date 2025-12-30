@@ -32,7 +32,9 @@ Grav が、他の CMS と比較して優れているところは、学習曲線�
 
 ## 更新状況
 
-2025-11-06 の [GitHub のコミット](https://github.com/getgrav/grav-learn/commits/develop/) まで対応しています。
+2025-11-06 の [GitHub のコミット](https://github.com/getgrav/grav-learn/commits/develop/) まで対応しています。  
+2025年12月末より、公式ドキュメントが大きく変更しており、一部リンク切れなどが起こっています。  
+少しずつ修正していきます。
 
 ## 訳文について
 
