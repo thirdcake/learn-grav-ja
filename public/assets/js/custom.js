@@ -39,9 +39,14 @@ function add_table_class () {
 function add_blockquote_class () {
     const data = [
         {needle: 'Note', csscolor: 'blue'},
+        {needle: 'NOTE', csscolor: 'blue'},
         {needle: 'Info', csscolor: 'orange'},
+        {needle: 'Caution', csscolor: 'orange'},
+        {needle: 'CAUTION', csscolor: 'orange'},
         {needle: 'Tip', csscolor: 'green'},
+        {needle: 'TIP', csscolor: 'green'},
         {needle: 'Warning', csscolor: 'red'},
+        {needle: 'WARNING', csscolor: 'red'},
         {needle: '訳注', csscolor: 'pink'},
     ];
     document.querySelectorAll('.learn-grav-default blockquote').forEach(blockq => {

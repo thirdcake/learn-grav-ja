@@ -1,13 +1,13 @@
 ---
 title: カスタムタグ
 layout: ../../../../layouts/Default.astro
-lastmod: '2025-08-03'
+lastmod: '2026-01-03'
 description: 'Grav で独自に追加した Twig のカスタムタグについて解説します。'
 ---
 
 Twig にはすでに、優秀なタグがありますが、 Grav ではさらに、わたしたちが便利だと気づいたカスタムタグを、たくさん追加しています。
 
-### `markdown`
+### markdown
 
 markdown タグは、 Twig テンプレートにマークダウンを組み込むための新しく強力な方法です。  
 変数を使って、 `|markdown` フィルタを変数にレンダリングすることは、これまでにも可能でしたが、 `{% markdown %}` 構文では、シンプルなマークダウンテキストのブロックを作ることができます。
@@ -21,7 +21,7 @@ This is **bold** and this _underlined_
 {% endmarkdown %}
 ```
 
-### `script`
+### script
 
 script タグは、通常の `{% do assets...%}` による方法に比べて、 Twig を読みやすくするために便利なタグです。  
 両者は純粋に、書き方が異なるだけです。
@@ -46,7 +46,7 @@ Grav 1.7.28 からは、 module にも対応しました：
 {% endscript %}
 ```
 
-### `style`
+### style
 
 <h4 id="css-file">CSS ファイル</h4>
 
@@ -62,14 +62,14 @@ Grav 1.7.28 からは、 module にも対応しました：
 {% endstyle %}
 ```
 
-### `link`
+### link
 
 ```twig
 {% link icon 'theme://images/favicon.png' priority: 20 with { type: 'image/png' } %}
 {% link modulepreload 'plugin://grav-plugin/build/js/vendor.js' %}
 ```
 
-### `switch`
+### switch
 
 ほとんどのプログラミング言語において、 `switch` 文は、 `if else` 文をよりクリーンで読みやすくしてくれる一般的な方法です。  
 また、また、多少速くなるかもしれません。  
@@ -86,7 +86,7 @@ twig の機能では忘れられているこの switch 文を、 Grav ではシ�
 {% endswitch %}
 ```
 
-### `deferred`
+### deferred
 
 かつての block では、一度その block がレンダリングされてしまったら、再度操作することはできませんでした。  
 `{% block scripts %}` を例に取ると、このブロックには、読み込みたい JavaScript を保持できます。  
@@ -115,7 +115,7 @@ deffered したブロックに `{{ parent() }}` を使うことで、親ブロ�
 {% endblock %}
 ```
 
-### `throw`
+### throw
 
 手動で例外を投げたい状況がありえます。  
 そのためのタグです。
@@ -124,7 +124,7 @@ deffered したブロックに `{{ parent() }}` を使うことで、親ブロ�
 {% throw 404 'Not Found' %}
 ```
 
-<h3 id="try-catch">`try` & `catch`</h3>
+<h3 id="try-catch">try & catch</h3>
 
 Twig テンプレート上で、 PHP スタイルのエラー制御ができると便利です。  
 そのために、`try/catch` タグを提供します。
@@ -137,7 +137,7 @@ Twig テンプレート上で、 PHP スタイルのエラー制御ができる�
 {% endcatch %}
 ```
 
-### `render`
+### render
 
 Flex Objects は、 Grav 内の要素に、ゆっくりと浸透しています。  
 これらは、 Twig テンプレート構造と関連する、自己を認識したオブジェクトなので、 Flex Objects には、レンダリングの方法まで含まれています。  
@@ -149,7 +149,7 @@ Flex Objects は、 Grav 内の要素に、ゆっくりと浸透しています�
 {% render object layout: 'default' with { variable: 'value' } %}
 ```
 
-### `cache`
+### cache
 
 ときどき、ページの部分的なキャッシュが必要になることがあります。  
 レンダリングに時間がかかるようなときです。  

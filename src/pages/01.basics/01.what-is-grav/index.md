@@ -53,7 +53,7 @@ Grav の基盤はシンプルですが、広範な **イベント** を介して
 基本的なサイトの立ち上げと運営であれば、最小限の web 開発経験で十分です。  
 もし、もう少し深く掘り下げたなら、 Grav に達成できないことはほとんど無いことに気づくでしょう。
 
-<h3 id="grav-logos-and-press-information">Grav のロゴ及びプレス情報</h3>
+<h2 id="grav-logos-and-press-information">Grav のロゴ及びプレス情報</h2>
 
 Grav のロゴやプレス情報を含む概要は、 [メディアページ](https://getgrav.org/media) をご覧ください。
 
