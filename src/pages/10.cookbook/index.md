@@ -2,6 +2,8 @@
 title: レシピ集
 layout: ../../layouts/Chapter.astro
 lastmod: '2025-05-04'
+description: 'この章では、よくある問題に対するレシピや、解決策を紹介します。ページの編集や、ご自身のアイディアの追加も、自由に行ってください。'
+icon: '/images/icons.svg#cookbook'
 ---
 ### 第10章
 

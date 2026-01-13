@@ -104,8 +104,13 @@ const breadcrumbJsonLd = JSON.stringify({
       </div>
       <div class="offcanvas-body d-flex flex-column flex-shrink-0 p-2 position-sticky top-0">
         <div class="m-4">
-          <img alt={ sitetitle } width="445" height="106"
-            src={ baseurl + '/assets/images/grav-text.svg' }>
+          <svg viewBox="0 0 600 100" width="600" height="100"
+            fill="currentColor"
+            style="width:100%;height:auto;"
+            href={ baseurl + '/assets/images/logo.svg' }>
+            <use href={ baseurl + '/assets/images/logo.svg#logo' }></use>
+            <title>{ sitetitle }</title>
+          </svg>
         </div>
         <p style="text-align:center;background-color:#fff;border:thin solid #777;">
           検索は<a href={ learnurl }>翻訳元</a>へ

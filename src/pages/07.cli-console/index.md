@@ -2,7 +2,8 @@
 title: CLI コンソール
 layout: ../../layouts/Chapter.astro
 lastmod: '2025-09-03'
-description: 'Grav は、便利なコマンドラインツールをたくさん提供しており、スクリプト操作でシンプルに管理できます。'
+description: 'Grav は、開発者にとって使いやすく、たくさんの便利なコマンドラインのツールや機能を提供します。これにより、可能な限りシンプルに、スクリプト操作で利用しやすいものとなっています。'
+icon: '/images/icons.svg#cli'
 ---
 
 ### 第7章

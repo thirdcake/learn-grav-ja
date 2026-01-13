@@ -2,7 +2,8 @@
 title: プラグイン
 layout: ../../layouts/Chapter.astro
 lastmod: '2025-08-06'
-description: 'Grav では、コアだけでは処理できないロジックを、プラグインによって拡張できます。'
+description: 'Grav は、強力なプラグインアーキテクチャのおかげで、自由に機能を拡張できます。コア機能の強化から、便利な機能の追加まで、思いのままです。'
+icon: '/images/icons.svg#plugins'
 ---
 
 ### 第4章

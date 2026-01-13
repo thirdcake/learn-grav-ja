@@ -2,7 +2,8 @@
 title: 管理パネル
 layout: ../../layouts/Chapter.astro
 lastmod: '2025-08-10'
-description: 'Grav では、サイトを GUI で操作できる管理パネルが、プラグインとして提供されています。'
+description: 'Grav の管理パネルは、直感的で管理しやすいインターフェースです。サイト管理やコンテンツ作成、システム更新をスムーズに行えます。'
+icon: '/images/icons.svg#admin'
 ---
 
 ### 第5章
