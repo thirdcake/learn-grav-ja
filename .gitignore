@@ -28,3 +28,6 @@ pnpm-debug.log*
 # php 関係
 vendor/
 composer.lock
+
+# geany 関連
+learn-grav-ja.geany

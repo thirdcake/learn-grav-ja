@@ -1,0 +1,5 @@
+baseURL = 'https://thirdcake.github.io/learn-grav-ja/'
+languageCode = 'ja-jp'
+title = 'Grav ドキュメント（日本語訳）'
+hasCJKLanguage = true
+
