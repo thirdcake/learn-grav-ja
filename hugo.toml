@@ -3,3 +3,8 @@ languageCode = 'ja-jp'
 title = 'Grav ドキュメント（日本語訳）'
 hasCJKLanguage = true
 
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
