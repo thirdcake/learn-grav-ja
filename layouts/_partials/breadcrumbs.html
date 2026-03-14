@@ -1,0 +1,22 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+    {{- with .Parent }}
+        {{- partial "inline/breadcrumbs/walk.html" . }}
+    {{- end }}
+    <li class="breadcrumb-item active" aria-current="page">
+        {{ .Title }}
+    </li>
+    </ol>
+</nav>
+
+{{- define "_partials/inline/breadcrumbs/walk.html" }}
+    {{- with .Parent }}
+        {{- partial "inline/breadcrumbs/walk.html" . }}
+    {{- end }}
+    {{- if not .IsHome }}
+    <li class="breadcrumb-item">
+        <a href="{{ .Permalink }}">{{ .Title }}</a>
+    </li>
+    {{- end }}
+{{- end }}
+

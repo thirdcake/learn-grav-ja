@@ -1,0 +1,27 @@
+{{ with site.GetPage "/" }}
+    {{ $pages := partialCached "prev-next-cache.html" .Pages }}
+    {{ $prev := $pages.Next $ }}
+    {{ $next := $pages.Prev $ }}
+    {{- if or $prev $next }}
+        <div class="d-flex justify-content-between">
+            <div class="border rounded p-3">
+            {{ with $prev }}
+                <span class="me-1">&lt; 前：</span>
+                <a href="{{ .RelPermalink }}" class="prev">
+                {{ .Title }}
+                </a>
+            {{ end }}
+            </div>
+
+            <div class="border rounded p-3">
+            {{ with $next }}
+                <a href="{{ .RelPermalink }}" class="next">
+                {{ .Title }}
+                </a>
+                <span class="ms-1">：次 &gt;</span>
+            {{ end }}
+            </div>
+        </div>
+    {{ end -}}
+{{ end }}
+

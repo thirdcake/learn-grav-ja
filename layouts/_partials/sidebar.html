@@ -1,35 +1,34 @@
-<button type="button" 
-    class="btn btn-primary d-lg-none"
-    data-bs-toggle="offcanvas"
-    data-bs-target="#offcanvasResponsive"
-    aria-controls="offcanvasResponsive">Toggle offcanvas</button>
-
 <div class="offcanvas-lg offcanvas-start"
     tabindex="-1" id="offcanvasResponsive"
-    aria-labelledby="offcanvasResponsiveLabel">
-    <div class="offcanvas-body d-lg-block pt-0" style="overflow-y:unset;">
+    aria-labelledby="offcanvasResponsiveLabel"
+    style="--bs-offcanvas-width:280px;">
+    <div class="offcanvas-body d-lg-block pt-0"
+        style="height:100%;overflow-y:unset;">
         <div class="d-flex flex-column"
             style="height:100dvh">
             <header class="flex-shrink-0 flex-grow-0
                 d-flex justify-content-between align-items-center
                 border-bottom ps-3"
                 style="height: 4rem;">
-                This is content within
+                <svg viewBox="0 0 600 100" style="height:2rem;width:auto;">
+                    <use href="{{ "images/logo.svg" | absURL }}#logo"></use>
+                </svg>
                 <button type="button"
-                    class="btn-close" data-bs-dismiss="offcanvas"
+                    class="btn-close d-block d-lg-none" data-bs-dismiss="offcanvas"
                     data-bs-target="#offcanvasResponsive"
                     aria-label="Close"></button>
             </header>
             <div class="flex-grow-1 pb-5"
                 style="min-height:0; overflow-y:auto;">
+                <div class="alert alert-primary">バージョン: 1.7</div>
                 {{ partial "node_tree.html" . }}
+                <div class="d-block d-lg-none">
+                    <a href="https://getgrav.org/" class="d-block m-3">Grav CMS</a>
+                    <a href="https://github.com/getgrav/grav" class="d-block m-3">GitHub</a>
+                    <a href="https://learn.getgrav.org/api" class="d-block m-3">API</a>
+                </div>
             </div>
         </div>
     </div>
-    <!--
-    <div class="d-block d-lg-none">
-        <p>footer</p>
-    </div>
-    -->
 </div>
 

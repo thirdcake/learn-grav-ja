@@ -1,3 +1,46 @@
-<header>
-header
-</header>
+<button type="button" 
+    class="btn btn-primary d-lg-none me-auto"
+    data-bs-toggle="offcanvas"
+    data-bs-target="#offcanvasResponsive"
+    aria-controls="offcanvasResponsive">
+    Menu
+</button>
+
+<div class="d-none d-lg-block">
+    <a href="https://getgrav.org/" class="btn">Grav CMS</a>
+    <a href="https://github.com/getgrav/grav" class="btn">GitHub</a>
+    <a href="https://learn.getgrav.org/api" class="btn">API</a>
+</div>
+
+<a href="https://learn.getgrav.org/"
+    class="ms-3 btn btn-outline-secondary btn-sm">
+    <span class="d-none d-sm-inline">検索は</span>
+    <span>翻訳元</span>
+    <span class="d-none d-sm-inline">へ</span>
+</a>
+
+<div class="ms-3">
+    <a href="https://github.com/getgrav/grav-learn" class="btn btn-sm">
+        <svg viewBox="0 0 16 16" style="width:1rem;height:auto;">
+            <use href="{{ "images/icons.svg" | absURL }}#github"></use>
+        </svg>
+    </a>
+</div>
+
+<div class="ms-3 btn-group btn-group-sm" role="group" aria-label="Color mode buttons">
+    <button type="button" class="btn">
+        <svg viewBox="0 0 16 16" style="width:1rem;height:auto;">
+            <use href="{{ "images/icons.svg" | absURL }}#light"></use>
+        </svg>
+    </button>
+    <button type="button" class="btn">
+        <svg viewBox="0 0 16 16" style="width:1rem;height:auto;">
+            <use href="{{ "images/icons.svg" | absURL }}#system"></use>
+        </svg>
+    </button>
+    <button type="button" class="btn">
+        <svg viewBox="0 0 16 16" style="width:1rem;height:auto;">
+            <use href="{{ "images/icons.svg" | absURL }}#dark"></use>
+        </svg>
+    </button>
+</div>

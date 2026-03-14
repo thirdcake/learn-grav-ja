@@ -6,6 +6,16 @@
         {{ $isAncestor := or (.IsAncestor $current) (eq . $current) }}
         {{ partial "inline/node_tree/walk.html" (dict "node" . "isAncestor" $isAncestor) }}
     {{ end }}
+    <li class="list-group-item me-0 pe-0">
+        <div class="d-flex justify-content-between align-items-center">
+            {{ with site.GetPage "/" }}
+            <a class="d-block me-auto"
+                href="{{ .RelPermalink }}">
+                {{ .Title }}
+            </a>
+            {{ end }}
+        </div>
+    </li>
 </ul>
 
 {{- define "_partials/inline/node_tree/walk.html" }}

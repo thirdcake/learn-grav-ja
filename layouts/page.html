@@ -1,5 +1,14 @@
 
 {{ define "main" }}
+{{ partial "breadcrumbs.html" . }}
+
+<h1 class="py-4">{{ .Title }}</h1>
+
+<div class="markdown">
 {{ .Content }}
+</div>
+
+{{ partial "prev-next.html" . }}
+
 {{ end }}
 
