@@ -1,116 +1,50 @@
-'use strict';
-// 目次を作る
-function create_mokuji() {
-    const ul = document.querySelector('#mokuji ul');
-    const template = document.querySelector('template#list-item');
-    if(!ul) {
-        return;
-    }
-    const heads = document.querySelectorAll(
-        '.learn-grav-default h2, .learn-grav-default h3'
-    );
-    if(heads.length === 0) {
-        return;
+function setTheme(colorMode) {
+    let theme;
+    if (colorMode === 'system') {
+        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     } else {
-        mokuji.style.display = 'block';
+        theme = colorMode;
     }
-    const frag = [...heads].reduce((frag, hx) => {
-        const clone = template.content.cloneNode(true);
-        const a = clone.querySelector('a');
-        a.textContent = hx.textContent;
-        a.href = `#${hx.id}`;
-        if(hx.tagName === 'H3') {
-            a.classList.add('ms-3');
+    document.documentElement.setAttribute('data-bs-theme', theme);
+}
+
+function initColorMode() {
+    const allowedModes = ['light', 'dark', 'system'];
+    const savedMode = localStorage.getItem('user-theme');
+    const colorMode = (savedMode && allowedModes.includes(savedMode))
+        ? savedMode : 'system';
+    const inputs = document.getElementsByName('color-mode');
+
+    // 1. 初期状態の適用
+    setTheme(colorMode);
+
+    // 2. 保存された値に合わせてラジオボタンのチェック状態を更新
+    inputs.forEach(input => {
+        // idの末尾（light/dark/system）と一致するか確認
+        if (input.id === `color-mode-${colorMode}`) {
+            input.checked = true;
         }
-        frag.appendChild(clone);
-        return frag;
-    }, document.createDocumentFragment());
-    ul.appendChild(frag);
-}
 
-// 不足しているtable classを補う
-function add_table_class () {
-    document.querySelectorAll('.learn-grav-default table').forEach(table => {
-        table.classList.add('table');
-    });
-}
-
-// 不足しているblockquote classを補う
-function add_blockquote_class () {
-    const data = [
-        {needle: 'Note', csscolor: 'blue'},
-        {needle: 'NOTE', csscolor: 'blue'},
-        {needle: 'Info', csscolor: 'orange'},
-        {needle: 'Caution', csscolor: 'orange'},
-        {needle: 'CAUTION', csscolor: 'orange'},
-        {needle: 'Tip', csscolor: 'green'},
-        {needle: 'TIP', csscolor: 'green'},
-        {needle: 'Warning', csscolor: 'red'},
-        {needle: 'WARNING', csscolor: 'red'},
-        {needle: '訳注', csscolor: 'pink'},
-    ];
-    document.querySelectorAll('.learn-grav-default blockquote').forEach(blockq => {
-        const p = blockq.querySelectorAll('p')[0];
-        if(!p) {return;}
-        data.forEach(({needle, csscolor})=>{
-            if(p.textContent.startsWith(`[!${needle}]`)) {
-                blockq.style.borderLeftColor = `var(--bs-${csscolor})`;
+        // 3. イベントリスナーの設定
+        input.addEventListener('change', (e) => {
+            const selectedMode = e.target.id.replace('color-mode-', '');
+            if(selectedMode && allowedModes.includes(selectedMode)) {
+                localStorage.setItem('user-theme', selectedMode);
+                setTheme(selectedMode);
+            }else{
+                console.error('color mode invalid');
             }
         });
     });
-}
 
-// 見出しに翻訳元への外部リンクを追加
-function headings_external_link () {
-    const source_page = document.getElementById('source-page');
-    if(!source_page) return;
-    const heads = [...document.querySelectorAll(
-        '.learn-grav-default h2, .learn-grav-default h3'
-    )];
-    heads.forEach(heading => {
-        heading.classList.add('heading-external-link');
-        const anc = document.createElement('a');
-        anc.target = '_blank';
-        anc.rel = 'noopener';
-        const href = new URL(source_page.href);
-        href.hash = heading.id;
-        anc.href = href;
-        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-        svg.setAttribute("width", "24");
-        svg.setAttribute("height", "24");
-        svg.setAttribute("viewBox", "0 0 24 24");
-        const use = document.createElementNS("http://www.w3.org/2000/svg", "use");
-        use.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", "#box-arrow-up-right");
-        const title = document.createElementNS("http://www.w3.org/2000/svg", "title");
-        title.textContent = '翻訳元の見出しへのリンク';
-        svg.appendChild(use);
-        svg.appendChild(title);
-        anc.appendChild(svg);
-        heading.appendChild(anc);
+    // 4. システム設定変更への追従（前述の通り）
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        if (localStorage.getItem('user-theme') === 'system') {
+            setTheme('system');
+        }
     });
 }
 
-// home画面でfaqを開閉
-function home_faq_open_close() {
-    const button = document.querySelector('button[data-faq="clickable"]');
-    if(!button) return;
-    const items = [...document.querySelectorAll('details[data-faq="item"]')];
-    if(items.length===0) return;
-    const toggleAll = (open) => {
-        items.forEach((item) => (item.open = open));
-        button.setAttribute('aria-expanded', String(open));
-        button.textContent = open ? 'すべて閉じる' : 'すべて開く';
-    };
-    button.addEventListener('click', ()=>{
-        const isOpen = button.getAttribute('aria-expanded') === 'true';
-        toggleAll(!isOpen);
-    }, false);
-}
+initColorMode();
 
-document.addEventListener('DOMContentLoaded', ()=>{
-    create_mokuji();
-    add_table_class();
-    add_blockquote_class();
-    headings_external_link();
-    home_faq_open_close();
-}, false);
+

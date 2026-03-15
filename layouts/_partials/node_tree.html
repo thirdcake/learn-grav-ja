@@ -3,7 +3,7 @@
 
 <ul class="list-group list-group-flush">
     {{ range $home.Sections }}
-        {{ $isAncestor := or (.IsAncestor $current) (eq . $current) }}
+        {{ $isAncestor := or (.Eq $current) (.IsAncestor $current) }}
         {{ partial "inline/node_tree/walk.html" (dict "node" . "isAncestor" $isAncestor) }}
     {{ end }}
     <li class="list-group-item me-0 pe-0">
@@ -46,7 +46,7 @@
     </button>
     </div>
     <ul id="collapse-{{ $node.File.UniqueID }}"
-        class="list-group list-group-flush collapse border-top {{ if $isAncestor}}show{{ end }}">
+        class="list-group list-group-flush collapse border-top{{ if $isAncestor}} show{{ end }}">
         {{ range $children.ByWeight }}
             {{/* 自分自身を再度呼び出す（再帰） */}}
             {{ partial "inline/node_tree/walk.html" (dict "node" . "isAncestor" $isAncestor ) }}

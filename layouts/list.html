@@ -1,5 +1,19 @@
 
 {{ define "main" }}
+{{ partial "breadcrumbs.html" . }}
+
+<div class="markdown">
 {{ .Content }}
+</div>
+
+<ul>
+  {{ range .Pages }}
+    <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+  {{ end }}
+</ul>
+
+{{ partial "prev-next.html" . }}
+
 {{ end }}
+
 

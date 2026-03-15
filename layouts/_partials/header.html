@@ -27,20 +27,31 @@
     </a>
 </div>
 
-<div class="ms-3 btn-group btn-group-sm" role="group" aria-label="Color mode buttons">
-    <button type="button" class="btn">
+<div class="ms-3 btn-group btn-group-sm" role="group"
+    aria-label="Color mode buttons">
+    
+    <input type="radio" class="btn-check" name="color-mode"
+        id="color-mode-light" autocomplete="off">
+    <label class="btn btn-outline-primary" for="color-mode-light">
         <svg viewBox="0 0 16 16" style="width:1rem;height:auto;">
             <use href="{{ "images/icons.svg" | absURL }}#light"></use>
         </svg>
-    </button>
-    <button type="button" class="btn">
+    </label>
+
+    <input type="radio" class="btn-check" name="color-mode"
+        id="color-mode-system" autocomplete="off" checked>
+    <label class="btn btn-outline-primary" for="color-mode-system">
         <svg viewBox="0 0 16 16" style="width:1rem;height:auto;">
             <use href="{{ "images/icons.svg" | absURL }}#system"></use>
         </svg>
-    </button>
-    <button type="button" class="btn">
+    </label>
+
+    <input type="radio" class="btn-check" name="color-mode"
+        id="color-mode-dark" autocomplete="off">
+    <label class="btn btn-outline-primary" for="color-mode-dark">
         <svg viewBox="0 0 16 16" style="width:1rem;height:auto;">
             <use href="{{ "images/icons.svg" | absURL }}#dark"></use>
         </svg>
-    </button>
+    </label>
 </div>
+
