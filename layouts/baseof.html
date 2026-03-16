@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>{{ with .Title}} | {{ end }}{{ site.Title }}</title>
+    <title>{{ with .Title}}{{ . }} | {{ end }}{{ site.Title }}</title>
     <script>(function(){document.documentElement.dataset.bsTheme=window.matchMedia('(prefers-color-scheme: dark)').matches ?'dark':'light'})()</script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -16,8 +16,8 @@
     <script defer src="{{ "js/custom.js" | absURL }}"></script>
 </head>
 <body>
-    <div class="d-block d-lg-flex align-items-start" style="position:relative;width: 100%;">
-        <div class="offcanvas-wrapper flex-shrink-0 border-end" style="width: 280px;">
+    <div class="container-fluid d-block d-lg-flex align-items-start" style="position:relative;width: 100%;">
+        <div class="offcanvas-wrapper flex-shrink-0 border-end" style="width: var(--g2-sidebar-width);">
             {{ partial "sidebar.html" . }}
         </div>
 
@@ -29,7 +29,7 @@
                 {{ partial "header.html" . }}
             </header>
 
-            <main class="container-fluid p-4" style="width:100%;min-width:0;">
+            <main style="width:100%;min-width:0;">
                 {{ block "main" . }}{{ end }}
             </main>
 

@@ -3,7 +3,7 @@
     {{ $prev := $pages.Next $ }}
     {{ $next := $pages.Prev $ }}
     {{- if or $prev $next }}
-        <div class="d-flex justify-content-between">
+        <div class="p-3 d-flex justify-content-between">
             <div class="border rounded p-3">
             {{ with $prev }}
                 <span class="me-1">&lt; 前：</span>

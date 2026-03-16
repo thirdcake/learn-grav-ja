@@ -1,5 +1,6 @@
 :root {
-    --bs-breadcrumb-divider: '>';
+    --g2-sidebar-width:280px;
+    --g2-table-of-contents-width: 240px;
 }
 
 img {
@@ -8,9 +9,9 @@ img {
 }
 
 pre {
-    padding: 2rem;
+    padding: 1rem 2rem;
     display: block;
-    width: 100%;
+    width: var(--g2-main-content-width);
     min-width: 0;
     overflow-x: auto;
     white-space: nowrap;
@@ -48,6 +49,7 @@ main {
 
 .breadcrumb {
     --bs-breadcrumb-margin-bottom: 0;
+    --bs-breadcrumb-divider: '>';
 }
 
 @media (min-width:991.99px) {

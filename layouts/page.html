@@ -1,14 +1,28 @@
 
 {{ define "main" }}
-{{ partial "breadcrumbs.html" . }}
+<div class="d-block d-xl-flex
+    justify-content-between align-items-start">
+    <div class="d-block flex-fill" style="min-width:0;">
+        {{ partial "breadcrumbs.html" . }}
 
-<h1 class="py-4">{{ .Title }}</h1>
+        <h1 class="p-3">{{ .Title }}</h1>
 
-<div class="markdown">
-{{ .Content }}
+        <div class="markdown p-3">
+        {{ .Content }}
+        </div>
+
+        {{ partial "prev-next.html" . }}
+    </div>
+
+    <div class="d-none d-xl-block flex-shrink-0
+        py-5 px-3" style="width:240px;">
+        {{ if gt (len (plainify .TableOfContents)) 0 }}
+        <div>
+            <h2 class="h5 pt-4">目次：</h2>
+            {{ .TableOfContents }}
+        </div>
+        {{ end }}
+    </div>
 </div>
-
-{{ partial "prev-next.html" . }}
-
 {{ end }}
 

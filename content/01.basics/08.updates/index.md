@@ -35,7 +35,7 @@ Grav の古いバージョンをアップデートするには、いくつかの
 - **[Grav1.7にアップグレード](../../08.advanced/09.grav-development/03.grav-17-upgrade-guide)**
 - **[Grav1.6にアップグレード](../../08.advanced/09.grav-development/02.grav-16-upgrade-guide)**
 
-> [!Note]  
+> [!NOTE]
 > Grav の次のバージョンをインストールする前に、このアップグレードガイドを読むことをおすすめします。
 
 <h3 id="grav-cms-updates">Grav CMSのアップデート</h3>
