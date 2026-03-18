@@ -1,0 +1,23 @@
+{{- $breadcrumbs := slice -}}
+{{- $ancestors := .Ancestors.Reverse -}} {{- range $ancestors -}}
+  {{- $breadcrumbs = $breadcrumbs | append . -}}
+{{- end -}}
+
+{{- $breadcrumbs = $breadcrumbs | append . -}} <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {{- range $index, $element := $breadcrumbs -}}
+    {{- if $index }},{{ end }}
+    {
+      "@type": "ListItem",
+      "position": {{ add $index 1 }},
+      "name": "{{ $element.Title | safeJS }}",
+      "item": "{{ $element.Permalink | safeJS }}"
+    }
+    {{- end -}}
+  ]
+}
+</script>
+

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ with .Title}}{{ . }} | {{ end }}{{ site.Title }}</title>
+    <script>(function(){document.documentElement.dataset.bsTheme=window.matchMedia('(prefers-color-scheme: dark)').matches ?'dark':'light'})()</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {{ with .Description }}
+    <meta name="description" content="{{ . }}">
+    {{ end }}
+    {{ partial "opengraph" . }}
+    {{ partial "twitter_cards.html" . }}
+    <link rel="icon" type="image/svg+xml" href="{{ "img/favicon.svg" | absURL }}">
+    <link rel="stylesheet" href="{{ "css/bootstrap.min.css" | absURL }}">
+    <link rel="stylesheet" href="{{ "css/custom.css" | absURL }}">
+    <script defer src="{{ "js/bootstrap.min.js" | absURL }}"></script>
+    <script defer src="{{ "js/custom.js" | absURL }}"></script>
+    {{- block "jsonld" . }}{{ end }}
+</head>
+<body>
+    <div class="container-fluid d-block d-lg-flex align-items-start" style="position:relative;width: 100%;">
+        <div class="offcanvas-wrapper flex-shrink-0 border-end" style="width: var(--g2-sidebar-width);">
+            {{ partial "sidebar.html" . }}
+        </div>
+
+        <div class="flex-shrink-1" style="min-width:0;width:100%;flex-basis:100%;">
+
+            <header class="px-3 border-bottom position-sticky top-0
+                bg-body d-flex justify-content-end align-items-center
+                z-1"
+                style="height:4rem;overflow-x:hidden;">
+                {{ partial "header.html" . }}
+            </header>
+
+            <main class="z-0" style="width:100%;min-width:0;">
+                {{ block "main" . }}{{ end }}
+            </main>
+
+            <footer class="z-0">
+                {{ partial "footer.html" (dict "page" . "site" .Site) }}
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
+

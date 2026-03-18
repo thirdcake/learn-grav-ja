@@ -1,0 +1,96 @@
+:root {
+    --g2-sidebar-width:280px;
+    --g2-table-of-contents-width: 240px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+pre {
+    padding: 1rem 2rem;
+    display: block;
+    width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+code {
+    white-space: nowrap;
+}
+
+main {
+    word-break: break-all;
+    line-height:1.7;
+}
+
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+    padding-top: 3.5rem;
+    padding-bottom: .7rem;
+}
+.alert-note {
+    --bs-alert-color: var(--bs-primary-text-emphasis);
+    --bs-alert-bg: var(--bs-primary-bg-subtle);
+    --bs-alert-border-color: var(--bs-primary-border-subtle);
+    --bs-alert-link-color: var(--bs-primary-text-emphasis);
+}
+.alert-caution {
+    --bs-alert-color: var(--bs-danger-text-emphasis);
+    --bs-alert-bg: var(--bs-danger-bg-subtle);
+    --bs-alert-border-color: var(--bs-danger-border-subtle);
+    --bs-alert-link-color: var(--bs-danger-text-emphasis);
+}
+.alert-tip {
+    --bs-alert-color: var(--bs-success-text-emphasis);
+    --bs-alert-bg: var(--bs-success-bg-subtle);
+    --bs-alert-border-color: var(--bs-success-border-subtle);
+    --bs-alert-link-color: var(--bs-success-text-emphasis);
+}
+.alert-translation {
+    --bs-alert-color: var(--bs-dark-text-emphasis);
+    --bs-alert-bg: var(--bs-dark-bg-subtle);
+    --bs-alert-border-color: var(--bs-dark-border-subtle);
+    --bs-alert-link-color: var(--bs-dark-text-emphasis);
+}
+
+.heading-external-link a {
+    padding-inline-start: .3rem;
+}
+
+.heading-external-link svg {
+    color: var(--bs-primary);
+    opacity: 0;
+}
+
+.heading-external-link:hover svg {
+    opacity: 1;
+}
+
+.breadcrumb {
+    --bs-breadcrumb-margin-bottom: 0;
+    --bs-breadcrumb-divider: '>';
+}
+
+@media (min-width:991.99px) {
+    .offcanvas-wrapper {
+        position: sticky;
+        height: 100dvh;
+        left:0;
+        top:0;
+    }
+}
+
+button[data-bs-toggle="collapse"] > svg {
+    display: inline-block;
+    transform-origin: center;
+}
+button[aria-expanded="true"] > svg {
+    transform: rotate(180deg);
+}
+
+

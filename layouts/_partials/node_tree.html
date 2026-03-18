@@ -1,0 +1,60 @@
+{{ $home := .Site.GetPage "/" }}
+{{ $current := . }}
+
+<ul class="list-group list-group-flush">
+    {{ range $home.Sections }}
+        {{ $isAncestor := or (.Eq $current) (.IsAncestor $current) }}
+        {{ partial "inline/node_tree/walk.html" (dict "node" . "isAncestor" $isAncestor) }}
+    {{ end }}
+    <li class="list-group-item me-0 pe-0">
+        <div class="d-flex justify-content-between align-items-center">
+            {{ with site.GetPage "/" }}
+            <a class="d-block me-auto"
+                href="{{ .RelPermalink }}">
+                {{ .Title }}
+            </a>
+            {{ end }}
+        </div>
+    </li>
+</ul>
+
+{{- define "_partials/inline/node_tree/walk.html" }}
+    {{ $node := .node }}
+    {{ $isAncestor := .isAncestor }}
+
+    <li class="list-group-item me-0 pe-0">
+    <div class="d-flex justify-content-between align-items-center">
+        <a class="d-block me-auto"
+            href="{{ $node.RelPermalink }}">
+            {{ $node.Title }}
+        </a>
+
+    {{/* 子ページ（Pages）またはセクション（Sections）があるか確認 */}}
+    {{ $children := union $node.Sections $node.Pages }}
+
+    {{ if $children }}
+    <button type="button"
+        class="btn"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapse-{{ $node.File.UniqueID }}"
+        aria-expanded="{{ if $isAncestor }}true{{ else }}false{{ end }}"
+        aria-controls="collapseExample">
+        <svg viewBox="0 0 16 16"
+            style="width:1rem;height:auto;">
+            <use href="{{ "images/icons.svg" | absURL }}#arrow-down"></use>
+        </svg>
+    </button>
+    </div>
+    <ul id="collapse-{{ $node.File.UniqueID }}"
+        class="list-group list-group-flush collapse border-top{{ if $isAncestor}} show{{ end }}">
+        {{ range $children.ByWeight }}
+            {{/* 自分自身を再度呼び出す（再帰） */}}
+            {{ partial "inline/node_tree/walk.html" (dict "node" . "isAncestor" $isAncestor ) }}
+        {{ end }}
+    </ul>
+    {{ else }}
+    </div>
+    {{ end }}
+    </li>
+{{- end }}
+
