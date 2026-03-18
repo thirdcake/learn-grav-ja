@@ -1,4 +1,25 @@
 <div class="mx-auto py-4" style="width:fit-content;">
-    <a href="#">GitHub で編集</a>
+    {{ $ghHost := .site.Params.githubHost }}
+    {{ $subdir := .site.BaseURL | relURL }}
+    {{ $cleanUrl := .page.RelPermalink | strings.TrimPrefix $subdir }}
+    {{ $filename := cond (eq .BundleType "branch") "_index.md" "index.md" }}
+    {{ $filename := "" }}
+    {{ if eq .page.BundleType "leaf" }}
+        {{ $filename = "index.md" }}
+    {{ else }}
+        {{ $filename = "_index.md" }}
+    {{ end }}
+    <div><a href="{{ $ghHost }}{{ $cleanUrl }}{{ $filename }}">GitHub で編集</a></div>
+    {{ $srcHost := .site.Params.srcHost }}
+    {{ with .page.Params.srcPath }}
+    <div><a id="source-page" href="{{ $srcHost }}{{ . }}">翻訳元ページ</a></div>
+    {{ end }}
+    
+    <svg width="0" height="0" viewBox="0 0 0 0" fill="none">
+        <symbol id="box-arrow-up-right" viewBox="0 0 16 16">
+        <path fill="currentColor" fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"/>
+        <path fill="currentColor" fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"/>
+        </symbol>
+    </svg>
 </div>
 

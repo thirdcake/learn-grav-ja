@@ -1,9 +1,10 @@
 ---
 title: 'メディア'
-lastmod: '2025-08-02T00:00:00+09:00'
+lastmod: 2025-08-02T00:00:00+09:00
 description: Grav では、画像、動画、その他様々なメディアファイルを動的に処理し、キャッシュして再利用できます。
 weight: 70
 ---
+
 > [!訳注]  
 > このページでは、ファイルの動的な処理をするため、静的サイトでは再現できない部分があります。また、動画などの容量が大きく、このGitHub Pages上では削除しています。メディア編集による Grav の機能については、 [翻訳元](https://learn.getgrav.org/content/media) にてご確認ください。
 
@@ -117,7 +118,7 @@ Grav では、3つのサムネイル画像の保存場所があります。
 2. ユーザーフォルダ： `user/images/media/thumb-[media-extension].png` ここでの `media-extension` は、オリジナルのメディアファイルの拡張子です。 たとえば、 `thumb-mp4.png` や、 `thumb-jpg.jpg` です。
 3. システムフォルダ： `system/images/media/thumb-[media-extension].png` ここでの `media-extension` は、オリジナルのメディアファイルの拡張子です。 **system フォルダ内のサムネイルは、Grav が準備するものです。**
 
-> [!Info]  
+> [!Caution]  
 > 以下に説明するような方法で、手動でサムネイルを選ぶこともできます。
 
 <h2 id="links-and-lightboxes">リンクと lightbox</h2>

@@ -1,16 +1,31 @@
+{{ define "jsonld" }}
+{{ partial "breadcrumb-json-ld.html" . }}
+{{ end }}
 
 {{ define "main" }}
 {{ partial "breadcrumbs.html" . }}
 
-<div class="markdown">
+<div class="markdown p-3">
 {{ .Content }}
 </div>
 
-<ul>
-  {{ range .Pages }}
-    <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
-  {{ end }}
-</ul>
+<div class="row p-3">
+    {{ range .Pages }}
+    <div class="col-12 col-lg-6">
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="">
+                    <a class="stretched-link" 
+                        href="{{ .Permalink }}">{{ .Title }}</a>
+                </div>
+                <div class="card-text">
+                    {{ .Content | plainify | strings.Truncate 42 }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ end }}
+</div>
 
 {{ partial "prev-next.html" . }}
 

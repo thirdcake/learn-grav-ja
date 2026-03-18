@@ -45,6 +45,44 @@ function initColorMode() {
     });
 }
 
-initColorMode();
+// 見出しに翻訳元への外部リンクを追加
+function headings_external_link () {
+    const source_page = document.getElementById('source-page');
+    if(!source_page) return;
+    const heads = [...document.querySelectorAll(
+        '.markdown h2, .markdown h3'
+    )];
+    heads.forEach(heading => {
+        heading.classList.add('heading-external-link');
+        const anc = document.createElement('a');
+        anc.target = '_blank';
+        anc.rel = 'noopener';
+        const href = new URL(source_page.href);
+        href.hash = heading.id;
+        anc.href = href;
+        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        //svg.setAttribute("width", "16");
+        //svg.setAttribute("height", "16");
+        svg.setAttribute("viewBox", "0 0 16 16");
+        svg.style.width = "1em";
+        svg.style.height = "auto";
+        const use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+        use.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", "#box-arrow-up-right");
+        const title = document.createElementNS("http://www.w3.org/2000/svg", "title");
+        title.textContent = '翻訳元の見出しへのリンク';
+        svg.appendChild(use);
+        svg.appendChild(title);
+        anc.appendChild(svg);
+        heading.appendChild(anc);
+    });
+}
+
+
+// 実行
+
+document.addEventListener('DOMContentLoaded', ()=>{
+    initColorMode();
+    headings_external_link();
+}, false);
 
 

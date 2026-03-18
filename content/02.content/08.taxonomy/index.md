@@ -1,9 +1,10 @@
 ---
 title: 'タクソノミー'
-lastmod: '2025-08-02T00:00:00+09:00'
+lastmod: 2025-08-02T00:00:00+09:00
 description: Grav では、ページをカテゴリーや、タグ、その他カスタムな方法で分類できます。分類方法及び分類されたものの一覧表示方法を解説します。
 weight: 80
 ---
+
 **Grav** では、**タクソノミー** を使って、ページをグループ化したり、タグ付けしたりできます。
 
 > **Taxonomy (general),** the practice and science (study) of classification of things or concepts, including the principles that underlie such classification.  
@@ -81,7 +82,7 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 フロントマターの YAML 設定部分を見てもらえばわかるとおり、 `site.yaml` の設定ファイルで定義した **タクソノミータイプ** に、 **値** を代入しています。  
 Grav は、この情報をページ処理中に使い、タクソノミーごとに分類するための内部的な **タクソノミーマップ** を作ります。
 
-> [!Warning]  
+> [!Tip]  
 > 各ページでは、`site.yaml` に定義したタクソノミーをすべて使う必要はありません。ただし、使いたいタクソノミーは、`site.yaml` で定義されている必要があります。
 
 テーマファイルでは、`ksmith` によって書かれたページの一覧を、簡単に表示できます。  

@@ -1,9 +1,12 @@
 ---
 title: 'Grav とはどんなもの?'
-lastmod: '2025-07-18T00:00:00+09:00'
-description: Grav とは、データベース不要のフラットファイル CMS です。高速で、シンプルかつ柔軟にサイトを構築できます。
+lastmod: 2025-07-18T00:00:00+09:00
+description: 'Grav とは、データベース不要のフラットファイル CMS です。高速で、シンプルかつ柔軟にサイトを構築できます。'
 weight: 10
+params:
+    srcPath: '/basics/what-is-grav'
 ---
+
 Grav とは、 **高速で** 、 **シンプルで** 、 **柔軟な** ファイルベースの web プラットフォームです。  
 必要なインストールは **ありません** 。  
 ただ、 ZIP アーカイブを展開するだけで、すぐに利用可能です。  
@@ -28,7 +31,7 @@ Grav の基礎となるアーキテクチャは、十分に洗練され、その
 * [Symfony Console](https://symfony.com/doc/current/components/console.html) : CLI インターフェースを利用できます
 * [Gregwar Image Library](https://github.com/Gregwar/Image) : 画像を動的に操作できます
 
-<h2 id="grav-s-place-in-the-universe">Grav の立ち位置</h2>
+## Grav の立ち位置{#grav-s-place-in-the-universe}
 
 複雑なウェブサイトを構築するために、強力なオープンソースの CMS が数多く存在します。  
 よく使われるものとして、 [Joomla](https://www.joomla.org) や、 [WordPress](https://wordpress.org) 、 [Drupal](https://www.drupal.org) があります。  
@@ -52,7 +55,7 @@ Grav の基盤はシンプルですが、広範な **イベント** を介して
 基本的なサイトの立ち上げと運営であれば、最小限の web 開発経験で十分です。  
 もし、もう少し深く掘り下げたなら、 Grav に達成できないことはほとんど無いことに気づくでしょう。
 
-<h2 id="grav-logos-and-press-information">Grav のロゴ及びプレス情報</h2>
+## Grav のロゴ及びプレス情報{#grav-logos-and-press-information}
 
 Grav のロゴやプレス情報を含む概要は、 [メディアページ](https://getgrav.org/media) をご覧ください。
 
@@ -60,5 +63,5 @@ Grav のロゴやプレス情報を含む概要は、 [メディアページ](ht
 > このドキュメントの最も簡単なナビゲート方法は、各ページ上部にある **前** と **次** の矢印を使うことです。サイドバーのチェックマークにより、進捗情報が確認できます。
 
 > [!訳注]  
-> チェックマークなど未実装です。
+> 翻訳元サイトのテーマが [Helios](https://getgrav.org/premium/helios) に変わったことにより、ナビゲーション位置は各ページの下部に変わりました。また、進捗状況のチェックマークは無くなりました。
 

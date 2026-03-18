@@ -1,6 +1,39 @@
+{{ define "jsonld" }}
+{{ partial "breadcrumb-json-ld.html" . }}
+{{ with .Params.faq }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {{ range $index, $item := . }}
+    {{ if $index }},{{ end }}
+    {
+      "@type": "Question",
+      "name": "{{ $item.q | safeJS }}",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "{{ $item.a | markdownify | plainify | safeJS }}"
+      }
+    }
+    {{ end }}
+  ]
+}
+</script>
+{{ end }}
+{{ end }}
 
 {{ define "main" }}
-<div class="markdown">
+<div class="markdown p-3">
 {{ .Content }}
+</div>
+<div class="p-3">
+<h2>Grav のよくある質問</h2>
+{{ range .Params.faq }}
+<details data-feq="item" class="border rounded p-3 mb-3">
+    <summary style="cursor: pointer; font-weight: bold;">{{ .q }}</summary>
+    <div class="">{{ .a | safeHTML }}</div>
+</details>
+{{ end }}
 </div>
 {{ end }}

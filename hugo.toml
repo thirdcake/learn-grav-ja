@@ -3,11 +3,25 @@ languageCode = 'ja-jp'
 title = 'Grav ドキュメント（日本語訳）'
 hasCJKLanguage = true
 
+[params]
+    srcHost = 'https://learn.getgrav.org/18'
+    githubHost = 'https://github.com/thirdcake/learn-grav-ja/blob/main/content'
+
+[outputs]
+    home = ['html', 'rss']
+    page = ['html']
+    rss = ['rss']
+    section = ['html']
+
+[taxonomies]
+
 [markup]
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = true
+    [markup.goldmark]
+        [markup.goldmark.renderer]
+            unsafe = true
 
 [caches]
-  [caches.images]
-    dir = ':cacheDir/images'
+    [caches.images]
+        dir = ':cacheDir/images'
+
+
