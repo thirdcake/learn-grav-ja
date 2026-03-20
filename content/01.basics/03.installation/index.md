@@ -3,6 +3,8 @@ title: 'インストール'
 lastmod: 2026-03-20T09:07:41+09:00
 description: 'Grav のインストールは簡単です。ZIP を展開するだけで使えます。 Composer や GitHub にも対応しており、その他にも、いろいろな実行方法が用意されています。'
 weight: 30
+params:
+    srcPath: '/basics/installation'
 ---
 
 Grav のインストールは簡単です。  

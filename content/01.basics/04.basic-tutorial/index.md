@@ -3,6 +3,8 @@ title: 'チュートリアル'
 lastmod: 2026-03-20T09:45:42+09:00
 description: 'Grav の基本操作をチュートリアル形式で学びましょう。ページ構造や Markdown によるコンテンツ作成を解説します。'
 weight: 40
+params:
+    srcPath: '/basics/basic-tutorial'
 ---
 
 前の章の手順どおりに [Grav のインストール](../03.installation/) が完了していることを前提に、ここでは引き続き Grav を操作してみて、使い方に慣れていきましょう。
