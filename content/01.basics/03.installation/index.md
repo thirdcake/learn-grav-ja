@@ -1,9 +1,10 @@
 ---
 title: 'インストール'
-lastmod: '2025-10-30T00:00:00+09:00'
-description: Grav のインストールは簡単です。ZIP を展開するだけで使えます。 Composer や GitHub にも対応しています。
+lastmod: 2026-03-20T09:07:41+09:00
+description: 'Grav のインストールは簡単です。ZIP を展開するだけで使えます。 Composer や GitHub にも対応しており、その他にも、いろいろな実行方法が用意されています。'
 weight: 30
 ---
+
 Grav のインストールは簡単です。  
 実のところ、本当の意味でのインストールはありません。  
 Grav をインストールする方法はいくつかあります。  
@@ -12,7 +13,7 @@ Grav をインストールする方法はいくつかあります。
 3つ目の方法は、 **GitHub** から直接ソースのプロジェクトをクローンし、そこに含まれるスクリプトコマンドを実行し、必要な依存関係をインストールすることです。  
 バンドルされたスクリプトを実行する [さらなる方法](#further-options) もあります。
 
-<h2 id="check-for-php-version">PHP のバージョンを確認</h2>
+## PHP のバージョンを確認{#check-for-php-version}
 
 Grav は、驚くほど簡単に構築して動かすことができます。  
 少なくとも、 PHP のバージョンが 7.3.6 以上であることを確認してください。  
@@ -26,31 +27,34 @@ Zend Engine v3.3.18, Copyright (c) 1998-2018 Zend Technologies
     with Zend OPcache v7.3.18, Copyright (c) 1999-2018, by Zend Technologies
 ```
 
-<h2 id="option-1-install-from-zip-package">選択肢1: ZIP パッケージからインストール</h2>
+> [!訳注]  
+> 上記の php バージョン7.3以上というのは、Grav バージョン 1.7 での要件です。1.8を動かすときは、8.3以上を確認してください。確認方法は、同じで `php -v` するだけです。
+
+## 選択肢1: ZIP パッケージからインストール{#option-1-install-from-zip-package}
 
 Grav をインストールする最も簡単な方法は、 ZIP パッケージをダウンロードして、展開することです：
 
 1. 最新で最上位の **[Grav](https://getgrav.org/download/core/grav/latest)** パッケージもしくは、 **[Grav + Admin](https://getgrav.org/download/core/grav-admin/latest)** パッケージを、ダウンロードしてください
 2. その ZIP ファイルを、 web サーバーの [webroot](https://www.wordnik.com/words/webroot) に展開してください。たとえば、次のフォルダで展開してください： `~/webroot/grav`
 
-> [!Tip]  
-> [Skeleton](https://getgrav.org/downloads/skeletons) パッケージも利用できます。それは、 Grav コアシステムと、サンプルページ、プラグイン、諸設定が含まれます。 Grav を始めて触るときには最適な方法です。お好みの [スケルトンをダウンロード](https://getgrav.org/downloads/skeletons) して、ステップに従うだけです。
+> [!Note]  
+> [Skeleton](https://getgrav.org/downloads/skeletons) パッケージも利用できます。スケルトンパッケージには、 Grav コアシステムと、サンプルページ、プラグイン、諸設定が含まれます。 Grav を始めて触るときには最適な方法です。お好みの [スケルトンをダウンロード](https://getgrav.org/downloads/skeletons) して、ステップに従うだけです。
 
 getgrav.org のサイトから、 [タグ付きリリース](https://github.com/getgrav/grav/tags) をダウンロードし、インストールすることもできます。  
 `https://getgrav.org/download/タイプ/パッケージ/バージョン` という形式で使ってください。
 
-- [getgrav.org/download/core/grav/1.7.0](https://getgrav.org/download/core/grav/1.7.0) downloads Grav Core v1.7.0
-- [getgrav.org/download/core/grav/1.7.0-rc.10?testing=true](https://getgrav.org/download/core/grav/1.7.0-rc.10?testing=true) downloads Grav Core v1.7.0-rc.10, a testing release
-- [getgrav.org/download/core/grav-admin/1.7.0](https://getgrav.org/download/core/grav-admin/1.7.0) downloads Grav Core with the Admin plugin, at Core v1.7.0
-- [getgrav.org/download/core/grav-admin/1.7.0-rc.10?testing=true](https://getgrav.org/download/core/grav-admin/1.7.0-rc.10?testing=true) downloads Grav Core v1.7.0-rc.10 with the Admin plugin, a testing release
-- [getgrav.org/download/core/grav-update/1.7.0](https://getgrav.org/download/core/grav-update/1.7.0) downloads the update package for Grav Core
-- [getgrav.org/download/plugins/flex-objects-json/0.1.0](https://getgrav.org/download/plugins/flex-objects-json/0.1.0) downloads the Flex Objects JSON plugin at v0.1.0
-- [getgrav.org/download/themes/quark/2.0.3](https://getgrav.org/download/themes/quark/2.0.3) downloads the Quark theme at v2.0.3
+- [getgrav.org/download/core/grav/1.7.0](https://getgrav.org/download/core/grav/1.7.0) Grav コア v1.7.0 をダウンロードします
+- [getgrav.org/download/core/grav/1.7.0-rc.10?testing=true](https://getgrav.org/download/core/grav/1.7.0-rc.10?testing=true) Grav コア v1.7.0-rc.10, テストリリースをダウンロードします
+- [getgrav.org/download/core/grav-admin/1.7.0](https://getgrav.org/download/core/grav-admin/1.7.0) Grav コア及び Admin プラグインをコア v1.7.0 でダウンロードします
+- [getgrav.org/download/core/grav-admin/1.7.0-rc.10?testing=true](https://getgrav.org/download/core/grav-admin/1.7.0-rc.10?testing=true) Grav コア v1.7.0-rc.10 テストリリース 及び Admin プラグインをダウンロードします
+- [getgrav.org/download/core/grav-update/1.7.0](https://getgrav.org/download/core/grav-update/1.7.0) Grav コア 向けのアップデートパッケージをダウンロードします
+- [getgrav.org/download/plugins/flex-objects-json/0.1.0](https://getgrav.org/download/plugins/flex-objects-json/0.1.0) Flex Objects JSON プラグイン v0.1.0 をダウンロードします
+- [getgrav.org/download/themes/quark/2.0.3](https://getgrav.org/download/themes/quark/2.0.3) Quark テーマ v2.0.3 をダウンロードします
 
-> [!Warning]  
+> [!Tip]  
 > もしZIPファイルをダウンロードして、 webroot に移動しようとした場合、 **すべてのフォルダ** を移動させてください。なぜなら、 ( .htaccess のような) いくつかの隠しファイルがあり、通常は移動時に選択されないからです。隠しファイルの見逃しにより、 Grav を動かしたときに問題を引き起こす可能性があります。
 
-<h2 id="option-2-install-with-composer">選択肢2: composer でインストール</h2>
+## 選択肢2: composer でインストール{#option-2-install-with-composer}
 
 次の方法は、 [composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos) を使って、 Grav をインストールする方法です:
 
@@ -64,7 +68,7 @@ Grav の最先端のバージョンをチェックしたい場合は、 `1.x-dev
 composer create-project getgrav/grav ~/webroot/grav 1.x-dev
 ```
 
-<h2 id="option-3-install-from-github">選択肢3: GitHub からインストール</h2>
+## 選択肢3: GitHub からインストール{#option-3-install-from-github}
 
 もう1つの方法として、 Github のリポジトリから Grav をクローンして、依存関係のインストールをシンプルなスクリプトで実行する方法があります。
 
@@ -91,19 +95,19 @@ bin/grav install
 
 これにより、 GitHub から必要な依存関係をこの Grav のインストールに直接 **クローンします** 。
 
-<h2 id="further-options">その他の選択肢</h2>
+## その他の選択肢{#further-options}
 
-<h3 id="install-with-docker">Docker でインストール</h3>
+### Docker でインストール{#install-with-docker}
 
 [Docker](https://ja.wikipedia.org/wiki/Docker) は、サーバとローカル環境の両方でプラットフォームやサービスを起動するための非常に効率的な方法です。  
-同じにする必要がある複数の環境をセットアップしたり、共同作業をしている場合、インストール間の一貫性を確保する簡単な方法を提供します。  
+同一環境とする必要がある複数の環境をセットアップしたり、共同作業をしている場合、インストール間の一貫性を確保する簡単な方法を提供します。  
 複数の Grav サイトを開発している場合、 Docker を使用してセットアップを効率化することができます。
 
 [Apache](https://github.com/getgrav/docker-grav) （公式イメージ）や、 [Nginx](https://github.com/dsavell/docker-grav) 、 [Caddy](https://github.com/hughbris/grav-daddy) ウェブサーバーを使用する安定した Docker イメージが利用可能です。  
 検索すれば、試せるものがもっと見つかるでしょう。  
-どのイメージであっても、 Grav の `user` 、 `backups` 、 `logs` フォルダを保存する volume を作成してください。（ `backups` と `logs` は、そのデータを保持する必要がない場合はオプションです）。
+どのイメージであっても、 Grav の `user` 、 `backups` 、 `logs` フォルダを保存する volume を作成してください。（ `backups` と `logs` は、バックアップやログを保存する必要がない場合は無くても構いません）。
 
-<h3 id="install-on-cloudron">Cloudron でのインストール</h3>
+### Cloudron でのインストール{#install-on-cloudron}
 
 Cloudron は、あなたのサーバーでアプリケーションを実行し、最新状態に保ち、安全にしておくための完璧なソリューションです。  
 Cloudron では、Grav を数クリックだけでインストール可能です。  
@@ -113,15 +117,15 @@ Cloudron では、Grav を数クリックだけでインストール可能です
 
 パッケージのソースコードは、 [ここ](https://git.cloudron.io/cloudron/grav-app) で見つかります。
 
-<h3 id="install-through-linode-marketplace">Linode マーケットプレイスでのインストール</h3>
+### Linode マーケットプレイスでのインストール{#install-through-linode-marketplace}
 
 Linode サーバーを利用されているなら、 [Linode マーケットプレイスを使った、簡単でドキュメント化された方法](https://www.linode.com/docs/marketplace-docs/guides/grav/) があります。  
 これは、新しい Grav サイトを専用の Linode 仮想サーバー上に設定します。  
 仮想サーバーには、定期的に料金が発生します。
 
-<h2 id="webservers">Web サーバー</h2>
+## Web サーバー{#webservers}
 
-<h4 id="apache-iis-nginx">Apache/IIS/Nginx</h4>
+#### Apache/IIS/Nginx{#apache-iis-nginx}
 
 Grav を、 Apache や、 IIS 、 Nginx などの Web サーバーで使用することは、 Grav を [webroot](https://www.wordnik.com/words/webroot) 下のフォルダに展開するのと同じくらい単純です。  
 機能に必要なのは PHP 7.3.6 以上であることだけなので、サーバーインスタンスがその要件を満たしていることを確認してください。  
@@ -130,17 +134,17 @@ Grav の要件の詳細については、このガイドの [システム要件]
 もし webroot が、たとえば `~/public_html` であるとき、このフォルダに展開し、 `http://localhost` からサイトにつながります。  
 `~/public_html/grav` に展開したときは、 `http://localhost/grav` からつながります。 
 
-> [!Tip]  
+> [!Note]  
 > すべてのウェブサーバには設定が必要です。Grav は、デフォルトで .htaccess ファイルによって、 Apache サーバに適用されます。そして、 [デフォルトサーバ設定ファイル集](https://github.com/getgrav/grav/tree/master/webserver-configs) により、 `nginx` や、 `caddy server` 、 `iis` 、 `lighttpd` に適用されます。必要に応じて、これらのファイルを利用してください。
 
-<h4 id="running-grav-with-the-built-in-php-webserver">Grav を PHP のビルトインサーバーで動かす</h4>
+#### Grav を PHP のビルトインサーバーで動かす{#running-grav-with-the-built-in-php-webserver}
 
 PHP がインストールされていれば、 PHP のビルトインサーバを利用して、 Grav を、ターミナルやコマンドプロンプトから、簡単なコマンドで実行することができます。
 
 ターミナルやコマンドプロンプトで、 Grav をインストールした root フォルダへ移動し、 `bin/grav server` を実行するだけです。
 
-> [!Info]  
-> 技術的には PHP がインストールされていればよいのですが、 [Symfony CLIアプリケーション](https://symfony.com/download) をインストールすれば、サーバーは SSL 証明書を提供するので、 `https://` を使い、よりよいパフォーマンスのために PHP-FPM を利用できます。
+> [!Caution]  
+> 技術的には PHP がインストールされていればよいのですが、 [Symfony CLIアプリケーション](https://symfony.com/download) をインストールすれば、サーバーは SSL 証明書を提供するので、 `https://` を使えますし、よりよいパフォーマンスのために PHP-FPM を利用できます。
 
 このコマンドを実行すると、以下に示すような出力がされます：
 
@@ -179,23 +183,23 @@ https://127.0.0.1:8000
 https://127.0.0.1:8000
 ```
 
-> [!Warning]  
-> この方法は、迅速な開発には便利なツールですが、 Apache や Nginx のような web サーバでは **利用すべきではありません** 。
+> [!Tip]  
+> この方法は、迅速な開発には便利なツールですが、 Apache や Nginx のような専用 web サーバを使うべき場面（本番環境など）では、 PHP ビルトインサーバーやSymfony サーバーは **利用すべきではありません** 。
 
-<h2 id="successful-installation">インストール成功</h2>
+## インストール成功{#successful-installation}
 
 最初にロードされるとき、 Grav はいくつかのファイルをコンパイルします。  
-ブラウザを再表示させれば、表示速度が上がり、キャッシュされたものが得られます。
+ブラウザを再表示させれば、キャッシュが表示され、表示速度が向上します。
 
 ![Grav Installed](install.webp)
 
-> [!Info]  
-> 先ほどの例では、コマンドプロンプトが **$マーク** で表示されていました。これはプラットフォームにより見え方が異なることがあります。
+> [!Caution]  
+> 先ほどの例では、コマンドプロンプトが **$マーク** で表示されていました。これはプラットフォームごとに見た目が異なることがあります。
 
 標準では、 Grav は、あなたが始められるようなサンプルページを用意しています。  
 あなたのサイトはすでに完全に機能しており、あなたはそれを好きなように設定し、コンテンツを追加し、拡張し、カスタマイズできます。
 
-<h2 id="installation-setup-problems">インストールとセットアップの問題</h2>
+## インストールとセットアップの問題{#installation-setup-problems}
 
 最初のページがロードされるときに（もしくは、キャッシュがクリアされたあとに）、なにか問題が見つかった場合、エラーページが表示されるかもしれません：
 
@@ -203,10 +207,10 @@ https://127.0.0.1:8000
 
 具体的な問題については、 [Troubleshooting](../../11.troubleshooting/) をご参照ください。
 
-> [!Note]  
-> ファイルのパーミッションに関する問題であれば、 [Permissions に関するトラブルシューティングのドキュメント](../../11.troubleshooting/05.permissions/) をチェックしてください。また、さまざまなホスティング環境について解説している [ホスティングガイドのドキュメント](../../09.webservers-hosting/) も、見てください。
+> [!Warning]  
+> ファイルのパーミッションに関する問題であれば、 [Permissions に関するトラブルシューティングのドキュメント](../../11.troubleshooting/05.permissions/) をチェックしてください。また、さまざまなホスティング環境について解説している [ホスティングガイドのドキュメント](../../09.webservers-hosting/) も、ご覧ください。
 
-<h2 id="grav-updates">Grav のアップデート</h2>
+## Grav のアップデート{#grav-updates}
 
 サイトを最新に保つため、[Grav とプラグインのアップデート](../../01.basics/08.updates/) をお読みください。
 
