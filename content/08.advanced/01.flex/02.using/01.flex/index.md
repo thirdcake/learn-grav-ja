@@ -1,8 +1,10 @@
 ---
-title: 'Flex'
+title: Flex
 lastmod: '2025-09-06T00:00:00+09:00'
-description: twig や、プラグイン中の PHP で、 flex を取得する方法を解説します。
+description: 'twig や、プラグイン中の PHP で、 flex を取得する方法を解説します。'
 weight: 10
+params:
+    srcPath: /advanced/flex/using/flex
 ---
 > [!Tip]  
 > メソッドの完全な一覧は、 **Customizing Flex Objects** セクションで解説します。

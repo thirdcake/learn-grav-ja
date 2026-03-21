@@ -1,8 +1,10 @@
 ---
-title: '導入'
+title: 導入
 lastmod: '2025-08-11T00:00:00+09:00'
 description: 管理パネルプラグインの概要及び、最初のログイン時の注意点などを解説します。
 weight: 10
+params:
+    srcPath: /admin-panel/introduction
 ---
 [Grav](https://github.com/getgrav/grav) の **管理パネル** プラグインは、 web GUI（グラフィカル・ユーザ・インターフェイス）として、 Grav の設定を便利にし、ページの作成や更新を簡単にします。  
 このプラグインは、完全にオプション（使っても使わなくても良い）であり、使うことで Grav の内部処理が効率化されるものでもありません。  
@@ -11,7 +13,7 @@ weight: 10
 
 ![](admin-dashboard.png)
 
-<h3 id="features">機能</h3>
+### 機能{#features}
 
 * 自動のパスワードハッシュを伴うユーザーログイン
 * パスワードを忘れたときの機能
@@ -34,7 +36,7 @@ weight: 10
 * GPM による新しいプラグインやテーマのインストール
 * 管理ユーザーのアクセスを制御する ACL
 
-<h3 id="support">サポート</h3>
+### サポート{#support}
 
 管理パネルは、たくさんの機能のついた、とてもよくばりなプラグインです。  
 Grav サイトを構築するための、強力で柔軟な機能をたくさん提供します。  
@@ -44,7 +46,7 @@ Grav サイトを構築するための、強力で柔軟な機能をたくさん
 
 **バグ、機能、改善** などについては、 [管理パネルプラグインの GitHub リポジトリに issues を作成してください](https://github.com/getgrav/grav-plugin-admin) 。
 
-<h3 id="installation">インストール</h3>
+### インストール{#installation}
 
 まず、Grav を [最新バージョン](../../01.basics/08.updates/#which-version-do-i-have/) にしてください。  
 これにより、管理パネルプラグインが適切に動きます。  
@@ -66,7 +68,7 @@ bin/gpm install admin
 
 システムで GPM を使えない場合、[プラグインを手動でインストール](../09.faq/#manual-installation-of-admin) することもできます。
 
-<h3 id="creating-a-user">ユーザーを作成</h3>
+### ユーザーを作成{#creating-a-user}
 
 最新バージョンの管理パネルプラグインは、ブラウザでサイトを表示したときに、管理ユーザーアカウントを作成するプロンプトが表示されます。  
 適切な管理ユーザーを制御するために、このプロンプトを埋めなければいけません。
@@ -80,7 +82,7 @@ Grav がインストールされているフォルダ中の `user/accounts/` フ
 また、新しいユーザーの作成も、手動でもできますし、 CLI コマンドの `bin/plugin login newuser` からも可能です。  
 より詳しい情報は、 [管理パネルの FAQ](../09.faq/#adding-and-managing-users) で説明しています。
 
-<h3 id="username-and-password-complexity">ユーザー名とパスワードの複雑さ</h3>
+### ユーザー名とパスワードの複雑さ{#username-and-password-complexity}
 
 ユーザー名とパスワードの正規表現パターンは、 `system/config/system.yaml` で定義されています。
 
@@ -89,7 +91,7 @@ Grav がインストールされているフォルダ中の `user/accounts/` フ
 
 パスワードのデフォルトパターン（ `system.pwd_regex` ）は、最小8文字で、最低でも 1つ以上の数字、1つ以上の大文字、1つ以上の小文字が必要です。
 
-<h3 id="usage">利用方法</h3>
+### 利用方法{#usage}
 
 デフォルトでは、ブラウザから `http://yoursite.com/admin` にアクセスすると、管理パネルにアクセスできます。  
 YAML ファイルに設定した `ユーザー名` と `パスワード` で、シンプルにログインできます。

@@ -1,9 +1,11 @@
 ---
-title: 'レシピ集'
+title: レシピ集
 lastmod: '2025-05-04T00:00:00+09:00'
 description: この章では、よくある問題に対するレシピや、解決策を紹介します。ページの編集や、ご自身のアイディアの追加も、自由に行ってください。
-icon: /images/icons.svg#cookbook
+icon: '/images/icons.svg#cookbook'
 weight: 100
+params:
+    srcPath: /cookbook
 ---
 ### 第10章
 

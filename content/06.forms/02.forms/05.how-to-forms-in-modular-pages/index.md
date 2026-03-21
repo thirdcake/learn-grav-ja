@@ -1,10 +1,12 @@
 ---
-title: 'ハウツー：モジュラーページ中のフォーム'
+title: ハウツー：モジュラーページ中のフォーム
 lastmod: '2025-09-02T00:00:00+09:00'
 description: モジュラーページで使うフォームの書き方について解説します。
 weight: 50
+params:
+    srcPath: /forms/forms/how-to-forms-in-modular-pages
 ---
-<h2 id="using-forms-in-modular-pages">モジュラーページでのフォームの使用</h2>
+## モジュラーページでのフォームの使用{#using-forms-in-modular-pages}
 
 あなたが使っているテーマに、 `templates/forms/form.html.twig` ファイルが提供されておらず、フォームが利用できるようにセットアップされていないとしても、心配無用です、 Grav デフォルトテーマの Antimatter からテンプレートをコピーするだけで解決します。
 
@@ -79,7 +81,7 @@ form:
 たとえモジュラーページがホームページであっても、ページルーティングを使ってください。  
 たとえば： `form: action: /home`
 
-<h4 id="a-live-example">実行できる具体例</h4>
+#### 実行できる具体例{#a-live-example}
 
 Deliver スケルトンには、このチュートリアルを読みながら確認できる、モジュラーフォームページが用意されています。
 
@@ -87,7 +89,7 @@ Deliver スケルトンには、このチュートリアルを読みながら確
 
 [Page markdown file](https://github.com/getgrav/grav-skeleton-deliver-site/blob/develop/pages/07.contact/modular_alt.md)
 
-<h4 id="troubleshooting-forms-in-modular-pages">モジュラーページのフォームのトラブルシューティング</h4>
+#### モジュラーページのフォームのトラブルシューティング{#troubleshooting-forms-in-modular-pages}
 
 フォームのトラブルシューティングする最善の方法は、まず根本に戻って、カスタマイズを1つずつ追加し、何が問題になっているのかを確認することです。
 

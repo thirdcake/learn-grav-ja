@@ -1,10 +1,12 @@
 ---
-title: 'リファレンス：ブループリントのform.fields'
+title: リファレンス：ブループリントのform.fields
 lastmod: '2025-08-26T00:00:00+09:00'
-description: Grav の管理パネルで利用できるフォーム入力欄を、ブループリントファイルで定義する方法を解説します。
+description: 'Grav の管理パネルで利用できるフォーム入力欄を、ブループリントファイルで定義する方法を解説します。'
 weight: 10
+params:
+    srcPath: /forms/blueprints/fields-available
 ---
-<h2 id="available-form-fields-for-use-in-the-admin">管理プラグインで使えるform.fields</h2>
+## 管理プラグインで使えるform.fields{#available-form-fields-for-use-in-the-admin}
 
 管理パネルでは、さまざまな入力欄を作れます。  
 このドキュメントでは、それぞれの入力欄のプロパティの完全なリファレンスと、使用例を提供します。
@@ -12,7 +14,7 @@ weight: 10
 管理パネルでは、以下に一覧表示している、 form.fields に加えて、フロントエンドで利用できる form.fields もすべて利用できます。  
 [フロントエンドのフォーム入力欄のリファレンス](../../02.forms/02.fields-available/) に解説されています。
 
-<h3 id="special-form-fields-available-exclusively-in-the-admin">管理プラグインだけで利用できる特別なフォームフィールド</h3>
+### 管理プラグインだけで利用できる特別なフォームフィールド{#special-form-fields-available-exclusively-in-the-admin}
 
 | フィールド | 説明  |
 | :----- | :----- |
@@ -52,7 +54,7 @@ weight: 10
 | **UserInfo**  |  |
 | **Xss** |  |
 
-<h3 id="common-fields-attributes">一般的な属性フィールド</h3>
+### 一般的な属性フィールド{#common-fields-attributes}
 
 このリストの属性は、基本的にすべてのフィールドで利用可能です。  
 それぞれのフィールドは、一般的な属性を共有しますが、特定のフィールドでは、適用されないこともあります。  
@@ -83,7 +85,7 @@ weight: 10
 | `validate.message`  | バリデーションが失敗したときに表示されるメッセージを設定します |
 | `validate.type`     | バリデーション中に使われるフィールドタイプを設定します |
 
-<h3 id="know-more-about-fields">フィールドについてより詳しく知る</h3>
+### フィールドについてより詳しく知る{#know-more-about-fields}
 
 どのようにソースコードからフィールドがビルドされるかは、ここで読めます： 
 [Form Plugin によるフィールドの追加](https://github.com/getgrav/grav-plugin-form/tree/master/templates/forms) 及び [管理パネルでのみ利用可能なフィールド](https://github.com/getgrav/grav-plugin-admin/tree/master/themes/grav/templates/forms) 。

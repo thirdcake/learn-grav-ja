@@ -1,8 +1,10 @@
 ---
 title: 'Flex オブジェクトを使う'
 lastmod: '2025-09-06T00:00:00+09:00'
-description: Flex Objects をサイトに表示する方法について、ページでの設定方法や、レイアウトファイルの配置方法など、使い方の概要を解説します。
+description: 'Flex Objects をサイトに表示する方法について、ページでの設定方法や、レイアウトファイルの配置方法など、使い方の概要を解説します。'
 weight: 20
+params:
+    srcPath: /advanced/flex/using
 ---
 **Flex オブジェクト** は、使いやすく設計されています。  
 ほとんど Twig テンプレートだけで、コレクションやグループをページへ表示できます。
@@ -10,7 +12,7 @@ weight: 20
 > [!Tip]  
 > Flex ディレクトリを有効化し、表示するためには、 [ディレクトリの有効化](../01.administration/01.introduction/) をお読みください。
 
-<h2 id="using-flex-objects-page-type">flex-objects ページタイプの使用</h2>
+## flex-objects ページタイプの使用{#using-flex-objects-page-type}
 
 `directories/flex-objects.md` という、ひとつのページで、複数の Flex ディレクトリを表示する方法:
 
@@ -98,7 +100,7 @@ https://www.domain.com/contacts/id:ki2ts4cbivggmtlj
 > [!Tip]  
 > `flex` 内で、独自のパラメータを渡すこともでき、自身のコレクションのテンプレートファイルや、オブジェクトテンプレートファイルで利用できます。
 
-<h2 id="rendering-collections-and-objects">コレクションとオブジェクトのレンダリング</h2>
+## コレクションとオブジェクトのレンダリング{#rendering-collections-and-objects}
 
 コレクションとオブジェクトはどちらも、 HTML での出力に対応しています。  
 出力は、 レイアウトとコンテキストという、2つのパラメータでカスタマイズされます。  
@@ -114,7 +116,7 @@ https://www.domain.com/contacts/id:ki2ts4cbivggmtlj
 
 詳しくは、ドキュメントをお読みください： [コレクションのレンダリング](./03.collection/#render) と、 [オブジェクトのレンダリング](./04.object/#render)
 
-<h2 id="templating-basics">テンプレートの基本</h2>
+## テンプレートの基本{#templating-basics}
 
 Flex テンプレートは、 `templates/flex` フォルダにあります：
 
@@ -132,7 +134,7 @@ templates/
 中のファイルはレイアウトで、ファイル名に基づいて名前が付けられています。  
 上記の例では、コレクションとオブジェクトの両方に対する `default` レイアウトがあります。
 
-<h3 id="collection-template">コレクションのテンプレート</h3>
+### コレクションのテンプレート{#collection-template}
 
 コレクションテンプレートの `flex/contacts/collection/default.html.twig` は、コレクション内のすべてのオブジェクトのレンダリングに対応します。  
 レンダリング出力は、デフォルトでキャッシュされます。  
@@ -172,7 +174,7 @@ templates/
 > [!Tip]  
 > レンダリングされた HTML に、動的コンテンツを含む場合、 Twig テンプレートで `{% do block.disableCache() %}` を実行することにより、キャッシュを無効にすることができます。
 
-<h3 id="object-template">オブジェクトのテンプレート</h3>
+### オブジェクトのテンプレート{#object-template}
 
 オブジェクトテンプレートの `flex/contacts/object/default.html.twig` は、1つのオブジェクトのレンダリングに対応します。  
 レンダリング出力は、デフォルトでキャッシュされます。  
@@ -204,7 +206,7 @@ templates/
 > [!Tip]  
 > レンダリングされた HTML に、動的コンテンツを含む場合、 Twig テンプレートで `{% do block.disableCache() %}` を実行することにより、キャッシュを無効にすることができます。
 
-<h3 id="custom-layouts">カスタムレイアウト</h3>
+### カスタムレイアウト{#custom-layouts}
 
 カスタムレイアウトを使用すると、コレクションとオブジェクトの両方に、無限に異なる見た目を作成できます。
 

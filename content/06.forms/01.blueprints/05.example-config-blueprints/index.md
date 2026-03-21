@@ -3,6 +3,8 @@ title: '具体例：config 設定のブループリント'
 lastmod: '2025-08-28T00:00:00+09:00'
 description: 管理パネルプラグインのサイト設定のフォーム内容をブループリントで設定する方法を解説します。
 weight: 50
+params:
+    srcPath: /forms/blueprints/example-config-blueprints
 ---
 サイトコンテンツ内に表示する設定は、site.yaml ファイル設定で追加するのが一般的です。
 

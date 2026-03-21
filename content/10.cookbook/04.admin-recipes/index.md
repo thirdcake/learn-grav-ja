@@ -1,17 +1,19 @@
 ---
-title: '管理パネルレシピ'
+title: 管理パネルレシピ
 lastmod: '2025-05-17T00:00:00+09:00'
 weight: 40
+params:
+    srcPath: /cookbook/admin-recipes
 ---
 このページでは、 Grav 管理パネルの修正に関連するさまざまな問題とその解決策を紹介します。
 
-<h2 id="add-a-custom-yaml-file">カスタム YAML ファイルを追加する</h2>
+## カスタム YAML ファイルを追加する{#add-a-custom-yaml-file}
 
-<h4 id="problem">問題：</h4>
+#### 問題：{#problem}
 
 `system.yaml` や `site.yaml` のようなサイト全体でユーザーが編集できる company フィールドグループを、専用のファイルで提供したい。
 
-<h4 id="solution">解決策：</h4>
+#### 解決策：{#solution}
 
 [Basics / Configuration](../../01.basics/05.grav-configuration/#other-configuration-settings-and-files) セクションで概要を説明したとおり、最初のステップは、新しい YAML データファイルを提供することです。たとえば： `user/config/details.yaml` ：
 
@@ -95,15 +97,15 @@ form:
 
 `array` フィールドタイプを使うことで、必要なぶんだけ任意の email フィールドや phone フィールドが追加できます。
 
-<h2 id="add-a-custom-page-creation-model">カスタムのページ作成モーダルを追加する</h2>
+## カスタムのページ作成モーダルを追加する{#add-a-custom-page-creation-model}
 
-<h4 id="problem-1">問題：</h4>
+#### 問題：{#problem-1}
 
 新しいブログ投稿やギャラリー画像ページを作成する簡単な方法を提供したい。
 この例では、ブログ投稿について説明します。
 ブログを作成し、ブログ投稿を現在のフォルダで、ボタンクリックだけで簡単に作成したいとします。
 
-<h4 id="solution-1">解決策：</h4>
+#### 解決策：{#solution-1}
 
 まずはじめに、モーダルで使うフォームを作成します。新しいファイルを作成してください： `user/blueprints/admin/pages/new_post.yaml`
 
@@ -167,14 +169,14 @@ add_modals:
 - `link_classes` - link 要素に追加される class
 - `modal_classes` - modal 要素に追加される class
 
-<h2 id="add-a-custom-select-field">カスタムの select フィールドを追加する</h2>
+## カスタムの select フィールドを追加する{#add-a-custom-select-field}
 
-<h4 id="problem-2">問題：</h4>
+#### 問題：{#problem-2}
 
 値の多いリストで select フィールドを追加したい。
 この例では、国のリストを表示したいものとします。
 
-<h4 id="solution-2">解決策：</h4>
+#### 解決策：{#solution-2}
 
 静的な関数を作り、ブループリント内から配列を呼び出すことができます。この関数は、テーマの PHP ファイルにも、カスタムプラグインの PHP ファイルにも書くことができます。
 

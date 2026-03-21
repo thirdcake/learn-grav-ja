@@ -1,8 +1,10 @@
 ---
-title: 'モジュラーページ'
+title: モジュラーページ
 lastmod: '2025-08-02T00:00:00+09:00'
-description: Grav には、マークダウンのシンプルなデータを組み合わせて、複雑なページを構築するモジュラーページという概念があります。
+description: 'Grav には、マークダウンのシンプルなデータを組み合わせて、複雑なページを構築するモジュラーページという概念があります。'
 weight: 90
+params:
+    srcPath: /content/modular
 ---
 **モジュラーページ** の概念は、最初のうちは多少トリッキーに映るかもしれません。  
 しかし実際に使ってみると、その便利さを理解するでしょう。  
@@ -10,7 +12,7 @@ weight: 90
 これにより、複雑な構造のページも **LEGO ブロック** のように作れます。  
 LEGO が嫌いな人なんていないでしょう?!
 
-<h2 id="what-are-modular-pages-and-what-are-they-not">モジュラーページとは何か？ そして何でないか？</h2>
+## モジュラーページとは何か？ そして何でないか？{#what-are-modular-pages-and-what-are-they-not}
 
 Grav では、 [ページ](../01.content-pages) という概念を幅広く使っており、 web サイトで考えうることのほとんど全てを網羅しうるものです。  
 モジュラーページは、このページ概念のひとつですが、通常ページとは違うものです。  
@@ -29,7 +31,7 @@ Gulliver's Travels も、The Hobbit も、 `pages/books/_gullivers-travels` や 
 よって、モジュラーページは、直接的には通常ページと互換性がありません。  
 モジュラーページ独自の構造を持ちます。
 
-<h2 id="example-folder-structure">フォルダ構造の例</h2>
+## フォルダ構造の例{#example-folder-structure}
 
 **1ページスケルトン** を例に使い、モジュラーページがどのように働くのかを詳しく説明します。
 
@@ -71,7 +73,7 @@ Gulliver's Travels も、The Hobbit も、 `pages/books/_gullivers-travels` や 
 
 ![Listing Page](modular-explainer-1.jpg)
 
-<h2 id="setting-up-the-primary-page">メインページのセットアップ</h2>
+## メインページのセットアップ{#setting-up-the-primary-page}
 
 上記のとおり、それぞれのセクションは、異なるモジュールフォルダからコンテンツを集めてきたものです。  
 どのモジュールフォルダをどんな順番で利用するかは、モジュールたちの親フォルダにある、メインのマークダウンファイルに書かれます。  
@@ -106,7 +108,7 @@ content:
 > [!訳注]  
 > 上記の例では、`@self.modular` を使っていますが、 [collectionsのモジュール部分](../03.collections/#atself-modules-modules-of-the-current-page) によると現在非推奨であり、`@self.modules` を使ったほうが良いようです。
 
-<h2 id="modules">モジュール</h2>
+## モジュール{#modules}
 
 ![Listing Page](modular-explainer-3.jpg)
 

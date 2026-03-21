@@ -1,8 +1,10 @@
 ---
 title: 'Flex コレクション'
 lastmod: '2025-09-11T00:00:00+09:00'
-description: twig や、プラグイン中の PHP で使える、 flex collection のメソッドを解説します。
+description: 'twig や、プラグイン中の PHP で使える、 flex collection のメソッドを解説します。'
 weight: 30
+params:
+    srcPath: /advanced/flex/using/collection
 ---
 **Flex コレクション** とは、**flex オブジェクトの順序付きマップ** であり、リストのように使うこともできます。
 
@@ -12,7 +14,7 @@ flex コレクションにより、いくつかの便利なメソッドが使え
 > [!Tip]  
 > Flex コレクションは、 [**Doctrine Collections**](https://www.doctrine-project.org/projects/doctrine-collections/en/1.6/index.html) を拡張しています。
 
-<h2 id="render-collection">コレクションのレンダリング</h2>
+## コレクションのレンダリング{#render-collection}
 
 ### render()
 
@@ -60,7 +62,7 @@ if ($collection) {
 }
 ```
 
-<h2 id="collection-manipulation">コレクションの操作</h2>
+## コレクションの操作{#collection-manipulation}
 
 これらのメソッドはすべて、 flex コレクションの **修正されたコピー** を返します。  
 オリジナルの  flex コレクションは、変更されないままです。
@@ -396,7 +398,7 @@ if ($collection) {
 }
 ```
 
-<h2 id="iterate-through-collection">コレクションの繰り返し</h2>
+## コレクションの繰り返し{#iterate-through-collection}
 
 **Collections** は、繰り返し処理ができます。
 
@@ -617,9 +619,9 @@ if ($collection) {
 }
 ```
 
-<h2 id="get-object-key">オブジェクト / キーの取得</h2>
+## オブジェクト / キーの取得{#get-object-key}
 
-<h3 id="array-access">配列のようにアクセス</h3>
+### 配列のようにアクセス{#array-access}
 
 **Collections** は、連想配列型や map 型のようにアクセス可能です。
 
@@ -703,7 +705,7 @@ if ($collection) {
 }
 ```
 
-<h2 id="collection-as-array">配列のようなコレクション</h2>
+## 配列のようなコレクション{#collection-as-array}
 
 ### getKeys()
 
@@ -966,7 +968,7 @@ if ($collection) {
 }
 ```
 
-<h2 id="adding-and-removing-objects">オブジェクトを追加・削除</h2>
+## オブジェクトを追加・削除{#adding-and-removing-objects}
 
 ### add()
 
@@ -999,7 +1001,7 @@ if ($collection) {
 
 `clear()` コレクションをクリアし、すべての要素を削除する。
 
-<h2 id="tests">テスト</h2>
+## テスト{#tests}
 
 ### containsKey()
 
@@ -1045,7 +1047,7 @@ if ($collection) {
 返り値：
 - `int` コレクションにあるオブジェクトの数
 
-<h2 id="bulk-actions-for-objects">オブジェクトへの一斉アクション</h2>
+## オブジェクトへの一斉アクション{#bulk-actions-for-objects}
 
 ### hasProperty()
 
@@ -1156,7 +1158,7 @@ if ($collection) {
 返り値：
 - **Collection** (`object`) そのコレクション。ただし、新しいキーでインデックスされています。
 
-<h2 id="closure-tests-php-only">クロージャーによるテスト( PHP のみ)</h2>
+## クロージャーによるテスト( PHP のみ){#closure-tests-php-only}
 
 ### exists()
 
@@ -1178,7 +1180,7 @@ if ($collection) {
 返り値：
 - `bool` コールバック関数がすべてのオブジェクトで true を返す場合に true。
 
-<h2 id="closure-filtering-php-only">クロージャーによるフィルタリング（PHPのみ）</h2>
+## クロージャーによるフィルタリング（PHPのみ）{#closure-filtering-php-only}
 
 ### filter()
 

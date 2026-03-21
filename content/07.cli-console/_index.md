@@ -1,9 +1,11 @@
 ---
 title: 'CLI コンソール'
 lastmod: '2025-09-03T00:00:00+09:00'
-description: Grav は、開発者にとって使いやすく、たくさんの便利なコマンドラインのツールや機能を提供します。これにより、可能な限りシンプルに、スクリプト操作で利用しやすいものとなっています。
-icon: /images/icons.svg#cli
+description: 'Grav は、開発者にとって使いやすく、たくさんの便利なコマンドラインのツールや機能を提供します。これにより、可能な限りシンプルに、スクリプト操作で利用しやすいものとなっています。'
+icon: '/images/icons.svg#cli'
 weight: 70
+params:
+    srcPath: /cli-console
 ---
 ### 第7章
 

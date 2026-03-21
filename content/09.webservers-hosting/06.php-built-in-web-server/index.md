@@ -1,9 +1,10 @@
 ---
 title: 'PHP ビルトインサーバー'
-lastmod: 2026-03-14T00:00:00+09:00
+lastmod: 1773414000
 weight: 60
+params:
+    srcPath: /webservers-hosting/php-built-in-web-server
 ---
-
 ## PHPのビルトインサーバーでテストホスティング {#test-hosting-with-the-php-built-in-web-server}
 
 PHP コマンドライン（CLI SAPI） には、組み込みで web サーバーが付属しており、Grav サイトの簡易的なテストやデモに便利です。これは、完全な web サーバー機能では **ありません** ので、公開されるネットワークでは使わないでください。

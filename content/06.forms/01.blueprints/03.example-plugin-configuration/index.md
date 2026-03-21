@@ -1,8 +1,10 @@
 ---
-title: '具体例：プラグイン設定'
+title: 具体例：プラグイン設定
 lastmod: '2025-08-28T00:00:00+09:00'
-description: Grav のプラグインで利用されるブループリントの例を示し、特に管理パネルでの設定オプション部分について、概要を解説します。
+description: 'Grav のプラグインで利用されるブループリントの例を示し、特に管理パネルでの設定オプション部分について、概要を解説します。'
 weight: 30
+params:
+    srcPath: /forms/blueprints/example-plugin-configuration
 ---
 [前回の例](../02.example-plugin-blueprint/) では、プラグインやテーマでのブループリントの定義方法を説明しました。
 

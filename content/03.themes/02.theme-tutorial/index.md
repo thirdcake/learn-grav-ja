@@ -1,8 +1,10 @@
 ---
-title: 'テーマのチュートリアル'
+title: テーマのチュートリアル
 lastmod: '2025-08-03T00:00:00+09:00'
-description: 実際にシンプルなテーマを作りながら、 Grav でのテーマの作成・カスタマイズ方法を解説します。
+description: '実際にシンプルなテーマを作りながら、 Grav でのテーマの作成・カスタマイズ方法を解説します。'
 weight: 20
+params:
+    srcPath: /themes/theme-tutorial
 ---
 新しいことを学ぶときに、具体例を使って、自分独自のものを作ってみることが最良の方法であるときがあります。  
 テーマづくりについて、この方法でやってみましょう。
@@ -32,7 +34,7 @@ Pure にはいくつかのモジュールがあり、それぞれ独立して使
 > [!訳注]  
 > 上記のブログ記事は、 Grav 1.5, 1.6 時代のものなので、これから始める方には、とくに関係なさそうでした。
 
-<h2 id="step-1-install-devtools-plugin">ステップ1: DevTools プラグインのインストール</h2>
+## ステップ1: DevTools プラグインのインストール{#step-1-install-devtools-plugin}
 
 > [!Info]  
 > 以前のバージョンのチュートリアルでは、あらかじめベーステーマを作る必要がありました。この手順はすべて、新しい **DevTools プラグイン** のおかげで、やらなくて済むようになりました。
@@ -40,7 +42,7 @@ Pure にはいくつかのモジュールがあり、それぞれ独立して使
 新しいテーマを作る最初のステップは、**DevTools プラグインをインストールする** ことです。  
 2つの方法でインストールできます。
 
-<h4 id="install-via-cli-gpm">CLI GPMによるインストール</h4>
+#### CLI GPMによるインストール{#install-via-cli-gpm}
 
 * コマンドラインを、 Grav をインストールしたルートディレクトリへ移動させてください。
 
@@ -48,13 +50,13 @@ Pure にはいくつかのモジュールがあり、それぞれ独立して使
 bin/gpm install devtools
 ```
 
-<h4 id="install-via-admin-plugin">管理パネルからのインストール</h4>
+#### 管理パネルからのインストール{#install-via-admin-plugin}
 
 * ログイン後、サイドバーから **Plugins** セクションへ移動します。
 * 右上の **+ Add** ボタンをクリックします。
 * リストから、 **DevTools** を探し、 **+ Install** ボタンをクリックします。
 
-<h2 id="step-2-create-base-theme">ステップ2: ベーステーマの作成</h2>
+## ステップ2: ベーステーマの作成{#step-2-create-base-theme}
 
 このステップのために、 [コマンドライン](../../07.cli-console/01.command-line-intro) を使う必要があります。  
 というのも、 DevTools が提供するいくつかの CLI コマンドによって、新しいテーマづくりがかなり簡単になるからです！
@@ -104,7 +106,7 @@ pages:
 
 ブラウザで、サイトをリロードすると、テーマが変わっていることがわかるはずです。
 
-<h2 id="step-3-theme-basics">ステップ3: テーマの基本</h2>
+## ステップ3: テーマの基本{#step-3-theme-basics}
 
 さて、新しいテーマができました。  
 これは、修正したり開発したりできます。  
@@ -137,7 +139,7 @@ pages:
 
 これは、サンプルの構造ですが、いくつかの要件があります：
 
-<h3 id="required-items-to-function">機能するのに必要なアイテム</h3>
+### 機能するのに必要なアイテム{#required-items-to-function}
 
 次のアイテムは、非常に重要です。  
 これらをあなたのテーマに含めない限り、確実に機能しないでしょう。
@@ -150,7 +152,7 @@ pages:
 > [!訳注]  
 > 厳密に言えば、[前の章のテーマの基本](../01.theme-basics/) にあったとおり、`templates/` フォルダさえあれば、動くことは動きます。
 
-<h3 id="required-items-for-release">リリースに必要なアイテム</h3>
+### リリースに必要なアイテム{#required-items-for-release}
 
 次のアイテムは、 GMP を通してテーマをリリースしたい場合に必要なアイテムです。
 
@@ -160,7 +162,7 @@ pages:
 * **`screenshot.jpg`** - 1009px x 1009px サイズのテーマのスクリーンショット。
 * **`thumbnail.jpg`** - 300px x 300px サイズのテーマのスクリーンショット。
 
-<h2 id="step-4-base-template">ステップ4: ベーステンプレート</h2>
+## ステップ4: ベーステンプレート{#step-4-base-template}
 
 [前の章](../01.theme-basics) に見たとおり、 Grav のコンテンツファイルは、特定のファイル名を持ちます。たとえば、 `default.md` のように。  
 これにより、 Grav は、 `default.html.twig` というレンダリング用の Twig テンプレートを探します。  
@@ -278,7 +280,7 @@ Twig の [Extends](https://twig.symfony.com/doc/1.x/tags/extends.html) タグを
 > [!訳注]  
 > ひとつひとつの変数を XSS 対策するのは、のちのち本当に面倒なことになるので、`autoescape` は `true` でお願いします。
 
-<h2 id="step-5-breaking-it-down">ステップ5: 分解しながら理解する</h2>
+## ステップ5: 分解しながら理解する{#step-5-breaking-it-down}
 
 何が起こっているのか、より深く理解するために、`base.html.twig` ファイルのコードを読み通してください。  
 いくつかの注目すべき重要な点があります：
@@ -319,7 +321,7 @@ Twig の [Extends](https://twig.symfony.com/doc/1.x/tags/extends.html) タグを
 
 1. コンテンツブロックと同様、`{% block bottom %}{% endblock %}` ブロックは、テンプレートがカスタムの JavaScript の起動コードや解析コードを追記するためのものです。この例では、`bottom` アセットグループに追加されているすべての JavaScript を出力しています。詳しい内容は、[アセット管理](../asset-manager) のドキュメントをお読みください。
 
-<h2 id="step-6-theme-css">ステップ6: テーマのCSS</h2>
+## ステップ6: テーマのCSS{#step-6-theme-css}
 
 `partials/base.html.twig` ファイルは、アセット管理の `do assets.add('theme://css/custom.css', 98)` から、カスタムの CSS を参照していることにお気づきかもしれません。  
 このファイルには、 Pure.css フレームワークで提供されない、不足した CSS をカスタムして書き込みます。  
@@ -510,7 +512,7 @@ blockquote {
 このファイルは、必要に応じて、気楽に編集してください。  
 もしくは、別の CSS ファイルを追加してもかまいません（`head` ブロックに、`custom.css` への参照を付け加えるだけです）。
 
-<h2 id="step-7-testing">ステップ7: テスト</h2>
+## ステップ7: テスト{#step-7-testing}
 
 このテーマが実際に動作するか確認するために、ブラウザを開いて、Gravのサイトを表示させてみてください。  
 以下のような表示になるはずです：

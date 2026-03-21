@@ -1,8 +1,10 @@
 ---
-title: 'カスタム関数'
+title: カスタム関数
 lastmod: '2026-01-03T00:00:00+09:00'
-description: Grav で独自に追加した Twig のカスタム関数について解説します。
+description: 'Grav で独自に追加した Twig のカスタム関数について解説します。'
 weight: 30
+params:
+    srcPath: /themes/twig-tags-filters-functions/functions
 ---
 Twig 関数は、カッコ内にパラメータを渡すことで、直接呼び出せます。
 
@@ -22,7 +24,7 @@ Twig:
 （配列型にキャストされた値）
 ```
 
-<h3 id="array-diff">array_diff</h3>
+### array_diff{#array-diff}
 
 配列の差分を計算します。
 
@@ -38,7 +40,7 @@ Twig:
 （array1 に含まれ、それ以降の array には含まれないものを含む配列）
 ```
 
-<h3 id="array-key-value">array_key_value</h3>
+### array_key_value{#array-key-value}
 
 キー/バリューのペアを配列に追加します。
 
@@ -59,7 +61,7 @@ Twig:
 ]
 ```
 
-<h3 id="array-key-exists">array_key_exists</h3>
+### array_key_exists{#array-key-exists}
 
 PHP の `array_key_exists` 関数と同じです。  
 配列にキーが存在するかどうかを判断します
@@ -77,7 +79,7 @@ Twig:
 true
 ```
 
-<h3 id="array-intersect">array_intersect</h3>
+### array_intersect{#array-intersect}
 
 2つの配列もしくは Grav collections の間の共通部分を調べます
 
@@ -97,7 +99,7 @@ Twig:
 ]
 ```
 
-<h3 id="array-unique">array_unique</h3>
+### array_unique{#array-unique}
 
 PHP の `array_unique` 関数と同じです。配列から重複を除きます。
 
@@ -130,7 +132,7 @@ Twig:
 true/false （ユーザーのパーミッション次第）
 ```
 
-<h3 id="body-class">body_class</h3>
+### body_class{#body-class}
 
 クラス名の配列を渡してください。  
 `body_classes` に設定されていなければ、現在のテーマ設定にセットされているか調べます。
@@ -200,7 +202,7 @@ Twig:
 en
 ```
 
-<h3 id="evaluate-twig">evaluate_twig</h3>
+### evaluate_twig{#evaluate-twig}
 
 evaluate に似ていますが、 Twig として評価した後に処理します。
 
@@ -240,7 +242,7 @@ Twig:
 これはカメラに設定されている値で、たとえば "40/10" です。  
 いつでも `{{ dump(exif) }}` を使うことで、デバッガ利用できるデータはすべて見られます。
 
-<h3 id="get-cookie">get_cookie</h3>
+### get_cookie{#get-cookie}
 
 cookie を取得します：
 
@@ -256,7 +258,7 @@ Twig:
 （cookie の値）
 ```
 
-<h3 id="get-type">get_type</h3>
+### get_type{#get-type}
 
 変数の型を取得します：
 
@@ -288,7 +290,7 @@ Twig:
 <script src="https://gist.github.com/bc448ff158df4bc56217.js"></script>
 ```
 
-<h3 id="header-var">header_var</h3>
+### header_var{#header-var}
 
 `header_var($variable, $pages = null)`
 
@@ -323,7 +325,7 @@ Twig:
 Home
 ```
 
-<h3 id="http-response-code">http_response_code</h3>
+### http_response_code{#http-response-code}
 
 レスポンスコードを渡すと、そのステータスコードを返します。  
 渡さない場合、現在のステータスコードが返ります。  
@@ -357,7 +359,7 @@ Twig:
 true/false
 ```
 
-<h3 id="json-decode">json_decode</h3>
+### json_decode{#json-decode}
 
 JSON がシンプルにデコードできます：
 
@@ -376,7 +378,7 @@ Twig:
 ]
 ```
 
-<h3 id="media-directory">media_directory</h3>
+### media_directory{#media-directory}
 
 任意のディレクトリから、メディアオブジェクトを返します。  
 一度取得すれば、ページと似た方法で画像を操作できます。
@@ -441,7 +443,7 @@ Twig:
 1 month ago
 ```
 
-<h3 id="nonce-field">nonce_field</h3>
+### nonce_field{#nonce-field}
 
 `action` を渡すことで、フォームのセキュリティのための nonce フィールドを生成します：
 
@@ -457,7 +459,7 @@ Twig:
 <input type="hidden" name="nonce" value="abc123def456">
 ```
 
-<h3 id="of-type">of_type</h3>
+### of_type{#of-type}
 
 変数の型をチェックします：
 
@@ -495,7 +497,7 @@ Twig:
 ]
 ```
 
-<h3 id="print-r">print_r</h3>
+### print_r{#print-r}
 
 読みやすい書式で、変数を表示します
 
@@ -514,7 +516,7 @@ Twig:
 ]
 ```
 
-<h3 id="random-string">random_string</h3>
+### random_string{#random-string}
 
 渡された文字数分の、ランダムな文字列を生成します。  
 ユニークな ID を作りたいときに便利です。
@@ -531,7 +533,7 @@ Twig:
 aBc123XyZ9
 ```
 
-<h3 id="unique-id">unique_id</h3>
+### unique_id{#unique-id}
 
 接頭辞や接尾辞付きで、文字数分のランダムな文字列を作ります。  
 PHP 組み込みの `uniqid` 関数や、`random_string` カスタム関数と違い、この文字列は真にユニークで、コンフリクトしません。
@@ -569,7 +571,7 @@ Twig:
 [25, 75, 125, 175, 225, 275]
 ```
 
-<h3 id="read-file">read_file</h3>
+### read_file{#read-file}
 
 ファイルのパスをもとに、ファイルを読み込み、それを出力します。
 
@@ -586,7 +588,7 @@ Twig:
 <p>This <strong>admin plugin</strong> for Grav...</p>
 ```
 
-<h3 id="redirect-me">redirect_me</h3>
+### redirect_me{#redirect-me}
 
 選んだURLにリダイレクトします
 
@@ -602,7 +604,7 @@ Twig:
 （304 ステータスで http://google.com にリダイレクトします）
 ```
 
-<h3 id="regex-filter">regex_filter</h3>
+### regex_filter{#regex-filter}
 
 PHP の `preg_grep` 関数のように、正規表現パターンに合う配列を返します
 
@@ -618,7 +620,7 @@ Twig:
 ['pasta', 'potatoes']
 ```
 
-<h3 id="regex-replace">regex_replace</h3>
+### regex_replace{#regex-replace}
 
 PHP の [`preg_replace`](https://www.php.net/manual/ja/function.preg-replace.php) 関数のように、複雑な正規表現でテキストを書き換えます：
 
@@ -634,7 +636,7 @@ Twig:
 The slow black bear jumps over the lazy turtle.
 ```
 
-<h3 id="regex-match">regex_match</h3>
+### regex_match{#regex-match}
 
 PHP の [`preg_match`](https://www.php.net/manual/ja/function.preg-match.php) 関数のように、複雑な正規表現にマッチするか調べられます。
 
@@ -653,7 +655,7 @@ Twig:
 ]
 ```
 
-<h3 id="regex-split">regex_split</h3>
+### regex_split{#regex-split}
 
 PHP の [`preg_split`](https://www.php.net/manual/ja/function.preg-split.php) 関数のように、正規表現で文字列を分割できます。
 
@@ -706,7 +708,7 @@ Twig:
 {"test":"x"}
 ```
 
-<h3 id="svg-image">svg_image</h3>
+### svg_image{#svg-image}
 
 必要なクラスを付けて、 SVG 画像を返します。  
 ページに直接コードを書くことなく、インラインの SVG の利益が得られます。  
@@ -730,7 +732,7 @@ Twig:
 <svg class="my-class-here mb-10" viewBox="0 0 24 24">...</svg>
 ```
 
-<h3 id="theme-var">theme_var</h3>
+### theme_var{#theme-var}
 
 `theme_var($variable, $default = null, $page = null)`
 

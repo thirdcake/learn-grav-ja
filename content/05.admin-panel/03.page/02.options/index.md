@@ -3,6 +3,8 @@ title: 'エディタ（Options タブ）'
 lastmod: '2025-08-19T00:00:00+09:00'
 description: 管理パネルのページ画面のオプションタブの使い方を解説します。
 weight: 20
+params:
+    srcPath: /admin-panel/page/options
 ---
 ![Admin Page Editor](page-options.png)
 

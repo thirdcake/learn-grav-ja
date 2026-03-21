@@ -1,8 +1,10 @@
 ---
 title: 'Grav コマンド'
 lastmod: '2025-09-03T00:00:00+09:00'
-description: ログ表示やスケジューラなど、サイト全体に関するコマンドを集めた bin/grav コマンドを解説します。
+description: 'ログ表示やスケジューラなど、サイト全体に関するコマンドを集めた bin/grav コマンドを解説します。'
 weight: 20
+params:
+    srcPath: /cli-console/grav-cli
 ---
 Grav には、組み込みで `bin/grav` というコマンドラインインターフェース（CLI） があります。  
 繰り返しのタスク実行時に、 CLI はとても便利です。  
@@ -300,7 +302,7 @@ Scanning 11 pages [===================================================] 100% < 1
 [OK] Security Scan complete: No issues found...
 ```
 
-<h4 id="php-cgi-fcgi-imformation">PHP CGI-FCGI 情報</h4>
+#### PHP CGI-FCGI 情報{#php-cgi-fcgi-imformation}
 
 コマンドラインで あなたのサーバーが `cgi-fcgi` で動いているかどうかを知るには、次の入力をしてください：
 

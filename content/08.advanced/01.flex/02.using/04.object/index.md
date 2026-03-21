@@ -1,8 +1,10 @@
 ---
 title: 'Flex オブジェクト'
 lastmod: '2025-10-15T00:00:00+09:00'
-description: twig や、プラグイン中の PHP で使える、 flex object のメソッドを解説します。
+description: 'twig や、プラグイン中の PHP で使える、 flex object のメソッドを解説します。'
 weight: 40
+params:
+    srcPath: /advanced/flex/using/object
 ---
 ## オブジェクトをレンダリング
 

@@ -1,9 +1,11 @@
 ---
 title: 'ヒントと Tips'
 lastmod: '2025-05-04T00:00:00+09:00'
-description: Grav ユーザからのヒントと Tips を紹介します。
-icon: /images/icons.svg#tips
+description: 'Grav ユーザからのヒントと Tips を紹介します。'
+icon: '/images/icons.svg#tips'
 weight: 150
+params:
+    srcPath: /hints-tips
 ---
 ### 第15章
 

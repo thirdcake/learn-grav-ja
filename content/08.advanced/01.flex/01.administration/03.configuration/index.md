@@ -1,8 +1,10 @@
 ---
 title: 'Config 設定画面'
 lastmod: '2025-08-06T00:00:00+09:00'
-description: 管理パネルの Flex Objects の設定画面から、設定できることの概要を解説します。
+description: '管理パネルの Flex Objects の設定画面から、設定できることの概要を解説します。'
 weight: 30
+params:
+    srcPath: /advanced/flex/administration/configuration
 ---
 **Config 設定** には、 **Flex ディレクトリ** の共通事項を設定します。
 
@@ -11,14 +13,14 @@ weight: 30
 > [!Info]  
 > 設定項目は、すべてのディレクトリで違います。このドキュメントでは、すべてのディレクトリに共通する設定のみを記載しています。
 
-<h4 id="controls">コントロール</h4>
+#### コントロール{#controls}
 
 ページの上部に、管理コントロール部分があります。
 
 - **Back**: [**コンテンツリスト**](../01.views-list/) に戻る
 - **Save**: config 設定を保存し、 [**コンテンツリスト**](../01.views-list/) に戻る
 
-<h3 id="caching-tab">キャッシュタブ</h3>
+### キャッシュタブ{#caching-tab}
 
 | オプション | 説明 |
 | :-----  | :----- |

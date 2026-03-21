@@ -1,8 +1,10 @@
 ---
-title: '具体例：ページのブループリント'
+title: 具体例：ページのブループリント
 lastmod: '2025-08-28T00:00:00+09:00'
 description: ページのブループリントについて、それが設定できる内容や、保存場所、設定方法などを解説します。
 weight: 40
+params:
+    srcPath: /forms/blueprints/example-page-blueprint
 ---
 **ページのブループリント** は、デフォルトのページを拡張し、オプションを追加できる機能を提供します。  
 基本的に、カスタムページは、ページのブループリントを使うことで成立します。  
@@ -11,7 +13,7 @@ weight: 40
 > [!訳注]  
 > このドキュメント中に明示的に書かれていませんが、ページのフォームタイプは、基本的にページのファイル名と一致する YAML ファイルのようです。（よって、おのずとテーマのテンプレート名にも一致するはずです）。たとえば、 `/user/pages/01.home/default.md` のページに対するページのブループリントは、 `/user/blueprints/pages/deafult.yaml` もしくは、 `/user/themes/あなたのテーマ/blueprints/default.yaml` であることが多いはずです。
 
-<h3 id="a-first-example">最初の例</h3>
+### 最初の例{#a-first-example}
 
 デフォルトのページフォームをベースに、たとえばいくつかの select ボックスを追加するだけの場合、デフォルトのページから拡張できます。
 
@@ -83,12 +85,12 @@ form:
 
 追加できるフィールドタイプは、[管理パネルで使用可能なフォームフィールド](../01.fields-available/) に一覧表示されています。
 
-<h3 id="how-to-name-fields">フィールドの命名法</h3>
+### フィールドの命名法{#how-to-name-fields}
 
 フィールドが `header.*` という構造を使うことは重要です。  
 これにより、ページの保存時に、フィールドのコンテンツは **ページヘッダー** に保存されます。
 
-<h3 id="create-a-completely-custom-page-form">完全にカスタムされたページのフォームを作成する</h3>
+### 完全にカスタムされたページのフォームを作成する{#create-a-completely-custom-page-form}
 
 デフォルトのフォームを拡張せずに、完全に独自のページフォームを作成することができます。
 
@@ -136,31 +138,31 @@ form:
 > [!Warning]  
 > `route` フィールドは、Grav 1.7 で変更されました。既存のブループリントを、新しい `type: parents` に更新してください。
 
-<h3 id="a-note-for-expert-mode">エキスパートモードに関する注意</h3>
+### エキスパートモードに関する注意{#a-note-for-expert-mode}
 
 ページを **エキスパート** モードで編集する場合、 **ブループリント** は読み込まれず、ページの編集フォームは全てのページで同じになります。このようになっている理由は、エキスパートモードでは、 **フロントマター** フィールドを直接編集するため、編集画面をカスタマイズする必要が無いからです。
 
-<h3 id="where-to-put-the-page-blueprints">ページのブループリントを保存する場所</h3>
+### ページのブループリントを保存する場所{#where-to-put-the-page-blueprints}
 
 管理パネルプラグインが、ブループリントを取得して、新しいページタイプを表示するために、ブループリントを正しい場所に配置する必要があります。
 
-<h4 id="in-the-user-blueprints-folder">ユーザーのブループリントフォルダ</h4>
+#### ユーザーのブループリントフォルダ{#in-the-user-blueprints-folder}
 
 `user/blueprints/pages/` 内に保存します。  
 ブループリントをサイトにシンプルに反映させたいときは、ここに置くのが良いです。
 
-<h4 id="in-the-theme">テーマ</h4>
+#### テーマ{#in-the-theme}
 
 `user/themes/YOURTHEME/blueprints/` 内に保存します。  
 テーマを配布する予定がある場合、ここが最適です。  
 テーマがページのブループリントを提供し、使いやすくなります。
 
-<h4 id="in-the-data-folder">データフォルダ</h4>
+#### データフォルダ{#in-the-data-folder}
 
 Gantry5 ベースのテーマを利用している場合、`user/data/gantry5/themes/YOURTHEME/blueprints/` 内が、最適な場所です。  
 そうでない場合、テーマのアップデート中に、ファイルが消えてしまうかもしれません。
 
-<h4 id="in-a-plugin">プラグイン</h4>
+#### プラグイン{#in-a-plugin}
 
 `user/plugins/YOURPLUGIN/blueprints/` 内に保存します。  
 これは、プラグインでカスタムページを定義して追加するようなときに保存する場所です。

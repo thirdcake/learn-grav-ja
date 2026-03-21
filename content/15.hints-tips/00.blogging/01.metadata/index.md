@@ -2,6 +2,8 @@
 title: 'Blog メタデータ'
 lastmod: '2025-04-26T00:00:00+09:00'
 weight: 10
+params:
+    srcPath: /hints-tips/blogging/metadata
 ---
 Grav をブログのプラットフォームとして使用する場合、Facebook や Twitter などのソーシャルメディアで投稿をシェアするときの説明や画像を入力するのに役立つメタデータを含めたいと思うでしょう。
 

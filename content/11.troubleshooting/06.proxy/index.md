@@ -2,6 +2,8 @@
 title: 'Proxy 問題'
 lastmod: '2025-05-09T00:00:00+09:00'
 weight: 60
+params:
+    srcPath: /troubleshooting/proxy
 ---
 プロキシーサーバー経由で GPM を実行すると、エラーになることがあります。
 

@@ -1,10 +1,13 @@
 ---
-title: 'プラグインのインストール'
+title: プラグインのインストール
 lastmod: '2025-08-06T00:00:00+09:00'
-description: プラグインを Grav にインストールする3つの方法を解説します。
+description: 'プラグインを Grav にインストールする3つの方法を解説します。'
 weight: 20
+params:
+    srcPath: /plugins/plugin-install
 ---
-<h2 id="installation">インストール</h2>
+
+## インストール{#installation}
 
 プラグインのインストールには、3つの方法があります：
 
@@ -14,7 +17,7 @@ weight: 20
 
 以下の各ステップでは、使いたいプラグイン名を **NAME** と表しています。
 
-<h3 id="gpm-installation-preferred">GPM によるインストール（推奨）</h3>
+### GPM によるインストール（推奨）{#gpm-installation-preferred}
 
 [GPM](../../07.cli-console/04.grav-cli-gpm/) からプラグインをインストールするには、あなたの使っている OS のターミナル (コマンドライン) で、 Grav をインストールしたルートディレクトリに移動し、以下を実行してください：
 
@@ -25,7 +28,7 @@ bin/gpm install NAME
 これにより、 `/user/plugins` ディレクトリにプラグインがインストールされます。  
 ファイルは、 `user/plugins/NAME` フォルダ内にあります。
 
-<h3 id="manual-installation">手作業でのインストール</h3>
+### 手作業でのインストール{#manual-installation}
 
 手作業でインストールするには、リポジトリの zip バージョンをダウンロードして、 `user/plugins/` ディレクトリ下で展開してください。  
 そして、そのフォルダ名を `NAME` に変更してください。
@@ -35,7 +38,7 @@ bin/gpm install NAME
 > [!Note]  
 > このプラグインが、 Grav にとってはモジュラー (部分的に利用する) のプラグインであっても、他のプラグインを操作するときに必要要件となるプラグインであるかもしれません。詳しいことは、 `user/plugins/NAME/blueprints.yaml` を確認してください。
 
-<h3 id="admin-plugin">管理パネル</h3>
+### 管理パネル{#admin-plugin}
 
 [管理パネルプラグイン](../../05.admin-panel/) を使っていて、利用したいプラグインが Grav のリポジトリに登録されていれば、そのプラグインを直接ダウンロードできます。  
 `Plugins` メニューから、 `Add` ボタンをクリックしてください。

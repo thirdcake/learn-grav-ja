@@ -1,8 +1,10 @@
 ---
 title: 'System 設定'
 lastmod: '2025-08-11T00:00:00+09:00'
-description: 管理パネルプラグインの Configuration ページの System 設定タブの操作方法を解説します。
+description: '管理パネルプラグインの Configuration ページの System 設定タブの操作方法を解説します。'
 weight: 10
+params:
+    srcPath: /admin-panel/dashboard/configuration-system
 ---
 ![Admin Configuration](configuration.png)
 

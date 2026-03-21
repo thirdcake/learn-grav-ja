@@ -1,8 +1,10 @@
 ---
-title: 'プラグインの優先度'
+title: プラグインの優先度
 lastmod: '2025-12-14T00:00:00+09:00'
-description: プラグイン内のイベントフックの実行順序を、直接 PHP を触ることなく、設定ファイルだけで変更する方法を解説します。
+description: 'プラグイン内のイベントフックの実行順序を、直接 PHP を触ることなく、設定ファイルだけで変更する方法を解説します。'
 weight: 60
+params:
+    srcPath: /advanced/plugin-prioritization
 ---
 複数のプラグインが同じイベントフック（ [Plugins > Event Hooks page for details](../../04.plugins/04.event-hooks/) ）を利用する場合、さまざまな処理が "優先度" の順番で実行されます。  
 優先度は、シンプルな番号です。  

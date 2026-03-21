@@ -1,8 +1,10 @@
 ---
-title: 'コンテンツエディタ画面'
+title: コンテンツエディタ画面
 lastmod: '2025-08-06T00:00:00+09:00'
-description: 管理パネルで、 Flex Objects を編集する画面について解説します。
+description: '管理パネルで、 Flex Objects を編集する画面について解説します。'
 weight: 20
+params:
+    srcPath: /advanced/flex/administration/views-edit
 ---
 ![Edit View](flex-objects-edit.png)
 
@@ -11,7 +13,7 @@ weight: 20
 エディタの見た目は、異なる **コントロール** や、 **タブ** 、 **フォームフィールド** ごとに大きく異なります。  
 設定された flex ディレクトリのタイプごとに、すべて指定されているためです。
 
-<h3 id="controls">コントロール</h3>
+### コントロール{#controls}
 
 ページの上部に、管理コントロールがあります。
 
@@ -22,7 +24,7 @@ weight: 20
 - **Save**: オブジェクトを保存し、 [**コンテンツリスト**](../01.views-list/) に戻る
 - **Delete**: オブジェクトを削除し、 [**コンテンツリスト**](../01.views-list/) に戻る
 
-<h3 id="edit-form">フォームの編集</h3>
+### フォームの編集{#edit-form}
 
 フォームは通常、コンテンツの編集を簡単にするための **タブ** と **セクション** で構成されます。
 

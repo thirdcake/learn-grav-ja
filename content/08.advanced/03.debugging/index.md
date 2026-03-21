@@ -1,13 +1,15 @@
 ---
-title: 'デバッグとログ'
+title: デバッグとログ
 lastmod: '2025-12-10T00:00:00+09:00'
-description: Grav で PHP 変数や、 Twig 変数、 JavaScript 変数などの状況を確認し、デバッグをする方法を解説します。
+description: 'Grav で PHP 変数や、 Twig 変数、 JavaScript 変数などの状況を確認し、デバッグをする方法を解説します。'
 weight: 30
+params:
+    srcPath: /advanced/debugging
 ---
 テーマとプラグインを開発するとき、しばしば **デバッグ** 情報を表示する必要があります。  
 Grav にはさまざまな種類の機能があるので、強力にデバッグできます。
 
-<h2 id="debug-bar">デバッグバー</h2>
+## デバッグバー{#debug-bar}
 
 Grav には、 **デバッグバー** と呼ばれる、デバッグの努力を簡単にしてくれるすばらしいツールがあります。  
 この機能は、デフォルトでは **無効化** されていますが、 `system.yaml` 設定ファイルから有効化できます。  
@@ -35,7 +37,7 @@ PHP デバッグバーは、これまで通り全体的な **プロセス時間*
 
 ![](timeline.png)
 
-<h3 id="dump-command-for-php">PHP 向けの dump コマンド</h3>
+### PHP 向けの dump コマンド{#dump-command-for-php}
 
 PHP をデバッグしているとき、たとえば開発中のカスタムプラグインで、オブジェクトや変数を素早く調べたいときには、パワフルな `dump()` コマンドを利用できます。  
 この関数には、基本的な PHP 変数であれば何でも渡せて、結果をきれいにフォーマットし、着色してブラウザに表示します。
@@ -56,7 +58,7 @@ dump($myvariable);
 $this->grav['debugger']->addMessage($myvariable)
 ```
 
-<h3 id="dump-command-for-twig">Twig 向けの dump コマンド</h3>
+### Twig 向けの dump コマンド{#dump-command-for-twig}
 
 また、 Twig 変数を Twig テンプレートから表示することもできます。  
 これは、 PHP の dump と同じように行われますが、結果はデバッグバーの **Messages** パネルに表示されます。  
@@ -89,7 +91,7 @@ twig:
 ![](twig-dump-text.png)  // 翻訳元でリンク切れ画像です
 ```
 
-<h3 id="dump-to-browser-console-from-twig">Twig からブラウザのコンソールに dump</h3>
+### Twig からブラウザのコンソールに dump{#dump-to-browser-console-from-twig}
 
 ページが Grav から返ってくる前に変数を表示したい場合や、ページの再読込みが発生しない場合（たとえば AJAX を利用しているような場合）は、他の方法を取ります。  
 JavaScript の1行を使って、変数をブラウザの developper console に表示できます。  
@@ -103,7 +105,7 @@ JavaScript の1行を使って、変数をブラウザの developper console に
 
 ![](console-dump.png)
 
-<h2 id="error-display">エラー表示</h2>
+## エラー表示{#error-display}
 
 新しいエラー表示ページでは、詳細情報や、 backtraces 、そして関連するコードブロックまで提供しています。  
 これにより、より早くクリティカルエラーを分離し、特定し、解決することができるようになります。  
@@ -128,7 +130,7 @@ errors:
 
 ![](error2.png)
 
-<h2 id="logging">ログ</h2>
+## ログ{#logging}
 
 情報をログに記録する機能は、しばしば便利ですが、これまで同様、 Grav ではパワフルなログ機能をシンプルな方法で提供します。  
 以下の構文のいずれかを利用してください：

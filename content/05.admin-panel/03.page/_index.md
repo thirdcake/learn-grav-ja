@@ -1,8 +1,10 @@
 ---
-title: 'ページ'
+title: ページ
 lastmod: '2025-08-19T00:00:00+09:00'
-description: 管理パネルの Pages 画面の見方と使い方を解説します。
+description: '管理パネルの Pages 画面の見方と使い方を解説します。'
 weight: 30
+params:
+    srcPath: /admin-panel/page
 ---
 ![Admin Pages](pages.png)
 
@@ -14,7 +16,7 @@ weight: 30
 
 サイトコンテンツを、ひんぱんに作成し、修正する場合、管理パネルのこのエリアは、とても良く見る画面となります。
 
-<h3 id="adding-new-pages">新しいページを追加</h3>
+### 新しいページを追加{#adding-new-pages}
 
 ![Admin Pages](add.png)
 
@@ -66,7 +68,7 @@ weight: 30
 この情報を入力したら、 **Continue** を選択し、新しいページエディタが表示されます。  
 ページエディタについてより詳しくは、 [後述のガイド](./01.editor/) をご覧ください。
 
-<h3 id="pages-list">ページリスト</h3>
+### ページリスト{#pages-list}
 
 ![Admin Pages](pages2.png)
 

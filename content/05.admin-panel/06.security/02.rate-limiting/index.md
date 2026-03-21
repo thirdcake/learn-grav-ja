@@ -1,8 +1,10 @@
 ---
-title: 'フラッドプロテクション'
+title: フラッドプロテクション
 lastmod: '2025-08-24T00:00:00+09:00'
-description: Grav の管理パネルへの不正ログイン対策として、フラッドプロテクションによる方法を解説します。
+description: 'Grav の管理パネルへの不正ログイン対策として、フラッドプロテクションによる方法を解説します。'
 weight: 20
+params:
+    srcPath: /admin-panel/security/rate-limiting
 ---
 ![](login.gif)
 
@@ -13,11 +15,11 @@ Grav のフラッドプロテクション（連続リクエスト制限とも呼
 指定した一定時間内に、指定した一定量のログインに失敗すると、アカウントを一時凍結する設定ができます。  
 加えて、アカウントがパスワードリセットできる総回数を制限して、それを超えるとパスワードリセット機能が無効化するようにできます。
 
-<h2 id="what-you-ll-need">必要な要件</h2>
+## 必要な要件{#what-you-ll-need}
 
 この機能は、 [**Login** プラグイン](https://github.com/getgrav/grav-plugin-login) により管理されており、管理パネルを使っていれば、すでにインストールされ、有効化されているはずです。
 
-<h2 id="how-to-set-it-up">セットアップ方法</h2>
+## セットアップ方法{#how-to-set-it-up}
 
 ![](2fa_3.jpeg)
 

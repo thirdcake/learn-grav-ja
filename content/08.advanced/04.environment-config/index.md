@@ -1,15 +1,17 @@
 ---
-title: '環境設定'
+title: 環境設定
 lastmod: '2025-12-10T00:00:00+09:00'
-description: 開発環境や、ステージング環境、本番環境など、さまざまな環境での Grav の設定を効率的に行う方法を解説します。
+description: '開発環境や、ステージング環境、本番環境など、さまざまな環境での Grav の設定を効率的に行う方法を解説します。'
 weight: 40
+params:
+    srcPath: /advanced/environment-config
 ---
 Grav では、 **開発環境** や、 **ステージング環境** 、 **本番環境** のような、異なる環境に異なる設定をサポートするため、 [強力な設定機能](../../01.basics/05.grav-configuration) を拡張できます。
 
 > [!Info]  
 > Grav 1.6 までは、環境変数は `user/` フォルダに保存していました。 Grav 1.7 では、環境変数を `user/env/` に移し、メンテナンスしやすくしました。既存のサイトでは、この新しい場所に環境変数を移し替えることを強く推奨します。
 
-<h3 id="automatic-environment-configuration">自動的な環境設定</h3>
+### 自動的な環境設定{#automatic-environment-configuration}
 
 何が「自動的」かというと、環境ごとに、必要な分だけ設定の変更を提供でき、それ以外は自動的に同じ設定になるということです。  
 この良い例として、[デバッグバー](../03.debugging/) があります。  
@@ -57,7 +59,7 @@ assets:
 > [!訳注]  
 > スケジューラーは、ホスト名を持たないため、 `localhost` 環境として実行されるそうです。
 
-<h4 id="plugin-overrides">プラグインの上書き</h4>
+#### プラグインの上書き{#plugin-overrides}
 
 プラグインの config 設定の YAML ファイルを上書きするには、通常ファイルを上書きするのと同じ処理です。  
 標準的な設定ファイルが、次の場所に置かれている場合：
@@ -85,7 +87,7 @@ mailer:
     password: 'a13e6e27bc7205'
 ```
 
-<h4 id="theme-overrides">テーマの上書き</h4>
+#### テーマの上書き{#theme-overrides}
 
 テーマについても、同じ方法で上書きできます：
 
@@ -100,7 +102,7 @@ user/config/themes/antimatter.yaml
 user/env/www.mysite.com/config/themes/antimatter.yaml
 ```
 
-<h3 id="server-based-environment-configuration">サーバー設定をもとにした環境設定</h3>
+### サーバー設定をもとにした環境設定{#server-based-environment-configuration}
 
 Grav 1.7 以降、サーバーの設定を使って環境を設定することができるようになりました。  
 想定される利用場面としては、サーバーから、もしくはスクリプトから環境変数を設定します。  
@@ -151,12 +153,12 @@ PHP:
 define('GRAV_ENVIRONMENT', 'development');
 ```
 
-<h3 id="custom-environment-paths">カスタム環境パス</h3>
+### カスタム環境パス{#custom-environment-paths}
 
 Grav 1.7 より、環境設定の保存場所を変更できるようにもなりました。  
 2つの選択肢があります：すべての環境で共通の場所を設定する、もしくは、ひとつひとつ定義する。
 
-<h4 id="custom-location-for-all-the-environments">すべての環境について設定の場所をカスタムする</h4>
+#### すべての環境について設定の場所をカスタムする{#custom-location-for-all-the-environments}
 
 何かの理由で、環境設定のデフォルトの保存場所 `user/env` を使いたくない場合、 `GRAV_ENVIRONMENTS_PATH` 環境変数を使うことで、変更ができます。
 
@@ -204,7 +206,7 @@ PHP:
 define('GRAV_ENVIRONMENTS_PATH', 'user://sites');
 ```
 
-<h4 id="custom-location-for-the-current-environment">現在の環境について設定の場所をカスタムする</h4>
+#### 現在の環境について設定の場所をカスタムする{#custom-location-for-the-current-environment}
 
 ときには、あなたの環境において設定場所をカスタムすることが便利な場合もあります。
 
@@ -257,7 +259,7 @@ define('GRAV_ENVIRONMENT_PATH', 'user://development');
 `GRAV_ENVIRONMENT_PATH` は、 `GRAV_ENVIRONMENT` とは違うことに気をつけてください。  
 このため、現在のドメイン名にもとづいて自動的に環境名が設定されたくない場合は、環境名も明示的に設定する必要があります。
 
-<h3 id="further-customization">さらなるカスタマイズ</h3>
+### さらなるカスタマイズ{#further-customization}
 
 環境設定は、このページで解説したものよりも、さらにカスタマイズ可能です。
 

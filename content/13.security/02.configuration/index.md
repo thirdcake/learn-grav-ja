@@ -1,15 +1,17 @@
 ---
-title: '推奨するセキュリティ設定'
+title: 推奨するセキュリティ設定
 lastmod: '2025-05-14T00:00:00+09:00'
 weight: 20
+params:
+    srcPath: /security/configuration
 ---
 他のすべてのアプリケーションと同様、サイトを保護し、最適化するために config 設定をチェックするのは重要です。
 
-<h2 id="production-site">本番サイト</h2>
+## 本番サイト{#production-site}
 
 config 設定の強化により、本番環境のサイトのセキュリティを強化するのは重要です。これを実行するには、 `user/config/` にメインの config 設定を設定し、本番環境で利用したいデフォルト設定をします。そのうえで、開発環境ではこれらを上書きすることをおすすめします。 たとえば、 `user/env/localhost` もしくは `user/env/site.local` に上書きします。また、環境変数により、本番サイト設定を上書きすることもできます。たとえば、複数のドメインにまたがるマルチサイトで可能です。
 
-<h3 id="system-configuration-user-config-system-yaml">システム設定（`user/config/system.yaml`）</h3>
+### システム設定（`user/config/system.yaml`）{#system-configuration-user-config-system-yaml}
 
 ```yaml
 force_ssl: true       # Use HTTPS only (redirect from HTTP -> HTTPS)
@@ -46,11 +48,11 @@ strict_mode:          # Test your site before changing these. Removes backward c
   blueprint_compat: false
 ```
 
-<h2 id="development-site">開発サイト</h2>
+## 開発サイト{#development-site}
 
 開発サーバーのために、サイトの更新をより便利にする設定がいくつかあります。
 
-<h3 id="system-configuration-user-env-localhost-config-sys">システム設定（`user/env/localhost/config/system.yaml`）</h3>
+### システム設定（`user/env/localhost/config/system.yaml`）{#system-configuration-user-env-localhost-config-sys}
 
 > [!Tip]  
 > localhost をあなたのローカルサーバー名に書きかえてください。

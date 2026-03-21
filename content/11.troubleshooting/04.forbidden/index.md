@@ -2,6 +2,8 @@
 title: '403 Forbidden'
 lastmod: '2025-05-09T00:00:00+09:00'
 weight: 40
+params:
+    srcPath: /troubleshooting/forbidden
 ---
 ![](forbidden-403.png)
 
@@ -19,7 +21,7 @@ param_sep: ';'
 
 これにより、Grav はパラメータに対してコロンではなくセミコロンを使うようになります。たとえば、 `http://yoursite.com/blog/tag:something` は、 `http://yoursite.com/blog/tag;something` になります。
 
-<h2 id="403-issue-in-admin">管理パネルでの 403 問題</h2>
+## 管理パネルでの 403 問題{#403-issue-in-admin}
 
 `mod_security` がインストールされている場合、rule 350147 が誤検知するという報告があります (http://wiki.atomicorp.com/wiki/index.php/WAF_350147) 。その rule をホワイトリストに入れるか、ホスティング会社に訊ねて、サポートを受けてください。
 

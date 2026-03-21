@@ -1,7 +1,9 @@
 ---
-title: 'Dokku'
+title: Dokku
 lastmod: '2025-07-17T00:00:00+09:00'
 weight: 50
+params:
+    srcPath: /webservers-hosting/paas/dokku
 ---
 > [!訳注]  
 > このページの内容は、最後のノートにもある通り、 Heroku のガイドをもとにして作成されており、一部の文章は Heroku の記述が混在していると思われます。しかし私の能力ではその部分の補完ができませんので、とりあえず元の文章通りに訳しています。 `Heroku` を `Dokku` に読み替えるだけで良いのか、それとも何か追加の手続きが必要なのかは、 [Dokku のドキュメント](https://github.com/dokku/dokku/) などを参考にしてください。

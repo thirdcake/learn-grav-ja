@@ -1,8 +1,10 @@
 ---
-title: 'ユーザーグループ'
+title: ユーザーグループ
 lastmod: '2025-08-15T00:00:00+09:00'
 description: 管理パネルでのユーザーの権限をまとめて整理できるグループの設定方法について解説します。
 weight: 20
+params:
+    srcPath: /admin-panel/accounts/groups
 ---
 ![Group Listing](accounts-groups1.png)
 
@@ -11,7 +13,7 @@ weight: 20
 
 ユーザーグループを作成後、 [アクセスタブ](../01.users/#access-tab) から、ユーザーアカウントに適用できます。
 
-<h2 id="user-group">ユーザーグループ</h2>
+## ユーザーグループ{#user-group}
 
 ![Edit Group](accounts-groups2.png)
 
@@ -24,7 +26,7 @@ weight: 20
 | **Enabled** | **Yes** を設定した場合、グループがサイト内で有効化されます。 **No** にすると、グループによるパーミッションの設定が適用されません |
 | **Permissions** | サイト内のすべてのパーミッションのリストです。 [以下を参照してください](#permissions). |
 
-<h3 id="permissions">パーミッション</h3>
+### パーミッション{#permissions}
 
 管理者には、特に便利なパーミッションのエリアが表示されます。  
 このエリアでは、ユーザーが、管理画面内でどこにアクセスでき、何ができるのかを正確に設定できます。

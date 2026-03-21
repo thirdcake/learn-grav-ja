@@ -1,12 +1,14 @@
 ---
-title: '拡張'
+title: 拡張
 lastmod: '2025-08-24T00:00:00+09:00'
 description: 管理パネルの表示項目や編集項目を拡張する方法を解説します。
 weight: 80
+params:
+    srcPath: /admin-panel/extending
 ---
 このページでは、管理パネルの拡張方法や、その際のベストプラクティスを解説します。
 
-<h3 id="understanding-admin-themes">管理パネルテーマを理解する</h3>
+### 管理パネルテーマを理解する{#understanding-admin-themes}
 
 普通の Grav テーマを拡張したり、修正したりするのとちょうど同じように、管理パネルの構造や見た目をテンプレートで上書きできます。  
 つまり、デフォルトのテンプレートの代わりに、あなたのプラグインで定義したテンプレートで、管理パネルのテーマを表示できます。  
@@ -50,7 +52,7 @@ public function onAdminTwigTemplatePaths($event): void
 > [!Tip]  
 > 管理パネルのテンプレートファイルは、自動エスケープが有効になっています。HTML コンテンツのエスケープのために `|e` フィルターを追加する必要はありません。しかし、適正な HTML を入力するには `|raw` を追加する必要はあります。
 
-<h3 id="adding-a-custom-field">カスタムフィールドを追加</h3>
+### カスタムフィールドを追加{#adding-a-custom-field}
 
 カスタムフィールドを作成するために、 `PLUGIN_TEMPLATES/forms/fields/myfield` へ追加します。  
 *myfield* フォルダには、その入力欄の処理方法を決める Twig テンプレートが必要です。  
@@ -130,12 +132,12 @@ form:
 > [!Info]  
 > この新しいテンプレートがフロントエンドと管理パネル（たとえば、 `PLUGIN_TEMPLATES` フォルダで利用）で共有される場合、すべての変数を `|e` でエスケープする必要があります。かわりに、 `Configuration` > `Twig Templating` > `Autoescape variables` で、 `Yes` にすることもできます。
 
-<h3 id="creating-custom-page-templates">カスタムページテンプレートを作成</h3>
+### カスタムページテンプレートを作成{#creating-custom-page-templates}
 
 [テーマの基本](../../03.themes/01.theme-basics/#content-pages-twig-templa) で言及したとおり、 Grav 内の **pages** 間には直接的な結びつきがあり、 **Twig テンプレートファイル** はテーマやプラグインで提供されます。  
 カスタムページテンプレートを作成するには、管理パネルプラグイン用のフィールドを定義したブループリントファイルと、コンテンツをレンダリングするテンプレートファイルを用意する必要があります。
 
-<h4 id="adding-a-custom-page-template-to-a-theme-plugin">テーマやプラグインにカスタムページテンプレートを追加</h4>
+#### テーマやプラグインにカスタムページテンプレートを追加{#adding-a-custom-page-template-to-a-theme-plugin}
 
 テーマやプラグインのルートフォルダに、 `templates` という名前のフォルダを作成してください。  
 このフォルダ内に、新たに mypage.html.twig ファイルを作成します。  
@@ -179,7 +181,7 @@ public function onTwigTemplatePaths(): void
 }
 ```
 
-<h4 id="adding-a-custom-page-blueprint-to-a-theme-plugin">テーマやプラグインにカスタムページブループリントを追加</h4>
+#### テーマやプラグインにカスタムページブループリントを追加{#adding-a-custom-page-blueprint-to-a-theme-plugin}
 
 管理パネルプラグインに新しく `mypage` ページオプションを提供するため、テーマやプラグインのルートディレクトリに、 `blueprints` というフォルダを作成してください。  
 このフォルダ内で、新たに mypage.yaml ファイルを作成します。  
@@ -243,7 +245,7 @@ public function onGetPageTemplates(Event $event): void
 }
 ```
 
-<h4 id="creating-a-new-page">新しいページを作成</h4>
+#### 新しいページを作成{#creating-a-new-page}
 
 ブループリントとテンプレートファイルを定義した後、管理パネルで、 **Add** ボタンをクリックし、 "Mypage" を選択することで、新しいページを作成できます:
 

@@ -1,8 +1,10 @@
 ---
 title: 'Plugin コマンド'
 lastmod: '2025-09-03T00:00:00+09:00'
-description: プラグイン側で CLI 操作を準備している場合は、 bin/plugin コマンドが利用できます。
+description: 'プラグイン側で CLI 操作を準備している場合は、 bin/plugin コマンドが利用できます。'
 weight: 30
+params:
+    srcPath: /cli-console/grav-cli-plugin
 ---
 プラグインは、 Grav の CLI `bin/plugin` と統合でき、特定のタスクをターミナルから実行することで、プラグイン機能を強化します。
 
@@ -18,7 +20,7 @@ weight: 30
 プラグインの実装次第で、他のオプションを受け付けることもあります。  
 `bin/plugin [スラッグ] list` コマンドにより、それらの、より詳しい内容を調べられます。
 
-<h2 id="reserved-commands-and-options">コマンドとオプションの予約語</h2>
+## コマンドとオプションの予約語{#reserved-commands-and-options}
 
 いくつか、予約された _コマンド_ と _オプション_ があります。  
 これらは、どのプラグインでもいつでも使えます。  
@@ -40,7 +42,7 @@ weight: 30
 | `-n`, `--no-interaction`   | インタラクティブな質問を聞かない |
 | `-v\|vv\|vvv`, `--verbose`   | メッセージの詳細度を増加します： 1つの場合ノーマル出力、2つの場合より詳しい出力、 3つの場合デバッグ用です |
 
-<h2 id="how-to-use-the-cli-for-plugins">プラグインでの CLI の使い方</h2>
+## プラグインでの CLI の使い方{#how-to-use-the-cli-for-plugins}
 
 **list** と **help** コマンドは、まだプラグイン CLI の使い方に詳しくないときに、とても便利です。
 
@@ -80,7 +82,7 @@ Repeat the password: *********
 Success! User joeuser created.
 ```
 
-<h2 id="developers-integrate-the-cli-in-plugin">開発者向け：プラグインに CLI を統合</h2>
+## 開発者向け：プラグインに CLI を統合{#developers-integrate-the-cli-in-plugin}
 
 開発者の方は、管理パネルやユーザーが実行できる CLI コマンドを作りたくなるかもしれません。  
 プラグインにそのような機能を追加するのは、とても簡単です。

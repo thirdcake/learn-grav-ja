@@ -2,11 +2,13 @@
 title: '共通事項 ubuntu 18'
 lastmod: '2025-07-15T00:00:00+09:00'
 weight: 50
+params:
+    srcPath: /webservers-hosting/vps/ubuntu-04
 ---
 > [!訳注]  
 > このページは、他の VPS のページの一部として動的に挿入される [モジュールページ](../../../02.content/09.modular/#modules) です。 Ubuntu 18.04 LTS に関する共通事項ですが、古い情報だと思われるので、もし読む必要がある場合は、適宜読み替えてください。
 
-<h3 id="update-and-upgrade-packages">パッケージのアップデートとアップグレード</h3>
+### パッケージのアップデートとアップグレード{#update-and-upgrade-packages}
 
 この時点で、ローカルの `/etc/hosts` エントリーを設定し、提供された IP にナイスでフレンドリーな名前（たとえば `（VPS業者ごとのローカル名）` ）を付けたくなるかもしれません。そうすれば、より簡単にサーバーに SSH 接続できます。 `ssh root@（ローカル名） -p（ポート番号）` のように。
 
@@ -43,7 +45,7 @@ weight: 50
 
 ここで、完全な VIM エディタをインストールします（Ubuntu に入っているミニバージョンではありません）。また、 Nginx web サーバ、 GIT コマンド、そして **PHP 7.2** をインストールしています。
 
-<h3 id="configure-php7-2-fpm">PHP7.2 FPM の設定</h3>
+### PHP7.2 FPM の設定{#configure-php7-2-fpm}
 
 php-fpm がインストールされると、より安全なセットアップに必要な設定変更が少し生じます。
 
@@ -67,7 +69,7 @@ cgi.fix_pathinfo=0
 # systemctl restart php7.2-fpm 
 ```
 
-<h3 id="configure-nginx-connection-pool">Nginx の接続プールの設定</h3>
+### Nginx の接続プールの設定{#configure-nginx-connection-pool}
 
 Nginx は先ほどインストール済みですが、設定をすることで、ユーザ固有の PHP 接続プールが使えます。これにより、安全になり、ユーザアカウントとして、そして web サーバ経由でファイルを操作する際のパーミッションの問題が起こるのを避けられます。
 
@@ -216,7 +218,7 @@ nginx: configuration file /etc/nginx/nginx.conf test is successful
 
 ブラウザで `http://{{ page.header.localname }}/info.php` を表示することで、次のこともテストできます。 PHP がインストールされ、正しく機能していることを。標準的な PHP info ページ（APCu, Opcache, その他の一覧）が表示されるはずです。
 
-<h3 id="installing-grav">Grav のインストール</h3>
+### Grav のインストール{#installing-grav}
 
 ここからは簡単なパートです！ まず、 Grav ユーザに戻ってください。 SSH 接続で `grav@{{ page.header.localname }}` とするか、ルート権限でログインした状態から `su - grav` とします。それから、次のステップに進みます：
 

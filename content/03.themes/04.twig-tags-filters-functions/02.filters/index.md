@@ -1,13 +1,15 @@
 ---
-title: 'カスタムフィルタ'
+title: カスタムフィルタ
 lastmod: '2026-01-03T00:00:00+09:00'
-description: Grav で独自に追加した Twig のカスタムフィルタについて解説します。
+description: 'Grav で独自に追加した Twig のカスタムフィルタについて解説します。'
 weight: 20
+params:
+    srcPath: /themes/twig-tags-filters-functions/filters
 ---
 Twig のフィルタは、 `|` という文字と、それに続くフィルタ名を使って、 Twig 変数に適用されます。  
 Twig 関数と同じように、カッコを使って引数を渡すことができます。
 
-<h3 id="absolute-url">absolute_url</h3>
+### absolute_url{#absolute-url}
 
 相対パスを使った `src` 属性や `href` 属性を持つ HTML 部分に使われます。  
 相対パスを、ホスト名を含む絶対 URL 表記の文字列に変換します。
@@ -24,7 +26,7 @@ Twig:
 <img src="https://learn.getgrav.org/some/path/to/image.jpg">
 ```
 
-<h3 id="array-unique">array_unique</h3>
+### array_unique{#array-unique}
 
 PHP の `array_unique()` 関数と同様のもので、配列から重複するものを取り除きます。
 
@@ -40,7 +42,7 @@ Twig:
 ['foo', 'bar', 'baz']
 ```
 
-<h3 id="base32-encode">base32_encode</h3>
+### base32_encode{#base32-encode}
 
 変数をbase32エンコードします。
 
@@ -56,7 +58,7 @@ Twig:
 ONXW2ZJAOZQXE2LBMJWGKIDIMVZGK
 ```
 
-<h3 id="base32-decode">base32_decode</h3>
+### base32_decode{#base32-decode}
 
 変数をbase32デコードします。
 
@@ -72,7 +74,7 @@ Twig:
 some variable here
 ```
 
-<h3 id="base64-encode">base64_encode</h3>
+### base64_encode{#base64-encode}
 
 変数をbase64エンコードします。
 
@@ -88,7 +90,7 @@ Twig:
 c29tZSB2YXJpYWJsZSBoZXJl
 ```
 
-<h3 id="base64-decode">base64_decode</h3>
+### base64_decode{#base64-decode}
 
 変数をbase64デコードします。
 
@@ -136,7 +138,7 @@ Twig:
 SendEmail
 ```
 
-<h3 id="chunk-split">chunk_split</h3>
+### chunk_split{#chunk-split}
 
 文字列をあるサイズで小さく区切ります。
 
@@ -168,7 +170,7 @@ Twig:
 true
 ```
 
-<h4 id="casting-values">値をキャストする</h4>
+#### 値をキャストする{#casting-values}
 
 PHP7から、型チェックが厳しくなりました。  
 これにより、間違った型の値には例外が投げられます。  
@@ -221,7 +223,7 @@ Twig:
 /etc
 ```
 
-<h3 id="ends-with">ends_with</h3>
+### ends_with{#ends-with}
 
 > [!訳注]  
 > 干し草の山から針を探す作業になぞらえて、文字列などの検索時、ヘイスタック（干し草の山）を探す場所、ニードル（針）を探すものとすることがあります。
@@ -257,7 +259,7 @@ Twig:
 field[name]
 ```
 
-<h3 id="get-type">get_type</h3>
+### get_type{#get-type}
 
 変数の型を返します。
 
@@ -305,7 +307,7 @@ Twig:
 something-text-to-read
 ```
 
-<h3 id="json-decode">json_decode</h3>
+### json_decode{#json-decode}
 
 JSON をデコードします。
 
@@ -518,7 +520,7 @@ Twig:
 > [!訳注]  
 > 実際に試してみると、上記の説明とは違う挙動をするので、よくわかりません。
 
-<h3 id="of-type">of_type</h3>
+### of_type{#of-type}
 
 引数の型かどうかチェックします：
 
@@ -593,7 +595,7 @@ Twig:
 <p>We have {{ num_vacancies }} {{ 'vacancy'|pluralize(num_vacancies) }} right now.</p>
 ```
 
-<h3 id="print-r">print_r</h3>
+### print_r{#print-r}
 
 人間に読みやすい形式で変数を表示します。
 
@@ -623,7 +625,7 @@ Twig:
 
 注意：最初の2つ（'one', 'two'）はそのままにして、残りはすべてランダムに入れ替えています。
 
-<h3 id="regex-replace">regex_replace</h3>
+### regex_replace{#regex-replace}
 
 PHPの [`preg_replace`](https://www.php.net/manual/ja/function.preg-replace.php) 関数と同じ機能です。  
 このフィルタを使えば、複雑な正規表現の書き換えができます：
@@ -676,7 +678,7 @@ Twig:
 shoe
 ```
 
-<h3 id="safe-email">safe_email</h3>
+### safe_email{#safe-email}
 
 Eメールアドレスを ASCII 文字に変換します。  
 Eメールスパムボットに認識されづらくします。
@@ -704,7 +706,7 @@ mailto リンクの例です：
 初見では、違いが分からないかもしれませんが、ページソース（ブラウザのディベロッパーツールではなく、実際のページソース）を確かめてください。  
 文字列がエンコードされています。
 
-<h3 id="sort-by-key">sort_by_key</h3>
+### sort_by_key{#sort-by-key}
 
 配列を特定のキーでソートします。
 
@@ -721,7 +723,7 @@ Twig:
 john@apple.com:2, tim@exchange.com:21, fred@yahoo.com:34,
 ```
 
-<h3 id="starts-with">starts_with</h3>
+### starts_with{#starts-with}
 
 ニードルとヘイスタックを使って、ヘイスタックがニードルで始まるか調べます。  
 ニードルが配列の場合、ヘイスタックがニードルの **いずれか** で始まるとき、`true` を返します。
@@ -874,21 +876,21 @@ Twig:
 one sentence. two senten…
 ```
 
-<h4 id="specialized-versions">特別なバージョン：</h4>
+#### 特別なバージョン：{#specialized-versions}
 
-<h3 id="safe-truncate">safe_truncate</h3>
+### safe_truncate{#safe-truncate}
 
 `|safe_truncate` を使うと、 "word-safe" な方法で、テキストを文字数で切り捨てます。
 
 > [!訳注]  
 > ここでの "word-safe" が何を指すのか分からないのですが、単語区切りのことなのかもしれません。日本語で試してみた範囲では、うまく短縮できませんでした。
 
-<h3 id="truncate-html">truncate_html</h3>
+### truncate_html{#truncate-html}
 
 `|truncate_html` を使うと、HTML を文字数で切り捨てます。  
 "word-safe" ではありません！
 
-<h3 id="safe-truncate-html">safe_truncate_html</h3>
+### safe_truncate_html{#safe-truncate-html}
 
 `|safe_truncate_html` を使うと、 "word-safe" な方法で、HTMlを文字数で切り捨てます。
 
@@ -950,7 +952,7 @@ Twig:
 > [!Caution]  
 > **サポートするロケール:** `en` (英語, デフォルト), `es` (スペイン語), `fr` (フランス語), `de` (ドイツ語), その他西欧言語では、単語ベースに数えます。 `zh`/`zh-cn`/`zh-tw`/`chinese` (中国語), `ja`/`japanese` (日本語), そして `ko`/`korean` (韓国語) は、文字ベースに数えます。
 
-<h3 id="yaml-encode">yaml_encode</h3>
+### yaml_encode{#yaml-encode}
 
 変数を YAML 構文に出力します。
 
@@ -972,7 +974,7 @@ foo:
 baz: qux
 ```
 
-<h3 id="yaml-decode">yaml_decode</h3>
+### yaml_decode{#yaml-decode}
 
 YAML 構文から変数にデコード/パースします。
 

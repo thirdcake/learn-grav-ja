@@ -1,10 +1,12 @@
 ---
-title: 'リファレンス：フォームのアクション'
+title: リファレンス：フォームのアクション
 lastmod: '2025-09-02T00:00:00+09:00'
-description: Grav のフォームプラグインで、フォーム送信後に設定可能な処理 (アクション) の書き方を解説します。
+description: 'Grav のフォームプラグインで、フォーム送信後に設定可能な処理 (アクション) の書き方を解説します。'
 weight: 40
+params:
+    srcPath: /forms/forms/reference-form-actions
 ---
-<h2 id="form-actions">フォームアクション</h2>
+## フォームアクション{#form-actions}
 
 前回の具体例で、いくつかのフォームアクションを見てきました。  
 利用できるアクションの詳細を見ていきましょう。
@@ -42,7 +44,7 @@ Antimatter では次のように設定します
 > [!Info]  
 > [重要なフォームのオプション](https://github.com/getgrav/grav-plugin-email#emails-sent-with-forms) については、email プラグインのドキュメントを参照してください。 [マルチパートのメッセージ本文](https://github.com/getgrav/grav-plugin-email#multi-part-mime-messages) （アンチ-スパム・スコアに良いです）や、`reply_to` や、[添付ファイル](https://github.com/getgrav/grav-plugin-email#sending-attachments) などがあります。
 
-<h5 id="dynamic-email-attribute">動的なメール属性</h5>
+##### 動的なメール属性{#dynamic-email-attribute}
 
 `email.from` フィールドを、Form の input から設定する具体例は、コンテンツを取得して、次のように使います：
 
@@ -82,7 +84,7 @@ process:
 
 ただし、オプションで `display` か、 `redirect` により、表示を修正できます。
 
-<h4 id="validation-message">バリデーション メッセージ</h4>
+#### バリデーション メッセージ{#validation-message}
 
 バリデーションに失敗したときに、メッセージを表示することができます。たとえば：
 
@@ -201,7 +203,7 @@ process:
 > [!Info]  
 > `recaptcha_secret` はオプションです。もし Form プラグインを設定済みだった場合に、その設定値を使います。
 
-<h3 id="user-ip-address">ユーザーの IP アドレス</h3>
+### ユーザーの IP アドレス{#user-ip-address}
 
 ユーザーの IP アドレスを出力に表示します。  
 出力プロセスで確実に使われるように、 'form.md' 内の email / save プロセスの上に配置してください。
@@ -223,7 +225,7 @@ process:
         label: Submission Timestamp
 ```
 
-<h3 id="reset-the-form-after-submit">送信後にフォームをリセット</h3>
+### 送信後にフォームをリセット{#reset-the-form-after-submit}
 
 デフォルトでは、送信後にフォームはクリアされません。  
 そのため、 `display` アクションを指定しない状態で、ユーザーがフォームページに戻った場合、入力されたデータがそのまま残ります。  
@@ -234,7 +236,7 @@ process:
     - reset: true
 ```
 
-<h3 id="remember-field-values">フィールド値を記憶する</h3>
+### フィールド値を記憶する{#remember-field-values}
 
 `remember` アクションを使うと、ユーザーがフォームを最後に送信した際に設定した _いくつかの_ フィールド値を "呼び出す" ことができます。  
 これは、繰り返し送信するときに便利です。たとえば、送信者に関する情報が必要な匿名の送信のような場合です。
@@ -260,7 +262,7 @@ process:
         - preferred-practitioner
 ```
 
-<h2 id="custom-actions">カスタムアクション</h2>
+## カスタムアクション{#custom-actions}
 
 フォームの process に "hook" することで、あらゆる種類の処理を実行できます。  
 カスタム処理の実行や、オンラインの web アプリケーションへのデータの追加、さらにはデータベースへの保存さえ可能です。
@@ -317,7 +319,7 @@ return;
 
 フォーム制御のサンプルコードは、 From プラグインと、Email プラグインのリポジトリで入手できます。
 
-<h4 id="an-example-of-custom-form-handling">カスタムフォーム制御の具体例</h4>
+#### カスタムフォーム制御の具体例{#an-example-of-custom-form-handling}
 
 Form プラグインは、メールの送信、ファイルの保存、メッセージの設定などの機能を提供し、本当に便利です。  
 しかしときどき、トータルの制御が必要になることもあります。  

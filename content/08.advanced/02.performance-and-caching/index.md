@@ -1,14 +1,16 @@
 ---
-title: 'パフォーマンスとキャッシュ'
+title: パフォーマンスとキャッシュ
 lastmod: '2025-12-09T00:00:00+09:00'
-description: Grav が提供するキャッシュの種類と、それぞれの設定方法について解説します。
+description: 'Grav が提供するキャッシュの種類と、それぞれの設定方法について解説します。'
 weight: 20
+params:
+    srcPath: /advanced/performance-and-caching
 ---
 Grav を魅力的なものとしている中心機能のひとつは、その速さです。  
 速いことは、本質的に、 Grav の設計において、常に考慮される重要事項です。  
 速さは、主にキャッシュによるものですが、他のコンポーネントによる部分もあります。
 
-<h2 id="performance">パフォーマンス</h2>
+## パフォーマンス{#performance}
 
 1. **PHP のキャッシュは重要です** 。 Grav のベストパフォーマンスを出すには、 PHP **opcache** と **usercache** （たとえば **APCu**）を実行してください。
 2. **SSD ドライブ** により、大きく変化します。ほとんどの場合、PHP のユーザーキャッシュからキャッシュを取得できますが、ファイルから取得するものもあります。そのため、 SSD ドライブは、パフォーマンスに大きく影響します。 NFS のようなネットワークファイルシステムを Grav で使用するのは避けてください。
@@ -21,7 +23,7 @@ Grav を魅力的なものとしている中心機能のひとつは、その速
 > [!Info]  
 > getgrav.org サイトは、1つの専用サーバーで、クアッドコアのプロセッサーと、16GB のメモリーと、6G のSSD ドライブとで、運用されています。また、PHP 7.4 の実行に、 Zend opcache と、APCu ユーザーキャッシュを利用しています。この web サーバーは、いくつか他の web サイトも運用していますが、レンタルサーバー環境ほどたくさんではありません。
 
-<h2 id="caching-options">キャッシュ・オプション</h2>
+## キャッシュ・オプション{#caching-options}
 
 キャッシュは、Grav に最初から組み込まれている不可欠な機能です。  
 Grav が採用しているキャッシュメカニズムのおかげで、 Grav は高速に動きます。  
@@ -43,7 +45,7 @@ Grav は定評のある [Doctrine Cache](https://www.doctrine-project.org/projec
 もちろん、`user/config/system.yaml` ファイルで、キャッシュ設定を明示することもできます。  
 これにより、少し早くなるかもしれません。
 
-<h2 id="caching-types">キャッシュ・タイプ</h2>
+## キャッシュ・タイプ{#caching-types}
 
 Grav では、 **5種類** のキャッシュが行われます。  
 次の通りです：
@@ -58,7 +60,7 @@ YAML 設定のキャッシュは変更できません。
 常にコンパイルされ、 `/cache` フォルダにキャッシュされます。  
 Image キャッシュも常に on になっており、処理済みの画像が `/images` フォルダに保存されます。
 
-<h3 id="grav-core-caching">Grav のコア・キャッシュ</h3>
+### Grav のコア・キャッシュ{#grav-core-caching}
 
 Core Grav キャッシュには、`user/config/system.yaml` ファイルに設定できる、次のような設定オプションがあります：
 
@@ -92,7 +94,7 @@ cache:
 > [!Tip]  
 > config 設定ファイルを作成/保存するだけで、簡単にキャッシュクリアを強制できます。
 
-<h4 id="memcache-specific-options">Memcache に特有のオプション</h4>
+#### Memcache に特有のオプション{#memcache-specific-options}
 
 `memcache` ドライバオプション経由で **memcache** サーバーに接続する場合に必要な、追加の設定オプションがあります。  
 これらのオプションは、 `user/config/system.yaml` ファイルの `cache:` グループ以下に記述します：
@@ -105,7 +107,7 @@ cache:
     port: 11211
 ```
 
-<h4 id="memcached-specific-options">Memcached に特有のオプション</h4>
+#### Memcached に特有のオプション{#memcached-specific-options}
 
 memcache と同様、memcached にもいくつかの設定オプションがあり、 `memcached` ドライバオプション経由で **memcached** サーバーに接続する場合には必要となるオプションです。  
 これらのオプションも、 `user/config/system.yaml` ファイルの `cache:` グループ以下に記述してください：
@@ -118,7 +120,7 @@ cache:
     port: 11211
 ```
 
-<h4 id="redis-specific-options">Redis に特有のオプション</h4>
+#### Redis に特有のオプション{#redis-specific-options}
 
 `redis` ドライバオプション経由で **redis** に接続する場合に必要な、いくつかの追加設定オプションがあります。  
 これらのオプションは、 `user/config/system.yaml` ファイルの `cache:` グループ以下に記述してください：
@@ -151,7 +153,7 @@ cache:
 
 _システムに、 php-redis をインストールする必要もあるでしょう_
 
-<h4 id="twig-specific-options">Twig に特有のオプション</h4>
+#### Twig に特有のオプション{#twig-specific-options}
 
 Twig テンプレートエンジンは、独自のファイルベースのキャッシュシステムを使います。  
 そして、それに伴い、いくつかのオプションがあります。
@@ -168,7 +170,7 @@ twig:
 また、`cache: check: method: none` と似た機能を持つ `auto_reload` も無効にできます。  
 それにより、キャッシュがリフレッシュされるまで、 `.html.twig` ファイルの変更を検知しません。
 
-<h2 id="caching-and-events">キャッシュとイベント</h2>
+## キャッシュとイベント{#caching-and-events}
 
 ほとんどの場合、キャッシュが有効化されていたとしても、 [イベントは発火します](../../04.plugins/04.event-hooks/) 。  
 イベントが、 `onPageContentRaw`, `onPageProcessed`, `onPageContentProcessed`, `onTwigPageVariables`, もしくは `onFolderProcessed` 以外であるとき、このことは正しいです。  

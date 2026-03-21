@@ -1,12 +1,14 @@
 ---
-title: '管理パネルのよくある質問'
+title: 管理パネルのよくある質問
 lastmod: '2025-08-24T00:00:00+09:00'
-description: Grav の管理パネルに関する、よくある質問と答えを紹介します。
+description: 'Grav の管理パネルに関する、よくある質問と答えを紹介します。'
 weight: 90
+params:
+    srcPath: /admin-panel/faq
 ---
 このFAQでは、管理パネルを最大限に利用するために役立つ、便利なチュートリアルや、テクニック、裏技を解説します。
 
-<h3 id="manual-installation-of-admin">管理プラグインを手動でインストールする</h3>
+### 管理プラグインを手動でインストールする{#manual-installation-of-admin}
 
 手動でのインストールは、推奨しませんが、管理パネルプラグインを手動でインストールすることは可能ではあります。  
 基本的に、以下のプラグインを個別にダウンロードする必要があります。
@@ -19,7 +21,7 @@ weight: 90
 それぞれのアーカイブファイルを、`user/plugins` フォルダに展開し、フォルダ名を単に `admin/`、 `login/`、 `form/`、 そして `email/` にしてください。  
 その後は、 **それ以降の使用方法** に従ってください。
 
-<h3 id="adding-and-managing-users">ユーザーの追加と管理</h3>
+### ユーザーの追加と管理{#adding-and-managing-users}
 
 最初に管理パネルプラグインをインストールするとき、ブラウザからアクセスすると、管理ユーザーを作るようにプロンプトで促されます。  
 これはシンプルな web のフォームで、最低でも1人の管理ユーザーを作る必要があります。
@@ -82,7 +84,7 @@ hashed_password: $2y$10$5RAUI6ZCISWR.4f0D6FILu3efYq3078ZX/.9vtAnZbjxS/4PXN/WW
 セキュリティ上の理由から、ユーザーパスワードはハッシュ値で保存されます。  
 パスワードを変更したい場合は、管理パネル内から行うことをおすすめします。
 
-<h3 id="managing-acl">ACL 管理</h3>
+### ACL 管理{#managing-acl}
 
 すべてのユーザーの yaml ファイルには、 `access` プロパティがあります。  
 このプロパティを適切に設定することにより、特定のユーザーに、管理パネルの特定の場所へのアクセス権を付与できます。
@@ -110,7 +112,7 @@ hashed_password: $2y$10$5RAUI6ZCISWR.4f0D6FILu3efYq3078ZX/.9vtAnZbjxS/4PXN/WW
 > [!Info]  
 > そのユーザーがログイン中に行った user.yaml ファイルへの変更は、一度ログアウトして、サイドログインしてから適用されます。
 
-<h3 id="custom-admin-url">管理パネル URL の変更</h3>
+### 管理パネル URL の変更{#custom-admin-url}
 
 管理パネルを安全にする助けとなる方法のひとつとして、その場所を隠すことができます。  
 これをするには、 URL を以下から変更します：
@@ -130,7 +132,7 @@ http://yourwebsite.com/admin
 http://yourwebsite.com/myspecialplace
 ```
 
-<h3 id="offline-mode">オフラインモード</h3>
+### オフラインモード{#offline-mode}
 
 ![Offline](offline.png)
 

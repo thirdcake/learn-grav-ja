@@ -1,8 +1,10 @@
 ---
-title: 'プラグイン'
+title: プラグイン
 lastmod: '2025-08-21T00:00:00+09:00'
-description: Grav の管理パネルのプラグインエリアの使い方を解説します。
+description: 'Grav の管理パネルのプラグインエリアの使い方を解説します。'
 weight: 40
+params:
+    srcPath: /admin-panel/plugins
 ---
 ![Admin Plugins](plugins.png)
 

@@ -1,10 +1,11 @@
 ---
-title: 'タクソノミー'
-lastmod: 2025-08-02T00:00:00+09:00
-description: Grav では、ページをカテゴリーや、タグ、その他カスタムな方法で分類できます。分類方法及び分類されたものの一覧表示方法を解説します。
+title: タクソノミー
+lastmod: 1754060400
+description: 'Grav では、ページをカテゴリーや、タグ、その他カスタムな方法で分類できます。分類方法及び分類されたものの一覧表示方法を解説します。'
 weight: 80
+params:
+    srcPath: /content/taxonomy
 ---
-
 **Grav** では、**タクソノミー** を使って、ページをグループ化したり、タグ付けしたりできます。
 
 > **Taxonomy (general),** the practice and science (study) of classification of things or concepts, including the principles that underlie such classification.  
@@ -17,7 +18,7 @@ weight: 80
 1. [`site.yaml`](../../01.basics/05.grav-configuration) ファイルに、タクソノミーのリストを定義する
 2. 各ページに、適切な `taxonomy` タイプとその値を書く
 
-<h2 id="taxonomy-example">タクソノミーの例</h2>
+## タクソノミーの例{#taxonomy-example}
 
 この概念を説明するために、ひとつの具体例を挙げます。  
 シンプルなブログを例として作ってみましょう。  
@@ -117,13 +118,13 @@ Grav は、この情報をページ処理中に使い、タクソノミーごと
 上記の例では、`tag` が `dog` **もしくは** `cat` になっている投稿が探されます。
 
 
-<h2 id="taxonomy-based-collections">タクソノミーベースのコレクション</h2>
+## タクソノミーベースのコレクション{#taxonomy-based-collections}
 
 以前の章で解説したことですが、重要なので、再度書いておきます。  
 [ページのフロントマター](../02.headers/) にあるタクソノミーを使って、ページのコレクションをフィルタすることができます。  
 [コレクションページのタクソノミーコレクション](../03.collections/#taxonomy-collections) へ戻ってみてください。
 
-<h2 id="adding-custom-taxonomy-values-in-default-and-options">カスタムタクソノミーの追加</h2>
+## カスタムタクソノミーの追加{#adding-custom-taxonomy-values-in-default-and-options}
 
 以下のようなブループリントのフォーマットを使えば、 `Default` のタクソノミーと(または) `Options` のタクソノミーを上書きできます。  
 ここで注意すべき重要なことは、これらの属性療法を上書きするためにこのメソッドを利用するときは、 `validate: type: commalist` を追加すべきです。そうでなければ、望んだような機能にならないでしょう。

@@ -1,8 +1,10 @@
 ---
 title: 'Site 設定'
 lastmod: '2025-08-11T00:00:00+09:00'
-description: 管理パネルプラグインの Configuration ページの Site 設定タブの操作方法を解説します。
+description: '管理パネルプラグインの Configuration ページの Site 設定タブの操作方法を解説します。'
 weight: 20
+params:
+    srcPath: /admin-panel/dashboard/configuration-site
 ---
 ![Admin Configuration](configuration-site.png)
 

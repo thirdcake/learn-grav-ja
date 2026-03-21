@@ -1,13 +1,15 @@
 ---
-title: '.htaccess'
+title: .htaccess
 lastmod: '2025-05-19T00:00:00+09:00'
 weight: 70
+params:
+    srcPath: /troubleshooting/htaccess
 ---
 Grav には、独自の `.htaccess` ファイルが付属しています。このファイルによって、 Grav は適切に操作できます。このファイルは、ルートフォルダにあり続けている必要があります。 `.htaccess` ファイルを使って解決できる問題に出会うかもしれません。
 
 Apache サーバーは、現在利用できる、もっとも人気のあるサーバーのひとつです。無料であり、ほとんどどこでも幅広く使えます。不幸なことに、 Apache も完璧ではありません。ときどき、 `.htaccess` ファイルが頭痛の種になることがあります。気にすることはありません。それはほとんどいつも柔軟に対応できます。
 
-<h2 id="how-to-edit-htaccess-in-windows-and-macos">Windows や maxOS で .htaccess の編集方法</h2>
+## Windows や maxOS で .htaccess の編集方法{#how-to-edit-htaccess-in-windows-and-macos}
 
 .htaccess ファイルは、隠しファイルです。つまり、デフォルトでは macOS や Windows ユーザーには、ファイルマネージャー（ファインダー）で、このファイルが見えません。隠しファイルの表示を有効化しなければいけません。
 

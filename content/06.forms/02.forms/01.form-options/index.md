@@ -1,8 +1,10 @@
 ---
-title: 'リファレンス：フォームオプション'
+title: リファレンス：フォームオプション
 lastmod: '2025-08-30T00:00:00+09:00'
-description: Grav のフォーム設定で定義できるオプションについて、その概要と使い方を解説します。
+description: 'Grav のフォーム設定で定義できるオプションについて、その概要と使い方を解説します。'
 weight: 10
+params:
+    srcPath: /forms/forms/form-options
 ---
 ### Name
 

@@ -1,7 +1,9 @@
 ---
-title: 'WireNine'
+title: WireNine
 lastmod: '2025-07-11T00:00:00+09:00'
 weight: 20
+params:
+    srcPath: /webservers-hosting/shared/wirenine
 ---
 > [!訳注]  
 > このページの内容は、日本向けのサービスではないため、日本の方が読む機会はほとんどないと思います。また、 PHP のバージョンなどから判断して、かなり古い情報が書かれているようです。もし読む必要がある場合は、古い情報であることを理解したうえで、適宜読み替えてください。
@@ -13,11 +15,11 @@ weight: 20
 
 このガイドでは、 Grav で最適に動作するために、中間のレンタルサーバーアカウントを設定するために必要な知識を解説します。
 
-<h2 id="picking-your-hosting-plan">ホスティングプランを決める</h2>
+## ホスティングプランを決める{#picking-your-hosting-plan}
 
 [WireNine](https://my.wirenine.com/aff.php?aff=023) には、3つのレンタルサーバープランがあります。最安は月額 $9 のベーシックプランから、月額 $18 のヘビーな通信量オプションのあるプランまであります。これらすべての設定は同じですが、私たちは中間の **Plus** プラン（月額 $14 ）をおすすめしています。なぜなら、 1 CPU 及び 1GB のメモリーが付き、妥当な提供プランだからです。
 
-<h2 id="enabling-ssh">SSH を有効化</h2>
+## SSH を有効化{#enabling-ssh}
 
 まず、 cPanel の **Security** セクションで、 **Toggle SSH Access** オプションを開かなければいけません。この SSH アクセスページで、 **SSH アクセスを有効化** するボタンをクリックしてください。
 
@@ -58,7 +60,7 @@ ssh wirenine_username@wirenine_servername -p2200
 
 言うまでもなく、 `wirenine_username` には WireNine から提供されているユーザー名を、 `wirenine_servername` には WireNine から提供されているサーバー名を入力する必要があります。 `-p2200` は、WireNine が SSH を標準とは違うポート番号で実行しているため、必要なものです。
 
-<h2 id="403-forbidden-errors">403 Forbidden エラー</h2>
+## 403 Forbidden エラー{#403-forbidden-errors}
 
 WireNine のセットアップにおいて、ユーザー作成ファイルのデフォルトのパーミッションが正しくなく、セキュリティフラグが発火して **403 Forbidden** エラーが起きるようです。この問題は、デフォルトの **umask が不正** であることで、作成されたフォルダが `775` 、 ファイルが `664` となってしまいます。これらのファイルは、正しくは `755` 及び `644` のときにそれぞれ機能します。
 
@@ -70,7 +72,7 @@ umask 022
 
 ターミナルに再度ログインすれば、変更が反映されます。
 
-<h2 id="configuring-php-caching">PHP とキャッシュの設定</h2>
+## PHP とキャッシュの設定{#configuring-php-caching}
 
 WireNine は、 PHP **5.4** をデフォルトで使用しますが、より新しい **5.5**, **5.6**, もしくは **7.0** バージョンを使用するオプションがあります。 Grav は最低でも PHP 5.5.9 が必要です。
 
@@ -100,7 +102,7 @@ WireNine は、ホスティングプロバイダ業界では珍しく、 PHP の
 
 ![](php-info2.png)
 
-<h2 id="install-and-test-grav">Grav のインストールとテスト</h2>
+## Grav のインストールとテスト{#install-and-test-grav}
 
 この SSH 機能を使って（もし未接続ならば） WireNine サーバーに接続し、最新バージョンの Grav をダウンロードし、 zip 展開し、テストしてみましょう！
 
@@ -132,7 +134,7 @@ Cleared:  assets/*
 Touched: /home/your_user/public_html/grav/user/config/system.yaml
 ```
 
-<h2 id="alternate-install-method-softaculous">替わりのインストールメソッド： Softaculous</h2>
+## 替わりのインストールメソッド： Softaculous{#alternate-install-method-softaculous}
 
 このカテゴリーを選択すると、 Grav CMS が掲載されているページになります。
 

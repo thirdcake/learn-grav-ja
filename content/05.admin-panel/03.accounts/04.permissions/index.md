@@ -1,8 +1,10 @@
 ---
-title: 'パーミッション'
+title: パーミッション
 lastmod: '2025-08-15T00:00:00+09:00'
 description: ユーザーアカウントのパーミッション設定でできることの概要を解説します。
 weight: 40
+params:
+    srcPath: /admin-panel/accounts/permissions
 ---
 > [!訳注]  
 > ユーザーグループのページの [パーミッションの解説部分](../02.groups/#permissions) で解説されていない部分の解説です。ただし、網羅はされていないようです。

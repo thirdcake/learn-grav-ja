@@ -1,10 +1,11 @@
 ---
-title: 'YAML構文'
-lastmod: 2026-03-20T13:56:48+09:00
+title: YAML構文
+lastmod: 1773982608
 description: 'Grav で設定に使われる YAML ファイルの役割や書き方について、詳しく具体的に解説します。'
 weight: 110
+params:
+    srcPath: /advanced/yaml
 ---
-
 ## はじめに{#introduction}
 
 YAML は、 _"YAML Ain't Markup Language"（YAML はマークアップ言語じゃねーよ）_ の頭文字を取っており、Grav では config 設定ファイルや、ブループリント、ページの設定のおいても、幅広く使われています。

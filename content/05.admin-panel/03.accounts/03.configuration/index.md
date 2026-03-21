@@ -1,8 +1,10 @@
 ---
 title: 'config 設定'
 lastmod: '2025-08-15T00:00:00+09:00'
-description: 管理パネルでのアカウントの config 設定タブでの操作方法を解説します。
+description: '管理パネルでのアカウントの config 設定タブでの操作方法を解説します。'
 weight: 30
+params:
+    srcPath: /admin-panel/accounts/configuration
 ---
 ![Compatibility Tab](accounts-configuration1.png)
 

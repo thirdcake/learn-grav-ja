@@ -1,8 +1,10 @@
 ---
 title: 'エディタ（Advanced タブ）'
 lastmod: '2025-08-20T00:00:00+09:00'
-description: 管理パネルのページ画面の advanced タブの使い方を解説します。
+description: '管理パネルのページ画面の advanced タブの使い方を解説します。'
 weight: 30
+params:
+    srcPath: /admin-panel/page/advanced
 ---
 ![Admin Page Editor](page-advanced.png)
 

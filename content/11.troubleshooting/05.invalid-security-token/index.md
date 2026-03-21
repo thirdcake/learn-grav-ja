@@ -2,6 +2,8 @@
 title: 'Invalid Security Token'
 lastmod: '2025-05-17T00:00:00+09:00'
 weight: 50
+params:
+    srcPath: /troubleshooting/invalid-security-token
 ---
 **問題：** 管理パネルにログインして、処理を実行中に、この Invalid Security Token エラーが表示されました。
 

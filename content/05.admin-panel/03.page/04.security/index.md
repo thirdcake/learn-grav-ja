@@ -3,6 +3,8 @@ title: 'エディタ（Security タブ）'
 lastmod: '2025-08-20T00:00:00+09:00'
 description: 管理パネルのページ画面のセキュリティタブの使い方を解説します。
 weight: 40
+params:
+    srcPath: /admin-panel/page/security
 ---
 ```
 ![Security Tab > Page Access](page-security.png)

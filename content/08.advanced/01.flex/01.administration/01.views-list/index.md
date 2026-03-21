@@ -1,8 +1,10 @@
 ---
-title: 'コンテンツリスト画面'
+title: コンテンツリスト画面
 lastmod: '2025-08-06T00:00:00+09:00'
-description: Grav 管理パネルでの、 Flex Objects の一覧表示画面の一般的な見方を解説します。
+description: 'Grav 管理パネルでの、 Flex Objects の一覧表示画面の一般的な見方を解説します。'
 weight: 10
+params:
+    srcPath: /advanced/flex/administration/views-list
 ---
 ![List View](flex-objects-list.png)
 
@@ -12,7 +14,7 @@ weight: 10
 一般的に、コンテンツリスト画面では、コンテンツを作成、編集、削除できます。  
 また、アイテムを **検索** したり **並べ替え** したりする強力なツールも用意されています。
 
-<h2 id="controls">コントロール</h2>
+## コントロール{#controls}
 
 ページの上部に、コントロールセクションがあります。  
 このコントロールの内容は、 **Flex タイプ** によって違うかもしれませんが、この解説では、最も一般的なものを列挙します：
@@ -22,14 +24,14 @@ weight: 10
 - **Add**: コンテンツアイテムを新規追加
 - [**Configuration**](../03.configuration/) : ディレクトリ設定の修正
 
-<h2 id="navigation">ナビゲーション</h2>
+## ナビゲーション{#navigation}
 
 - **Filter**: 検索用のテキスト入力欄
 - **Display Number**: 表示するオブジェクトの数
 - **Ordering**: 列のタイトルをクリックして、並び替えます
 - **Pagination**: オブジェクトを素早く移動
 
-<h2 id="single-row">表の1行</h2>
+## 表の1行{#single-row}
 
 - **Columns**: オブジェクトの概要を知ることができる、 Flex タイプ特有の列
 - **Actions**: 単一のオブジェクトに対すアクションで、通常は： **Preview**, **Edit**, **Delete**... など。

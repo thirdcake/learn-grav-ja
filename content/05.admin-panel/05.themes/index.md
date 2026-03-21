@@ -1,8 +1,10 @@
 ---
-title: 'テーマ'
+title: テーマ
 lastmod: '2025-05-07T00:00:00+09:00'
-description: Grav の管理パネルのテーマ画面の使い方について解説します
+description: 'Grav の管理パネルのテーマ画面の使い方について解説します'
 weight: 50
+params:
+    srcPath: /admin-panel/themes
 ---
 ![Admin Themes](themes.png)
 

@@ -1,10 +1,12 @@
 ---
-title: 'ハウツー：Ajax送信'
+title: ハウツー：Ajax送信
 lastmod: '2025-09-02T00:00:00+09:00'
-description: Grav では、ページをリフレッシュすることなく、非同期によるフォーム送信に対応しています。その方法を解説します。
+description: 'Grav では、ページをリフレッシュすることなく、非同期によるフォーム送信に対応しています。その方法を解説します。'
 weight: 60
+params:
+    srcPath: /forms/forms/how-to-ajax-submission
 ---
-<h2 id="submitting-forms-via-xhr-ajax">XHR/Ajax でフォームを送信</h2>
+## XHR/Ajax でフォームを送信{#submitting-forms-via-xhr-ajax}
 
 フォーム処理のデフォルトのメカニズムは、 HTML 標準のフォーム送信によっており、 HTML フォームは、 `POST` または `GET` （デフォルトは `POST` ）でサーバーに送られます。  
 送られたフォームは、 [バリデーション](../02.fields-available/) され、 [処理](../04.reference-form-actions/) された後に、結果がフォームに送り返され（もしくは、 [リダイレクトされたページへ遷移し](../04.reference-form-actions/#redirect) ）、メッセージが表示されたり、必要に応じて再送信するための編集ができたりします。
@@ -13,7 +15,7 @@ weight: 60
 このような場合、 Ajax や XHR を使った JavaScript 経由で、フォームを送信することがより良い選択になります。  
 幸運なことに、 Grav のフォーム機能は、このタスクに対応しています。
 
-<h2 id="automatic-approach-form-plugin-v7-3-0">自動的なアプローチ（From プラグイン `v7.3.0` 以上）</h2>
+## 自動的なアプローチ（From プラグイン `v7.3.0` 以上）{#automatic-approach-form-plugin-v7-3-0}
 
 Form プラグインのバージョン `7.3.0` のリリースにより、 XHR によるフォーム送信機能が、素早いセットアップオプションで利用可能になりました。  
 XHR により、フォームのその場所での処理となり、ページ全体のリロードは不要になります。
@@ -34,9 +36,9 @@ xhr_submit: true
 > [!Tip]  
 > XHR リクエストに使用される JavaScript コードは、 `form/layouts/xhr.html.twig` にあります。必要であれば、これを あなたのテーマの `templates` フォルダに（パス構造を維持しながら）コピーし、必要な修正をほどこしてください。
 
-<h2 id="manual-approach-required-for-form-plugin-v7-3-0">手動のアプローチ（Form プラグイン `v7.3.0` 未満）</h2>
+## 手動のアプローチ（Form プラグイン `v7.3.0` 未満）{#manual-approach-required-for-form-plugin-v7-3-0}
 
-<h3 id="creating-the-form">フォームを作成する</h3>
+### フォームを作成する{#creating-the-form}
 
 お好みで、標準的なフォームを作り、それを利用できます。  
 今回の例では、 Ajax 制御部分にフォーカスするため、できるだけシンプルなものにしています。  
@@ -77,7 +79,7 @@ form:
 
 ![](simple-form.png)
 
-<h3 id="the-page-content">ページコンテンツ</h3>
+### ページコンテンツ{#the-page-content}
 
 この同じページに、少しの HTML と、 JavaScript を追加する必要があります：
 

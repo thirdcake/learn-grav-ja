@@ -1,12 +1,14 @@
 ---
-title: '高度なブループリントの機能'
+title: 高度なブループリントの機能
 lastmod: '2025-10-30T00:00:00+09:00'
 description: ブループリント設定ファイルを、拡張したり、動的に編集する方法を解説します。
 weight: 70
+params:
+    srcPath: /forms/blueprints/advanced-features
 ---
 ブループリントには、それらを拡張し、動的にフィールドを使える高度な機能があります。
 
-<h2 id="defining-validation-rules">バリデーションルールの定義</h2>
+## バリデーションルールの定義{#defining-validation-rules}
 
 同じバリデーションルールが複数回必要な場合、独自のカスタムルールを作成できます。
 
@@ -27,7 +29,7 @@ form:
 
 上記の例では、 `slug` というルールを作り、フォームの folder フィールドで使っています。
 
-<h2 id="extending-base-type-extendsat">ベースタイプの拡張（extends@）</h2>
+## ベースタイプの拡張（extends@）{#extending-base-type-extendsat}
 
 既存のブループリントを拡張して、新しいフィールドを追加したり、基本となるブループリントから既存のフィールドを変更したりすることができます。
 
@@ -59,7 +61,7 @@ extends@:
     context: blueprints://pages
 ```
 
-<h3 id="understanding-the-type-and-context-properties">type 及び context プロパティを理解する</h3>
+### type 及び context プロパティを理解する{#understanding-the-type-and-context-properties}
 
 上記の例で、 `type` は参照ファイルで、 `context` は path です。  
 `context` プロパティは、 [ストリーム](../../../08.advanced/05.multisite-setup/#streams) を使い、これはつまり、物理的なロケーションを解決します。
@@ -71,7 +73,7 @@ extends@:
 `://` という構文を見た場合はいつでも、ストリームを参照すると確信してもらって構いません。  
 そして `context` を使う場合は、このストリームは、機能するフォルダの存在を解決しなければいけません。
 
-<h2 id="embedding-form-importat">埋め込みフォーム(import@)</h2>
+## 埋め込みフォーム(import@){#embedding-form-importat}
 
 複数のフォーム間で、いくつかの入力フィールドや、サブフォームを共有したい場面があるかもしれません。
 
@@ -136,12 +138,12 @@ form:
           context: theme://blueprints
 ```
 
-<h2 id="removing-fields-properties-unset-at">フィールド・プロパティの削除(unset-*@)</h2>
+## フィールド・プロパティの削除(unset-*@){#removing-fields-properties-unset-at}
 
 フィールドを削除したい場合、その内部に `unset@: true` を追加できます。
 フィールドのプロパティを削除したい場合、プロパティ名に、たとえば `unset-options@` を付けるだけで、すべてのオプションを削除できます。
 
-<h2 id="replacing-fields-properties-replace-at">フィールド・プロパティの置き換え(replace-*@)</h2>
+## フィールド・プロパティの置き換え(replace-*@){#replacing-fields-properties-replace-at}
 
 デフォルトでは、ブループリントは、プロパティを深くマージ(再帰的に中身まで含めてマージ)します。  
 ときには、フィールドのコンテンツをマージするのではなく、クリーンなテーブルから始めたい場合もあります。
@@ -168,7 +170,7 @@ summary.enabled:
 
 注意: `replace-*@` は、 `unset-*@` のエイリアス(別名)です。
 
-<h2 id="using-configuration-config-at">設定を利用する (config-*@)</h2>
+## 設定を利用する (config-*@){#using-configuration-config-at}
 
 Grav config 設定から、デフォルト値を得たい場合があります。  
 たとえば、サイトの著者をデフォルト著者として使いたい場合です:
@@ -195,7 +197,7 @@ form:
 
 `config-*@` は、どの入力フィールドでも使えます; たとえば、 `type` フィールドを変更したい場合、 `config-type@: site.forms.author.type` とするだけで、入力フィールドの type を config 設定から変更できます。
 
-<h2 id="using-function-calls-data-at">関数呼び出しを利用する (data-*@)</h2>
+## 関数呼び出しを利用する (data-*@){#using-function-calls-data-at}
 
 ブループリントから引数とともに関数を呼び出して、動的にフィールド内の任意のプロパティ値を取得できます。  
 これを行うには `data-*@` 表記をキーとして使います。  
@@ -245,7 +247,7 @@ form:
   data-default@: ['\Grav\Theme\ImaginaryClass::getMyDefault', 'default', false]
 ```
 
-<h2 id="changing-field-ordering">フィールドの順番を変更する</h2>
+## フィールドの順番を変更する{#changing-field-ordering}
 
 ブループリントを拡張したり、ファイルをインポートしたとき、デフォルトでは新しいフィールドはリストの最後に追加されます。  
 場合によっては、そういうことがやりたいのではないこともあります。  
@@ -294,7 +296,7 @@ form:
 > [!Info]  
 > ページのブループリントでフィールドを順序付ける場合、順序付けが機能するためには、フィールド名に `header` 接頭辞を参照する必要があります。例: `header.title`
 
-<h2 id="creating-new-form-field-type">新しいフォームフィールドタイプを作成する</h2>
+## 新しいフォームフィールドタイプを作成する{#creating-new-form-field-type}
 
 ブループリントで特別な制御を必要とする、特別なフォームフィールドタイプを作成する場合に、利用できるプラグインの関数があります。
 
@@ -324,7 +326,7 @@ form:
 
 フィールドに自動的に追加される `data-options@` のような動的なプロパティを含め、あらゆる `key: value` ペアを追加できます。
 
-<h2 id="override-or-extend-a-plugin-s-blueprint">プラグインのブループリントを上書きもしくは拡張する</h2>
+## プラグインのブループリントを上書きもしくは拡張する{#override-or-extend-a-plugin-s-blueprint}
 
 プラグインで提供されているブループリントについて、変更を加えたいこともあります； そこにあるオプションに付け加えたり、移動させたり、削除したい場合です。  
 これは、単純ではありません: プラグインのブループリントは、ただの `form`-プロパティ以上のものを含み、暗黙的に拡張可能なものではないからです。  
@@ -385,7 +387,7 @@ form:
 
 そして、これはプラグインの configuration-ページでピックアップされるでしょう。
 
-<h2 id="onblueprintcreated-or-accessing-blueprint-data">onBlueprintCreated もしくはブループリントデータへのアクセス</h2>
+## onBlueprintCreated もしくはブループリントデータへのアクセス{#onblueprintcreated-or-accessing-blueprint-data}
 
 ブループリントは、ドット付きのフィールドで構成されるため、ブループリントからネストされたフィールドを取得するには、 `.` 記法ではなく、 `/` 記法を使います。
 

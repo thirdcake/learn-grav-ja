@@ -1,8 +1,10 @@
 ---
-title: 'イベントフック'
+title: イベントフック
 lastmod: '2025-08-07T00:00:00+09:00'
-description: Grav プラグインの実行順序や実行条件を制御するイベントフックという仕組みと、その全体像を解説します。
+description: 'Grav プラグインの実行順序や実行条件を制御するイベントフックという仕組みと、その全体像を解説します。'
 weight: 40
+params:
+    srcPath: /plugins/event-hooks
 ---
 前回の [プラグインチュートリアル](../03.plugin-tutorial/) の解説では、プラグインのプログラミングロジックが、2つのメソッドで作られていたことに気づいたかもしれません。  
 これらのメソッド `onPluginInitialized` と、 `onPageInitialized` はそれぞれ、 Grav のライフサイクルで利用可能な **イベントフック** に対応しています。
@@ -10,7 +12,7 @@ weight: 40
 Grav においてプラグインの力を完全に発揮するには、利用可能なイベントフックを、その呼ばれる順番や、それが呼ばれている間にできることも含めて、知っておく必要があります。  
 **イベントフック** は、 [Grav のライフサイクル](../05.grav-lifecycle/) と直接関係しています。
 
-<h2 id="event-order">イベントの順番</h2>
+## イベントの順番{#event-order}
 
 Grav 内のほとんどのイベントは、特定の順番で発火します。  
 プラグインを作る時、この順番を理解しておくことは重要です。
@@ -75,7 +77,7 @@ Grav 内のほとんどのイベントは、特定の順番で発火します。
 1. onHttpPostFilter (1.7)
 1. `PermissionsRegisterEvent`class (1.7)
 
-<h2 id="core-grav-event-hooks">Grav コアのイベントフック</h2>
+## Grav コアのイベントフック{#core-grav-event-hooks}
 
 Grav コアのイベントフックがあります。  
 ページを処理する間にトリガーします：
@@ -192,7 +194,7 @@ $scanBlueprintsAndTemplates = function () use ($grav) {
 
 上記の例では、`onGetPageTemplates` と `onGetPageBlueprints` フックの両方を使用して、プラグインが提供するリソース（テンプレートとブループリント）を Grav が継承やその他の用途で利用できるようにしています。
 
-<h2 id="twig-event-hooks">Twigイベントフック</h2>
+## Twigイベントフック{#twig-event-hooks}
 
 Twg には、独自のイベントフックが設定されています。
 
@@ -231,13 +233,13 @@ Twig がページを直接処理するような場合（たとえば、`process:
 サイト全体で Twig が処理する場面で使います。  
 ここで、処理中に Twig に使って欲しい変数を追加できます。
 
-<h2 id="collection-event-hooks">コレクション・イベントフック</h2>
+## コレクション・イベントフック{#collection-event-hooks}
 
 #### onCollectionProcessed
 
 コレクションが処理された後で、それを操作したいときに利用できます。
 
-<h2 id="page-event-hooks">ページ・イベントフック</h2>
+## ページ・イベントフック{#page-event-hooks}
 
 #### onBuildPagesInitialized
 

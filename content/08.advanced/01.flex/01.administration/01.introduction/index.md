@@ -1,12 +1,14 @@
 ---
-title: '導入'
+title: 導入
 lastmod: '2025-09-06T00:00:00+09:00'
 weight: 10
+params:
+    srcPath: /advanced/flex/administration/introduction
 ---
 このセクションでは、既存の **Flex ディレクトリ** を速やかに有効化し、 Grav 管理パネルに表示するまでの手順について、解説します。  
 具体例として、このデモのために、 **Flex Objects プラグイン** に含まれる **Contacts** flex ディレクトリを使用します。
 
-<h2 id="enabling-a-directory">ディレクトリの有効化</h2>
+## ディレクトリの有効化{#enabling-a-directory}
 
 カスタムの **Flex ディレクトリ** を有効化するには、管理パネルのサイドバーから、 **Plugins** > **Flex Objects** へ移動してください。
 
@@ -21,7 +23,7 @@ weight: 10
 
 ページのリロード後、 Grav の管理パネルメニューに **Contacts** という新しい項目が表示されているはずです。
 
-<h2 id="install-sample-data-optional">サンプルデータのインストール（オプション）</h2>
+## サンプルデータのインストール（オプション）{#install-sample-data-optional}
 
 今回の具体例のため、 **Contacts** flex ディレクトリ用のサンプルデータセットをコピーしたものとします。
 
@@ -29,7 +31,7 @@ weight: 10
 $ cp user/plugins/flex-objects/data/flex-objects/contacts.json user/data/flex-objects/contacts.json
 ```
 
-<h2 id="create-a-page">ページの作成</h2>
+## ページの作成{#create-a-page}
 
 **[管理パネルのページ](../../../../05.admin-panel/03.page/)** へ移動して、 [新しいページを追加](../../../../05.admin-panel/03.page/#adding-new-pages) してください。  
 以下の値を入力してください。
@@ -56,7 +58,7 @@ flex:
 > [!Tip]  
 > `Flex ディレクトリ` を指定しなかったとき、単一のディレクトリではなく、すべてのディレクトリからページが表示されます。
 
-<h2 id="display-the-page">ページを表示</h2>
+## ページを表示{#display-the-page}
 
 作成したページに移動してください。  
 **Contacts** を含む以下のようなページが表示されます。

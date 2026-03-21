@@ -1,12 +1,14 @@
 ---
-title: 'グループとパーミッション'
+title: グループとパーミッション
 lastmod: '2025-05-28T00:00:00+09:00'
 weight: 140
+params:
+    srcPath: /advanced/groups-and-permissions
 ---
 > [!Info]  
 > ユーザー管理については、 [Grav Admin FAQ](../../05.admin-panel/09.faq/#adding-and-managing-users) をご覧ください。
 
-<h2 id="defining-groups">グループの定義</h2>
+## グループの定義{#defining-groups}
 
 デフォルトでは、Grav はグループを提供しません。これらを定義する必要があります。
 
@@ -44,7 +46,7 @@ administrators:
 
 ここでは、3つのグループを定義しています。
 
-<h2 id="assigning-a-user-to-a-group">ユーザーをグループに割り当てる</h2>
+## ユーザーをグループに割り当てる{#assigning-a-user-to-a-group}
 
 すべてのユーザーは、グループに割り当てられます。
 
@@ -67,7 +69,7 @@ groups:
 
 管理パネルプラグインから、ユーザーのグループ情報を編集することもできます。
 
-<h2 id="permissions">パーミッション</h2>
+## パーミッション{#permissions}
 
 グループに割り当てられたユーザーは、グループのパーミッションを継承します。たとえば、 `site.paid` パーミッションを持つグループを定義するには、次のように追加します：
 
@@ -83,7 +85,7 @@ access:
 
 ユーザーが複数のグループに所属する場合、グループは、あるパーミッションを提供すればそれだけで、ユーザーにそのパーミッションが追加されます。
 
-<h3 id="fine-tuning-permissions-on-a-user-level">ユーザーレベルでの権限の微調整</h3>
+### ユーザーレベルでの権限の微調整{#fine-tuning-permissions-on-a-user-level}
 
 通常、パーミッションを、ユーザーレベルで微調整することもできます。グループによって、サイト全体のパーミッションを定義し、ユーザーレベルでそれを取り消せます。次のように：
 

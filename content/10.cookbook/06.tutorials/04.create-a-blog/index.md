@@ -1,12 +1,14 @@
 ---
-title: 'ブログを構築する'
+title: ブログを構築する
 lastmod: '2025-04-28T00:00:00+09:00'
 weight: 40
+params:
+    srcPath: /cookbook/tutorials/create-a-blog
 ---
 > [!Info]  
 > [https://getgrav.org/downloads/skeletons](https://getgrav.org/downloads/skeletons) からブログサイト用のスケルトンをダウンロードし、インストールするか、最低でも [https://github.com/getgrav/grav-skeleton-blog-site](https://github.com/getgrav/grav-skeleton-blog-site) リポジトリをチェックしておいてください。このサンプルサイトは、Antimatter テーマを使います。すでにブログ構造で機能している Grav サイトがあれば、行き詰まったときや、次に何をすれば良いかわからなくなったときに、助けになるでしょう。
 
-<h2 id="check-your-theme-provides-the-blog-and-item-page-templates">テーマがブログとアイテムページのテンプレートを提供しているかチェックしましょう</h2>
+## テーマがブログとアイテムページのテンプレートを提供しているかチェックしましょう{#check-your-theme-provides-the-blog-and-item-page-templates}
 
 シンプルに始めましょう：ブログページテンプレートをすでに提供しているテーマを選んでください。たとえば、 Antimatter, TwentyFifteen, Deliver, Lingonberry, Afterburner2, など他にも多数あります。  
 そのテーマがブログページテンプレートをすでに提供しているか、どうやってチェックしたら良いでしょうか？ `/user/themes/[あなたのテーマ]/templates` フォルダで、`blog.html.twig` ファイルや、 `item.html.twig` ファイルが存在しているか、チェックしてください。
@@ -15,17 +17,17 @@ weight: 40
 
 あなたのテーマに合わせて、マークアップを微調整する必要があるかもしれません。これから始めるのであれば、最良の方法はすでにこれらのテンプレートが提供されているテーマを使うことです。
 
-<h2 id="create-the-blog-pages-structure">ブログのページ構造を作りましょう</h2>
+## ブログのページ構造を作りましょう{#create-the-blog-pages-structure}
 
 ページ構造を作る方法は、いくつかあります。デフォルトでよりシンプルなの方法は、Blog タイプの親ページを作り、ブログ投稿ページをその子ページとして作ります。
 
-<h3 id="with-the-admin-plugin">管理パネルプラグインで</h3>
+### 管理パネルプラグインで{#with-the-admin-plugin}
 
 Blog タイプのページを作ってください。そのページは、ブログの "ホームページ" になり、ブログ投稿の一覧が表示されます。
 
 `Item` タイプの子ページを1つ以上作ってください。これらが、ブログの投稿ページです。
 
-<h3 id="manually">手作業で</h3>
+### 手作業で{#manually}
 
 pages/ フォルダに入ってください。`01.blog` ページを作ってください（あなたのメニュー構造によって、数字部分は変更してください）。そして、`blog.md` ファイルをそこに入れてください。  
 このファイルは、次のようなコンテンツになります：
@@ -76,7 +78,7 @@ content:
 
 今回の場合では、テーマは、ひとつのブログ投稿をレンダリングする部分的なテンプレート `partials/blog_item.html.twig` を含み、レンダリングする実際のブログ投稿を含む `子` オブジェクトを渡します。
 
-<h3 id="to-learn-more">より詳しく学ぶには</h3>
+### より詳しく学ぶには{#to-learn-more}
 
 - コレクション： [/content/collections/](../../../02.content/03.collections/)
 - リストページ： [/content/content-pages/#listing-page](../../../02.content/01.content-pages/#listing-page)

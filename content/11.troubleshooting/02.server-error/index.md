@@ -2,6 +2,8 @@
 title: 'Grav サーバーエラー'
 lastmod: '2025-05-09T00:00:00+09:00'
 weight: 20
+params:
+    srcPath: /troubleshooting/server-error
 ---
 ![](grav-server-error.png)
 
@@ -20,7 +22,7 @@ weight: 20
 > [!Tip]  
 > もし **管理パネル** プラグインをインストールしていたら、そこからサーバーエラーを確認することもできます。デバッガーがオフであっても、個々のエラーをクリックすると、デバッグページが表示されます。
 
-<h2 id="out-of-date-configuration">古い config 設定</h2>
+## 古い config 設定{#out-of-date-configuration}
 
 まず最初にやるべきことは、キャッシュのクリアです。これにより、最新の設定が適用されます：
 
@@ -31,7 +33,7 @@ bin/grav clearcache
 > [!Info]  
 > 先に進む前に、以下のような他のファイルパーミッション上の問題が無いことを確認してください。
 
-<h2 id="installation-and-configuration-issues">インストール問題と config 設定問題</h2>
+## インストール問題と config 設定問題{#installation-and-configuration-issues}
 
 - システム要件
 - ファイルパーミッション

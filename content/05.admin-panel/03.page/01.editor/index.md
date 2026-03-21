@@ -3,6 +3,8 @@ title: 'エディタ（Content タブ）'
 lastmod: '2025-08-19T00:00:00+09:00'
 description: 管理パネルのページ画面のコンテンツタブの使い方を解説します。
 weight: 10
+params:
+    srcPath: /admin-panel/page/editor
 ---
 ![Admin Page Editor](page-editor.png)
 

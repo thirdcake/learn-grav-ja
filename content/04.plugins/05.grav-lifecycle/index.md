@@ -1,8 +1,10 @@
 ---
-title: 'Gravのライフサイクル'
+title: Gravのライフサイクル
 lastmod: '2025-08-07T00:00:00+09:00'
-description: Grav 処理の開始から終わりまでの、主要な処理内容と、そこで発火するイベントについて解説します。
+description: 'Grav 処理の開始から終わりまでの、主要な処理内容と、そこで発火するイベントについて解説します。'
 weight: 50
+params:
+    srcPath: /plugins/grav-lifecycle
 ---
 > [!訳注]  
 > このページの内容は、色分けが無いととても見にくいのですが、追加 CSS の処理がうまくいかず、現状このような見た目になっています。基本的には、 [翻訳元のページ](https://learn.getgrav.org/plugins/grav-lifecycle) を参照してください。

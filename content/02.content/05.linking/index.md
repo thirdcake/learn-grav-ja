@@ -1,8 +1,10 @@
 ---
-title: 'ページリンク'
+title: ページリンク
 lastmod: '2025-07-25T00:00:00+09:00'
-description: Grav では、マークダウン記法に独自拡張を加えて、サイト内外のページへのリンクを、柔軟に設定できます。
+description: 'Grav では、マークダウン記法に独自拡張を加えて、サイト内外のページへのリンクを、柔軟に設定できます。'
 weight: 50
+params:
+    srcPath: /content/linking
 ---
 Grav には、たくさんの柔軟な方法でリンクできるので、あるページからサイト内の別ページ、もしくは別のサイトのページへリンクすることができます。  
 これまで HTML を使ってファイルをリンクしたり、あるいはファイルシステムをコマンドラインで使ったことがあれば、とても簡単に理解できるはずです。
@@ -27,7 +29,7 @@ Grav には、たくさんの柔軟な方法でリンクできるので、ある
 | `()`   | 丸カッコは、リンク先を囲みます。角カッコの直後に置く必要があります |
 | `../`  | リンクの中で使われ、親ディレクトリに移動することを意味します |
 
-<h3 id="slug-relative">スラッグによる相対リンク</h3>
+### スラッグによる相対リンク{#slug-relative}
 
 Grav では、サイト内リンクを、ファイル名やフォルダ名だけに限定しません。  
 ファイルのフロントマターに書いたスラッグによっても、ディレクトリ名などと同様に、リンクできます。  
@@ -61,7 +63,7 @@ Grav は、スラッグを生成するときにこの数字を無視します。
 
 `item.md` のフロントマターに、スラッグが指定されていると、デフォルトの値であるディレクトリ名（`green`）から、`tree-is-green` に置き換えられます。
 
-<h3 id="directory-relative">ディレクトリによる相対リンク</h3>
+### ディレクトリによる相対リンク{#directory-relative}
 
 **相対ディレクトリ** リンクは、現在ページからの相対的な位置にある目的地へリンクします。  
 これは、同じディレクトリ内の画像へのリンクのような、かんたんなものもありますし、いくつものディレクトリ階層を上り、特定のフォルダやファイルまで下っていくような、複雑なものもあります。
@@ -103,7 +105,7 @@ Grav は、スラッグを生成するときにこの数字を無視します。
 [link](../../02.green/01.grass)
 ```
 
-<h3 id="absolute">絶対リンク</h3>
+### 絶対リンク{#absolute}
 
 絶対リンクは、相対リンクに似ていますが、サイトの root ディレクトリからの相対位置を示します。  
 **Grav** においては、とくに **/user/pages/** ディレクトリが root になります。  
@@ -129,7 +131,7 @@ Grav は、スラッグを生成するときにこの数字を無視します。
 [link](/01.blue/01.sky)
 ```
 
-<h3 id="remote">サイト外リンク</h3>
+### サイト外リンク{#remote}
 
 サイト外へのリンクにより、 URL を使って、あらゆるファイルやドキュメントと直接つながることができます。  
 これは、あなたの所有するサイトコンテンツを含む必要はありません（そうすることは可能ですが）。  
@@ -146,14 +148,14 @@ Grav は、スラッグを生成するときにこの数字を無視します。
 [link](https://github.com)
 ```
 
-<h3 id="link-attributes">リンク属性</h3>
+### リンク属性{#link-attributes}
 
 マークダウン構文を利用して、リンクの属性を提供してくれる機能が提供されました。  
 これを使えば、 **class** 属性、 **id** 属性、 **rel** 属性、そして **target** 属性を、[Markdown Extra](https://michelf.ca/projects/php-markdown/extra/) を使うことなく利用できます。
 
 いくつかの例を示します：
 
-<h5 id="class-classes-attribute">クラス属性</h5>
+##### クラス属性{#class-classes-attribute}
 
 ```markdown
 [Big Button](../some-page?classes=button,big)
@@ -165,7 +167,7 @@ HTMLにすると次のようになります：
 <a href="/your/pages/some-page" class="button big">Big Button</a>
 ```
 
-<h5 id="id-attribute">ID属性</h5>
+##### ID属性{#id-attribute}
 
 ```markdown
 [Unique Button](../some-page?id=important-button)
@@ -177,7 +179,7 @@ HTMLにすると次のようになります：
 <a href="/your/pages/some-page" id="important-button">Unique Button</a>
 ```
 
-<h5 id="rel-attribute">Rel属性</h5>
+##### Rel属性{#rel-attribute}
 
 ```markdown
 [NoFollow Link](../some-page?rel=nofollow)
@@ -189,7 +191,7 @@ HTMLにすると次のようになります：
 <a href="/your/pages/some-page" rel="nofollow">NoFollow Link</a>
 ```
 
-<h5 id="target-attribute">Target属性</h5>
+##### Target属性{#target-attribute}
 
 ```markdown
 [Link in new Tab](../some-page?target=_blank)
@@ -201,7 +203,7 @@ HTMLにすると次のようになります：
 <a href="/your/pages/some-page" target="_blank">Link in new Tab</a>
 ```
 
-<h5 id="attribute-combinations">属性の組み合わせ</h5>
+##### 属性の組み合わせ{#attribute-combinations}
 
 ```markdown
 [Combinations of Attributes](../some-page?target=_blank&classes=button)
@@ -213,7 +215,7 @@ HTML にすると次のようになります：
 <a href="/your/pages/some-page" target="_blank" class="button">Combinations of Attributes</a>
 ```
 
-<h5 id="attribute-combinations-with-anchors">アンカー付きの属性の組み合わせ</h5>
+##### アンカー付きの属性の組み合わせ{#attribute-combinations-with-anchors}
 
 ```markdown
 [Element Anchor](../some-page?target=_blank&classes=button#element-id)
@@ -225,7 +227,7 @@ HTMLにすると次のようになります：
 <a href="/your/pages/some-page#element-id" target="_blank" class="button">Element Anchor</a>
 ```
 
-<h5 id="anchor-links-on-the-same-page">同一ページのアンカーリンク</h5>
+##### 同一ページのアンカーリンク{#anchor-links-on-the-same-page}
 
 ```markdown
 [Element Anchor](?classes=button#element-id)
@@ -239,7 +241,7 @@ HTML にすると次のようになります：
 
 注意： [Issue 1324](https://github.com/getgrav/grav/issues/1324#issuecomment-282587549) での議論のように、アンカーはクエリの _後に_ 来なければいけません。
 
-<h5 id="pass-through-of-non-supported-attributes">未サポートの属性を素通り</h5>
+##### 未サポートの属性を素通り{#pass-through-of-non-supported-attributes}
 
 ```markdown
 [Pass-through of 'cat' attribute](../some-page?classes=underline&cat=black)
@@ -251,7 +253,7 @@ HTML にすると次のようになります：
 <a href="/your/pages/some-page?cat=black" class="underline">Pass-through of 'cat' attribute</a>
 ```
 
-<h5 id="skip-all-attributes">すべての属性をスキップ</h5>
+##### すべての属性をスキップ{#skip-all-attributes}
 
 ```markdown
 [Skip all attributes](../some-page?classes=underline&rel=nofollow&noprocess)
@@ -263,7 +265,7 @@ HTML にすると次のようになります：
 <a href="/your/pages/some-page?rel=nofollow&classes=underline">Skip All attributes</a>
 ```
 
-<h5 id="skip-certain-attributes">特定の属性のみスキップ</h5>
+##### 特定の属性のみスキップ{#skip-certain-attributes}
 
 ```markdown
 [Skip Certain attributes](../some-page?id=myvariable&classes=underline&target=_blank&noprocess=id,classes)

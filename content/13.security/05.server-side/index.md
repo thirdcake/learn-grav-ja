@@ -1,15 +1,17 @@
 ---
-title: 'サーバーサイド'
+title: サーバーサイド
 lastmod: '2025-04-29T00:00:00+09:00'
 weight: 50
+params:
+    srcPath: /security/server-side
 ---
 Grav をサーバーサイドで防御するには、サーバーと PHP に適切なオプションを使用します。このガイドでは、Grav が実行されるサーバーの設定方法や、理想的な条件について解説するのではなく、Grav を安全にする tips やベストプラクティスを説明し、さらに、サーバーを安全にする方法について詳しく書かれたリソースへのリンクを紹介します。 **これは、本番サーバーに関するガイドで、ローカル環境は対象にしません。また、初心者ユーザーにはおすすめしない内容です**
 
-<h2 id="grav-and-default-configuration">Grav とデフォルトの config</h2>
+## Grav とデフォルトの config{#grav-and-default-configuration}
 
 For Grav, you should always use an up-to-date directory-specific configuration relevant to your server. These are found in the [GitHub repository](https://github.com/getgrav/grav/tree/develop/webserver-configs). Further, periodically update your installation of Grav as new security-patches are implemented in new versions - for details consult the [CHANGELOG](https://github.com/getgrav/grav/blob/develop/CHANGELOG.md).
 
-<h2 id="php-configuration">PHP の config</h2>
+## PHP の config{#php-configuration}
 
 Before meddling with PHP's configuration, be aware that most shared hosts that you rent hosting-space from will likely already have set up sensible, secure defaults. Also, in most cases they do not allow you to edit this yourself. Before disabling or changing any configuration, you should familiarize yourself with Grav's [requirements, including PHP-extensions](https://github.com/getgrav/grav/blob/develop/composer.json) and how changes will affect them.
 

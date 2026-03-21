@@ -1,8 +1,10 @@
 ---
 title: 'config 設定'
 lastmod: '2025-08-20T00:00:00+09:00'
-description: このページは、 acount>configuration と重複しています。
+description: 'このページは、 acount>configuration と重複しています。'
 weight: 50
+params:
+    srcPath: /admin-panel/page/configuration
 ---
 > [!訳注]  
 > このページの内容は、 [アカウント &gt; config 設定](../../03.accounts/03.configuration/) と同じで、画像もリンク切れしており、 管理パネルの Pages に configuration タブも無いので、コピペミスか何かだと思います。詳しい方がおられたら、教えてください。

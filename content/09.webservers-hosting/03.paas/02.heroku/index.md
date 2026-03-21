@@ -1,7 +1,9 @@
 ---
-title: 'Heroku'
+title: Heroku
 lastmod: '2025-07-16T00:00:00+09:00'
 weight: 20
+params:
+    srcPath: /webservers-hosting/paas/heroku
 ---
 Heroku は、 web アプリケーションのための、大変よく知られたホスティングサービスです。
 テスト目的の便利なフリープランがあり、ウェブサイトをデプロイする有料オプションがあります。

@@ -1,8 +1,10 @@
 ---
-title: 'マークダウン構文'
+title: マークダウン構文
 lastmod: '2025-07-24T00:00:00+09:00'
-description: Grav で使用されるマークダウン構文について、その書き方と、その見え方を、合わせて解説します。
+description: 'Grav で使用されるマークダウン構文について、その書き方と、その見え方を、合わせて解説します。'
 weight: 40
+params:
+    srcPath: /content/markdown
 ---
 率直にいって、 web コンテンツを書くのは面倒です。  
 WYSIWYG エディタは助けになりますが、それらはたびたび、ひどいコードとなり、ひどいだけでなく、見にくい web ページになってしまいます。
@@ -31,7 +33,7 @@ Grav は、最初から [Markdown](https://daringfireball.net/projects/markdown/
 > [!Info]  
 > これからいつでも参照できるように、このページをブックマークしてください！
 
-<h2 id="headings">見出し</h2>
+## 見出し{#headings}
 
 `h1` から `h6` までの見出しは、それぞれのレベルの `#` により作れます：
 
@@ -64,7 +66,7 @@ HTMLは、こうなります：
 <h6>h6 Heading</h6>
 ```
 
-<h2 id="comments">コメント</h2>
+## コメント{#comments}
 
 コメントは、 HTML と同じように書いてください
 
@@ -80,7 +82,7 @@ This is a comment
 This is a comment
 -->
 
-<h2 id="horizontal-rules">水平線</h2>
+## 水平線{#horizontal-rules}
 
 HTMLの `<hr>` 要素は、段落レベルの要素間で、「内容の区切り」を作ります。  
 マークダウンでは、次のように書きます：
@@ -97,7 +99,7 @@ ___
 
 ***
 
-<h2 id="body-copy">本文</h2>
+## 本文{#body-copy}
 
 通常のプレーンなテキストで書かれた本文は、 `<p></p>` タグで包まれて、 HTML にレンダリングされます。
 
@@ -115,7 +117,7 @@ Lorem ipsum dolor sit amet, graecis denique ei vel, at duo primis mandamus. Et l
 
 **改行** は、2つのスペースの後にリターンキーをすることによってできます。
 
-<h2 id="inline-html">インラインの HTML</h2>
+## インラインの HTML{#inline-html}
 
 HTML タグが作りたい場合（class を付けるようなとき）は、単に HTML を使ってください：
 
@@ -129,9 +131,9 @@ Paragraph in Markdown.
 Paragraph in Markdown.
 ```
 
-<h2 id="emphasis">強調</h2>
+## 強調{#emphasis}
 
-<h3 id="bold">太字</h3>
+### 太字{#bold}
 
 太字で強調したいとき、次の文章の部分は、 **太字のテキストでレンダリングされます** 。
 
@@ -149,7 +151,7 @@ HTML は、このようになります：
 <strong>rendered as bold text</strong>
 ```
 
-<h3 id="italics">斜体</h3>
+### 斜体{#italics}
 
 斜体で強調したいとき、次の文章の部分は、 _斜体のテキストでレンダリングされます_ 。
 
@@ -167,7 +169,7 @@ HTML は、このようになります：
 <em>rendered as italicized text</em>
 ```
 
-<h3 id="strikethrough">見え消し</h3>
+### 見え消し{#strikethrough}
 
 GFM（GitHubフレーバーのマークダウン）では、見え消しができます。
 
@@ -185,7 +187,7 @@ HTMLです：
 <del>Strike through this text.</del>
 ```
 
-<h2 id="blockquotes">引用ブロック</h2>
+## 引用ブロック{#blockquotes}
 
 他の文章のコンテンツを、自分の文章中に引用するためのものです。
 
@@ -223,14 +225,14 @@ Nunc augue augue, aliquam non hendrerit ac, commodo vel nisi.
 >> Sed adipiscing elit vitae augue consectetur a gravida nunc vehicula. Donec auctor
 odio non est accumsan facilisis. Aliquam id turpis in dolor tincidunt mollis ac eu diam.
 
-<h2 id="notices">注意書き</h2>
+## 注意書き{#notices}
 
 > [!Note]  
 > 引用ブロックを上書きした注意書き（`>>>`）はもう古く、非推奨です。[Markdown Notices](https://github.com/getgrav/grav-plugin-markdown-notices) という専用のプラグインを使ってください。
 
-<h2 id="lists">リスト</h2>
+## リスト{#lists}
 
-<h3 id="unordered">順番無しリスト</h3>
+### 順番無しリスト{#unordered}
 
 アイテムのリストで、順番が大事でないときに使います。
 
@@ -296,7 +298,7 @@ odio non est accumsan facilisis. Aliquam id turpis in dolor tincidunt mollis ac 
 </ul>
 ```
 
-<h3 id="ordered">順番ありリスト</h3>
+### 順番ありリスト{#ordered}
 
 アイテムのリストで、順番が大事であるときに使います。
 
@@ -361,9 +363,9 @@ odio non est accumsan facilisis. Aliquam id turpis in dolor tincidunt mollis ac 
 7. Aenean sit amet erat nunc
 8. Eget porttitor lorem
 
-<h2 id="code">コード</h2>
+## コード{#code}
 
-<h3 id="inline-code">1行コード</h3>
+### 1行コード{#inline-code}
 
 `` ` `` （バッククオート）でコード部分を囲んでください。
 
@@ -381,7 +383,7 @@ HTML です：
 <p>In this example, <code>&lt;section&gt;&lt;/section&gt;</code> should be wrapped with <strong>code</strong>.</p>
 ```
 
-<h3 id="indented-code">インデント・コード</h3>
+### インデント・コード{#indented-code}
 
 4文字以上のスペースで複数行のコードををインデントしてください。次のように：
 
@@ -414,7 +416,7 @@ HTML です：
 </pre>
 ```
 
-<h3 id="block-code-fences">ブロック・コード</h3>
+### ブロック・コード{#block-code-fences}
 
 言語属性付きの複数行のコードブロックを作るには、"fences" `` 3つの` `` を使ってください。
 
@@ -432,7 +434,7 @@ HTML です：
 </pre>
 ```
 
-<h3 id="syntax-highlighting">構文のハイライト</h3>
+### 構文のハイライト{#syntax-highlighting}
 
 GFM（GitHubフレーバーのマークダウン）は、構文のハイライトに対応しています。  
 有効化すると、最初の "fence" に、言語の拡張子をつけるだけで、自動的に構文のハイライトが適用されます。  
@@ -487,7 +489,7 @@ grunt.initConfig({
 > [!Tip]  
 > ハイライトさせるには、 [Highlight plugin](https://github.com/getgrav/grav-plugin-highlight) をインストールして、有効化する必要があります。これは jQuery を使っており、テーマでも読み込む必要があります。
 
-<h2 id="tables">表</h2>
+## 表{#tables}
 
 表は、それぞれのセルをパイプ（ `|` ）で区切って作ります。  
 そして、表のヘッダの下に、（バーで区切られた）ダッシュ（ `-` ）の行を）追加してください。  
@@ -536,7 +538,7 @@ grunt.initConfig({
 </table>
 ```
 
-<h3 id="right-aligned-text">表のテキストを右に揃える</h3>
+### 表のテキストを右に揃える{#right-aligned-text}
 
 ダッシュの行の右側にコロンを追加すると、その列は右揃えになります。
 
@@ -554,9 +556,9 @@ grunt.initConfig({
 | engine | engine to be used for processing templates. Handlebars is the default. |
 | ext    | extension to be used for dest files. |
 
-<h2 id="links">リンク</h2>
+## リンク{#links}
 
-<h3 id="basic-link">普通のリンク</h3>
+### 普通のリンク{#basic-link}
 
 ```txt
 [Assemble](https://assemble.io)
@@ -573,7 +575,7 @@ HTML:
 <a href="https://assemble.io">Assemble</a>
 ```
 
-<h3 id="add-a-title">タイトルをつけたリンク</h3>
+### タイトルをつけたリンク{#add-a-title}
 
 ```txt
 [Upstage](https://github.com/upstage/ "Visit Upstage!")
@@ -590,7 +592,7 @@ HTML:
 <a href="https://github.com/upstage/" title="Visit Upstage!">Upstage</a>
 ```
 
-<h3 id="named-anchors">アンカー・リンク</h3>
+### アンカー・リンク{#named-anchors}
 
 アンカーリンクは、同じページのアンカーポイントへジャンプする機能です。たとえば、次のようなそれぞれのチャプターは：
 
@@ -616,7 +618,7 @@ Content for chapter one.
 
 **注意** アンカータグの配置は、任意です。ここでは目立たないようにインラインにしており、機能します。
 
-<h2 id="images">画像</h2>
+## 画像{#images}
 
 画像は、リンクの構文に似ていますが、イクスクラメーションマーク（ `!` ）が最初に付きます。
 

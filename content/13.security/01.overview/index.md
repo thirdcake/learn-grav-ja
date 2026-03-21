@@ -1,7 +1,9 @@
 ---
-title: '概要'
+title: 概要
 lastmod: '2025-05-14T00:00:00+09:00'
 weight: 10
+params:
+    srcPath: /security/overview
 ---
 もし Grav またはその拡張機能に関連するセキュリティ上の問題を発見されたら、コア・チームにメールしてください（[contact@getgrav.org](mailto:contact@getgrav.org)）。速やかに対応します。
 

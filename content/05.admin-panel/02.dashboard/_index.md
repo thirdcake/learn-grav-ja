@@ -1,8 +1,10 @@
 ---
-title: 'ダッシュボード'
+title: ダッシュボード
 lastmod: '2025-08-11T00:00:00+09:00'
-description: Grav の管理パネルプラグインのダッシュボード画面の見方について解説します
+description: 'Grav の管理パネルプラグインのダッシュボード画面の見方について解説します'
 weight: 20
+params:
+    srcPath: /admin-panel/dashboard
 ---
 ![Admin Dashboard](grav-dashboard.png)
 
@@ -18,7 +20,7 @@ weight: 20
 `access.admin.pages` で、ページにアクセスできます。  
 `access.admin.statistics` で、サイト閲覧の統計情報が表示されます。
 
-<h3 id="cache-and-updates-checking">キャッシュとアップデートをチェック</h3>
+### キャッシュとアップデートをチェック{#cache-and-updates-checking}
 
 ![Admin Dashboard](grav-dashboard-cache.png)
 
@@ -38,7 +40,7 @@ Grav が新しいアップデート情報をチェックする方法は、これ
 > [!Info]  
 > アップデートは、管理パネルで新しいページが読み込まれるときにチェックされ、1日キャッシュされます。 Grav のすべてのキャッシュをクリアし、管理パネルで新しいページを読み込むと、自動的にアップデートチェックが行われます。
 
-<h3 id="maintenance-and-page-view-statistics">メンテナンスとページビューの統計</h3>
+### メンテナンスとページビューの統計{#maintenance-and-page-view-statistics}
 
 ![Admin Dashboard](grav-dashboard-maintenance.png)
 
@@ -62,7 +64,7 @@ Grav のコアは、その通知バーの **Update Grav Now** ボタンを選択
 **Page View Statistics** セクションでは、過去1日、1週間、1ヶ月（30日）間のサイトのフロントエンドのページビューを分かりやすく、シンプルに、ひと目でわかるトラフィックデータにして表示します。  
 過去1週間のページビューの統計は、その集の日付ごとに分けられた棒グラフで表示されます。
 
-<h3 id="latest-page-updates">最新のページ更新</h3>
+### 最新のページ更新{#latest-page-updates}
 
 ![Admin Dashboard](grav-dashboard-latest.png)
 

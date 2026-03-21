@@ -1,12 +1,14 @@
 ---
-title: 'テーマ設定'
+title: テーマ設定
 lastmod: '2025-08-05T00:00:00+09:00'
-description: テーマで設定したプロパティ値を、 Twig や PHP プログラム中で使用する方法を解説します
+description: 'テーマで設定したプロパティ値を、 Twig や PHP プログラム中で使用する方法を解説します'
 weight: 50
+params:
+    srcPath: /themes/theme-configuration
 ---
 Grav では、 Twig や PHP ファイルから、テーマ設定やブループリント（設計図）情報へ簡単にアクセスできます。
 
-<h2 id="accessing-theme-blueprint-information">ブループリント情報へのアクセス</h2>
+## ブループリント情報へのアクセス{#accessing-theme-blueprint-information}
 
 現在有効なテーマの `blueprints.yaml` ファイルの情報は、`theme` オブジェクトにあります。  
 具体例として、次のような `blueprins.yaml` ファイルを使いましょう：
@@ -43,7 +45,7 @@ $theme_author_email = $this->grav['theme']['author']['email'];
 $theme_license = $this->grav['theme']['license'];
 ```
 
-<h2 id="accessing-theme-configuration">テーマ設定へのアクセス</h2>
+## テーマ設定へのアクセス{#accessing-theme-configuration}
 
 テーマには、設定ファイルもあります。  
 テーマの設定ファイルは、 `<テーマ名>.yaml` というファイルです。  
@@ -94,7 +96,7 @@ $info = $this->grav['theme']->config()['info'];
 テーマの設定は無限です。  
 好きなように使ってください！ :)
 
-<h3 id="alternative-notation">その他の注意事項</h3>
+### その他の注意事項{#alternative-notation}
 
 次のような別名（エイリアス）も動きます：
 

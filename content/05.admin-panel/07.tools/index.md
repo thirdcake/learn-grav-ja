@@ -1,8 +1,10 @@
 ---
-title: 'ツール'
+title: ツール
 lastmod: '2025-08-24T00:00:00+09:00'
 description: 管理パネルのツール画面の機能を紹介します。
 weight: 70
+params:
+    srcPath: /admin-panel/tools
 ---
 ![Admin Tools](tools.png)
 
@@ -19,7 +21,7 @@ Grav そのものさえこの方法でアップロードでき、アップグレ
 どのようなインストールプロセスによる場合でも、このツールを利用する前には、 Grav のインストール内容のバックアップを取っておいてください。  
 このツールを使用して Grav すべてを変更しようとしている場合は、特にそうしてください。
 
-<h3 id="uploading">ローカル環境からアップロード</h3>
+### ローカル環境からアップロード{#uploading}
 
 ![Admin Tools](tools1.png)
 
@@ -33,7 +35,7 @@ Grav そのものさえこの方法でアップロードでき、アップグレ
 パッケージのインストールが成功したら、それを知らせるアラートが表示されます。  
 それで終わりです！
 
-<h4 id="remote-location">リモート環境からインストール</h4>
+#### リモート環境からインストール{#remote-location}
 
 ![Admin Tools](tools2.png)
 

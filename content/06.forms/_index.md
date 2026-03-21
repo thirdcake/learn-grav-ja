@@ -1,9 +1,11 @@
 ---
-title: 'フォーム'
+title: フォーム
 lastmod: '2025-05-04T00:00:00+09:00'
 description: この章では、管理パネルのフォームを拡張する方法や、ページコンテンツにカスタムフィールドを作成する方法について説明します。
-icon: /images/icons.svg#forms
+icon: '/images/icons.svg#forms'
 weight: 60
+params:
+    srcPath: /forms
 ---
 ### 第6章
 

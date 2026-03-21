@@ -1,8 +1,10 @@
 ---
-title: 'Twigのタグ・フィルタ・関数'
+title: Twigのタグ・フィルタ・関数
 lastmod: '2025-08-03T00:00:00+09:00'
-description: Twig で使えるタグ・フィルタ・関数についての概要を解説します。Twig オリジナルのものとは別に、 Grav で追加しているものもあります。
+description: 'Twig で使えるタグ・フィルタ・関数についての概要を解説します。Twig オリジナルのものとは別に、 Grav で追加しているものもあります。'
 weight: 40
+params:
+    srcPath: /themes/twig-tags-filters-functions
 ---
 Twig でもすでに、 [フィルタ、関数、タグ](https://twig.symfony.com/doc/1.x/#reference) の幅広いリストを提供していますが、 Grav でもテーマ処理を容易にする便利な追加機能を提供します。
 
@@ -40,7 +42,7 @@ Grav では、いくつかのカスタムフィルタを提供します。
 
 [カスタムフィルタの説明](02.filters/)
 
-<h2 id="functions">関数</h2>
+## 関数{#functions}
 
 Twig の関数は、 Twig に機能を実装するもうひとつの方法です。  
 フィルタに似ていますが、 `|` を通じて変数に働きかけるのではなく、関数を直接呼び出して、関数名の後のカッコに、対象の属性を渡すことではたらきます。  

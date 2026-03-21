@@ -1,8 +1,10 @@
 ---
-title: 'オプション'
+title: オプション
 lastmod: '2025-08-21T00:00:00+09:00'
-description: Grav の管理パネルプラグイン自体を、管理パネルのプラグインエリアでカスタマイズする方法を解説します。
+description: 'Grav の管理パネルプラグイン自体を、管理パネルのプラグインエリアでカスタマイズする方法を解説します。'
 weight: 10
+params:
+    srcPath: /admin-panel/plugins/options
 ---
 ![Admin Options](grav-options1.png)
 
@@ -11,7 +13,7 @@ weight: 10
 サイドバーの **Plugins** をクリック後、表示されたプラグイン一覧の中から **Admin Panel** のプラグイン名をクリックしてください。  
 新しくページが開いて、管理パネルでの運用体験をカスタマイズできる便利なオプションページが現れます。
 
-<h3 id="plugin-information">プラグイン情報</h3>
+### プラグイン情報{#plugin-information}
 
 ![Admin Options](grav-options2.png)
 

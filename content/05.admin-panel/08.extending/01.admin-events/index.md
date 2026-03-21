@@ -1,13 +1,15 @@
 ---
-title: '管理パネルのイベントフック'
+title: 管理パネルのイベントフック
 lastmod: '2025-08-24T00:00:00+09:00'
 description: 管理パネルプラグインで使えるイベントフックを紹介します。
 weight: 10
+params:
+    srcPath: /admin-panel/extending/admin-events
 ---
 管理パネルプラグインには、複数のイベントフックがあり、 [Grav のライフサイクル](../../04.plugins/05.grav-lifecycle/) 中に利用できます。  
 プラグインでイベントフックを使う方法は、 [Plugins](../../04.plugins/) にある一般的なプラグインのドキュメントをご覧ください
 
-<h2 id="available-admin-event-hooks">利用可能な管理パネルのイベントフック</h2>
+## 利用可能な管理パネルのイベントフック{#available-admin-event-hooks}
 
 * [onAdminTaskExecute](#onadmintaskexecute)
 * [onAdminCreatePageFrontmatter](#onadmincreatepagefrontmatter)
@@ -19,7 +21,7 @@ weight: 10
 * [onAdminAfterDelMedia](#onadminafterdelmedia)
 
 
-<h2 id="enabling-an-admin-event-hook">管理パネルのイベントフックの有効化</h2>
+## 管理パネルのイベントフックの有効化{#enabling-an-admin-event-hook}
 
 管理パネルのイベントフックは、コアのイベントフックの呼び出し方と [同じ方法](../../../04.plugins/03.plugin-tutorial/#step-7-determine-if-the-plugin-should-run) で呼び出せます。
 

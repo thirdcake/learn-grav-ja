@@ -1,10 +1,12 @@
 ---
-title: 'コンテンツタイプ'
+title: コンテンツタイプ
 lastmod: '2025-08-02T00:00:00+09:00'
-description: Grav では、さまざまな拡張子のファイルを、動的に配信できます。簡単なカスタム方法から、config 設定する上級者向けの方法まで解説します。
+description: 'Grav では、さまざまな拡張子のファイルを、動的に配信できます。簡単なカスタム方法から、config 設定する上級者向けの方法まで解説します。'
 weight: 120
+params:
+    srcPath: /content/content-types
 ---
-<h2 id="default-content-type">デフォルトのコンテンツタイプ</h2>
+## デフォルトのコンテンツタイプ{#default-content-type}
 
 ほとんどのウェブプラットフォームに特徴的なことですが、 Grav のデフォルトのコンテンツタイプは **HTML** です。  
 これはつまり、ユーザーがブラウザでルーティングをリクエストしたとき、たとえば `/blog/new-macbook-pros-soon` にアクセスしようとしたとき、このリクエストには拡張子がないので、 HTML ページを要求しているのだと Grav は判断します。  
@@ -12,14 +14,14 @@ weight: 120
 
 ユーザーが明示的に、`/blog/new-macbook-pros-soon.html` をリクエストしていたとしたら、 Grav は同じく `blog-item.html.twig` ファイルを探したでしょう。
 
-<h2 id="other-content-types">異なるコンテンツタイプ</h2>
+## 異なるコンテンツタイプ{#other-content-types}
 
 しかしながら、 Grav は柔軟なプラットフォームなので、（`xml`、`rss`、`json`、`pdf`などの）いかなるコンテンツタイプでも提供できます。それらが適切にレンダリングされる方法を提供してさえいれば。
 
 たとえば、 `.xml` 拡張子のリクエストを受け取った場合、たとえば： `/blog.xml` 通常の `blog.html.twig` テンプレートでレンダリングする代わりに、 Grav は `blog.xml.twig` を探します。  
 そのテンプレートが、適切な XML 構造を出力できるようにしておく必要はあります。
 
-<h3 id="example-with-json-files">JSON ファイルの例</h3>
+### JSON ファイルの例{#example-with-json-files}
 
 ファイルへの一般的なアクセス方法に、 `.json` 拡張子によるものがあります。  
 JSON ファイルでリクエストされたデータは、 JavaScript で簡単に処理できます。
@@ -63,7 +65,7 @@ JSON ファイルでリクエストされたデータは、 JavaScript で簡単
 これは適切な JSON であり、 JavaScript でかんたんにパースでき、処理できます。  
 楽勝です！
 
-<h2 id="custom-content-types">カスタム・コンテンツタイプ</h2>
+## カスタム・コンテンツタイプ{#custom-content-types}
 
 適切なコンテンツタイプでデータ送信するため、ブラウザが期待する MIME タイプを Grav に知らせる必要があります。  
 標準的なコンテンツタイプであれば、 `system/config/media.yaml` ファイルに定義されています。  

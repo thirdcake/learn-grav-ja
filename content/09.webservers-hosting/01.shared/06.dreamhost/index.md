@@ -1,7 +1,9 @@
 ---
-title: 'Dreamhost'
+title: Dreamhost
 lastmod: '2025-07-13T00:00:00+09:00'
 weight: 60
+params:
+    srcPath: /webservers-hosting/shared/dreamhost
 ---
 > [!訳注]  
 > このページの内容は、日本向けのサービスではないため、日本の方が読む機会はほとんどないと思います。また、 PHP のバージョンなどから判断して、かなり古い情報が書かれているようです。もし読む必要がある場合は、古い情報であることを理解したうえで、適宜読み替えてください。
@@ -12,19 +14,19 @@ weight: 60
 
 レンタルサーバーの低いサービスに注目しましょう。素晴らしい管理パネルが付いていますが、一般的な cPanel ではありません。しかし利用可能なカスタムパネルは、 SSH ユーザーの管理から実行 PHP のバージョンまであらゆる設定が可能です。
 
-<h2 id="configuring-php">PHP の設定</h2>
+## PHP の設定{#configuring-php}
 
 すべての（サブ）ドメインごとに PHP バージョンを設定可能です。このドキュメントを書いている時点では、デフォルトの PHP バージョンは 7.4 です。新しいバージョンを選択することも可能です（8.0 が利用可能）。そして、 Grav のシステム要件である 7.3.6 以上にすることをおすすめします。
 
 ![](php-version.png)
 
-<h2 id="enabling-ssh">SSH を有効化</h2>
+## SSH を有効化{#enabling-ssh}
 
 Users パネルを開いてください。 Dreamhost ユーザーはすべて、異なるアクセスレベルを持つことができます。あなたのユーザーアカウントに、 Shell User を設定してください。
 
 このドキュメントを書いている時点で、デフォルトの PHP CLI バージョンは 8.0.8 です。よって、 Grav の CLI ツールが適切に動かすためにすることは特にありません。
 
-<h2 id="install-and-test-grav">Grav のインストールとテスト</h2>
+## Grav のインストールとテスト{#install-and-test-grav}
 
 新しいドメインを追加したときは、 Dreamhost では、あなたのアカウントのフォルダの下に、それ用のフォルダが作成されます。
 
@@ -59,13 +61,13 @@ bin/gpm install admin
 
 ![](install-plugin.png)
 
-<h2 id="enable-opcache">OPCache を有効化</h2>
+## OPCache を有効化{#enable-opcache}
 
-<h3 id="on-dreamhost-shared-hosting-plans">Dreamhost レンタルサーバーのプランの場合</h3>
+### Dreamhost レンタルサーバーのプランの場合{#on-dreamhost-shared-hosting-plans}
 
 OPCache はデフォルトで有効です。
 
-<h3 id="on-dreamhost-vps-plans">Dreamhost VPS プランの場合</h3>
+### Dreamhost VPS プランの場合{#on-dreamhost-vps-plans}
 
 OPCache はサポートされていますが、デフォルトでは有効になっていません。手動で有効化する必要があります。 phprc ファイルをユーザーフォルダの下の `.php/7.4/phprc` に作成してください（数字は、お使いの PHP バージョンに合わせてください）。このファイルで、以下のコードを書き込んでください：
 

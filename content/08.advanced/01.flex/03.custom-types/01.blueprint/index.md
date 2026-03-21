@@ -1,8 +1,10 @@
 ---
-title: 'ブループリント'
+title: ブループリント
 lastmod: '2025-10-26T00:00:00+09:00'
-description: Flex ディレクトリの設定ファイルであるブループリントの書き方について解説します。
+description: 'Flex ディレクトリの設定ファイルであるブループリントの書き方について解説します。'
 weight: 10
+params:
+    srcPath: /advanced/flex/custom-types/blueprint
 ---
 **Flex ブループリント** の基本構造には、その Flex タイプがどんなものかを説明する `title` と、 `description` と、 `type` が含まれています。  
 さらに、 Flex ディレクトリを、異なる観点から設定する3つのセクション（ `config` と、 `blueprints` と `form` ）があります。

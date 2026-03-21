@@ -2,6 +2,8 @@
 title: 'Crucial Web Hosting'
 lastmod: '2025-07-12T00:00:00+09:00'
 weight: 30
+params:
+    srcPath: /webservers-hosting/shared/crucial
 ---
 > [!訳注]  
 > このページの内容は、日本向けのサービスではないため、日本の方が読む機会はほとんどないと思います。また、 PHP のバージョンなどから判断して、かなり古い情報が書かれているようです。もし読む必要がある場合は、古い情報であることを理解したうえで、適宜読み替えてください。
@@ -12,13 +14,13 @@ weight: 30
 
 このガイドでは、 **Tier-1 Split-Shared** ホスティングパッケージを設定しながら、 Grav を最適化して動かすための概要を解説します。
 
-<h2 id="picking-your-hosting-plan">ホスティングプランを決める</h2>
+## ホスティングプランを決める{#picking-your-hosting-plan}
 
 [Crucial Web Hosting](http://www.crucialwebhost.com/promo/1421086/) には、2つの主要なオプションがあります。 **Spit-Shared** と、 **Split-Dedicated** ホスティングです。Crucial によれば、これらのクラウドベースのオプションは、これまでのホスティングセットアップよりも優れており、より独立した、より良いパフォーマンスを提供します。
 
 Split-Shared ホスティングは、月額 $10 から $100 で、メモリーと SSD 容量で決まります。 Split Dedicated は、月額 $150 から $650 で、コアの数、メモリー、SSD 容量、そして帯域幅により決まります。今回は、ベースラインの月額 $10 オプションを使って、メモリー 266MB 及び SSD 容量 10GB とします。
 
-<h2 id="enabling-ssh">SSHを有効化</h2>
+## SSHを有効化{#enabling-ssh}
 
 まず、 cPanel の **Security** セクションにある **Toggle SSH Access** オプションを開いてください。この SSH アクセスページで、 **Enable SSH Access** ボタンをクリックします。
 
@@ -58,7 +60,7 @@ ssh crucial_username@crucial_servername
 
 言うまでもなく、 `crucial_username` には Crucial から提供されているユーザー名を、 `crucial_servername` には Crucial から提供されているサーバー名を入力する必要があります。
 
-<h2 id="configuring-php">PHP の設定</h2>
+## PHP の設定{#configuring-php}
 
 現在の Crucial Web Hosting のデフォルトは **PHP 5.3** で、Grav の最低要件を満たしていません。幸運なことに、 Crucial では、最新の **PHP 7.0** までサポートしています。より新しいものに PHP バージョンを上げましょう。
 
@@ -84,7 +86,7 @@ AddHandler application/x-httpd-php70 .php
 > [!Tip]  
 > Grav を実行するときに別の PHP バージョンを選択できます。たとえば PHP 5.6 を `x-httpd-php56` によって選択できます。
 
-<h2 id="setup-cli-php">CLI PHP のセットアップ</h2>
+## CLI PHP のセットアップ{#setup-cli-php}
 
 このドキュメントを書いている時点では、 Crucial のデフォルト PHP バージョンは **5.3** です。 Grav は PHP **5.5 以上** を必要とするため、 Grav がコマンドライン（ CLI ）で新しい PHP バージョンを使えるようにする必要があります。そのためには、 SSH でサーバーにアクセスし、新しいシンボリックリンクをあなたのユーザーの `bin/` フォルダ内の新しい PHP バージョンに作成してください：
 
@@ -119,7 +121,7 @@ Zend Engine v3.0.0, Copyright (c) 1998-2015 Zend Technologies
     with Zend OPcache v7.0.6-dev, Copyright (c) 1999-2015, by Zend Technologies
 ```
 
-<h2 id="install-and-test-grav">Grav のインストールとテスト</h2>
+## Grav のインストールとテスト{#install-and-test-grav}
 
 新しい SSH 機能を使って、（まだ未接続であれば） Crucial サーバーに SSH 接続し、最新バージョンの Grav をダウンロードし、展開し、テストしてみましょう！
 

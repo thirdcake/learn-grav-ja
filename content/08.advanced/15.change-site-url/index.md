@@ -2,6 +2,8 @@
 title: 'サイト URL の変更'
 lastmod: '2025-05-08T00:00:00+09:00'
 weight: 150
+params:
+    srcPath: /advanced/change-site-url
 ---
 system.yaml の `custom_base_url` を設定することで（もしくは、管理パネルの System 設定の Custom Base URL を設定することで）、フォルダ内の Grav をドメインルートにあるものとして実行できます。
 

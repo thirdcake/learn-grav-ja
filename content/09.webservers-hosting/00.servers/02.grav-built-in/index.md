@@ -2,6 +2,8 @@
 title: 'Grav ビルトイン Web サーバ'
 lastmod: '2025-05-09T00:00:00+09:00'
 weight: 20
+params:
+    srcPath: /webservers-hosting/servers/grav-built-in
 ---
 Grav を起動する最速の方法として、 PHP をインストールしていれば使える PHP のビルトインサーバーで、ターミナル / コマンドプロンプトから Grav を実行することができます。
 

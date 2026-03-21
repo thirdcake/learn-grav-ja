@@ -1,7 +1,9 @@
 ---
-title: 'DigitalOcean'
+title: DigitalOcean
 lastmod: '2025-07-14T00:00:00+09:00'
 weight: 10
+params:
+    srcPath: /webservers-hosting/vps/digitalocean
 ---
 > [!訳注]  
 > このページは、内容的に日本のサービスではないので、日本の方で、このページを読む人はほとんどいないと思いますが、以下の内容は Ubuntu バージョンの話などから類推するにかなり古い内容であり、もし読む必要がある場合でも、適宜読み替えながら読んでください。

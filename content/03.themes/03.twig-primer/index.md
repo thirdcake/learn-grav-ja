@@ -1,8 +1,10 @@
 ---
-title: 'Twig入門'
+title: Twig入門
 lastmod: '2025-08-03T00:00:00+09:00'
-description: Grav で利用される Twig の基本を学びましょう。基本的な構文や、タグ、フィルタ、関数などについて概要を解説します。
+description: 'Grav で利用される Twig の基本を学びましょう。基本的な構文や、タグ、フィルタ、関数などについて概要を解説します。'
 weight: 30
+params:
+    srcPath: /themes/twig-primer
 ---
 Twig とは、高速で、最適化された、 PHP 用のテンプレートエンジンです。  
 開発者にも、デザイナーにも、簡単にテンプレートが作れるように設計されています。
@@ -26,7 +28,7 @@ Twig の lexer と parser は、独自の [ドメイン固有言語（DSL）](ht
 基本的に、 Twig はユーザ・インターフェイスを制御するのに強力なエンジンです。  
 設定用の YAML と組み合わせれば、あらゆる開発者やあらゆるサイト管理者にとって、強力でシンプルなシステムになります。
 
-<h2 id="how-does-twig-work">Twig はどのように動くか？</h2>
+## Twig はどのように動くか？{#how-does-twig-work}
 
 Twig は、テンプレートデザインからすべての面倒を取り去ってくれます。  
 テンプレートは基本的にテキストファイルであり、それが評価されるときに、ある値に変換される _variables_ （変数）や _expressions_ （式）を持ちます。
@@ -73,14 +75,14 @@ Twig は拡張可能でもあります。
 タグや、フィルタ、テスト、オペレータ、グローバル変数、そして関数を追加できます。  
 より詳しい情報は、 [公式ドキュメント](https://twig.symfony.com/doc/1.x/advanced.html) をご覧ください。
 
-<h2 id="twig-syntax">Twig構文</h2>
+## Twig構文{#twig-syntax}
 
 Twig テンプレートには、いくつかの重要なコンポーネントがあり、それらによって、あなたがいったい何がしたいのかを Twig に理解させるのに役立ちます。  
 それらは、タグ、フィルタ、関数、そして変数です。
 
 これらの重要な道具について、すばらしいテンプレートづくりにいかに役立つかを、もっと詳しく見ていきましょう。
 
-<h3 id="tags">タグ</h3>
+### タグ{#tags}
 
 タグは、 Twig に何をやるべきかを伝えます。  
 どのコードを制御すべきで、どのコードを無視するべきかを指示できます。
@@ -88,7 +90,7 @@ Twig テンプレートには、いくつかの重要なコンポーネントが
 いくつかの種類のタグがあります。  
 それぞれは、特定の構文を持ちます。
 
-<h4 id="comment-tags">コメントタグ</h4>
+#### コメントタグ{#comment-tags}
 
 コメントタグ（`{# Insert Comment Here #}`）は、 Twig テンプレートファイルの中でのコメントになります。  
 このコメントは、エンドユーザーには見えなくなります。  
@@ -103,7 +105,7 @@ PHP の処理中にこれらは取り除かれ、 parse されることも、出
 {# Chocolate Chip Cookies are great! Don't tell anyone! #}
 ```
 
-<h4 id="output-tags">出力タグ</h4>
+#### 出力タグ{#output-tags}
 
 出力タグ (`{{ Insert Output Here }}`) は、評価され、出力を生成するために追加されます。  
 フロントエンドや、その他の生成コンテンツに表示させたいものを、ここに置いてください。
@@ -120,7 +122,7 @@ My name is {{ name|e }} and I love cookies.
 > [!Info]  
 > [システム設定](../../01.basics/05.grav-configuration/#twig) で、 `autoescape` を true にするのか、それともすべての変数ひとつひとつに対して `|e` フィルタを付けて、 [XSS攻撃](https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting) への対策のために忘れずにエスケープするのかは、とても重要な問題です。安全な HTML コンテンツにおいては、 `|raw` フィルタを使ってください。
 
-<h4 id="action-tags">実行タグ</h4>
+#### 実行タグ{#action-tags}
 
 実行タグは、 Twig 界のやり手（go-getters）です。  
 このタグは、実際に何かをやります。  
@@ -147,7 +149,7 @@ Twig テンプレート中の実行タグは、以下のようなものです：
 とても重要なことに、タグは、オーバーラップさせることはできません。  
 実行タグの中に出力タグを入れたり、その逆にしたりすることはできません。
 
-<h3 id="filters">フィルタ</h3>
+### フィルタ{#filters}
 
 フィルタは、適切な表示形式になっていないデータを、出力タグで使うときに、とても便利です。
 
@@ -158,7 +160,7 @@ Twig テンプレート中の実行タグは、以下のようなものです：
 {{ name|striptags|e }}
 ```
 
-<h3 id="functions">関数</h3>
+### 関数{#functions}
 
 関数によって、コンテンツを生成できます。  
 通常は引数を伴い、関数が呼び出された直後のカッコ内に引数を表します。  
@@ -170,7 +172,7 @@ Twig テンプレート中の実行タグは、以下のようなものです：
 {% endif %}
 ```
 
-<h2 id="resources">役立つ資料</h2>
+## 役立つ資料{#resources}
 
 * [Official Twig Documentation](https://twig.symfony.com/doc/1.x/)
 * [Twig for Template Designers](https://twig.symfony.com/doc/1.x/templates.html)

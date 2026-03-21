@@ -1,8 +1,10 @@
 ---
-title: '2要素認証'
+title: 2要素認証
 lastmod: '2025-08-24T00:00:00+09:00'
-description: Grav の管理パネルへのログイン時に、2要素認証を適用する方法を解説します。
+description: 'Grav の管理パネルへのログイン時に、2要素認証を適用する方法を解説します。'
 weight: 10
+params:
+    srcPath: /admin-panel/security/2fa
 ---
 ![Admin Profile](auth3.gif)
 
@@ -13,7 +15,7 @@ weight: 10
 たとえば、 [Authy](https://authy.com/) や [Google Authenticator](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en) があります。  
 このアプリは、認証コードのための仮想の鍵を束ねたものです。
 
-<h2 id="how-to-set-it-up">セットアップ方法</h2>
+## セットアップ方法{#how-to-set-it-up}
 
 ![](2fa_1.jpeg)
 
@@ -51,9 +53,9 @@ QR コードが 2FA シークレットキーとともに現れるので、書き
 
 そうだ、もし 2FA キーを変更したいなら、赤い大きな **Regenerate** ボタンを押すだけです。
 
-<h2 id="frequently-asked-questions">よくある質問</h2>
+## よくある質問{#frequently-asked-questions}
 
-<h4 id="what-happens-if-i-lose-access-to-my-2fa-device">2FA デバイスを無くしてしまいました。どうしたら良いですか？</h4>
+#### 2FA デバイスを無くしてしまいました。どうしたら良いですか？{#what-happens-if-i-lose-access-to-my-2fa-device}
 
 ご心配なく！ すべてを失ったわけではありません。
 
@@ -69,7 +71,7 @@ twofa_secret: RQX46XTTBK7QMMB6VR4RAUNWOYVXXTSR
 これで、ユーザー名とパスワードだけでサイトにログインできるようになります。  
 または、 **twofa_secret** を使って、お好みの認証アプリにアカウントを登録することもできます。
 
-<h4 id="what-if-my-2fa-secret-is-compromised">もし 2FA 情報が漏洩したら？</h4>
+#### もし 2FA 情報が漏洩したら？{#what-if-my-2fa-secret-is-compromised}
 
 2FA 情報が漏洩した可能性がある場合、管理パネルのユーザープロフィール設定にある赤く大きな **Regenerate** ボタンを選択することで、新しいキーを生成でき、古いものを無効にできます。
 

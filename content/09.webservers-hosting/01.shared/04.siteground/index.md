@@ -1,7 +1,9 @@
 ---
-title: 'SiteGround'
+title: SiteGround
 lastmod: '2025-07-12T00:00:00+09:00'
 weight: 40
+params:
+    srcPath: /webservers-hosting/shared/siteground
 ---
 > [!訳注]  
 > このページの内容は、日本向けのサービスではないため、日本の方が読む機会はほとんどないと思います。また、 PHP のバージョンなどから判断して、かなり古い情報が書かれているようです。もし読む必要がある場合は、古い情報であることを理解したうえで、適宜読み替えてください。
@@ -12,15 +14,15 @@ weight: 40
 
 このガイドでは、標準的な SiteGround シェアホスティングアカウントでの Grav の最適化方法の概要を解説します。
 
-<h2 id="picking-your-hosting-plan">ホスティングプランを決める</h2>
+## ホスティングプランを決める{#picking-your-hosting-plan}
 
 このドキュメントを書いている時点では、 SiteGround には [3つのホスティングオプション](http://www.siteground.com/web-hosting.htm) があり、ローエンドで月額 $3.95 から $14.95 の **GoGeek** プランまであります。ハイエンドなのに十分に安い **GoGeek** プランが特におすすめです。このプランはより良いサーバーハードウェアを提供し、サーバーでの _ユーザーの混雑_ を減らします。
 
-<h2 id="configuring">設定</h2>
+## 設定{#configuring}
 
 SiteGround では、コントロールパネルとして **cPanel** のフル機能を提供しています。これは、 **My Accounts** タブから直接アクセス可能です。
 
-<h2 id="enabling-ssh">SSH を有効化</h2>
+## SSH を有効化{#enabling-ssh}
 
 まず、 cPanel の **ADVANCED** セクションにある **SSH/Shell Access** オプションを開きます。
 
@@ -52,7 +54,7 @@ $ ssh siteground_username@siteground_servername -p18765
 
 言うまでもなく、 `siteground_username` には SiteGround から提供されているユーザー名を、 `siteground_servername` には SiteGround から提供されているサーバー名を入力する必要があります。 `-p18765` は、 SiteGround の SSH 実行ポートが非標準なので、必要です。
 
-<h2 id="enabling-php-opcache">PHP OPcache を有効化</h2>
+## PHP OPcache を有効化{#enabling-php-opcache}
 
 > [!Tip]  
 > アップデート [2016-03]: SiteGround サポートによると、 OPCache は PHP 7 から利用可能であり、5.5 ではできないようです。 OPCache はデフォルトで有効化され、それ以上の設定はセットアップ時に不要です。よって、以下の解説の一部は、もはや不要となりました。
@@ -77,7 +79,7 @@ zend_extension=opcache.so
 
 ![](phpinfo-2.png)
 
-<h2 id="install-and-test-grav">Grav のインストールとテスト</h2>
+## Grav のインストールとテスト{#install-and-test-grav}
 
 新しい SSH 機能で、（もし未接続であれば） SiteGround サーバーに SSH 接続し、最新バージョンの Grav をダウンロードし、 unzip し、テストしてみましょう！
 

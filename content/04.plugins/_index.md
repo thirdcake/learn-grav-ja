@@ -1,9 +1,11 @@
 ---
-title: 'プラグイン'
+title: プラグイン
 lastmod: '2025-08-06T00:00:00+09:00'
-description: Grav は、強力なプラグインアーキテクチャのおかげで、自由に機能を拡張できます。コア機能の強化から、便利な機能の追加まで、思いのままです。
-icon: /images/icons.svg#plugins
+description: 'Grav は、強力なプラグインアーキテクチャのおかげで、自由に機能を拡張できます。コア機能の強化から、便利な機能の追加まで、思いのままです。'
+icon: '/images/icons.svg#plugins'
 weight: 40
+params:
+    srcPath: /plugins
 ---
 ### 第4章
 
