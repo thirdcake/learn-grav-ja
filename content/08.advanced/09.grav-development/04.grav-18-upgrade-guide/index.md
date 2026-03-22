@@ -1,10 +1,12 @@
 ---
 title: 'Grav 1.8 ベータ へのアップデート'
 lastmod: '2025-11-08T00:00:00+09:00'
+description: 'Grav バージョン 1.8 ベータ版へのアップデートの方法を解説します。'
 weight: 40
 params:
     srcPath: /advanced/grav-development/grav-18-upgrade-guide
 ---
+
 > [!Note]  
 > ここは、現在作業中です。最新版の Grav 1.7 や 1.8ベータと不整合が含まれる可能性があります。
 

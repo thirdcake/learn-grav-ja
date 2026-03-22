@@ -1,30 +1,32 @@
 ---
 title: 'サイト URL の変更'
-lastmod: '2025-05-08T00:00:00+09:00'
+lastmod: 2026-03-22T17:33:10+09:00
+description: 'Grav が実際にはインストールされていないディレクトリで、 Grav を実行する方法を解説します。 Grav 側の system 設定と、web サーバー側のリダイレクト設定を組み合わせます。'
 weight: 150
 params:
     srcPath: /advanced/change-site-url
 ---
+
 system.yaml の `custom_base_url` を設定することで（もしくは、管理パネルの System 設定の Custom Base URL を設定することで）、フォルダ内の Grav をドメインルートにあるものとして実行できます。
 
-## Scenario 1, run in the domain root folder
+## シナリオ1：ドメインルートディレクトリで実行{#scenario-1-run-in-the-domain-root-folder}
 
-Grav is installed in `http://localhost:8080/grav-develop` but you want it to respond on `http://localhost:8080`
+Grav は、 `http://localhost:8080/grav-develop` にインストールされているが、 `http://localhost:8080` で実行したい場合
 
-In system.yaml, set
+system.yaml で、次のように設定してください：
 
 ```yaml
 custom_base_url: 'http://localhost:8080'
 ```
 
-and set the session path to the new Grav site path,
+そして、制作中の Grav サイトのパスに session path を設定してください：
 
 ```yaml
 session:
   path: /
 ```
 
-And in the domain root, set the redirect, e.g. with .htaccess:
+そして、ドメインのルートディレクトリで、リダイレクトを設定してください。例： .htaccess に、次のように：
 
 ```txt
 RewriteEngine On
@@ -32,26 +34,26 @@ RewriteCond %{REQUEST_URI} !^/grav-develop/
 RewriteRule ^(.*)$ /grav-develop/$1
 ```
 
-where `grav-develop` is the subfolder where Grav is.
+上記の `grav-develop` とは、 Grav の存在するサブディレクトリを指します。
 
-## Scenario 2, run in a different subfolder
+## シナリオ2：異なるサブディレクトリで実行{#scenario-2-run-in-a-different-subfolder}
 
-Grav is installed in `http://localhost:8080/grav-develop` but you want it to respond on `http://localhost:8080/xxxxx`
+Grav は `http://localhost:8080/grav-develop` にインストールされているが、 `http://localhost:8080/xxxxx` で実行したい場合：
 
-In system.yaml, set
+system.yaml に、次のように設定してください：
 
 ```yaml
 custom_base_url: 'http://localhost:8080/xxxxx'
 ```
 
-and set the session path to the new Grav site path,
+そして、制作中の Grav のサイトパスに session path を設定してください：
 
 ```yaml
 session:
   path: /xxxxx
 ```
 
-And in the new root folder, /xxxxx, set the redirect, e.g. with .htaccess:
+そして、新しいルートフォルダ（`/xxxxx`）にて、リダイレクトを設定してください。例： .htaccess に、次のように設定：
 
 ```txt
 RewriteEngine On
@@ -59,5 +61,5 @@ RewriteCond %{REQUEST_URI} !^/grav-develop/
 RewriteRule ^(.*)$ /grav-develop/$1
 ```
 
-where `grav-develop` is the sister subfolder where Grav is.
+`grav-develop` とは、 Grav の存在する姉妹サブディレクトリを指します。
 

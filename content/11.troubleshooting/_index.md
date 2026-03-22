@@ -2,14 +2,13 @@
 title: トラブルシューティング
 lastmod: '2025-05-04T00:00:00+09:00'
 description: 'Grav は、ほとんどの場合、そのまますぐに使い始めることができます。 ただし、まれにサーバーエラーや、その他の問題が発生することもあります。 この章では、そうした問題への対処方法が見つかるかもしれません。'
-icon: '/images/icons.svg#troubleshooting'
 weight: 110
+layout: 'chapter'
 params:
+    icon: '#troubleshooting'
     srcPath: /troubleshooting
+    chapter_number: 11
 ---
-### 第11章
-
-# トラブルシューティング
 
 **Grav** は、ほとんどの場合、そのまますぐに使い始めることができます。 ただし、まれに **サーバーエラー** や、その他の問題が発生することもあります。 この章では、そうした問題への対処方法が見つかるかもしれません。
 

@@ -1,11 +1,13 @@
 ---
 title: グループとパーミッション
 lastmod: '2025-05-28T00:00:00+09:00'
+description: 'Grav でのユーザーグループの作り方や、ユーザーへの適用方法を解説します。'
 weight: 140
 params:
     srcPath: /advanced/groups-and-permissions
 ---
-> [!Info]  
+
+> [!Caution]  
 > ユーザー管理については、 [Grav Admin FAQ](../../05.admin-panel/09.faq/#adding-and-managing-users) をご覧ください。
 
 ## グループの定義{#defining-groups}
@@ -97,6 +99,6 @@ access:
 
 ユーザーの yaml ファイルに追加します。
 
-> [!Info]  
+> [!Caution]  
 > 利用可能なパーミッションについて、より詳しくは、 [Grav 管理パネルの FAQ](../../05.admin-panel/09.faq/#managing-acl) をお読みください。
 

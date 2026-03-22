@@ -1,10 +1,12 @@
 ---
 title: 導入
 lastmod: '2025-09-06T00:00:00+09:00'
+description: 'Flex Objects の導入方法を解説します。あらかじめ Flex Objects プラグインに具体例として入っている Contacts データを使って、有効化の方法や編集方法、表示方法などを解説します。'
 weight: 10
 params:
     srcPath: /advanced/flex/administration/introduction
 ---
+
 このセクションでは、既存の **Flex ディレクトリ** を速やかに有効化し、 Grav 管理パネルに表示するまでの手順について、解説します。  
 具体例として、このデモのために、 **Flex Objects プラグイン** に含まれる **Contacts** flex ディレクトリを使用します。
 
