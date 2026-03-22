@@ -1,26 +1,43 @@
 ---
 title: ユーザー
-lastmod: '2025-04-29T00:00:00+09:00'
+lastmod: 2026-03-22T20:11:58+09:00
+description: 'Grav を管理する際のユーザーの取り扱いや、パーミッションの範囲、各ユーザーに求めるべきことなどをまとめています。'
 weight: 30
 params:
     srcPath: /security/users
 ---
-Grav を運用する際、管理パネルプラグインをインストールするかどうかに関わらず、留意してほしいベストプラクティスが、いくつかあります。それは、あなたの web サイトで、 *誰* が、 *何に* アクセス可能かに関することであり、この点について、リスク要因を制限しないことによる潜在的な危険性に関することです。
+
+Grav を運用する際、管理パネルプラグインをインストールするかどうかに関わらず、留意してほしいベストプラクティスが、いくつかあります。  
+それは、あなたの web サイトで、 *誰* が、 *何に* アクセス可能かに関することであり、この点について、リスク要因を制限しないことによる潜在的な危険性に関することです。
 
 ## Grav ユーザーと管理パネル{#grav-users-and-the-administration-panel}
 
-[管理パネル](../../05.admin-panel/) にアクセスするユーザーを作成するとき、そのユーザーのアクセス範囲を、まず考えましょう。
- The Admin-plugin offers solid [permissions](https://learn.getgrav.org/admin-panel/dashboard/profile#access-levels) that should be set to restrict what new users can do with the site. If you have many users, and some of them will only write content for the site, these should typically only need the `admin.pages`-permission -- as well as normal permissions like `admin.login`.
+[管理パネル](../../05.admin-panel/) にアクセスするユーザーを作成するとき、そのユーザーのアクセス範囲を、まず考えましょう。  
+Admin プラグインには、堅牢な [パーミッション](https://learn.getgrav.org/admin-panel/dashboard/profile#access-levels) が備わっており、これにより作成したユーザーがサイト上で何ができるのかを厳密に設定できます。  
+多くのユーザーを抱え、かつその多くがコンテンツを書くだけで良い場合、 `admin.pages` パーミッションと、 `admin.login` のようなノーマルなパーミッションのみが必要なだけです。
 
-Further, it is always a best practice that your users do not have only one password that they use everywhere. If someone stole their password, they could then log in everywhere. A good password is a strong password, but even a long sentence using words in the dictionary is easier to crack than a password made up of random symbols, letters and numbers. Any human will have trouble remembering a long, random password [though](https://xkcd.com/936/) -- much less several -- so the [best practice](https://support.google.com/accounts/answer/32040) is to use a [password manager](https://alternativeto.net/tag/encrypted-passwords/) and **never the same password twice**. Many people also like to have their browser remember the passwords for each site, and only remember one strong password to unlock these. To generate a random password, you need only open Notepad and furiously hit random keys on your keyboard.
+さらに、ユーザーたちが、あらゆる場所で使えるたった1つのパスワードを持たないことは、常にベストな対応です。  
+もし誰かが、パスワードを盗まれたら、サイトのすべてにログインできてしまいます。  
+良いパスワードとは、強いパスワードですが、辞書にある言葉を使った長い文章でさえ、ランダムな記号・文字・数字の羅列で作られたパスワードよりも簡単にハッキングされます。  
+[とはいえ](https://xkcd.com/936/) 、どんな人でも、長くランダムなパスワードを覚えておくのは難しいものです -- 複数覚えるならなおさらです -- そこで、 [ベストプラクティス](https://support.google.com/accounts/answer/32040) は、 [パスワードマネージャ](https://alternativeto.net/tag/encrypted-passwords/) を使い、 **決してパスワードを二回使い回さない** ことです。  
+また、多くの人は、ブラウザに各サイトのパスワードを覚えてもらい、そしてそのロックを解除する強いパスワードを1個だけ持っています。  
+ランダムなパスワードを生成するには、メモ帳を開いて、キーボードをランダムに打ち込むだけです。
 
-Tell your users to use random passwords and create one strong, long password that they'll remember. On occasion this long password should also be changed. And because the Admin-plugin features it, they should always use [2-Factor Authentication](https://learn.getgrav.org/admin-panel/security/2fa). To prevent brute force attacks against the Admin Panel, the administrator should also enable [Flood Protection](https://learn.getgrav.org/admin-panel/security/rate-limiting).
+ユーザーには、覚えておける、強く、長いパスワードを1つ作成し、ランダムなパスワードを複数使うように促してください。  
+また、この長いパスワードも変更する必要があります。  
+そして Admin プラグインには、 [2要素認証](../../05.admin-panel/06.security/01.2fa/) があるので、ユーザーは常にこれを利用すべきです。  
+Admin パネルへのブルートフォース攻撃を防ぐため、管理者は [フラッドプロテクション](../../05.admin-panel/06.security/02.rate-limiting/) も有効化すべきです。
 
-## サーバーのユーザーとwebマスター{#server-users-and-the-webmaster}
+## サーバーのユーザーと web マスター{#server-users-and-the-webmaster}
 
-The Webmaster is the person responsible for maintaining the website, and typically has access to it on a server-level. This person should of course [secure the server](https://learn.getgrav.org/security/server-side), but also ensure that he or she -- and anyone else with server-access -- only accesses the server in a secure manner. This means that **under no circumstance should the FTP-protocol be used**, only [SFTP](https://www.ssh.com/ssh/sftp/) with phrase-secured [key-pairs](https://www.ssh.com/ssh/public-key-authentication). The server host typically has information about disabling regular FTP and accessing the server through SFTP, creating key-pairs is [well documented](https://www.linode.com/docs/security/authentication/use-public-key-authentication-with-ssh/#generating-keys).
+web マスターは、 web サイトをメンテナンスする責任者であり、特にサーバーレベルのアクセス権を持ちます。  
+もちろん web マスターは、 [サーバーを安全に保つ](../05.server-side/) べきですが、彼もしくは彼女 -- そしてサーバーにアクセスする誰であれ -- は、安全な方法でサーバーにアクセスできるように確認すべきです。  
+これはつまり、 **どんな状況でも FTP プロトコルは使わない** ことであり、 [公開鍵暗号](https://www.ssh.com/ssh/public-key-authentication) による [SFTP](https://www.ssh.com/ssh/sftp/) のみが使われるべきです。  
+特にホスティングサーバー会社では、 FTP を無効化し、 SFTP アクセスにする方法や、公開鍵の生成方法などが [ドキュメント化](https://www.linode.com/docs/security/authentication/use-public-key-authentication-with-ssh/#generating-keys) されています。
 
-More broadly, consider whether any other user *needs* server-access. Every additional user with access is a potential risk, not just by their own behavior, but by the danger that if their keys or passwords are stolen others can access the server directly. In the same vein, **no users should have root access** to the server, and the system-user that runs PHP for Grav should be a separate user that only the system has access to.
+より広く、他のあらゆるユーザーがサーバーにアクセスすることが *必要か* は、検討してください。  
+アクセスできる追加ユーザーは、潜在的なリスクであり、彼ら自身の行動だけでなく、彼らの持つ鍵やパスワードが盗まれることで、サーバーに直接アクセスされるおそれもありえます。  
+同様に、サーバーの **ルートには、どのユーザーもアクセスできるべきではなく** 、 Grav の PHP を実行するシステムユーザーは、システムのみにアクセスできる別ユーザーとして分けられるべきです。
 
-Given how essential the server is for your website or service, taking care to protect it and its contents should be paramount.
+あなたの web サイトやサービスに、サーバーがいかに重要かを考えると、サーバーとそのコンテンツを守ることに、細心の注意を払うことは、最優先されるべきです。
 
