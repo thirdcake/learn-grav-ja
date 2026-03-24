@@ -1,15 +1,22 @@
 ---
 title: 推奨するセキュリティ設定
-lastmod: '2025-05-14T00:00:00+09:00'
+lastmod: 2026-03-24T19:43:34+09:00
+description: 'Grav でセキュリティを強化するための config 設定のおすすめを解説しています。'
 weight: 20
 params:
     srcPath: /security/configuration
 ---
+
 他のすべてのアプリケーションと同様、サイトを保護し、最適化するために config 設定をチェックするのは重要です。
 
 ## 本番サイト{#production-site}
 
-config 設定の強化により、本番環境のサイトのセキュリティを強化するのは重要です。これを実行するには、 `user/config/` にメインの config 設定を設定し、本番環境で利用したいデフォルト設定をします。そのうえで、開発環境ではこれらを上書きすることをおすすめします。 たとえば、 `user/env/localhost` もしくは `user/env/site.local` に上書きします。また、環境変数により、本番サイト設定を上書きすることもできます。たとえば、複数のドメインにまたがるマルチサイトで可能です。
+config 設定の強化により、本番環境のサイトのセキュリティを強化するのは重要です。  
+これを実行するには、 `user/config/` にメインの config 設定を設定し、本番環境で利用したいデフォルト設定をします。  
+そのうえで、開発環境ではこれらを上書きすることをおすすめします。  
+たとえば、 `user/env/localhost` もしくは `user/env/site.local` に上書きします。  
+また、環境変数により、本番サイト設定を上書きすることもできます。  
+たとえば、複数のドメインにまたがるマルチサイトで可能です。
 
 ### システム設定（`user/config/system.yaml`）{#system-configuration-user-config-system-yaml}
 
@@ -54,7 +61,7 @@ strict_mode:          # Test your site before changing these. Removes backward c
 
 ### システム設定（`user/env/localhost/config/system.yaml`）{#system-configuration-user-env-localhost-config-sys}
 
-> [!Tip]  
+> [!Note]  
 > localhost をあなたのローカルサーバー名に書きかえてください。
 
 ```yaml
@@ -86,3 +93,4 @@ strict_mode:          # These settings help you to keep your site updated to use
   twig_compat: false
   blueprint_compat: false
 ```
+
