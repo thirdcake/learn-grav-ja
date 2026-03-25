@@ -1,8 +1,21 @@
 {{ partial "breadcrumbs.html" . }}
 
 <div class="markdown mt-4 p-3">
-<h1>{{ .Title }}</h1>
+
+    <h1 class="p-3">
+        {{ with .Params.icon }}
+        <svg class="chapter-icon me-1">
+            <use
+                href="{{ "images/icons.svg" | relURL }}{{ . | safeHTML}}">
+            </use>
+        </svg>
+        {{ end }}
+        
+        {{ .Title }}
+    </h1>
+
 {{ .Content }}
+
 </div>
 
 

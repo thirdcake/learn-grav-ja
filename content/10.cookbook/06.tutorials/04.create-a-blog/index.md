@@ -1,12 +1,14 @@
 ---
 title: ブログを構築する
-lastmod: '2025-04-28T00:00:00+09:00'
+lastmod: 2026-03-25T17:55:41+09:00
+description: 'Grav で、 collection や frontmatter の仕組みを利用して、ブログを構築する方法や、その機能の仕組みなどを解説します。'
 weight: 40
 params:
     srcPath: /cookbook/tutorials/create-a-blog
 ---
-> [!Info]  
-> [https://getgrav.org/downloads/skeletons](https://getgrav.org/downloads/skeletons) からブログサイト用のスケルトンをダウンロードし、インストールするか、最低でも [https://github.com/getgrav/grav-skeleton-blog-site](https://github.com/getgrav/grav-skeleton-blog-site) リポジトリをチェックしておいてください。このサンプルサイトは、Antimatter テーマを使います。すでにブログ構造で機能している Grav サイトがあれば、行き詰まったときや、次に何をすれば良いかわからなくなったときに、助けになるでしょう。
+
+> [!Caution]  
+> [https://getgrav.org/downloads/skeletons](https://getgrav.org/downloads/skeletons) からブログサイト用のスケルトンをダウンロードし、インストールするか、少なくとも [https://github.com/getgrav/grav-skeleton-blog-site](https://github.com/getgrav/grav-skeleton-blog-site) リポジトリをチェックしておいてください。このサンプルサイトは、Antimatter テーマを使います。すでにブログ構造で機能している Grav サイトがあれば、行き詰まったときや、次に何をすれば良いかわからなくなったときに、助けになるでしょう。
 
 ## テーマがブログとアイテムページのテンプレートを提供しているかチェックしましょう{#check-your-theme-provides-the-blog-and-item-page-templates}
 
@@ -49,11 +51,11 @@ content:
 
 この場合、 system.yaml （管理パネルでは System 設定）で、 `home.hide_in_urls` オプション（管理パネルでは URLs の Hide Home ）を true にしてください。
 
-## The inner workings
+## 内部的な仕組み{#the-inner-workings}
 
 どのように機能するか、知りたいかもしれません。 テーマの `templates/` フォルダにある `blog.html.twig` ファイルのコンテンツが Blog のテンプレートで、これは単純に子ページを繰り返します。
 
-もっとの簡単な方法は：
+もっとも簡単な方法は：
 
 ```twig
 {% set collection = page.collection() %}

@@ -26,6 +26,12 @@
     <div class="d-flex justify-content-between align-items-center">
         <a class="d-block me-auto"
             href="{{ $node.RelPermalink }}">
+            {{ with $node.Params.icon }}
+            <svg class="me-1 chapter-icon">
+                <use
+                    href="{{ "images/icons.svg" | relURL }}{{ . | safeHTML }}"></use>
+            </svg>
+            {{ end }}
             {{ $node.Title }}
         </a>
 

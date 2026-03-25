@@ -5,6 +5,7 @@ weight: 50
 params:
     srcPath: /troubleshooting/invalid-security-token
 ---
+
 **問題：** 管理パネルにログインして、処理を実行中に、この Invalid Security Token エラーが表示されました。
 
 問題の原因はいくつか考えられますが、すべて session に関係します：

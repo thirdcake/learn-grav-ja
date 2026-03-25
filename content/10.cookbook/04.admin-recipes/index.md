@@ -1,6 +1,7 @@
 ---
 title: 管理パネルレシピ
 lastmod: '2025-05-17T00:00:00+09:00'
+description: 'Grav の管理パネルプラグインを利用する際に便利なテクニックをまとめて紹介します。'
 weight: 40
 params:
     srcPath: /cookbook/admin-recipes

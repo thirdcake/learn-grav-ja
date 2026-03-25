@@ -58,6 +58,14 @@ main {
     --bs-alert-link-color: var(--bs-dark-text-emphasis);
 }
 
+svg.chapter-icon {
+    width: 1.2em;
+    height: 1.2em;
+    fill: currentColor;
+    display: inline-block;
+    vertical-align: middle;
+}
+
 .heading-external-link a {
     padding-inline-start: .3rem;
 }

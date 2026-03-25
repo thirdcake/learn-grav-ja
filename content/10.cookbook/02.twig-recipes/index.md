@@ -1,10 +1,12 @@
 ---
-title: Twigレシピ
-lastmod: '2025-05-15T00:00:00+09:00'
+title: Twig レシピ
+lastmod: 2026-03-25T16:53:46+09:00
+description: 'Grav のテーマや Twig を利用する際に便利なテクニックをまとめて紹介します。'
 weight: 20
 params:
     srcPath: /cookbook/twig-recipes
 ---
+
 このページでは、 Twig テンプレートに関するさまざまな問題とその解決策を記載しています。
 
 ## ブログ投稿で最近の5つのリスト{#list-the-last-5-recent-blog-posts}

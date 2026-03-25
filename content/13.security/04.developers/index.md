@@ -1,11 +1,13 @@
 ---
 title: 開発者
-lastmod: '2025-04-29T00:00:00+09:00'
+lastmod: 2026-03-25T18:11:43+09:00
+description: 'Grav のプラグインやテーマを開発する人向けに、注意事項をまとめています。ただし、これだけで良いということではなく、必ず潜在的な問題が無いか考え続ける必要があります。'
 weight: 40
 params:
     srcPath: /security/developers
 ---
-Grav のプラグインやテーマを作るとき、ベストプラクティスに従うだけではなく、サイトへの潜在的な侵入者に攻撃の道を開けてしまうかどうかを考慮することも、重要です。Grav は flat-file CMS であり、依存関係がほとんどないので、類似のシステムに比べると、安全ですが、危険な経路が不注意で作り出されてしまうことはありえます。
+
+Grav のプラグインやテーマを開発するとき、ベストプラクティスに従うだけではなく、サイトへの潜在的な侵入者に攻撃の道を開けてしまわないかどうかを考慮することも、重要なことです。Grav は flat-file CMS であり、依存関係がほとんどないので、類似のシステムに比べると、安全ですが、危険な経路が不注意で作り出されてしまうことはありえます。
 
 ## ベストプラクティス{#best-practices}
 
@@ -13,10 +15,10 @@ Grav のプラグインやテーマを作るとき、ベストプラクティス
 
 - ユーザーが送信した情報を出力する Twig テンプレートを書くときは、常に [入力をエスケープしてください](https://twig.symfony.com/doc/1.x/filters/escape.html) 。また、同じことは [assets](https://twig.symfony.com/doc/1.x/filters/raw.html) についても言えます。
 - PHP コードは、入力も出力も [sanitize](https://php.net/manual/en/filter.filters.sanitize.php) してください。
-- ブループリントは、事前に用意された選択肢を好んで使うべきです： 可能ならば、ユーザーが、白紙から入力をするのではなく、選択肢から選べるようにしてあげましょう。
+- ブループリントは、事前に用意された選択肢を優先して使うべきです： 可能ならば、ユーザーが、白紙から入力をするのではなく、選択肢から選べるようにしてあげましょう。
 - メモリやプロセッサの使用量が、拡張機能にどのような影響を与えるのかを意識し、不当にシステムリソースを消費しないようにしてください。
 - テストされていないコードを書くのではなく、Grav の持つ機能と処理のエコシステムを使ってください。それ以上の必要がある場合は、戦場でテストされている [サードパーティ製のライブラリ](https://packagist.org/) を検討してください。
-- [安全でない PHP 関数](https://www.owasp.org/index.php/PHP_Security_Cheat_Sheet#Other_Injection_Cheat_Sheet) を使わないでください。また、セキュリティを主題とする [PHP 自身の推奨](https://php.net/manual/en/security.php) と、 PHP セキュリティ コンソーシアム ガイド（リンク切れ）をお読みください。
+- [安全でない PHP 関数](https://www.owasp.org/index.php/PHP_Security_Cheat_Sheet#Other_Injection_Cheat_Sheet) を使わないでください。また、セキュリティを主題とする [PHP 自身の推奨](https://php.net/manual/en/security.php) と、「PHP セキュリティ コンソーシアム ガイド（リンク切れ）」をお読みください。
 - スクリプトが失敗するときに、エラーレポートを使わず、特定のエラーに対する [例外（exceptions）](https://php.net/manual/en/language.exceptions.php) を使ってください。決して、例外や公開範囲のデバッグに、ユーザー情報や、インストール情報、システムデータを含めないでください。
 
 ## Flat-file CMS
