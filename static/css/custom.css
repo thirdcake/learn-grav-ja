@@ -17,7 +17,7 @@ pre {
     white-space: nowrap;
 }
 pre > code {
-    white-space: nowrap;
+    white-space: pre;
 }
 
 main {

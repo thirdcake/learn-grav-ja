@@ -1,6 +1,7 @@
 ---
 title: 'Invalid Security Token'
 lastmod: '2025-05-17T00:00:00+09:00'
+description: 'Grav CMS で Invalid Security Token エラーへの対処方法。セッション Cookie のトラブル、 HTTPS/SSL 設定の不整合、 PHP の tmp パス設定、ホスト名の制限など。'
 weight: 50
 params:
     srcPath: /troubleshooting/invalid-security-token

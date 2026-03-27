@@ -1,10 +1,12 @@
 ---
 title: '500 Internal Server Error'
 lastmod: '2025-05-13T00:00:00+09:00'
+description: 'Grav CMS の500内部サーバーエラー解決ガイド。 PHP の動作テスト方法、.htaccess やパーミッションの適切な設定、管理パネルでエラーが出る際のキャッシュ権限の修正など、サーバー側の不具合を特定して復旧させる方法を解説します。'
 weight: 30
 params:
     srcPath: /troubleshooting/internal-server-error
 ---
+
 > The server encountered an internal error or misconfiguration and was unable to complete your request.
 >
 > Please contact the server administrator at webmaster@localhost to inform them of the time this error occurred, and the actions you performed just before this error.

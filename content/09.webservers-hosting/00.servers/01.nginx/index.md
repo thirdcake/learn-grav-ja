@@ -1,10 +1,12 @@
 ---
 title: Nginx
 lastmod: '2025-05-27T00:00:00+09:00'
+description: 'Grav CMS を Nginx サーバーで利用する際の使い方を解説します。'
 weight: 10
 params:
     srcPath: /webservers-hosting/servers/nginx
 ---
+
 *Nginx* とは、 HTTP サーバーソフトウェアで、 web サーバーのコア機能と、プロキシー機能に特化しています。
 資源効率が良く、負荷がかかる中での応答性の良さから、とても人気です。
 Nginx は、worker process を生成し、それぞれが大量の接続を処理することができます。

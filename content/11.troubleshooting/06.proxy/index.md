@@ -1,10 +1,12 @@
 ---
 title: 'Proxy 問題'
 lastmod: '2025-05-09T00:00:00+09:00'
+description: 'Grav CMS をプロ棋士サーバー経由で利用する場合に、 GPM が失敗する問題があり、その問題への対処方法を解説します。'
 weight: 60
 params:
     srcPath: /troubleshooting/proxy
 ---
+
 プロキシーサーバー経由で GPM を実行すると、エラーになることがあります。
 
 cURL により、環境変数（ `http_proxy` や `https_proxy` ）としてプロキシーを設定できます。Grav に変更の必要はありません。

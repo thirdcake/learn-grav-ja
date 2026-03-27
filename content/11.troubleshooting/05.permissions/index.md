@@ -1,6 +1,7 @@
 ---
 title: パーミッション
 lastmod: '2025-05-19T00:00:00+09:00'
+description: 'Grav CMS のパーミッション最適化ガイド。実行ユーザーの確認コマンドから、 system.yaml での画像キャッシュ権限設定、 setup.php による umask 指定まで、サーバー環境に合わせた適切な権限構築とエラー回避のためのテクニックを掲載しています。'
 weight: 55
 params:
     srcPath: /troubleshooting/permissions

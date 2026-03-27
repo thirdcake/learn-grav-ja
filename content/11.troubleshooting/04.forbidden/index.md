@@ -1,10 +1,12 @@
 ---
 title: '403 Forbidden'
 lastmod: '2025-05-09T00:00:00+09:00'
+description: 'Grav CMS の意図しない 403 Forbidden 問題への解消方法です。 Windows サーバーで URL パラメータが制限される問題への設定変更（param_sep）や、管理パネルの動作を阻害するセキュリティルールの特定など、特定の環境下で起こるアクセス拒否の解決策を掲載しています。'
 weight: 40
 params:
     srcPath: /troubleshooting/forbidden
 ---
+
 ![](forbidden-403.png)
 
 **Windows** の **Apache** で、403 forbidden エラーが発生するという、曖昧ですが根の深い問題があります。

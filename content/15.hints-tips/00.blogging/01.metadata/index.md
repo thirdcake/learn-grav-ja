@@ -1,10 +1,12 @@
 ---
 title: 'Blog メタデータ'
 lastmod: '2025-04-26T00:00:00+09:00'
+description: 'SNS などでシェアされるときに、表現をリッチにするための OGP や 旧 Twitter カードなどの設定方法を解説します。'
 weight: 10
 params:
     srcPath: /hints-tips/blogging/metadata
 ---
+
 Grav をブログのプラットフォームとして使用する場合、Facebook や Twitter などのソーシャルメディアで投稿をシェアするときの説明や画像を入力するのに役立つメタデータを含めたいと思うでしょう。
 
 以下の情報を、Grav の[フロントマター](../../../02.content/02.headers/) に追記してください。

@@ -1,10 +1,12 @@
 ---
 title: 'Grav サーバーエラー'
 lastmod: '2025-05-09T00:00:00+09:00'
+description: 'Grav CMSのサーバーエラー解決ガイド。設定ミスやパーミッション問題など、予期せぬエラーの特定方法からキャッシュクリアの手順まで、迅速なリカバリーのためのチェックリストを掲載しています。'
 weight: 20
 params:
     srcPath: /troubleshooting/server-error
 ---
+
 ![](grav-server-error.png)
 
 サーバーエラーは、ほとんどいつも Grav の設定ミスによって起こります。何か予期しないことが起こり、そのせいで Grav がリカバリーできず、ページを提供できません。
@@ -19,7 +21,7 @@ params:
 * config 設定ファイルのフォーマットが無効であるために読み取れなかったエラー
 
 
-> [!Tip]  
+> [!Note]  
 > もし **管理パネル** プラグインをインストールしていたら、そこからサーバーエラーを確認することもできます。デバッガーがオフであっても、個々のエラーをクリックすると、デバッグページが表示されます。
 
 ## 古い config 設定{#out-of-date-configuration}
@@ -30,7 +32,7 @@ params:
 bin/grav clearcache
 ```
 
-> [!Info]  
+> [!Caution]  
 > 先に進む前に、以下のような他のファイルパーミッション上の問題が無いことを確認してください。
 
 ## インストール問題と config 設定問題{#installation-and-configuration-issues}

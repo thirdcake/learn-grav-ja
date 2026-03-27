@@ -1,10 +1,12 @@
 ---
 title: 一般的な問題
 lastmod: '2025-05-19T00:00:00+09:00'
+description: 'Grav CMS におけるよくある問題、一般的な問題について、解説します。'
 weight: 70
 params:
     srcPath: /troubleshooting/common-problems
 ---
+
 ここでは、 [Grav forum](https://getgrav.org/forum) や [Discord Chat server](https://chat.getgrav.org) であがった、よくある問題について情報提供します。問題をリスト化し、関係する解決策を1つの場所にまとめることで、時間の節約になります。
 
 ## GPMにつながらない{#cannot-connect-to-the-gpm}
