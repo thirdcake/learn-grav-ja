@@ -6,6 +6,7 @@ hasCJKLanguage = true
 [params]
     srcHost = 'https://learn.getgrav.org/18'
     githubHost = 'https://github.com/thirdcake/learn-grav-ja/blob/main/content'
+    images = ['images/ogimage.jpg']
 
 [outputs]
     home = ['html', 'rss']
