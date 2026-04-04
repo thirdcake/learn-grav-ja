@@ -14,7 +14,11 @@
     {{ partial "twitter_cards.html" . }}
 {{ end }}
 
-<link rel="icon" type="image/svg+xml" href="{{ "img/favicon.svg" | absURL }}">
+{{ if .Permalink }}
+  <link rel="canonical" href="{{ .Permalink }}">
+{{ end }}
+
+<link rel="icon" type="image/svg+xml" href="{{ "images/favicon.svg" | absURL }}">
 <link rel="stylesheet" href="{{ "css/bootstrap.min.css" | absURL }}">
 <link rel="stylesheet" href="{{ "css/custom.css" | absURL }}">
 
