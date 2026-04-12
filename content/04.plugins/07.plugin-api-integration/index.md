@@ -1,31 +1,33 @@
 ---
-title: API Integration
-lastmod: '2026-04-04T09:12:27+09:00'
+title: API 統合
+lastmod: '2026-04-12T19:48:34+09:00'
 description: 'API インテグレーション'
 weight: 70
 params:
     srcPath: /plugins/plugin-api-integration
 ---
 
-# Plugin API Integration
+[Grav API プラグイン](https://github.com/getgrav/grav-plugin-api) は、 Grav CMS に RESTful API を提供します。  
+あらゆるプラグインが、 `onApiRegisterRoutes` イベントを使って、自身のエンドポイントを登録することにより、この API を拡張できます。  
+このガイドでは、一歩ずつパターンを解説します。
 
-The [Grav API plugin](https://github.com/getgrav/grav-plugin-api) provides a RESTful API for Grav CMS. Any plugin can extend this API by registering its own endpoints via the `onApiRegisterRoutes` event. This guide walks through the pattern step by step.
+## 概要{#overview}
 
-## Overview
+API プラグインがインストールされているとき、ルーターの初期化中に `onApiRegisterRoutes` イベントを発火します。  
+あなたのプラグインは、このイベントを聞き、 `AbstractApiController` クラスを extends したコントローラークラスを指し示した独自のルーティングを登録します。  
+これにより、自由に、認証や、パーミッション、リクエストのパース、ページネーション、エラー処理を制御できます。
 
-When the API plugin is installed, it fires the `onApiRegisterRoutes` event during router initialization. Your plugin listens for this event and registers its own routes, pointing them to a controller class that extends `AbstractApiController`. This gives you authentication, permissions, request parsing, pagination, and error handling for free.
+## 前提条件{#prerequisites}
 
-## Prerequisites
+- Grav API プラグインがインストールされ、有効化されていること
+- あなたのプラグインに、 `composer.json` があり、 PSR-4 設定で `classes/` ディレクトリをオートロードすること
+- あなたのプラグインに `autoload()` メソッドがあり、 `vendor/autoload.php` を読み込めること
 
-- Grav API plugin installed and enabled
-- Your plugin must have a `composer.json` with PSR-4 autoloading for its `classes/` directory
-- Your plugin must have an `autoload()` method that loads its `vendor/autoload.php`
+## 段階的なガイド{#step-by-step-guide}
 
-## Step-by-Step Guide
+### 1. イベントリスナーの追加{#1-add-the-event-listener}
 
-### 1. Add the Event Listener
-
-In your plugin's main PHP file, subscribe to the `onApiRegisterRoutes` event:
+あなたのプラグインのメインの PHP ファイルで、 `onApiRegisterRoutes` イベントを登録してください：
 
 ```php
 public static function getSubscribedEvents()
@@ -37,9 +39,9 @@ public static function getSubscribedEvents()
 }
 ```
 
-### 2. Register Routes
+### 2. ルーティング登録{#2-register-routes}
 
-In the event handler, use the `ApiRouteCollector` to register your endpoints:
+イベントハンドラ内で、 `ApiRouteCollector` を使って、エンドポイントを登録してください：
 
 ```php
 public function onApiRegisterRoutes(Event $event): void
@@ -55,7 +57,7 @@ public function onApiRegisterRoutes(Event $event): void
 }
 ```
 
-The route collector supports `get()`, `post()`, `patch()`, `put()`, `delete()`, and `group()` for prefixed groups:
+ルーティングは、接頭辞グループ内で  `get()`, `post()`, `patch()`, `put()`, `delete()`, 及び `group()` をサポートします：
 
 ```php
 $routes->group('/my-plugin', function ($group) {
@@ -65,9 +67,9 @@ $routes->group('/my-plugin', function ($group) {
 });
 ```
 
-### 3. Create the API Controller
+### 3. API コントローラーの作成{#3-create-the-api-controller}
 
-Create a controller class in your plugin's `classes/` directory that extends `AbstractApiController`:
+`AbstractApiController` クラスを extends したコントローラークラスを、あなたのプラグインの `classes/` ディレクトリ内に作成してください：
 
 ```php
 <?php
@@ -142,16 +144,16 @@ class MyApiController extends AbstractApiController
 }
 ```
 
-### 4. Available Helpers
+### 4. 利用可能なヘルパー{#4-available-helpers}
 
-`AbstractApiController` provides these methods out of the box:
+`AbstractApiController` は、デフォルトで次のようなメソッドを提供します：
 
-| Method | Purpose |
+| メソッド | 目的 |
 |--------|---------|
-| `requirePermission($request, $perm)` | Check user has permission, throw 403 if not |
-| `getUser($request)` | Get the authenticated user |
-| `getRequestBody($request)` | Parse JSON request body |
-| `getRouteParam($request, $name)` | Get a FastRoute route parameter |
+| `requirePermission($request, $perm)` | パーミッションをチェックし、無ければ 403 を投げる |
+| `getUser($request)` | 認証されたユーザーを取得 |
+| `getRequestBody($request)` | リクエストを JSON パースする |
+| `getRouteParam($request, $name)` |  Get a FastRoute route parameter |
 | `getPagination($request)` | Parse `page`/`per_page` query params |
 | `getSorting($request, $fields)` | Parse `sort`/`order` query params |
 | `getFilters($request, $fields)` | Parse filter query params |
@@ -161,9 +163,9 @@ class MyApiController extends AbstractApiController
 | `fireEvent($name, $data)` | Fire a Grav event |
 | `getApiBaseUrl()` | Get the API base URL for link generation |
 
-### 5. Response Helpers
+### 5. レスポンスヘルパー{#5-response-helpers}
 
-Use the static methods on `ApiResponse` and `ErrorResponse`:
+`ApiResponse` 及び `ErrorResponse` の静的メソッドを利用できます：
 
 ```php
 use Grav\Plugin\Api\Response\ApiResponse;
@@ -175,9 +177,9 @@ ApiResponse::noContent();                      // 204, empty body
 ApiResponse::paginated($data, $total, $page, $perPage, $baseUrl);  // With pagination meta
 ```
 
-### 6. Exception Handling
+### 6. 例外処理{#6-exception-handling}
 
-Throw typed exceptions — they're automatically caught and converted to RFC 7807 error responses:
+型付きの例外を投げます -- それらは、自動的にキャッチされ、 RFC 7807 エラーレスポンスに変換されます：
 
 ```php
 use Grav\Plugin\Api\Exceptions\NotFoundException;
@@ -193,9 +195,9 @@ throw new ConflictException("Resource modified.");        // 409
 throw new ApiException(503, 'Unavailable', 'Detail');     // Custom status
 ```
 
-### 7. Ensure Autoloading
+### 7. オートロードの確約{#7-ensure-autoloading}
 
-Your plugin **must** have an `autoload()` method so Grav loads your classes:
+あなたのプラグインは、 class を読み込むための `autoload()` メソッドを **持たなければいけません** ：
 
 ```php
 public function autoload(): \Composer\Autoload\ClassLoader
@@ -204,7 +206,7 @@ public function autoload(): \Composer\Autoload\ClassLoader
 }
 ```
 
-And a `composer.json` with PSR-4 mapping:
+そして、 `composer.json` で PSR-4 を指定してください：
 
 ```json
 {
@@ -216,9 +218,9 @@ And a `composer.json` with PSR-4 mapping:
 }
 ```
 
-Run `composer dump-autoload` after adding new classes.
+新しい class を追加した後は、 `composer dump-autoload` を実行してください。
 
-## API Documentation
+## API ドキュメント{#api-documentation}
 
 ### Helios-Compatible Docs
 
@@ -466,7 +468,7 @@ your-plugin/
 │       └── {component-id}.js     # Web component script
 ```
 
-## Real-World Examples
+## 実例{#real-world-examples}
 
 - **Email Plugin** — Registers `/email/send` and `/email/test` endpoints
 - **License Manager** — Registers full CRUD for `/licenses` with format validation
