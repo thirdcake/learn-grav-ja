@@ -1,6 +1,6 @@
 ---
 title: 'API 開発者ガイド'
-lastmod: '2026-04-12T19:58:50+09:00'
+lastmod: '2026-04-13T18:18:03+09:00'
 description: 'プラグイン開発者が Grav API を利用するときのガイドを解説します。'
 weight: 50
 params:
@@ -22,31 +22,31 @@ params:
 
 ## Web Components を利用したカスタム Admin フィールド{#custom-admin-fields-via-web-components}
 
+次世代 Admin は、クラシック Admin と同様、プラグインの構成フォームを、 blueprint スキーマを利用して表示します。  
+標準的なフィールドタイプ（テキスト、トグル、セレクト、配列、リスト、その他）は、自動で機能します。
 
-Admin-next renders plugin configuration forms using blueprint schemas, just like the classic admin. Standard field types (text, toggle, select, array, list, etc.) work automatically.
+**カスタムフィールドタイプ** （標準的なタイプでは制御できない特別な UI を持つフィールド）のため、プラグインには、次世代 Admin で読み込める **Web コンポーネント** を積み込めます。
 
-For **custom field types** — fields with specialized UI that standard types can't handle — plugins can ship **Web Components** that admin-next loads on demand.
+### 使い方{#how-it-works}
 
-### How It Works
+1. 次世代 Admin が、 blueprint 内の未知のフィールドタイプを発見する
+1. そのプラグインが、 API レスポンスでカスタムフィールドを宣言しているか確認する
+1. 見つかったら、 API から JavaScript ファイルを取得する
+1. その JavaScript は、カスタム要素（Custom Element）を定義している。
+1. 次世代 Admin は、その要素をマウントし、プロパティとイベントを使って通信する
 
-1. Admin-next encounters an unknown field type in a blueprint
-2. It checks if the plugin declared custom fields in its API response
-3. If found, it fetches the JavaScript file from the API
-4. The JavaScript defines a Custom Element
-5. Admin-next mounts the element and communicates via properties and events
+### ファイル規約{#file-convention}
 
-### File Convention
+Web コンポーネント JavaScript ファイルは、次の場所に置いてください：
 
-Place web component JavaScript files at:
-
-```
+```txt
 your-plugin/
   admin-next/
     fields/
-      yourfieldtype.js      # One JS file per custom field type
+      yourfieldtype.js      # カスタムフィールドタイプ1つにつき、 JS 1ファイル
 ```
 
-When admin-next loads a plugin's detail page, the API automatically discovers files in `admin-next/fields/` and includes them in the response:
+次世代 Admin が、プラグインの詳細ページを読み込むとき、 API は自動的に `admin-next/fields/` 内のファイルを探し、レスポンスの中にそれらを含めます：
 
 ```json
 {
@@ -57,9 +57,9 @@ When admin-next loads a plugin's detail page, the API automatically discovers fi
 }
 ```
 
-### Web Component Contract
+### Web コンポーネント契約{#web-component-contract}
 
-Each JavaScript file must define a Custom Element using the tag name provided via `window.__GRAV_FIELD_TAG`:
+各 JavaScript ファイルは、 `window.__GRAV_FIELD_TAG` によるタグ名を使用したカスタム要素を定義しなければいけません：
 
 ```javascript
 const TAG = window.__GRAV_FIELD_TAG;
@@ -90,16 +90,17 @@ class YourFieldType extends HTMLElement {
 customElements.define(TAG, YourFieldType);
 ```
 
-**Properties** (set by admin-next):
-- `field` — The blueprint field definition object (label, help, options, validate, etc.)
-- `value` — The current field value
+**プロパティ** （次世代 Admin が設定する）：
+- `field` -- ブループリントのフィールド定義オブジェクト（label, help, options, validate, その他）
+- `value` -- 現在のフィールド値
 
-**Events** (emitted by your component):
-- `change` — `CustomEvent` with `detail` set to the new value
+**Events** （あなたの作成したコンポーネントから発火する）：
+- `change` -- `detail` に新しい値を持つ `CustomEvent`
 
-### Accessing the API
+### API へアクセス{#accessing-the-api}
 
-Your web component can call API endpoints. Authentication details are available via globals:
+あなたの web コンポーネントは、 API エンドポイントを呼び出せます。  
+認証の詳細は、グローバル変数を使って利用できます。
 
 ```javascript
 // API connection details (set by admin-next before loading your script)
@@ -133,9 +134,10 @@ async function apiGet(path) {
 }
 ```
 
-### Modals and Overlays
+### モーダルとオーバーレイ{#modals-and-overlays}
 
-If your field needs a modal (e.g., a picker dialog), append it to `document.body` rather than rendering it inside the shadow DOM. This avoids overflow constraints from the form layout:
+あなたの作成するフィールドに、モーダルが必要な場合（たとえば、ピックアップダイアログのような場合）、シャドウ DOM 内にレンダリングするのではなく、 `document.body` に追加してください。  
+これにより、フォームレイアウトからのオーバーフローを防げます。
 
 ```javascript
 _openModal() {
@@ -151,11 +153,11 @@ _closeModal() {
 ```
 
 > [!WARNING]  
-> When rendering in `document.body`, your CSS will be affected by the host page's styles (including Tailwind CSS). Use unique class prefixes and explicit property values to avoid conflicts. In particular, Tailwind v4 sets `* { min-height: 0 }` which can collapse elements — add `min-height: auto` to your containers.
+> `document.body` 内でのレンダリングは、ホストページのスタイル（Tailwind CSS を含む）の影響を受けます。衝突を防ぐため、独自のクラス接頭辞を使い、プロパティ値を明示してください。特に、 Tailwind v4 では `* {min-height: 0}` を設定しており、これにより要素を壊す可能性があります -- あなたのコンテナに `min-height: auto` を追加してください。
 
-### Sharing Code Between Old and New Admin
+### 新旧 Admin 間でのコードの共有{#sharing-code-between-old-and-new-admin}
 
-Plugin authors can share business logic between the classic Twig/jQuery admin and admin-next web components:
+プラグイン制作者は、Twig/jQuery の旧 Admin と、web コンポーネンツの次世代 Admin 間で、ビジネスロジックを共有できます：
 
 ```
 your-plugin/
@@ -171,15 +173,16 @@ your-plugin/
                              # Can import from ../../admin/lib/
 ```
 
-The `admin/lib/` directory holds framework-agnostic logic. Both the jQuery-based fields and web components import from it.
+`admin/lib` ディレクトリに、フレームワークに依存しないロジックを置きます。  
+jQuery ベースのフィールドも、 web コンポーネンツも、ここからインポートします。
 
-## Real-World Example: Code Syntax Highlighter
+## 実例：コード構文ハイライト{#real-world-example-code-syntax-highlighter}
 
-The [Codesh plugin](https://github.com/trilbymedia/grav-plugin-codesh) provides two custom field types as a reference implementation:
+[Codesh プラグイン](https://github.com/trilbymedia/grav-plugin-codesh) では、リファレンス実装として2つのカスタムフィールドタイプを提供します：
 
-### Custom API Endpoints
+### カスタム API エンドポイント{#custom-api-endpoints}
 
-Codesh registers its own endpoints for theme and grammar management:
+Codesh は、自身のエンドポイントをテーマと文法管理用に登録します：
 
 ```php
 // In codesh.php
@@ -195,14 +198,14 @@ public function onApiRegisterRoutes(Event $event): void
 }
 ```
 
-### Custom Field: Theme Picker (`codeshtheme`)
+### カスタムフィールド：テーマピッカー（`codeshtheme`）{#custom-field-theme-picker-codeshtheme}
 
-A visual theme selector with code preview cards:
+code プレビューカードによるヴィジュアルテーマセレクター：
 
-- **File**: `admin-next/fields/codeshtheme.js`
-- **Blueprint usage**: `type: codeshtheme` with `variant: dark` or `variant: light`
-- **Features**: Modal grid with 62+ themes, syntax-highlighted code previews, search, dark/light/custom filters, import/delete for custom themes
-- **API calls**: `GET /codesh/themes`, `POST /codesh/themes/import`, `DELETE /codesh/themes/{name}`
+- **ファイル**: `admin-next/fields/codeshtheme.js`
+- **Blueprint での使い方**: `type: codeshtheme` with `variant: dark` or `variant: light`
+- **機能**: 62以上のテーマを持つモーダルグリッド、構文をハイライトしたコードプレビュー、検索、dark/light/custom フィルタ、テーマカスタマイズのためのimport/delete
+- **API 呼び出し**: `GET /codesh/themes`, `POST /codesh/themes/import`, `DELETE /codesh/themes/{name}`
 
 ```yaml
 # In blueprints.yaml
@@ -214,31 +217,32 @@ theme_dark:
   default: helios-dark
 ```
 
-### Custom Field: Grammar List (`codeshgrammarlist`)
+### カスタムフィールド：文法リスト（`codeshgrammarlist`）{#custom-field-grammar-list-codeshgrammarlist}
 
-A multi-column display of available TextMate grammars:
+TextMate 文法が利用できる複数カラム表示：
 
-- **File**: `admin-next/fields/codeshgrammarlist.js`
-- **Blueprint usage**: `type: codeshgrammarlist`
-- **Features**: 4-column responsive layout, import button for custom grammars, delete for custom entries, shows aliases
-- **API calls**: `GET /codesh/grammars`, `POST /codesh/grammars/import`, `DELETE /codesh/grammars/{slug}`
+- **ファイル**: `admin-next/fields/codeshgrammarlist.js`
+- **Blueprint での使い方**: `type: codeshgrammarlist`
+- **機能**: 4カラムのレスポンシブレイアウト、カスタム文法のためのインポートボタン、カスタム入力の削除、エイリアスの表示
+- **API 呼び出し**: `GET /codesh/grammars`, `POST /codesh/grammars/import`, `DELETE /codesh/grammars/{slug}`
 
-### Key Patterns from Codesh
+### Codesh から学ぶ重要パターン{#key-patterns-from-codesh}
 
-1. **Separate API controller** — `classes/ApiController.php` handles all REST endpoints
-2. **Reuses existing managers** — `ThemeManager` and `GrammarManager` are used by both the classic admin and API controller
-3. **File upload handling** — Falls back to `$_FILES` when PSR-7 `getUploadedFiles()` returns empty
-4. **Modal in document.body** — The theme picker appends its modal to `document.body` to escape shadow DOM constraints
-5. **Single-pass tokenized highlighting** — Uses a single regex with alternation groups for syntax highlighting to avoid self-matching
+1. **独立した API Controller** — `classes/ApiController.php` が、すべての REST エンドポイントを制御する
+2. **既存のマネージャーを再利用** — `ThemeManager` 及び `GrammarManager` は、旧 Admin 及び API Controller の両方で使われる
+3. **ファイルアップロード制御** — PSR-7 の `getUploadedFiles()` が何も返さない場合、 `$_FILES` にフォールバックする
+4. **document.body 内のモーダル** — テーマピッカーは、シャドウ DOM 制約を避けるため、そのモーダルを `document.body` に追加する
+5. **シングルパストークン化ハイライト** — 構文ハイライトに、自己一致を避けるため、 `|` グループを持つ単一正規表現を使う
 
-## Custom Admin Pages
+## カスタム Admin ページ
 
-Beyond custom field types, plugins can register their own **full pages** in the admin-next sidebar. This lets plugins provide dedicated management interfaces — like the License Manager's license editing page — without modifying admin-next itself.
+カスタムフィールドタイプを超えて、プラグインは、次世代 Admin のサイドバーに、独自の **フルページ** を登録できます。  
+このことにより、プラグインは、次世代 Admin それ自体の修正をすることなく、専用の管理インターフェースを提供できます （License Manager のライセンス編集ページのように）
 
-There are two rendering modes:
+2つのレンダリングモードがあります：
 
-- **Blueprint mode** — The plugin provides a Grav blueprint, and admin-next renders the form automatically. Best for data-driven pages (settings, key-value editors, configuration panels).
-- **Component mode** — The plugin provides a full-page web component. Best for completely custom UIs that don't map to a standard form.
+- **Blueprint モード** — プラグインは Grav ブループリントを提供し、次世代 Admin が自動でフォームをレンダリングする。データ-ドリブンページ（設定、キー・バリューエディタ、config パネル）にピッタリです。
+- **Component モード** — プラグインはフルページの web コンポーネントを提供する。標準的なフォームでは表示できない、完全にカスタマイズされた UI に最適です。
 
 ### Sidebar Registration
 
