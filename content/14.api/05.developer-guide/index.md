@@ -1,6 +1,6 @@
 ---
 title: 'API 開発者ガイド'
-lastmod: '2026-04-13T18:18:03+09:00'
+lastmod: '2026-04-16T19:25:32+09:00'
 description: 'プラグイン開発者が Grav API を利用するときのガイドを解説します。'
 weight: 50
 params:
@@ -244,9 +244,9 @@ TextMate 文法が利用できる複数カラム表示：
 - **Blueprint モード** — プラグインは Grav ブループリントを提供し、次世代 Admin が自動でフォームをレンダリングする。データ-ドリブンページ（設定、キー・バリューエディタ、config パネル）にピッタリです。
 - **Component モード** — プラグインはフルページの web コンポーネントを提供する。標準的なフォームでは表示できない、完全にカスタマイズされた UI に最適です。
 
-### Sidebar Registration
+### サイドバー登録{#sidebar-registration}
 
-To add an entry to the admin-next sidebar, subscribe to the `onApiSidebarItems` event and append your item:
+次世代 Admin サイドバーにエントリーを追加するには、 `onApiSidebarItems` イベントに登録し、アイテムを追加してください：
 
 ```php
 public static function getSubscribedEvents()
@@ -271,23 +271,25 @@ public function onApiSidebarItems(Event $event): void
 }
 ```
 
-**Sidebar item properties:**
+**サイドバーアイテムのプロパティ**
 
-| Property   | Type    | Required | Description |
+| プロパティ | 型      | 必須かどうか | 説明 |
 |------------|---------|----------|-------------|
-| `id`       | string  | yes      | Unique identifier for this sidebar item |
-| `plugin`   | string  | yes      | The owning plugin's slug |
-| `label`    | string  | yes      | Display name shown in the sidebar |
-| `icon`     | string  | yes      | FontAwesome icon class (e.g. `fa-key`) |
-| `route`    | string  | yes      | Admin-next route path (e.g. `/plugin/license-manager`) |
-| `priority` | integer | no       | Sort order; higher values appear earlier (default: 0) |
-| `badge`    | string  | no       | Optional badge text or count shown next to the label |
+| `id`       | string  | yes      | このサイドバーアイテムで単一の識別子 |
+| `plugin`   | string  | yes      | 紐づくプラグインの slug |
+| `label`    | string  | yes      | サイドバーに表示される名前 |
+| `icon`     | string  | yes      | FontAwesome のアイコンの class (例： `fa-key`) |
+| `route`    | string  | yes      | 次世代 Admin のルートパス (例： `/plugin/license-manager`) |
+| `priority` | integer | no       | 並び替え順序； 大きい値ほど上に表示される (デフォルト： 0) |
+| `badge`    | string  | no       | オプションのバッジテキストまたはラベルの隣に表示されるカウント |
 
-Admin-next calls `GET /sidebar/items` on load. The API fires `onApiSidebarItems`, collects all items from plugins, and returns them.
+次世代 Admin は読み込み時、 `GET /sidebar/items` を呼び出します。  
+API は、 `onApiSidebarItems` で発火し、プラグインからすべてのアイテムを集め、これらを返します。
 
-### Page Definition
+### ページ定義{#page-definition}
 
-When a user navigates to a plugin page, admin-next calls `GET /gpm/plugins/{slug}/page` to get the page definition. Subscribe to `onApiPluginPageInfo` to provide it:
+ユーザーがプラグインページに移動したとき、次世代 Admin は、ページの定義を取得するため、 `GET /gpm/plugins/{slug}/page` を呼び出します。  
+これを提供するには、 `onApiPluginPageInfo` に登録してください：
 
 ```php
 public static function getSubscribedEvents()
@@ -339,68 +341,72 @@ public function onApiPluginPageInfo(Event $event): void
 ```
 
 > [!NOTE]
-> Always check `$event['plugin']` before setting the definition. Every plugin listening to `onApiPluginPageInfo` receives every request — only respond when the slug matches yours.
+> 定義を設定する前に、常に `$event['plugin']` をチェックしてください。すべての `onApiPluginPageInfo` をリッスンしているプラグインは、すべてのリクエストを受信するため slug があなたのプラグインと適合したときのみ応答するようにしてください。。
 
-#### Blueprint Mode
+#### ブループリントモード{#blueprint-mode}
 
-Set `page_type` to `'blueprint'` and provide:
+`page_type` を `'blueprint'` に設定し、提供してください：
 
-| Property        | Description |
+| プロパティ      | 説明 |
 |-----------------|-------------|
-| `blueprint`     | Name of the blueprint file (without `.yaml`) in `admin/blueprints/` |
-| `data_endpoint` | API path that returns current data in blueprint-compatible format |
-| `save_endpoint` | API path that receives a PATCH with the form data |
+| `blueprint`     | `admin/blueprints/` 内のブループリントファイルの（`.yaml` を除いた）名前 |
+| `data_endpoint` | ブループリント互換のフォーマットで現在のデータを返す API パス |
+| `save_endpoint` | フォームデータとともに PATCH を受信する API パス |
 
-Admin-next fetches the blueprint via `GET /blueprints/plugins/{plugin}/pages/{pageId}`, loads the current data from `data_endpoint`, renders the form, and sends saves to `save_endpoint`.
+次世代 Admin は、 `GET /blueprints/plugins/{plugin}/pages/{pageId}` を使ってブループリントを呼び出し、現在のデータを `data_endpoint` から読み込み、フォームをレンダリングし、そして `save_endpoint` へ保存データを送ります。
 
-The blueprint file lives in the standard Grav location:
+ブループリントファイルは、標準的な Grav 配置の中にあります：
 
-```
+```txt
 your-plugin/
   admin/
     blueprints/
       your-page.yaml       # Standard Grav blueprint YAML
 ```
 
-#### Component Mode
+#### コンポーネントモード{#component-mode}
 
-Set `page_type` to `'component'` and place a JavaScript file at:
 
-```
+`page_type` を `'component'` に設定し、 JavaScript ファイルを次の場所に置いてください：:
+
+```txt
 your-plugin/
   admin-next/
     pages/
       your-plugin.js       # Full-page web component
 ```
 
-Admin-next fetches the script via `GET /gpm/plugins/{slug}/page-script`, sets the tag name via `window.__GRAV_PAGE_TAG`, and mounts the element in the content area. The same globals (`__GRAV_API_SERVER_URL`, `__GRAV_API_PREFIX`, `__GRAV_API_TOKEN`) are available for API calls.
+次世代 Admin は、 `GET /gpm/plugins/{slug}/page-script` を利用してスクリプトを取得し、 `window.__GRAV_PAGE_TAG` を利用してタグ名を設定し、コンテンツエリア内の要素をマウントします。  
+API 呼び出しにｈ，同じグローバル変数（ `__GRAV_API_SERVER_URL`, `__GRAV_API_PREFIX`, `__GRAV_API_TOKEN` ）が利用できます。
 
-You can also use **both modes together**: set `page_type` to `'blueprint'` and also ship a `pages/{slug}.js` file. The API response will include `has_custom_component: true`, letting admin-next render the blueprint form alongside custom component sections.
+**両方のモードが一緒に** 利用可能です： `page_type` を `'blueprint'` に設定し、同時に `pages/{slug}.js` を載せられます。  
+API レスポンスは、 `has_custom_component: true` を含み、次世代 Admin は、ブループリントをカスタムコンポーネントセクションからレンダリングできます。
 
-### Action Buttons
+### アクションボタン{#action-buttons}
 
-The `actions` array defines buttons rendered in the page header toolbar. Each action is an object with these properties:
+`actions` 配列は、ページヘッダーツールバーにレンダリングされるボタンに利用できます。  
+各アクションは、以下のプロパティを持つオブジェクトです：
 
-| Property   | Type    | Description |
+| プロパティ | 型      | 説明 |
 |------------|---------|-------------|
-| `id`       | string  | Unique action identifier |
-| `label`    | string  | Button text |
-| `icon`     | string  | FontAwesome icon class |
-| `primary`  | boolean | If `true`, this is the main save action (uses form data, calls `save_endpoint`) |
-| `upload`   | boolean | If `true`, clicking opens a file picker and POSTs the file to `endpoint` |
-| `download` | boolean | If `true`, clicking triggers a file download from `endpoint` |
-| `endpoint` | string  | API path for upload/download actions |
-| `confirm`  | string  | If set, shows a confirmation dialog with this message before executing |
+| `id`       | string  | 独立したアクションの識別子 |
+| `label`    | string  | ボタンテキスト |
+| `icon`     | string  | FontAwesome アイコンクラス |
+| `primary`  | boolean | `true` のとき、これがメインの保存アクションになる（フォームデータを使い、 `save_endpoint` を呼び出す） |
+| `upload`   | boolean | `true` のとき、クリックしてファイルピッカーを開き、 `endpoint` にファイルを POST する |
+| `download` | boolean | `true` のとき、クリックして `endpoint` からファイルをダウンロードする |
+| `endpoint` | string  | アップロード・ダウンロードアクションへの API パス |
+| `confirm`  | string  | 設定すると、実行前にこのメッセージの確認が表示される |
 
-A page typically has one `primary` save button plus optional import/export or custom actions.
+一般的なページでは、1つの `primary` 保存ボタンと、オプションでインポート・エクスポートもしくはカスタムアクションを持ちます。
 
-### Real-World Example: License Manager
+### 実例： ライセンス管理{#real-world-example-license-manager}
 
-The [license-manager plugin](https://github.com/getgrav/grav-plugin-license-manager) is a complete reference implementation of a custom admin page using blueprint mode.
+[ライセンス管理プラグイン](https://github.com/getgrav/grav-plugin-license-manager) は、ブループリントモードを使ったカスタム Admin ページの完全なリファレンス実装です。
 
-#### Event Handlers
+#### イベント制御{#event-handlers}
 
-The plugin subscribes to three events:
+プラグインは、以下のイベントを登録します：
 
 ```php
 public static function getSubscribedEvents()
@@ -414,25 +420,25 @@ public static function getSubscribedEvents()
 }
 ```
 
-- `onApiRegisterRoutes` — Registers REST endpoints for license CRUD, import, export, and product status
-- `onApiSidebarItems` — Adds the "Licenses" entry to the sidebar
-- `onApiPluginPageInfo` — Returns the page definition with blueprint reference, data/save endpoints, and import/export actions
+- `onApiRegisterRoutes` — ライセンスの CRUD, インポート、エクスポート及びプロダクトステータスのための REST エンドポイントを登録する
+- `onApiSidebarItems` — "Licenses" の入り口をサイドバーに追加
+- `onApiPluginPageInfo` — ブループリントリファレンス、 data/save エンドポイント、そして、インポート・エクスポートアクションについてのページ定義を返す
 
-#### API Endpoints
+#### API エンドポイント{#api-endpoints}
 
-The `LicenseApiController` provides these endpoints:
+`LicenseApiController` は、以下のエンドポイントを提供します：
 
-| Method | Path | Description |
+| メソッド | パス | 説明 |
 |--------|------|-------------|
-| GET    | `/licenses/form-data` | Returns license data in blueprint-compatible format (used by `data_endpoint`) |
-| PATCH  | `/licenses` | Saves all licenses from the form (used by `save_endpoint`) |
-| POST   | `/licenses/import` | Imports a `licenses.yaml` file (upload action) |
-| GET    | `/licenses/export` | Downloads `licenses.yaml` (download action) |
-| GET    | `/licenses/products-status` | Returns installation status of licensed products |
+| GET    | `/licenses/form-data` | ブループリント互換フォーマット内のライセンスデータを返す（ `data_endpoint` を利用） |
+| PATCH  | `/licenses` | フォームからすべてのライセンスを保存（ `save_endpoint` を利用） |
+| POST   | `/licenses/import` | `licenses.yaml` ファイルをインポート（アップロードアクション） |
+| GET    | `/licenses/export` | `licenses.yaml` ファイルをダウンロード（ダウンロードアクション） |
+| GET    | `/licenses/products-status` | ライセンスされたプロダクトのインストールステータスを返す |
 
-#### Custom Field: Products Status
+#### カスタムフィールド： プロダクトステータス{#custom-field-products-status}
 
-The blueprint includes a `products-status` custom field type that displays a read-only list of licensed products with their installation state:
+ブループリントには、 `products-status` カスタムフィールドタイプを含み、読み込み専用のライセンスプロダクトをインストール状態付きで、リスト形式で表示します：
 
 ```yaml
 # admin/blueprints/licenses.yaml
@@ -449,21 +455,21 @@ form:
       style: vertical
 ```
 
-The web component (`admin-next/fields/products-status.js`) calls `GET /licenses/products-status` and renders each product with its status (enabled, disabled, installed, or not installed) using the `window.__GRAV_API_TOKEN` global for authentication.
+web コンポーネント（ `admin-next/fields/products-status.js` ） は、 `GET /licenses/products-status` を呼び出し、各プロダクトをそのステータス（有効、無効、インストール済み、もしくは未インストール）とともに、 `window.__GRAV_API_TOKEN` グローバル定数を認証に利用して、表示します。
 
-#### How It All Fits Together
+#### すべてがどのようにつながっているか{#how-it-all-fits-together}
 
-1. Admin-next loads and calls `GET /sidebar/items` — the license-manager adds its "Licenses" entry
-2. User clicks the sidebar item, admin-next navigates to `/plugin/license-manager`
-3. Admin-next calls `GET /gpm/plugins/license-manager/page` — the plugin returns its page definition
-4. Admin-next sees `page_type: 'blueprint'`, fetches the blueprint from `GET /blueprints/plugins/license-manager/pages/licenses`
-5. Admin-next loads current data from `GET /licenses/form-data`
-6. The form renders with standard fields (array for licenses) and a custom field (products-status web component)
-7. The Save button sends a PATCH to `/licenses`; Import/Export trigger their respective endpoints
+1. 次世代 Admin が、 `GET /sidebar/items` を呼び出し、読み込み -- ライセンスマネージャーは "Licenses" のエントリーを追加
+1. ユーザーはサイドバーアイテムをクリックし、次世代 Admin は `/plugin/license-manager` へ移動
+1. 次世代 Admin は `GET /gpm/plugins/license-manager/page` を呼び出す -- プラグインはページ定義を返す
+1. 次世代 Admin は `page_type: 'blueprint'` を確認し、 `GET /blueprints/plugins/license-manager/pages/licenses` からブループリントを取得
+1. 次世代 Admin は、 `GET /licenses/form-data` から現在のデータを読み込む
+1. フォームは、標準的なフィールド（ライセンスの配列）と、カスタムフィールド（web コンポーネントによるプロダクトステータス）で表示される
+1. 保存ボタンを押すと、 `/licenses` に PATCH 送信する；インポート・エクスポートはそれぞれのエンドポイントをトリガーする 
 
-## Compatibility Declaration
+## 互換性の宣言{#compatibility-declaration}
 
-Declare API compatibility in your plugin's `blueprints.yaml`:
+プラグインの `blueprints.yaml` に API 互換性を宣言してください：
 
 ```yaml
 compatibility:
@@ -473,18 +479,20 @@ compatibility:
     - 1.0
 ```
 
-This signals to the ecosystem that your plugin:
-- Has been tested with the API plugin
-- Ships web components for any custom field types (if applicable)
-- Works correctly with admin-next
+これにより、あなたのプラグインがエコシステムに以下のことを示します：
 
-## Webhooks
+- API プラグインでテストされている
+- カスタムフィールドタイプ用の web コンポーネントを持つ（該当する場合）
+- 次世代 Admin で正しく動く
 
-The API plugin can dispatch webhooks for all mutation events. Plugins don't need to do anything special — the API's `WebhookDispatcher` listens for `onApi*` events and forwards them to configured webhook URLs.
+## web フック{#webhooks}
 
-Webhook events map directly to API events:
+API プラグインは、すべての mutation イベントへ web フック通信できます。  
+プラグインは、特別なことをする必要はありません -- API の `WebhookDispatcher` が、 `onApi*` イベントをリッスンし、設定された web フック URL にそれらを向けます。
 
-| API Event | Webhook Event |
+Web フックイベントは、直接 API イベントにマップされています：
+
+| API イベント | Web フックイベント |
 |-----------|---------------|
 | `onApiPageCreated` | `page.created` |
 | `onApiPageUpdated` | `page.updated` |
