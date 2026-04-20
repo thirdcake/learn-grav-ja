@@ -222,22 +222,22 @@ public function autoload(): \Composer\Autoload\ClassLoader
 
 ## API ドキュメント{#api-documentation}
 
-### Helios-Compatible Docs
+### Helios 互換ドキュメント{#helios-compatible-docs}
 
-Create an `api-docs/` directory in your plugin with Helios-formatted endpoint pages:
+あなたのプラグインに、 Helios フォーマットのエンドポイントページを持つ `api-docs/` ディレクトリを作成してください：
 
-```
+```txt
 my-plugin/
 ├── api-docs/
-│   ├── chapter.md              # Overview page
+│   ├── chapter.md              # 概要ページ
 │   ├── 01.list-items/
-│   │   └── api-endpoint.md     # Endpoint documentation
+│   │   └── api-endpoint.md     # エンドポイントドキュメント
 │   ├── 02.create-item/
 │   │   └── api-endpoint.md
 │   └── grav-my-plugin-api.postman_collection.json
 ```
 
-Each endpoint page uses the `api-endpoint` template:
+各エンドポイントページは、 `api-endpoint` テンプレートを利用します：
 
 ```yaml
 ---
@@ -268,14 +268,14 @@ Additional documentation in markdown...
 
 ### Postman Collection
 
-Include a Postman v2.1 collection JSON file that uses the standard Grav API environment variables:
+標準的な Grav API 環境変数を利用する Postman v2.1 コレクション JSON ファイルを含めます：
 
-- `{{base_url}}` — Site URL
-- `{{api_prefix}}` — API prefix (default: `/api/v1`)
-- `{{api_key}}` — API key
-- `{{grav_environment}}` — Grav environment
+- `{{base_url}}` — サイト URL
+- `{{api_prefix}}` — API プレフィックス (デフォルト： `/api/v1`)
+- `{{api_key}}` — API キー
+- `{{grav_environment}}` — Grav 環境
 
-Every request should include explicit headers:
+すべｔねおリクエストには、明示的なヘッダーを含むべきです：
 
 ```json
 {
@@ -287,24 +287,25 @@ Every request should include explicit headers:
 }
 ```
 
-## Events
+## イベント{#events}
 
-Your API endpoints can fire their own events to allow other plugins to hook in:
+API エンドポイントは、他のプラグインがフックできる、それら自身のイベントを、発火できます：
 
 ```php
-// In your controller
+// コントローラー内で
 $this->fireEvent('onMyPluginItemCreated', ['item' => $item]);
 ```
 
-## Permissions
+## パーミッション{#permissions}
 
-Use Grav's existing permission system. Common patterns:
+Grav の既存のパーミッションシステムを使ってください。  
+一般的なパターンは次の通りです：
 
-- **Read endpoints** → `api.system.read` or a custom permission
-- **Write endpoints** → `api.system.write` or a custom permission
-- **Plugin-specific** → Register your own permissions via `permissions.yaml`
+- **Read endpoints** → `api.system.read` もしくは、カスタムパーミッション
+- **Write endpoints** → `api.system.write` もしくは、カスタムパーミッション
+- **Plugin-specific** → 独自のパーミッションを `permissions.yaml` を使って登録してください
 
-## Reports Integration
+## 統合レポート{#reports-integration}
 
 The API provides a plugin-extensible reports system in the **Tools > Reports** tab. Plugins can contribute diagnostic reports by listening for the `onApiGenerateReports` event and optionally providing a web component for custom rendering.
 

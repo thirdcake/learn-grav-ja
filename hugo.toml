@@ -4,7 +4,7 @@ title = 'Grav ドキュメント（日本語訳）'
 hasCJKLanguage = true
 
 [params]
-    srcHost = 'https://learn.getgrav.org/18'
+    srcHost = 'https://learn.getgrav.org'
     githubHost = 'https://github.com/thirdcake/learn-grav-ja/blob/main/content'
     images = ['images/ogimage.jpg']
 
