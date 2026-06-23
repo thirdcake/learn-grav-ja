@@ -20,30 +20,29 @@ Grav と、プラグイン、テーマを最新に保つより良い方法は、
 * **CLI** ：`bin/gpm version grav` コマンドを実行してください。テーマとプラグインのバージョンリストがそれらの名前とともに表示されます。
 * **ファイルシステム** ：ファイルシステムでバージョンを確認する最も簡単な方法は、Gravをインストールしたルートディレクトリの `CHANGELOG.md` ファイルを見ることです。プラグインとテーマについても同様に、通常 `user/plugins` と、 `user/themes` フォルダ内に、それぞれ見つかります。
 
-### Grav1.5以前のバージョンからのアップグレード{#upgrading-from-grav-1-5-or-older-version}
+### Grav 1系から2.0 へのマイグレーション {migrating-from-grav-1-x-to-2-0}
 
-Grav の古いバージョンをアップデートするには、いくつかの追加の準備と作業が必要になるかもしれません。  
-最低限のシステム要件が上昇し、互換性の崩れている可能性があるためです。
+Grav 2.0 は、 1.x 系と同じ場所からアップグレードしません。  
+PHP の最低バージョン及び、 vendor スタック、管理パネル、 API に至るまで、すべてが新しくなったので、アップグレードの対応方法は、新しくインストールし、コンテンツをインポートすることです。
 
-基本的なワークフローは、次の通りです：
+完全なプロセスは、以下を含む [マイグレーション](../../02.migration/) をご覧ください：
 
-- **PHP 7.3** 及び **CLI** のサポートされたサーバにサイトをコピーする
-- 手動で、 **Grav 1.6.31** にアップグレードする
-- 最新バージョンにアップグレードする
+- Grav 2.0 へのマイグレートプラグインを利用する [アシスト付きマイグレーション](../../02.migration/02.assisted-migration)
+- 複雑な設定があるサイトの場合の [マニュアルマイグレーション](../../02.migration/03.manual-migration/)
+- プラグイン及びテーマ作成者のための [開発者向けアップグレードガイド](../../02.migration/05.developper-upgrade-guide/)
 
-詳しいガイドは、 **[Grav 1.6 未満からのアップグレード](../../08.advanced/09.grav-development/01.grav-15-upgrade-guide)**  にあります。処理の助けになるでしょう。
+もし Grav 1.5 以前を利用している場合は、 GPM で 1.7 の最終リリース（`1.7.51`） にまずアップグレードし、それから 2.0 へマイグレートしてください。
 
-### 次のバージョンへのアップグレード{#upgrading-to-the-next-version}
+### Plugin Compatibility Checks
 
-次のバージョンにアップデートについては、アップグレード後もすべてが機能することを確認するための特別なガイドがあります。
+Grav 2.0 introduces a `compatibility:` property in plugin and theme `blueprints.yaml`, declaring which major Grav versions a package has been tested against. The flag is read in two places:
 
-- **[Grav1.7にアップグレード](../../08.advanced/09.grav-development/03.grav-17-upgrade-guide)**
-- **[Grav1.6にアップグレード](../../08.advanced/09.grav-development/02.grav-16-upgrade-guide)**
+- The **Migrate to Grav 2.0** wizard, when bringing a 1.x site across into a staged 2.0 install. Incompatible packages are routed through the user's skip-or-disable policy, with **strict** and **permissive** mode options for handling unflagged packages.
+- **GPM**, when installing or updating plugins on an already-migrated 2.0 site. Packages without a 2.0-compatible flag won't install cleanly.
 
-> [!Warning]
-> Grav の次のバージョンをインストールする前に、このアップグレードガイドを読むことをおすすめします。
+Plugin authors declare compatibility in their `blueprints.yaml` using the `compatibility:` property. See [Plugin Compatibility](/20/plugins/plugin-compatibility) for full details.
 
-### Grav CMSのアップデート{#grav-cms-updates}
+### Grav CMS のアップデート{#grav-cms-updates}
 
 Grav をアップデートするより良い方法は、**Grav パッケージ・マネージャ(GPM)** を使うことです。  
 やるべきことは、Grav サイトのルートフォルダに移動し、次のように入力することだけです：
@@ -53,7 +52,20 @@ bin/gpm selfupgrade -f
 ```
 
 > [!Note]  
-> コマンドの詳しい情報は、 [GPM コマンド &gt; 自身をアップグレード](../../07.cli-console/04.grav-cli-gpm/#self-upgrade) にあります。
+> コマンドの詳しい情報は、 [GPM コマンド &gt; self-upgrade](../../07.cli-console/04.grav-cli-gpm/#self-upgrade) にあります。
+
+
+### Plugin and Theme Updates
+
+Plugins and Themes can be kept up to date by running following command from the root of your Grav site:
+
+```bash
+bin/gpm update
+```
+
+> [!NOTE]
+> **TIP:** More information about the command can be found from [GPM Command > Update](/20/cli-console/grav-cli-gpm#update).
+
 
 ### プラグインとテーマのアップデート{#plugin-and-theme-updates}
 
