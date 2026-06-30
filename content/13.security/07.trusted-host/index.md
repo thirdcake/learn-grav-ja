@@ -41,7 +41,7 @@ Grav にホスト名を設定しなかった場合、 Grav は、受け取った
 
 Admin パネルで、 **Configuration → System → Advanced → Custom Base URL** と進み、完全なサイトアドレスを次のように入力してください：
 
-```
+```txt
 https://www.example.com
 ```
 
@@ -57,7 +57,7 @@ If you only want to pin the email links and leave everything else alone, use the
 
 In the admin, go to **Plugins → Login → Site Host** and enter your full site address, for example:
 
-```
+```txt
 https://www.example.com
 ```
 
