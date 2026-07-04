@@ -3,11 +3,58 @@
 {{ end }}
 
 {{ define "main" }}
-{{ if eq .Layout "chapter" }}
-    {{ partial "chapter-page.html" . }}
-{{ else }}
-    {{ partial "content-page.html" . }}
-{{ end }}
+<div class="d-block d-xl-flex
+    justify-content-between align-items-start">
+    <div class="d-block flex-fill" style="min-width:0;">
+        {{ partial "breadcrumbs.html" . }}
+
+        <h1 class="p-3">
+            {{ with .Params.icon }}
+            <svg class="chapter-icon me-1">
+                <use
+                href="{{ "images/icons.svg" | relURL }}{{ . | safeHTML}}">
+                </use>
+            </svg>
+            {{ end }}
+
+            {{ .Title }}
+        </h1>
+
+        <div class="markdown p-3">
+        {{ .Content }}
+        </div>
+
+        <div class="row p-3">
+            {{ range .Pages }}
+            <div class="col-12 col-lg-6">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="">
+                            <a class="stretched-link" 
+                                href="{{ .Permalink }}">{{ .Title }}</a>
+                        </div>
+                        <div class="card-text">
+                            {{ .Content | plainify | strings.Truncate 42 }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{ end }}
+        </div>
+
+        {{ partial "prev-next.html" . }}
+    </div>
+
+    <div class="d-none d-xl-block flex-shrink-0
+        py-5 px-3" style="width:240px;">
+        {{ if gt (len (plainify .TableOfContents)) 0 }}
+        <div>
+            <h2 class="h5 pt-4">目次：</h2>
+            {{ .TableOfContents }}
+        </div>
+        {{ end }}
+    </div>
+</div>
 
 {{ end }}
 
