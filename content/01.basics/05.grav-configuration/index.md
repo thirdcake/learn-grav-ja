@@ -11,7 +11,7 @@ params:
 > 「config 設定」というタイトルは、 config 自体に「設定」の意味があるので、日本語としては変な言葉なのですが、 Grav の設定ファイルとしては blueprint もあるため、それとの区別を分かりやすくするために 「config 設定」と訳しました。ここで説明されているのは、 blueprint 以外の設定ファイルのことであるとイメージしてもらえたらと思います。
 
 すべての Grav の設定ファイルは、 [YAML 構文](../../08.advanced/11.yaml/) で書かれており、拡張子は、 `.yaml` です。  
-YAML は、非常に直感的なので、読み書きともに簡単ですが、利用可能な構文を完全に理解するには、 [高度な設定の章の YAML ページ](../../08.advanced/11.yaml/) をチェックしてください。
+YAML は、非常に直感的なので、読み書きともに簡単ですが、利用可能な構文を完全に理解するには、 [Advances の章の YAML ページ](../../08.advanced/11.yaml/) をチェックしてください。
 
 > [!Tip]  
 > 本番サイトを、安全に最適化するクイックガイドとして、 [セキュリティ > 設定](../../13.security/02.configuration/) の章を参照してください。
@@ -199,7 +199,7 @@ pages:
 | **publish_dates:** | 日付をもとに公開開始/公開終了を自動化する。 `true` または `false` の値 |
 | **process:** | |
 | ... **markdown:** | フロントエンドでマークダウン処理を有効化もしくは無効化する。 `true` または `false` の値 |
-| ... **twig:** | フロントエンドで Twig 処理を有効化もしくは無効化する。 `true` または `false` の値 |
+| ... **twig:** | フロントエンドで Twig 処理を有効化もしくは無効化する。 `true` または `false` の値。 **Grav 2.0:** page **コンテンツ** 内の Twig もまた、セキュリティスイッチによって制御され、サンドボックス内で実行されます；この `process.twig` フラグのみでは、もはやコンテンツに Twig をレンダリングするには不十分です。 [コンテンツ内の Twig](../../02.content/05.twig-in-content/) を参照してください。 |
 | **twig_first:** | マークダウンと Twig の両方をページで処理するときに、マークダウン処理よりも前に Twig を処理する。 `true` または `false` の値 |
 | **never_cache_twig:** | これを有効化すると、結果をキャッシュ・保存せずに、ページの読み込みごとに動的に変化するロジック処理を追加できます。 **system.yaml** では、サイト全体での有効化/無効化ができます。 [特定のページ単位で設定する方法](../../02.content/02.headers/#never-cache-twig) もあります。 `true` または `false` の値 |
 | **events:** | |
@@ -344,7 +344,7 @@ assets:
 | **js_minify:** | パイプライン中に JS をミニファイします。 `true` または `false` の値 |
 | **enable_asset_timestamp:** | アセットのタイムスタンプを有効化。 `true` または `false` の値 |
 | **enable_asset_sri:** | アセットの SRI を有効化。 `true` または `false` の値 |
-| **collections:** | サブアイテムとして設計されたコレクションを含めます。 例えば： `jquery: system://assets/jquery/jquery-3.x.min.js` 。 [より詳しくは、こちらを参照](../../03.themes/07.asset-manager/#named-assets-and-collections) |
+| **collections:** | サブアイテムとして設計されたコレクションを含めます。 例えば： `jquery: system://assets/jquery/jquery-3.x.min.js` 。 [より詳しくは、こちらを参照](../../03.themes/07.asset-manager/#collections-and-attributes) |
 
 ### Errors
 
@@ -759,4 +759,123 @@ $count_var = Grav::instance()['config']->get('data.count');
 
 **テーマ** においても、プラグインと同じルールが適用されます。  
 このため、 `user/themes/mytheme` というファイルに、 `user/themes/mytheme/mytheme.yaml` という設定ファイルがあった場合、このファイルを `user/config/themes/mytheme.yaml` にコピーし、そこで編集できます。
+
+### 環境変数と `.env` ファイル{#environment-variables-and-env-files}
+
+Grav は、起動時に環境変数を読み込み、いろいろな用途に使います。
+環境変数は、設定ファイルに commit したくない値に役立ちます。たとえば、 API キーや、データベースパスワードなどです。そしてあなたの開発環境、ステージング環境、本番環境のそれぞれの間で異なる設定をするときにも役に立ちます。
+
+Grav 2.0 では、サイトのルートディレクトリにある `.env` ファイルから、自動的に環境変数を読み込むことができます。
+この機能は、コアに実装されており、 DotEnv プラグインはもはや不要です（そして、このプラグインは Grav 2.0 では利用不可です）。
+
+#### `.env` ファイル{#the-env-file}
+
+Grav をインストールしたルートディレクトリに `index.php` と並べて `.env` ファイルを作成してください。
+各行は、1つの変数を設定します：
+
+```txt
+GRAV_ENVIRONMENT=production
+MY_API_KEY=super-secret-value
+```
+
+新規にインストールした場合は、 `.env.example` テンプレートがルートディレクトリに同梱されます。
+これを `.env` としてコピーし、スタート地点として、必要なものをアンコメントしてください。
+
+> [!CAUTION]
+> `.env` ファイルは、通常、秘密情報を含みます。このため、バージョンコントロールに絶対にコミットしないでください。また、 web 上からアクセス可能な状態に絶対にしないでください。 Grav のデフォルトの `.gitignore` は、すでに `.env` や `.env.local` ファイルを含んでいますし、同梱の web サーバー設定は、 `.env` ファイルへのリクエストを拒否します。もし独自のサーバー設定で実行する場合は、それらへのリクエストが確実に拒否されるように注意してください。
+
+#### `.env` ファイルのレイヤー{#layered-env-files}
+
+より複雑な設定をするため、いくつかのファイルに変数を分けることができます。
+それらのファイルは、以下の順に読み込まれ、以前に読み込まれたファイルの設定を順に上書きしていきます：
+
+| ファイル | 目的 |
+| ---- | ------- |
+| `.env`                     | デフォルトとなるベース。シェアしても安全なもの |
+| `.env.local`               |  Machine-specific overrides, not committed |
+| `.env.<environment>`       | 環境ごとの値。たとえば `.env.production` |
+| `.env.<environment>.local` | Per-environment machine overrides |
+
+`<environment>` 接尾辞は、 `GRAV_ENVIRONMENT` 変数によります。
+これが設定されていないとき、その環境ファイルは読み飛ばされ、 Grav はホスト名に基づいて環境変数を検出する通常の方法にフォールバックします。
+`.env.local` ファイルは、 `GRAV_ENVIRONMENT` が `test` のとき読み飛ばされます。そのため、テストは predictable なまま実行されます。
+
+> [!NOTE]
+> 実際のサーバー環境にすでに設定済みの変数は、常にあらゆる `.env` ファイルよりも優先されるので、 `.env` がホスティング会社によって提供されたクレデンシャルを上書きすることはありません。
+
+#### 設定の上書き{#overriding-configuration}
+
+`GRAV_CONFIG` 変数に truthy な値を設定した場合、あらゆる config 設定オプションを環境変数から上書きできます。
+`GRAV_CONFIG__` 接頭辞を使ってください。2つのアンダースコア（`__`）は、 YAML 構文のドット（`.`）によるネスト階層を意味します：
+
+```txt
+GRAV_CONFIG=true                            # Turn the override feature on
+
+GRAV_CONFIG__system__cache__enabled=true    # Sets system.cache.enabled
+GRAV_CONFIG__plugins__github__auth__token=xxxxxxxx
+```
+
+長い変数名を読みやすくするため、 `GRAV_CONFIG_ALIAS__` 接頭辞でエイリアスを定義できます：
+
+```txt
+GRAV_CONFIG_ALIAS__GITHUB=plugins.github    # GITHUB now stands for plugins.github
+
+GRAV_CONFIG__GITHUB__auth__method=api       # Sets plugins.github.auth.method
+GRAV_CONFIG__GITHUB__auth__token=xxxxxxxx   # Sets plugins.github.auth.token
+```
+
+エイリアスも、ハイフンのある設定パスにたどり着くための手段でもあります。。
+環境変数名は、英字、数字、アンダースコアしか利用できないので、スラッグにハイフンを持つようなプラグイン（たとえば、 `translation-service`）は、直接名付けられません。エイリアス値にハイフン月パスを設定し、そのエイリアスを参照してください。
+
+```txt
+GRAV_CONFIG_ALIAS__TRANSLATIONSERVICE=plugins.translation-service
+
+GRAV_CONFIG__TRANSLATIONSERVICE__anthropic__api_key=xxxxxxxx   # Sets plugins.translation-service.anthropic.api_key
+```
+
+> [!NOTE]
+> エイリアス名は、キー内のプレーンなテキストとして照合されるので、パスの他の部分に現れない一意の大文字のみの名前を選択してください。
+
+#### Grav 環境とパス変数{#grav-environment-and-path-variables}
+
+A handful of Grav's own variables are read very early during startup, so they can be set in `.env` too:
+
+| 変数 | 目的 |
+| -------- | ------- |
+| `GRAV_ENVIRONMENT`       | Selects the active environment for configuration under `user/env/` |
+| `GRAV_ENVIRONMENT_PATH`  | Path to a specific environment folder |
+| `GRAV_ENVIRONMENTS_PATH` | Base path that holds all environment folders |
+| `GRAV_SETUP_PATH`        | Location of a custom `setup.php` file |
+| `GRAV_USER_PATH`         | Location of the `user` folder |
+
+#### Setting variables on the server
+
+A `.env` file is one way to provide these variables. You can also set them directly in your server configuration, which takes precedence over the file:
+
+```txt
+# apache2
+<VirtualHost 127.0.0.1:80>
+    ...
+
+    SetEnv GRAV_ENVIRONMENT  production
+    SetEnv MY_API_KEY        super-secret-value
+</VirtualHost>
+```
+
+```nginx
+# nginx
+location ~ \.php$ {
+    ...
+
+    fastcgi_param GRAV_ENVIRONMENT  production;
+    fastcgi_param MY_API_KEY        super-secret-value;
+}
+```
+
+Your own variables (anything that is not a Grav setting) are available to plugins and themes through PHP's `getenv()`:
+
+```php
+$key = getenv('MY_API_KEY') ?: null;
+```
+
 
