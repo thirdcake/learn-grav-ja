@@ -1,6 +1,6 @@
 ---
 title: 'config 設定'
-lastmod: 2026-03-20T14:44:30+09:00
+lastmod: '2026-07-27T19:31:59+09:00'
 description: 'Grav の設定は YAML 形式で簡単に管理できます。 system.yaml を中心に各種設定ファイルを紹介します。'
 weight: 50
 params:
@@ -838,19 +838,20 @@ GRAV_CONFIG__TRANSLATIONSERVICE__anthropic__api_key=xxxxxxxx   # Sets plugins.tr
 
 #### Grav 環境とパス変数{#grav-environment-and-path-variables}
 
-A handful of Grav's own variables are read very early during startup, so they can be set in `.env` too:
+Grav 独自変数のうち、ごく一部は、セットアップ中の最初期に読み込まれるので、 `.env` にも設定可能です：
 
 | 変数 | 目的 |
 | -------- | ------- |
-| `GRAV_ENVIRONMENT`       | Selects the active environment for configuration under `user/env/` |
-| `GRAV_ENVIRONMENT_PATH`  | Path to a specific environment folder |
-| `GRAV_ENVIRONMENTS_PATH` | Base path that holds all environment folders |
-| `GRAV_SETUP_PATH`        | Location of a custom `setup.php` file |
-| `GRAV_USER_PATH`         | Location of the `user` folder |
+| `GRAV_ENVIRONMENT`       | `user/env/` 以下の有効な設定環境を選択 |
+| `GRAV_ENVIRONMENT_PATH`  | 特定の環境フォルダへのパス |
+| `GRAV_ENVIRONMENTS_PATH` | すべての環境フォルダを含むベースパス |
+| `GRAV_SETUP_PATH`        | カスタムの `setup.php` ファイルの場所 |
+| `GRAV_USER_PATH`         | `user` フォルダの場所 |
 
-#### Setting variables on the server
+#### サーバー上の設定変数{#setting-variables-on-the-server}
 
-A `.env` file is one way to provide these variables. You can also set them directly in your server configuration, which takes precedence over the file:
+`.env` ファイルは、これらの変数を提供する方法のひとつです。
+そのファイルよりも優先して、サーバー設定に直接これらの変数を設定可能です：
 
 ```txt
 # apache2
@@ -872,7 +873,7 @@ location ~ \.php$ {
 }
 ```
 
-Your own variables (anything that is not a Grav setting) are available to plugins and themes through PHP's `getenv()`:
+独自の変数（Grav 設定でないものならどんなものでも）が、プラグイン及びテーマで PHP の `getenv()` により利用可能です：
 
 ```php
 $key = getenv('MY_API_KEY') ?: null;
