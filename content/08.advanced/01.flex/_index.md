@@ -1,107 +1,144 @@
 ---
 title: 'Flex オブジェクト'
-lastmod: '2025-09-04T00:00:00+09:00'
+lastmod: '2026-08-03T22:24:13+09:00'
 description: 'Grav で型安全にオブジェクトを管理でき、 CRUD 処理やレンダリング機能までやってくれる Flex オブジェクトの概要を解説します'
 weight: 10
 params:
     srcPath: /advanced/flex
 ---
-**Flex オブジェクト** は、 Grav 1.7 で登場した新しい概念です。  
-あなたのサイトに、カスタムのデータタイプを、簡単に追加します。  
-**Flex オブジェクト** は、 [**Flex Objects** プラグイン](https://github.com/trilbymedia/grav-plugin-flex-objects) により提供され、 [管理パネルプラグイン](../../05.admin-panel/) で必要になるもので、 [**Grav コア + 管理パネルプラグイン**](https://getgrav.org/downloads) パッケージに含まれています。
 
-> [!Info]  
-> このドキュメントの **Flex ディレクトリ** は、旧来の **Flex Directories プラグイン** とは全く関係ありません。実際、その古いプラグインは、 **Flex Objects プラグイン** により取って代わりました。
+**Flex** は、 Grav のカスタム構造化データ用フレームワークです。
+これにより、ページツリーや設定ファイルに置くには合わないデータ（商品、イベント、チームメンバー、住所録、サポートチケット、その他何でも）のコレクションを保存し、問い合わせ、編集し、表示する一貫した方法を提供します。
 
-## 導入{#introduction}
+Flex は、2つの側面からなります：
 
-**Flex** は、型のある **Directories** の集まりです。  
-Grav は、あらかじめ **ユーザーアカウント** や、 **ページ** のような、組み込みの型を持っています。  
-プラグインとテーマでも、それぞれ独自の型を定義でき、 Grav に登録できます。
+* コアの **Flex フレームワーク** （ `Grav\Framework\Flex` ）, これは、 Grav に同梱されています。オブジェクトや、コレクション、インデックス、ストレージレイヤー、その他すべてを定義します。
+* **Flex Objects** プラグイン, これは、フレームワークを PHP を書くことなく本番環境に導入できるようにします。このプラグインは、カスタムディレクトリの登録や、 CRUD 管理用の **Admin Next** UI や、 `[flex-objects]` ショートコードや、フロントエンドページのルーティング及びテンプレートを提供します。
+
+> [!NOTE]  
+> このドキュメント中の **Flex Directories** は、古い **Flex Directories** プラグインとは関係がありません。このプラグインは、 Flex フレームワークと Flex Objects プラグインの継承元でした。
+
+## Flex は、どんな問題を解決するか？{#what-problem-does-flex-solve}
+
+すべての Grav サイトは、最終的にはページもしくは設定のデータが必要です。
+ページは、URL と本文とメディアを持つ編集コンテンツに最適です。
+設定ファイルは、あまり変更されないオプションを使いやすくします。
+しかし、500個の商品リストや、予約システム、メンバーディレクトリなどは、それらに当てはまりません。
+それらのデータをページとして扱うと、（レコードごとにフォルダが必要で、実際の問い合わせは無く、構造化入力欄も無いので）扱いにくく、設定ファイルは、レコードデータを保持することを全く意図していません。
+
+Flex は、このギャップを埋めます。
+最初に **blueprint** に（入力欄や、フォーム、ストレージ、パーミッション）を書けば、 Flex が編集可能な管理パネルセクションや、 PHP や Twig から問い合わせ可能なコレクション API や、REST API や、フロントエンドレンダリングを与えてくれます。
+同じオブジェクト定義で、すべてのアクセスポイントを提供するので、管理パネルのフォームや、 API ペイロードや、 Twig テンプレート のレコード形式は一致しています。
+
+## いつ Flex を使うか{#when-to-use-flex}
+
+Flex は、 Grav 内でデータを保持する方法のひとつです。
+やりたいことにマッチするツールを使ってください。
 
 
-#### Flex
+| 使うもの | 使う場面 |
+| :------- | :------- |
+| **Pages** | The record is editorial content that wants its own URL, body copy, and media (a blog post, a landing page, a documentation article). |
+| **Config / YAML** | You have a small, mostly static set of options that a site builder edits occasionally (site title, API keys, feature flags). |
+| **Accounts**      | You are storing login users. The accounts system is itself a built-in Flex type, so you get user records for free without defining anything. |
+| **Flex**  | You have many structured records of the same kind that need querying, an editing UI, an API, or all three, and that are not primarily URL-addressable content. |
 
-**[Flex](./02.using/01.flex/)** とは、 **Flex ディレクトリ** を持つ箱（コンテナ）です。
 
-Flex は、たった1つのアクセスポイントから、サイト内の Flex ディレクトリに入ったすべてのデータへつながります。  
-これにより、サイトのすべてのページやプラグインで、すべてのオブジェクトが利用可能になります。
+A useful rule of thumb: if you would reach for a database table on another platform, you probably want a Flex type here.
 
-> [!Tip]  
-> Flex *ユーザー アカウント* や、 Flex *ページ* が有効になっていない場合でさえ、フロントエンドや管理パネルの両方から、 Flex バージョンのユーザーアカウントやページにアクセスすることが可能です。
+## Built-in types
 
-> [!訳注]  
-> 後の章で解説されることですが、サイト内のすべての flex オブジェクトに対して、 `grav.get('flex')...` や、 `Grav::instance()->get('flex')->...` のように、ひとつのアクセスポイントから、アクセスできます。
+You are already using Flex even if you have never defined a type. Under the hood, several core systems are Flex directories:
 
-#### Flex Type
+* **Pages** are backed by a Flex type, which is what lets Admin Next list, search, and edit them consistently.
+* **User Accounts** are a Flex type. Every account you manage in admin is a Flex object.
+* **User Groups** are a Flex type as well.
 
-**Flex タイプ** とは、**Flex ディレクトリ** のためのブループリントです。
+Because these are real Flex directories, you can query them from Twig and PHP with the same collection API you use for your own custom types. You do not have to enable anything special to read the built-in Flex versions of accounts or pages.
 
-Flex タイプは、コンテンツを表示したり、修正したりするのに必要なすべてを定義します。  
-たとえば: データ構造、フォームフィールド、パーミッション、テンプレートファイル、ストレージレイヤさえも定義します。
+## Concept glossary
 
-> [!訳注]  
-> 型安全にしたい場合 (たとえば、 `my_flex_object.date` に、 20250904 や、 2025年9月4日, 2025-09-04, 4/sep/2025, 20250904-08:00 のように、さまざまな書き方が混在していると困る場合) に、flex type で定義しておけば Grav 側が型を合わせて保存してくれます。
+Flex introduces a handful of terms. They map cleanly onto each other, so it is worth reading them once before you start.
 
-#### Flex Directory
+### Flex
 
-**[Flex ディレクトリ](./02.using/02.directory/)** とは、ひとつの **Flex タイプ** に適合する **Flex Objects** のコレクションだけが保持されます。
+**Felx** とは、すべての **Flex ディレクトリ** が入っているコンテナです。
+Flex は、サイト上に登録されたすべてのディレクトリへの唯一のアクセスポイントであり、すべてのデータが、あらゆるページや、プラグインや、テンプレートから利用できるようにしてくれます。
 
-各 Flex ディレクトリは、 **Objects** の **Collection** を持ちます。  
-オプションで、 **Storage** への問い合わせをスピードアップさせる **Indexes** もサポートします。
+### Flex Type
 
-#### Flex Collection
+**Flex Type** とは、Flex ディレクトリのための設計図（ブループリント）です。
+データを保存したり、表示したり、修正したりするのに必要なすべてを定義します：データ構造や、フォームの入力欄、パーミッション、テンプレートファイル、及びストレージレイヤーなどです。
+Type は、 blurprint YAML ファイルに記述されます。
+（[カスタムタイプの作成](./03.custom-types/) をご覧ください）
 
-**[Flex コレクション](./02.using/03.collection/)** とは、 **Flex オブジェクト** を持つ構造です。
 
-Flex コレクションは、一般的に、ページに表示したり、与えられた処理を実行したりするための Flex オブジェクトのみを持ちます。  
-データをさらにフィルタしたり、操作したりする便利なツールと、コレクション全体をレンダリングするメソッドを提供します。
+### Flex Directory
 
-#### Flex Object
+**Flex Directory** は、**Flex Objects** のコレクションを一つ持ちます。すべてのデータが、 **Flex Type** に適合します。
+各ディレクトリは、 **Objects** の **Collection** を管理し、**Storage** への問い合わせをスピードアップさせる **Index** をオプションで持ちます。
 
-**[Flex オブジェクト](./02.using/04.object/)** とは、 **Flex タイプ** のひとつのインスタンスです。
+### Flex Collection
 
-Flex オブジェクトは、ひとつのエンティティを表します。  
-Flex オブジェクトにより、プロパティへアクセスできます。  
-あらゆる関係データ (たとえば **[メディア](../../02.content/07.media/)** ) にもアクセス可能です。  
-また、 Flex オブジェクトは、自身がどのように **レンダリング** されるかや、管理パネルでそのコンテンツを編集するときに使用される **フォーム** も定義されています。  
-オブジェクトの作成・更新・削除のようなアクションは、オブジェクトそれ自身でサポートされています。
+**Flex Collection** は、**Flex Objects** を持つ構造です。
+コレクションは、通常、現在のページやアクションに必要なオブジェクトのみを持ちます。
+コレクションは、データをフィルタリングしたり、操作したりするツールを提供し、加えて、一度にそれらすべてをレンダリングするメソッドを持ちます。
 
-#### Flex Index
 
-**Flex インデックス** は、**Flex ディレクトリ** のクエリー (検索) を速くします。
+### Flex Object
 
-**Flex オブジェクト** のメタデータを含みます。  
-しかし、オブジェクトそのものは含みません。
+**Flex Object** は、1つのレコードを表現する **Flex Type** のひとつのインスタンスです。
+そのオブジェクトから、そのプロパティや、 [メディア](../../02.content/07.media/) のような、オブジェクトに関係するデータへのアクセスを提供します。
+また、オブジェクトは、自身のレンダリング方法や、編集時に利用するフォームも登録されています。
+作成、更新、削除は、すべてオブジェクトで操作されます。
 
-#### Flex Storage
+### Flex Index
 
-**Flex ストレージ** は、**Flex オブジェクト** のストレージレイヤーです。
+**Flex Index** は、ディレクトリへの問い合わせを速くします。
+これは、オブジェクトに関する軽量な（ソートや、フィルタリング、ページネーションに必要な程度の）メタデータを持っており、メモリにオブジェクト全体を読み込むことなく利用できます。
 
-ストレージの形式は、1つのファイルでも、1つのフォルダに複数のファイルでも、複数のフォルダでも良いです。  
-Flex は、カスタムストレージにも対応しており、データベースストレージも可能です。
+### Flex Storage
 
-#### Flex Form
+**Flex Storage** は、オブジェクトを永続化するレイヤーです。
+それは、1つのファイルでシェアすることもできますし、オブジェクトごとに1つのファイルにすることや、オブジェクトごとに1つのフォルダにすることもできます。
+Flex は、データベースのような、カスタムのストレージバックエンドをサポートします。
+この保存方法は、オブジェクトごとに type がメディアを持つことができるかどうかに影響します。（[Flex はどのように機能するか](./02.concepts/) をご覧ください。）
 
-**Flex フォーム** は、**Form プラグイン** と統合し、 **Flex オブジェクト** を作成したり、編集したりできるようにします。
+### Flex Form
 
-Flex は、オブジェクトの異なる部分を修正できるようにする、複数の views をサポートします。
+**Flex Form** は、Form プラグインを統合し、 Flex Object を作成したり編集したりできるようにします。
+Flex は、複数の view をサポートし、あるオブジェクトの異なる部分を別のフォームから編集できます。
 
-#### Flex Administration 
+### Flex Administration
 
-**[Flex 管理](./01.administration/)** とは、 **Flex Objects プラグイン** で実装されるものです。
-
-サイト管理者が **Flex オブジェクト** を管理するために、 **管理パネルプラグイン** 上に、新しいセクションを追加します。  
-各 **Flex ディレクトリ** は、 CRUD タイプの ACL （Create, Read, Update, Delete タイプのアクセスコントロールリスト）を用意しており、これを使用することで、管理パネルの一部やその中のアクションを特定のユーザーに制限することができます。
+**Flex Administration** は、 Flex Objects プラグインから提供されます。
+**Admin Next** に、 Flex Objects を管理する場所を付け加えます。
+すべてのディレクトリは、 CRUD スタイルのパーミッションとともに提供されるので、リスト表示や、読み取り、作成、更新、削除などを特定のユーザーに制限することができます。
+[Admin Next 内での Flex の管理](./05.administration/) をご覧ください。
 
 ## 現状の制限事項{#current-limitations}
 
-改善点は、まだたくさんあります。  
-以下は、Flex オブジェクトを使用を検討する際の、現状の制限事項です：
+Flex は、パワフルですが、すべての用途に最適なツールではありません。
+利用を検討時には、以下の制約を覚えておいてください：
 
-* 多言語サポートは、 **Pages**  にのみ実装され、管理パネルも完全には翻訳されていません
-* フロントエンドにのみ、基本的なルーティングを持っています。たとえば保存のような、カスタムのタスクを処理するには、別途、独自の実装が必要です
-* 管理パネルからのバルクアップデート（一斉アップデート）機能は、まだ実装されていません（コードからするのは、簡単です）
-* インデックスの作成に限界があるため、頻繁に更新されるオブジェクトには Flex は推奨されません
-* **Flex タイプ** をカスタマイズするには、コーディングの知識が必要になり、独自クラスを作れる必要があります
+* Flex は、 **インデックスベース** なので、コンスタントに書き換わるデータには不向きです。1秒間に何度も書き換わるレコード用には、その目的に作られたデータベースを利用する方が適切です。
+* **blurprint で表現できる以上の** ふるまいをカスタマイズする（問い合わせや、プロパティの計算、オーダーメイドのストレージ、詳細なバリデーションなど）場合は、 PHP class を書く必要があります。 [PHP で Flex を拡張する](./06.php-and-events/) をご覧ください。 
+* **多言語** サポートは、 **Pages** の方が得意です。カスタムのタイプは、翻訳されたフィールドを保存できますが、Grav のページレベルの多言語操作と完全に同等の制御は、まだありません。
+
+これらはいずれも、 Flex を使ったデータ駆動機能のほとんどを構築することを妨げるものではありません。
+これらは単に、設計を確定する前に留意すべき注意点に過ぎません。
+
+
+## 次に読むべき資料{#where-to-go-next}
+
+* [Quickstart](/20/advanced/flex/quickstart) - build and enable your first custom type in a few minutes.
+* [How Flex Works](/20/advanced/flex/concepts) - the framework model: objects, collections, indexes, and storage strategies.
+* [Creating a Custom Type](/20/advanced/flex/custom-types) - the full blueprint reference, from `config` to `form`.
+* [Displaying Flex Content](/20/advanced/flex/frontend) - the `[flex-objects]` shortcode, the flex-objects page type, and Twig rendering.
+* [Managing Flex in Admin Next](/20/advanced/flex/administration) - list columns, edit forms, exports, menu placement, and permissions.
+* [Extending Flex in PHP](/20/advanced/flex/php-and-events) - custom object, collection, and index classes, plus the Flex events.
+* [Twig & PHP Reference](/20/advanced/flex/reference) - the API surface for querying and rendering Flex in code.
+* [Troubleshooting & FAQ](/20/advanced/flex/troubleshooting) - common errors, permission gotchas, and how to fix them.
+* [REST API](/20/api/endpoints/flex-objects) - the Flex Objects HTTP endpoints, auth, and response envelope.
+
 
