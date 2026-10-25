@@ -19,8 +19,8 @@
 </ul>
 
 {{- define "_partials/inline/node_tree/walk.html" }}
-    {{ $node := .node }}
-    {{ $isAncestor := .isAncestor }}
+    {{- $node := .node }}
+    {{- $isAncestor := .isAncestor }}
 
     <li class="list-group-item me-0 pe-0">
     <div class="d-flex justify-content-between align-items-center">
@@ -31,14 +31,14 @@
                 <use
                     href="{{ "images/icons.svg" | relURL }}{{ . | safeHTML }}"></use>
             </svg>
-            {{ end }}
-            {{ $node.Title }}
+            {{- end }}
+            {{- $node.Title }}
         </a>
 
     {{/* 子ページ（Pages）またはセクション（Sections）があるか確認 */}}
-    {{ $children := union $node.Sections $node.Pages }}
+    {{- $children := union $node.Sections $node.Pages }}
 
-    {{ if $children }}
+    {{- if $children }}
     <button type="button"
         class="btn"
         data-bs-toggle="collapse"
@@ -53,13 +53,13 @@
     </div>
     <ul id="collapse-{{ $node.File.UniqueID }}"
         class="list-group list-group-flush collapse border-top{{ if $isAncestor}} show{{ end }}">
-        {{ range $children.ByWeight }}
+        {{- range $children.ByWeight }}
             {{/* 自分自身を再度呼び出す（再帰） */}}
             {{ partial "inline/node_tree/walk.html" (dict "node" . "isAncestor" $isAncestor ) }}
-        {{ end }}
+        {{- end }}
     </ul>
-    {{ else }}
+    {{- else }}
     </div>
-    {{ end }}
+    {{- end }}
     </li>
 {{- end }}

@@ -18,12 +18,12 @@
   <link rel="canonical" href="{{ .Permalink }}">
 {{ end }}
 
-<link rel="icon" type="image/svg+xml" href="{{ "images/favicon.svg" | absURL }}">
-<link rel="stylesheet" href="{{ "css/bootstrap.min.css" | absURL }}">
-<link rel="stylesheet" href="{{ "css/custom.css" | absURL }}">
+<link rel="icon" type="image/svg+xml" href="{{ "images/favicon.svg" | relURL }}">
+<link rel="stylesheet" href="{{ "css/bootstrap.min.css" | relURL }}">
+<link rel="stylesheet" href="{{ "css/custom.css" | relURL }}">
 
-<script defer src="{{ "js/bootstrap.min.js" | absURL }}"></script>
-<script defer src="{{ "js/custom.js" | absURL }}"></script>
+<script defer src="{{ "js/bootstrap.min.js" | relURL }}"></script>
+<script defer src="{{ "js/custom.js" | relURL }}"></script>
 
 {{- block "jsonld" . }}{{ end }}
 

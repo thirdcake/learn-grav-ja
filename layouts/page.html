@@ -8,7 +8,8 @@
     <div class="d-block flex-fill" style="min-width:0;">
         {{ partial "breadcrumbs.html" . }}
 
-        <h1 class="p-3">            {{ with .Params.icon }}
+        <h1 class="p-3">
+            {{ with .Params.icon }}
             <svg class="chapter-icon me-1">
                 <use
                 href="{{ "images/icons.svg" | relURL }}{{ . | safeHTML}}">
