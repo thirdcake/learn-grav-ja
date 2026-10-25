@@ -2,7 +2,7 @@
 {{ $current := . }}
 
 <ul class="list-group list-group-flush">
-    {{ range $home.Sections }}
+    {{ range .Site.Home.Pages }}
         {{ $isAncestor := or (.Eq $current) (.IsAncestor $current) }}
         {{ partial "inline/node_tree/walk.html" (dict "node" . "isAncestor" $isAncestor) }}
     {{ end }}
@@ -63,4 +63,3 @@
     {{ end }}
     </li>
 {{- end }}
-
