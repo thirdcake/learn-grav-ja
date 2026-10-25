@@ -20,7 +20,23 @@ Grav とは何か、どんな問題を解決するために、どんな技術で
 他の CMS のどんなところが不満で、 Grav を作ったのかも書かれています。
 
 機能に関するもう少し詳しい説明は、公式サイトの [Features](https://getgrav.org/features) や、 [About](https://getgrav.org/about) も参考になります。  
-WordPress との詳しい比較は、 [blog 記事](https://getgrav.org/blog/grav-vs-wordpress) があります。
+WordPress との詳しい比較は、 [ブログ記事](https://getgrav.org/blog/grav-vs-wordpress) もあります。
+
+**プロンプト例**
+
+```txt
+会社のドキュメントサイトを作る際に Grav CMS を検討中です。
+
+https://learn.getgrav.org/basics/what-is-grav.md
+https://getgrav.org/features.md
+https://getgrav.org/about.md
+
+上記のページを参考に教えてください。
+- レンタルサーバーで動かしたい
+- 管理画面でページ管理したい
+- ワンクリックでアップデートしたい
+このような用途に、Grav は向いていますか？
+```
 
 ## システム要件
 
