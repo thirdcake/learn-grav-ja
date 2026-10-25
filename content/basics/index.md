@@ -1,7 +1,7 @@
 ---
 title: 'Basics'
-lastmod: 2025-05-04T00:00:00+09:00
-description: 'Grav とはいったい何なのか？ その背景にある主要なコンセプトを探りましょう。'
+lastmod: '2026-10-25T21:02:59+09:00'
+description: 'Grav の基本的なことを解説します'
 weight: 10
 layout: 'chapter'
 params:
