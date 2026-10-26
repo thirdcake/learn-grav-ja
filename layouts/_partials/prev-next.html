@@ -4,24 +4,27 @@
     {{ $next := $pages.Prev $ }}
     {{- if or $prev $next }}
         <div class="p-3 d-flex justify-content-between">
-            <div class="border rounded p-3">
+            <div>
             {{ with $prev }}
+            <div class="border rounded p-3">
                 <span class="me-1">&lt; 前：</span>
                 <a href="{{ .RelPermalink }}" class="prev">
                 {{ .Title }}
                 </a>
+            </div>
             {{ end }}
             </div>
 
-            <div class="border rounded p-3">
+            <div>
             {{ with $next }}
+            <div class="border rounded p-3">
                 <a href="{{ .RelPermalink }}" class="next">
                 {{ .Title }}
                 </a>
                 <span class="ms-1">：次 &gt;</span>
+            </div>
             {{ end }}
             </div>
         </div>
     {{ end -}}
 {{ end }}
-

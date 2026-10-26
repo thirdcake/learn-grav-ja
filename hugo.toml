@@ -1,11 +1,11 @@
 baseURL = 'https://thirdcake.github.io/learn-grav-ja/'
 locale = 'ja-jp'
-title = 'Grav ドキュメント（日本語訳）'
+title = 'Grav 公式ドキュメント案内'
 hasCJKLanguage = true
 
 [params]
-    srcHost = 'https://learn.getgrav.org/20'
-    githubHost = 'https://github.com/thirdcake/learn-grav-ja/blob/main/content'
+    srcHost = 'https://learn.getgrav.org/2'
+    githubHost = 'https://github.com/thirdcake/learn-grav-ja'
     images = ['images/ogimage.jpg']
 
 [outputs]
@@ -24,5 +24,3 @@ hasCJKLanguage = true
 [caches]
     [caches.images]
         dir = ':cacheDir/images'
-
-

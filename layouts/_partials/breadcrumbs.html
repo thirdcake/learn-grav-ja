@@ -10,13 +10,20 @@
 </nav>
 
 {{- define "_partials/inline/breadcrumbs/walk.html" }}
-    {{- with .Parent }}
-        {{- partial "inline/breadcrumbs/walk.html" . }}
-    {{- end }}
-    {{- if not .IsHome }}
-    <li class="breadcrumb-item">
-        <a href="{{ .Permalink }}">{{ .Title }}</a>
-    </li>
+    {{- if .IsHome }}
+        <li class="breadcrumb-item">
+            <a href="{{ .Permalink }}">
+                <svg viewBox="0 0 16 16" width="16" height="16" style="width:1.2rem;height:auto;">
+                    <use href="{{ "images/icons.svg" | relURL }}#home"></use>
+                </svg>
+            </a>
+        </li>
+    {{- else }}
+        {{- with .Parent }}
+            {{- partial "inline/breadcrumbs/walk.html" . }}
+        {{- end }}
+        <li class="breadcrumb-item">
+            <a href="{{ .Permalink }}">{{ .Title }}</a>
+        </li>
     {{- end }}
 {{- end }}
-

@@ -1,34 +1,28 @@
 {{ define "jsonld" }}
-{{ partial "breadcrumb-json-ld.html" . }}
+    {{ partial "breadcrumb-json-ld.html" . }}
 {{ end }}
 
 {{ define "main" }}
-<div class="d-block d-xl-flex
-    justify-content-between align-items-start">
-    <div class="d-block flex-fill" style="min-width:0;">
-        {{ partial "breadcrumbs.html" . }}
+<div>
 
-        <h1 class="p-3">
-            {{ with .Params.icon }}
-            <svg class="chapter-icon me-1">
-                <use
-                href="{{ "images/icons.svg" | relURL }}{{ . | safeHTML}}">
-                </use>
-            </svg>
-            {{ end }}
+{{ partial "breadcrumbs.html" . }}
 
-            {{ .Title }}
-        </h1>
+<h1 class="p-3">
+    {{ with .Params.icon }}
+    <svg class="chapter-icon me-1">
+        <use href="{{ "images/icons.svg" | relURL }}{{ . | safeHTML}}"></use>
+    </svg>
+    {{ end }}
 
+    {{ .Title }}
+</h1>
 
-        <div class="markdown p-3">
-        {{ .Content }}
-        </div>
+</div>
 
-        {{ partial "prev-next.html" . }}
-    </div>
+<div class="d-block d-xl-flex flex-row-reverse
+    justify-content-around align-items-start">
 
-    <div class="d-none d-xl-block flex-shrink-0
+    <div class="d-block d-xl-block flex-shrink-0
         py-5 px-3" style="width:240px;">
         {{ if gt (len (plainify .TableOfContents)) 0 }}
         <div>
@@ -37,5 +31,14 @@
         </div>
         {{ end }}
     </div>
+
+    <div class="d-block flex-fill" style="min-width:0;">
+        <div class="markdown p-3">
+        {{ .Content }}
+        </div>
+
+        {{ partial "prev-next.html" . }}
+    </div>
+
 </div>
 {{ end }}
