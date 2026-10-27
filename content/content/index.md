@@ -10,36 +10,99 @@ params:
     chapter_number: 2
 ---
 
-Grav でのコンテンツに関する解説をするチャプターです。  
-主に、ページの中身の編集に関することと、ページ同士の関係性に関することの説明に分かれています。
+Grav でのコンテンツを解説するチャプターです。
 
-サイト制作者（サイトの管理をする人）や、開発者（テーマやプラグインを作る人）は、このチャプターの内容を、ある程度知っておく必要があります。  
-一方、ページ編集者（コンテンツを作成する人）は、もしかしたら [Administration Panel](https://learn.getgrav.org/2/admin-panel) の使い方の方が優先度が高いかもしれません。
+コンテンツを書くときに必要な知識と、コンテンツどうしをつなげるときに必要な知識があります。
+
+- 全体概要：
+  - [ページ](#content-pages)
+- 書くときに必要（主にページ編集者）：
+  - [ヘッダー / フロントマター](#headers)
+  - [マークダウン構文](#markdown)
+  - [ページリンク](#linking)
+  - [イメージリンク](#image-linking)
+  - [メディア](#media)
+  - [ショートコードの作成](#creating-a-shortcode)
+  - [コンテンツ内の Twig](#twig-in-content)
+- つなげるときに必要（主にサイト管理者やサイト制作者）：
+  - [ページ・コレクション](#collections)
+  - [タクソノミー](#taxonomy)
+  - [モジュラーページ](#modular)
+  - [ルーティング](#routing)
+  - [多言語対応](#multi-language)
+- その他：
+  - [コンテンツ・タイプ](#content-types)
+  - [AI エージェント用マークダウン](#markdown-output)
 
 ## ページ{#content-pages}
 
 [公式ドキュメント](https://learn.getgrav.org/content/content-pages) （[md](https://learn.getgrav.org/content/content-pages.md)）
 
-このチャプターの概論です。  
-それぞれの詳しい内容は、後の章で解説されます。
+このチャプターの概要です。
 
-まず、 Grav における3種類のページが解説されます：
-
-1. 1つのファイルに書いた内容がそのまま表示される「レギュラーページ」
-1. ある範囲内の複数ファイルの内容を集約し、一覧表示する「コレクションページ」（ブログの一覧ページなどに使う）
-1. ある範囲内の複数ファイルの内容を集約し、モジュラー（コンポーネント部品）にして表示する「モジュラーページ」（複雑なデザインのページに使う）
-
-また、マークダウンファイルの冒頭にメタデータとして yaml 形式の設定を書くことができ、それを「フロントマター」と呼びます。
+コレクションページや、モジュラーページなど、 Grav 特有の用語が解説されています。
 
 ## ヘッダー / フロントマター{#headers}
 
 [公式ドキュメント](https://learn.getgrav.org/content/headers) （[md](https://learn.getgrav.org/content/headers.md)）
 
-Grav で利用されるフロントマターのリファレンスです。  
-最初のうちは、すべてを読むのは大変だと思います。  
+Grav で利用するフロントマター（ページのメタデータ）のリファレンスです。
+
+最初から、すべてを読む必要は無いと思います。  
 ページ単位で何かの設定が必要になったら、ここを見てみるのが良いと思います。（サイト単位で設定が必要なら、 `user/config/system.yaml`, `user/config/site.yaml` などのファイルに書きます）
 
 なお、コレクションページやモジュラーページのフロントマターの書き方は、それぞれ解説ページが別にあります。
+
+## マークダウン構文{#markdown}
+
+[公式ドキュメント](https://learn.getgrav.org/content/markdown) （[md](https://learn.getgrav.org/content/markdown.md)）
+
+マークダウンの書き方について解説されています。  
+すでにマークダウンを知っている方には、特に新しい知識は無いかもしれません。
+
+基本的には、 Grav を使うならマークダウンを覚えたほうが、不具合も少なく、何かと便利です。  
+ただし、もしその学習コストをかけたくない場合は、 TipTap ベースや、 TinyMCE ベースの管理パネル（Admin2）で使える WYSIWYG エディタプラグインがあるので、探してみてください。
+
+## ページリンク{#linking}
+
+[公式ドキュメント](https://learn.getgrav.org/content/linking) （[md](https://learn.getgrav.org/content/linking.md)）
+
+これもマークダウンの書き方の一部なのですが、 Grav では、`user/pages/01.home/` のように、ディレクトリ名にナビゲーション用の順番を付けることができ、この番号は実際のルーティングでは消えます。  
+リンクをするときに、この番号を省略しても、付けたままでも、柔軟に対応することが解説されています。
+
+## イメージリンク{#image-linking}
+
+[公式ドキュメント](https://learn.getgrav.org/content/image-linking) （[md](https://learn.getgrav.org/content/image-linking.md)）
+
+これも、「ページリンク」と同じ理由で、マークダウンを使いながらも、リンク先の URL を柔軟に設定にできるという解説です。
+
+## メディア{#media}
+
+[公式ドキュメント](https://learn.getgrav.org/content/media) （[md](https://learn.getgrav.org/content/media.md)）
+
+Grav では、GD 拡張などを使って、画像を動的に処理できます。
+
+よくある使い方は、ギャラリーページで、サムネイルの一覧は小さく切り取って素早く表示し、リンク先の高画質の画像は元画像を表示するような場合です。  
+画像だけでなく、アニメーションやオーディオなどの設定も解説されています。
+
+## ショートコードの作成{#creating-a-shortcode}
+
+[公式ドキュメント](https://learn.getgrav.org/content/creating-a-shortcode) （[md](https://learn.getgrav.org/content/creating-a-shortcode.md)）
+
+Grav のインストールをすると、最初から入っている「ショートコード」プラグインを使って、オリジナルのタグを実装できます。
+
+たとえば、通常のマークダウン構文では、文字に色を付けたりすることはできません（`<span style="color:red;">文字を赤く</span>` のようなことができません）が、ショートコードを作れば、オリジナルのタグ（たとえば `[red]文字を赤く[/red]` のようなタグ）を作れます。  
+やや開発者向けの内容です。
+
+## コンテンツ内の Twig{#twig-in-content}
+
+[公式ドキュメント](https://learn.getgrav.org/content/twig-in-content) （[md](https://learn.getgrav.org/content/twig-in-content.md)）
+
+Grav 1.x 系では、マークダウン内に Twig を直書きして、動的な処理ができるようになっていました。  
+しかし、セキュリティ的にいろいろと問題が噴出したので、さまざまな対策が講じられるようになりました。  
+これからページを作る人は、この機能を使う必要は無く、上記の「ショートコード」を使ってください。  
+もし、過去に運用されていた Grav アップデートするときは、上記のような経緯があり、いろいろと対策されてきたことを知っておくと良いかもしれません。
+
 
 ## ページ・コレクション{#collections}
 
@@ -58,92 +121,51 @@ https://learn.getgrav.org/content/collections.md
 最終変更日の降順で並べて、1ページあたり10記事を一覧表示したいです。
 ```
 
-## マークダウン構文{#markdown}
-
-[公式ドキュメント](https://learn.getgrav.org/content/markdown) （[md](https://learn.getgrav.org/content/markdown.md)）
-
-マークダウンの書き方について解説されています。  
-基本的には、 Grav を使うならマークダウンを覚えたほうが、不具合も少なく、何かと便利です。  
-しかし、もしその学習コストをかけたくない場合は、 TipTap ベースや、 TinyMCE ベースの管理パネル（Admin2）で使える WYSIWYG エディタプラグインがあるので、探してみてください。
-
-## ページリンク{#linking}
-
-[公式ドキュメント](https://learn.getgrav.org/content/linking) （[md](https://learn.getgrav.org/content/linking.md)）
-
-これもマークダウンの書き方の一部なのですが、 Grav では、`user/pages/01.home/` のように、ナビゲーション用の順番を付けることができ、この番号は実際のルーティングでは消えます。  
-リンクをするときに、この番号を省略しても、付けたままでも対応することが書かれています。
-
-## コンテンツ内の Twig{#twig-in-content}
-
-[公式ドキュメント](https://learn.getgrav.org/content/twig-in-content) （[md](https://learn.getgrav.org/content/twig-in-content.md)）
-
-Grav 1.x 系では、マークダウン内に Twig を直書きして、動的な処理ができるようになっていました。  
-しかし、セキュリティ的にいろいろと問題が噴出したので、さまざまな対策が講じられるようになりました。  
-これからページを作る人が、このページを読む必要はありません。  
-動的な処理を入れたい場合は、次の「ショートコード」を利用してください。
-
-## ショートコードの作成
-
-[公式ドキュメント](https://learn.getgrav.org/content/creating-a-shortcode) （[md](https://learn.getgrav.org/content/creating-a-shortcode.md)）
-
-Grav のインストールをすると、最初から入っている「ショートコード」プラグインを使って、オリジナルのタグを実装できます。  
-たとえば、通常のマークダウン構文では、文字に色を付けたりすることはできません（`<span style="color:red;">...</span>` のようなことができません）が、ショートコードを作れば、オリジナルのタグ（たとえば `[red]...[/red]` のようなタグ）を作れます。
-やや開発者向けの内容です。
-
-## イメージリンク
-
-[公式ドキュメント](https://learn.getgrav.org/content/image-linking) （[md](https://learn.getgrav.org/content/image-linking.md)）
-
-これも、「ページリンク」と同じ理由で、マークダウンを使いながらも、リンク先の URL をある程度自由にできるという解説です。
-
-## メディア
-
-[公式ドキュメント](https://learn.getgrav.org/content/media) （[md](https://learn.getgrav.org/content/media.md)）
-
-Grav では、Gregwar Image Library などを使って、画像を動的に処理できます。  
-画像だけでなく、アニメーションやオーディオなどの設定も解説されています。
-
-## タクソノミー
+## タクソノミー{#taxonomy}
 
 [公式ドキュメント](https://learn.getgrav.org/content/taxonomy) （[md](https://learn.getgrav.org/content/taxonomy.md)）
 
 タクソノミーとは、分類のことで、ブログをカテゴリー分けしたり、タグ分けしたりする際に使います。  
 タクソノミーで分類する方法が解説されています。
 
-## モジュラーページ
+## モジュラーページ{#modular}
 
 [公式ドキュメント](https://learn.getgrav.org/content/modular) （[md](https://learn.getgrav.org/content/modular.md)）
 
 上記の「コレクションページ」と似ていますが、モジュラーページは、部品を組み合わせるイメージです。  
-各部品に、テンプレートが別々に用意できます。
+各部品に、テンプレートが別々に用意できるため、複雑なデザインのページに対応できます。
 
-## ルーティング
+## ルーティング{#routing}
 
 [公式ドキュメント](https://learn.getgrav.org/content/routing) （[md](https://learn.getgrav.org/content/routing.md)）
 
-Grav では、ページのリダイレクトや別名（エイリアス）が簡単に設定できます。  
-他の CMS から引っ越すとき、 URL の付け方のルールが違う場合でも、柔軟に対応できる機能です。
+Grav では、ページのリダイレクトや別名（エイリアス）が簡単に設定できます。
 
-## 多言語対応
+URL を本来の（カノニカルな）ページにリダイレクトする方法と、 URL を別名のままで、内容だけ本来のものを表示する方法があります。  
+他の CMS から引っ越すとき、元 CMS の URL の付け方ルールが違ったとしても、柔軟に対応できる設計になっています。
+
+## 多言語対応{#multi-language}
 
 [公式ドキュメント](https://learn.getgrav.org/content/multi-language) （[md](https://learn.getgrav.org/content/multi-language.md)）
 
-Grav では、多言語サイトが必要な場合に、簡単に設定できます。  
+Grav では、多言語サイトを簡単に設定できます。
+
 1つのディレクトリ内に、別言語用のマークダウンファイルを設置するだけで、その言語用ルーティングを生成してくれます。  
 また、対応言語が無い場合にどのようにフォールバックするかも設定できます。
 
-## コンテンツ・タイプ
+## コンテンツ・タイプ{#content-types}
 
 [公式ドキュメント](https://learn.getgrav.org/content/content-types) （[md](https://learn.getgrav.org/content/content-types.md)）
 
 Grav では、基本的には html ファイルをレスポンスしますが、 `.json` ファイルが欲しい場合もあります。  
 そのような場合に、 Twig テンプレートを追加するだけで自動的に Json ファイルにしてくれる機能があります。
 
-## AI エージェント用マークダウン
+## AI エージェント用マークダウン{#markdown-output}
 
 [公式ドキュメント](https://learn.getgrav.org/content/markdown-output) （[md](https://learn.getgrav.org/content/markdown-output.md)）
 
-Grav 2.1 からの新機能です。  
-上記のコンテンツタイプを設定しなくても、メインコンテンツをマークダウンファイルにしてくれる機能の解説です。  
+Grav 2.1 からの新機能です。
+
+上記のコンテンツタイプをわざわざ設定しなくても、メインコンテンツをマークダウンファイルにしてくれる機能の解説です。  
 AI に読み込ませる際には、大変便利です。
 

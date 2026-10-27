@@ -1,5 +1,5 @@
 ---
-title: 'Basics'
+title: 'ベーシック'
 lastmod: '2026-10-25T21:02:59+09:00'
 description: 'Grav の基本的なことを解説します'
 weight: 10
@@ -10,9 +10,9 @@ params:
     chapter_number: 1
 ---
 
-Grav の基本的なことを解説するチャプターです。
+Grav のベーシック（基本的）なことを解説するチャプターです。
 
-## Grav とは？
+## Grav とは？{#what-is-grav}
 
 [公式ドキュメント](https://learn.getgrav.org/basics/what-is-grav) （[md](https://learn.getgrav.org/basics/what-is-grav.md)）
 
@@ -38,21 +38,22 @@ https://getgrav.org/about.md
 このような用途に、Grav は向いていますか？
 ```
 
-## システム要件
+## システム要件{#requirements}
 
 [公式ドキュメント](https://learn.getgrav.org/basics/requirements) （[md](https://learn.getgrav.org/basics/requirements.md)）
 
-Grav を動かすためのシステム要件が書かれています。  
-RDBMS（MySQLなど）のお世話をしなくて良いところが大きなメリットです。  
+Grav を動かすためのシステム要件が書かれています。
+
+RDBMS（MySQLなど）のお世話をしなくて良く、 PHP 拡張もよくあるものだけ使って作られています。  
 レンタルサーバーならファイルを置くだけで動きますし、 VPS やクラウドサービスでも、設定が少なく済み、メンテナンスコストも低いです。
 
-## インストール
+## インストール{#installation}
 
 [公式ドキュメント](https://learn.getgrav.org/basics/installation) （[md](https://learn.getgrav.org/basics/installation.md)）
 
 インストール方法の解説です。  
 いくつかの方法が解説されていますが、どの方法でも最終的にはファイルを置くだけです。  
-web サーバー側の設定が必要な場合もありますが、このページやここからリンクされているトラブルシューティングページに解説があります。
+OS や web サーバーの種類によって追加設定が必要な場合は、このページやここからリンクされているトラブルシューティングページに解説があります。
 
 ## 基本のチュートリアル
 
@@ -65,9 +66,23 @@ web サーバー側の設定が必要な場合もありますが、このペー�
 
 [公式ドキュメント](https://learn.getgrav.org/basics/grav-configuration) （[md](https://learn.getgrav.org/basics/grav-configuration.md)）
 
-`user/config/system.yaml` などの、初期設定で必要なことがリファレンス形式で書かれています。  
+`user/config/system.yaml` や `user/config/site.yaml` などの、初期設定で必要なことがリファレンス形式で書かれています。  
 Grav を初めて設定するときは、このページを AI に読ませて、自分の環境ごとの設定方法を尋ねると良いです。
 
+なお、セキュリティページに、[ローカル開発環境や、本番環境での推奨設定](https://learn.getgrav.org/security/configuration.md) もあるので、合わせて確認してください。
+
+**プロンプト例**
+
+```txt
+はじめて Grav を設定します。
+https://learn.getgrav.org/basics/grav-configuration.md
+https://learn.getgrav.org/security/configuration.md
+
+上記のページを参考に、`sytem.yaml` の設定教えてください。
+- 基本的な本番環境での設定をしたいです
+- 日本語対応にしたいです（つまり、プラグインなどからのメッセージを日本語にしたいです）
+- その際、 URL に `/jp/...` のような日本語のプレフィックスを入れたくありません
+```
 
 ## フォルダ構造
 
@@ -92,7 +107,8 @@ Grav は、ファイルベースのシステムなので、ディレクトリ構
 何か困ったことがあって、公式ドキュメントを読ませた AI にもわからない場合は、基本的には、フォーラムの過去事例を検索してみて、類似事例を探してみてください。  
 それでも無い場合は、 [The art of asking great questions](https://getgrav.org/forum/general/the-art-of-asking-great-questions-t8554) をもとに、フォーラムで質問してみるのが良いと思います。
 
-明らかなバグであれば、 GitHub Issues に、単に Grav を使っている他の人の意見が聞きたい、コミュニケーションを取りたいなら、 Discord がおすすめです。
+明らかなバグであれば、 GitHub Issues に送ってあげてください。  
+単に Grav を使っている他の人の意見が聞きたい、コミュニケーションを取りたいなら、 Discord がおすすめです。
 
 ## Gravとプラグインのアップデート
 
