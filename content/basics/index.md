@@ -10,6 +10,8 @@ params:
     chapter_number: 1
 ---
 
+[公式ドキュメント](https://learn.getgrav.org/basics)
+
 Grav のベーシック（基本的）なことを解説するチャプターです。
 
 ## Grav とは？{#what-is-grav}

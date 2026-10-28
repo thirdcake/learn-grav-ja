@@ -10,6 +10,8 @@ params:
     chapter_number: 2
 ---
 
+[公式ドキュメント](https://learn.getgrav.org/content)
+
 Grav でのコンテンツを解説するチャプターです。
 
 コンテンツを書くときに必要な知識と、コンテンツどうしをつなげるときに必要な知識があります。

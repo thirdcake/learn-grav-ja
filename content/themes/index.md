@@ -10,6 +10,8 @@ params:
     chapter_number: 3
 ---
 
+[公式ドキュメント](https://learn.getgrav.org/themes)
+
 Grav のテーマ（見た目を処理する）機能を解説するチャプターです。
 
 ## テーマの基本{#theme-basics}
