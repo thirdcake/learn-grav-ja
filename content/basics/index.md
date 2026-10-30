@@ -3,7 +3,6 @@ title: 'ベーシック'
 lastmod: '2026-10-25T21:02:59+09:00'
 description: 'Grav の基本的なことを解説します'
 weight: 10
-layout: 'chapter'
 params:
     icon: '#basics'
     srcPath: /basics
