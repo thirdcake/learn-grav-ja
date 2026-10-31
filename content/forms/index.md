@@ -41,7 +41,7 @@ Grav における Blueprints について解説されています。
 
 Grav の Blueprints は、主に管理パネルで使われる設定ファイルを指すことが多いです。
 
-### リファレンス：Blueprint で使えるフォーム入力欄{#fields-available}
+### リファレンス：Blueprint で使えるフォーム入力欄{#fields-available-1}
 
 [公式ドキュメント](https://learn.getgrav.org/forms/blueprints/fields-available) （[md](https://learn.getgrav.org/forms/blueprints/fields-available.md)）
 
@@ -105,7 +105,7 @@ Blueprint の高度なカスタマイズ方法が解説されています。
 
 フォームに書き込むべきオプション（設定）を解説しています。
 
-### リファレンス：フォーム入力欄{#fields-available}
+### リファレンス：フォーム入力欄{#fields-available-2}
 
 [公式ドキュメント](https://learn.getgrav.org/forms/forms/fields-available) （[md](https://learn.getgrav.org/forms/forms/fields-available.md)）
 

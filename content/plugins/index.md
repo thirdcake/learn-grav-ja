@@ -67,6 +67,9 @@ Twig テンプレートに、 URL のパラメータ（`?restaurant_id=1`）次�
 
 どこでどんなサービスが初期化されているかがわからないと、その時点のイベントで何が使えるかわからないので、便利です。
 
+なお、ここに列挙されているのは、コアで発火するイベントです。  
+これらの他に、たとえば API プラグインで発火するイベントは、[その説明ページが別にあります](https://learn.getgrav.org/api/events) 。
+
 ## フレックスオブジェクトのプラグイン{#plugin-flex}
 
 [公式ドキュメント](https://learn.getgrav.org/plugins/plugin-flex) （[md](https://learn.getgrav.org/plugins/plugin-flex.md)）
