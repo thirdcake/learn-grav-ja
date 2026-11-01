@@ -1,6 +1,6 @@
 ---
 title: '上級者向け'
-lastmod: '2026-11-01T16:02:15+09:00'
+lastmod: '2026-11-01T15:50:15+09:00'
 description: 'この章では、 Grav の高度な特長と機能を解説します。'
 weight: 80
 layout: 'chapter'
