@@ -9,7 +9,7 @@
 
 <h1 class="p-3">
     {{ with .Params.icon }}
-    <svg class="chapter-icon me-1">
+    <svg class="chapter-icon me-2" viewBox="0 0 16 16">
         <use href="{{ "images/icons.svg" | relURL }}{{ . | safeHTML}}"></use>
     </svg>
     {{ end }}

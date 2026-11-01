@@ -24,7 +24,12 @@
 {{ end }}
 
 {{ define "main" }}
-<h1 class="p-3">{{ .Title }}</h1>
+<h1 class="p-3">
+    <svg class="chapter-icon me-2" viewBox="0 0 16 16">
+        <use href="{{ "images/icons.svg" | relURL }}#home"></use>
+    </svg>
+    {{ .Title }}
+</h1>
 <div class="markdown p-3">
     {{ .Content }}
 </div>

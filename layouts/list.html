@@ -10,10 +10,8 @@
 
         <h1 class="p-3">
             {{ with .Params.icon }}
-            <svg class="chapter-icon me-1">
-                <use
-                href="{{ "images/icons.svg" | relURL }}{{ . | safeHTML}}">
-                </use>
+            <svg class="chapter-icon me-2" viewBox="0 0 16 16">
+                <use href="{{ "images/icons.svg" | relURL }}{{ . | safeHTML}}"></use>
             </svg>
             {{ end }}
 
@@ -30,7 +28,7 @@
                 <div class="card mb-3">
                     <div class="card-body">
                         <div class="">
-                            <a class="stretched-link" 
+                            <a class="stretched-link"
                                 href="{{ .Permalink }}">{{ .Title }}</a>
                         </div>
                         <div class="card-text">
@@ -57,5 +55,3 @@
 </div>
 
 {{ end }}
-
-

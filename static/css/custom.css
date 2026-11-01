@@ -69,7 +69,13 @@ svg.chapter-icon {
     height: 1.2em;
     fill: currentColor;
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: center;
+}
+svg.g2-breadcrumb-home-icon {
+    width: 1.2rem;
+    height: 1.2rem;
+    fill: currentColor;
+    vertical-align: center;
 }
 
 .heading-external-link a {
@@ -106,5 +112,3 @@ button[data-bs-toggle="collapse"] > svg {
 button[aria-expanded="true"] > svg {
     transform: rotate(180deg);
 }
-
-
