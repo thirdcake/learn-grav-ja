@@ -27,6 +27,10 @@ Grav のセキュリティに関するチャプターです。
 2要素認証（2FA）やログイン試行制限（フラッドプロテクション）については、 [2.x 系の解説](https://learn.getgrav.org/2/admin-panel) では説明が不足していると思うので、 [1.7 系のフラッドプロテクション](https://learn.getgrav.org/17/admin-panel/security/rate-limiting) および [1.7 系の2FA](https://learn.getgrav.org/17/admin-panel/security/2fa) も参照してみてください。
 画面のデザインは違いますが、Admin2 の管理パネルでも同じ手順で有効化できます。
 
+なお、フラッドプロテクションについては、ログインプラグインをインストールした時点で、デフォルトの設定が有効になっています。  
+特に問題が無ければ、変更する必要はありません。  
+一方、2FA に関しては、ユーザーを作成しただけでは有効化されないので、ユーザー自身がスマホにアプリを入れて QR コードを読み取るなどの作業が発生します。
+
 ## 概要{#overview}
 
 [公式ドキュメント](https://learn.getgrav.org/security/overview) （[md](https://learn.getgrav.org/security/overview.md)）

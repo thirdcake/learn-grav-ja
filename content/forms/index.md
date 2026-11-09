@@ -46,8 +46,11 @@ Grav の Blueprints は、主に管理パネルで使われる設定ファイル
 
 [公式ドキュメント](https://learn.getgrav.org/forms/blueprints/fields-available) （[md](https://learn.getgrav.org/forms/blueprints/fields-available.md)）
 
-主に管理パネルで使えるフォーム入力欄の設定方法が解説されています。  
-Flex Objects のフォーム設定でも使われます。
+主に、管理パネルで使えるフォーム入力欄の設定方法が解説されています。  
+あとのページで解説されるフロントエンドフォームのリファレンスも、管理パネルで使えるものがあります。  
+それらの説明もこのページに合わせて書いてあるので、管理パネルで作りたいフォームがあったときには、まずここを読み込ませてください。
+
+また、ここで解説されるリファレンスは、 Flex Objects のフォーム設定でも使われます。
 
 ### 具体例：プラグインの Blueprint{#example-plugin-blueprint}
 
